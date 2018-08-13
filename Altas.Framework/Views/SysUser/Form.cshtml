@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="ibox-content">
+    <form class="form form-horizontal" id="form" autocomplete="off">
+        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">登录名：</label>
+            <div class="col-sm-4">
+                <input type="text" name="account_name" id="account_name" value="" class="form-control" data-rule="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">姓名：</label>
+            <div class="col-sm-4">
+                <input type="text" name="real_name" id="real_name" value="" class="form-control" data-rule="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">密码：</label>
+            <div class="col-sm-4">
+                <input type="password" name="pass_word" id="pass_word" class="form-control" data-rule="密码:required;password;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">确认密码：</label>
+            <div class="col-sm-4">
+                <input type="password" name="SurePassWord" id="SurePassWord" class="form-control" data-rule="确认密码:required;password;match(pass_word)">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label ">联系方式：</label>
+            <div class="col-sm-4">
+                <input type="text" name="mobile_phone" id="mobile_phone" class="form-control" data-rule="mobile;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱：</label>
+            <div class="col-sm-4">
+                <input type="text" name="email" id="email" value="" class="form-control" data-rule="required;email;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">系统角色：</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("sys_role_id", ViewBag.RoleList as SelectList, new { @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-9">
+                <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-3">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var index = parent.layer.getFrameIndex(window.name);
+        $(function () {
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                   
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/sysuser/SaveData', $(form).serialize(),
+                        function (res) {
+                            parent.layer.close(index);
+                        });
+                }
+            });
+
+            loadData();
+        });
+
+
+        function loadData() {
+            var id = $("#id").val();
+
+            if (id !== '') {
+
+                jutils.ajaxGet('/sysuser/GetUserById', { id: id }, function (res) {
+                    // console.log('返回内容：\n' + JSON.stringify(json));
+                    $('#form').initFormData(res.data.model);
+                    $('#SurePassWord').val(res.data.model.pass_word);
+
+                });
+            }
+        }
+
+
+        function cancel() {
+            parent.layer.close(index);
+        }
+    </script>
+
+
+}
+
+
+

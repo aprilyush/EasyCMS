@@ -7,7 +7,14 @@
   <ItemGroup>
     <PackageReference Include="Mapster" Version="3.1.8" />
     <PackageReference Include="sqlSugarCore" Version="4.6.4.9" />
-    <PackageReference Include="TinyMapper" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Altas.Framework.Common\Altas.Framework.Common.csproj" />
+    <ProjectReference Include="..\Altas.Framework.Core\Altas.Framework.Core.csproj" />
+    <ProjectReference Include="..\Altas.Framework.IAppService\Altas.Framework.IAppService.csproj" />
+    <ProjectReference Include="..\Altas.Framework.Models\Altas.Framework.Models.csproj" />
+    <ProjectReference Include="..\Altas.Framework.ViewModels\Altas.Framework.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

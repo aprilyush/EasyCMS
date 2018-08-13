@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "设置菜单权限";
+    Layout = null;
+}
+
+<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
+    <input type="hidden" id="roleId" value="@(ViewBag.Id)"/>
+    <div class="bs-example">
+        <div id="menuDiv" style="bottom: 30px;">
+            <table id="menuList" class="table table-bordered"></table>
+        </div>
+    </div>
+</div>
+<div class="bjui-pageFooter" style="bottom: 25px;">
+    <ul>
+        <li><button type="button" class="btn-close btn" data-icon="close"><i class="fa fa-close"></i> 关闭</button></li>
+        <li><button type="button" class="btn-default btn" data-icon="save" onclick="save();"><i class="fa fa-save"></i> 保存</button></li>
+    </ul>
+</div>
+<script>
+    $(function() {
+        loadGrid();
+        //loadData();
+        getallData();
+    });
+
+    function loadGrid() {
+        $('#menuList').datagrid({
+            height: 400,
+            tableWidth: 500,
+            gridTitle: '菜单表格',
+            dataUrl: '/sysmenu/GetData',
+            filterThead: false,
+            columnFilter: false,
+            inlineEditMult: false,
+            showCheckboxcol: true,
+            paging: false,
+            isTree: 'MenuName',
+            treeOptions: {
+                expandAll: false,
+                add: false,
+                simpleData: true,
+                keys: {
+                    key: 'Id',
+                    parentKey: 'ParentId'
+                }
+            },
+            columns: [
+                { name: 'MenuName', label: '菜单名称', align: 'center' },
+                { name: 'MenuUrl', label: '菜单Url', align: 'center' },
+                { name: 'MenuSort', label: '排序', align: 'center' }
+            ],
+            // paging: { pageSize: 50, pageCurrent: 10 },
+            linenumberAll: true
+        });
+    }
+
+    function getallData() {
+        //setTimeout(function () {
+        //    var data = $('#menuList').data('allData');
+
+        //    console.log(data);
+        //}, 2000);
+
+        //for (var i = 0; i < menuids.length; i++) {
+        //    $('#menuList').datagrid('selectedRows', menuids[i], true);
+        //}
+    }
+    function loadRoleData() {
+        var id = $.CurrentDialog.find("#roleId").val();
+        if (id !== '') {
+
+            jutils.ajaxGet('/sysrole/GetRoleAuthById', { roleId: id }, function (res) {
+                console.log(res.Data);
+
+                var menuids = res.Data;
+                if (menuids.length > 0) {
+                    //setInterval(function() {
+                    //    $('#menuList').datagrid('selectedRows', menuids, true);
+                    //}, 1000);
+                    setTimeout(function() {
+                        for (var i = 0; i < menuids.length; i++) {
+                            $('#menuList').datagrid('selectedRows', menuids[i], true);
+                        }
+                    },2000);
+                }
+
+            });
+        }
+    }
+    function save() {
+        var deom1=$('#menuList').data('selectedTrs');
+        console.log(deom1);
+        return;
+        var ids = [];
+        var rows = $('#menuList').selectedRows();
+        if (rows.length > 0) {
+            //jutils.warn('选择一条数据行编辑');
+            //return;
+            for (var i = 0; i < rows.length; i++) {
+
+                ids.push(rows[i].Id);
+
+            }
+        }
+        var roleId = $.CurrentDialog.find("#roleId").val();
+        jutils.confirm('确认修改权限吗', function () {
+            jutils.ajaxPost('/sysrole/SaveRoleAuth', { roleId: roleId, ids: ids.join() }, function () {
+                jutils.info('设置完成');
+            });
+        });
+
+
+
+    }
+</script>

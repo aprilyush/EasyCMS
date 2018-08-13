@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="~/hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    @*<link href="~/hplus/css/animate.css" rel="stylesheet">*@
+    <link href="~/hplus/css/style.css?v=4.1.0" rel="stylesheet">
+    @*<link href="~/hplus/css/plugins/iCheck/custom.css" rel="stylesheet">*@
+    <link href="~/plugins/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/plugins/nice_validate/jquery.validator.css" rel="stylesheet" />
+</head>
+<body>
+    @RenderBody()
+    <!-- 全局js -->
+    <script src="~/hplus/js/jquery.min.js?v=2.1.4"></script>
+    @*<script src="~/hplus/js/bootstrap.min.js?v=3.3.6"></script>*@
+
+    <!-- 自定义js -->
+    @*<script src="~/hplus/js/content.js?v=1.0.0"></script>*@
+
+    <!-- iCheck -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    @*<script src="~/hplus/js/plugins/iCheck/icheck.min.js"></script>*@
+    <script src="~/plugins/nice_validate/jquery.validator.js?local=zh-CN"></script>
+    <script src="~/plugins/layer/layer.js"></script>
+    <script src="~/framework/jutils.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

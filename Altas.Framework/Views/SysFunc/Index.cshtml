@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "操作管理";
+    Layout = null;
+}
+<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
+    <div id="gridList" style="bottom: 30px;">
+        <table id="j_datagrid" class="table table-bordered"></table>
+    </div>
+</div>
+<script>
+    $(function () {
+        loadGrid();
+    });
+
+    function loadGrid() {
+        $('#j_datagrid').datagrid({
+            height: 600,
+            tableWidth: '95%',
+            gridTitle: '操作按钮表格',
+            showToolbar: true,
+            dataUrl: '/sysfunc/GetData',
+            filterThead: false,
+            columnFilter: false,
+            inlineEditMult: false,
+            showCheckboxcol: true,
+            paging: { pageSize: 15 },
+            columns: [
+                { name: 'func_cname', label: '按钮名称', align: 'center' },
+                { name: 'func_name', label: '按钮事件', align: 'center' },
+                //{
+                //    name: 'func_icon', label: '按钮图标', align: 'center', render: function() {
+                    
+                //} },
+                {
+                    name: 'func_class', label: '按钮样式', align: 'center', render: function (v,d) {
+                        return renderButtonTempl(d);
+                    }  },
+                { name: 'func_sort', label: '排序', align: 'center' },
+                 { name: 'remark', label: '备注', align: 'center' }
+            ],
+            linenumberAll: true
+        });
+
+
+        //jutils.loadToolBarExt('#gridList',true);
+        jutils.loadRoleToolBar('#gridList',true);
+    }
+
+    function renderButtonTempl(rolebtn) {
+        var html = '<button type="button" class="btn ' + rolebtn.func_class + '" data-icon="' + rolebtn.func_icon + '"><i class="fa fa-' + rolebtn.func_icon + '"></i> ' + rolebtn.func_cname + '</button>';
+        return html;
+    }
+
+    function add() {
+        var url = '/sysfunc/form/' + '';
+        jutils.dialog('funcdialog', url, '操作按钮', null, null, function () {
+            $('#j_datagrid').datagrid('refresh');
+        });
+    }
+    function edit() {
+
+        var rows = $('#j_datagrid').selectedRows();
+        if (rows.length === 1) {
+            var id = rows[0].id;
+            var url = '/sysfunc/form/' + id;
+            jutils.dialog('funcdialog', url, '操作按钮', null, null, function () {
+                $('#j_datagrid').datagrid('refresh');
+            });
+        } else {
+            jutils.warn('选择一条数据行进行编辑');
+        }
+    }
+
+    function del() {
+        var rows = $('#j_datagrid').selectedRows();
+        if (rows.length === 0) {
+            jutils.warn('请选中需要删除的数据行');
+            return;
+        }
+        var ids = [];
+        for (var i = 0; i < rows.length; i++) {
+
+            ids.push(rows[i].id);
+
+        }
+
+        jutils.confirm('确认删除吗', function () {
+            jutils.ajaxGet('/sysfunc/DelByIds', { ids: ids.join() }, function () {
+                $('#j_datagrid').datagrid('refresh');
+            });
+        });
+    }
+</script>

@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
+    <div class="bs-example">
+        <form id="areaform">
+            <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+            <div class="bjui-row col-2">
+                <label class="row-label">区域名称</label>
+                <div class="row-input required">
+                    <input type="text" name="name" id="name" value="" data-rule="required">
+                </div>
+                <label class="row-label">行政编码</label>
+                <div class="row-input">
+                    <input type="text" name="area_code" id="area_code" value="" data-rule="">
+                </div>
+                <label class="row-label">父项</label>
+                <div class="row-input">
+                    <input type="hidden" name="parent_id" id="parent_id" value="@(ViewBag.Pid)" />
+                    <input type="text" name="parent_name" id="parent_name" value="@(ViewBag.Pname)" />
+                </div>
+                <label class="row-label">坐标信息</label>
+                <div class="row-input">
+                    <input type="text" name="lat_lng" id="lat_lng" value="" data-rule=""><br/>
+                    <a href="http://lbs.qq.com/tool/getpoint/index.html" target="_blank">拾取坐标</a>
+                </div>
+                <label class="row-label">排序</label>
+                <div class="row-input required">
+                    <input type="text" name="sort" id="sort" value="1" data-toggle="spinner" data-min="1" data-max="10000" data-step="1" data-rule="integer">
+                </div>
+                <br />
+                <label class="row-label">备注</label>
+                <div class="row-input">
+                    <textarea name="remark" id="remark" data-toggle="autoheight" cols="60" rows="4"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="bjui-pageFooter" style="bottom: 5px;">
+    <ul>
+        <li><button type="button" class="btn-close btn" data-icon="close"><i class="fa fa-close"></i> 取消</button></li>
+        <li><button type="button" class="btn-default btn" data-icon="save" onclick="save();"><i class="fa fa-save"></i> 保存</button></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        loadData();
+    });
+
+    function loadData() {
+        var id = $.CurrentDialog.find("#id").val();
+        if (id !== '') {
+
+            jutils.ajaxGet('/sysarea/GetDataById', { id: id }, function (res) {
+                $('#areaform').initFormData(res.Data);
+
+            });
+        }
+    }
+    function save() {
+        BJUI.ajax('ajaxform', {
+            url: '/sysarea/savedata',
+            form: $('#areaform'),
+            closeCurrent: true
+        });
+    }
+</script>
+
+
+
+

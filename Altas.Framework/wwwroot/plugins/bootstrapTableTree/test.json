@@ -1,0 +1,57 @@
+﻿[
+  {
+    "id": "1",
+    "dic_name": "1",
+    "dic_value": null,
+    "parent_id": "0",
+    "dic_code": "0",
+    "sort_num": 0,
+    "create_person": null,
+    "create_time": "0001-01-01 00:00:00",
+    "remark": null
+  },
+  {
+    "id": "2",
+    "dic_name": "2",
+    "dic_value": null,
+    "parent_id": "1",
+    "dic_code": "0",
+    "sort_num": 0,
+    "create_person": null,
+    "create_time": "0001-01-01 00:00:00",
+    "remark": null
+  },
+  {
+    "id": "3",
+    "dic_name": "3",
+    "dic_value": null,
+    "parent_id": "1",
+    "dic_code": "0",
+    "sort_num": 0,
+    "create_person": null,
+    "create_time": "0001-01-01 00:00:00",
+    "remark": null
+  },
+  {
+    "id":"4",
+    "dic_name": "3",
+    "dic_value": null,
+    "parent_id":"0",
+    "dic_code": "0",
+    "sort_num": 0,
+    "create_person": null,
+    "create_time": "0001-01-01 00:00:00",
+    "remark": null
+  },
+  {
+    "id":"5",
+    "dic_name": "3",
+    "dic_value": null,
+    "parent_id": "4",
+    "dic_code": "0",
+    "sort_num": 0,
+    "create_person": null,
+    "create_time": "0001-01-01 00:00:00",
+    "remark": null
+  }
+]

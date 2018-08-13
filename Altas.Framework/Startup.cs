@@ -1,7 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Altas.Framework.Common.NLog;
+using Altas.Framework.Core.AltasDbContext;
+using Altas.Framework.Core.AutofacInjectModule;
+using Altas.Framework.Core.Web;
+using Altas.Framework.ViewModels;
+using Autofac;
+using Hangfire;
+using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,17 +18,25 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using NLog.Web;
+using StackExchange.Redis;
 
 namespace Altas.Framework
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("configs/appsettings.json", optional: true, reloadOnChange: true);
+            //Configuration = configuration;
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -27,12 +44,39 @@ namespace Altas.Framework
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //扩展httpcontext
+            //services.AddHttpContextAccessor();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            #region 获取配置项
+            //services.AddDbContext<IAltasDbContext,MySqlDbContext>(opts =>
+            //{
+            //    opts.
+            //})
+            SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   //为数据库连接字符串赋值
+            GlobalParamsDto.RpcUname = this.Configuration.GetSection("RpcUser:Username").Value;
+            GlobalParamsDto.RpcPwd = this.Configuration.GetSection("RpcUser:Password").Value;
+            #endregion
+
+            #region hangfire配置
+            string redisConn = this.Configuration.GetSection("redisConn:redisConnStr").Value;
+            string redisPwd = this.Configuration.GetSection("redisConn:redisPwd").Value;
+            var hgOpts = ConfigurationOptions.Parse(redisConn);
+            hgOpts.AllowAdmin = true;
+            hgOpts.Password = redisPwd;
+            //var _redisContext = ConnectionMultiplexer.Connect(hgOpts);
+            //services.AddHangfire(x => x.UseRedisStorage(_redisContext, new RedisStorageOptions()
+            //{
+            //    Prefix = "{altas_web_hangfire}:"
+            //}));
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,13 +95,39 @@ namespace Altas.Framework
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            //nlog日志配置文件
+            env.ConfigureNLog("configs/nlog.config");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "areaRoute",
+                    template: "{area:exists}/{controller=DeviceData}/{action=Index}/{id?}");
             });
+
+            #region 解决Ubuntu Nginx 代理不能获取IP问题
+            //app.UseForwardedHeaders(new ForwardedHeadersOptions
+            //{
+            //    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            //});
+            #endregion
+
+            //扩展HttpContext
+            app.UseStaticHttpContext();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            try
+            {
+                builder.RegisterModule(new AutofacModule());
+            }
+            catch (Exception e)
+            {
+               LogNHelper.Exception(e);
+            }
+
         }
     }
 }

@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "菜单管理";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div id="toolbar" class="btn-group">
+                    @*<div class="btn-group">
+                        <button class="btn btn-success " type="button" onclick="refresh()"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
+                        <button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;新建</button>
+                        <button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;修改</button>
+                        <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
+                    </div>*@
+                </div>
+                <div class="">
+                    <table id="table"></table>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
+    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
+    <script>
+        var $table;
+
+        $(function() {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/SysMenu/GetData',
+                height: $(window).height(),
+                striped: true,
+                sidePagination: 'server',
+                idField: 'id',
+                columns: [
+                    {field: 'ck',checkbox: true},
+                    { field: 'menu_name', title: '名称', align: 'left' },
+                    { field: 'menu_url', title: '菜单路径', align: 'center' },
+                    { field: 'menu_icon', title: '菜单图片', align: 'center' },
+                    { field: 'menu_sort', title: '排序', align: 'center' },
+                    { field: 'remark', title: '排序',align: 'center'}
+                ],
+                treeShowField: 'menu_name',
+                parentIdField: 'parent_id',
+                onLoadSuccess: function (data) {
+                    $table.treegrid({
+                        // initialState: 'collapsed',
+                        treeColumn: 1,
+                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
+                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function() {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+                // bootstrap-table-treetreegrid.js 插件配置
+            });
+            jutils.initToolBar('#toolbar', true);
+
+        }
+
+        function renderIcon(rowdata, index, value) {
+            return '<i class="' + value+'"></i>';
+        }
+
+        function add() {
+            jutils.dialogForm('菜单信息', '/sysmenu/form',null,
+                function() {
+                    $table.bootstrapTable('refresh');
+                });
+            //$.dialog({
+            //    id:'hha',
+            //    url: '/login/index',
+            //    title: '新增',
+            //    callBack: function(id) {
+            //        console.log('关闭回调');
+            //    }
+            //});
+        }
+        function edit() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length === 1) {
+               // console.log(rows);
+                jutils.dialogForm('菜单信息', '/sysmenu/form', {id:rows[0].id},
+                    function() {
+                       // console.log('关闭回调');
+                        $table.bootstrapTable('refresh');
+                    });
+            } else {
+                jutils.warn('请选择一条需要编辑的数据行');
+            }
+        }
+
+        function del() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.warn('请选中需要删除的数据行');
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+
+                ids.push(rows[i].id);
+
+            }
+          
+            jutils.confirm('确认删除选中的数据吗', function () {
+               
+                jutils.ajaxGet('/sysmenu/del', { ids: ids.join() }, function () {
+                    jutils.success('删除成功');
+                    $table.bootstrapTable('refresh');
+                });
+            });
+        }
+
+        function refresh() {
+            $table.bootstrapTable('refresh');
+        }
+    </script>
+
+}

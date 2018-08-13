@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+<div class="bjui-pageContent" style="top: 0px; bottom: 35px;">
+    <div class="bs-example">
+        <form id="funcform">
+            <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+            <div class="bjui-row col-2">
+                <label class="row-label">按钮名称</label>
+                <div class="row-input required">
+                    <input type="text" name="func_cname" id="func_cname" value="" data-rule="required">
+                </div>
+                <label class="row-label">按钮事件</label>
+                <div class="row-input required">
+                    <input type="text" name="func_name" id="func_name" value="" data-rule="required">
+                </div>
+                <label class="row-label">按钮图标</label>
+                <div class="row-input">
+                    <input type="text" name="func_icon" id="func_icon" value="" data-rule="">
+                </div>
+                <label class="row-label">按钮样式</label>
+                <div class="row-input">
+                    <input type="text" name="func_class" id="func_class" value="" data-rule="">
+                </div>
+                <label class="row-label">排序</label>
+                <div class="row-input required">
+                    <input type="text" name="func_sort" id="func_sort" value="1" data-toggle="spinner" data-min="1" data-max="10000" data-step="1" data-rule="integer">
+                </div>
+                <br />
+                <label class="row-label">备注</label>
+                <div class="row-input">
+                    <textarea name="remark" id="remark" data-toggle="autoheight" cols="60" rows="4"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="bjui-pageFooter" style="bottom:5px;">
+    <ul>
+        <li><button type="button" class="btn-close btn" data-icon="close"><i class="fa fa-close"></i> 取消</button></li>
+        <li><button type="button" class="btn-default btn" data-icon="save" onclick="save();"><i class="fa fa-save"></i> 保存</button></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        loadData();
+    });
+
+
+    function loadData() {
+        var id = $.CurrentDialog.find("#id").val();
+        if (id !== '') {
+
+            jutils.ajaxGet('/sysfunc/GetDataById', { id: id }, function (res) {
+                $('#funcform').initFormData(res.Data);
+
+            });
+        }
+    }
+    function save() {
+        BJUI.ajax('ajaxform', {
+            url: '/sysfunc/savedata',
+            form: $('#funcform'),
+            closeCurrent: true
+        });
+    }
+</script>
+
+

@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.5.8" />
-    <PackageReference Include="TinyMapper" Version="2.0.8" />
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.0" />
+    <PackageReference Include="JWT" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.6.0" />
+    <PackageReference Include="Npoi.Core.Common" Version="1.0.2" />
+    <PackageReference Include="Snowflake.Core" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Web\" />
   </ItemGroup>
 
 </Project>

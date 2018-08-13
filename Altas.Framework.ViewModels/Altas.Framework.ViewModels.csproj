@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Altas.Framework.Models\Altas.Framework.Models.csproj" />
+  </ItemGroup>
+
 </Project>

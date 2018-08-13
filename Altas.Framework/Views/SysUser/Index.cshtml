@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "用户管理";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div id="toolbar" class="btn-group">
+                  
+                </div>
+                <div class="jqGrid_wrapper">
+                    <table id="userTable"></table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        var $userTable;
+        $(function() {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $userTable=$("#userTable").bootstrapTable({
+                url: '/sysuser/getdata',
+                toolbar: '#toolbar',       
+                pagination: true,
+                height: $(window).height()-50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true, 
+                sidePagination: "server", 
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'AccountName', title: '登录名', align: 'center' },
+                    { field: 'RealName', title: '用户名', align: 'center'  },
+                    { field: 'RoleName', title: '角色名称', align: 'center'  },
+                    { field: 'MobilePhone', title: '联系方式', align: 'center'  },
+                    { field: 'Email', title: '邮箱', align: 'center'  }
+                ]
+                
+            });  
+            jutils.initToolBar('#toolbar', true);
+        }
+
+
+        function add() {
+            jutils.dialogForm('用户信息', '/SysUser/form', {id:''},function () {
+                $userTable.bootstrapTable('refresh');
+            });
+        }
+
+        function edit() {
+            var rows = $userTable.bootstrapTable('getSelections');
+            //console.log(rows);
+            if (rows.length === 1) {
+                // console.log(rows);
+                jutils.dialogForm('用户信息', '/SysUser/form', {id:rows[0].Id},
+                    function() {
+                        $userTable.bootstrapTable('refresh');
+                    });
+            } else {
+                jutils.warn('请选择一条需要编辑的数据行');
+            }
+         
+        }
+
+        function del() {
+            var rows = $userTable.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.warn('请选择需要删除的数据行');
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+
+                ids.push(rows[i].Id);
+
+            }
+            jutils.confirm('确认删除吗',
+                function() {
+                    jutils.ajaxGet('/SysUser/DelUserByIds',
+                        { ids: ids.join() },
+                        function() {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function query() {
+            var pname = $('#accountName').val();
+            $('#j_datagrid').datagrid('filter', { accountName: pname });
+        }
+
+    </script>
+}
