@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CSRedisCore" Version="2.3.9.2" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.0" />
     <PackageReference Include="JWT" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />

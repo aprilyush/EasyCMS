@@ -21,6 +21,7 @@ namespace Altas.Framework.Admin
 
         public SysMenuController(SysMenuAppService menuApp)
         {
+           
             _menuApp = menuApp;
         }
         public ActionResult Index()
