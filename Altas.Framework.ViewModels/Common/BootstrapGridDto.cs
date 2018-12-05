@@ -9,7 +9,7 @@ namespace Altas.Framework.ViewModels.Common
         public object rows { get; set; }
         public int total { get; set; }
         public int offset { get; set; }
-        public int page { get { return this.offset + 1; } }
+        public int page { get { return (this.offset/limit) + 1; } }
         public int limit { get; set; }
     }
 

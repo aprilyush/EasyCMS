@@ -57,7 +57,7 @@ namespace Altas.Framework.Admin
         public ActionResult SaveData(sys_citys dto)
         {
 
-            bool existCount =false;
+            //bool existCount =false;
             //if (!string.IsNullOrEmpty(dto.zipcode))
             //{
             //    existCount = _areaApp.IsExist(dto.area_code, dto.id);

@@ -75,6 +75,35 @@ jutils.dialogForm = function(title,url,data,callFunc) {
     layer.full(index1);
 
 }
+
+jutils.dialog = function (title, url, data, area, callFunc) {
+    //弹出即全屏
+    if (data) {
+        var queryStr = toQueryString(data);
+        url += "?" + queryStr;
+    }
+    area = area || ['800px', '600px'];
+    var index1 = layer.open({
+        title: title,
+        type: 2,
+        content: url,
+        skin: 'layui-layer-lan',
+        area: area,
+        maxmin: true,
+        yes: function (index, layero) {
+            layer.close(index);
+        },
+        cancel: function (index, layero) {
+            return true;
+        },
+        end: function () {
+            if ($.isFunction(callFunc)) {
+                callFunc();
+            }
+        }
+    });
+
+};
 //关闭弹出
 jutils.closeForm = function() {
     var index = parent.layer.getFrameIndex(window.name);
@@ -197,17 +226,46 @@ jutils.info = function (msg) {
 }
 
 //确认框molv
-jutils.confirm = function(msg, okfunc) {
+jutils.confirm = function (msg, okfunc) {
+    var btn = ['确认', '取消'];
+    var title = "温馨提示";
+    var lan = jutils.getCookie('webLang');
+    if (lan === 'en') {
+        title = 'Prompt';
+        btn = ["Confirm", "Cancel"];
+    }
     layer.confirm(msg, {
-        title:'温馨提示',
+        title: title,
         skin: 'layui-layer-lan',
-        btn: ['确认', '取消'] //按钮
+        btn: btn //按钮
     }, function (index) {
         layer.close(index);
         okfunc();
     }, function () {
       
     });
+}
+jutils.confirmEn = function (msg, okfunc) {
+    var title = 'Prompt';
+    var btn = ["Confirm", "Cancel"];
+    layer.confirm(msg, {
+        title: title,
+        skin: 'layui-layer-lan',
+        btn: btn //按钮
+    }, function (index) {
+        layer.close(index);
+        okfunc();
+    }, function () {
+
+    });
+}
+jutils.pad = function(str, totalLen) {
+    var len = str.toString().length;
+    while (len < totalLen) {
+        str = "0" + str;
+        len++;
+    }
+    return str;
 }
 //弹出框
 $.dialog = function(opts) {
@@ -330,24 +388,118 @@ jutils.loadFormData = function (form, data) {
 
 };
 
+jutils.getCookie = function(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+
+};
+jutils.setCookie = function(name, value) {
+    var date = new Date();
+    var ms = 100 * 24 * 3600 * 1000;
+    date.setTime(date.getTime() + ms);
+    document.cookie = name + "=" + escape(value) + ";expires=" + date.toGMTString();
+};
+
+jutils.resetValidateSrc = function() {
+    var lan = jutils.getCookie('webLang');
+    if (lan === 'en') {
+        var obj = document.getElementById('validateScript');
+        if (obj != null) {
+            obj.src = '/plugins/nice_validate/local/en.js';
+        }
+    }
+};
+jutils.loadLangI18 = function(url) {
+    var i18nLanguage = jutils.getCookie('webLang');
+
+    if (i18nLanguage !== 'en') {
+        i18nLanguage = 'zh';
+    }
+    jQuery.i18n.properties({
+        name: 'common',
+        //path: '/Lang/B_Obituary/i18n/', //资源文件路径
+        path: url,
+        mode: 'map', //用Map的方式使用资源文件中的值
+        language: i18nLanguage,
+        callback: function() { //加载成功后设置显示内容
+            //console.log("i18n赋值中...");
+            try {
+                // $('#fucktest').text($.i18n.prop('orderno'));
+                ////初始化页面元素
+                //if ($('[data-i18n-placeholder]').length > 0) {
+                //    $('[data-i18n-placeholder]').each(function () {
+                //        $(this).attr('placeholder', $.i18n.prop($(this).data('i18n-placeholder')));
+                //    });
+                //}
+
+                // console.log($('[data-i18n-text]').length);
+                if ($('[data-i18n-text]').length > 0) {
+                    //console.log('test');
+                    $('[data-i18n-text]').each(function () {
+                        var key = $(this).data('i18n-text');
+                        var val = $.i18n.prop(key);
+                        $(this).text(val);
+                    });
+                }
+                //$('[data-i18n-text]').each(function () {
+                //    //如果text里面还有html需要过滤掉
+                //    var html = $(this).html();
+                //    var reg = /<(.*)>/;
+                //    if (reg.test(html)) {
+                //        var htmlValue = reg.exec(html)[0];
+                //        $(this).html(htmlValue + $.i18n.prop($(this).data('i18n-text')));
+                //    } else {
+                //        var t = $.i18n.prop($(this).data('i18n-text'));
+                //        console.log(t);
+                //        $(this).text(t);
+                //    }
+                //});
+                if ($('[data-i18n-value]').length > 0) {
+                    $('[data-i18n-value]').each(function() {
+                        $(this).val($.i18n.prop($(this).data('i18n-value')));
+                    });
+                }
+
+            } catch (ex) {
+                console.log(ex);
+            }
+            //console.log("i18n写入完毕");
+        }
+    });
+
+};
+
 //生成基本操作按钮 [{text:'按钮',func:'ok',color:'btn-danger',icon:fa-edit'}]
-jutils.initToolBar = function(id,isDefault,extBtn) {
+jutils.initToolBar = function (id, isDefault, extBtn) {
     extBtn = extBtn || [];
     var html = '';
     if (isDefault) {
-       // html += '<div class="btn-group">';
+        var add = '新建', edit = "修改", del = "删除";
+        var lang = jutils.getCookie('webLang');
+        if (lang === "en") {
+            add = "Add";
+            edit = "Edit";
+            del = "Delete";
+        }
+        // html += '<div class="btn-group">';
         //html += '<button class="btn btn-success " type = "button" onclick = "refresh()" > <i class="fa fa-refresh"></i>&nbsp; 刷新</button>';
-        html += '<button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;新建</button>';
-        html += '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;修改</button>';
-        html += '<button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>';
+        html +=
+            '<button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;' + add+'</button>';
+        html +=
+            '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;' + edit +'</button>';
+        html += '<button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> ' + del +'</button>';
         //html += '</div >';
     }
 
     if (extBtn.length > 0) {
-       // html += '<div class="btn-group">';
-        html += '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;修改</button>';
+        // html += '<div class="btn-group">';
+        html +=
+            '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;修改</button>';
         //html += '</div >';
     }
-    
+
     $(id).append(html);
-}
+};

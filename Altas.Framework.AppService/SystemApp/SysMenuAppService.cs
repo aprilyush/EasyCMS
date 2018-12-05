@@ -33,7 +33,7 @@ namespace Altas.Framework.AppService
         public List<sys_menu> GetMenuList(BootstrapGridDto param)
         {
 
-            int total = 0;
+            //int total = 0;
             var query = Sqldb.Queryable<sys_menu>().OrderBy(s=>s.menu_sort).ToList();
             return query;
         }
