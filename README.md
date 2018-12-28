@@ -1,5 +1,6 @@
 # Altas.Framework
 Altas 管理系统 基于Asp.net Core 2.2的后台快速开发框架  
+Altas框架默认携带数据库脚本为mysql版本
 # Altas后台技术介绍
 核心框架：基于最新的AspNet.Core2.2，跨平台，高性能  
 安全支持：过滤器、Sql注入、请求伪造,Jwt Token  
