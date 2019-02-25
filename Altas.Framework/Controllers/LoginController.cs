@@ -8,7 +8,6 @@ using Altas.Framework.Common.NLog;
 using Altas.Framework.Core.Web;
 using Altas.Framework.Models;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Altas.Framework.Controllers
