@@ -21,9 +21,10 @@ namespace Altas.Framework
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
+				.UseIIS()
                 .UseIISIntegration()
                 .ConfigureServices(services => services.AddAutofac())
-                .UseStartup<Startup>()
                 .UseStartup<Startup>();
+
     }
 }
