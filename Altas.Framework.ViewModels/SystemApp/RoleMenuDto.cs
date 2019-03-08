@@ -15,5 +15,8 @@ namespace Altas.Framework.ViewModels
         public long parent_id { get; set; }
         public int menu_type { get; set; }
         public string menu_icon { get; set; }
+
+        public string func_name { get; set; }
+        public int in_table { get; set; }
     }
 }

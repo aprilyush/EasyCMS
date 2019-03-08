@@ -78,11 +78,21 @@
                     { field: 'dic_name', title: '字典名称', align: 'center' },
                     { field: 'dic_code', title: '字典编码', align: 'center' },
                     { field: 'sort_num', title: '排序', align: 'center' },
-                    { field: 'remark', title: '备注', align: 'center' }
+                    { field: 'remark', title: '备注', align: 'center' },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: render
+                    }
                 ]
 
             });
-            jutils.initToolBar('#toolbar', true);
+            //jutils.initToolBar('#toolbar', true);
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function render(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
         }
 
         function add() {
@@ -100,23 +110,26 @@
                     }
                 });
         }
-        function edit() {
-            var rows = $dicTable.bootstrapTable('getSelections');
-            if (rows.length === 1) {
-                var pid = rows[0].parent_id;
-                jutils.dialogForm('字典信息', '/sysdic/form', { id: rows[0].id },
-                    function () {
-                        $dicTable.bootstrapTable('refresh', { query: { pid: pid } });
-                        if (pid === '0') {
-                            loadDicTree();
-                        }
-                    });
-            } else {
-                jutils.warn('请选择一条需要编辑的数据行');
-            }
-           
+        function edit(obj) {
+            var id = $(obj).data('id');
+            jutils.dialogForm('字典信息', '/sysdic/form', { id: id },
+                function () {
+                    $dicTable.bootstrapTable('refresh', { query: { pid: pid } });
+                    if (pid === '0') {
+                        loadDicTree();
+                    }
+                });
         }
 
+        function delSingle(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗', function () {
+                jutils.ajaxGet('/sysdic/del', { ids: id}, function () {
+                    $dicTable.bootstrapTable('refresh');
+                    loadDicTree();
+                });
+            });
+        }
         function del() {
             var rows = $dicTable.bootstrapTable('getSelections');
             if (rows.length === 0) {

@@ -1,7 +1,5 @@
 ﻿var clients = {
-    user: {},
-    menu: [],
-    status: {}
+    menu: []
 };
 $(function () {
     initHplus();
@@ -16,10 +14,11 @@ $(function () {
         success: function (res, textStatus, jqXHr) {
             if (res.statusCode === 200) {
                 clients.menu = res.data.menu;
-                clients.user = res.data.user;
-                clients.status = res.data.status;
                 initMenuList(clients.menu);
                 $('#side-menu').metisMenu();
+                var expressIn = 8 * 60 * 60;
+                var funcs = JSON.stringify(res.data.funcs);
+                locache.set("role_funcs", funcs, expressIn);
             } else {
                 clients.user.id = '';
             }

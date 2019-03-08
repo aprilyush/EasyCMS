@@ -33,14 +33,10 @@ namespace Altas.Framework.Controllers
         }
         public async Task<ActionResult> GetRoleMenu()
         {
-            var user = CookieHelper.GetUserLoginCookie();
-            var userDto = user.ToObject<LoginUserDto>();
             var result = new ResultAdaptDto();
             var menu = await _menuApp.GetRoleMenu();
-            //var status = GetStatusDic();
-            result.data.Add("menu", menu);
-            result.data.Add("user", userDto);
-           // result.data.Add("status", status);
+            result.data.Add("menu", menu.Item1);
+            result.data.Add("funcs", menu.Item2);
             return Content(result.ToJson());
         }
         public IActionResult About()

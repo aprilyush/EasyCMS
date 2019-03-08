@@ -45,9 +45,9 @@ namespace Altas.Framework.AppService
         {
             dto.id = IdWorkerHelper.NewId();
             dto.func_icon = dto.func_icon ?? "tag";
-            dto.func_class = dto.func_class ?? "btn-blue";
-            dto.create_time=DateTime.Now;
-            dto.create_person = UserCookie.AccountName;
+            //dto.func_class = dto.func_class ?? "btn-blue";
+            //dto.create_time=DateTime.Now;
+            //dto.create_person = UserCookie.AccountName;
 
             Sqldb.Insertable(dto).ExecuteCommand();
         }
@@ -59,9 +59,9 @@ namespace Altas.Framework.AppService
         public void UpdateFunc(sys_operate dto)
         {
             dto.func_icon = dto.func_icon ?? "tag";
-            dto.func_class = dto.func_class ?? "btn-blue";
+            //dto.func_class = dto.func_class ?? "btn-blue";
 
-            Sqldb.Updateable(dto).IgnoreColumns(s => new {s.create_time, s.create_person }).ExecuteCommand();
+            //Sqldb.Updateable(dto).IgnoreColumns(s => new {s.create_time, s.create_person }).ExecuteCommand();
         }
 
         /// <summary>

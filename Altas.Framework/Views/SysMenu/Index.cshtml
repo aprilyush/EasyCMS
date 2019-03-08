@@ -73,28 +73,29 @@
         }
 
         function add() {
-            jutils.dialogForm('菜单信息', '/sysmenu/form',null,
-                function() {
+            var url = '/sysmenu/form';
+            parent.$.altasTab.open({
+                id: 'menuformTab',
+                title: '菜单信息',
+                url: url,
+                close: function () {
                     $table.bootstrapTable('refresh');
-                });
-            //$.dialog({
-            //    id:'hha',
-            //    url: '/login/index',
-            //    title: '新增',
-            //    callBack: function(id) {
-            //        console.log('关闭回调');
-            //    }
-            //});
+                }
+            });
         }
         function edit() {
             var rows = $table.bootstrapTable('getSelections');
             if (rows.length === 1) {
                // console.log(rows);
-                jutils.dialogForm('菜单信息', '/sysmenu/form', {id:rows[0].id},
-                    function() {
-                       // console.log('关闭回调');
+                var url = '/sysmenu/form/' + rows[0].id;
+                parent.$.altasTab.open({
+                    id: 'menuformTab',
+                    title: '菜单信息',
+                    url: url,
+                    close: function () {
                         $table.bootstrapTable('refresh');
-                    });
+                    }
+                });
             } else {
                 jutils.warn('请选择一条需要编辑的数据行');
             }

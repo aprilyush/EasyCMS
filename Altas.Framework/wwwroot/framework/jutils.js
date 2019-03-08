@@ -56,7 +56,7 @@ jutils.dialogForm = function(title,url,data,callFunc) {
         title: title,
         type: 2,
         content: url,
-        skin: 'layui-layer-lan',
+        //skin: 'layui-layer-lan',
         area: ['800px', '600px'],
         maxmin: true,
         yes: function (index, layero) {
@@ -87,7 +87,7 @@ jutils.dialog = function (title, url, data, area, callFunc) {
         title: title,
         type: 2,
         content: url,
-        skin: 'layui-layer-lan',
+        //skin: 'layui-layer-lan',
         area: area,
         maxmin: true,
         yes: function (index, layero) {
@@ -502,4 +502,59 @@ jutils.initToolBar = function (id, isDefault, extBtn) {
     }
 
     $(id).append(html);
+};
+
+//加载表格外权限按钮
+jutils.initToolBarRole = function (id, extBtn) {
+    extBtn = extBtn || [];
+    var iframeId = self.frameElement.getAttribute('data-id');
+    if (iframeId) {
+        var jsonstr = locache.get('role_funcs');
+        var funcs = $.parseJSON(jsonstr);//JSON.parse(jsonstr);
+        //console.log(funcs);
+        if (funcs.length > 0) {
+            var menus = funcs.filter(function (currentValue, index, arr) {
+                return currentValue.parent_id === iframeId && currentValue.in_table === 0;
+            });
+
+            if (menus.length > 0) {
+                var html = '';
+                for (var i = 0; i < menus.length; i++) {
+                    var menu = menus[i];
+                    html += '<button class="btn btn-default btn-outline" type="button" onclick="' + menu.func_name + '()">';
+                    html += '<i class="' + menu.menu_icon + '"></i>&nbsp;' + menu.menu_name + '</button>';
+                }
+                $(id).prepend(html);
+            }
+        }
+    }
+};
+
+//加载表格内按钮
+jutils.initToolBarRow = function (dataid) {
+    var iframeId = self.frameElement.getAttribute('data-id');
+    if (iframeId) {
+
+        var jsonstr = locache.get('role_funcs');
+        var funcs = JSON.parse(jsonstr);
+        if (funcs.length > 0) {
+            var menus = funcs.filter(function (currentValue, index, arr) {
+                return currentValue.parent_id === iframeId && currentValue.in_table === 1;
+            });
+
+            if (menus.length > 0) {
+                var html = '';
+                for (var i = 0; i < menus.length; i++) {
+                    var menu = menus[i];
+                    html += '<a class="btn btn-white btn-bitbucket" title = "' +
+                        menu.menu_name + '"  href = "javascript:void(0);" onclick = "' +
+                        menu.func_name + '(this)" data-id="' + dataid + '" >';
+                    html += '<i class="' + menu.menu_icon + '"></i></a >';
+                }
+                return html;
+            }
+        }
+    }
+
+    return '';
 };

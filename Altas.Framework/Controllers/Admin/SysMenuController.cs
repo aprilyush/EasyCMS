@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
-
-namespace Altas.Framework.Admin
+namespace Altas.Framework.Controllers.Admin
 {
     public class SysMenuController : BaseController
     {
@@ -50,7 +49,7 @@ namespace Altas.Framework.Admin
             return Content(data.ToJson());
         }
         [HttpPost]
-        public ActionResult SaveData(sys_menu dto)
+        public ActionResult SaveData(sys_menu dto, string funcs)
         {
             if (dto.parent_id == 0)
             {
@@ -65,11 +64,11 @@ namespace Altas.Framework.Admin
             
             if (dto.id==0)
             {
-                _menuApp.AddMenu(dto,string.Empty);
+                _menuApp.AddMenu(dto, funcs);
             }
             else
             {
-                _menuApp.UpdateMenu(dto, string.Empty);
+                _menuApp.UpdateMenu(dto, funcs);
             }
             return Success("保存成功");
         }
@@ -86,10 +85,24 @@ namespace Altas.Framework.Admin
                 return Error("参数错误");
             }
             var data = _menuApp.GetMenuById(id);
-            var result=new ResultAdaptDto();
-            result.data.Add("model",data);
+            var funcs = _menuApp.GetMenuRefOpt(id);
+            var result = new ResultAdaptDto();
+            result.data.Add("model", data);
+            result.data.Add("funcs", funcs);
             return Content(result.ToJson());
         }
+
+        /// <summary>
+        /// 删除某个操作
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delfunc(string id)
+        {
+            _menuApp.Delfunc(id.ToInt64());
+
+            return Success("删除成功");
+        } 
         /// <summary>
         /// 删除
         /// </summary>

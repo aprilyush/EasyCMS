@@ -60,9 +60,7 @@ namespace Altas.Framework
             //{
             //    opts.
             //})
-            SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   //为数据库连接字符串赋值
-            GlobalParamsDto.RpcUname = this.Configuration.GetSection("RpcUser:Username").Value;
-            GlobalParamsDto.RpcPwd = this.Configuration.GetSection("RpcUser:Password").Value;
+
             #endregion
 
             #region hangfire配置
@@ -80,7 +78,7 @@ namespace Altas.Framework
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -115,6 +113,22 @@ namespace Altas.Framework
 
             //扩展HttpContext
             app.UseStaticHttpContext();
+
+            //应用程序启动后
+            appLifetime.ApplicationStarted.Register(() => {
+                try
+                {
+                 
+                    GlobalParamsDto.WebRoot = env.WebRootPath;
+                    SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   //为数据库连接字符串赋值
+                    GlobalParamsDto.RpcUname = this.Configuration.GetSection("RpcUser:Username").Value;
+                    GlobalParamsDto.RpcPwd = this.Configuration.GetSection("RpcUser:Password").Value;
+                }
+                catch (Exception e)
+                {
+                    LogNHelper.Exception(e);
+                }
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

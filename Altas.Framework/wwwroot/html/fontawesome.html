@@ -7,10 +7,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="../hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="../hplus/css/animate.css" rel="stylesheet">
-    <link href="../hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../hplus/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -51,7 +51,6 @@
                             <h2 class="page-header">4.4版新增的66个图标</h2>
 
                             <div class="row fontawesome-icon-list">
-
                                 <div class="fa-hover col-md-3 col-sm-4"><a href="#500px"><i class="fa fa-500px"></i> 500px</a></div>
                                 <div class="fa-hover col-md-3 col-sm-4"><a href="#amazon"><i class="fa fa-amazon"></i> amazon</a></div>
                                 <div class="fa-hover col-md-3 col-sm-4"><a href="#balance-scale"><i class="fa fa-balance-scale"></i> balance-scale</a></div>
@@ -1027,6 +1026,34 @@
     </div>
     <script src="../lib/jquery/dist/jquery.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../plugins/layer/layer.js"></script>
+    <script>
+
+        (function ($) {
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+        })(jQuery);
+        var rowIndex = 0;
+        var index = parent.layer.getFrameIndex(window.name);
+        $(function () {
+            var id = $.getUrlParam('id');
+            rowIndex = id || 0;
+            $('.fontawesome-icon-list').find('a').on('click',
+                function () {
+                    var icon = $(this).children('i').attr('class');
+                    console.log(icon);
+
+                    var obj = { icon: icon, rowId: rowIndex }
+                    window.parent.postMessage(obj, '*');
+                    parent.layer.close(index);
+                });
+
+
+        });
+    </script>
 </body>
 
 

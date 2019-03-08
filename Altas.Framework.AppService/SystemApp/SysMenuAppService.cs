@@ -11,6 +11,7 @@ using Altas.Framework.ViewModels;
 using Altas.Framework.ViewModels.Common;
 using Altas.Framework.AppService;
 using Altas.Framework.Core.AltasDbContext;
+using Altas.Framework.ViewModels.SystemApp;
 using Animal.Adoption.Utils;
 using Models;
 using SqlSugar;
@@ -56,6 +57,7 @@ namespace Altas.Framework.AppService
         /// <param name="dto"></param>
         public void AddMenu(sys_menu dto,string funcs)
         {
+
             dto.id = IdWorkerHelper.NewId();
             dto.create_time = DateTime.Now;
             dto.create_person = "admin";
@@ -76,22 +78,23 @@ namespace Altas.Framework.AppService
             Sqldb.Insertable(dto).ExecuteCommand();
 
             //设置菜单下按钮
-            if (!string.IsNullOrEmpty(funcs))
+            if (dto.menu_type == 1 && !string.IsNullOrEmpty(funcs))
             {
-                var funcArray = funcs.Split(',');
-                if (funcArray.Length > 0)
+                var funcArray = funcs.ToObject<List<SysFuncDto>>();
+                var list = new List<sys_operate>();
+                foreach (var func in funcArray)
                 {
-                    var list = new List<sys_menu_ref_operate>();
-                    foreach (var func in funcArray)
-                    {
-                        var funcModel=new sys_menu_ref_operate();
-                        funcModel.menu_id = dto.id;
-                        funcModel.operate_id = func.ToInt64();
-                        list.Add(funcModel);
-                    }
-                    Sqldb.Insertable(list).ExecuteCommand();
+                    var funcModel = new sys_operate();
+                    funcModel.menu_id = dto.id;
+                    funcModel.func_cname = func.title;
+                    funcModel.func_name = func.funcname;
+                    funcModel.func_icon = func.icon;
+                    funcModel.func_url = func.url;
+                    funcModel.in_table = func.intable;
+                    funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
+                    list.Add(funcModel);
                 }
-
+                Sqldb.Insertable(list).ExecuteCommand();
             }
 
         }
@@ -101,6 +104,7 @@ namespace Altas.Framework.AppService
         /// <param name="dto"></param>
         public void UpdateMenu(sys_menu dto, string funcs)
         {
+
             if (!string.IsNullOrEmpty(dto.menu_url))
             {
                 dto.menu_type = 1;
@@ -117,22 +121,24 @@ namespace Altas.Framework.AppService
             Sqldb.Updateable(dto).IgnoreColumns(s => new { s.create_time, s.create_person }).ExecuteCommand();
 
             //设置菜单下按钮
-            Sqldb.Deleteable<sys_menu_ref_operate>().Where(s => s.menu_id == dto.id).ExecuteCommand();
-            if (!string.IsNullOrEmpty(funcs))
+            Sqldb.Deleteable<sys_operate>().Where(s => s.menu_id == dto.id).ExecuteCommand();
+            if (dto.menu_type == 1 && !string.IsNullOrEmpty(funcs))
             {
-                var funcArray = funcs.Split(',');
-                if (funcArray.Length > 0)
+                var funcArray = funcs.ToObject<List<SysFuncDto>>();
+                var list = new List<sys_operate>();
+                foreach (var func in funcArray)
                 {
-                    var list = new List<sys_menu_ref_operate>();
-                    foreach (var func in funcArray)
-                    {
-                        var funcModel = new sys_menu_ref_operate();
-                        funcModel.menu_id = dto.id;
-                        funcModel.operate_id = func.ToInt64();
-                        list.Add(funcModel);
-                    }
-                    Sqldb.Insertable(list).ExecuteCommand();
+                    var funcModel = new sys_operate();
+                    funcModel.menu_id = dto.id;
+                    funcModel.func_cname = func.title;
+                    funcModel.func_name = func.funcname;
+                    funcModel.func_icon = func.icon;
+                    funcModel.func_url = func.url;
+                    funcModel.in_table = func.intable;
+                    funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
+                    list.Add(funcModel);
                 }
+                Sqldb.Insertable(list).ExecuteCommand();
 
             }
         }
@@ -151,12 +157,12 @@ namespace Altas.Framework.AppService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<long> GetMenuRefOpt(string id)
+        public List<SysFuncDto> GetMenuRefOpt(string id)
         {
             return
-                Sqldb.Queryable<sys_menu_ref_operate>()
+                Sqldb.Queryable<sys_operate>()
                     .Where(s => s.menu_id == SqlFunc.ToInt64(id))
-                    .Select(s => s.operate_id)
+                    .Select(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name, icon = s.func_icon, url = s.func_url, intable = s.in_table })
                     .ToList();
         }
         /// <summary>
@@ -195,12 +201,16 @@ namespace Altas.Framework.AppService
         /// 根据权限获取菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<List<RoleMenuDto>> GetRoleMenu()
+        /// <summary>
+        /// 根据权限获取菜单
+        /// </summary>
+        /// <returns></returns>
+        public async Task<(List<RoleMenuDto>, List<RoleMenuDto>)> GetRoleMenu()
         {
             var list = new List<RoleMenuDto>();
             if (UserCookie.IsSuper)
             {
-                list =await Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).Select(s => new RoleMenuDto()
+                list = await Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).Select(s => new RoleMenuDto()
                 {
                     id = s.id,
                     menu_name = s.menu_name,
@@ -208,9 +218,21 @@ namespace Altas.Framework.AppService
                     menu_url = s.menu_url,
                     parent_id = s.parent_id,
                     menu_type = s.menu_type,
-                    menu_icon=s.menu_icon
+                    menu_icon = s.menu_icon
                 }).ToListAsync();
 
+                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.id).Select(m => new RoleMenuDto()
+                {
+                    id = m.id,
+                    menu_name = m.func_cname,
+                    func_name = m.func_name,
+                    menu_url = m.func_url,
+                    parent_id = m.menu_id,
+                    menu_type = 3,
+                    menu_icon = m.func_icon,
+                    in_table = m.in_table
+                }).ToListAsync();
+                return (list, funcs);
             }
             else
             {
@@ -223,14 +245,34 @@ namespace Altas.Framework.AppService
                        {
                            id = m.id,
                            menu_name = m.menu_name,
+
                            menu_sort = m.menu_sort,
                            menu_url = m.menu_url,
                            parent_id = m.parent_id,
                            menu_type = m.menu_type,
                            menu_icon = m.menu_icon
                        }).ToListAsync();
+
+                var funcs = await Sqldb.Queryable<sys_operate, sys_role_authorize>(
+                            (m, r) => new object[] { JoinType.Inner, m.id == r.menu_id })
+                        .Where((m, r) => r.role_id == UserCookie.SysRoleId)
+                        .OrderBy((m, r) => m.id)
+                        .Select((m, r) => new RoleMenuDto()
+                        {
+                            id = m.id,
+                            menu_name = m.func_cname,
+                            func_name = m.func_name,
+                            menu_url = m.func_url,
+                            parent_id = m.menu_id,
+                            menu_type = 3,
+                            menu_icon = m.func_icon,
+                            in_table = m.in_table
+                        }).ToListAsync();
+
+                return (list, funcs);
+
             }
-            return list;
+            return (list, new List<RoleMenuDto>()); ;
         }
         /// <summary>
         /// 批量删除
@@ -247,7 +289,7 @@ namespace Altas.Framework.AppService
 
                     Sqldb.Ado.BeginTran();
                     Sqldb.Deleteable<sys_menu>().In(idsArray).ExecuteCommand();
-                    Sqldb.Deleteable<sys_menu_ref_operate>().Where(s => arri.Contains(s.menu_id)).ExecuteCommand();
+                    Sqldb.Deleteable<sys_operate>().Where(s => arri.Contains(s.menu_id)).ExecuteCommand();
                     Sqldb.Deleteable<sys_role_authorize>()
                         .Where(s => arri.Contains(s.menu_id) || arri.Contains(s.menu_pid))
                         .ExecuteCommand();
@@ -262,6 +304,15 @@ namespace Altas.Framework.AppService
 
         }
 
+        /// <summary>
+        /// 删除操作
+        /// </summary>
+        /// <param name="funcId"></param>
+        public void Delfunc(long funcId)
+        {
+            Sqldb.Deleteable<sys_operate>().Where(s => s.id == funcId).ExecuteCommand();
+            Sqldb.Deleteable<sys_role_authorize>().Where(s => s.menu_id == funcId).ExecuteCommand();
+        }
 
         public List<sys_operate> GetFuncSelList()
         {
