@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Altas.Framework.Common
 {
@@ -251,8 +252,34 @@ namespace Altas.Framework.Common
         {
             return data == null ? string.Empty : data.ToString().Trim();
         }
-        #endregion
-
+        /// <summary>
+        /// 自带类库的反转
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns></returns>
+        public static string ReverseByArray(this string original)
+        {
+            char[] c = original.ToCharArray();
+            Array.Reverse(c);
+            return new string(c);
+        }
+        /// <summary>
+        /// string 字符串翻转 高效反转算法
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns></returns>
+        public static string ReverseByCharBuffer(this string original)
+        {
+            char[] c = original.ToCharArray();
+            int l = original.Length;
+            for (int i = 0; i < l / 2; i++)
+            {
+                char t = c[i];
+                c[i] = c[l - i - 1];
+                c[l - i - 1] = t;
+            }
+            return new string(c);
+        }
         /// <summary>
         /// 安全返回值
         /// </summary>
@@ -304,9 +331,9 @@ namespace Altas.Framework.Common
                 return true;
             }
         }
+        #endregion
 
-
-    #region 数组转换
+        #region 数组转换
         public static long[] StrToLongArray(this string[] value)
         {
            long[] newarray=Array.ConvertAll(value, new Converter<string, long>(ToInt64));
