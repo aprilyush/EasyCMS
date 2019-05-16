@@ -120,11 +120,11 @@ namespace Altas.Framework.AppService
             }).ToList();
 
             var func =
-                Sqldb.Queryable<sys_menu_ref_operate, sys_operate, sys_menu>(
-                    (f, o, m) => f.operate_id == o.id && f.menu_id == m.id).Select((f, o, m) => new ZtreeDto()
+                Sqldb.Queryable<sys_operate, sys_menu>(
+                    (o, m) => o.menu_id == m.id).Select((o, m) => new ZtreeDto()
                     {
-                        id = f.operate_id.ToString(),
-                        pId = f.menu_id.ToString(),
+                        id = o.id.ToString(),
+                        pId = o.menu_id.ToString(),
                         name = o.func_cname
                     }).ToList();
             menu.AddRange(func);
@@ -132,7 +132,7 @@ namespace Altas.Framework.AppService
             var role =
                 Sqldb.Queryable<sys_role_authorize>()
                     .Where(s => s.role_id == SqlFunc.ToInt64(roleid))
-                    .Select(s => new{s.menu_id,s.menu_pid})
+                    .Select(s => new { s.menu_id, s.menu_pid })
                     .ToList();
 
             //判断是否有权限
@@ -140,16 +140,14 @@ namespace Altas.Framework.AppService
             {
                 foreach (var item in menu)
                 {
-                    var isok = role.Where(s => s.menu_id == item.id.ToInt64() &&s.menu_pid == item.pId.ToInt64()).Count();
+                    var isok = role.Where(s => s.menu_id == item.id.ToInt64() && s.menu_pid == item.pId.ToInt64()).Count();
 
                     if (isok > 0)
                     {
-                        item.checkstate =true;
+                        item.checkstate = true;
                     }
                 }
             }
-
-
             return menu;
         }
         /// <summary>
