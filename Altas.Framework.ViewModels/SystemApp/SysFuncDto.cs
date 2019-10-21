@@ -12,5 +12,7 @@ public class SysFuncDto
         public string funcname { get; set; }
         public string url { get; set; }
         public string icon { get; set; }
+
+        public int funcSort { get; set; }
     }
 }

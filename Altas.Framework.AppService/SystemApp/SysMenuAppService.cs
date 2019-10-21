@@ -91,6 +91,7 @@ namespace Altas.Framework.AppService
                     funcModel.func_icon = func.icon;
                     funcModel.func_url = func.url;
                     funcModel.in_table = func.intable;
+                    funcModel.func_sort = func.funcSort;
                     funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
                     list.Add(funcModel);
                 }
@@ -135,6 +136,7 @@ namespace Altas.Framework.AppService
                     funcModel.func_icon = func.icon;
                     funcModel.func_url = func.url;
                     funcModel.in_table = func.intable;
+                    funcModel.func_sort = func.funcSort;
                     funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
                     list.Add(funcModel);
                 }
@@ -162,7 +164,10 @@ namespace Altas.Framework.AppService
             return
                 Sqldb.Queryable<sys_operate>()
                     .Where(s => s.menu_id == SqlFunc.ToInt64(id))
-                    .Select(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name, icon = s.func_icon, url = s.func_url, intable = s.in_table })
+                     .OrderBy(s => s.in_table)
+                    .OrderBy(s => s.func_sort)
+                    .Select(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name,
+                        icon = s.func_icon, url = s.func_url, intable = s.in_table,funcSort=s.func_sort })
                     .ToList();
         }
         /// <summary>
@@ -201,10 +206,6 @@ namespace Altas.Framework.AppService
         /// 根据权限获取菜单
         /// </summary>
         /// <returns></returns>
-        /// <summary>
-        /// 根据权限获取菜单
-        /// </summary>
-        /// <returns></returns>
         public async Task<(List<RoleMenuDto>, List<RoleMenuDto>)> GetRoleMenu()
         {
             var list = new List<RoleMenuDto>();
@@ -218,10 +219,11 @@ namespace Altas.Framework.AppService
                     menu_url = s.menu_url,
                     parent_id = s.parent_id,
                     menu_type = s.menu_type,
-                    menu_icon = s.menu_icon
+                    menu_icon = s.menu_icon,
+                   
                 }).ToListAsync();
 
-                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.id).Select(m => new RoleMenuDto()
+                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.func_sort).Select(m => new RoleMenuDto()
                 {
                     id = m.id,
                     menu_name = m.func_cname,
@@ -230,7 +232,8 @@ namespace Altas.Framework.AppService
                     parent_id = m.menu_id,
                     menu_type = 3,
                     menu_icon = m.func_icon,
-                    in_table = m.in_table
+                    in_table = m.in_table,
+                    menu_sort=m.func_sort
                 }).ToListAsync();
                 return (list, funcs);
             }
@@ -245,7 +248,6 @@ namespace Altas.Framework.AppService
                        {
                            id = m.id,
                            menu_name = m.menu_name,
-
                            menu_sort = m.menu_sort,
                            menu_url = m.menu_url,
                            parent_id = m.parent_id,
@@ -256,12 +258,13 @@ namespace Altas.Framework.AppService
                 var funcs = await Sqldb.Queryable<sys_operate, sys_role_authorize>(
                             (m, r) => new object[] { JoinType.Inner, m.id == r.menu_id })
                         .Where((m, r) => r.role_id == UserCookie.SysRoleId)
-                        .OrderBy((m, r) => m.id)
+                        .OrderBy((m, r) => m.func_sort)
                         .Select((m, r) => new RoleMenuDto()
                         {
                             id = m.id,
                             menu_name = m.func_cname,
-                            func_name = m.func_name,
+                            //func_name = m.func_name,
+                            menu_sort = m.func_sort,
                             menu_url = m.func_url,
                             parent_id = m.menu_id,
                             menu_type = 3,

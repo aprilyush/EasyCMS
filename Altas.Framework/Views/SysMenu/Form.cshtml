@@ -10,7 +10,7 @@
                     <a data-toggle="tab" href="#tab-1" aria-expanded="true">菜单</a>
                 </li>
                 <li class="">
-                    <a data-toggle="tab" href="#tab-2" aria-expanded="false">操作</a>
+                    <a data-toggle="tab" href="#tab-2" aria-expanded="false">关联操作</a>
                 </li>
             </ul>
 
@@ -21,7 +21,7 @@
                         <form class="form form-horizontal" id="menuForm" autocomplete="off">
                             <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">父菜单：</label>
+                                <label class="col-sm-3 control-label">上级：</label>
                                 <div class="col-sm-4">
                                     @Html.DropDownList("parent_id", ViewBag.MenuSel as SelectList, new { @class = "form-control" })
                                 </div>
@@ -44,7 +44,7 @@
                                     <div class="input-group">
                                         <input type="text" name="menu_icon" id="menu_icon" class="form-control"> <span class="input-group-btn">
                                             <button type="button" class="btn btn-primary" onclick="showicon();">
-                                                搜索图标
+                                                搜索
                                             </button>
                                         </span>
                                     </div>
@@ -73,26 +73,27 @@
                                 <thead>
                                     <tr>
                                         <th>位置(表格内)</th>
-                                        <th>名称</th>
-                                        <th>js方法名称</th>
+                                        <th>显示名称</th>
+                                        <th>Js方法名称</th>
                                         <th>url</th>
-                                        <th>设置图标</th>
                                         <th>图标</th>
-                                        <th>操作</th>
+                                        <th>图标</th>
+                                        <th>排序</th>
+                                        <th width="100">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody id="optbody">
                                     <tr>
                                         <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="新增" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="add" data-rule="required"></td>
+                                        <td> <input type="text" placeholder="显示名称" class="form-control" value="新增" data-rule="required"></td>
+                                        <td> <input type="text" placeholder="Js方法名称" class="form-control" value="add" data-rule="required"></td>
                                         <td><input type="text" placeholder="url" class="form-control" value="/controller/form"></td>
 
                                         <td>
                                             <div class="input-group">
                                                 <input type="text" id="icon1" class="form-control icon" value="fa fa-plus" data-rule="required"> <span class="input-group-btn">
                                                     <button type="button" class="btn btn-primary" onclick="showicon(1);">
-                                                        搜索
+                                                        图标搜索
                                                     </button>
                                                 </span>
                                             </div>
@@ -100,21 +101,24 @@
                                         <td>
                                             <i class="fa fa-plus"></i>
                                         </td>
+                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
                                         <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
                                         <td style="display:none;"><input type="hidden" value="0"></td>
                                     </tr>
                                     <tr>
                                         <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="修改" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="edit" data-rule="required"></td>
+                                        <td> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
+                                        <td> <input type="text" placeholder="显示名称" class="form-control" value="Edit" data-rule="required"></td>
+                                        <td> <input type="text" placeholder="Js方法名称" class="form-control" value="edit" data-rule="required"></td>
                                         <td><input type="text" placeholder="url" class="form-control" value="/controller/form" data-rule="required"></td>
 
                                         <td>
 
                                             <div class="input-group">
-                                                <input type="text" id="icon2" class="form-control icon" value="fa fa-edit" data-rule="required"> <span class="input-group-btn">
+                                                <input type="text" id="icon2" class="form-control icon" value="fa fa-edit" data-rule="required">
+                                                <span class="input-group-btn">
                                                     <button type="button" class="btn btn-primary" onclick="showicon(2);">
-                                                        搜索
+                                                        图标搜索
                                                     </button>
                                                 </span>
                                             </div>
@@ -122,19 +126,21 @@
                                         <td>
                                             <i class="fa fa-edit"></i>
                                         </td>
+                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
                                         <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
                                         <td style="display:none;"><input type="hidden" value="0"></td>
                                     </tr>
                                     <tr>
                                         <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="删除" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="del" data-rule="required"></td>
+                                        <td> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
+                                        <td> <input type="text" placeholder="显示名称" class="form-control" value="Delete" data-rule="required"></td>
+                                        <td> <input type="text" placeholder="Js方法名称" class="form-control" value="del" data-rule="required"></td>
                                         <td><input type="text" placeholder="url" class="form-control" value="/controller/del"></td>
                                         <td>
                                             <div class="input-group">
                                                 <input type="text" id="icon3" class="form-control icon" value="fa fa-trash" data-rule="required"> <span class="input-group-btn">
                                                     <button type="button" class="btn btn-primary" onclick="showicon(3);">
-                                                        搜索
+                                                        图标搜索
                                                     </button>
                                                 </span>
                                             </div>
@@ -142,13 +148,14 @@
                                         <td>
                                             <i class="fa fa-trash"></i>
                                         </td>
+                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
                                         <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
                                         <td style="display:none;"><input type="hidden" value="0"></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <TR>
-                                        <TD colspan="6">
+                                        <TD colspan="7">
                                             <button class="btn btn-info " onclick="addrow(this)"><i class="fa fa-plus"></i></button>
                                         </TD>
                                     </TR>
@@ -162,8 +169,8 @@
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                     <div class="col-sm-12 col-sm-offset-3">
-                        <button class="btn btn-primary" type="button" onclick="save()">保存内容</button>
-                        <button class="btn btn-white" type="button" onclick="cancel()">返回</button>
+                        <button class="btn btn-primary" type="button" onclick="save()">提交</button>
+                        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
                     </div>
                 </div>
 
@@ -255,11 +262,11 @@
                                 } else {
                                     html += ' <td><input type="checkbox"  class="form-control" value="0"></td>';
                                 }
-
-                                html += '<td> <input type="text" placeholder="名称" class="form-control" value="' +
+                              
+                                html += '<td> <input type="text" placeholder="显示名" class="form-control" value="' +
                                     model.title +
                                     '" data-rule="required"></td>';
-                                html += '<td> <input type="text" placeholder="方法名称" class="form-control" value="' +
+                                html += '<td> <input type="text" placeholder="Js方法名" class="form-control" value="' +
                                     model.funcname +
                                     '" data-rule="required"></td>';
                                 html += ' <td><input type="text" placeholder="url" class="form-control" value="' +
@@ -274,9 +281,10 @@
                                     '" data-rule="required"> <span class="input-group-btn">';
                                 html += '<button type="button" class="btn btn-primary" onclick="showicon(' +
                                     rowIndex +
-                                    ');">搜索</button>';
+                                    ');">图标搜索</button>';
                                 html += '</span></div></td>';
                                 html += '<td><i class="' + model.icon + '"></i></td>';
+                                html += '<td width="100"> <input type="number" placeholder="排序" class="form-control" value="' + model.funcSort + '" data-rule="required" min="1"></td>';
                                 html +=
                                     '<td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>';
                                 html += '<td style="display:none;"><input type="hidden" value="' + model.id + '"></td>';
@@ -292,7 +300,7 @@
 
             $('#menuForm').trigger("validate");
             if (!menuform) {
-                jutils.error('菜单内容验证失败');
+                jutils.error('菜单信息验证失败');
                 return;
             }
             var funcArry = [];
@@ -300,7 +308,7 @@
             if (hasops > 0) {
                 $('#funcForm').trigger("validate");
                 if (!funcstatus) {
-                    jutils.error('操作内容验证失败');
+                    jutils.error('操作信息验证失败');
                     return;
                 }
 
@@ -311,7 +319,8 @@
                         title: '',
                         funcname: '',
                         url: '',
-                        icon: ''
+                        icon: '',
+                        funcSort:1
                     };
 
                     // var d = $(this).find('input');
@@ -329,6 +338,8 @@
                         } else if (index === 4) {
                             func.icon = itext;
                         } else if (index === 5) {
+                            func.funcSort = itext;
+                        } else if (index === 6) {
                             func.id = itext;
                         }
                     });
@@ -357,7 +368,7 @@
         function delrow(obj) {
             var id = $(obj).parent().next('td').find('input').val();
             if (id !== '0') {
-                jutils.confirm('删除当前操作，可能会影响系统权限，确认删除吗？',
+                jutils.confirm('删除可能会影响权限，确认删除吗?',
                     function () {
                         jutils.ajaxPost('/sysmenu/delfunc',
                             { id: id },
@@ -380,9 +391,10 @@
             rowIndex++;
             var html = '<tr>';
             html += ' <td><input type="checkbox"  class="form-control" value="0" ></td>';
-            html += '<td> <input type="text" placeholder="名称" class="form-control" value="" data-rule="required"></td>';
+          
+            html += '<td> <input type="text" placeholder="显示名" class="form-control" value="" data-rule="required"></td>';
             html +=
-                '<td> <input type="text" placeholder="方法名称" class="form-control" value="" data-rule="required"></td>';
+                '<td> <input type="text" placeholder="Js方法名" class="form-control" value="" data-rule="required"></td>';
             html +=
                 ' <td><input type="text" placeholder="url" class="form-control" value="/controller/action" data-rule="required"></td>';
             html += '<td> <div class="input-group">';
@@ -390,9 +402,10 @@
                 '<input type="text" id="icon' +
                 rowIndex +
                 '" class="form-control icon" value="fa fa-plus" data-rule="required"> <span class="input-group-btn">';
-            html += '<button type="button" class="btn btn-primary" onclick="showicon(' + rowIndex + ');">搜索</button>';
+            html += '<button type="button" class="btn btn-primary" onclick="showicon(' + rowIndex + ');">图标搜索</button>';
             html += '</span></div></td>';
             html += '<td><i class="fa fa-plus"></i></td>';
+            html += '<td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>';
             html +=
                 '<td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>';
             html += '<td style="display:none;"><input type="hidden" value="0"></td>';

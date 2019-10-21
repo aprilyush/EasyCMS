@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+
+                <div id="toolbar" class="btn-group">
+                </div>
+                <table id="tagTable"></table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script>
+        var $table;
+        $(function() {
+
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#tagTable").bootstrapTable({
+                url: '/JobsManager/getdata',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'id', title: '任务ID', align: 'center' },
+                    { field: 'job_name', title: '任务名称', align: 'center' },
+                    { field: 'cron_expression', title: '执行表达式', align: 'center' },
+                    { field: 'job_note', title: '任务描述', align: 'center' },
+                    { field: 'job_status', title: '任务状态', align: 'center', formatter: renderJobStatus },
+                    { field: 'excute_status', title: '执行结果', align: 'center', formatter: renderExcuteStatus },
+                    { field: 'last_time', title: '上次执行时间', align: 'center' },
+                  
+                    {
+                        field: 'id',
+                        title: '操作',
+                        formatter: renderOpts
+                    }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOpts(v, r, i) {
+            //var html = '';
+            //html += '<a class="btn btn-white btn-bitbucket" title = "修改"  href="javascript:void(0);" onclick="edit(this)" data-id="'+v+'"><i class="fa fa-edit"></i></a>';
+            //html += '<a class="btn btn-white btn-bitbucket" title = "查看" href="javascript:void(0);"  onclick="show(this)" data-id="' + v +'"><i class="fa fa-eye"></i></a>';
+            //html += '<a class="btn btn-white btn-bitbucket" title = "设置" href="javascript:void(0);"  onclick="set(this)" data-id="' + v +'"><i class="fa fa-cog"></i></a>';
+            //return html;
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function renderJobStatus(v) {
+            if (v === 1) {
+                return '<span class="badge badge-info">正常</span>';
+            }
+            return '<span class="badge badge-danger">停止</span>';
+        }
+
+        function renderExcuteStatus(v) {
+            if (v === 1) {
+                return '<span class="badge badge-info">成功</span>';
+            }
+            return '<span class="badge badge-danger">异常</span>';
+        }
+
+
+        function excute(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确定执行当前任务?',
+                function() {
+                    jutils.ajaxGet('/JobsManager/excute',
+                        { id: id},
+                        function() {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function reset() {
+            jutils.confirm('重置所有任务吗?',
+                function() {
+                    jutils.ajaxGet('/JobsManager/InitTask',
+                        null,
+                        function() {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function edit() {
+            //jutils.dialogForm('计步器发放',
+            //    '/farmtag/form',
+            //    { id: '' },
+            //    function() {
+            //        $table.bootstrapTable('refresh');
+            //    });
+            jutils.info('暂不支持');
+        }
+
+        function del() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+
+                ids.push(rows[i].id);
+
+            }
+            jutils.confirm('确认删除?',
+                function() {
+                    jutils.ajaxGet('/JobsManager/DelByIds',
+                        { ids: ids.join() },
+                        function() {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function genTaskId() {
+            jutils.ajaxGet('/JobsManager/genTaskId',
+                null,
+                function (res) {
+                    layer.alert(res.data.taskId, { title:'新任务ID' });
+                
+                });
+        }
+        
+        function query() {
+            var county = $('#county').val();
+            var coop = $('#coop').val();
+            var tag = $('#tag').val();
+            $table.bootstrapTable('refresh', { query: { county: county, coop: coop, tag: tag } });
+        }
+
+    </script>
+}
+
+

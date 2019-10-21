@@ -30,5 +30,10 @@ namespace Altas.Framework.Core.Web
             var result = new { statusCode = 300, msg = msg };
             return Content(result.ToJson());
         }
+
+        protected virtual ContentResult Data(object dto,string dateFormatter= "yyyy-MM-dd HH:mm:ss")
+        {
+            return Content(dto.ToJson(dateFormatter));
+        }
     }
 }

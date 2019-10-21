@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HangFire" Version="1.7.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Altas.Framework.Common\Altas.Framework.Common.csproj" />
+    <ProjectReference Include="..\Altas.Framework.Models\Altas.Framework.Models.csproj" />
+  </ItemGroup>
+
+</Project>

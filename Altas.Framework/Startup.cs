@@ -7,7 +7,9 @@ using Altas.Framework.Common.NLog;
 using Altas.Framework.Core.AltasDbContext;
 using Altas.Framework.Core.AutofacInjectModule;
 using Altas.Framework.Core.Web;
+using Altas.Framework.Middlerware.Exception;
 using Altas.Framework.ViewModels;
+using Atlas.Framework.Jobs.Interface;
 using Autofac;
 using Hangfire;
 using Hangfire.Redis;
@@ -69,11 +71,12 @@ namespace Altas.Framework
             var hgOpts = ConfigurationOptions.Parse(redisConn);
             hgOpts.AllowAdmin = true;
             hgOpts.Password = redisPwd;
-            //var _redisContext = ConnectionMultiplexer.Connect(hgOpts);
-            //services.AddHangfire(x => x.UseRedisStorage(_redisContext, new RedisStorageOptions()
-            //{
-            //    Prefix = "{altas_web_hangfire}:"
-            //}));
+
+            var _redisContext = ConnectionMultiplexer.Connect(hgOpts);
+            services.AddHangfire(x => x.UseRedisStorage(_redisContext, new RedisStorageOptions()
+            {
+                Prefix = "{altas}:{jobs}:"
+            }));
             #endregion
         }
 
@@ -95,6 +98,9 @@ namespace Altas.Framework
             app.UseCookiePolicy();
             //nlog日志配置文件
             env.ConfigureNLog("configs/nlog.config");
+            #region 自定义中间件
+            app.UseMiddleware(typeof(AltasExceptionMiddlerware));
+            #endregion
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -104,6 +110,11 @@ namespace Altas.Framework
                     template: "{area:exists}/{controller=DeviceData}/{action=Index}/{id?}");
             });
 
+            //扩展HttpContext
+            app.UseStaticHttpContext();
+
+
+
             #region 解决Ubuntu Nginx 代理不能获取IP问题
             //app.UseForwardedHeaders(new ForwardedHeadersOptions
             //{
@@ -111,8 +122,15 @@ namespace Altas.Framework
             //});
             #endregion
 
-            //扩展HttpContext
-            app.UseStaticHttpContext();
+            //启动hangfire服务和面板
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                Queues = new[] { "default", "demo_queue" }
+            });
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
+            {
+                Authorization = new[] { new HangfireAuthorizeFilter() }
+            });
 
             //应用程序启动后
             appLifetime.ApplicationStarted.Register(() => {

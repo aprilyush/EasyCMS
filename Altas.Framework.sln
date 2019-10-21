@@ -3,29 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework", "Altas.Framework\Altas.Framework.csproj", "{1E859FAC-303A-4F58-B527-CE4CA6110242}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework", "Altas.Framework\Altas.Framework.csproj", "{1E859FAC-303A-4F58-B527-CE4CA6110242}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Core", "01-Core", "{F3E5D32B-EB16-4DE9-B209-56D6E7808263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.Core", "Altas.Framework.Core\Altas.Framework.Core.csproj", "{F93194A3-A055-44D5-A731-7BE63AA92A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.Core", "Altas.Framework.Core\Altas.Framework.Core.csproj", "{F93194A3-A055-44D5-A731-7BE63AA92A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.Common", "Altas.Framework.Common\Altas.Framework.Common.csproj", "{9E0E31E8-FEA2-4D9E-A6DC-1D3A57FE2DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.Common", "Altas.Framework.Common\Altas.Framework.Common.csproj", "{9E0E31E8-FEA2-4D9E-A6DC-1D3A57FE2DCE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{2A51B856-86E3-4160-BFA5-0DD871BC1872}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-AppService", "03-AppService", "{160AFD1F-A243-4434-A4B5-BBA3605956C1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Web", "04-Web", "{09086685-3E3E-4846-BF5A-F616C1582F1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Web", "06-Web", "{09086685-3E3E-4846-BF5A-F616C1582F1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.Models", "Altas.Framework.Models\Altas.Framework.Models.csproj", "{EA2B9EE0-D100-4875-9A0C-01CEA7A8A3A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.Models", "Altas.Framework.Models\Altas.Framework.Models.csproj", "{EA2B9EE0-D100-4875-9A0C-01CEA7A8A3A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.ViewModels", "Altas.Framework.ViewModels\Altas.Framework.ViewModels.csproj", "{DE76192E-B5E5-4C1D-9EF1-4AAE444226A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.ViewModels", "Altas.Framework.ViewModels\Altas.Framework.ViewModels.csproj", "{DE76192E-B5E5-4C1D-9EF1-4AAE444226A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.AppService", "Altas.Framework.AppService\Altas.Framework.AppService.csproj", "{BDB831B4-4C9B-4E07-9905-95B7D0A639E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.AppService", "Altas.Framework.AppService\Altas.Framework.AppService.csproj", "{BDB831B4-4C9B-4E07-9905-95B7D0A639E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.IAppService", "Altas.Framework.IAppService\Altas.Framework.IAppService.csproj", "{6A37C35E-F320-4B54-886D-FF10588A71E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.IAppService", "Altas.Framework.IAppService\Altas.Framework.IAppService.csproj", "{6A37C35E-F320-4B54-886D-FF10588A71E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altas.Framework.Validation", "Altas.Framework.Validation\Altas.Framework.Validation.csproj", "{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.Validation", "Altas.Framework.Validation\Altas.Framework.Validation.csproj", "{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Middlerware", "04-Middlerware", "{D2AF03AF-3335-460E-BEE6-1EDA97CE2FBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.Middlerware", "Altas.Framework.Middlerware\Altas.Framework.Middlerware.csproj", "{B527C577-4B31-49F7-8B60-35ED76F8DF74}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlas.Framework.Jobs", "Atlas.Framework.Jobs\Atlas.Framework.Jobs.csproj", "{E54BE703-F5CE-4FA6-A176-28506E83B435}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altas.Framework.EventBus", "Altas.Framework.EventBus\Altas.Framework.EventBus.csproj", "{53DA8006-80F4-4B82-8734-848DB9839BAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +73,18 @@ Global
 		{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B527C577-4B31-49F7-8B60-35ED76F8DF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B527C577-4B31-49F7-8B60-35ED76F8DF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B527C577-4B31-49F7-8B60-35ED76F8DF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B527C577-4B31-49F7-8B60-35ED76F8DF74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E54BE703-F5CE-4FA6-A176-28506E83B435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E54BE703-F5CE-4FA6-A176-28506E83B435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E54BE703-F5CE-4FA6-A176-28506E83B435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E54BE703-F5CE-4FA6-A176-28506E83B435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DA8006-80F4-4B82-8734-848DB9839BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DA8006-80F4-4B82-8734-848DB9839BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DA8006-80F4-4B82-8734-848DB9839BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DA8006-80F4-4B82-8734-848DB9839BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +98,9 @@ Global
 		{BDB831B4-4C9B-4E07-9905-95B7D0A639E2} = {160AFD1F-A243-4434-A4B5-BBA3605956C1}
 		{6A37C35E-F320-4B54-886D-FF10588A71E4} = {160AFD1F-A243-4434-A4B5-BBA3605956C1}
 		{6FD98CBE-87B9-4E5F-BFAF-0809EA6E6CEF} = {160AFD1F-A243-4434-A4B5-BBA3605956C1}
+		{B527C577-4B31-49F7-8B60-35ED76F8DF74} = {D2AF03AF-3335-460E-BEE6-1EDA97CE2FBB}
+		{E54BE703-F5CE-4FA6-A176-28506E83B435} = {D2AF03AF-3335-460E-BEE6-1EDA97CE2FBB}
+		{53DA8006-80F4-4B82-8734-848DB9839BAE} = {D2AF03AF-3335-460E-BEE6-1EDA97CE2FBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F5A1420-9783-44D7-8B3D-45B4FF436567}
