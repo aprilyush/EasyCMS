@@ -75,6 +75,12 @@ namespace Altas.Framework.Controllers.Jobs
 
             return Success("删除成功");
         }
+
+        public ActionResult ExcuteJob(string id)
+        {
+            JobManager.ExcuteJob(id);
+            return Success("执行成功");
+        }
         public ActionResult Test()
         {
             throw new Exception("人为异常");

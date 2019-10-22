@@ -84,11 +84,11 @@
         }
 
 
-        function excute(obj) {
+        function excuteJob (obj) {
             var id = $(obj).data('id');
             jutils.confirm('确定执行当前任务?',
                 function() {
-                    jutils.ajaxGet('/JobsManager/excute',
+                    jutils.ajaxGet('/JobsManager/excuteJob',
                         { id: id},
                         function() {
                             $table.bootstrapTable('refresh');

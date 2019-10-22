@@ -36,6 +36,10 @@ namespace Atlas.Framework.Jobs.Interface
             RecurringJob.RemoveIfExists(id);
         }
 
+        public static void ExcuteJob(string id)
+        {
+            RecurringJob.Trigger(id);
+        }
         /// <summary>
         /// 初始化所有任务
         /// </summary>
