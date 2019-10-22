@@ -107,7 +107,7 @@
                 });
         }
 
-        function edit() {
+        function editJob() {
             //jutils.dialogForm('计步器发放',
             //    '/farmtag/form',
             //    { id: '' },
@@ -117,7 +117,7 @@
             jutils.info('暂不支持');
         }
 
-        function del() {
+        function deleteJob () {
             var rows = $table.bootstrapTable('getSelections');
             if (rows.length === 0) {
                 jutils.warn('请选择数据行');
@@ -129,9 +129,9 @@
                 ids.push(rows[i].id);
 
             }
-            jutils.confirm('确认删除?',
+            jutils.confirm('确认删除任务?',
                 function() {
-                    jutils.ajaxGet('/JobsManager/DelByIds',
+                    jutils.ajaxGet('/JobsManager/DeleteTask',
                         { ids: ids.join() },
                         function() {
                             $table.bootstrapTable('refresh');

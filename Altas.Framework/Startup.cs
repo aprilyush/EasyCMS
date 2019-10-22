@@ -62,7 +62,12 @@ namespace Altas.Framework
             //{
             //    opts.
             //})
-
+            
+            //如果使用IIS进程内承载模型
+            services.Configure<IISServerOptions>(option =>
+            {
+                option.AutomaticAuthentication = false;
+            });
             #endregion
 
             #region hangfire配置

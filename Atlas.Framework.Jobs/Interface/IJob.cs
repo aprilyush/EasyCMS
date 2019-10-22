@@ -18,10 +18,7 @@ namespace Atlas.Framework.Jobs
         /// 表达式
         /// </summary>
         string CronExpression { get; set; }
-        /// <summary>
-        /// 完成回调
-        /// </summary>
-        Action<string> OnCompleteCallback { get; set; }
+
         /// <summary>
         /// 任务执行
         /// </summary>
@@ -33,5 +30,13 @@ namespace Atlas.Framework.Jobs
         /// </summary>
         /// <returns></returns>
         hangfire_jobs JobInfo { get; set; }
+        /// <summary>
+        /// 完成回调
+        /// </summary>
+        Action<string> OnComplete { get; set; }
+        /// <summary>
+        /// 异常回调
+        /// </summary>
+        Action<string, Exception> OnError { get; set; }
     }
 }

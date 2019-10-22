@@ -50,6 +50,9 @@ namespace Altas.Framework.Controllers.Jobs
             JobManager.AddTask(new DemoJob());
             var ret=JobManager.InitJobs();
 
+            JobManager.Add(new DemoAbstractJob());
+            JobManager.AbsInitJobs();
+
             if (!ret)
             {
                 return Content("初始化失败");
@@ -61,6 +64,16 @@ namespace Altas.Framework.Controllers.Jobs
             }
           
             return Content("初始化完成");
+        }
+
+        public ActionResult DeleteTask(string ids)
+        {
+            var idsArry=_jobsManagerApp.DeleteTask(ids);
+            foreach(var id in idsArry)
+            JobManager.RemoveJob(id);
+
+
+            return Success("删除成功");
         }
         public ActionResult Test()
         {

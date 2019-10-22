@@ -18,11 +18,16 @@ namespace Altas.Framework
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// 使用默认构造函数或者使用下面三者方便IIS进程外或进程内切换
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
-				.UseIIS()
-                .UseIISIntegration()
+                //.UseKestrel() 
+				//.UseIIS()  
+                //.UseIISIntegration()
                 .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>();
 

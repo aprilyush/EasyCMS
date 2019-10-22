@@ -4,26 +4,18 @@ using Altas.Framework.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Hangfire;
-namespace Atlas.Framework.Jobs
+
+namespace Atlas.Framework.Jobs.Interface
 {
-    public class DemoJob:IJob
+    public class DemoAbstractJob:Jobs
     {
-        public string TaskId { get; set; }
-        public string CronExpression { get; set; }
-        public Action<string> OnComplete { get; set; }
-        public Action<string, Exception> OnError { get; set; }
-        public hangfire_jobs JobInfo { get; set; }
-
-
-        
-        public DemoJob()
+        public DemoAbstractJob()
         {
             JobInfo = new hangfire_jobs();
-            JobInfo.id = "5dad40031b46632a24823333";
-            JobInfo.job_name = "写日志";
+            JobInfo.id = "5daeaec11b4663319c53cc06";
+            JobInfo.job_name = "写日志2";
             JobInfo.cron_expression = CronHelper.MinuteInterval(1);
-            JobInfo.job_note = "每一分钟写一次测试日志";
+            JobInfo.job_note = "每一分钟写一次测试日志2";
             JobInfo.send_email = 1;
             JobInfo.email = "461733078@qq.com";
             JobInfo.excute_status = 1;
@@ -35,19 +27,18 @@ namespace Atlas.Framework.Jobs
             CronExpression = JobInfo.cron_expression;
         }
 
-
-        public void Excute()
+        public override void Excute()
         {
             try
             {
-                LogNHelper.Info($"执行任务ID为{JobInfo.id}的测试任务");
+                LogNHelper.Info($"DemoAbstractJob 执行任务ID为{JobInfo.id}的测试任务");
                 OnComplete?.Invoke(JobInfo.id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                OnError?.Invoke(JobInfo.id,ex);
+                OnError?.Invoke(JobInfo.id, ex);
             }
-           
+
         }
     }
 }
