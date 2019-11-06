@@ -51,7 +51,7 @@ namespace Altas.Framework
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //扩展httpcontext
             //services.AddHttpContextAccessor();
