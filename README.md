@@ -27,7 +27,8 @@ UI基于H+主题框架,完全响应式布局（支持电脑、平板、手机等
 更多……  
  ![image](https://github.com/jasonyush/Altas.Framework/raw/master/资料/home.png)
 
- # 更新日志 2020.05.11
+ # [更新日志](https://github.com/jasonyush/Altas.Framework/raw/master/Update.md) 
+ ## 2020.05.11
  1，升级到asp.net core 3.1  
  2，重写定时任务   
  3，架构拆分，部分重构  
