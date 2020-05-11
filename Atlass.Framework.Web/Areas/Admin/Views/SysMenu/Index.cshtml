@@ -4,22 +4,11 @@
 }
 <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
 <div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox ">
-                <div id="toolbar" class="btn-group">
-                    @*<div class="btn-group">
-                        <button class="btn btn-success " type="button" onclick="refresh()"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
-                        <button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;新建</button>
-                        <button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;修改</button>
-                        <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
-                    </div>*@
-                </div>
-                <div class="">
-                    <table id="table"></table>
-                </div>
+    <div class="ibox">
+        <div class="ibox-content">
+            <div id="toolbar" class="btn-group">
             </div>
-          
+            <table id="table"></table>
         </div>
     </div>
 </div>
@@ -47,7 +36,8 @@
                     { field: 'menu_url', title: '菜单路径', align: 'center' },
                     { field: 'menu_icon', title: '菜单图片', align: 'center' },
                     { field: 'menu_sort', title: '排序', align: 'center' },
-                    { field: 'remark', title: '排序',align: 'center'}
+                    { field: 'remark', title: '排序', align: 'center' },
+                    { field: 'id', title: '操作', align: 'center',formatter:renderOpts }
                 ],
                 treeShowField: 'menu_name',
                 parentIdField: 'parent_id',
@@ -64,10 +54,12 @@
                 }
                 // bootstrap-table-treetreegrid.js 插件配置
             });
-            jutils.initToolBar('#toolbar', true);
+            jutils.initToolBarRole('#toolbar');
 
         }
-
+        function renderOpts(v, d, i) {
+            return jutils.initToolBarRow(v);
+        }
         function renderIcon(rowdata, index, value) {
             return '<i class="' + value+'"></i>';
         }
@@ -83,25 +75,31 @@
                 }
             });
         }
-        function edit() {
-            var rows = $table.bootstrapTable('getSelections');
-            if (rows.length === 1) {
-               // console.log(rows);
-                var url = '/admin/sysmenu/form/' + rows[0].id;
-                parent.$.altasTab.open({
-                    id: 'menuformTab',
-                    title: '菜单信息',
-                    url: url,
-                    close: function () {
-                        $table.bootstrapTable('refresh');
-                    }
-                });
-            } else {
-                jutils.warn('请选择一条需要编辑的数据行');
-            }
+        function edit(obj) {
+            var id = $(obj).data('id');
+            var url = '/admin/sysmenu/form/' + id;
+            parent.$.altasTab.open({
+                id: 'menuformTab',
+                title: '菜单信息',
+                url: url,
+                close: function () {
+                    $table.bootstrapTable('refresh');
+                }
+            });
         }
+        function del(obj) {
 
-        function del() {
+            var id = $(obj).data('id');
+
+            jutils.confirm('确认删除选中的数据吗', function () {
+
+                jutils.ajaxGet('/admin/sysmenu/del', { ids: id }, function () {
+                    jutils.success('删除成功');
+                    $table.bootstrapTable('refresh');
+                });
+            });
+        }
+        function batchDel() {
             var rows = $table.bootstrapTable('getSelections');
             if (rows.length === 0) {
                 jutils.warn('请选中需要删除的数据行');

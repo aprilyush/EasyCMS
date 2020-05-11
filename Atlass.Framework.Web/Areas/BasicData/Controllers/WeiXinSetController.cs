@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.BasicData;
-using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
@@ -32,11 +31,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         public IActionResult GetModel()
         {
             var result = new ResultAdaptDto();
-            var model = WeiXinCacheHelper.GetPushMessage();
-            if (model == null)
-            {
-                model = _weiXinSetApp.GetModel();
-            }
+            var model = _weiXinSetApp.GetModel();
             result.data.Add("model", model);
             return Content(result.ToJson());
         }
@@ -45,7 +40,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         public IActionResult Save(weixin_set dto)
         {
             _weiXinSetApp.SaveSet(dto);
-            WeiXinCacheHelper.SetPushMessage(dto);
+
             return Success("保存成功");
         }
     }

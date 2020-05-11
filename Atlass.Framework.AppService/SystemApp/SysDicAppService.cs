@@ -49,9 +49,13 @@ namespace Atlass.Framework.AppService
             if (dto.parent_id != 0)
             {
                 var dicCode =
-                    Sqldb.Queryable<sys_dictionary>().Where(s => s.id == dto.parent_id).Select(s => s.dic_code).First();
+                    Sqldb.Select<sys_dictionary>().Where(s => s.id == dto.parent_id).First(s => s.dic_code);
 
                 dto.dic_code = dicCode;
+            }
+            else
+            {
+                dto.dic_code = "";
             }
             Sqldb.Insert(dto).ExecuteAffrows();
         }

@@ -3,11 +3,13 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
     <div class="wrapper wrapper-content  animated fadeInRight">
-        <div class="ibox ">
-            <div id="toolbar" class="btn-group">
-
+        <div class="ibox">
+            <div class="ibox-content">
+                <div id="toolbar" class="btn-group">
+                </div>
+                <table id="userTable"></table>
             </div>
-            <table id="userTable"></table>
+
         </div>
     </div>
 @section scripts
@@ -32,6 +34,13 @@
                 sidePagination: "server", 
                 locale: "zh-CN",
                 striped: true,
+                queryParams: function (params) {
+                    var dto = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                    };
+                    return dto;
+                },
                 columns: [
                     { field: 'ck', checkbox: true },
                     { field: 'AccountName', title: '登录名', align: 'center' },
@@ -46,53 +55,32 @@
                     },
                     { field: 'RoleName', title: '角色名称', align: 'center'  },
                     { field: 'MobilePhone', title: '联系方式', align: 'center'  },
-                    { field: 'Email', title: '邮箱', align: 'center'  }
+                    { field: 'Email', title: '邮箱', align: 'center' },
+                    { field: 'Id', title: '操作', align: 'center', formatter: renderOpts }
                 ]
                 
-            });  
-            jutils.initToolBar('#toolbar', true);
+            });
+            jutils.initToolBarRole('#toolbar');
         }
 
-
+        function renderOpts(v, d, i) {
+            return jutils.initToolBarRow(v);
+        }
         function add() {
             location.href = '/admin/SysUser/form?id=0';
-            //jutils.dialogForm('用户信息', '/admin/SysUser/form', {id:''},function () {
-            //    $userTable.bootstrapTable('refresh');
-            //});
         }
 
-        function edit() {
-            var rows = $userTable.bootstrapTable('getSelections');
-            //console.log(rows);
-            if (rows.length >0) {
-                // console.log(rows);
-                location.href = '/admin/SysUser/form?id='+rows[0].Id;
-                //jutils.dialogForm('用户信息', '/admin/SysUser/form', {id:rows[0].Id},
-                //    function() {
-                //        $userTable.bootstrapTable('refresh');
-                //    });
-            } else {
-                jutils.warn('请选择一条需要编辑的数据行');
-            }
-         
+        function edit(obj) {
+            var id = $(obj).data('id');
+            location.href = '/admin/SysUser/form?id=' + id;
         }
 
-        function del() {
-            var rows = $userTable.bootstrapTable('getSelections');
-            if (rows.length === 0) {
-                jutils.warn('请选择需要删除的数据行');
-                return;
-            }
-            var ids = [];
-            for (var i = 0; i < rows.length; i++) {
-
-                ids.push(rows[i].Id);
-
-            }
+        function del(obj) {
+            var id = $(obj).data('id');
             jutils.confirm('确认删除吗',
                 function() {
                     jutils.ajaxGet('/admin/SysUser/DelUserByIds',
-                        { ids: ids.join() },
+                        { ids: id},
                         function() {
                             $userTable.bootstrapTable('refresh');
                         });
@@ -100,8 +88,7 @@
         }
 
         function query() {
-            var pname = $('#accountName').val();
-            $('#j_datagrid').datagrid('filter', { accountName: pname });
+            $userTable.bootstrapTable('refresh');
         }
 
     </script>

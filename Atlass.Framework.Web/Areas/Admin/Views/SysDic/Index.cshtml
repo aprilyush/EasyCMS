@@ -5,29 +5,30 @@
 @*<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />*@
 <link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
 <div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="ibox ">
-                <ul id="dicTree" class="ztree"></ul>
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="ibox ">
-                <div id="toolbar" class="btn-group">
-
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="ibox ">
+                        <ul id="dicTree" class="ztree"></ul>
+                    </div>
                 </div>
-                <div class="jqGrid_wrapper">
+                <div class="col-sm-10">
+                    <div id="toolbar" class="btn-group">
+
+                    </div>
                     <table id="dicTable"></table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 @section scripts
     {
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script>
-        var ptree, $dicTable;
+        var ptree, $dicTable,pid=0;
         $(function () {
             loadDicTree();
             loadGrid();
@@ -53,9 +54,9 @@
 
         //单击事件
         function DicZtreeClick(event, treeId, treeNode) {
-            var pid = treeNode.id;
+            pid = treeNode.id;
 
-            $dicTable.bootstrapTable('refresh', { query: { pid: pid }});
+            $dicTable.bootstrapTable('refresh');
 
         }
 
@@ -73,6 +74,14 @@
                 sidePagination: "client",//server
                 locale: "zh-CN",
                 striped: true,
+                queryParams: function (params) {
+                    var dto = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        pid: pid
+                    };
+                    return dto;
+                },
                 columns: [
                     { field: 'ck', checkbox: true },
                     { field: 'dic_name', title: '字典名称', align: 'center' },
@@ -102,9 +111,9 @@
                 return;
             }
             var id = node[0].id;
-            jutils.dialogForm('字典信息', '/admin/sysdic/form', { id:'',pid:id },
+            jutils.dialog('字典信息', '/admin/sysdic/form', { id: '', pid: id }, null,
                 function () {
-                    $dicTable.bootstrapTable('refresh', { query: { pid: id } });
+                    $dicTable.bootstrapTable('refresh');
                     if (id === '0') {
                         loadDicTree();
                     }
@@ -112,9 +121,9 @@
         }
         function edit(obj) {
             var id = $(obj).data('id');
-            jutils.dialogForm('字典信息', '/admin/sysdic/form', { id: id },
+            jutils.dialog('字典信息', '/admin/sysdic/form', { id: id },null,
                 function () {
-                    $dicTable.bootstrapTable('refresh', { query: { pid: pid } });
+                    $dicTable.bootstrapTable('refresh');
                     if (pid === '0') {
                         loadDicTree();
                     }

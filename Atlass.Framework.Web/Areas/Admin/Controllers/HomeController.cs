@@ -58,16 +58,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             try
             {
                 var user = RequestHelper.AdminInfo();
-                var data = new HomeChartDto();
-                if (user.IsSuper)
-                {
-                    data = _menuApp.GetHomeChart();
-                }
-                else
-                {
-                    data = _menuApp.GetHomeDoctorChart(user);
-                }
-                result.data.Add("chart", data);
+             
+                result.data.Add("user", user);
             }
             catch (Exception e)
             {

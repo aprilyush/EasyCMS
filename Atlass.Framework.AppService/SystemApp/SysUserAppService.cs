@@ -117,24 +117,9 @@ namespace Atlass.Framework.AppService
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
 
-            List<user_ref_expert> experts = new List<user_ref_expert>();
-            if (!string.IsNullOrEmpty(refExperts))
-            {
-                var expertIds = refExperts.Split(',');
-                foreach(var id in expertIds)
-                {
-                    var expert = new user_ref_expert();
-                    expert.expert_id = id;
-                    expert.user_id = dto.id;
-                    experts.Add(expert);
-                }
-            }
-
+           
             Sqldb.Insert(dto).ExecuteAffrows();
-            if (experts.Count > 0)
-            {
-                Sqldb.Insert(experts).ExecuteAffrows();
-            }
+
         }
         /// <summary>
         /// 修改数据
@@ -147,29 +132,6 @@ namespace Atlass.Framework.AppService
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
 
-            List<user_ref_expert> experts = new List<user_ref_expert>();
-            if (!string.IsNullOrEmpty(refExperts))
-            {
-                var expertIds = refExperts.Split(',');
-                foreach (var id in expertIds)
-                {
-                    var expert = new user_ref_expert();
-                    expert.expert_id = id;
-                    expert.user_id = dto.id;
-                    experts.Add(expert);
-                }
-            }
-
-            var existIds = Sqldb.Select<user_ref_expert>().Where(s => s.user_id == dto.id).ToList(s => s.id);
-            if (existIds.Count > 0)
-            {
-                Sqldb.Delete<user_ref_expert>().Where(s => existIds.Contains(s.id)).ExecuteAffrows();
-            }
-
-            if (experts.Count > 0)
-            {
-                Sqldb.Insert(experts).ExecuteAffrows();
-            }
             Sqldb.Update<sys_user>().SetSource(dto)
                 .IgnoreColumns(s => new { s.create_person, s.create_time, s.account_name }).ExecuteAffrows();
 
@@ -201,43 +163,7 @@ namespace Atlass.Framework.AppService
             return data;
         }
 
-        public List<user_ref_expert> GetRefExpert(long userId)
-        {
-            if (userId == 0)
-            {
-                return new List<user_ref_expert>();
-            }
-            return Sqldb.Select<user_ref_expert>().Where(s => s.user_id == userId).ToList();
-        }
-        /// <summary>
-        /// 获取所有专家信息
-        /// </summary>
-        /// <returns></returns>
-        public List<ZtreeDto> GetAllExpertTree(long userId)
-        {
-            var data = Sqldb.Queryable<expert_info>()
-                .OrderBy(s => s.show_sort)
-                .Where(s => s.is_delete == 0)
-                .Select(s => new ZtreeDto()
-                {
-                    id = s.id.ToString(),
-                    name = s.expert_name,
-                    pId = s.open_id
-                }).ToList();
-            var refExperts = GetRefExpert(userId);
-            if (refExperts.Count > 0)
-            {
-                data.ForEach(s =>
-                {
-                    var count = refExperts.Where(a => a.expert_id == s.id).Count();
-                    if (count > 0)
-                    {
-                        s.checkstate = true;
-                    }
-                });
-            }
-            return data;
-        }
+       
         /// <summary>
         /// 批量删除
         /// </summary>

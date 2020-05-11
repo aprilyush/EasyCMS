@@ -5,10 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using Atlass.Framework.AppService.Api;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
-using Atlass.Framework.Jobs.Message;
+
 using Atlass.Framework.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -20,12 +19,9 @@ namespace Atlass.Framework.Web.Controllers.WeiXin
     public class WxPayController : Controller
     {
         private readonly SenparcWeixinSetting _senparcWeixinSetting;
-        private readonly ApiQuestionAppService _questionApp;
-        public WxPayController(IOptions<SenparcWeixinSetting> senparcWeixinSetting,
-            ApiQuestionAppService questionApp)
+        public WxPayController(IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             _senparcWeixinSetting = senparcWeixinSetting.Value;
-            _questionApp = questionApp;
         }
         /// <summary>
         /// JS-SDK支付回调地址（在统一下单接口中设置notify_url）
@@ -57,14 +53,7 @@ namespace Atlass.Framework.Web.Controllers.WeiXin
                         model.device_info = resHandler.GetParameter("device_info");
                         //string json = model.ToJson();
                         //LogNHelper.Info(json);
-                       string openid = _questionApp.SavePayHistory(model);
-
-                        //支付打赏
-                        if (openid != IdWorkerHelper.GenOId())
-                        {
-                            Task.Factory.StartNew(() =>
-                                MessagePush.PayNotice(_senparcWeixinSetting.WeixinAppId, openid, "", model.total_fee));
-                        }
+                   
 
                     }
                 }

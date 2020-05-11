@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
-                    <div class=" ibox">
+                    @*<div class=" ibox">
                         <div class="ibox-title">
                             <h5>关联专家信息</h5>
                         </div>
@@ -89,7 +89,7 @@
                             <ul id="expertTree" class="ztree">
                             </ul>
                         </div>
-                    </div>
+                    </div>*@
                    
                 </div>
             </div>
@@ -109,27 +109,27 @@
                 theme: "yellow_right",
                 valid: function (form) {
 
-                    var ids = [];
-                    var nodes = eTree.getCheckedNodes(true);
-                    if (nodes.length > 0) {
-                        //jutils.warn('选择一条数据行编辑');
-                        //return;
-                        for (var i = 0; i < nodes.length; i++) {
+                    //var ids = [];
+                    //var nodes = eTree.getCheckedNodes(true);
+                    //if (nodes.length > 0) {
+                    //    //jutils.warn('选择一条数据行编辑');
+                    //    //return;
+                    //    for (var i = 0; i < nodes.length; i++) {
 
-                            //var newobj = {
-                            //    id: nodes[i].id,
-                            //    pId: nodes[i].pId
-                            //}
-                            ids.push(nodes[i].id);
+                    //        //var newobj = {
+                    //        //    id: nodes[i].id,
+                    //        //    pId: nodes[i].pId
+                    //        //}
+                    //        ids.push(nodes[i].id);
 
-                        }
-                    }
-                    if (ids.length > 0) {
-                        var idsJson = ids.join();
-                        $('#refExperts').val(idsJson);
-                    } else {
-                        $('#refExperts').val('');
-                    }
+                    //    }
+                    //}
+                    //if (ids.length > 0) {
+                    //    var idsJson = ids.join();
+                    //    $('#refExperts').val(idsJson);
+                    //} else {
+                    //    $('#refExperts').val('');
+                    //}
                     // 表单验证通过，提交表单
                     jutils.ajaxPost('/admin/sysuser/SaveData', $(form).serialize(),
                         function (res) {
@@ -147,7 +147,7 @@
 
             jutils.ajaxGet('/admin/sysuser/GetUserById', { id: id }, function (res) {
 
-                loadDicTree(res.data.expertTree);
+                //loadDicTree(res.data.expertTree);
                 if (id != '0') {
                     $('#form').initFormData(res.data.model);
                     $('#SurePassWord').val(res.data.model.pass_word);

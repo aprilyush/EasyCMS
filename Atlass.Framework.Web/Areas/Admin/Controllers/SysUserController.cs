@@ -97,10 +97,7 @@ namespace Altas.Framework.Admin
         public ActionResult GetUserById(string id)
         {
             var result=new ResultAdaptDto();
-            //result.Data = _userApp.GetUserById(id);
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
-            var expertTree = _userApp.GetAllExpertTree(id.ToInt64());
-            result.data.Add("expertTree", expertTree);
+
             if (!id.EmptyId())
             {
                 var user = _userApp.GetUserById(id.ToInt64());

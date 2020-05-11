@@ -81,7 +81,7 @@ namespace Altas.Framework.Admin
         [HttpPost]
         public ActionResult SaveData(sys_dictionary dto)
         {
-            dto.dic_code = dto.dic_code.Trim();
+            dto.dic_code = dto.dic_code??"";
             dto.dic_name = dto.dic_name.Trim();
             dto.dic_value = dto.dic_name;
             if (dto.id == 0)

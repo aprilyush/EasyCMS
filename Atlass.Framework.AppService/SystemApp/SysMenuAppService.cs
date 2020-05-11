@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Atlass.Framework.Common;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
-using Atlass.Framework.AppService;
 using Atlass.Framework.ViewModels.SystemApp;
-using Atlass.Framework.ViewModels.Wx;
 using Microsoft.Extensions.DependencyInjection;
-using Atlass.Framework.Models.doctor;
-using Atlass.Framework.Models.Admin;
 
 namespace Atlass.Framework.AppService
 {
@@ -323,120 +317,6 @@ namespace Atlass.Framework.AppService
 
 
 
-        /// <summary>
-        /// 获取首页统计
-        /// </summary>
-        /// <returns></returns>
-        public HomeChartDto GetHomeChart()
-        {
-            var model=new HomeChartDto();
-            var chart=new EchartsDto();
-            var time = DateTime.Now;
-            var stime=new DateTime(time.Year,time.Month,1);
-            var today=new DateTime(time.Year,time.Month,time.Day,0,0,0);
-            int days = time.Day;
-            //总览数量
-            decimal totalFen= Sqldb.Select<pay_history>().Where(s => s.pay_time > stime).Sum(s=>s.total_fee);
-            model.MonthPayCount = decimal.Round(totalFen/100,2) ;
-            var questions = Sqldb.Queryable<expert_question>().Where(s => s.insert_time > stime)
-                .Select(s => new { id = s.id, itime = s.insert_time }).ToList();
-            int count = 0;
-            if (questions.Any())
-            {
-                count = 1;
-                model.TodayQuestionCount = questions.Where(s => s.itime > today).Count();
-                model.MonthQuestionCount = questions.Count;
-                model.TotalQuestion = Sqldb.Select<expert_question>().Count();
-            }
-            var ymodel = new EchartsYDto();
-            ymodel.name = "本月咨询量";
-            for (int i = 0; i < days; i++)
-            {
-                if (i >0)
-                {
-                    stime = stime.AddDays(1);
-                }
-                if (count > 0)
-                {
-                    var etime = stime.AddDays(1);
-                    int tcount = questions.Where(s => s.itime > stime&&s.itime<etime).Count();
-                    ymodel.data.Add(tcount);
-                }
-                else
-                {
-                   ymodel.data.Add(0);
-                }
-                chart.Xdata.Add(stime.ToString("MM-dd"));
-            }
-            chart.Ydata.Add(ymodel);
-            chart.Title.Add(ymodel.name);
-            model.chart = chart;
-            //图表
-            return model;
-        }
-
-
-        /// <summary>
-        /// 获取首页统计
-        /// </summary>
-        /// <returns></returns>
-        public HomeChartDto GetHomeDoctorChart(LoginUserDto user)
-        {
-            var model = new HomeChartDto();
-            var chart = new EchartsDto();
-            var time = DateTime.Now;
-            var stime = new DateTime(time.Year, time.Month, 1);
-            var today = new DateTime(time.Year, time.Month, time.Day, 0, 0, 0);
-            int days = time.Day;
-            int year_num = stime.ToString("yyyyMM").ToInt();
-            //总览数量
-            decimal totalFen = Sqldb.Select<pay_chart,user_ref_expert>()
-                 .InnerJoin((p,u)=>p.expert_id==u.expert_id)
-                .Where((p, u) =>u.user_id==user.Id&&p.year_num > year_num).First((p, u) =>p.money_num);
-
-            string emptyId = IdWorkerHelper.GenOId();
-            model.MonthPayCount = decimal.Round(totalFen / 100, 2);
-            var questions = Sqldb.Select<expert_question,user_ref_expert>()
-                .InnerJoin((q, u) => q.expert_oid == u.expert_id)
-                .Where((q,u)=>u.user_id==user.Id&&q.insert_time > stime&&q.pid==emptyId)
-                .ToList((q, u) => new { id = q.id, itime = q.insert_time });
-            int count = 0;
-            if (questions.Any())
-            {
-                count = 1;
-                model.TodayQuestionCount = questions.Where(s => s.itime > today).Count();
-                model.MonthQuestionCount = questions.Count;
-                
-            }
-
-            model.TotalQuestion = Sqldb.Select<expert_question, user_ref_expert>()
-                .InnerJoin((q, u) => q.expert_oid == u.expert_id)
-                .Where((q, u) => u.user_id == user.Id && q.pid == emptyId).Count();
-            var ymodel = new EchartsYDto();
-            ymodel.name = "本月咨询量";
-            for (int i = 0; i < days; i++)
-            {
-                if (i > 0)
-                {
-                    stime = stime.AddDays(1);
-                }
-                if (count > 0)
-                {
-                    var etime = stime.AddDays(1);
-                    int tcount = questions.Where(s => s.itime > stime && s.itime < etime).Count();
-                    ymodel.data.Add(tcount);
-                }
-                else
-                {
-                    ymodel.data.Add(0);
-                }
-                chart.Xdata.Add(stime.ToString("MM-dd"));
-            }
-            chart.Ydata.Add(ymodel);
-            chart.Title.Add(ymodel.name);
-            model.chart = chart;
-            //图表
-            return model;
-        }
+        
     }
 }
