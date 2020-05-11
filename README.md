@@ -1,7 +1,10 @@
 # Altas.Framework
 Atlass 管理系统 基于Asp.net Core的后台快速开发框架  
 Atlass ORM使用FreeSql,默认使用mysql
-## 演示地址：http://182.43.178.216:8080/admin 用户名：test，密码：123123
+## 演示地址：
+ http://182.43.178.216:9090/admin 
+ 用户名：test，密码：123123
+ 本地超级管理员 admin 123123
 ## 依赖环境
 asp.net core3.1, redis,mysql,
 # [更新日志(详细)](Update.md) 
