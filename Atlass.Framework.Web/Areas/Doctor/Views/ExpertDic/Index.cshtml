@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
+        </div>
+        <div>
+            <table id="roleTable"></table>
+        </div>
+    </div>
+
+</div>
+@section scripts
+    {
+    <script>
+        var $roleTable;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $roleTable = $("#roleTable").bootstrapTable({
+                url: '/doctor/expertdic/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'expert_name', title: '分类名称', align: 'center' },
+                    { field: 'expert_sort', title: '排序', align: 'center' },
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpt }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        //渲染操作
+        function renderOpt(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+
+            return html;
+        }
+
+        function add() {
+            jutils.dialogForm('专家分类', '/doctor/expertdic/form/', { id: '' },
+                function () {
+                    $roleTable.bootstrapTable('refresh');
+                });
+        }
+
+        function edit(obj) {
+
+            var id = $(obj).data('id');
+            jutils.dialogForm('专家分类', '/doctor/expertdic/form', { id: id },
+                function () {
+                    $roleTable.bootstrapTable('refresh');
+                });
+
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/doctor/expertdic/DeleteById',
+                        { ids: id },
+                        function () {
+                            $roleTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+    </script>
+
+
+}
+
+

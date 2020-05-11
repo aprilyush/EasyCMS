@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="ibox ">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
+        </div>
+        <div class="table-responsive">
+            <table id="table" class="table text-nowrap"></table>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script src="~/plugins/laydate/laydate.js"></script>
+    <script>
+        var $table;
+        $(function () {
+
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/Consulting/QuestionShare/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var params2 = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+               
+                    };
+                    return params2;
+                },
+                columns: [
+                    { field: 'share_title', title: '分享标题', align: 'center', width: 100, formatter: renderResp },
+                    { field: 'question_title', title: '咨询主题', align: 'center', width: 100, formatter: renderResp },
+                    { field: 'categoryName', title: '分类', align: 'center' },
+                    { field: 'hit_count', title: '点击量', align: 'left', width:100},
+                    { field: 'share_time', title: '分享时间', align: 'left', width: 150},
+                    {
+                        field: 'share_status', title: '分享状态', align: 'center', width: 50, formatter: function (v, d, i) {
+                            if (v === 0) {
+                                return '<span class="label">待审</span>';
+                            } else if (v === 1) {
+                                return '<span class="label label-primary">通过</span>';
+                            }
+
+                            return '<span class="label label-danger">不通过</span>';
+                        }
+                    },
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpt }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderResp(v, r, i) {
+            //一共28位
+            var rendHtml = jutils.splitLine(v, 20);
+            return rendHtml;
+        }
+        //渲染操作
+        function renderOpt(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+
+            return html;
+        }
+        function set(obj) {
+
+            var id = $(obj).data('id');
+            location.href = '/Consulting/QuestionShare/Form?id=' + id;
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/Consulting/QuestionShare/DeleteById',
+                        { id: id },
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        
+    </script>
+
+
+}
+
+
+
+

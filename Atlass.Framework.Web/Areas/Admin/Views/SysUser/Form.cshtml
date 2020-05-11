@@ -1,0 +1,198 @@
+﻿@{
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+    <link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+    <div class="ibox">
+        <div class="ibox-title">
+            用户信息
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-5">
+                    <form class="form form-horizontal" id="form" autocomplete="off">
+                        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">登录名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="account_name" id="account_name" value="" class="form-control" data-rule="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">姓名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="real_name" id="real_name" value="" class="form-control" data-rule="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">密码：</label>
+                            <div class="col-sm-9">
+                                <input type="password" name="pass_word" id="pass_word" class="form-control" data-rule="密码:required;password;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">确认密码：</label>
+                            <div class="col-sm-9">
+                                <input type="password" name="SurePassWord" id="SurePassWord" class="form-control" data-rule="确认密码:required;password;match(pass_word)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">联系方式：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="mobile_phone" id="mobile_phone" class="form-control" data-rule="mobile;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="email" id="email" value="" class="form-control" data-rule="email;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">超管：</label>
+                            <div class="col-sm-9">
+                                <div class="checkbox checkbox-success checkbox-inline">
+                                    <input type="checkbox" id="is_super" name="is_super" value="true">
+                                    <label for="is_super">是否超级管理员</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">系统角色：</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownList("sys_role_id", ViewBag.RoleList as SelectList, new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-9">
+                                <textarea name="remark" id="remark" cols="50" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="refExperts" id="refExperts" />
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <div class=" ibox">
+                        <div class="ibox-title">
+                            <h5>关联专家信息</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <ul id="expertTree" class="ztree">
+                            </ul>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+          
+        </div>
+
+    </div>
+
+@section scripts{
+    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript">
+        var eTree;
+        $(function () {
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+
+                    var ids = [];
+                    var nodes = eTree.getCheckedNodes(true);
+                    if (nodes.length > 0) {
+                        //jutils.warn('选择一条数据行编辑');
+                        //return;
+                        for (var i = 0; i < nodes.length; i++) {
+
+                            //var newobj = {
+                            //    id: nodes[i].id,
+                            //    pId: nodes[i].pId
+                            //}
+                            ids.push(nodes[i].id);
+
+                        }
+                    }
+                    if (ids.length > 0) {
+                        var idsJson = ids.join();
+                        $('#refExperts').val(idsJson);
+                    } else {
+                        $('#refExperts').val('');
+                    }
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/admin/sysuser/SaveData', $(form).serialize(),
+                        function (res) {
+                            cancel();
+                        });
+                }
+            });
+
+            loadData();
+        });
+
+
+        function loadData() {
+            var id = $("#id").val();
+
+            jutils.ajaxGet('/admin/sysuser/GetUserById', { id: id }, function (res) {
+
+                loadDicTree(res.data.expertTree);
+                if (id != '0') {
+                    $('#form').initFormData(res.data.model);
+                    $('#SurePassWord').val(res.data.model.pass_word);
+                }
+            });
+        }
+
+        function loadDicTree(expertTree) {
+            var opts = {
+
+                data: {
+                    simpleData: {
+                        enable: true
+                    }, key: {
+                        checked: 'checkstate'
+                    }
+                }, callback: {
+                    onClick: DicZtreeClick
+
+                },check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    autoCheckTrigger: true,
+                    chkboxType: { "Y": "ps", "N": "ps" }
+                }
+            };
+            eTree = $.fn.zTree.init($("#expertTree"), opts, expertTree);
+            eTree.expandAll(true);
+        }
+
+
+        //单击事件
+        function DicZtreeClick(event, treeId, treeNode) {
+            // var pid = treeNode.id;
+            console.log(treeNode);
+          //  $dicTable.bootstrapTable('refresh', { query: { pid: pid } });
+
+        }
+        function cancel() {
+            jutils.back();
+        }
+    </script>
+
+
+}
+
+
+

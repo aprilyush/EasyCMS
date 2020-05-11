@@ -1,0 +1,108 @@
+
+/* 移动端适配 */
+html,
+body {
+	font-size: 13.3333333333333vw;
+}
+
+
+body {
+	width: 100%;
+	color: #000;
+	height: 100%;
+	font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+	background-color: #fff;
+}
+textarea{
+	resize: none;      /*去掉拖动*/
+    outline: none;     /*去掉外围的发光*/
+    overflow-y:hidden; /*去掉右边的下拉条*/
+	overflow-x:hidden;  /*去掉x轴滚动条*/
+	border:none;
+}
+::-webkit-input-placeholder{
+	color: #959595;
+} 
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.jddk {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 100vh;
+	font-size:.24rem;
+	overflow: hidden;
+	padding-bottom:1.4rem;
+}
+
+.text-ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+/* flex */
+
+.flex {
+	display: flex;
+}
+
+.flex-inline {
+	display: inline-flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-row-reverse {
+	flex-direction: row-reverse;
+}
+
+.flex-align-center {
+	align-items: center;
+}
+.flex-align-end {
+	align-items: flex-end;
+}
+.flex-justify-around {
+	justify-content: space-around;
+}
+
+.flex-justify-center {
+	justify-content: center;
+}
+
+.flex-justify-between {
+	justify-content: space-between;
+}
+
+.flex-1 {
+	flex: 1;
+}
+.flex-end {
+	align-self: flex-end;
+}
+
+[v-cloak]{
+	display:none;
+}

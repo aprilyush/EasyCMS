@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div id="main-container" class="wrapper wrapper-content animated fadeInUp">
+    <div class="ibox">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="ibox-title">
+                    <h5>咨询信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form form-horizontal" id="form" autocomplete="off">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">主题</label>
+                            <div class="col-sm-3">
+                                <label class="control-label">{{question.qtitle}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">咨询时间：</label>
+                            <div class="col-sm-3">
+                                <label class="control-label">{{question.insert_time}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">咨询专家：</label>
+                            <div class="col-sm-3">
+                                <label class="control-label">{{question.expert_name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">咨询内容：</label>
+                            <div class="col-sm-6">
+                                <label class="control-label">{{question.qcontent}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">咨询图片：</label>
+                            <div class="col-sm-9">
+                                <ul class="cupload-image-boxs" id="imgList">
+                                    <li class="cupload-image-box" style="position:relative;" v-for="image in images">
+                                        <img class="cupload-image-preview" :src="image">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">高危行为发生日期：</label>
+                            <div class="col-sm-6">
+                                <label class="control-label">{{question.highrisk_time | timeFormatter}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">回复时间：</label>
+                            <div class="col-sm-6">
+                                <label class="control-label">{{question.resp_time_one | timeFormatter}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">回复内容：</label>
+                            <div class="col-sm-6">
+                                <div style="padding-top:10px;" v-html="question.resp_content_one"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">回复图片：</label>
+                            <div class="col-sm-9">
+                                <ul class="cupload-image-boxs" id="imgList">
+                                    <li class="cupload-image-box" style="position:relative;" v-for="image in resp_images">
+                                        <img  class="cupload-image-preview" :src="image">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">追加回复时间：</label>
+                            <div class="col-sm-6">
+                                <label class="control-label">{{question.resp_time_two | timeFormatter}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">追加回复内容：</label>
+                            <div class="col-sm-6">
+                                <div style="padding-top:10px;" v-html="question.resp_content_two"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">回复图片：</label>
+                            <div class="col-sm-9">
+                                <ul class="cupload-image-boxs" id="imgList">
+                                    <li class="cupload-image-box" style="position:relative;" v-for="image in resp_images_two">
+                                        <img class="cupload-image-preview" :src="image">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">咨询结束：</label>
+                            <div class="col-sm-6">
+                                <label class="control-label" v-html="questionEnd"></label>
+                            </div>
+                        </div>
+                        <div class="footerbar">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <button class="btn btn-white" type="button" onclick="cancel()">关闭</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox-title">
+                    <h5>患者资料</h5>
+                </div>
+                <div class=" ibox-content">
+                    <form class="form form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">昵称：</label>
+                            <div class="col-sm-9">
+                                <label class="control-label">{{patient.nick_name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性别：</label>
+                            <div class="col-sm-9">
+                                <label class="control-label">{{patient.gender|gender}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性取向：</label>
+                            <div class="col-sm-9">
+                                <label class="control-label">{{question.sexual_orientation|sexual_orientation}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">出生年份：</label>
+                            <div class="col-sm-9">
+                                <label class="control-label">{{patient.birth_year}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">地址：</label>
+                            <div class="col-sm-9">
+                                <label class="control-label">{{question.provice}}--{{question.provice}}</label>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-hover table-mail">
+                        <tbody>
+                            <tr class="read">
+                                <td colspan="2">关联主题</td>
+                            </tr>
+                            <tr class="read" v-for="refq in refQuestions">
+                                <td class="mail-subject">
+                                    <a :href="'/Consulting/questioninfo/detail?id='+refq.id">{{refq.question_title}}</a>
+                                </td>
+                                <td class="text-right mail-date">{{refq.question_time}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#main-container',
+            data: {
+                question: {},
+                refQuestions:[],
+                images: [],
+                resp_images: [],
+                resp_images_two:[],
+                patient: {}
+            },
+            methods: {
+
+            },
+            created: function () {
+                loadData();
+            },
+            computed: {
+                questionEnd: function(v) {
+                    if (this.question.qend) {
+                        return '<span class="label label-primary">已结束</span>';
+                    }
+                    return '<span class="label label-danger">未结束</span>';
+                }
+            },
+            filters: {
+                timeFormatter: function (value) {
+                  return jutils.toLocalTime(value);
+                },
+                gender: function (v) {
+                    if (v === 0)
+                        return '女';
+                    return '男';
+                },
+                sexual_orientation: function (v) {
+                    if (v === 0) {
+                        return '同性';
+                    } else if (v ===1) {
+                        return '异性';
+                    }
+                    return '其他';
+                }
+                
+            }
+        });
+
+        function loadData() {
+            var id = jutils.getQueryParam("id");
+            jutils.ajaxGet('/Consulting/questioninfo/GetDetail', { id: id }, function (res) {
+                app.question = res.data.model;
+                app.patient = res.data.patient;
+                app.refQuestions = res.data.refQuestions;
+
+                var allImages = res.data.imgs;
+                app.images = allImages.QuestionImages;
+                app.resp_images = allImages.ResponseImages;
+                app.resp_images_two = allImages.ResponseImagesTwo;
+            });
+        }
+
+
+        function cancel() {
+            location.href = '/Consulting/questioninfo/index';
+        }
+    </script>
+
+}
+
+

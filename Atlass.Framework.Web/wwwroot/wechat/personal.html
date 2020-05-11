@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>个人资料</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css" />
+		<style>
+			.tips {
+				width: 70%;
+				height: auto;
+				text-align: center;
+				margin: 10px auto 0;
+				font-size: 15px;
+				color: #cecece;
+			}
+			
+			.dataList {
+				width: 92%;
+				height: auto;
+				margin: 10px auto;
+			}
+			
+			.dataList .list {
+				width: 100%;
+				height: auto;
+				margin-bottom: 10px;
+				border-radius: 6px;
+				background: #f5f5f5;
+				position: relative;
+				box-sizing: border-box;
+				padding: 0 10px 0 15px;
+				display: flex;
+			}
+			
+			.dataList .list .mask {
+				width: 110px;
+				height: 30px;
+				line-height: 30px;
+			}
+			
+			.dataList .list .mask span {
+				color: #cacaca;
+				font-size: 14px;
+			}
+			
+			.dataList .list .mask i {
+				color: #F19B79;
+				font-style: normal;
+				position: relative;
+				top: 4px;
+			}
+			
+			.dataList .list .contents {
+				width: 100%;
+				height: auto;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			
+			.dataList .list .contents .nickname {
+				background: transparent;
+				width: 90%;
+				height: 30px;
+				border: none;
+				color: #333;
+			}
+			
+			.dataList .list .contents .sexchoose {
+				width: 30%;
+				height: 30px;
+				float: left;
+				line-height: 30px;
+			}
+			
+			.dataList .list .contents .sexchoose input {
+				height: 18px;
+				width: 18px;
+				position: relative;
+				top: 3px;
+			}
+			
+			.dataList .list .contents #myYear {
+				height: 30px;
+				line-height: 30px;
+				padding-left: 0;
+			}
+			.dataList .list .contents #city-picker{
+				background: transparent;
+				border: none;
+				height: 30px;
+			}
+			.dataList .list .contents .allLine{
+				width: 100%;
+				display: block;
+				margin-top: 5px;
+			}
+			.save{
+				width: 100%;
+				height: 40px;
+				background: #EE591D;
+				color: #fff;
+				font-size: 16px;
+				border: none;
+				border-radius: 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="tips">完善个人资料，有助于咨询师更了解您<br/>更快解答您的咨询问题</div>
+		<div class="dataList">
+			<div class="list">
+				<div class="mask">
+					<span>昵称</span>
+					<i>*</i>
+				</div>
+				<div class="contents">
+					<input type="text" class="nickname">
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>性别</span>
+					<i>*</i>
+				</div>
+				<div class="contents sexMask">
+					<label class="sexchoose"><input type="radio" name="sex" value="0" style="margin-right: 5px;">女</label>
+					<label class="sexchoose"><input type="radio" name="sex" value="1" style="margin-right: 5px;">男</label>
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>出生年份</span>
+					<i>*</i>
+				</div>
+				<div class="contents">
+					<select id="myYear" class="weui-select">
+					</select>
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>现居城市</span>
+					<i>*</i>
+				</div>
+				<div class="contents">
+					<input type="text" id='city-picker' placeholder="请选择省市" />
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>职业</span>
+				</div>
+				<div class="contents">
+					<input type="text" class="nickname" placeholder="请填写职业" id="yourJob">
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>民族</span>
+				</div>
+				<div class="contents">
+					<input type="text" class="nickname" placeholder="请输入民族" id="yourNational">
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>婚姻状况</span>
+				</div>
+				<div class="contents" id="youMarry">
+					<label class="allLine"><input type="radio" name="marry" value="1" style="margin-right: 5px;">未婚</label>
+					<label class="allLine"><input type="radio" name="marry" value="2" style="margin-right: 5px;">已婚有配偶</label>
+					<label class="allLine"><input type="radio" name="marry" value="3" style="margin-right: 5px;">离异或丧偶</label>
+					<label class="allLine"><input type="radio" name="marry" value="4" style="margin-right: 5px;">不详</label>
+				</div>
+			</div>
+			<div class="list">
+				<div class="mask">
+					<span>文化程度</span>
+				</div>
+				<div class="contents" id="yourEducation">
+					<label class="allLine"><input type="radio" name="education" value="1" style="margin-right: 5px;">文盲</label>
+					<label class="allLine"><input type="radio" name="education" value="2" style="margin-right: 5px;">小学</label>
+					<label class="allLine"><input type="radio" name="education" value="3" style="margin-right: 5px;">初中</label>
+					<label class="allLine"><input type="radio" name="education" value="4" style="margin-right: 5px;">高中或中专</label>
+					<label class="allLine"><input type="radio" name="education" value="5" style="margin-right: 5px;">大专以上</label>
+				</div>
+			</div>
+			<button class="save" onclick="save()">保存</button>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/city-picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var webUrl = 'http://182.43.178.216:9006';
+			var userObj = {};
+			$(function() {
+				var myDate = new Date();
+				var startYear = myDate.getFullYear() - 100; //起始年份 
+				var endYear = myDate.getFullYear(); //结束年份
+				var obj = document.getElementById('myYear');
+				for(var i = startYear; i <= endYear; i++) {
+					obj.options.add(new Option(i, i));
+				}
+
+				
+				//				选择城市
+				$("#city-picker").cityPicker({
+					title: "请选择居住城市",
+					showDistrict: false
+				});
+
+				function getUserInfo() {
+					$.ajax({
+						url: webUrl+'/api/ApiUser/GetUserInfo',
+						type: "GET",
+						data:{
+							openId: getQueryVariable('openId')
+						},
+						dataType: "json",
+						success: function(res){
+							if(res.status){
+								userObj = res.data.user;
+								$('.nickname').val(userObj.nick_name);
+								$('.sexMask .sexchoose').eq(userObj.gender).find('input').click();
+								if(userObj.birth_year == 0){
+									obj.options[obj.options.length - 1].selected = 1;
+								}else{
+									var n = endYear-userObj.birth_year;
+									obj.options[obj.options.length - n - 1].selected = 1;
+								}
+								$('#city-picker').val(userObj.province+' '+userObj.city);
+								$('#yourJob').val(userObj.job_name);
+								$('#yourNational').val(userObj.national);
+								if(userObj.marriage_status != 0){
+									$('#youMarry .allLine').eq(userObj.marriage_status-1).find('input').click();
+								}
+								if(userObj.educational_level != 0){
+									$('#yourEducation .allLine').eq(userObj.educational_level-1).find('input').click();
+								}
+							}else{
+								$.toast(res.msg, "text")
+							}
+						}
+					})
+				};
+				getUserInfo();
+			});
+			function getQueryVariable(variable){
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if(pair[0] == variable){return pair[1];}
+				}
+				return(false);
+			};
+
+			function save() {
+				if($('.nickname').val() == ''){
+					$.toast('请输入你的昵称', "text");
+					return false;
+				}
+				if($('#city-picker').val() == ''){
+					$.toast('请选择现居城市', "text");
+					return false;
+				}
+
+				$.ajax({
+					type: 'POST',
+					url: webUrl+'/api/ApiUser/UpdateUserInfo',
+					dataType: "json",
+					data: {
+						id: userObj.id,
+						open_id: getQueryVariable('openId').trim(),
+						nick_name: $('.nickname').val(),
+						gender: $("input[name='sex']:checked").val(),
+						birth_year: $("#myYear").val(),
+						province: $('#city-picker').val().split(' ')[0],
+						city: $('#city-picker').val().split(' ')[1],
+						job_name: $('#yourJob').val(),
+						national: $('#yourNational').val(),
+						marriage_status: $("input[name='marry']:checked").val(),
+						educational_level: $("input[name='education']:checked").val()
+					},
+					success: function (res) {
+						console.log(res,res.status)
+						if(res.status){
+							$.toast('保存成功', "text")
+						}else{
+							$.toast('保存失败', "text")
+						}
+					}
+				});
+			}
+
+		</script>
+	</body>
+
+</html>

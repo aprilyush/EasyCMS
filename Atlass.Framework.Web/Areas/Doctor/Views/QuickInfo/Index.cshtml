@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="text-center">
+                    <div class="btn-group" id="tableStatus">
+                        <a href="javascript:void(0);" class="btn btn-info" data-id="0">快捷回复</a>
+                        <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="1">个人资料</a>
+                    </div>
+                </div>
+                <div class="div_find">
+                    <p>
+                        <label class="find_labela">专家名称：</label>
+                        @Html.DropDownList("expertId", ViewBag.ExpertList as SelectList, new { @class = "find_input" })
+                        <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
+                    </p>
+                </div>
+              
+                <div>
+                    <div id="toolbar" class="btn-group">
+                    </div>
+                    <table id="roleTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script>
+        var $roleTable,qtype=0;
+        $(function () {
+            $('#tableStatus a').on('click',
+                function () {
+                    $(this).removeClass("btn-default").removeClass("btn-outline").addClass('btn-info')
+                        .siblings().removeClass("btn-info").addClass('btn-outline').addClass('btn-default');
+
+                    qtype = $(this).data('id');
+                    query();
+                });
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $roleTable = $("#roleTable").bootstrapTable({
+                url: '/doctor/QuickInfo/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var expertId = $('#expertId').val();
+                    var params2 = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        expertId: expertId,
+                        qtype: qtype
+                    };
+                    return params2;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: 'expertName', title: '添加人', align: 'left'
+                    },
+                    {
+                        field: 'qtitle', title: '标题备注', align: 'left', formatter: function (v) {
+                            return jutils.splitLine(v, 20);
+                        }
+                    },
+                    {
+                        field: 'qcontent', title: '内容', align: 'left', formatter: function (v) {
+                            return jutils.splitLine(v,20);
+                        }
+                    },
+                    { field: 'insert_time', title: '添加时间', align: 'center' },
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpt}
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        //渲染操作
+        function renderOpt(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+
+            return html;
+        }
+
+        function add() {
+            jutils.dialogForm('快捷回复',
+                '/doctor/quickinfo/form',
+                { id: '' },
+                function (res) {
+                    $roleTable.bootstrapTable('refresh');
+                });
+        }
+
+        function edit(obj) {
+
+            var id = $(obj).data('id');
+            jutils.dialogForm('快捷回复',
+                '/doctor/quickinfo/form',
+                { id: id },
+                function(res) {
+                    $roleTable.bootstrapTable('refresh');
+                });
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function() {
+                    jutils.ajaxGet('/Doctor/quickinfo/DeleteById',
+                        { id: id },
+                        function() {
+                            $roleTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function query() {
+            $roleTable.bootstrapTable('refresh');
+        }
+    </script>
+
+
+}
+
+
+
+

@@ -1,0 +1,1012 @@
+2020-04-30 09:09:18.785 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:8202/iisintegration  0
+2020-04-30 09:09:18.787 +08:00 [INF] Request finished in 2.6998ms 202 
+2020-04-30 09:09:18.787 +08:00 [INF] Application is shutting down...
+2020-04-30 10:48:36.618 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 10:48:36.649 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 10:48:36.883 +08:00 [INF] Creating key "76422fde-4acc-48ef-8e93-1d9302647be3" with creation date "2020-04-30T02:48:36.8798652+00:00", activation date "2020-04-30T02:48:36.8768195+00:00", and expiration date "2020-07-29T02:48:36.8768195+00:00".
+2020-04-30 10:48:36.894 +08:00 [WRN] No XML encryptor configured. Key "76422fde-4acc-48ef-8e93-1d9302647be3" may be persisted to storage in unencrypted form.
+2020-04-30 10:48:37.959 +08:00 [INF] Now listening on: http://127.0.0.1:12294
+2020-04-30 10:48:37.959 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 10:48:37.959 +08:00 [INF] Hosting environment: Production
+2020-04-30 10:48:37.959 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 10:48:38.059 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 10:48:38.065 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 10:48:38.107 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:38.154 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 10:48:38.164 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 4.4764ms
+2020-04-30 10:48:38.164 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:38.169 +08:00 [INF] Request finished in 111.6981ms 200 
+2020-04-30 10:48:38.321 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/Login/Index  
+2020-04-30 10:48:38.331 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:38.336 +08:00 [INF] Route matched with {action = "Index", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-04-30 10:48:38.373 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 10:48:38.518 +08:00 [INF] Executed ViewResult - view Index executed in 161.5353ms.
+2020-04-30 10:48:38.518 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web) in 182.1856ms
+2020-04-30 10:48:38.519 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:38.520 +08:00 [INF] Request finished in 199.0588ms 200 text/html; charset=utf-8
+2020-04-30 10:48:41.296 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/login/LoginOn application/x-www-form-urlencoded 22
+2020-04-30 10:48:41.298 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-04-30 10:48:41.307 +08:00 [INF] Route matched with {action = "Loginon", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Loginon(Atlass.Framework.Web.Models.LoginDto) on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-04-30 10:48:41.734 +08:00 [INF] Executing RedirectResult, redirecting to /admin/Home/Index.
+2020-04-30 10:48:41.734 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web) in 426.9022ms
+2020-04-30 10:48:41.735 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-04-30 10:48:41.735 +08:00 [INF] Request finished in 439.7827ms 302 
+2020-04-30 10:48:41.765 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/Index  
+2020-04-30 10:48:41.766 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:41.800 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 10:48:41.836 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 10:48:41.868 +08:00 [INF] Executed ViewResult - view Index executed in 33.9612ms.
+2020-04-30 10:48:41.868 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 68.6302ms
+2020-04-30 10:48:41.868 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 10:48:41.868 +08:00 [INF] Request finished in 103.4425ms 200 text/html; charset=utf-8
+2020-04-30 10:48:42.151 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2010:48:42%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588214922111  
+2020-04-30 10:48:42.154 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 10:48:42.161 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 10:48:42.275 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588214922181  
+2020-04-30 10:48:42.276 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 10:48:42.278 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 10:48:42.307 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 10:48:42.309 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 148.134ms
+2020-04-30 10:48:42.311 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 10:48:42.312 +08:00 [INF] Request finished in 161.0026ms 200 text/plain; charset=utf-8
+2020-04-30 10:48:42.618 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 10:48:42.618 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 339.7103ms
+2020-04-30 10:48:42.618 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 10:48:42.618 +08:00 [INF] Request finished in 343.0857ms 200 text/plain; charset=utf-8
+2020-04-30 11:09:34.973 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:12294/iisintegration  0
+2020-04-30 11:09:34.974 +08:00 [INF] Application is shutting down...
+2020-04-30 11:09:34.974 +08:00 [INF] Request finished in 1.5972ms 202 
+2020-04-30 11:21:23.399 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 11:21:23.428 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 11:21:23.628 +08:00 [INF] Creating key "dff90721-fbe7-49c2-bd31-2862eb78c0e7" with creation date "2020-04-30T03:21:23.6230694+00:00", activation date "2020-04-30T03:21:23.6199741+00:00", and expiration date "2020-07-29T03:21:23.6199741+00:00".
+2020-04-30 11:21:23.637 +08:00 [WRN] No XML encryptor configured. Key "dff90721-fbe7-49c2-bd31-2862eb78c0e7" may be persisted to storage in unencrypted form.
+2020-04-30 11:21:24.622 +08:00 [INF] Now listening on: http://127.0.0.1:10339
+2020-04-30 11:21:24.623 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 11:21:24.623 +08:00 [INF] Hosting environment: Production
+2020-04-30 11:21:24.623 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 11:21:24.826 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------015969795934879063814172 851
+2020-04-30 11:21:24.831 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 11:21:24.873 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:21:24.913 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:21:24.986 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2020-04-30 11:21:25.147 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 225.3825ms
+2020-04-30 11:21:25.148 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:21:25.156 +08:00 [INF] Request finished in 332.6822ms 415 application/problem+json; charset=utf-8
+2020-04-30 11:21:57.965 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------491454415478197285431464 851
+2020-04-30 11:21:57.970 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:21:57.970 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:21:57.972 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2020-04-30 11:21:57.973 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 2.1238ms
+2020-04-30 11:21:57.973 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:21:57.974 +08:00 [INF] Request finished in 8.7237ms 415 application/problem+json; charset=utf-8
+2020-04-30 11:22:16.813 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------924829790396237679773153 851
+2020-04-30 11:22:16.814 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:22:16.819 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:22:16.821 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2020-04-30 11:22:16.822 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 2.9485ms
+2020-04-30 11:22:16.822 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:22:16.823 +08:00 [INF] Request finished in 9.4951ms 415 application/problem+json; charset=utf-8
+2020-04-30 11:22:26.235 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------292613459762089858397701 851
+2020-04-30 11:22:26.237 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:22:26.238 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:22:26.243 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2020-04-30 11:22:26.244 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 5.395ms
+2020-04-30 11:22:26.244 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:22:26.246 +08:00 [INF] Request finished in 10.9135ms 415 application/problem+json; charset=utf-8
+2020-04-30 11:24:29.786 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:10339/iisintegration  0
+2020-04-30 11:24:29.787 +08:00 [INF] Application is shutting down...
+2020-04-30 11:24:29.787 +08:00 [INF] Request finished in 0.9363ms 202 
+2020-04-30 11:24:43.737 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 11:24:43.765 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 11:24:43.963 +08:00 [INF] Creating key "b174998d-9e1b-4d39-9e4d-8e94cdb987b8" with creation date "2020-04-30T03:24:43.9609184+00:00", activation date "2020-04-30T03:24:43.9571454+00:00", and expiration date "2020-07-29T03:24:43.9571454+00:00".
+2020-04-30 11:24:43.974 +08:00 [WRN] No XML encryptor configured. Key "b174998d-9e1b-4d39-9e4d-8e94cdb987b8" may be persisted to storage in unencrypted form.
+2020-04-30 11:24:44.874 +08:00 [INF] Now listening on: http://127.0.0.1:37848
+2020-04-30 11:24:44.875 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 11:24:44.875 +08:00 [INF] Hosting environment: Production
+2020-04-30 11:24:44.875 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 11:24:45.053 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------086093014854665849945528 851
+2020-04-30 11:24:45.059 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 11:24:45.097 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:24:45.128 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:24:45.443 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/html;charset=utf-8
+2020-04-30 11:24:45.450 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 318.1868ms
+2020-04-30 11:24:45.451 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:24:45.458 +08:00 [INF] Request finished in 405.9491ms 500 text/html;charset=utf-8
+2020-04-30 11:25:09.250 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/Index  
+2020-04-30 11:25:09.253 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 11:25:09.298 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 11:25:09.419 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 11:25:09.481 +08:00 [INF] Executed ViewResult - view Index executed in 77.0717ms.
+2020-04-30 11:25:09.481 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 182.9774ms
+2020-04-30 11:25:09.481 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 11:25:09.483 +08:00 [INF] Request finished in 232.376ms 200 text/html; charset=utf-8
+2020-04-30 11:25:09.649 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2011:25:09%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588217109584  
+2020-04-30 11:25:09.654 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 11:25:09.661 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 11:25:09.769 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:25:09.770 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 108.5137ms
+2020-04-30 11:25:09.771 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 11:25:09.773 +08:00 [INF] Request finished in 123.6962ms 200 text/plain; charset=utf-8
+2020-04-30 11:25:09.832 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588217109725  
+2020-04-30 11:25:09.833 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 11:25:09.834 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 11:25:09.882 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 11:25:09.887 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:25:09.887 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 52.7077ms
+2020-04-30 11:25:09.887 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 11:25:09.887 +08:00 [INF] Request finished in 55.3565ms 200 text/plain; charset=utf-8
+2020-04-30 11:25:09.911 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 11:25:09.911 +08:00 [INF] Request finished in 29.0564ms 200 image/x-icon
+2020-04-30 11:25:11.521 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/index  
+2020-04-30 11:25:11.524 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web)'
+2020-04-30 11:25:11.529 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-04-30 11:25:11.537 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 11:25:11.563 +08:00 [INF] Executed ViewResult - view Index executed in 30.4646ms.
+2020-04-30 11:25:11.564 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web) in 34.4182ms
+2020-04-30 11:25:11.564 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web)'
+2020-04-30 11:25:11.565 +08:00 [INF] Request finished in 44.289ms 200 text/html; charset=utf-8
+2020-04-30 11:25:11.597 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-04-30 11:25:11.599 +08:00 [INF] The file /framework/jutils.js was not modified
+2020-04-30 11:25:11.600 +08:00 [INF] Request finished in 2.407ms 304 application/javascript
+2020-04-30 11:25:11.689 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-04-30 11:25:11.691 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-04-30 11:25:11.699 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-04-30 11:25:11.767 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:25:11.768 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 68.1805ms
+2020-04-30 11:25:11.768 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-04-30 11:25:11.768 +08:00 [INF] Request finished in 79.2399ms 200 text/plain; charset=utf-8
+2020-04-30 11:25:15.859 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/detail?id=17  
+2020-04-30 11:25:15.860 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web)'
+2020-04-30 11:25:15.863 +08:00 [INF] Route matched with {area = "Admin", action = "Detail", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Detail(Int32) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-04-30 11:25:15.870 +08:00 [INF] Executing ViewResult, running view Detail.
+2020-04-30 11:25:15.899 +08:00 [INF] Executed ViewResult - view Detail executed in 30.3985ms.
+2020-04-30 11:25:15.899 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web) in 35.9223ms
+2020-04-30 11:25:15.899 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web)'
+2020-04-30 11:25:15.900 +08:00 [INF] Request finished in 40.8866ms 200 text/html; charset=utf-8
+2020-04-30 11:25:15.932 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/vue/vue.js  
+2020-04-30 11:25:15.933 +08:00 [INF] The file /plugins/vue/vue.js was not modified
+2020-04-30 11:25:15.933 +08:00 [INF] Request finished in 0.995ms 304 application/javascript
+2020-04-30 11:25:16.030 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/GetDataById?id=17&_=1588217115952  
+2020-04-30 11:25:16.032 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web)'
+2020-04-30 11:25:16.033 +08:00 [INF] Route matched with {area = "Admin", action = "GetDataById", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetDataById(Int32) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-04-30 11:25:16.037 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:25:16.037 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web) in 3.8165ms
+2020-04-30 11:25:16.037 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web)'
+2020-04-30 11:25:16.037 +08:00 [INF] Request finished in 7.1266ms 200 text/plain; charset=utf-8
+2020-04-30 11:27:29.278 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------219636511155178583304762 850
+2020-04-30 11:27:29.281 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:27:29.282 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:27:29.423 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:27:29.423 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 140.9872ms
+2020-04-30 11:27:29.423 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:27:29.424 +08:00 [INF] Request finished in 145.871ms 200 text/plain; charset=utf-8
+2020-04-30 11:28:06.447 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/api/apiExpert/SaveQuickReply multipart/form-data; boundary=--------------------------873973539981651047710047 850
+2020-04-30 11:28:06.448 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:28:06.448 +08:00 [INF] Route matched with {action = "SaveQuickReply", controller = "ApiExpert", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveQuickReply(Atlass.Framework.Models.quick_reply) on controller Atlass.Framework.Web.ApiControllers.ApiExpertController (Atlass.Framework.Web).
+2020-04-30 11:28:06.542 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 11:28:06.542 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web) in 94.2506ms
+2020-04-30 11:28:06.542 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiExpertController.SaveQuickReply (Atlass.Framework.Web)'
+2020-04-30 11:28:06.543 +08:00 [INF] Request finished in 95.8807ms 200 text/plain; charset=utf-8
+2020-04-30 11:48:18.829 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:37848/iisintegration  0
+2020-04-30 11:48:18.830 +08:00 [INF] Request finished in 0.6492ms 202 
+2020-04-30 11:48:18.830 +08:00 [INF] Application is shutting down...
+2020-04-30 14:57:42.163 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 14:57:42.193 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 14:57:42.370 +08:00 [INF] Creating key "ee58fe38-707d-462d-a4da-52ee21bd07f4" with creation date "2020-04-30T06:57:42.3665206+00:00", activation date "2020-04-30T06:57:42.3625435+00:00", and expiration date "2020-07-29T06:57:42.3625435+00:00".
+2020-04-30 14:57:42.384 +08:00 [WRN] No XML encryptor configured. Key "ee58fe38-707d-462d-a4da-52ee21bd07f4" may be persisted to storage in unencrypted form.
+2020-04-30 14:57:43.466 +08:00 [INF] Now listening on: http://127.0.0.1:19972
+2020-04-30 14:57:43.466 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 14:57:43.467 +08:00 [INF] Hosting environment: Production
+2020-04-30 14:57:43.467 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 14:57:43.674 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 14:57:43.681 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 14:57:43.766 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 14:57:43.898 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 14:57:44.010 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 14:57:44.108 +08:00 [INF] Executed ViewResult - view Index executed in 127.026ms.
+2020-04-30 14:57:44.109 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 210.6883ms
+2020-04-30 14:57:44.109 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 14:57:44.118 +08:00 [INF] Request finished in 445.24ms 200 text/html; charset=utf-8
+2020-04-30 14:57:44.220 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-04-30 14:57:44.226 +08:00 [INF] The file /html/index.html was not modified
+2020-04-30 14:57:44.227 +08:00 [INF] Request finished in 7.0406ms 304 text/html
+2020-04-30 14:57:44.473 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-04-30 14:57:44.474 +08:00 [INF] The file /framework/jui-framework.js was not modified
+2020-04-30 14:57:44.474 +08:00 [INF] Request finished in 1.387ms 304 application/javascript
+2020-04-30 14:57:44.501 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2014:57:44%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588229864244  
+2020-04-30 14:57:44.503 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 14:57:44.510 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 14:57:44.611 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588229864290  
+2020-04-30 14:57:44.615 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 14:57:44.621 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 14:57:44.693 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 14:57:44.694 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 183.2655ms
+2020-04-30 14:57:44.694 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 14:57:44.694 +08:00 [INF] Request finished in 193.4736ms 200 text/plain; charset=utf-8
+2020-04-30 14:57:44.694 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 14:57:44.695 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 73.4938ms
+2020-04-30 14:57:44.695 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 14:57:44.695 +08:00 [INF] Request finished in 83.8188ms 200 text/plain; charset=utf-8
+2020-04-30 14:57:48.138 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysMenu/Index  
+2020-04-30 14:57:48.139 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web)'
+2020-04-30 14:57:48.144 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 14:57:48.148 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 14:57:48.186 +08:00 [INF] Executed ViewResult - view Index executed in 40.8002ms.
+2020-04-30 14:57:48.186 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web) in 42.4582ms
+2020-04-30 14:57:48.186 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web)'
+2020-04-30 14:57:48.187 +08:00 [INF] Request finished in 49.4788ms 200 text/html; charset=utf-8
+2020-04-30 14:57:48.301 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysMenu/GetData?order=asc application/json 
+2020-04-30 14:57:48.303 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 14:57:48.305 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData() on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 14:57:48.344 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 14:57:48.344 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web) in 38.7435ms
+2020-04-30 14:57:48.344 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 14:57:48.344 +08:00 [INF] Request finished in 42.9783ms 200 text/plain; charset=utf-8
+2020-04-30 14:57:51.969 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/sysmenu/form  
+2020-04-30 14:57:51.970 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Form (Atlass.Framework.Web)'
+2020-04-30 14:57:51.980 +08:00 [INF] Route matched with {area = "Admin", action = "Form", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Form(System.String) on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 14:57:51.994 +08:00 [INF] Executing ViewResult, running view Form.
+2020-04-30 14:57:52.022 +08:00 [INF] Executed ViewResult - view Form executed in 29.9474ms.
+2020-04-30 14:57:52.022 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.Form (Atlass.Framework.Web) in 42.1527ms
+2020-04-30 14:57:52.022 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Form (Atlass.Framework.Web)'
+2020-04-30 14:57:52.022 +08:00 [INF] Request finished in 54.0066ms 200 text/html; charset=utf-8
+2020-04-30 14:58:39.170 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/admin/sysmenu/SaveData application/x-www-form-urlencoded; charset=UTF-8 178
+2020-04-30 14:58:39.170 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.SaveData (Atlass.Framework.Web)'
+2020-04-30 14:58:39.194 +08:00 [INF] Route matched with {area = "Admin", action = "SaveData", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult SaveData(Atlass.Framework.Models.sys_menu, System.String) on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 14:58:39.298 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 14:58:39.298 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.SaveData (Atlass.Framework.Web) in 104.0655ms
+2020-04-30 14:58:39.299 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.SaveData (Atlass.Framework.Web)'
+2020-04-30 14:58:39.299 +08:00 [INF] Request finished in 129.4826ms 200 text/plain; charset=utf-8
+2020-04-30 14:58:39.309 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysMenu/GetData?order=asc application/json 
+2020-04-30 14:58:39.310 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 14:58:39.310 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData() on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 14:58:39.311 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 14:58:39.311 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web) in 1.1683ms
+2020-04-30 14:58:39.311 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 14:58:39.311 +08:00 [INF] Request finished in 2.1878ms 200 text/plain; charset=utf-8
+2020-04-30 14:58:52.544 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:19972/iisintegration  0
+2020-04-30 14:58:52.545 +08:00 [INF] Application is shutting down...
+2020-04-30 14:58:52.545 +08:00 [INF] Request finished in 0.6866ms 202 
+2020-04-30 15:01:03.781 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 15:01:03.811 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 15:01:04.018 +08:00 [INF] Creating key "ee5982a0-1542-4a73-a7c5-f69f66d2dd0e" with creation date "2020-04-30T07:01:04.0130395+00:00", activation date "2020-04-30T07:01:04.0083826+00:00", and expiration date "2020-07-29T07:01:04.0083826+00:00".
+2020-04-30 15:01:04.028 +08:00 [WRN] No XML encryptor configured. Key "ee5982a0-1542-4a73-a7c5-f69f66d2dd0e" may be persisted to storage in unencrypted form.
+2020-04-30 15:01:04.953 +08:00 [INF] Now listening on: http://127.0.0.1:41491
+2020-04-30 15:01:04.954 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 15:01:04.954 +08:00 [INF] Hosting environment: Production
+2020-04-30 15:01:04.954 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 15:01:05.151 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 15:01:05.157 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 15:01:05.197 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:01:05.294 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:01:05.361 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:01:05.426 +08:00 [INF] Executed ViewResult - view Index executed in 75.3394ms.
+2020-04-30 15:01:05.427 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 132.2909ms
+2020-04-30 15:01:05.427 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:01:05.434 +08:00 [INF] Request finished in 286.0361ms 200 text/html; charset=utf-8
+2020-04-30 15:01:05.496 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-04-30 15:01:05.497 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:01:05.498 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:01:05.499 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:01:05.511 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:01:05.511 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:01:05.511 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:01:05.511 +08:00 [INF] Request finished in 13.9794ms 200 text/css
+2020-04-30 15:01:05.511 +08:00 [INF] Request finished in 12.8437ms 200 text/css
+2020-04-30 15:01:05.511 +08:00 [INF] Request finished in 11.9156ms 200 text/css
+2020-04-30 15:01:05.523 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-04-30 15:01:05.524 +08:00 [INF] Request finished in 27.599ms 200 text/css
+2020-04-30 15:01:05.544 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:01:05.545 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:01:05.545 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-04-30 15:01:05.545 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:01:05.546 +08:00 [INF] Request finished in 0.9915ms 200 application/javascript
+2020-04-30 15:01:05.563 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-04-30 15:01:05.564 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-04-30 15:01:05.564 +08:00 [INF] Request finished in 0.7662ms 200 application/javascript
+2020-04-30 15:01:05.565 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-04-30 15:01:05.567 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:01:05.571 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-04-30 15:01:05.571 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-04-30 15:01:05.576 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-04-30 15:01:05.576 +08:00 [INF] Request finished in 30.9262ms 200 text/html
+2020-04-30 15:01:05.580 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-04-30 15:01:05.580 +08:00 [INF] Request finished in 15.606ms 200 application/javascript
+2020-04-30 15:01:05.585 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-04-30 15:01:05.586 +08:00 [INF] Request finished in 14.0533ms 200 application/javascript
+2020-04-30 15:01:05.589 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:01:05.590 +08:00 [INF] Request finished in 22.616ms 200 application/javascript
+2020-04-30 15:01:05.593 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-04-30 15:01:05.593 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-04-30 15:01:05.593 +08:00 [INF] Request finished in 0.6738ms 200 application/javascript
+2020-04-30 15:01:05.598 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-04-30 15:01:05.598 +08:00 [INF] Request finished in 26.5103ms 200 application/javascript
+2020-04-30 15:01:05.633 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:01:05.633 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:01:05.634 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:01:05.635 +08:00 [INF] Request finished in 1.67ms 200 application/javascript
+2020-04-30 15:01:05.641 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:01:05.641 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:01:05.641 +08:00 [INF] Request finished in 96.4081ms 200 application/javascript
+2020-04-30 15:01:05.641 +08:00 [INF] Request finished in 8.1881ms 200 application/javascript
+2020-04-30 15:01:05.663 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:01:05.665 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:01:05.666 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:01:05.666 +08:00 [INF] Request finished in 2.8249ms 200 font/woff2
+2020-04-30 15:01:05.668 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:01:05.668 +08:00 [INF] Request finished in 3.1642ms 200 text/css
+2020-04-30 15:01:05.674 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-04-30 15:01:05.675 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-04-30 15:01:05.675 +08:00 [INF] Request finished in 1.4364ms 200 text/css
+2020-04-30 15:01:05.676 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:01:05.681 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:01:05.681 +08:00 [INF] Request finished in 6.0707ms 200 text/css
+2020-04-30 15:01:05.681 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-04-30 15:01:05.686 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:01:05.686 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:01:05.686 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-04-30 15:01:05.687 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:01:05.687 +08:00 [INF] Request finished in 1.9121ms 200 text/css
+2020-04-30 15:01:05.688 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:01:05.688 +08:00 [INF] Request finished in 1.7565ms 200 application/javascript
+2020-04-30 15:01:05.688 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-04-30 15:01:05.693 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-04-30 15:01:05.694 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-04-30 15:01:05.695 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-04-30 15:01:05.695 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-04-30 15:01:05.695 +08:00 [INF] Request finished in 1.9513ms 200 application/javascript
+2020-04-30 15:01:05.696 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-04-30 15:01:05.696 +08:00 [INF] Request finished in 1.9695ms 200 image/png
+2020-04-30 15:01:05.711 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-04-30 15:01:05.711 +08:00 [INF] Request finished in 30.3701ms 200 image/png
+2020-04-30 15:01:05.716 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-04-30 15:01:05.716 +08:00 [INF] Request finished in 21.5154ms 200 image/png
+2020-04-30 15:01:05.719 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-04-30 15:01:05.719 +08:00 [INF] Request finished in 32.6975ms 200 image/png
+2020-04-30 15:01:05.881 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:01:05.882 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:01:05.883 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:01:05.883 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:01:05.884 +08:00 [INF] Request finished in 2.8099ms 200 text/css
+2020-04-30 15:01:05.887 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:01:05.888 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:01:05.890 +08:00 [INF] Request finished in 6.3998ms 200 text/css
+2020-04-30 15:01:05.893 +08:00 [INF] Request finished in 10.5717ms 200 font/woff2
+2020-04-30 15:01:05.901 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2015:01:05%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588230065701  
+2020-04-30 15:01:05.909 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:01:05.917 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:01:05.947 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-04-30 15:01:05.947 +08:00 [INF] Request finished in 258.7247ms 200 application/javascript
+2020-04-30 15:01:06.042 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588230065777  
+2020-04-30 15:01:06.047 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:01:06.049 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:01:06.074 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 15:01:06.075 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 15:01:06.075 +08:00 [INF] Request finished in 0.8134ms 200 image/x-icon
+2020-04-30 15:01:06.098 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:01:06.099 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 181.5059ms
+2020-04-30 15:01:06.099 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:01:06.101 +08:00 [INF] Request finished in 201.3487ms 200 text/plain; charset=utf-8
+2020-04-30 15:01:06.111 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:01:06.112 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 62.8544ms
+2020-04-30 15:01:06.112 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:01:06.112 +08:00 [INF] Request finished in 70.2021ms 200 text/plain; charset=utf-8
+2020-04-30 15:01:18.454 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/index  
+2020-04-30 15:01:18.456 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:01:18.460 +08:00 [INF] Route matched with {area = "BasicData", action = "Index", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:01:18.464 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:01:18.524 +08:00 [INF] Executed ViewResult - view Index executed in 62.6826ms.
+2020-04-30 15:01:18.524 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web) in 64.1817ms
+2020-04-30 15:01:18.524 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:01:18.525 +08:00 [INF] Request finished in 70.7119ms 200 text/html; charset=utf-8
+2020-04-30 15:07:05.375 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:41491/iisintegration  0
+2020-04-30 15:07:05.376 +08:00 [INF] Application is shutting down...
+2020-04-30 15:07:05.376 +08:00 [INF] Request finished in 0.9561ms 202 
+2020-04-30 15:07:23.239 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 15:07:23.265 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 15:07:23.451 +08:00 [INF] Creating key "d2976f69-f36d-433a-b04d-52118330a726" with creation date "2020-04-30T07:07:23.4462488+00:00", activation date "2020-04-30T07:07:23.4424858+00:00", and expiration date "2020-07-29T07:07:23.4424858+00:00".
+2020-04-30 15:07:23.461 +08:00 [WRN] No XML encryptor configured. Key "d2976f69-f36d-433a-b04d-52118330a726" may be persisted to storage in unencrypted form.
+2020-04-30 15:07:24.421 +08:00 [INF] Now listening on: http://127.0.0.1:38561
+2020-04-30 15:07:24.421 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 15:07:24.421 +08:00 [INF] Hosting environment: Production
+2020-04-30 15:07:24.421 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 15:07:24.643 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 15:07:24.650 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 15:07:24.732 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:07:24.836 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:07:24.906 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:07:24.971 +08:00 [INF] Executed ViewResult - view Index executed in 76.3427ms.
+2020-04-30 15:07:24.972 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 134.6521ms
+2020-04-30 15:07:24.972 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:07:24.978 +08:00 [INF] Request finished in 336.1307ms 200 text/html; charset=utf-8
+2020-04-30 15:07:25.039 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-04-30 15:07:25.044 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:07:25.051 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:07:25.051 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-04-30 15:07:25.051 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:07:25.051 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:07:25.051 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-04-30 15:07:25.052 +08:00 [INF] Request finished in 12.3464ms 200 text/css
+2020-04-30 15:07:25.052 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:07:25.052 +08:00 [INF] Request finished in 8.6617ms 200 text/css
+2020-04-30 15:07:25.053 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-04-30 15:07:25.053 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:07:25.053 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:07:25.053 +08:00 [INF] Request finished in 1.6794ms 200 text/html
+2020-04-30 15:07:25.053 +08:00 [INF] Request finished in 1.755ms 200 application/javascript
+2020-04-30 15:07:25.053 +08:00 [INF] Request finished in 0.9503ms 200 text/css
+2020-04-30 15:07:25.053 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:07:25.053 +08:00 [INF] Request finished in 2.5436ms 200 text/css
+2020-04-30 15:07:25.063 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:07:25.064 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:07:25.064 +08:00 [INF] Request finished in 1.0981ms 200 application/javascript
+2020-04-30 15:07:25.106 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-04-30 15:07:25.106 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-04-30 15:07:25.106 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-04-30 15:07:25.106 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-04-30 15:07:25.106 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:07:25.107 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-04-30 15:07:25.107 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-04-30 15:07:25.107 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-04-30 15:07:25.107 +08:00 [INF] Request finished in 0.5391ms 200 application/javascript
+2020-04-30 15:07:25.107 +08:00 [INF] Request finished in 0.7003ms 200 application/javascript
+2020-04-30 15:07:25.107 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-04-30 15:07:25.107 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:07:25.107 +08:00 [INF] Request finished in 0.7398ms 200 application/javascript
+2020-04-30 15:07:25.107 +08:00 [INF] Request finished in 0.8361ms 200 application/javascript
+2020-04-30 15:07:25.107 +08:00 [INF] Request finished in 0.9443ms 200 application/javascript
+2020-04-30 15:07:25.108 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-04-30 15:07:25.109 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-04-30 15:07:25.109 +08:00 [INF] Request finished in 0.6146ms 200 application/javascript
+2020-04-30 15:07:25.154 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-04-30 15:07:25.154 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-04-30 15:07:25.154 +08:00 [INF] Request finished in 0.7708ms 200 application/javascript
+2020-04-30 15:07:25.157 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-04-30 15:07:25.157 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-04-30 15:07:25.158 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-04-30 15:07:25.158 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-04-30 15:07:25.158 +08:00 [INF] Request finished in 0.6757ms 200 image/png
+2020-04-30 15:07:25.158 +08:00 [INF] Request finished in 0.704ms 200 image/png
+2020-04-30 15:07:25.158 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-04-30 15:07:25.159 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-04-30 15:07:25.160 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-04-30 15:07:25.160 +08:00 [INF] Request finished in 2.2548ms 200 image/png
+2020-04-30 15:07:25.161 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-04-30 15:07:25.161 +08:00 [INF] Request finished in 2.532ms 200 image/png
+2020-04-30 15:07:25.161 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:07:25.162 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:07:25.162 +08:00 [INF] Request finished in 0.7581ms 200 font/woff2
+2020-04-30 15:07:25.164 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:07:25.165 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:07:25.165 +08:00 [INF] Request finished in 0.5602ms 200 text/css
+2020-04-30 15:07:25.168 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:07:25.169 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:07:25.169 +08:00 [INF] Request finished in 1.2348ms 200 text/css
+2020-04-30 15:07:25.170 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-04-30 15:07:25.171 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-04-30 15:07:25.171 +08:00 [INF] Request finished in 0.9267ms 200 text/css
+2020-04-30 15:07:25.171 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:07:25.171 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:07:25.172 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:07:25.172 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:07:25.173 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:07:25.173 +08:00 [INF] Request finished in 1.1566ms 200 text/css
+2020-04-30 15:07:25.173 +08:00 [INF] Request finished in 1.2371ms 200 text/css
+2020-04-30 15:07:25.173 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:07:25.173 +08:00 [INF] Request finished in 1.5681ms 200 application/javascript
+2020-04-30 15:07:25.176 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:07:25.177 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:07:25.177 +08:00 [INF] Request finished in 0.6058ms 200 application/javascript
+2020-04-30 15:07:25.186 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:07:25.186 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-04-30 15:07:25.186 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:07:25.186 +08:00 [INF] Request finished in 0.7814ms 200 application/javascript
+2020-04-30 15:07:25.190 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-04-30 15:07:25.190 +08:00 [INF] Request finished in 4.5736ms 200 application/javascript
+2020-04-30 15:07:25.246 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2015:07:25%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588230445086  
+2020-04-30 15:07:25.248 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:07:25.251 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:07:25.251 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:07:25.251 +08:00 [INF] Request finished in 0.8185ms 200 font/woff2
+2020-04-30 15:07:25.262 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:07:25.278 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:07:25.278 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:07:25.279 +08:00 [INF] Request finished in 0.6365ms 200 text/css
+2020-04-30 15:07:25.386 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588230445267  
+2020-04-30 15:07:25.389 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:07:25.390 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:07:25.456 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:07:25.457 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 194.51ms
+2020-04-30 15:07:25.457 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:07:25.457 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:07:25.457 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 66.6742ms
+2020-04-30 15:07:25.457 +08:00 [INF] Request finished in 211.4984ms 200 text/plain; charset=utf-8
+2020-04-30 15:07:25.457 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:07:25.457 +08:00 [INF] Request finished in 71.8292ms 200 text/plain; charset=utf-8
+2020-04-30 15:07:25.499 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 15:07:25.502 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 15:07:25.503 +08:00 [INF] Request finished in 4.119ms 200 image/x-icon
+2020-04-30 15:07:27.233 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/index  
+2020-04-30 15:07:27.235 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:07:27.241 +08:00 [INF] Route matched with {area = "BasicData", action = "Index", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:07:27.247 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:07:27.272 +08:00 [INF] Executed ViewResult - view Index executed in 27.8815ms.
+2020-04-30 15:07:27.272 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web) in 30.5651ms
+2020-04-30 15:07:27.272 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:07:27.272 +08:00 [INF] Request finished in 40.378ms 200 text/html; charset=utf-8
+2020-04-30 15:07:27.414 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/GetModel?_=1588230447385  
+2020-04-30 15:07:27.419 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:07:27.422 +08:00 [INF] Route matched with {area = "BasicData", action = "GetModel", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetModel() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:07:27.449 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:07:27.450 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web) in 27.8098ms
+2020-04-30 15:07:27.450 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:07:27.451 +08:00 [INF] Request finished in 36.2924ms 200 text/plain; charset=utf-8
+2020-04-30 15:08:34.956 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/BasicData/WeiXinSet/Save application/x-www-form-urlencoded; charset=UTF-8 330
+2020-04-30 15:08:34.958 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:08:34.969 +08:00 [INF] Route matched with {area = "BasicData", action = "Save", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Save(Atlass.Framework.Models.BaseData.weixin_set) on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:08:35.170 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:08:35.170 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web) in 200.6848ms
+2020-04-30 15:08:35.170 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:08:35.171 +08:00 [INF] Request finished in 214.5464ms 200 text/plain; charset=utf-8
+2020-04-30 15:08:37.228 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.js.map  
+2020-04-30 15:08:37.231 +08:00 [INF] Request finished in 2.162ms 404 
+2020-04-30 15:08:37.326 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-04-30 15:08:37.326 +08:00 [INF] Request finished in 0.8061ms 404 
+2020-04-30 15:08:48.767 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/BasicData/WeiXinSet/Save application/x-www-form-urlencoded; charset=UTF-8 330
+2020-04-30 15:08:48.768 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:08:48.770 +08:00 [INF] Route matched with {area = "BasicData", action = "Save", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Save(Atlass.Framework.Models.BaseData.weixin_set) on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:08:48.829 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:08:48.830 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web) in 59.8183ms
+2020-04-30 15:08:48.830 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:08:48.830 +08:00 [INF] Request finished in 62.9342ms 200 text/plain; charset=utf-8
+2020-04-30 15:11:01.729 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 15:11:01.730 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:11:01.732 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:11:01.733 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:11:01.735 +08:00 [INF] Executed ViewResult - view Index executed in 2.2491ms.
+2020-04-30 15:11:01.735 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 2.7137ms
+2020-04-30 15:11:01.735 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:11:01.736 +08:00 [INF] Request finished in 7.0971ms 200 text/html; charset=utf-8
+2020-04-30 15:11:01.842 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:11:01.844 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-04-30 15:11:01.844 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:11:01.844 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-04-30 15:11:01.845 +08:00 [INF] Request finished in 0.8446ms 200 text/css
+2020-04-30 15:11:01.845 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:11:01.845 +08:00 [INF] Request finished in 2.5882ms 200 text/css
+2020-04-30 15:11:01.845 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:11:01.845 +08:00 [INF] Request finished in 1.2282ms 200 text/css
+2020-04-30 15:11:01.845 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:11:01.846 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:11:01.846 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:11:01.847 +08:00 [INF] Request finished in 1.3511ms 200 text/css
+2020-04-30 15:11:01.847 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:11:01.848 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:11:01.849 +08:00 [INF] Request finished in 1.9474ms 200 application/javascript
+2020-04-30 15:11:01.849 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:11:01.849 +08:00 [INF] Request finished in 2.732ms 200 application/javascript
+2020-04-30 15:11:01.859 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-04-30 15:11:01.861 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-04-30 15:11:01.861 +08:00 [INF] Request finished in 1.9503ms 200 text/html
+2020-04-30 15:11:01.871 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-04-30 15:11:01.871 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-04-30 15:11:01.871 +08:00 [INF] Request finished in 0.6759ms 200 application/javascript
+2020-04-30 15:11:01.872 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-04-30 15:11:01.873 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-04-30 15:11:01.873 +08:00 [INF] Request finished in 0.5785ms 200 application/javascript
+2020-04-30 15:11:01.880 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:11:01.880 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-04-30 15:11:01.880 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:11:01.880 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-04-30 15:11:01.880 +08:00 [INF] Request finished in 0.6123ms 200 application/javascript
+2020-04-30 15:11:01.880 +08:00 [INF] Request finished in 0.5255ms 200 application/javascript
+2020-04-30 15:11:01.892 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-04-30 15:11:01.892 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-04-30 15:11:01.892 +08:00 [INF] Request finished in 0.5237ms 200 application/javascript
+2020-04-30 15:11:01.904 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-04-30 15:11:01.905 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-04-30 15:11:01.905 +08:00 [INF] Request finished in 1.0744ms 200 application/javascript
+2020-04-30 15:11:01.911 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-04-30 15:11:01.911 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-04-30 15:11:01.911 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-04-30 15:11:01.912 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-04-30 15:11:01.912 +08:00 [INF] Request finished in 0.6105ms 200 application/javascript
+2020-04-30 15:11:01.912 +08:00 [INF] Request finished in 0.4139ms 200 image/png
+2020-04-30 15:11:01.922 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-04-30 15:11:01.923 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-04-30 15:11:01.923 +08:00 [INF] Request finished in 0.5828ms 200 image/png
+2020-04-30 15:11:01.928 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-04-30 15:11:01.928 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-04-30 15:11:01.929 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-04-30 15:11:01.929 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-04-30 15:11:01.930 +08:00 [INF] Request finished in 1.2932ms 200 image/png
+2020-04-30 15:11:01.930 +08:00 [INF] Request finished in 1.4432ms 200 image/png
+2020-04-30 15:11:01.936 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:11:01.938 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:11:01.938 +08:00 [INF] Request finished in 1.607ms 200 font/woff2
+2020-04-30 15:11:01.971 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-04-30 15:11:01.973 +08:00 [INF] Request finished in 1.9198ms 404 
+2020-04-30 15:11:02.011 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:11:02.011 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:11:02.011 +08:00 [INF] Request finished in 0.6678ms 200 text/css
+2020-04-30 15:11:02.040 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2015:11:02%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588230661971  
+2020-04-30 15:11:02.040 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:11:02.044 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:11:02.054 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-04-30 15:11:02.054 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:11:02.054 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:11:02.054 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-04-30 15:11:02.054 +08:00 [INF] Request finished in 0.6918ms 200 text/css
+2020-04-30 15:11:02.055 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:11:02.055 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:11:02.055 +08:00 [INF] Request finished in 1.5129ms 200 text/css
+2020-04-30 15:11:02.055 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:11:02.055 +08:00 [INF] Request finished in 0.7866ms 200 application/javascript
+2020-04-30 15:11:02.055 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:11:02.056 +08:00 [INF] Request finished in 1.8003ms 200 text/css
+2020-04-30 15:11:02.057 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:11:02.060 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:11:02.060 +08:00 [INF] Request finished in 3.6243ms 200 text/css
+2020-04-30 15:11:02.070 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:11:02.070 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:11:02.070 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:11:02.071 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:11:02.071 +08:00 [INF] Request finished in 0.9577ms 200 application/javascript
+2020-04-30 15:11:02.071 +08:00 [INF] Request finished in 1.0072ms 200 application/javascript
+2020-04-30 15:11:02.081 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-04-30 15:11:02.084 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:11:02.085 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 40.527ms
+2020-04-30 15:11:02.085 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:11:02.086 +08:00 [INF] Request finished in 46.2757ms 200 text/plain; charset=utf-8
+2020-04-30 15:11:02.090 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-04-30 15:11:02.090 +08:00 [INF] Request finished in 9.3494ms 200 application/javascript
+2020-04-30 15:11:02.169 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:11:02.170 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:11:02.170 +08:00 [INF] Request finished in 0.6113ms 200 text/css
+2020-04-30 15:11:02.201 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:11:02.202 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:11:02.202 +08:00 [INF] Request finished in 0.789ms 200 font/woff2
+2020-04-30 15:11:02.228 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-04-30 15:11:02.228 +08:00 [INF] Request finished in 0.5482ms 404 
+2020-04-30 15:11:02.320 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588230662156  
+2020-04-30 15:11:02.324 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:11:02.327 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:11:02.343 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:11:02.344 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 16.63ms
+2020-04-30 15:11:02.344 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:11:02.345 +08:00 [INF] Request finished in 25.0582ms 200 text/plain; charset=utf-8
+2020-04-30 15:11:02.377 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 15:11:02.378 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 15:11:02.378 +08:00 [INF] Request finished in 1.2218ms 200 image/x-icon
+2020-04-30 15:11:05.864 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/index  
+2020-04-30 15:11:05.865 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/default/loading-2.gif  
+2020-04-30 15:11:05.865 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:11:05.869 +08:00 [INF] Route matched with {area = "BasicData", action = "Index", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:11:05.889 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/default/loading-2.gif'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\default\loading-2.gif'
+2020-04-30 15:11:05.889 +08:00 [INF] Request finished in 24.7837ms 200 image/gif
+2020-04-30 15:11:08.298 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:11:08.305 +08:00 [INF] Executed ViewResult - view Index executed in 2434.6012ms.
+2020-04-30 15:11:08.305 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web) in 2435.5402ms
+2020-04-30 15:11:08.305 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:11:08.305 +08:00 [INF] Request finished in 2441.9931ms 200 text/html; charset=utf-8
+2020-04-30 15:11:08.345 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.css  
+2020-04-30 15:11:08.345 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.js  
+2020-04-30 15:11:08.345 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/jquery.validator.css  
+2020-04-30 15:11:08.346 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css  
+2020-04-30 15:11:08.347 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/jquery.validator.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\jquery.validator.css'
+2020-04-30 15:11:08.347 +08:00 [INF] Request finished in 1.7075ms 200 text/css
+2020-04-30 15:11:08.347 +08:00 [INF] Sending file. Request path: '/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css'
+2020-04-30 15:11:08.347 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.css'
+2020-04-30 15:11:08.347 +08:00 [INF] Request finished in 0.9638ms 200 text/css
+2020-04-30 15:11:08.347 +08:00 [INF] Request finished in 2.6231ms 200 text/css
+2020-04-30 15:11:08.348 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/jquery.validator.js?local=zh-CN  
+2020-04-30 15:11:08.350 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/jquery.validator.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\jquery.validator.js'
+2020-04-30 15:11:08.350 +08:00 [INF] Request finished in 1.7361ms 200 application/javascript
+2020-04-30 15:11:08.352 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/layer.js  
+2020-04-30 15:11:08.353 +08:00 [INF] Sending file. Request path: '/plugins/layer/layer.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\layer.js'
+2020-04-30 15:11:08.353 +08:00 [INF] Request finished in 1.1536ms 200 application/javascript
+2020-04-30 15:11:08.356 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.js'
+2020-04-30 15:11:08.356 +08:00 [INF] Request finished in 11.0032ms 200 application/javascript
+2020-04-30 15:11:08.356 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/vue/vue.js  
+2020-04-30 15:11:08.356 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-04-30 15:11:08.357 +08:00 [INF] Sending file. Request path: '/framework/jutils.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jutils.js'
+2020-04-30 15:11:08.357 +08:00 [INF] Request finished in 1.1398ms 200 application/javascript
+2020-04-30 15:11:08.417 +08:00 [INF] Sending file. Request path: '/plugins/vue/vue.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\vue\vue.js'
+2020-04-30 15:11:08.417 +08:00 [INF] Request finished in 60.9043ms 200 application/javascript
+2020-04-30 15:11:08.456 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-04-30 15:11:08.457 +08:00 [INF] Request finished in 0.922ms 404 
+2020-04-30 15:11:08.562 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/local/zh-CN.js  
+2020-04-30 15:11:08.562 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/local/zh-CN.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\local\zh-CN.js'
+2020-04-30 15:11:08.562 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/theme/default/layer.css?v=3.1.1  
+2020-04-30 15:11:08.562 +08:00 [INF] Request finished in 0.7166ms 200 application/javascript
+2020-04-30 15:11:08.562 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.js.map  
+2020-04-30 15:11:08.563 +08:00 [INF] Sending file. Request path: '/plugins/layer/theme/default/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\theme\default\layer.css'
+2020-04-30 15:11:08.563 +08:00 [INF] Request finished in 0.4798ms 200 text/css
+2020-04-30 15:11:08.563 +08:00 [INF] Request finished in 0.4799ms 404 
+2020-04-30 15:11:08.564 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/GetModel?_=1588230668467  
+2020-04-30 15:11:08.569 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:11:08.571 +08:00 [INF] Route matched with {area = "BasicData", action = "GetModel", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetModel() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:11:08.576 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:11:08.576 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web) in 4.5088ms
+2020-04-30 15:11:08.576 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:11:08.576 +08:00 [INF] Request finished in 12.5144ms 200 text/plain; charset=utf-8
+2020-04-30 15:11:14.090 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/BasicData/WeiXinSet/Save application/x-www-form-urlencoded; charset=UTF-8 330
+2020-04-30 15:11:14.090 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:11:14.093 +08:00 [INF] Route matched with {area = "BasicData", action = "Save", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Save(Atlass.Framework.Models.BaseData.weixin_set) on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:11:14.205 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:11:14.206 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web) in 112.5862ms
+2020-04-30 15:11:14.206 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Save (Atlass.Framework.Web)'
+2020-04-30 15:11:14.206 +08:00 [INF] Request finished in 116.5258ms 200 text/plain; charset=utf-8
+2020-04-30 15:20:27.457 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:38561/iisintegration  0
+2020-04-30 15:20:27.458 +08:00 [INF] Request finished in 0.7138ms 202 
+2020-04-30 15:20:27.459 +08:00 [INF] Application is shutting down...
+2020-04-30 15:21:01.847 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 15:21:01.878 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 15:21:02.077 +08:00 [INF] Creating key "b4f3c6e6-78a4-4172-985f-2816c5f9de55" with creation date "2020-04-30T07:21:02.0740719+00:00", activation date "2020-04-30T07:21:02.0709526+00:00", and expiration date "2020-07-29T07:21:02.0709526+00:00".
+2020-04-30 15:21:02.088 +08:00 [WRN] No XML encryptor configured. Key "b4f3c6e6-78a4-4172-985f-2816c5f9de55" may be persisted to storage in unencrypted form.
+2020-04-30 15:21:02.975 +08:00 [INF] Now listening on: http://127.0.0.1:29549
+2020-04-30 15:21:02.975 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 15:21:02.976 +08:00 [INF] Hosting environment: Production
+2020-04-30 15:21:02.976 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 15:21:03.185 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 15:21:03.193 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 15:21:03.238 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:21:03.355 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:21:03.444 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:21:03.525 +08:00 [INF] Executed ViewResult - view Index executed in 94.0041ms.
+2020-04-30 15:21:03.525 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 169.8243ms
+2020-04-30 15:21:03.526 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:21:03.534 +08:00 [INF] Request finished in 351.2617ms 200 text/html; charset=utf-8
+2020-04-30 15:21:03.682 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2015:21:03%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588231263614  
+2020-04-30 15:21:03.687 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:21:03.694 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:21:03.875 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588231263726  
+2020-04-30 15:21:03.880 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:21:03.882 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:21:03.906 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:21:03.906 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 212.0784ms
+2020-04-30 15:21:03.906 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:21:03.907 +08:00 [INF] Request finished in 224.7515ms 200 text/plain; charset=utf-8
+2020-04-30 15:21:03.948 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:21:03.948 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 66.0265ms
+2020-04-30 15:21:03.948 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:21:03.949 +08:00 [INF] Request finished in 73.5844ms 200 text/plain; charset=utf-8
+2020-04-30 15:21:03.968 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 15:21:03.975 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 15:21:03.976 +08:00 [INF] Request finished in 7.4844ms 200 image/x-icon
+2020-04-30 15:21:05.987 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/index  
+2020-04-30 15:21:05.989 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:21:05.995 +08:00 [INF] Route matched with {area = "BasicData", action = "Index", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:21:06.003 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:21:06.034 +08:00 [INF] Executed ViewResult - view Index executed in 35.6461ms.
+2020-04-30 15:21:06.035 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web) in 39.4644ms
+2020-04-30 15:21:06.035 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.Index (Atlass.Framework.Web)'
+2020-04-30 15:21:06.036 +08:00 [INF] Request finished in 49.2659ms 200 text/html; charset=utf-8
+2020-04-30 15:21:06.076 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-04-30 15:21:06.077 +08:00 [INF] The file /framework/jutils.js was not modified
+2020-04-30 15:21:06.078 +08:00 [INF] Request finished in 2.395ms 304 application/javascript
+2020-04-30 15:21:06.169 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/BasicData/WeiXinSet/GetModel?_=1588231266130  
+2020-04-30 15:21:06.172 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:21:06.175 +08:00 [INF] Route matched with {area = "BasicData", action = "GetModel", controller = "WeiXinSet"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetModel() on controller Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController (Atlass.Framework.Web).
+2020-04-30 15:21:06.194 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:21:06.194 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web) in 19.0551ms
+2020-04-30 15:21:06.194 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.BasicData.Controllers.WeiXinSetController.GetModel (Atlass.Framework.Web)'
+2020-04-30 15:21:06.194 +08:00 [INF] Request finished in 25.2482ms 200 text/plain; charset=utf-8
+2020-04-30 15:23:03.696 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:29549/iisintegration  0
+2020-04-30 15:23:03.697 +08:00 [INF] Request finished in 1.0401ms 202 
+2020-04-30 15:23:03.698 +08:00 [INF] Application is shutting down...
+2020-04-30 15:23:39.805 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 15:23:39.842 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 15:23:40.082 +08:00 [INF] Creating key "0eccdc8f-8225-401e-ac41-dc2c8a482095" with creation date "2020-04-30T07:23:40.0783372+00:00", activation date "2020-04-30T07:23:40.0749352+00:00", and expiration date "2020-07-29T07:23:40.0749352+00:00".
+2020-04-30 15:23:40.094 +08:00 [WRN] No XML encryptor configured. Key "0eccdc8f-8225-401e-ac41-dc2c8a482095" may be persisted to storage in unencrypted form.
+2020-04-30 15:23:40.977 +08:00 [INF] Now listening on: http://127.0.0.1:8221
+2020-04-30 15:23:40.977 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 15:23:40.977 +08:00 [INF] Hosting environment: Production
+2020-04-30 15:23:40.978 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 15:23:41.036 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-04-30 15:23:41.042 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 15:23:41.087 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:23:41.207 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:23:41.325 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:23:41.418 +08:00 [INF] Executed ViewResult - view Index executed in 115.0784ms.
+2020-04-30 15:23:41.419 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 211.3873ms
+2020-04-30 15:23:41.420 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-04-30 15:23:41.426 +08:00 [INF] Request finished in 394.7761ms 200 text/html; charset=utf-8
+2020-04-30 15:23:41.492 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-04-30 15:23:41.492 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:23:41.492 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-04-30 15:23:41.501 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:23:41.512 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-04-30 15:23:41.512 +08:00 [INF] Request finished in 21.2307ms 200 text/html
+2020-04-30 15:23:41.513 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:23:41.513 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-04-30 15:23:41.513 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:23:41.515 +08:00 [INF] Request finished in 13.6711ms 200 text/css
+2020-04-30 15:23:41.515 +08:00 [INF] Request finished in 23.6039ms 200 text/css
+2020-04-30 15:23:41.515 +08:00 [INF] Request finished in 23.595ms 200 text/css
+2020-04-30 15:23:41.548 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:23:41.548 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:23:41.548 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-04-30 15:23:41.548 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:23:41.549 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-04-30 15:23:41.550 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:23:41.550 +08:00 [INF] Request finished in 1.3363ms 200 application/javascript
+2020-04-30 15:23:41.550 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-04-30 15:23:41.550 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:23:41.550 +08:00 [INF] Request finished in 1.9079ms 200 text/css
+2020-04-30 15:23:41.550 +08:00 [INF] Request finished in 2.3925ms 200 application/javascript
+2020-04-30 15:23:41.551 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-04-30 15:23:41.551 +08:00 [INF] Request finished in 1.4171ms 200 text/css
+2020-04-30 15:23:41.552 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:23:41.552 +08:00 [INF] Request finished in 4.0543ms 200 text/css
+2020-04-30 15:23:41.570 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-04-30 15:23:41.571 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-04-30 15:23:41.571 +08:00 [INF] Request finished in 0.7708ms 200 text/css
+2020-04-30 15:23:41.573 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-04-30 15:23:41.574 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-04-30 15:23:41.574 +08:00 [INF] Request finished in 0.8297ms 200 application/javascript
+2020-04-30 15:23:41.611 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-04-30 15:23:41.612 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-04-30 15:23:41.612 +08:00 [INF] Request finished in 1.402ms 200 text/css
+2020-04-30 15:23:41.613 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-04-30 15:23:41.613 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:23:41.613 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-04-30 15:23:41.613 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-04-30 15:23:41.613 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:23:41.613 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-04-30 15:23:41.614 +08:00 [INF] Request finished in 0.6598ms 200 application/javascript
+2020-04-30 15:23:41.614 +08:00 [INF] Request finished in 0.7275ms 200 application/javascript
+2020-04-30 15:23:41.614 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-04-30 15:23:41.614 +08:00 [INF] Request finished in 0.7918ms 200 application/javascript
+2020-04-30 15:23:41.614 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-04-30 15:23:41.614 +08:00 [INF] Request finished in 0.9837ms 200 application/javascript
+2020-04-30 15:23:41.639 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-04-30 15:23:41.639 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-04-30 15:23:41.639 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-04-30 15:23:41.639 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-04-30 15:23:41.639 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-04-30 15:23:41.639 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-04-30 15:23:41.639 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-04-30 15:23:41.639 +08:00 [INF] Request finished in 0.5593ms 200 application/javascript
+2020-04-30 15:23:41.639 +08:00 [INF] Request finished in 0.5752ms 200 application/javascript
+2020-04-30 15:23:41.639 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-04-30 15:23:41.639 +08:00 [INF] Request finished in 0.5292ms 200 application/javascript
+2020-04-30 15:23:41.639 +08:00 [INF] Request finished in 0.7676ms 200 application/javascript
+2020-04-30 15:23:41.693 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:23:41.693 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:23:41.694 +08:00 [INF] Request finished in 0.7483ms 200 font/woff2
+2020-04-30 15:23:41.705 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-04-30 15:23:41.705 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-04-30 15:23:41.705 +08:00 [INF] Request finished in 0.5153ms 200 application/javascript
+2020-04-30 15:23:41.714 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:23:41.714 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-04-30 15:23:41.715 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:23:41.715 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-04-30 15:23:41.715 +08:00 [INF] Request finished in 0.7228ms 200 text/css
+2020-04-30 15:23:41.715 +08:00 [INF] Request finished in 0.7329ms 200 font/woff2
+2020-04-30 15:23:41.717 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-04-30 15:23:41.717 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-04-30 15:23:41.718 +08:00 [INF] Request finished in 0.7171ms 200 image/png
+2020-04-30 15:23:41.738 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-04-30 15:23:41.738 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2015:23:41%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588231421585  
+2020-04-30 15:23:41.742 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:23:41.746 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-04-30 15:23:41.746 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-04-30 15:23:41.747 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-04-30 15:23:41.747 +08:00 [INF] Request finished in 0.6614ms 200 image/png
+2020-04-30 15:23:41.747 +08:00 [INF] Request finished in 8.3831ms 200 application/javascript
+2020-04-30 15:23:41.751 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:23:41.772 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-04-30 15:23:41.772 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-04-30 15:23:41.772 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-04-30 15:23:41.773 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-04-30 15:23:41.773 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-04-30 15:23:41.773 +08:00 [INF] Request finished in 0.7156ms 200 image/png
+2020-04-30 15:23:41.773 +08:00 [INF] Request finished in 0.554ms 200 text/css
+2020-04-30 15:23:41.773 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-04-30 15:23:41.773 +08:00 [INF] Request finished in 0.9203ms 200 image/png
+2020-04-30 15:23:41.936 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588231421694  
+2020-04-30 15:23:41.938 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:23:41.939 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 15:23:41.971 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:23:41.971 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 220.4222ms
+2020-04-30 15:23:41.971 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 15:23:41.972 +08:00 [INF] Request finished in 233.3569ms 200 text/plain; charset=utf-8
+2020-04-30 15:23:42.011 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:23:42.011 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 71.5778ms
+2020-04-30 15:23:42.011 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 15:23:42.011 +08:00 [INF] Request finished in 75.6559ms 200 text/plain; charset=utf-8
+2020-04-30 15:23:42.258 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-04-30 15:23:42.259 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-04-30 15:23:42.260 +08:00 [INF] Request finished in 2.6398ms 200 image/x-icon
+2020-04-30 15:23:54.926 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysMenu/Index  
+2020-04-30 15:23:54.928 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web)'
+2020-04-30 15:23:54.932 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 15:23:54.937 +08:00 [INF] Executing ViewResult, running view Index.
+2020-04-30 15:23:54.964 +08:00 [INF] Executed ViewResult - view Index executed in 31.2643ms.
+2020-04-30 15:23:54.965 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web) in 32.7757ms
+2020-04-30 15:23:54.965 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.Index (Atlass.Framework.Web)'
+2020-04-30 15:23:54.965 +08:00 [INF] Request finished in 39.3124ms 200 text/html; charset=utf-8
+2020-04-30 15:23:54.998 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css  
+2020-04-30 15:23:55.000 +08:00 [INF] Sending file. Request path: '/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\plugins\bootstrap-table\bootstrap-table.min.css'
+2020-04-30 15:23:55.000 +08:00 [INF] Request finished in 2.2377ms 200 text/css
+2020-04-30 15:23:55.005 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/jquery-treegrid/css/jquery.treegrid.min.css  
+2020-04-30 15:23:55.006 +08:00 [INF] Sending file. Request path: '/plugins/jquery-treegrid/css/jquery.treegrid.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\jquery-treegrid\css\jquery.treegrid.min.css'
+2020-04-30 15:23:55.006 +08:00 [INF] Request finished in 0.7058ms 200 text/css
+2020-04-30 15:23:55.007 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js  
+2020-04-30 15:23:55.007 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js  
+2020-04-30 15:23:55.008 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.js'
+2020-04-30 15:23:55.008 +08:00 [INF] Request finished in 0.464ms 200 application/javascript
+2020-04-30 15:23:55.009 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/content.js?v=1.0.0  
+2020-04-30 15:23:55.009 +08:00 [INF] Sending file. Request path: '/hplus/js/content.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\content.js'
+2020-04-30 15:23:55.010 +08:00 [INF] Request finished in 0.6094ms 200 application/javascript
+2020-04-30 15:23:55.011 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/bootstrapTableTree/bootstrap-table-treegrid.js  
+2020-04-30 15:23:55.011 +08:00 [INF] Sending file. Request path: '/plugins/bootstrapTableTree/bootstrap-table-treegrid.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\bootstrapTableTree\bootstrap-table-treegrid.js'
+2020-04-30 15:23:55.011 +08:00 [INF] Request finished in 0.5281ms 200 application/javascript
+2020-04-30 15:23:55.014 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/jquery-treegrid/jquery.treegrid.min.js  
+2020-04-30 15:23:55.014 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-04-30 15:23:55.017 +08:00 [INF] The file /framework/jutils.js was not modified
+2020-04-30 15:23:55.017 +08:00 [INF] Request finished in 2.8658ms 304 application/javascript
+2020-04-30 15:23:55.042 +08:00 [INF] Sending file. Request path: '/plugins/jquery-treegrid/jquery.treegrid.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\jquery-treegrid\jquery.treegrid.min.js'
+2020-04-30 15:23:55.042 +08:00 [INF] Request finished in 28.2199ms 200 application/javascript
+2020-04-30 15:23:55.072 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\bootstrap-table.min.js'
+2020-04-30 15:23:55.073 +08:00 [INF] Request finished in 65.6737ms 200 application/javascript
+2020-04-30 15:23:55.145 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysMenu/GetData?order=asc application/json 
+2020-04-30 15:23:55.147 +08:00 [INF] Executing endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 15:23:55.149 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "SysMenu"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData() on controller Altas.Framework.Controllers.Admin.SysMenuController (Atlass.Framework.Web).
+2020-04-30 15:23:55.189 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 15:23:55.189 +08:00 [INF] Executed action Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web) in 39.9431ms
+2020-04-30 15:23:55.189 +08:00 [INF] Executed endpoint 'Altas.Framework.Controllers.Admin.SysMenuController.GetData (Atlass.Framework.Web)'
+2020-04-30 15:23:55.189 +08:00 [INF] Request finished in 44.0357ms 200 text/plain; charset=utf-8
+2020-04-30 15:23:55.259 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/jquery-treegrid/img/collapse.png  
+2020-04-30 15:23:55.259 +08:00 [INF] Sending file. Request path: '/plugins/jquery-treegrid/img/collapse.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\jquery-treegrid\img\collapse.png'
+2020-04-30 15:23:55.259 +08:00 [INF] Request finished in 0.7167ms 200 image/png
+2020-04-30 15:27:19.042 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:8221/iisintegration  0
+2020-04-30 15:27:19.043 +08:00 [INF] Application is shutting down...
+2020-04-30 15:27:19.043 +08:00 [INF] Request finished in 1.8648ms 202 
+2020-04-30 16:10:29.233 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-04-30 16:10:29.943 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-04-30 16:10:32.745 +08:00 [INF] Creating key "daa9e20f-c991-4a27-974e-7c1c77faf76a" with creation date "2020-04-30T08:10:32.7422272+00:00", activation date "2020-04-30T08:10:32.7263432+00:00", and expiration date "2020-07-29T08:10:32.7263432+00:00".
+2020-04-30 16:10:32.830 +08:00 [WRN] No XML encryptor configured. Key "daa9e20f-c991-4a27-974e-7c1c77faf76a" may be persisted to storage in unencrypted form.
+2020-04-30 16:10:38.463 +08:00 [INF] Now listening on: http://127.0.0.1:28644
+2020-04-30 16:10:38.463 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-04-30 16:10:38.463 +08:00 [INF] Hosting environment: Production
+2020-04-30 16:10:38.463 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-04-30 16:10:38.629 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20Apr%2030%202020%2016:10:20%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588234220330  
+2020-04-30 16:10:38.629 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588234220841  
+2020-04-30 16:10:38.649 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-04-30 16:10:38.701 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 16:10:38.701 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 16:10:39.112 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 16:10:39.128 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-04-30 16:10:40.230 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-04-30 16:10:40.259 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 1143.143ms
+2020-04-30 16:10:40.259 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-04-30 16:10:40.264 +08:00 [INF] Request finished in 1636.6729ms 200 text/plain; charset=utf-8
+2020-04-30 16:10:40.783 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/html;charset=utf-8
+2020-04-30 16:10:40.784 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 1655.9698ms
+2020-04-30 16:10:40.784 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-04-30 16:10:40.785 +08:00 [INF] Request finished in 2158.1853ms 500 text/html;charset=utf-8
+2020-04-30 16:10:41.090 +08:00 [ERR] System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+ ---> System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.getFree(Boolean checkAvailable)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)
+   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()
+   at Atlass.Framework.Core.HostService.EasyLogHostedService.DoWork() in E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Core\HostService\EasyLogHostedService.cs:line 48
+2020-04-30 16:10:41.192 +08:00 [ERR] System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+ ---> System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.getFree(Boolean checkAvailable)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)
+   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()
+   at Atlass.Framework.Core.HostService.EasyLogHostedService.DoWork() in E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Core\HostService\EasyLogHostedService.cs:line 48
+2020-04-30 16:31:21.815 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:28644/iisintegration  0
+2020-04-30 16:31:21.816 +08:00 [INF] Application is shutting down...
+2020-04-30 16:31:21.816 +08:00 [INF] Request finished in 0.758ms 202 

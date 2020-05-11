@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>已提交</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css" />
+		<style>
+			.success{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.success img{
+				width: 100px;
+				margin-top: 50px;
+			}
+			.success .sub{
+				font-size: 14px;
+				color: #39b7a7;
+				margin-top: 10px;
+			}
+			.success p{
+				font-size: 16px;
+				margin-top: 20px;
+			}
+			.success p:last-child{
+				margin-top: 5px;
+			}
+			.myButton{
+				width: 94%;
+				height: 40px;
+				background: #39B7A7;
+				border-radius: 3px;
+				margin: 50px auto;
+				font-size: 16px;
+				color: #fff;
+				display: table;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="success">
+			<img src="imgs/complete.png" alt="" />
+			<span class="sub">已提交</span>
+			<p>专家会在12小时内回复</p>
+			<p>请耐心等待</p>
+			<button onclick="goIndex()" class="myButton">返回首页</button>
+		</div>
+		<script>
+			function goIndex(){
+				window.location.href = './index.html'
+			}
+		</script>
+	</body>
+</html>

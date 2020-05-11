@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="div_find">
+                    <p>
+                        <label class="find_labela">患者昵称：</label>
+                        <input type="text" class="find_input" id="patientName" />
+                        <label class="find_labela">患者唯一ID：</label>
+                        <input type="text" class="find_input" id="patientOpenId" />
+                        <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
+                    </p>
+                </div>
+                <div>
+                    <div id="toolbar" class="btn-group">
+                    </div>
+                    <table id="roleTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script>
+        var $roleTable,qtype=0;
+        $(function () {
+            $('#tableStatus a').on('click',
+                function () {
+                    $(this).removeClass("btn-default").removeClass("btn-outline").addClass('btn-info')
+                        .siblings().removeClass("btn-info").addClass('btn-outline').addClass('btn-default');
+
+                    qtype = $(this).data('id');
+                    query();
+                });
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $roleTable = $("#roleTable").bootstrapTable({
+                url: '/Consulting/Patient/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var patientName = $('#patientName').val();
+                    var patientOpenId = $('#patientOpenId').val();
+                    var params2 = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        patientName: patientName,
+                        patientOpenId: patientOpenId
+                    };
+                    return params2;
+                },
+                columns: [
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpt },
+                    {
+                        field: 'open_id', title: '唯一ID', align: 'left'
+                    },
+                    {
+                        field: 'nick_name', title: '昵称', align: 'left'
+                    },
+                    {
+                        field: 'province', title: '居住地', align: 'left', formatter: function (v,d) {
+                           
+                            return d.province + ' ' + d.city;
+                        }
+                    },
+                    {
+                        field: 'national', title: '民族', align: 'left'
+                    },
+                    {
+                        field: 'job_name', title: '职位', align: 'left'
+                    },
+                    {
+                        field: 'gender', title: '性别', align: 'left', formatter: function (v) {
+                            if (v === 0) {
+                                return '女';
+                            }
+                            return '男';
+                        }
+                    },
+                    {
+                        field: 'birth_year', title: '出生年份', align: 'left'
+                    },
+                    {
+                        field: 'marriage_status', title: '婚姻状况', align: 'left', formatter: renderEdu
+                    },
+                    {
+                        field: 'educational_level', title: '文化程度', align: 'left', formatter: renderMarriage
+                    },
+                    { field: 'create_time', title: '添加时间', align: 'center' },
+                   
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        //渲染操作
+        function renderOpt(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+
+            return html;
+        }
+        //婚姻状况 1-未婚，2-已婚有配偶，3-离异或丧偶，4-不详
+        function renderEdu(v, r, i) {
+            if (v === 1) {
+                return '未婚';
+            } else if (v === 2) {
+                return '已婚有配偶';
+            } else if (v === 3) {
+                return '离异或丧偶';
+            } else if (v === 4) {
+                return '不详';
+            } 
+            return '';
+        }
+        //文化程度，1-文盲，2-小学，3-初中，4-高中或中专,5-大专及以上
+        function renderMarriage(v, r, i) {
+            if (v === 1) {
+                return '文盲';
+            } else if (v === 2) {
+                return '小学';
+            } else if (v === 3) {
+                return '初中';
+            } else if (v === 4) {
+                return '高中或中专';
+            } else if (v === 5) {
+                return '大专及以上';
+            }
+            return '';
+        }
+
+        function showDetail(obj) {
+
+            var id = $(obj).data('id');
+            location.href = '/Consulting/Patient/detail?id=' + id;
+        }
+
+       
+        function query() {
+            $roleTable.bootstrapTable('refresh');
+        }
+    </script>
+
+
+}
+
+
+
+
+
+

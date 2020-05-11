@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSRedisCore" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>咨询记录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css" />
+    <style>
+        .advistoryList{
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .advistoryList .list{
+            width: 100%;
+            height: auto;
+            display: flex;
+        }
+        .advistoryList .list i{
+            width: 11px;
+            height: 10px;
+            border-radius: 10px;
+            background: #EE591D;
+            margin: 21px 5px 0;
+            position: relative;
+        }
+        .advistoryList .list i.hid{
+            visibility:hidden;
+        }
+        .advistoryList .list .info{
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+        }
+        .advistoryList .list .info .tips{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+        }
+        .advistoryList .list .info .tips .name{
+            font-size: 18px;
+            color: #54B8A7;
+            float: left;
+        }
+        .advistoryList .list .info .tips .time{
+            float: right;
+            font-size: 12px;
+            color: #B6B6B6;
+        }
+        .advistoryList .list .info p{
+            font-size: 14px;
+            color: #9C9C9C;
+            display: -webkit-box;
+            -webkit-line-clamp:2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="advistoryList">
+        <!-- <div class="list" onclick="goDoctorReply()">
+            <i></i>
+            <div class="info">
+                <div class="tips">
+                    <span class="name">安迪</span>
+                    <span class="time">2020/01/01 20:00</span>
+                </div>
+                <p>撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低黄金撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低黄金</p>
+            </div>
+        </div>
+        <div class="list">
+            <i class="hid"></i>
+            <div class="info">
+                <div class="tips">
+                    <span class="name">安迪</span>
+                    <span class="time">2020/01/01 20:00</span>
+                </div>
+                <p>撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低黄金撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低黄金</p>
+            </div>
+        </div> -->
+    </div>
+	<div class="weui-loadmore">
+		<i class="weui-loading"></i>
+		<span class="weui-loadmore__tips">正在加载</span>
+	</div>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+		var webUrl = 'http://182.43.178.216:9006';
+		var page = 1,psize = 20;
+		var hasMore = false;
+		var loading = false;
+		function getQueryVariable(variable){
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		};
+		var myid = getQueryVariable('openId');
+		if(myid){
+			localStorage.setItem('myOpenId',myid)
+		}
+		
+		$('.weui-loadmore').hide();
+		$(function(){
+			getRecordList();
+		})
+		
+        function goDoctorReply(event) {
+			var id = event.currentTarget.getAttribute('data-id');
+            window.location.href = './doctorReply.html?id='+id
+        }
+		function getRecordList() {
+		    $.ajax({
+		        url: webUrl+'/api/apiexpert/QuestionList',
+		        type: "GET",
+		        data:{
+		            openId: localStorage.getItem('myOpenId'),
+					page: page,
+					psize: psize
+		        },
+		        dataType: "json",
+		        success: function(res){
+		            if(res.status){
+		                var arr = res.data.list;
+						if(arr.length>=psize){
+							hasMore = true;
+							loading = false;
+							$('.weui-loadmore').show();
+						}else{
+							hasMore = false;
+							$(document.body).destroyInfinite();
+							$('.weui-loadmore').hide();
+						}
+						var html = '';
+						for(var i = 0;i<arr.length;i++){
+							html += '<div class="list" data-id="'+arr[i].id+'" onclick="goDoctorReply(event)">';
+							if(arr[i].high_light){
+								html += '<i></i>'
+							}else{
+								html += '<i class="hid"></i>'
+							}
+							html += 	'<div class="info">'+
+											'<div class="tips">';
+							if(arr[i].patientName&&arr[i].patientName!=''){
+								html += '<span class="name">'+arr[i].patientName+'</span>'
+							}else{
+								html += '<span class="name">匿名</span>'
+							}
+							html +=         	'<span class="time">'+arr[i].time+'</span>'+
+											'</div>'+
+											'<p>'+arr[i].qcontent+'</p>'+
+										'</div>'+
+									'</div>'
+						}
+						$('.advistoryList').append(html);
+		            }else{
+		                $.toast(res.msg)
+		            }
+		        }
+		    })
+		};
+		//加载更多
+		$(document.body).infinite(100).on("infinite", function() {
+			if(loading) return;
+			loading = true;
+			if(hasMore){
+				page ++;
+				getRecordList();
+			}
+		});
+		
+	
+    </script>
+</body>
+</html>

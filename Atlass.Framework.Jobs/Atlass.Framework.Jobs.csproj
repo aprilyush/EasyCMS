@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.10.500" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.Cache\Atlass.Framework.Cache.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

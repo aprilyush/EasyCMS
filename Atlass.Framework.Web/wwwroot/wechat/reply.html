@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>专家回复</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/webuploader.css" />
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+        }
+        .box{
+            width: 100%;
+            height: auto;
+        }
+        .box .infoList{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            box-sizing: border-box;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        .box .infoList .someQuestion{
+            padding-top: 10px;
+        }
+        .box .infoList .title{
+            width: 100%;
+            display: flex;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            color: #888;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .box .infoList .title.doctor{
+            height: auto;
+        }
+        .box .infoList .dashang{
+            width: 100%;
+            background: #fff;
+            text-align: right;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .box .infoList .dashang span{
+            color: #EE591D;
+        }
+        .box .infoList .title.doctor .time{
+            position: relative;
+            top: 14px;
+        }
+        .box .infoList .docHead{
+            width: auto;
+            height: 46px;
+            overflow: auto;
+        }
+        .box .infoList .docHead img{
+            width: 46px;
+            height: 46px;
+            float: left;
+        }
+        .box .infoList .docHead .intro{
+            width: auto;
+            height: 46px;
+            float: left;
+            margin-left: 10px;
+			overflow: hidden;
+        }
+        .box .infoList .docHead .intro h6{
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+        .box .infoList .docHead .intro span{
+            color: #A6A6A6;
+            font-size: 12px;
+            position: relative;
+            top: -10px;
+        }
+        .box .infoList .question{
+            /*padding-top: 10px;*/
+        }
+        .box .infoList .content{
+            width: 100%;
+            height: auto;
+            padding: 10px 0;
+        }
+        .box .infoList .content .type{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .box .infoList .content .type span{
+            font-size: 14px;
+            color: #39B7A7;
+            height: 20px;
+            line-height: 20px;
+            padding: 0px 8px;
+            border-radius: 20px;
+            border: 1px solid #39B7A7;
+            margin-right: 10px;
+            float: left;
+        }
+        .box .infoList .content p{
+            font-size: 16px;
+            color: #333;
+            line-height: 20px;
+        }
+        .btnList{
+            width: 90%;
+            height: 40px;
+            border-radius: 8px;
+            margin: 20px auto;
+            border: 1px solid #EE591D;
+            overflow: hidden;
+        }
+        .btnList button{
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+            border-right: 1px solid #EE591D;
+            font-size: 16px;
+            float: left;
+            background: #fff;
+            color: #EE591D;
+        }
+        .btnList button:last-child{
+            border-right: none;
+        }
+        .moreQuestion{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            box-sizing: border-box;
+            padding: 15px;
+            display: none;
+        }
+        .moreQuestion span{
+            font-size: 14px;
+            color: #a6a6a6;
+            line-height: 30px;
+        }
+        .moreQuestion textarea{
+            width: 100%;
+            height: 140px;
+            background: #F6F6F6;
+            border: none;
+            box-sizing: border-box;
+            padding: 8px;
+        }
+        .moreQuestion .info{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        .moreQuestion .info .upImg {
+            width: 52px;
+            height: 52px;
+            margin-right: 10px;
+            margin-top: 6px;
+            float: left;
+            position: relative;
+        }
+
+        .moreQuestion .info .upImg .yourimg {
+            width: 100%;
+            height: 100%;
+        }
+        .moreQuestion .save{
+            width: 100%;
+            height: 40px;
+            background: #EE591D;
+            font-size: 16px;
+            color: #fff;
+            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
+        }
+        .infoList .showUpImg{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .infoList .showUpImg img{
+            width: 60px;
+            height: 60px;
+            margin: 0 10px 10px 0;
+        }
+		.saveMyImg{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.saveMyImg .showImg{
+			display: flex;
+			flex-wrap: wrap;
+			margin-right: 5px;
+		}
+		.saveMyImg .showImg .imgs{
+			width: 52px;
+			height: 52px;
+			margin-right: 10px;
+			margin-top: 8px;
+			position: relative;
+		}
+		.saveMyImg .showImg .imgs .shows{
+			width: 100%;
+			height: 100%;
+		}
+		.saveMyImg .showImg .imgs .del{
+			position: absolute;
+			width: 14px;
+			height: 16px;
+			right: -7px;
+			top: -7px;
+		}
+		.goevaluate{
+			display: none;
+			width: 90%;
+			height: 40px;
+			border-radius: 8px;
+			margin: 20px auto;
+			border: 1px solid #EE591D;
+			overflow: hidden;
+		}
+		.goReward{
+			display: none;
+			width: 90%;
+			height: 40px;
+			border-radius: 8px;
+			margin: 20px auto;
+			border: 1px solid #EE591D;
+			overflow: hidden;
+		}
+		.goevaluate button,.goReward button{
+		    width: 100%;
+		    height: 100%;
+		    box-sizing: border-box;
+		    border: none;
+		    border-right: 1px solid #EE591D;
+		    font-size: 16px;
+		    float: left;
+		    background: #fff;
+		    color: #EE591D;
+		}
+		.showBigImg{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 100;
+			display: none;
+		}
+		.showBigImg .bg{
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.6);
+			top: 0;
+			left: 0;
+			position: absolute;
+			display: block;
+		}
+		.showBigImg img{
+			width: 100%;
+			position: relative;
+		}
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <div class="firstPart">
+        <div class="infoList youStartQuestion">
+            <div class="someQuestion">
+                <div class="dashang"><span></span>次打赏</div>
+                <div class="title question">
+                    <span class="mask">您的提问</span>
+                    <span class="time startTime"></span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="type questionType">
+                </div>
+                <p class="yourQuestion"></p>
+            </div>
+            <!--<div class="showUpImg">-->
+            <!--<img src="imgs/addpic.png" alt="">-->
+            <!--<img src="imgs/addpic.png" alt="">-->
+            <!--<img src="imgs/addpic.png" alt="">-->
+            <!--</div>-->
+        </div>
+		<div class="doctorFirstAnswer">
+			
+		</div>
+		<div class="moreInfoChat">
+		</div>
+    </div>
+
+    <div class="btnList">
+        <button onclick="hasMore()" class="getMoreQuestion">追问（剩2次）</button>
+        <button onclick="goSubmission()">结束</button>
+    </div>
+	<div class="goevaluate">
+		<button onclick="goEvaluate()">去评价</button>
+	</div>
+	<div class="goReward">
+		<button onclick="goReward()">去打赏</button>
+	</div>
+    <div class="moreQuestion">
+        <span>追问</span>
+        <textarea name="" placeholder="请详细描述..." id="moreDetail" cols="30" rows="10"></textarea>
+        <div class="info saveMyImg">
+            <div class="showImg">
+                    
+            </div>
+            <div class="upImg" id="upload-container">
+            	<img src="imgs/addpic.png" alt="" class="yourimg" />
+            </div>
+            <div id="upload-list">
+            	<!-- <div class="upload-item">
+                    <span>文件名：123</span>
+                    <span data-file_id="" class="btn-delete">删除</span>
+                    <span data-file_id="" class="btn-retry">重试</span>
+                    <div class="percentage"></div>
+                </div> -->
+            </div>
+            <button id="picker" style="display: none;"></button>
+        </div>
+        <button class="save" onclick="postMoreQuestion()">提交</button>
+    </div>
+</div>
+<div class="showBigImg">
+	<div class="bg"></div>
+	<img src="" alt="">
+</div>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/webuploader.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var webUrl = 'http://182.43.178.216:9006';
+	var imgArr = [];
+	var questionObj = {};
+	var qarr = [];
+    $(function () {
+		//删除图片
+		$('.showImg').on('click','.del',function () {
+			imgArr.splice($(this).parent().index(),1);
+			$(this).parent().remove();
+		});
+		$('#upload-container').click(function(event) {
+			$("#picker").find('input').attr('accept','image/*');
+			$("#picker").find('input').click();
+		});
+		var uploader = WebUploader.create({
+			auto: true,// 选完文件后，是否自动上传。
+			swf: 'https://cdn.bootcss.com/webuploader/0.1.1/Uploader.swf',// swf文件路径
+			server: webUrl+'/api/Upload/Uploadimg',// 文件接收服务端。
+			dnd: '#upload-container',
+			pick: '#picker',// 内部根据当前运行是创建，可能是input元素，也可能是flash. 这里是div的id
+			multiple: true, // 选择多个
+			chunked: true,// 开起分片上传。
+			threads: 5, // 上传并发数。允许同时最大上传进程数。
+			method: 'POST', // 文件上传方式，POST或者GET。
+			fileSizeLimit: 1024*1024*100*100, //验证文件总大小是否超出限制, 超出则不允许加入队列。
+			fileSingleSizeLimit: 1024*1024*100, //验证单个文件大小是否超出限制, 超出则不允许加入队列。
+			fileVal:'upload', // [默认值：'file'] 设置文件上传域的name。
+		});
+		uploader.on('fileQueued', function(file) {
+			// 选中文件时要做的事情，比如在页面中显示选中的文件并添加到文件列表，获取文件的大小，文件类型等
+			// console.log(file.ext) // 获取文件的后缀
+			// console.log(file.size) // 获取文件的大小
+			// console.log(file.name);
+			// var html = '<div class="upload-item"><span>文件名：'+file.name+'</span><span data-file_id="'+file.id+'" class="btn-delete">删除</span><span data-file_id="'+file.id+'" class="btn-retry">重试</span><div class="percentage '+file.id+'" style="width: 0%;"></div></div>';
+			// $('#upload-list').append(html);
+		});
+		uploader.on('uploadSuccess', function(file, response) {
+			var html = '<div class="imgs">\n' +
+				'<img src="'+webUrl+response.data.url+'" alt="" class="shows">\n' +
+				'<img src="imgs/del2.png" alt="" class="del">\n' +
+				'</div>';
+			$('.showImg').append(html);
+			imgArr.push(response.data.url);
+		});
+		uploader.on('uploadError', function(file) {
+			$.toast('图片上传失败','text');
+		});
+		
+		$('.firstPart').on('click','.showUpImg img',function(){
+			$('.showBigImg img').attr('src',$(this).attr('src'));
+			$('.showBigImg').css('display','flex');
+		});
+		$('.showBigImg').on('click','.bg',function(){
+			$('.showBigImg').hide();
+		})
+		
+        questionDetail();
+    });
+
+    function goSubmission(){
+		$.ajax({
+		    url: webUrl+'/api/ApiQuestion/EndQuestion',
+		    type: "GET",
+		    data:{
+		        id: questionObj.id
+		    },
+		    dataType: "json",
+		    success: function(res){
+		        if(res.status){
+		            window.location.href = './submission.html?qid='+questionObj.id;
+		        }else{
+		            $.toast(res.msg, "text")
+		        }
+		    }
+		});
+    }
+	function goEvaluate(){
+		window.location.href = './submission.html?qid='+questionObj.id;
+	}
+	function goReward(){
+		window.location.href = './reward.html?qid='+questionObj.id;
+	}
+    function hasMore() {
+		if(qarr.length == 2){
+		    $.toast('无法再追问','text');
+		}else{
+		    $('.btnList').hide();
+		    $('.moreQuestion').show();
+		}
+    }
+
+    function questionDetail() {
+        $.ajax({
+            url: webUrl+'/api/ApiQuestion/QuestionDetail',
+            type: "GET",
+            data:{
+                questionId: getQueryVariable('qid')
+            },
+            dataType: "json",
+            success: function(res){
+                if(res.status){
+                    questionObj = res.data.question.baseQuestion;
+                    if(questionObj.pay){
+                        $('.dashang span').html('1')
+                    }else{
+                        $('.dashang span').html('0')
+                    }
+                    $('.startTime').html(questionObj.qtime);
+                    var title = questionObj.qtitle.split(',');
+                    var html = '';
+                    for(var i = 0;i<title.length;i++){
+                        html += '<span>'+title[i]+'</span>'
+                    }
+                    $('.questionType').html(html);
+                    $('.yourQuestion').html(questionObj.qcontent);
+                    var text = '',text2;
+					var img1 = [],img2 = [],img3 = [];
+                    if(questionObj.qimgs&&questionObj.qimgs.length!=0){
+						for(var s = 0;s<questionObj.qimgs.length;s++){
+						    if(questionObj.qimgs[s].img_type == 0){
+								img1.push(questionObj.qimgs[s])
+							}
+							if(questionObj.qimgs[s].img_type == 1){
+								if(questionObj.qimgs[s].up_number == 1){
+									img2.push(questionObj.qimgs[s])
+								}
+								if(questionObj.qimgs[s].up_number == 2){
+									img3.push(questionObj.qimgs[s])
+								}
+							}
+						}
+                        text += '<div class="showUpImg">';
+                        for(var m = 0;m<img1.length;m++){
+                            text += '<img src="'+webUrl+img1[m].img_url+'" alt="">'
+                        }
+                        text += '</div>';
+                        $('.youStartQuestion').append(text);
+                    }
+					if(questionObj.repContentOne){
+					    var doctorStr = '';
+					    doctorStr += '<div class="infoList">'+
+					    				'<div class="title doctor">'+
+					    					'<div class="docHead">'+
+					    						'<img src="imgs/head.png" alt="">'+
+					    						'<div class="intro">'+
+					    							'<h6>'+questionObj.expertName+'</h6>'+
+					    							'<span>'+questionObj.postion+'</span>'+
+					    						'</div>'+
+					    					'</div>'+
+					    					'<span class="time">'+questionObj.replyTimeOne+'</span>'+
+					    				'</div>'+
+					    				'<div class="content">'+
+					    					'<p>'+questionObj.repContentOne+'</p>'+
+					    				'</div>';
+					    doctorStr += '<div class="showUpImg">';
+					    for(var p = 0;p<img2.length;p++){
+					        doctorStr += '<img src="'+webUrl+img2[p].img_url+'" alt="">'
+					    }
+					    doctorStr += '</div></div>';
+					    $('.doctorFirstAnswer').append(doctorStr)
+					}else{
+						$('.btnList').hide();
+					}
+					if(questionObj.repContentTwo){
+					    var doctorStr = '';
+					    doctorStr += '<div class="infoList">'+
+					    				'<div class="title doctor">'+
+					    					'<div class="docHead">'+
+					    						'<img src="imgs/head.png" alt="">'+
+					    						'<div class="intro">'+
+					    							'<h6>'+questionObj.expertName+'</h6>'+
+					    							'<span>'+questionObj.postion+'</span>'+
+					    						'</div>'+
+					    					'</div>'+
+					    					'<span class="time">'+questionObj.replyTimeTwo+'</span>'+
+					    				'</div>'+
+					    				'<div class="content">'+
+					    					'<p>'+questionObj.repContentTwo+'</p>'+
+					    				'</div>';
+					    doctorStr += '<div class="showUpImg">';
+					    for(var p = 0;p<img3.length;p++){
+					        doctorStr += '<img src="'+webUrl+img3[p].img_url+'" alt="">'
+					    }
+					    doctorStr += '</div></div>';
+					    $('.doctorFirstAnswer').append(doctorStr)
+					}
+					
+					//还能追问几次
+					var len = 2-res.data.question.extraQuestions.length;
+					qarr = res.data.question.extraQuestions;
+					$('.getMoreQuestion').html('追问（剩'+len+'次）');
+					
+					//是否有追问
+					if(!qarr[qarr.length-1].repContentOne){
+						$('.btnList').hide();
+					}
+					var str = '';
+					for(var m = 0;m<qarr.length;m++){
+						str += '<div class="infoList">'+
+									'<div class="someQuestion">'+
+										'<div class="title question">'+
+											'<div class="mask">'+
+												'<span class="masks">您的</span>'+
+												'<span class="tips">追问</span>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].qtime+'</span>'+
+										'</div>'+
+									'</div>'+
+									'<div class="content">'+qarr[m].qcontent+'</div>';
+						var imgarr1 = [],imgarr2 = [],imgarr3 = [];
+						if(qarr[m].qimgs && qarr[m].qimgs.length>0){
+							for(var a = 0;a<qarr[m].qimgs.length;a++){
+							    if(qarr[m].qimgs[a].img_type == 0){
+									imgarr1.push(qarr[m].qimgs[a])
+								}
+								if(qarr[m].qimgs[a].img_type == 1){
+									if(qarr[m].qimgs[a].up_number == 1){
+										imgarr2.push(qarr[m].qimgs[a])
+									}
+									if(qarr[m].qimgs[a].up_number == 2){
+										imgarr3.push(qarr[m].qimgs[a])
+									}
+								}
+							}
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr1.length;p++){
+							    str += '<img src="'+webUrl+imgarr1[p].img_url+'" alt="">'
+							}
+							str += '</div>';
+							str += '</div>';
+						}else{
+							str += '</div>';
+						}
+								
+						if(qarr[m].repContentOne){
+							str += '<div class="infoList">'+
+										'<div class="title doctor">'+
+											'<div class="docHead">'+
+												'<img src="imgs/head.png" alt="">'+
+												'<div class="intro">'+
+													'<h6>'+questionObj.expertName+'</h6>'+
+													'<span>'+questionObj.postion+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].replyTimeOne+'</span>'+
+										'</div>'+
+										'<div class="content">'+qarr[m].repContentOne+'</div>';
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr2.length;p++){
+							    str += '<img src="'+webUrl+imgarr2[p].img_url+'" alt="">'
+							}
+							str += '</div></div>';
+						}
+						if(qarr[m].repContentTwo){
+							str += '<div class="infoList">'+
+										'<div class="title doctor">'+
+											'<div class="docHead">'+
+												'<img src="imgs/head.png" alt="">'+
+												'<div class="intro">'+
+													'<h6>'+questionObj.expertName+'</h6>'+
+													'<span>'+questionObj.postion+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].replyTimeTwo+'</span>'+
+										'</div>'+
+										'<div class="content">'+qarr[m].repContentTwo+'</div>';
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr3.length;p++){
+							    str += '<img src="'+webUrl+imgarr3[p].img_url+'" alt="">'
+							}
+							str += '</div></div>';
+						}
+					}
+					$('.moreInfoChat').html(str);
+					//整个回合是否结束
+					if(questionObj.qend){
+						$('.btnList').hide();
+						if(questionObj.star_num == 0){
+							$('.goevaluate').show();
+						}
+						if(!questionObj.pay){
+							$('.goReward').show();
+						}
+					}
+                }else{
+                    $.toast(res.msg, "text")
+                }
+            }
+        })
+    }
+	//追问
+	function postMoreQuestion(){
+		if($('#moreDetail').val() == ''){
+			$.toast('请详细描述','text');
+			return false;
+		}
+		var option = {
+			paient_openid: localStorage.getItem('myOpenId'),
+			pid: getQueryVariable('qid'),
+			qcontent: $('#moreDetail').val(),
+			imgs: imgArr.join(',')
+		}
+		$.ajax({
+			type: 'POST',
+			url: webUrl+'/api/ApiQuestion/SaveQuestionRepeat',
+			dataType: "json",
+			data: option,
+			success: function (res) {
+				if(res.status){
+					window.location.href = './upSuccess.html';
+				}else{
+					$.toast('提交失败', "text")
+				}
+			}
+		});
+	}
+
+    function getQueryVariable(variable){
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    };
+	if(getQueryVariable('openId')){
+		localStorage.setItem('myOpenId',getQueryVariable('openId'))
+	}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+@charset "UTF-8";
+.uploadFilesBox {
+    width: 400px;
+    padding: 5px;
+    margin-top: 15px;
+    box-shadow: 1px -1px 3px #999, -1px 1px 3px #999;
+    border-radius: 5px;
+    background: #fff;
+    position: relative;
+    z-index: 999;
+    min-height: 120px;
+    max-height: 320px;
+    overflow: auto;
+}
+
+.uploadFileList {
+    line-height: 30px;
+    margin: 0;
+}
+
+.uploadFileListItems {
+    list-style: decimal;
+    min-height: 30px;
+    max-height: 120px;
+    height: auto;
+}
+
+.uploadFilewrapper {
+    width: 220px;
+    background-color: #efeff4;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.uploadFilemyPromption-wrapper .uploadFilereturnCommission .uploadFileprocess {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileicon-flag {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 12px;
+    height: 18px;
+    background-size: 11px;
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-static {
+    width: 100%;
+    height: 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 198, 255, .6);
+    box-shadow: 0 0 5px rgba(0, 198, 255, .6);
+    background-color: rgba(0, 198, 255, .6);
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 0;
+    height: 14px;
+    border: 1px solid #4dafe2;
+    border-radius: 10px;
+    background-image: linear-gradient(75deg, transparent 0rem, transparent 0.8rem, #4dafe2 0.8rem, #4dafe2 1.6rem, transparent 1.6rem, transparent 2.4rem, #4dafe2 2.4rem);
+    background-color: #008cd5;
+    background-size: 20px 38px;
+    -box-shadow: 1px 1px 5px rgba(0, 140, 213, .8);
+    box-shadow: 1px 1px 5px rgba(0, 140, 213, .8);
+    -webkit-animation: process 800ms infinite linear;
+    animation: process 800ms infinite linear;
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, rgba(0, 140, 213, .6), rgba(0, 140, 213, .6) 15%, transparent 60%, rgba(0, 140, 213, .6));
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-static.uploadFileSuccess {
+    width: 100%;
+    height: 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 128, 0, .6);
+    box-shadow: 0 0 5px rgba(0, 128, 0, .6);
+    background-color: rgba(0, 128, 0, .6);
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active.uploadFileSuccess {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 14px;
+    border: 1px solid #008000;
+    border-radius: 10px;
+    background-image: linear-gradient(75deg, transparent 0rem, transparent 0.8rem, #308024 0.8rem, #228004 1.6rem, transparent 1.6rem, transparent 2.4rem, #4D8003 2.4rem);
+    background-color: #5cb85c;
+    background-size: 20px 38px;
+    -box-shadow: 1px 1px 5px rgba(0, 128, 0, .8);
+    box-shadow: 1px 1px 5px rgba(0, 128, 0, .8);
+    -webkit-animation: process 800ms;
+    animation: process 800ms;
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active.uploadFileSuccess:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, rgba(0, 128, 0, .6), rgba(0, 128, 0, .6) 15%, transparent 60%, rgba(0, 128, 0, .6));
+}
+
+.uploadFileLodaingText {
+    position: absolute;
+    font-size: 12px;
+    height: 20px;
+    margin-top: -10px;
+    top: 25%;
+    color: #fff;
+    width: 220px;
+    text-align: center;
+    z-index: 999;
+}
+
+/* 动画 */
+@-webkit-keyframes process {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
+@keyframes process {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-static.uploadFileError {
+    width: 100%;
+    height: 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .6);
+    box-shadow: 0 0 5px rgba(255, 0, 0, .6);
+    background-color: rgba(255, 0, 0, .6);
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active.uploadFileError {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 14px;
+    border: 1px solid #d9534f;
+    border-radius: 10px;
+    background-image: linear-gradient(75deg, transparent 0rem, transparent 0.8rem, #ff1029 0.8rem, #ff1029 1.6rem, transparent 1.6rem, transparent 2.4rem, #ff1029 2.4rem);
+    background-color: #d9534f;
+    background-size: 20px 38px;
+    -box-shadow: 1px 1px 5px rgba(217, 83, 79, .8);
+    box-shadow: 1px 1px 5px rgba(217, 83, 79, .8);
+    -webkit-animation: process 800ms;
+    animation: process 800ms;
+}
+
+.uploadFilemyPromption-wrapper .uploadFileprocess .uploadFileprocess-active.uploadFileError:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, rgba(255, 174, 15, 0.6), rgba(255, 233, 19, 0.6) 15%, transparent 60%, rgba(255, 233, 19, 0.6));
+}
+
+.uploadFileListItemsContents {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.uploadFileListItemsContents > span {
+    display: inline-block;
+    color: grey;
+}
+
+.uploadFileListItemsContents .uploadFileListItemsName:after {
+    content: " / ";
+}
+
+.uploadFileClose, .uploadFileOk {
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0 5px;
+    line-height: 25px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.uploadFileClose {
+    color: orangered;
+}
+
+.uploadFileOk {
+    color: green;
+}
+
+.uploadFileMoreBtn {
+    vertical-align: middle;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+.uploadFileOk:hover, .uploadFileOk:active, .uploadFileOk:focus {
+    background: green;
+    color: #fff;
+}
+
+.uploadFileClose:hover, .uploadFileClose:active, .uploadFileClose:focus {
+    background: orangered;
+    color: #fff;
+}
+
+.uploadFileMoreLoads {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+}
+
+.uploadFileMoreLoadsList {
+    margin-top: 30px;
+}
+
+.uploadFileMoreLoads .uploadFileLodaingText {
+    top: 10px !important;
+}
+
+.uploadFileMoreLoads .uploadFileprocess-active.uploadFileSuccess{
+    top:0 !important;
+}

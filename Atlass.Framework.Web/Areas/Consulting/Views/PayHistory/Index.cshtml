@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div id="toolbar" class="btn-group">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" placeholder="起始时间" id="stime" class="form-control" value="@(DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd"))">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="结束时间" id="etime" class="form-control" value="@(DateTime.Now.ToString("yyyy-MM-dd"))">
+                        </div>
+                        <button class="btn btn-white" type="button" onclick="query()"><i class="fa fa-search"></i>查询</button>
+                        <button class="btn btn-white" type="button" onclick="outfile()"><i class="fa fa-upload"></i>导出</button>
+                    </form>
+                </div>
+                <div>
+                    <table id="roleTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/plugins/laydate/laydate.js"></script>
+    <script>
+        var $roleTable;
+        $(function () {
+            laydate.render({
+                elem: '#stime'
+                ,theme: 'molv'
+            });
+            laydate.render({
+                elem: '#etime'
+                ,theme: 'molv'
+            });
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $roleTable = $("#roleTable").bootstrapTable({
+                url: '/Consulting/PayHistory/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var stime = $('#stime').val();
+                    var etime = $('#etime').val();
+                    var params2 = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        stime: stime,
+                        etime: etime
+                    };
+                    return params2;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'out_trade_no', title: '商家订单号', align: 'center' },
+                    { field: 'openid', title: '打赏人', align: 'center' },
+                    { field: 'expert_name', title: '专家', align: 'center' },
+                    { field: 'total_fee', title: '打赏金额', align: 'center', formatter: function(v, e, i) {
+                        return (v/100).toFixed(2);
+                    } },
+                    { field: 'pay_time', title: '打赏时间', align: 'center' },
+                    //{ field: 'id', title: '操作', align: 'center', formatter: renderOpt}
+                ]
+
+            });
+
+            //jutils.initToolBarRole('#toolbar');
+        }
+
+        function query() {
+            $roleTable.bootstrapTable('refresh');
+        }
+
+        //渲染操作
+        function renderOpt(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+
+            return html;
+        }
+
+        function add() {
+            jutils.dialogForm('快捷回复',
+                '/Consulting/quickinfo/form',
+                { id: 0 },
+                function (res) {
+                    $roleTable.bootstrapTable('refresh');
+                });
+        }
+
+        function edit(obj) {
+
+            var id = $(obj).data('id');
+            jutils.dialogForm('快捷回复',
+                '/Doctor/quickinfo/form',
+                { id: id },
+                function(res) {
+                    $roleTable.bootstrapTable('refresh');
+                });
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function() {
+                    jutils.ajaxGet('/Doctor/QuickInfo/DeleteById',
+                        { id: id },
+                        function() {
+                            $roleTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function outfile() {
+            var stime = $('#stime').val();
+            var etime = $('#etime').val();
+
+            if (!stime) {
+                jutils.info("请选择起始时间");
+                return;
+            }
+            if (!etime) {
+                jutils.info("请选择结束时间");
+                return;
+            }
+
+            location.href = '/Consulting/payhistory/outfile?stime=' + stime + "&etime=" + etime;
+        }
+    </script>
+
+
+}
+
+
+
+
+

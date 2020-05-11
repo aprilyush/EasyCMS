@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+     <!--<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>-->
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <AspNetCoreHostingModel>outofprocess</AspNetCoreHostingModel>
+  
+</PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="packages\**" />
+    <Content Remove="packages\**" />
+    <EmbeddedResource Remove="packages\**" />
+    <None Remove="packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\wechat\.idea\encodings.xml" />
+    <Content Include="wwwroot\wechat\.idea\misc.xml" />
+    <Content Include="wwwroot\wechat\.idea\modules.xml" />
+    <Content Include="wwwroot\wechat\.idea\workspace.xml" />
+  </ItemGroup>
+  <!--Condition="'$(Configuration)' == 'Debug'"-->
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="CSRedisCore" Version="3.6.1" />
+    <PackageReference Include="CsvHelper" Version="15.0.4" />
+    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="1.3.5" />
+    <PackageReference Include="Hangfire" Version="1.7.10" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.10" />
+    <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.8.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
+    <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.10.500" />
+    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.5.500" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.AppService\Atlass.Framework.AppService.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Cache\Atlass.Framework.Cache.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Core\Atlass.Framework.Core.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Jobs\Atlass.Framework.Jobs.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\wechat\.idea\wechat.iml" />
+  </ItemGroup>
+
+</Project>

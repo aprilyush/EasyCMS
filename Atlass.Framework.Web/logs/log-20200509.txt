@@ -1,0 +1,1018 @@
+2020-05-09 10:16:47.243 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-05-09 10:16:47.284 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-05-09 10:16:49.443 +08:00 [INF] Creating key "4c910be0-95b9-4ee3-9c05-04450dd6fdaa" with creation date "2020-05-09T02:16:49.4379647+00:00", activation date "2020-05-09T02:16:49.4350168+00:00", and expiration date "2020-08-07T02:16:49.4350168+00:00".
+2020-05-09 10:16:49.456 +08:00 [WRN] No XML encryptor configured. Key "4c910be0-95b9-4ee3-9c05-04450dd6fdaa" may be persisted to storage in unencrypted form.
+2020-05-09 10:16:49.903 +08:00 [INF] Starting Hangfire Server using job storage: 'redis://127.0.0.1:6379,allowAdmin=True/0'
+2020-05-09 10:16:49.903 +08:00 [DBG] Using the following options for Redis job storage:
+2020-05-09 10:16:49.903 +08:00 [DBG] ConnectionString: 127.0.0.1:6379,allowAdmin=True
+DN: 0
+2020-05-09 10:16:49.904 +08:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2020-05-09 10:16:49.913 +08:00 [DBG] Execution loop BackgroundServerProcess:2618bfab has started in 4.1821 ms
+2020-05-09 10:16:49.939 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 successfully announced in 21.578 ms
+2020-05-09 10:16:49.941 +08:00 [DBG] Execution loop ServerHeartbeatProcess:b54f023b has started in 1.4277 ms
+2020-05-09 10:16:49.942 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, FetchedJobsWatcher, ExpiredJobsWatcher, RedisSubscription, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2020-05-09 10:16:49.943 +08:00 [DBG] Execution loop ServerWatchdog:73d5adf8 has started in 0.3144 ms
+2020-05-09 10:16:49.943 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:2fb25f5c has started in 0.2958 ms
+2020-05-09 10:16:49.944 +08:00 [DBG] Execution loop FetchedJobsWatcher:bcbf0c3e has started in 0.4494 ms
+2020-05-09 10:16:49.944 +08:00 [DBG] Execution loop ExpiredJobsWatcher:30dfe52f has started in 0.2214 ms
+2020-05-09 10:16:49.944 +08:00 [DBG] Execution loop RedisSubscription:088463c5 has started in 0.1659 ms
+2020-05-09 10:16:49.944 +08:00 [DBG] Execution loop Worker:3eb13a1c has started in 0.3607 ms
+2020-05-09 10:16:49.944 +08:00 [DBG] Execution loop Worker:7c53b027 has started in 0.5128 ms
+2020-05-09 10:16:49.945 +08:00 [DBG] Execution loop Worker:fe75154a has started in 0.74 ms
+2020-05-09 10:16:49.945 +08:00 [DBG] Execution loop Worker:5d9e78c3 has started in 0.9871 ms
+2020-05-09 10:16:49.945 +08:00 [DBG] Execution loop Worker:fdfa1dc8 has started in 1.3365 ms
+2020-05-09 10:16:49.945 +08:00 [DBG] Execution loop Worker:ad08aa07 has started in 1.5013 ms
+2020-05-09 10:16:49.946 +08:00 [DBG] Execution loop Worker:57cea7bf has started in 1.813 ms
+2020-05-09 10:16:49.946 +08:00 [DBG] Execution loop Worker:83faf073 has started in 2.5218 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:3d9f9ee1 has started in 2.6158 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:201d311e has started in 2.7729 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:351a921f has started in 2.942 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:e317b14a has started in 3.0569 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:9ea2e1ad has started in 3.1917 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:3599f5ce has started in 3.3073 ms
+2020-05-09 10:16:49.947 +08:00 [DBG] Execution loop Worker:db3863ea has started in 3.4472 ms
+2020-05-09 10:16:49.948 +08:00 [DBG] Execution loop Worker:e34254e3 has started in 3.5641 ms
+2020-05-09 10:16:49.948 +08:00 [DBG] Execution loop Worker:92619026 has started in 3.6955 ms
+2020-05-09 10:16:49.948 +08:00 [DBG] Execution loop Worker:f1bc6652 has started in 3.9331 ms
+2020-05-09 10:16:49.948 +08:00 [DBG] Execution loop Worker:4e257567 has started in 4.3698 ms
+2020-05-09 10:16:49.949 +08:00 [DBG] Execution loop Worker:3c64cac4 has started in 4.5957 ms
+2020-05-09 10:16:49.949 +08:00 [DBG] Execution loop DelayedJobScheduler:7cd20dbd has started in 0.1693 ms
+2020-05-09 10:16:49.949 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 all the dispatchers started
+2020-05-09 10:16:49.949 +08:00 [DBG] Execution loop RecurringJobScheduler:c5478eb8 has started in 0.1771 ms
+2020-05-09 10:16:49.953 +08:00 [INF] Removing expired records from the 'succeeded' list...
+2020-05-09 10:16:49.955 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:16:49.960 +08:00 [INF] Removing 6 expired jobs from 'succeeded' list...
+2020-05-09 10:16:49.960 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:16:49.961 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:16:50.551 +08:00 [INF] Now listening on: http://127.0.0.1:42634
+2020-05-09 10:16:50.552 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-05-09 10:16:50.552 +08:00 [INF] Hosting environment: Production
+2020-05-09 10:16:50.552 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-05-09 10:16:50.647 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-05-09 10:16:50.654 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-05-09 10:16:50.700 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:16:50.726 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:16:50.738 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 5.8526ms
+2020-05-09 10:16:50.739 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:16:50.747 +08:00 [INF] Request finished in 99.4086ms 200 
+2020-05-09 10:16:51.205 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/Login/Index  
+2020-05-09 10:16:51.207 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-05-09 10:16:51.210 +08:00 [INF] Route matched with {action = "Index", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-05-09 10:16:51.250 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 10:16:51.335 +08:00 [INF] Executed ViewResult - view Index executed in 108.5454ms.
+2020-05-09 10:16:51.335 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web) in 125.0095ms
+2020-05-09 10:16:51.335 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-05-09 10:16:51.337 +08:00 [INF] Request finished in 132.329ms 200 text/html; charset=utf-8
+2020-05-09 10:16:51.402 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/vendor/bootstrap/css/bootstrap.min.css  
+2020-05-09 10:16:51.404 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css  
+2020-05-09 10:16:51.405 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/iconic/css/material-design-iconic-font.min.css  
+2020-05-09 10:16:51.407 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/css/util.css  
+2020-05-09 10:16:51.408 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/css/main.css  
+2020-05-09 10:16:51.408 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-05-09 10:16:51.440 +08:00 [INF] Sending file. Request path: '/extui/login/css/util.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\css\util.css'
+2020-05-09 10:16:51.440 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\font-awesome-4.7.0\css\font-awesome.min.css'
+2020-05-09 10:16:51.441 +08:00 [INF] Request finished in 36.2832ms 200 text/css
+2020-05-09 10:16:51.441 +08:00 [INF] Request finished in 34.0977ms 200 text/css
+2020-05-09 10:16:51.447 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/js/main.js  
+2020-05-09 10:16:51.448 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-05-09 10:16:51.448 +08:00 [INF] Request finished in 40.4569ms 200 application/javascript
+2020-05-09 10:16:51.453 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/iconic/css/material-design-iconic-font.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\iconic\css\material-design-iconic-font.min.css'
+2020-05-09 10:16:51.453 +08:00 [INF] Request finished in 48.2308ms 200 text/css
+2020-05-09 10:16:51.456 +08:00 [INF] Sending file. Request path: '/extui/login/js/main.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\js\main.js'
+2020-05-09 10:16:51.456 +08:00 [INF] Request finished in 9.9956ms 200 application/javascript
+2020-05-09 10:16:51.461 +08:00 [INF] Sending file. Request path: '/extui/login/vendor/bootstrap/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\vendor\bootstrap\css\bootstrap.min.css'
+2020-05-09 10:16:51.461 +08:00 [INF] Request finished in 59.1871ms 200 text/css
+2020-05-09 10:16:51.471 +08:00 [INF] Sending file. Request path: '/extui/login/css/main.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\css\main.css'
+2020-05-09 10:16:51.471 +08:00 [INF] Request finished in 63.7442ms 200 text/css
+2020-05-09 10:16:51.589 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/images/bg-01.jpg  
+2020-05-09 10:16:51.622 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/iconic/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0  
+2020-05-09 10:16:51.628 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/iconic/fonts/Material-Design-Iconic-Font.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2'
+2020-05-09 10:16:51.628 +08:00 [INF] Request finished in 6.1506ms 200 font/woff2
+2020-05-09 10:16:51.629 +08:00 [INF] Sending file. Request path: '/extui/login/images/bg-01.jpg'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\images\bg-01.jpg'
+2020-05-09 10:16:51.629 +08:00 [INF] Request finished in 39.9113ms 200 image/jpeg
+2020-05-09 10:16:52.461 +08:00 [ERR] System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+ ---> System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.getFree(Boolean checkAvailable)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)
+   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()
+   at Atlass.Framework.Core.HostService.EasyLogHostedService.DoWork() in E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Core\HostService\EasyLogHostedService.cs:line 48
+2020-05-09 10:16:52.562 +08:00 [ERR] System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+ ---> System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.getFree(Boolean checkAvailable)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)
+   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()
+   at Atlass.Framework.Core.HostService.EasyLogHostedService.DoWork() in E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Core\HostService\EasyLogHostedService.cs:line 48
+2020-05-09 10:16:58.520 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/login/LoginOn application/x-www-form-urlencoded 22
+2020-05-09 10:16:58.523 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-09 10:16:58.533 +08:00 [INF] Route matched with {action = "Loginon", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Loginon(Atlass.Framework.Web.Models.LoginDto) on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-05-09 10:16:58.585 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 10:16:58.598 +08:00 [INF] Executed ViewResult - view Index executed in 12.7994ms.
+2020-05-09 10:16:58.598 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web) in 65.0784ms
+2020-05-09 10:16:58.598 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-09 10:16:58.599 +08:00 [INF] Request finished in 78.8848ms 200 text/html; charset=utf-8
+2020-05-09 10:16:58.607 +08:00 [ERR] System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+ ---> System.Exception: 【主库】状态不可用，等待后台检查程序恢复方可使用。Unable to connect to any of the specified MySQL hosts.
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.getFree(Boolean checkAvailable)
+   at FreeSql.Internal.ObjectPool.ObjectPool`1.Get(Nullable`1 timeout)
+   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)
+   --- End of inner exception stack trace ---
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()
+   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)
+   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()
+   at Atlass.Framework.Core.HostService.EasyLogHostedService.DoWork() in E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Core\HostService\EasyLogHostedService.cs:line 48
+2020-05-09 10:17:01.868 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0  
+2020-05-09 10:17:01.892 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2'
+2020-05-09 10:17:01.893 +08:00 [INF] Request finished in 24.499ms 200 font/woff2
+2020-05-09 10:17:19.946 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:17:29.646 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/login/LoginOn application/x-www-form-urlencoded 22
+2020-05-09 10:17:29.647 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-09 10:17:29.648 +08:00 [INF] Route matched with {action = "Loginon", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Loginon(Atlass.Framework.Web.Models.LoginDto) on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-05-09 10:17:29.774 +08:00 [INF] Executing RedirectResult, redirecting to /admin/Home/Index.
+2020-05-09 10:17:29.774 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web) in 125.9021ms
+2020-05-09 10:17:29.775 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-09 10:17:29.775 +08:00 [INF] Request finished in 129.3045ms 302 
+2020-05-09 10:17:29.794 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/Index  
+2020-05-09 10:17:29.795 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:17:29.808 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:17:29.849 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 10:17:29.883 +08:00 [INF] Executed ViewResult - view Index executed in 37.4836ms.
+2020-05-09 10:17:29.883 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 75.6552ms
+2020-05-09 10:17:29.883 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:17:29.883 +08:00 [INF] Request finished in 89.7233ms 200 text/html; charset=utf-8
+2020-05-09 10:17:29.932 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-05-09 10:17:29.933 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-05-09 10:17:29.933 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-05-09 10:17:29.937 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-05-09 10:17:29.937 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-05-09 10:17:29.937 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-05-09 10:17:29.956 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-05-09 10:17:29.956 +08:00 [INF] Request finished in 23.1073ms 200 text/css
+2020-05-09 10:17:29.960 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-05-09 10:17:29.960 +08:00 [INF] Request finished in 22.6877ms 200 image/png
+2020-05-09 10:17:29.966 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-05-09 10:17:29.967 +08:00 [INF] Request finished in 29.2509ms 200 application/javascript
+2020-05-09 10:17:30.003 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-05-09 10:17:30.003 +08:00 [INF] Request finished in 69.2233ms 200 text/css
+2020-05-09 10:17:30.003 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-05-09 10:17:30.003 +08:00 [INF] Request finished in 71.3915ms 200 text/css
+2020-05-09 10:17:30.043 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-05-09 10:17:30.043 +08:00 [INF] Request finished in 106.6828ms 200 text/css
+2020-05-09 10:17:30.059 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-05-09 10:17:30.062 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-05-09 10:17:30.062 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-05-09 10:17:30.073 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-05-09 10:17:30.073 +08:00 [INF] Request finished in 14.2337ms 200 application/javascript
+2020-05-09 10:17:30.079 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-05-09 10:17:30.079 +08:00 [INF] Request finished in 17.3122ms 200 application/javascript
+2020-05-09 10:17:30.094 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-05-09 10:17:30.094 +08:00 [INF] Request finished in 32.3179ms 200 text/html
+2020-05-09 10:17:30.111 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-05-09 10:17:30.113 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-05-09 10:17:30.116 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-05-09 10:17:30.116 +08:00 [INF] Request finished in 3.4987ms 200 application/javascript
+2020-05-09 10:17:30.121 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-05-09 10:17:30.130 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-05-09 10:17:30.130 +08:00 [INF] Request finished in 19.3272ms 200 application/javascript
+2020-05-09 10:17:30.138 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-05-09 10:17:30.138 +08:00 [INF] Request finished in 17.2573ms 200 application/javascript
+2020-05-09 10:17:30.155 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-05-09 10:17:30.156 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-05-09 10:17:30.163 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-05-09 10:17:30.179 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-05-09 10:17:30.179 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-05-09 10:17:30.183 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-05-09 10:17:30.183 +08:00 [INF] Request finished in 28.401ms 200 application/javascript
+2020-05-09 10:17:30.189 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-05-09 10:17:30.189 +08:00 [INF] Request finished in 32.965ms 200 application/javascript
+2020-05-09 10:17:30.200 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-05-09 10:17:30.200 +08:00 [INF] Request finished in 21.4974ms 200 image/png
+2020-05-09 10:17:30.200 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-05-09 10:17:30.201 +08:00 [INF] Request finished in 21.0401ms 200 image/png
+2020-05-09 10:17:30.201 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-05-09 10:17:30.201 +08:00 [INF] Request finished in 37.9073ms 200 image/png
+2020-05-09 10:17:30.216 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-05-09 10:17:30.217 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-05-09 10:17:30.218 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-05-09 10:17:30.218 +08:00 [INF] Request finished in 1.2346ms 200 text/css
+2020-05-09 10:17:30.219 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-05-09 10:17:30.220 +08:00 [INF] Request finished in 3.6282ms 200 font/woff2
+2020-05-09 10:17:30.259 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Sat%20May%2009%202020%2010:17:30%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588990650124  
+2020-05-09 10:17:30.263 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-09 10:17:30.269 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-05-09 10:17:30.270 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-05-09 10:17:30.271 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:17:30.271 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-05-09 10:17:30.271 +08:00 [INF] Request finished in 1.9372ms 200 text/css
+2020-05-09 10:17:30.349 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-05-09 10:17:30.349 +08:00 [INF] Request finished in 79.9002ms 200 application/javascript
+2020-05-09 10:17:30.403 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 10:17:30.404 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 133.4767ms
+2020-05-09 10:17:30.405 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-09 10:17:30.406 +08:00 [INF] Request finished in 147.2384ms 200 text/plain; charset=utf-8
+2020-05-09 10:17:30.461 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588990650364  
+2020-05-09 10:17:30.462 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:17:30.464 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:17:31.017 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 10:17:31.018 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 554.0513ms
+2020-05-09 10:17:31.018 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:17:31.018 +08:00 [INF] Request finished in 556.8622ms 200 text/plain; charset=utf-8
+2020-05-09 10:17:49.947 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:17:49.971 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:17:49.972 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:17:49.972 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:18:17.351 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 10:18:17.356 +08:00 [INF] Request finished in 4.4775ms 404 
+2020-05-09 10:18:18.929 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/default/loading-2.gif  
+2020-05-09 10:18:18.945 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/default/loading-2.gif'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\default\loading-2.gif'
+2020-05-09 10:18:18.945 +08:00 [INF] Request finished in 15.9288ms 200 image/gif
+2020-05-09 10:18:19.083 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 10:18:19.084 +08:00 [INF] Request finished in 0.612ms 404 
+2020-05-09 10:18:19.279 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588990699129  
+2020-05-09 10:18:19.279 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:18:19.281 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:18:19.296 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 10:18:19.296 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 15.2662ms
+2020-05-09 10:18:19.296 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:18:19.297 +08:00 [INF] Request finished in 17.8989ms 200 text/plain; charset=utf-8
+2020-05-09 10:18:19.948 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:18:49.949 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:18:49.974 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:18:49.974 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:18:49.975 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:19:19.951 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:19:49.952 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:19:49.976 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:19:49.976 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:19:49.976 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:20:16.726 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/Index  
+2020-05-09 10:20:16.728 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:20:16.730 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:20:16.731 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 10:20:16.734 +08:00 [INF] Executed ViewResult - view Index executed in 2.9573ms.
+2020-05-09 10:20:16.734 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 3.7843ms
+2020-05-09 10:20:16.734 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-09 10:20:16.735 +08:00 [INF] Request finished in 8.3073ms 200 text/html; charset=utf-8
+2020-05-09 10:20:16.801 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-05-09 10:20:16.804 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-05-09 10:20:16.805 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-05-09 10:20:16.805 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-05-09 10:20:16.805 +08:00 [INF] Request finished in 3.9548ms 200 text/css
+2020-05-09 10:20:16.805 +08:00 [INF] Request finished in 0.6796ms 200 text/css
+2020-05-09 10:20:16.809 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-05-09 10:20:16.814 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-05-09 10:20:16.815 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-05-09 10:20:16.815 +08:00 [INF] Request finished in 6.3176ms 200 text/css
+2020-05-09 10:20:16.816 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-05-09 10:20:16.821 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-05-09 10:20:16.821 +08:00 [INF] Request finished in 6.4296ms 200 image/png
+2020-05-09 10:20:16.822 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-05-09 10:20:16.822 +08:00 [INF] Request finished in 7.9473ms 200 application/javascript
+2020-05-09 10:20:16.824 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-05-09 10:20:16.825 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-05-09 10:20:16.825 +08:00 [INF] Request finished in 1.2617ms 200 text/css
+2020-05-09 10:20:16.908 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-05-09 10:20:16.909 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-05-09 10:20:16.909 +08:00 [INF] Request finished in 0.8706ms 200 application/javascript
+2020-05-09 10:20:16.917 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-05-09 10:20:16.918 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-05-09 10:20:16.918 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-05-09 10:20:16.918 +08:00 [INF] Request finished in 0.5352ms 200 application/javascript
+2020-05-09 10:20:16.919 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-05-09 10:20:16.919 +08:00 [INF] Request finished in 1.0826ms 200 application/javascript
+2020-05-09 10:20:16.919 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-05-09 10:20:16.920 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-05-09 10:20:16.920 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-05-09 10:20:16.920 +08:00 [INF] Request finished in 0.7649ms 200 application/javascript
+2020-05-09 10:20:16.920 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-05-09 10:20:16.920 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-05-09 10:20:16.920 +08:00 [INF] Request finished in 0.5996ms 200 application/javascript
+2020-05-09 10:20:16.921 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-05-09 10:20:16.922 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-05-09 10:20:16.922 +08:00 [INF] Request finished in 0.8618ms 200 application/javascript
+2020-05-09 10:20:16.922 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-05-09 10:20:16.922 +08:00 [INF] Request finished in 0.5711ms 200 text/html
+2020-05-09 10:20:16.936 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-05-09 10:20:16.938 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-05-09 10:20:16.938 +08:00 [INF] Request finished in 1.8572ms 200 application/javascript
+2020-05-09 10:20:16.954 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-05-09 10:20:16.955 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-05-09 10:20:16.955 +08:00 [INF] Request finished in 1.0991ms 200 application/javascript
+2020-05-09 10:20:17.029 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-05-09 10:20:17.031 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-05-09 10:20:17.031 +08:00 [INF] Request finished in 2.118ms 200 image/png
+2020-05-09 10:20:17.036 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-05-09 10:20:17.037 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-05-09 10:20:17.037 +08:00 [INF] Request finished in 0.7385ms 200 image/png
+2020-05-09 10:20:17.061 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-05-09 10:20:17.062 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-05-09 10:20:17.062 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-05-09 10:20:17.063 +08:00 [INF] Request finished in 2.0103ms 200 image/png
+2020-05-09 10:20:17.063 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-05-09 10:20:17.063 +08:00 [INF] Request finished in 1.6853ms 200 font/woff2
+2020-05-09 10:20:17.082 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 10:20:17.083 +08:00 [INF] Request finished in 0.7915ms 404 
+2020-05-09 10:20:17.087 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-05-09 10:20:17.087 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-05-09 10:20:17.087 +08:00 [INF] Request finished in 0.6862ms 200 text/css
+2020-05-09 10:20:17.191 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Sat%20May%2009%202020%2010:20:17%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588990816971  
+2020-05-09 10:20:17.191 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-09 10:20:17.192 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:20:17.200 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-05-09 10:20:17.200 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-05-09 10:20:17.201 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-05-09 10:20:17.201 +08:00 [INF] Request finished in 0.5856ms 200 text/css
+2020-05-09 10:20:17.201 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-05-09 10:20:17.201 +08:00 [INF] Request finished in 1.0329ms 200 text/css
+2020-05-09 10:20:17.201 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-05-09 10:20:17.201 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-05-09 10:20:17.202 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-05-09 10:20:17.202 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-05-09 10:20:17.202 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-05-09 10:20:17.202 +08:00 [INF] Request finished in 0.9353ms 200 text/css
+2020-05-09 10:20:17.202 +08:00 [INF] Request finished in 1.1613ms 200 text/css
+2020-05-09 10:20:17.203 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-05-09 10:20:17.203 +08:00 [INF] Request finished in 1.3819ms 200 application/javascript
+2020-05-09 10:20:17.214 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-05-09 10:20:17.217 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-05-09 10:20:17.217 +08:00 [INF] Request finished in 2.6414ms 200 application/javascript
+2020-05-09 10:20:17.218 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-05-09 10:20:17.218 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-05-09 10:20:17.218 +08:00 [INF] Request finished in 0.6037ms 200 application/javascript
+2020-05-09 10:20:17.219 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-05-09 10:20:17.223 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 10:20:17.224 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 30.9734ms
+2020-05-09 10:20:17.224 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-09 10:20:17.224 +08:00 [INF] Request finished in 33.0103ms 200 text/plain; charset=utf-8
+2020-05-09 10:20:17.229 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-05-09 10:20:17.229 +08:00 [INF] Request finished in 9.7526ms 200 application/javascript
+2020-05-09 10:20:17.316 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-05-09 10:20:17.317 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-05-09 10:20:17.317 +08:00 [INF] Request finished in 0.7254ms 200 font/woff2
+2020-05-09 10:20:17.402 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 10:20:17.402 +08:00 [INF] Request finished in 0.6769ms 404 
+2020-05-09 10:20:17.424 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-05-09 10:20:17.426 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-05-09 10:20:17.427 +08:00 [INF] Request finished in 1.9909ms 200 text/css
+2020-05-09 10:20:17.521 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588990817357  
+2020-05-09 10:20:17.522 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:20:17.523 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-09 10:20:17.541 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 10:20:17.542 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 18.9132ms
+2020-05-09 10:20:17.542 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-09 10:20:17.542 +08:00 [INF] Request finished in 20.6234ms 200 text/plain; charset=utf-8
+2020-05-09 10:20:17.561 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-05-09 10:20:17.562 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-05-09 10:20:17.562 +08:00 [INF] Request finished in 1.5242ms 200 image/x-icon
+2020-05-09 10:20:19.952 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:20:49.953 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:20:49.977 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:20:49.978 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:20:49.978 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:21:19.953 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:21:49.954 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:21:49.979 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:21:49.979 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:21:49.979 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:22:19.954 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:22:49.955 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:22:49.980 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:22:49.981 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:22:49.982 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:23:19.956 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:23:49.958 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:23:49.983 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:23:49.983 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:23:49.984 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:24:19.959 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:24:49.959 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:24:49.984 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:24:49.985 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:24:49.985 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:25:19.959 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:25:49.961 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:25:49.986 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:25:49.987 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:25:49.987 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:26:19.961 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:26:49.962 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:26:49.989 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:26:49.989 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:26:49.990 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:27:19.963 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:27:49.964 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:27:49.992 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:27:49.993 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:27:49.993 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:28:19.965 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:28:49.966 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:28:49.995 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:28:49.996 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:28:49.996 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:29:19.967 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:29:49.968 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:29:49.998 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:29:49.998 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:29:49.998 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:30:19.968 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:30:49.970 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:30:50.000 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:30:50.000 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:30:50.001 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:31:19.971 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:31:49.971 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:31:50.003 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:31:50.003 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:31:50.004 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:32:19.973 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:32:49.974 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:32:50.006 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:32:50.007 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:32:50.007 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:33:19.975 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:33:49.976 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:33:50.008 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:33:50.008 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:33:50.009 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:34:19.977 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:34:49.977 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:34:50.010 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:34:50.010 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:34:50.011 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:35:19.977 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:35:49.978 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:35:50.012 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:35:50.012 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:35:50.012 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:36:19.979 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:36:49.980 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:36:50.014 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:36:50.014 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:36:50.014 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:37:19.980 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:37:49.981 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:37:50.016 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:37:50.016 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:37:50.017 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:38:19.982 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:38:49.982 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:38:50.018 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:38:50.019 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:38:50.019 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:39:19.983 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:39:49.985 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:39:50.021 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 10:39:50.021 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 10:39:50.021 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 10:40:19.985 +08:00 [DBG] Server xttd-2020fopbkl:18732:faa8c8f0 heartbeat successfully sent
+2020-05-09 10:40:46.019 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:42634/iisintegration  0
+2020-05-09 10:40:46.019 +08:00 [INF] Request finished in 0.2134ms 202 
+2020-05-09 10:40:46.020 +08:00 [DBG] Hangfire Server is stopping...
+2020-05-09 10:40:46.020 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 caught stopping signal...
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:2fb25f5c stopped in 0.0753 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop FetchedJobsWatcher:bcbf0c3e stopped in 0.0761 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop DelayedJobScheduler:7cd20dbd stopped in 0.0781 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop RecurringJobScheduler:c5478eb8 stopped in 0.0868 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:3c64cac4 stopped in 0.2491 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:3eb13a1c stopped in 0.3754 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop ExpiredJobsWatcher:30dfe52f stopped in 0.0771 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:57cea7bf stopped in 0.5567 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:201d311e stopped in 0.5738 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:5d9e78c3 stopped in 0.6441 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop ServerWatchdog:73d5adf8 stopped in 0.6493 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:e317b14a stopped in 0.6943 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:3599f5ce stopped in 0.7179 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:7c53b027 stopped in 0.8108 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:fe75154a stopped in 0.9078 ms
+2020-05-09 10:40:46.021 +08:00 [INF] Application is shutting down...
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:351a921f stopped in 0.9892 ms
+2020-05-09 10:40:46.021 +08:00 [DBG] Execution loop Worker:4e257567 stopped in 1.0105 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:ad08aa07 stopped in 1.1427 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:92619026 stopped in 1.2167 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:83faf073 stopped in 1.2879 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:fdfa1dc8 stopped in 1.3431 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:db3863ea stopped in 1.3981 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:9ea2e1ad stopped in 1.5288 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:f1bc6652 stopped in 1.5409 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:3d9f9ee1 stopped in 1.6797 ms
+2020-05-09 10:40:46.022 +08:00 [DBG] Execution loop Worker:e34254e3 stopped in 1.6963 ms
+2020-05-09 10:40:46.023 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 caught stopped signal...
+2020-05-09 10:40:46.025 +08:00 [DBG] Execution loop RedisSubscription:088463c5 stopped in 4.1404 ms
+2020-05-09 10:40:46.025 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 All dispatchers stopped
+2020-05-09 10:40:46.025 +08:00 [DBG] Execution loop ServerHeartbeatProcess:b54f023b stopped in 4.6447 ms
+2020-05-09 10:40:46.028 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 successfully reported itself as stopped in 1.4619 ms
+2020-05-09 10:40:46.028 +08:00 [INF] Server xttd-2020fopbkl:18732:faa8c8f0 has been stopped in total 6.9908 ms
+2020-05-09 10:40:46.028 +08:00 [DBG] Execution loop BackgroundServerProcess:2618bfab stopped in 8.0239 ms
+2020-05-09 12:26:18.678 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-05-09 12:26:18.715 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-05-09 12:26:18.926 +08:00 [INF] Creating key "7a25190c-3966-40af-b756-eb07a055f986" with creation date "2020-05-09T04:26:18.9210489+00:00", activation date "2020-05-09T04:26:18.9174924+00:00", and expiration date "2020-08-07T04:26:18.9174924+00:00".
+2020-05-09 12:26:18.939 +08:00 [WRN] No XML encryptor configured. Key "7a25190c-3966-40af-b756-eb07a055f986" may be persisted to storage in unencrypted form.
+2020-05-09 12:26:19.329 +08:00 [INF] Starting Hangfire Server using job storage: 'redis://127.0.0.1:6379,allowAdmin=True/0'
+2020-05-09 12:26:19.329 +08:00 [DBG] Using the following options for Redis job storage:
+2020-05-09 12:26:19.330 +08:00 [DBG] ConnectionString: 127.0.0.1:6379,allowAdmin=True
+DN: 0
+2020-05-09 12:26:19.330 +08:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2020-05-09 12:26:19.341 +08:00 [DBG] Execution loop BackgroundServerProcess:dcfd34e8 has started in 4.6159 ms
+2020-05-09 12:26:19.368 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d successfully announced in 24.2186 ms
+2020-05-09 12:26:19.371 +08:00 [DBG] Execution loop ServerHeartbeatProcess:f697a9da has started in 1.4825 ms
+2020-05-09 12:26:19.372 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, FetchedJobsWatcher, ExpiredJobsWatcher, RedisSubscription, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2020-05-09 12:26:19.372 +08:00 [DBG] Execution loop ServerWatchdog:10fa2f9a has started in 0.3537 ms
+2020-05-09 12:26:19.372 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:fbdecc06 has started in 0.2523 ms
+2020-05-09 12:26:19.373 +08:00 [DBG] Execution loop FetchedJobsWatcher:2c589feb has started in 0.3079 ms
+2020-05-09 12:26:19.373 +08:00 [DBG] Execution loop ExpiredJobsWatcher:7b122d28 has started in 0.1789 ms
+2020-05-09 12:26:19.373 +08:00 [DBG] Execution loop RedisSubscription:02b147ec has started in 0.2931 ms
+2020-05-09 12:26:19.374 +08:00 [DBG] Execution loop Worker:d9f2dc10 has started in 0.7153 ms
+2020-05-09 12:26:19.376 +08:00 [DBG] Execution loop Worker:52fd69e1 has started in 2.9246 ms
+2020-05-09 12:26:19.377 +08:00 [DBG] Execution loop Worker:05785b04 has started in 3.3814 ms
+2020-05-09 12:26:19.379 +08:00 [DBG] Execution loop Worker:4cda19ad has started in 5.7791 ms
+2020-05-09 12:26:19.379 +08:00 [DBG] Execution loop Worker:17f18fc3 has started in 6.1594 ms
+2020-05-09 12:26:19.380 +08:00 [DBG] Execution loop Worker:0c78ddc8 has started in 6.4983 ms
+2020-05-09 12:26:19.380 +08:00 [DBG] Execution loop Worker:e2fa56eb has started in 6.8671 ms
+2020-05-09 12:26:19.380 +08:00 [DBG] Execution loop Worker:c170a71f has started in 7.0302 ms
+2020-05-09 12:26:19.380 +08:00 [DBG] Execution loop Worker:9293cb8d has started in 7.1358 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:440297ac has started in 7.2545 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:8fb29a58 has started in 7.4728 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:ca992adf has started in 7.6494 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:3d1cdb94 has started in 7.8119 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:b0c69cf6 has started in 7.9437 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:c8266f8b has started in 8.0466 ms
+2020-05-09 12:26:19.381 +08:00 [DBG] Execution loop Worker:a3e0943a has started in 8.1755 ms
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop Worker:a376081d has started in 8.3026 ms
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop Worker:9c67a3c3 has started in 8.4216 ms
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop Worker:3e87107a has started in 8.5218 ms
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop Worker:8d804b2b has started in 8.6758 ms
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop DelayedJobScheduler:5209ab6c has started in 0.2095 ms
+2020-05-09 12:26:19.382 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d all the dispatchers started
+2020-05-09 12:26:19.382 +08:00 [DBG] Execution loop RecurringJobScheduler:06568aa7 has started in 0.2384 ms
+2020-05-09 12:26:19.384 +08:00 [INF] Removing expired records from the 'succeeded' list...
+2020-05-09 12:26:19.385 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:26:19.391 +08:00 [INF] Removing 2 expired jobs from 'succeeded' list...
+2020-05-09 12:26:19.391 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:26:19.392 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:26:20.076 +08:00 [INF] Now listening on: http://127.0.0.1:6923
+2020-05-09 12:26:20.078 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-05-09 12:26:20.078 +08:00 [INF] Hosting environment: Production
+2020-05-09 12:26:20.078 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-05-09 12:26:20.245 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/SysDic/Index  
+2020-05-09 12:26:20.253 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-05-09 12:26:20.309 +08:00 [INF] Executing endpoint 'Altas.Framework.Admin.SysDicController.Index (Atlass.Framework.Web)'
+2020-05-09 12:26:20.362 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "SysDic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller Altas.Framework.Admin.SysDicController (Atlass.Framework.Web).
+2020-05-09 12:26:20.402 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 12:26:20.543 +08:00 [INF] Executed ViewResult - view Index executed in 156.3544ms.
+2020-05-09 12:26:20.545 +08:00 [INF] Executed action Altas.Framework.Admin.SysDicController.Index (Atlass.Framework.Web) in 182.6366ms
+2020-05-09 12:26:20.545 +08:00 [INF] Executed endpoint 'Altas.Framework.Admin.SysDicController.Index (Atlass.Framework.Web)'
+2020-05-09 12:26:20.553 +08:00 [INF] Request finished in 308.6234ms 200 text/html; charset=utf-8
+2020-05-09 12:26:20.588 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css  
+2020-05-09 12:26:20.589 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/layer.js  
+2020-05-09 12:26:20.589 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.js  
+2020-05-09 12:26:20.589 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.css  
+2020-05-09 12:26:20.589 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css  
+2020-05-09 12:26:20.590 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js  
+2020-05-09 12:26:20.598 +08:00 [INF] Sending file. Request path: '/plugins/layer/layer.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\layer.js'
+2020-05-09 12:26:20.599 +08:00 [INF] Request finished in 10.0738ms 200 application/javascript
+2020-05-09 12:26:20.599 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js  
+2020-05-09 12:26:20.599 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.js'
+2020-05-09 12:26:20.599 +08:00 [INF] Request finished in 0.5189ms 200 application/javascript
+2020-05-09 12:26:20.603 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-05-09 12:26:20.607 +08:00 [INF] Sending file. Request path: '/framework/jutils.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jutils.js'
+2020-05-09 12:26:20.607 +08:00 [INF] Request finished in 3.9313ms 200 application/javascript
+2020-05-09 12:26:20.609 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/content.js?v=1.0.0  
+2020-05-09 12:26:20.610 +08:00 [INF] Sending file. Request path: '/hplus/js/content.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\content.js'
+2020-05-09 12:26:20.610 +08:00 [INF] Request finished in 0.7417ms 200 application/javascript
+2020-05-09 12:26:20.611 +08:00 [INF] Sending file. Request path: '/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\zTree_v3\css\bootstrapStyle\bootstrapStyle.css'
+2020-05-09 12:26:20.611 +08:00 [INF] Request finished in 22.2969ms 200 text/css
+2020-05-09 12:26:20.614 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.js'
+2020-05-09 12:26:20.614 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.css'
+2020-05-09 12:26:20.614 +08:00 [INF] Request finished in 25.472ms 200 application/javascript
+2020-05-09 12:26:20.614 +08:00 [INF] Request finished in 25.5184ms 200 text/css
+2020-05-09 12:26:20.615 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/zTree_v3/js/jquery.ztree.all.min.js  
+2020-05-09 12:26:20.624 +08:00 [INF] Sending file. Request path: '/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\plugins\bootstrap-table\bootstrap-table.min.css'
+2020-05-09 12:26:20.624 +08:00 [INF] Request finished in 36.7518ms 200 text/css
+2020-05-09 12:26:20.636 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\bootstrap-table.min.js'
+2020-05-09 12:26:20.636 +08:00 [INF] Request finished in 46.7588ms 200 application/javascript
+2020-05-09 12:26:20.645 +08:00 [INF] Sending file. Request path: '/plugins/zTree_v3/js/jquery.ztree.all.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\zTree_v3\js\jquery.ztree.all.min.js'
+2020-05-09 12:26:20.645 +08:00 [INF] Request finished in 30.7227ms 200 application/javascript
+2020-05-09 12:26:20.790 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 12:26:20.794 +08:00 [INF] Request finished in 4.9953ms 404 
+2020-05-09 12:26:20.817 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/theme/default/layer.css?v=3.1.1  
+2020-05-09 12:26:20.831 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/sysdic/getdicztree?_=1588998380799  
+2020-05-09 12:26:20.835 +08:00 [INF] Executing endpoint 'Altas.Framework.Admin.SysDicController.GetDicZtree (Atlass.Framework.Web)'
+2020-05-09 12:26:20.840 +08:00 [INF] Route matched with {area = "Admin", action = "GetDicZtree", controller = "SysDic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetDicZtree() on controller Altas.Framework.Admin.SysDicController (Atlass.Framework.Web).
+2020-05-09 12:26:20.855 +08:00 [INF] Sending file. Request path: '/plugins/layer/theme/default/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\theme\default\layer.css'
+2020-05-09 12:26:20.855 +08:00 [INF] Request finished in 38.666ms 200 text/css
+2020-05-09 12:26:20.890 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/sysdic/GetGridDataBypId?order=asc application/json 
+2020-05-09 12:26:20.891 +08:00 [INF] Executing endpoint 'Altas.Framework.Admin.SysDicController.GetGridDataBypId (Atlass.Framework.Web)'
+2020-05-09 12:26:20.892 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.js.map  
+2020-05-09 12:26:20.892 +08:00 [INF] Request finished in 0.459ms 404 
+2020-05-09 12:26:20.894 +08:00 [INF] Route matched with {area = "Admin", action = "GetGridDataBypId", controller = "SysDic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetGridDataBypId() on controller Altas.Framework.Admin.SysDicController (Atlass.Framework.Web).
+2020-05-09 12:26:20.901 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/glyphicons-halflings-regular.woff2  
+2020-05-09 12:26:20.918 +08:00 [INF] Sending file. Request path: '/hplus/fonts/glyphicons-halflings-regular.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\glyphicons-halflings-regular.woff2'
+2020-05-09 12:26:20.919 +08:00 [INF] Request finished in 18.0137ms 200 font/woff2
+2020-05-09 12:26:20.963 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 12:26:20.963 +08:00 [INF] Executed action Altas.Framework.Admin.SysDicController.GetDicZtree (Atlass.Framework.Web) in 123.0884ms
+2020-05-09 12:26:20.964 +08:00 [INF] Executed endpoint 'Altas.Framework.Admin.SysDicController.GetDicZtree (Atlass.Framework.Web)'
+2020-05-09 12:26:20.964 +08:00 [INF] Request finished in 132.8665ms 200 text/plain; charset=utf-8
+2020-05-09 12:26:20.970 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 12:26:20.970 +08:00 [INF] Executed action Altas.Framework.Admin.SysDicController.GetGridDataBypId (Atlass.Framework.Web) in 76.2651ms
+2020-05-09 12:26:20.970 +08:00 [INF] Executed endpoint 'Altas.Framework.Admin.SysDicController.GetGridDataBypId (Atlass.Framework.Web)'
+2020-05-09 12:26:20.970 +08:00 [INF] Request finished in 79.9194ms 200 text/plain; charset=utf-8
+2020-05-09 12:26:20.982 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/zTree_v3/css/bootstrapStyle/img/bootstrap.png  
+2020-05-09 12:26:21.003 +08:00 [INF] Sending file. Request path: '/plugins/zTree_v3/css/bootstrapStyle/img/bootstrap.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\zTree_v3\css\bootstrapStyle\img\bootstrap.png'
+2020-05-09 12:26:21.003 +08:00 [INF] Request finished in 21.2439ms 200 image/png
+2020-05-09 12:26:49.376 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:27:19.378 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:27:19.413 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:27:19.414 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:27:19.414 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:27:49.379 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:28:19.379 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:28:19.416 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:28:19.417 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:28:19.417 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:28:49.380 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:29:19.382 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:29:19.419 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:29:19.419 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:29:19.420 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:29:49.383 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:30:19.383 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:30:19.421 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:30:19.423 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:30:19.424 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:30:49.384 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:31:19.385 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:31:19.425 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:31:19.426 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:31:19.426 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:31:49.385 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:32:19.385 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:32:19.427 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:32:19.428 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:32:19.428 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:32:49.386 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:33:19.387 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:33:19.429 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:33:19.429 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:33:19.429 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:33:49.388 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:34:19.388 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:34:19.430 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:34:19.431 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:34:19.431 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:34:49.388 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:35:19.388 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:35:19.432 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:35:19.433 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:35:19.433 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:35:49.389 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:36:19.390 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:36:19.435 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:36:19.435 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:36:19.435 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:36:49.390 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:37:19.391 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:37:19.436 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:37:19.437 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:37:19.437 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:37:49.393 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:38:19.393 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:38:19.438 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:38:19.438 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:38:19.438 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:38:49.394 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:39:19.395 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:39:19.440 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:39:19.440 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:39:19.441 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:39:49.397 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:40:19.398 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:40:19.443 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:40:19.443 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:40:19.444 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:40:49.399 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:41:19.400 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:41:19.445 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:41:19.445 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:41:19.446 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:41:49.401 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:42:19.402 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:42:19.446 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:42:19.447 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:42:19.447 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:42:49.402 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:43:19.403 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:43:19.448 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:43:19.448 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:43:19.449 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:43:49.404 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:44:19.404 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:44:19.449 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:44:19.450 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:44:19.450 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:44:49.405 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:45:19.405 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:45:19.452 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:45:19.452 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:45:19.452 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:45:49.406 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:46:19.406 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:46:19.453 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:46:19.453 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:46:19.454 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:46:49.406 +08:00 [DBG] Server xttd-2020fopbkl:22040:1069358d heartbeat successfully sent
+2020-05-09 12:47:17.640 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:6923/iisintegration  0
+2020-05-09 12:47:17.641 +08:00 [INF] Request finished in 0.7023ms 202 
+2020-05-09 12:47:17.641 +08:00 [DBG] Hangfire Server is stopping...
+2020-05-09 12:47:17.641 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d caught stopping signal...
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop FetchedJobsWatcher:2c589feb stopped in 0.2006 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:ca992adf stopped in 0.2452 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop ExpiredJobsWatcher:7b122d28 stopped in 0.2071 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:c8266f8b stopped in 0.3381 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:b0c69cf6 stopped in 0.3831 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:3e87107a stopped in 0.2189 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:a3e0943a stopped in 0.4355 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:0c78ddc8 stopped in 0.6021 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop ServerWatchdog:10fa2f9a stopped in 0.7393 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop DelayedJobScheduler:5209ab6c stopped in 0.7985 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:05785b04 stopped in 0.8241 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:3d1cdb94 stopped in 0.7852 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:fbdecc06 stopped in 0.7938 ms
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop RecurringJobScheduler:06568aa7 stopped in 0.8175 ms
+2020-05-09 12:47:17.643 +08:00 [INF] Application is shutting down...
+2020-05-09 12:47:17.642 +08:00 [DBG] Execution loop Worker:9c67a3c3 stopped in 0.7409 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:8d804b2b stopped in 1.1464 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:52fd69e1 stopped in 0.974 ms
+2020-05-09 12:47:17.643 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d caught stopped signal...
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:c170a71f stopped in 1.1464 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:d9f2dc10 stopped in 1.2917 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:9293cb8d stopped in 1.3528 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:4cda19ad stopped in 1.4036 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:8fb29a58 stopped in 1.4626 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:17f18fc3 stopped in 1.5054 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:440297ac stopped in 1.5765 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:a376081d stopped in 1.5114 ms
+2020-05-09 12:47:17.643 +08:00 [DBG] Execution loop Worker:e2fa56eb stopped in 1.6589 ms
+2020-05-09 12:47:17.646 +08:00 [DBG] Execution loop RedisSubscription:02b147ec stopped in 4.5561 ms
+2020-05-09 12:47:17.646 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d All dispatchers stopped
+2020-05-09 12:47:17.647 +08:00 [DBG] Execution loop ServerHeartbeatProcess:f697a9da stopped in 5.0769 ms
+2020-05-09 12:47:17.650 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d successfully reported itself as stopped in 1.4572 ms
+2020-05-09 12:47:17.650 +08:00 [INF] Server xttd-2020fopbkl:22040:1069358d has been stopped in total 7.5981 ms
+2020-05-09 12:47:17.650 +08:00 [DBG] Execution loop BackgroundServerProcess:dcfd34e8 stopped in 8.4186 ms
+2020-05-09 12:51:40.906 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-05-09 12:51:40.954 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-05-09 12:51:41.227 +08:00 [INF] Creating key "b0741cd4-0f12-4e8a-8d28-fc711f33a710" with creation date "2020-05-09T04:51:41.2228993+00:00", activation date "2020-05-09T04:51:41.2196172+00:00", and expiration date "2020-08-07T04:51:41.2196172+00:00".
+2020-05-09 12:51:41.241 +08:00 [WRN] No XML encryptor configured. Key "b0741cd4-0f12-4e8a-8d28-fc711f33a710" may be persisted to storage in unencrypted form.
+2020-05-09 12:51:41.626 +08:00 [INF] Starting Hangfire Server using job storage: 'redis://127.0.0.1:6379,allowAdmin=True/0'
+2020-05-09 12:51:41.626 +08:00 [DBG] Using the following options for Redis job storage:
+2020-05-09 12:51:41.627 +08:00 [DBG] ConnectionString: 127.0.0.1:6379,allowAdmin=True
+DN: 0
+2020-05-09 12:51:41.627 +08:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2020-05-09 12:51:41.636 +08:00 [DBG] Execution loop BackgroundServerProcess:df42d58e has started in 4.0495 ms
+2020-05-09 12:51:41.664 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed successfully announced in 25.2765 ms
+2020-05-09 12:51:41.666 +08:00 [DBG] Execution loop ServerHeartbeatProcess:70fa005b has started in 1.2803 ms
+2020-05-09 12:51:41.667 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, FetchedJobsWatcher, ExpiredJobsWatcher, RedisSubscription, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2020-05-09 12:51:41.667 +08:00 [DBG] Execution loop ServerWatchdog:1732a368 has started in 0.2846 ms
+2020-05-09 12:51:41.668 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:e79a39a6 has started in 0.204 ms
+2020-05-09 12:51:41.668 +08:00 [DBG] Execution loop FetchedJobsWatcher:562317f7 has started in 0.2975 ms
+2020-05-09 12:51:41.668 +08:00 [DBG] Execution loop ExpiredJobsWatcher:c554d26b has started in 0.1534 ms
+2020-05-09 12:51:41.673 +08:00 [DBG] Execution loop RedisSubscription:30f76609 has started in 4.6418 ms
+2020-05-09 12:51:41.674 +08:00 [DBG] Execution loop Worker:5c7eaf0e has started in 0.4507 ms
+2020-05-09 12:51:41.674 +08:00 [DBG] Execution loop Worker:bbb158e0 has started in 0.6767 ms
+2020-05-09 12:51:41.674 +08:00 [DBG] Execution loop Worker:a0c8f5c2 has started in 0.9017 ms
+2020-05-09 12:51:41.674 +08:00 [DBG] Execution loop Worker:a69e4ce4 has started in 1.0476 ms
+2020-05-09 12:51:41.677 +08:00 [DBG] Execution loop Worker:adbecc8c has started in 4.1638 ms
+2020-05-09 12:51:41.684 +08:00 [INF] Removing expired records from the 'succeeded' list...
+2020-05-09 12:51:41.686 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:51:41.705 +08:00 [DBG] Execution loop Worker:f29c35f5 has started in 31.2944 ms
+2020-05-09 12:51:41.705 +08:00 [DBG] Execution loop Worker:4c8d3e73 has started in 31.9599 ms
+2020-05-09 12:51:41.716 +08:00 [DBG] Execution loop Worker:7405c538 has started in 42.6617 ms
+2020-05-09 12:51:41.716 +08:00 [DBG] Execution loop Worker:07b6c4a4 has started in 42.9967 ms
+2020-05-09 12:51:41.716 +08:00 [DBG] Execution loop Worker:bede30b3 has started in 43.202 ms
+2020-05-09 12:51:41.716 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:fc901ee6 has started in 43.5002 ms
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:ac09d470 has started in 43.6812 ms
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:6ad07aa9 has started in 43.8334 ms
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:e40fcf89 has started in 43.9509 ms
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:26656779 has started in 44.1193 ms
+2020-05-09 12:51:41.717 +08:00 [DBG] Execution loop Worker:11064edb has started in 44.2744 ms
+2020-05-09 12:51:41.718 +08:00 [DBG] Execution loop Worker:0083dd42 has started in 44.9288 ms
+2020-05-09 12:51:41.718 +08:00 [DBG] Execution loop Worker:a5e81b83 has started in 45.2062 ms
+2020-05-09 12:51:41.719 +08:00 [DBG] Execution loop Worker:745d6147 has started in 45.5863 ms
+2020-05-09 12:51:41.719 +08:00 [DBG] Execution loop Worker:a1b3cbc8 has started in 46.1483 ms
+2020-05-09 12:51:41.719 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:51:41.720 +08:00 [DBG] Execution loop DelayedJobScheduler:cabf260c has started in 0.2762 ms
+2020-05-09 12:51:41.720 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed all the dispatchers started
+2020-05-09 12:51:41.720 +08:00 [DBG] Execution loop RecurringJobScheduler:0f0de97b has started in 0.2085 ms
+2020-05-09 12:51:42.447 +08:00 [INF] Now listening on: http://127.0.0.1:16921
+2020-05-09 12:51:42.448 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-05-09 12:51:42.448 +08:00 [INF] Hosting environment: Production
+2020-05-09 12:51:42.448 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-05-09 12:51:42.699 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/doctor/expertinfo/index  
+2020-05-09 12:51:42.708 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-05-09 12:51:42.779 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.Index (Atlass.Framework.Web)'
+2020-05-09 12:51:42.915 +08:00 [INF] Route matched with {area = "Doctor", action = "Index", controller = "ExpertInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController (Atlass.Framework.Web).
+2020-05-09 12:51:42.950 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-09 12:51:43.091 +08:00 [INF] Executed ViewResult - view Index executed in 149.0993ms.
+2020-05-09 12:51:43.091 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.Index (Atlass.Framework.Web) in 176.0719ms
+2020-05-09 12:51:43.092 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.Index (Atlass.Framework.Web)'
+2020-05-09 12:51:43.101 +08:00 [INF] Request finished in 403.2232ms 200 text/html; charset=utf-8
+2020-05-09 12:51:43.346 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css.map  
+2020-05-09 12:51:43.354 +08:00 [INF] Request finished in 8.5055ms 404 
+2020-05-09 12:51:43.459 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/doctor/expertinfo/GetData?order=asc&offset=0&limit=15 application/json 
+2020-05-09 12:51:43.465 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.js.map  
+2020-05-09 12:51:43.465 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.GetData (Atlass.Framework.Web)'
+2020-05-09 12:51:43.465 +08:00 [INF] Request finished in 0.5057ms 404 
+2020-05-09 12:51:43.483 +08:00 [INF] Route matched with {area = "Doctor", action = "GetData", controller = "ExpertInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController (Atlass.Framework.Web).
+2020-05-09 12:51:43.785 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-09 12:51:43.786 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.GetData (Atlass.Framework.Web) in 302.2936ms
+2020-05-09 12:51:43.786 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Doctor.Controllers.ExpertInfoController.GetData (Atlass.Framework.Web)'
+2020-05-09 12:51:43.786 +08:00 [INF] Request finished in 327.4306ms 200 text/plain; charset=utf-8
+2020-05-09 12:51:43.872 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/c170fbe8073946278cc1cc572241ad6e.png  
+2020-05-09 12:51:43.879 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/633ad2f0322344619a176c16c4d7ca2c.jpg  
+2020-05-09 12:51:43.881 +08:00 [INF] Request finished in 1.6086ms 404 
+2020-05-09 12:51:43.882 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/c0087991bd6244faac638dbbe84d3435.jpg  
+2020-05-09 12:51:43.883 +08:00 [INF] Request finished in 0.7912ms 404 
+2020-05-09 12:51:43.883 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/adfd0db0b04547499012c971b42bc9c1.jpg  
+2020-05-09 12:51:43.884 +08:00 [INF] Request finished in 0.5323ms 404 
+2020-05-09 12:51:43.885 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/f6ce57651f144367ab911d655343cabd.jpg  
+2020-05-09 12:51:43.885 +08:00 [INF] Request finished in 0.523ms 404 
+2020-05-09 12:51:43.886 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/58c81f3cd8a64ef8b38fd2aeef6a3ed8.png  
+2020-05-09 12:51:43.890 +08:00 [INF] Request finished in 4.2077ms 404 
+2020-05-09 12:51:43.901 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/2aa976e6872c4553b01de4fe76be91fe.jpg  
+2020-05-09 12:51:43.902 +08:00 [INF] Request finished in 1.0536ms 404 
+2020-05-09 12:51:43.914 +08:00 [INF] Sending file. Request path: '/upfiles/heads/c170fbe8073946278cc1cc572241ad6e.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\upfiles\heads\c170fbe8073946278cc1cc572241ad6e.png'
+2020-05-09 12:51:43.915 +08:00 [INF] Request finished in 42.7594ms 200 image/png
+2020-05-09 12:51:43.934 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/5bc9f3d467e94033ad808085ef512da7.png  
+2020-05-09 12:51:43.934 +08:00 [INF] Request finished in 0.705ms 404 
+2020-05-09 12:51:43.937 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/e6c99d15f6d441c4a604fe506d760cdc.jpeg  
+2020-05-09 12:51:43.938 +08:00 [INF] Request finished in 1.232ms 404 
+2020-05-09 12:51:43.939 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/86da54bc3a1f49a18ab57fc871ab0e6f.jpg  
+2020-05-09 12:51:43.940 +08:00 [INF] Request finished in 1.0127ms 404 
+2020-05-09 12:51:43.955 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/fa9e5bbb9c4a49b4a8e1c87f9522de9f.jpg  
+2020-05-09 12:51:43.955 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/449ba94c245c4af1addcde738b03d303.jpg  
+2020-05-09 12:51:43.955 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/5f8906ce8f0947b2949c54e54a327239.jpg  
+2020-05-09 12:51:43.956 +08:00 [INF] Request finished in 1.1439ms 404 
+2020-05-09 12:51:43.956 +08:00 [INF] Request finished in 0.8796ms 404 
+2020-05-09 12:51:43.957 +08:00 [INF] Request finished in 2.6143ms 404 
+2020-05-09 12:51:43.967 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/aeb443475ce542e08bcecfb40a509193.jpg  
+2020-05-09 12:51:43.967 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/upfiles/heads/cc5c9e82a7c44f4cbc67d6cf56b974e9.jpg  
+2020-05-09 12:51:43.968 +08:00 [INF] Request finished in 0.6389ms 404 
+2020-05-09 12:51:43.968 +08:00 [INF] Request finished in 0.6389ms 404 
+2020-05-09 12:52:11.672 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:52:41.675 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:52:41.732 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:52:41.733 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:52:41.733 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:53:11.676 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:53:41.676 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:53:41.734 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:53:41.735 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:53:41.735 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:54:11.677 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:54:41.677 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:54:41.736 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:54:41.737 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:54:41.738 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:55:11.678 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:55:41.678 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:55:41.738 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:55:41.739 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:55:41.739 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:56:11.679 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:56:41.680 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:56:41.740 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:56:41.741 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:56:41.742 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:57:11.681 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:57:41.682 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:57:41.742 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:57:41.743 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:57:41.743 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:58:11.683 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:58:41.684 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:58:41.744 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:58:41.744 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:58:41.744 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 12:59:11.686 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:59:41.688 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 12:59:41.745 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 12:59:41.745 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 12:59:41.746 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:00:11.689 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:00:41.690 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:00:41.747 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:00:41.747 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:00:41.747 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:01:11.691 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:01:41.691 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:01:41.748 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:01:41.749 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:01:41.749 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:02:11.692 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:02:41.693 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:02:41.750 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:02:41.750 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:02:41.750 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:03:11.694 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:03:41.694 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:03:41.751 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:03:41.752 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:03:41.752 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:04:11.695 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:04:41.696 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:04:41.754 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:04:41.754 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:04:41.755 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:05:11.697 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:05:41.699 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:05:41.756 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:05:41.756 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:05:41.757 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:06:11.700 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:06:41.702 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:06:41.758 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:06:41.758 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:06:41.759 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:07:11.703 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:07:41.704 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:07:41.761 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:07:41.762 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:07:41.762 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:08:11.705 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:08:41.707 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:08:41.764 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:08:41.765 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:08:41.765 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:09:11.708 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:09:41.708 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:09:41.766 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:09:41.767 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:09:41.767 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:10:11.709 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:10:41.711 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:10:41.769 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:10:41.770 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:10:41.770 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:11:11.713 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:11:41.714 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:11:41.772 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-09 13:11:41.772 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-09 13:11:41.773 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-09 13:12:11.715 +08:00 [DBG] Server xttd-2020fopbkl:21264:ae942fed heartbeat successfully sent
+2020-05-09 13:12:39.837 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:16921/iisintegration  0
+2020-05-09 13:12:39.838 +08:00 [INF] Request finished in 0.6045ms 202 
+2020-05-09 13:12:39.838 +08:00 [DBG] Hangfire Server is stopping...
+2020-05-09 13:12:39.839 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed caught stopping signal...
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop FetchedJobsWatcher:562317f7 stopped in 0.8313 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:6ad07aa9 stopped in 0.9064 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:26656779 stopped in 0.9499 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop ExpiredJobsWatcher:c554d26b stopped in 0.8321 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:0083dd42 stopped in 1.0538 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:ac09d470 stopped in 0.8333 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:e79a39a6 stopped in 1.1224 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop DelayedJobScheduler:cabf260c stopped in 1.1944 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:adbecc8c stopped in 0.8783 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:4c8d3e73 stopped in 1.24 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:a0c8f5c2 stopped in 0.9191 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:11064edb stopped in 1.3806 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:bede30b3 stopped in 0.9468 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:fc901ee6 stopped in 0.9973 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:f29c35f5 stopped in 1.0057 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:5c7eaf0e stopped in 1.585 ms
+2020-05-09 13:12:39.840 +08:00 [INF] Application is shutting down...
+2020-05-09 13:12:39.841 +08:00 [DBG] Execution loop Worker:a5e81b83 stopped in 1.7219 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop ServerWatchdog:1732a368 stopped in 1.1853 ms
+2020-05-09 13:12:39.841 +08:00 [DBG] Execution loop Worker:7405c538 stopped in 1.7803 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:bbb158e0 stopped in 1.3201 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:e40fcf89 stopped in 0.9239 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop Worker:07b6c4a4 stopped in 1.5182 ms
+2020-05-09 13:12:39.841 +08:00 [DBG] Execution loop Worker:745d6147 stopped in 1.6747 ms
+2020-05-09 13:12:39.841 +08:00 [DBG] Execution loop Worker:a1b3cbc8 stopped in 1.7398 ms
+2020-05-09 13:12:39.840 +08:00 [DBG] Execution loop RecurringJobScheduler:0f0de97b stopped in 1.2041 ms
+2020-05-09 13:12:39.841 +08:00 [DBG] Execution loop Worker:a69e4ce4 stopped in 1.802 ms
+2020-05-09 13:12:39.841 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed caught stopped signal...
+2020-05-09 13:12:39.844 +08:00 [DBG] Execution loop RedisSubscription:30f76609 stopped in 4.8381 ms
+2020-05-09 13:12:39.844 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed All dispatchers stopped
+2020-05-09 13:12:39.844 +08:00 [DBG] Execution loop ServerHeartbeatProcess:70fa005b stopped in 5.3968 ms
+2020-05-09 13:12:39.847 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed successfully reported itself as stopped in 1.495 ms
+2020-05-09 13:12:39.847 +08:00 [INF] Server xttd-2020fopbkl:21264:ae942fed has been stopped in total 8.0815 ms
+2020-05-09 13:12:39.847 +08:00 [DBG] Execution loop BackgroundServerProcess:df42d58e stopped in 7.6273 ms

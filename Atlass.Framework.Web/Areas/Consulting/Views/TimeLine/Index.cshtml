@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="ibox-content">
+    <form class="form form-horizontal" id="form" autocomplete="off">
+        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">回合次数：</label>
+            <div class="col-sm-4">
+                <input type="text" name="qcount" id="qcount" class="form-control" data-rule="required;integer; range[1~1000]">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">咨询超时（小时）：</label>
+            <div class="col-sm-4">
+                <input type="text" name="qhours" id="qhours" class="form-control" data-rule="required;integer; range[1~1000]">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required">推送信息</label>
+            <div class="col-sm-4">
+                <textarea cols="50" rows="4" id="push_msg" name="push_msg" data-rule="required"></textarea>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-3">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/Consulting/timeline/savedata', $(form).serialize(),
+                        function (res) {
+
+                        });
+                }
+            });
+
+            loadData();
+        });
+
+
+        function loadData() {
+            jutils.ajaxGet('/Consulting/timeline/GetDataById', null, function (res) {
+                $('#form').initFormData(res.data.model);
+            });
+        }
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+

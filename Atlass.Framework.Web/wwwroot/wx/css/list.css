@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+}
+.box2{
+    margin: 0 .4rem;
+    position: relative;
+    background-color: #fff;
+}
+.row{
+    height: 1.2rem;
+    width: 100%;
+    font-size: 0.28rem;
+    line-height: .4rem;
+    padding: .2rem 0;
+    border-bottom: 1px solid #F0F0F0 ;
+}
+.text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.btn{
+    width: 100%;
+    height: .56rem;
+    color: #fff;
+    font-size: .24rem;
+    line-height: .56rem;
+    text-align: center;
+    border-radius: .06rem;
+    background-color: #EE591D;
+    margin-top: .4rem;
+}

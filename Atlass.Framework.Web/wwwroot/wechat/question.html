@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>咨询问题填写</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/webuploader.css" />
+		<style>
+			.questionList {
+				width: 100%;
+				height: auto;
+				box-sizing: border-box;
+				padding: 0 10px;
+			}
+			
+			.questionList .list {
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			
+			.questionList .sameTop {
+				width: 100%;
+				height: auto;
+				line-height: 30px;
+				font-size: 16px;
+			}
+			
+			.questionList .sameTop p {
+				display: inline-block;
+				margin-right: 5px;
+				color: #ccc;
+			}
+			
+			.questionList .sameTop i {
+				color: #f00;
+				position: relative;
+				top: 3px;
+				;
+			}
+			
+			.questionList .info {
+				width: 100%;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			.questionList .info .name {
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				border: none;
+				background: #eee;
+				font-size: 16px;
+				border-radius: 5px;
+			}
+			
+			.questionList .info .sexchoose {
+				margin-right: 15px;
+			}
+			
+			.questionList .info .mask {
+				color: #ccc;
+				border: 1px solid #ccc;
+				border-radius: 30px;
+				padding: 4px 8px;
+				margin: 8px 8px 0 0;
+				display: inline-block;
+			}
+			
+			.questionList .info .mask:last-child {
+				margin-right: 0;
+			}
+			.questionList .info .editTheme{
+				/*display: inline-block;*/
+				border: none;
+				border-bottom: 1px solid #333;
+				line-height: 30px;
+				width: 200px;
+				display: none;
+			}
+			
+			.questionList .info .upImg {
+				width: 52px;
+				height: 52px;
+				margin-right: 10px;
+				margin-top: 8px;
+				float: left;
+				position: relative;
+			}
+			
+			.questionList .info .upImg .yourimg {
+				width: 100%;
+				height: 100%;
+			}
+			.save{
+				width: 100%;
+				height: 40px;
+				background: #39b7a7;
+				color: #fff;
+				margin-top: 10px;
+				border: none;
+				border-radius: 6px;
+			}
+			.line{
+				width: 100%;
+				height: 1px;
+				background: #f0f0f0;
+				margin-top: 10px;
+			}
+			.tips{
+				font-size: 12px;
+				color: #999;
+			}
+			
+			#myYear,
+			#city-picker,
+			#date-picker {
+				width: 90px;
+				height: 30px;
+				background: #eee;
+				line-height: 30px;
+				border: none;
+			}
+			
+			#city-picker,
+			#date-picker {
+				width: auto;
+			}
+			
+			#detail {
+				width: 100%;
+				height: 100px;
+				background: #eee;
+				border: none;
+			}
+			#allThemes span.active{
+				color: #39B7A7;
+				border-color: #39B7A7;
+			}
+			.saveMyImg{
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.saveMyImg .showImg{
+				display: flex;
+				flex-wrap: wrap;
+				margin-right: 5px;
+			}
+			.saveMyImg .showImg .imgs{
+				width: 52px;
+				height: 52px;
+				margin-right: 10px;
+				margin-top: 8px;
+				position: relative;
+			}
+			.saveMyImg .showImg .imgs .shows{
+				width: 100%;
+				height: 100%;
+			}
+			.saveMyImg .showImg .imgs .del{
+				position: absolute;
+				width: 14px;
+				height: 16px;
+				right: -7px;
+				top: -7px;
+			}
+			.bg{
+			    width: 100%;
+			    height: 100%;
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    background: rgba(0,0,0,0.6);
+			    display: none;
+				z-index: 2;
+			}
+			.attention{
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				display: none;
+				justify-content: center;
+				align-items: center;
+				z-index: 3;
+			}
+			.attention .popInfo{
+				width: 95%;
+				height: 200px;
+				border-radius: 6px;
+				background: #fff;
+				overflow: hidden;
+			}
+			.attention .popInfo .someInfo{
+				width: 100%;
+				height: 150px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				border-bottom: 1px solid #d1d1d1;
+			}
+			.attention .popInfo .someInfo p{
+				font-size: 14px;
+				color: #333;
+				margin-bottom: 30px;
+			}
+			.attention .popInfo .someInfo .lian{
+				font-size: 14px;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.attention .popInfo .someInfo .lian a{
+				color: #fff;
+				padding: 10px;
+				background: #e36211;
+				border: none;
+				border-radius: 5px;
+				margin-right: 10px;
+			}
+			.attention .popInfo .someInfo .lian a:last-child{
+				margin-right: 0;;
+			}
+			.attention .popInfo .know{
+				width: 100%;
+				height: 50px;
+				font-size: 16px;
+				color: #33a3ff;
+				background: #f1f1f1;
+				line-height: 50px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="questionList">
+			<div class="list">
+				<div class="sameTop">
+					<p>昵称</p>
+					<i>*</i>
+				</div>
+				<div class="info">
+					<input type="text" class="name" id="yournickname" />
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>性别</p>
+					<i>*</i>
+				</div>
+				<div class="info" id="yourSex">
+					<label class="sexchoose"><input type="radio" name="sex" value="0" style="margin-right: 5px;">女</label>
+					<label class="sexchoose"><input type="radio" name="sex" value="1" style="margin-right: 5px;">男</label>
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>出生年份</p>
+					<i>*</i>
+				</div>
+				<div class="info">
+					<select id="myYear" class="weui-select">
+					</select>
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>性取向</p>
+					<i>*</i>
+				</div>
+				<div class="info" id="yourLove">
+					<label class="sexchoose"><input type="radio" name="love" value="0" style="margin-right: 5px;">同性恋</label>
+					<label class="sexchoose" onclick="showAtt()"><input type="radio" name="love" value="1" style="margin-right: 5px;">异性恋</label>
+					<label class="sexchoose"><input type="radio" name="love" value="2" style="margin-right: 5px;">其他</label>
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>居住城市</p>
+					<i>*</i>
+				</div>
+				<div class="info">
+					<input type="text" id='city-picker' />
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>咨询主题(可多选)</p>
+					<i>*</i>
+				</div>
+				<div class="info" id="allThemes">
+					<span class="mask other">其他</span>
+					<input type="text" placeholder="请输入您要咨询的主题" class="editTheme">
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>担心行为发生在哪一天</p>
+				</div>
+				<div class="info">
+					<input type="text" id='date-picker' />
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>请详细描述担心的具体行为</p>
+					<i>*</i>
+				</div>
+				<div class="info">
+					<textarea id="detail"></textarea>
+				</div>
+			</div>
+			<div class="list">
+				<div class="sameTop">
+					<p>上传照片</p>
+				</div>
+				<div class="info saveMyImg">
+					<div class="showImg">
+
+					</div>
+					<div class="upImg" id="upload-container">
+						<img src="imgs/addpic.png" alt="" class="yourimg" />
+					</div>
+					<div id="upload-list">
+						<!-- <div class="upload-item">
+                            <span>文件名：123</span>
+                            <span data-file_id="" class="btn-delete">删除</span>
+                            <span data-file_id="" class="btn-retry">重试</span>
+                            <div class="percentage"></div>
+                        </div> -->
+					</div>
+					<button id="picker" style="display: none;"></button>
+					<!--<div class="upImg">-->
+					<!--&lt;!&ndash;<input id="uploaderInput" class="weui-uploader__input zjxfjs_file" type="file" accept="image/*" multiple="" onchange="myImgFile(event)"><input id="uploaderInput" class="weui-uploader__input zjxfjs_file" type="file" accept="image/*" multiple="" onchange="myImgFile(event)">&ndash;&gt;-->
+					<!--<img src="imgs/addpic.png" alt="" class="yourimg" />-->
+					<!--</div>-->
+				</div>
+			</div>
+			<button class="save" onclick="save()">提交咨询</button>
+			<div class="line"></div>
+			<div class="tips">注意：您可以在提问后追问2次，专家的回答只作为咨询建议</div>
+		</div>
+		<div class="bg"></div>
+		<div class="attention">
+			<div class="popInfo">
+				<div class="someInfo">
+					<p>本平台专家咨询师只擅长同性恋相关性健康问题<br>如非同性恋，请关注本机构另一平台(全直伙伴)</p>
+					<div class="lian">
+						<a href="">使用说明</a>
+						<a href="">我已关注</a>
+					</div>
+				</div>
+				<div class="know">我知道了</div>
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/city-picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/webuploader.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var webUrl = 'http://182.43.178.216:9006';
+			var imgArr = [];
+			$(function() {
+				$('.attention .know').on('click', function() {
+					$('.bg').hide();
+					$('.attention').hide();
+				});
+
+				var myDate = new Date();
+				var startYear = myDate.getFullYear() - 100; //起始年份 
+				var endYear = myDate.getFullYear(); //结束年份 
+				var month = myDate.getMonth() + 1;
+				var day = myDate.getDate();
+				var obj = document.getElementById('myYear');
+				for (var i = startYear; i <= endYear; i++) {
+					obj.options.add(new Option(i, i));
+				}
+				obj.options[obj.options.length - 1].selected = 1;
+				//	obj.value
+
+				//				选择城市
+				$("#city-picker").cityPicker({
+					title: "请选择居住城市",
+					showDistrict: false
+				});
+
+				// 日期
+
+				$("#date-picker").calendar();
+				// var today = endYear + '-' + addZero(month) + '-' + addZero(day);
+				//
+				// $("#date-picker").calendar("setValue", [today]);
+
+
+				//选择主题
+				$('#allThemes').on('click', 'span', function() {
+					if ($(this).html() == '其他') {
+						if ($(this).hasClass('active')) {
+							$(this).removeClass('active');
+							$('.editTheme').hide();
+						} else {
+							$(this).parent().find('span').removeClass('active');
+							$(this).addClass('active');
+							$('.editTheme').show();
+						}
+					} else {
+						if ($(this).hasClass('active')) {
+							$(this).removeClass('active');
+						} else {
+							$('#allThemes .other').removeClass('active');
+							$('.editTheme').hide();
+							$(this).addClass('active');
+						}
+					}
+				});
+
+				function getAllInfo() {
+					$.ajax({
+						url: webUrl + '/api/ApiQuestion/GetQuestionInit',
+						type: "GET",
+						data: {
+							openId: getQueryVariable('openId')
+						},
+						dataType: "json",
+						success: function(res) {
+							if (res.status) {
+								var user = res.data.user;
+								if (user.nick_name == '') {
+
+								} else {
+									$('#yournickname').val(user.nick_name);
+									$('#yournickname').attr("disabled", true);
+									$('#yourSex .sexchoose').eq(user.gender).find('input').click();
+									$("input[name='sex']").attr("disabled", true);
+									var n = endYear - user.birth_year;
+									obj.options[obj.options.length - n - 1].selected = 1;
+									$("#myYear").attr("disabled", "disabled");
+									$('#city-picker').val(user.province + ' ' + user.city);
+								};
+								var themes = res.data.themes;
+								var html = '';
+								for (var i = 0; i < themes.length; i++) {
+									html += '<span class="mask">' + themes[i] + '</span>'
+								}
+								$('#allThemes').prepend(html);
+							} else {
+								$.toast(res.msg, "text")
+							}
+						}
+					})
+				};
+				getAllInfo();
+
+				//删除图片
+				$('.showImg').on('click', '.del', function() {
+					imgArr.splice($(this).parent().index(), 1);
+					$(this).parent().remove();
+					console.log(imgArr)
+				})
+			});
+
+			function showAtt() {
+				$('.bg').show();
+				$('.attention').css('display', 'flex');
+			}
+			//上传图片
+
+			$('#upload-container').click(function(event) {
+				$("#picker").find('input').attr('accept', 'image/*');
+				$("#picker").find('input').click();
+			});
+			var uploader = WebUploader.create({
+				auto: true, // 选完文件后，是否自动上传。
+				swf: 'https://cdn.bootcss.com/webuploader/0.1.1/Uploader.swf', // swf文件路径
+				server: webUrl + '/api/Upload/Uploadimg', // 文件接收服务端。
+				dnd: '#upload-container',
+				pick: '#picker', // 内部根据当前运行是创建，可能是input元素，也可能是flash. 这里是div的id
+				multiple: true, // 选择多个
+				chunked: true, // 开起分片上传。
+				threads: 5, // 上传并发数。允许同时最大上传进程数。
+				method: 'POST', // 文件上传方式，POST或者GET。
+				fileSizeLimit: 1024 * 1024 * 100 * 100, //验证文件总大小是否超出限制, 超出则不允许加入队列。
+				fileSingleSizeLimit: 1024 * 1024 * 100, //验证单个文件大小是否超出限制, 超出则不允许加入队列。
+				fileVal: 'upload', // [默认值：'file'] 设置文件上传域的name。
+			});
+			uploader.on('fileQueued', function(file) {
+				// 选中文件时要做的事情，比如在页面中显示选中的文件并添加到文件列表，获取文件的大小，文件类型等
+				// console.log(file.ext) // 获取文件的后缀
+				// console.log(file.size) // 获取文件的大小
+				// console.log(file.name);
+				// var html = '<div class="upload-item"><span>文件名：'+file.name+'</span><span data-file_id="'+file.id+'" class="btn-delete">删除</span><span data-file_id="'+file.id+'" class="btn-retry">重试</span><div class="percentage '+file.id+'" style="width: 0%;"></div></div>';
+				// $('#upload-list').append(html);
+			});
+			uploader.on('uploadSuccess', function(file, response) {
+				var html = '<div class="imgs">\n' +
+					'<img src="' + webUrl + response.data.url + '" alt="" class="shows">\n' +
+					'<img src="imgs/del2.png" alt="" class="del">\n' +
+					'</div>';
+				$('.showImg').append(html);
+				imgArr.push(response.data.url);
+			});
+			uploader.on('uploadError', function(file) {
+				$.toast('图片上传失败', 'text');
+			});
+
+			// function myImgFile(e){
+			// 	var file = e.srcElement.files[0];
+			// 	var reader = new FileReader();
+			// 	reader.readAsDataURL(file);
+			// 	reader.onload = function(e) {
+			// 		var html = '<div class="imgs">\n' +
+			// 						'<img src="'+this.result+'" alt="" class="shows">\n' +
+			// 						'<img src="imgs/del2.png" alt="" class="del">\n' +
+			// 					'</div>';
+			// 		$('.showImg').append(html);
+			// 		imgArr.push(this.result);
+			// 	};
+			// 	// var imgURL = window.URL.createObjectURL(file);
+			// 	console.log(getObjectURL(file))
+			// }
+			function getObjectURL(file) {
+				var url = null;
+				if (window.createObjectURL != undefined) { // basic
+					url = window.createObjectURL(file);
+				} else if (window.URL != undefined) { // mozilla(firefox)
+					url = window.URL.createObjectURL(file);
+				} else if (window.webkitURL != undefined) { // webkit or chrome
+					url = window.webkitURL.createObjectURL(file);
+				}
+				return url;
+			}
+
+			function save() {
+				if (!$("input[name='love']:checked").val() || $("input[name='love']:checked").val() == '') {
+					$.toast('请选择您的性取向', 'text');
+					return false;
+				}
+				if ($('#city-picker').val() == '') {
+					$.toast('请选择居住城市', 'text');
+					return false;
+				}
+				var arr = $('#allThemes span');
+				var themesArr = [];
+				for (var i = 0; i < arr.length; i++) {
+					if (arr.eq(i).hasClass('active')) {
+						if (arr.eq(i).html() == '其他') {
+							if ($('.editTheme').val() == '') {
+								themesArr = []
+							} else {
+								themesArr = [$('.editTheme').val()];
+							}
+						} else {
+							themesArr.push(arr.eq(i).html())
+						}
+					}
+				}
+				if (themesArr.length == 0) {
+					$.toast('请选择主题或输入主题', 'text');
+					return false;
+				}
+				if ($('#detail').val() == '') {
+					$.toast('请描述具体行为', 'text');
+					return false;
+				}
+				var option = {
+					qtitle: themesArr.join(','),
+					qcontent: $('#detail').val(),
+					expert_id: getQueryVariable('expert_id'),
+					nick_name: $('#yournickname').val(),
+					gender: $("input[name='sex']:checked").val(),
+					sexual_orientation: $("input[name='love']:checked").val(),
+					birth_year: $("#myYear").val(),
+					province: $('#city-picker').val().split(' ')[0],
+					city: $('#city-picker').val().split(' ')[1],
+					hight_risk_time: $('#date-picker').val(),
+					imgs: imgArr.join(','),
+					paient_openid: getQueryVariable('openId')
+				};
+				upQuestion(option);
+			}
+
+			function upQuestion(option) {
+				$.ajax({
+					type: 'POST',
+					url: webUrl + '/api/ApiQuestion/SaveQuestion',
+					dataType: "json",
+					data: option,
+					success: function(res) {
+						if (res.status) {
+							console.log(res);
+							window.location.href = './upSuccess.html';
+						} else {
+							$.toast('提交失败', "text")
+						}
+					}
+				});
+			}
+
+			function addZero(ele) {
+				console.log(ele, ele.length)
+				if (ele.toString().length == 1) {
+					ele = '0' + ele;
+				}
+				return ele;
+			};
+
+			function getQueryVariable(variable) {
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == variable) {
+						return pair[1];
+					}
+				}
+				return (false);
+			};
+		</script>
+	</body>
+
+</html>

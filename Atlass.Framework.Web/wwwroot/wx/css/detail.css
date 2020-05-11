@@ -1,0 +1,93 @@
+﻿
+/* 头部 */
+.header{
+    width: 100%;
+    text-align: center;
+    padding: .4rem;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.header .avatar{
+    position: relative;
+    display: block;
+    width: 1.48rem;
+    height: 1.48rem;
+    margin: auto;
+}
+.floatLeft{
+    position: absolute;
+    top: .2rem;
+    left: .2rem;
+}
+.floatLeft .btn{
+    width: .96rem;
+    color: #39B7A7;
+    background-color: #F5F5F5 ;
+    margin-bottom: .08rem;
+}
+.floatLeft span{
+    font-size: .3rem;
+}
+.floatRight{
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    font-size: .2rem;
+    color: #A6A6A6;
+}
+
+.header .name{
+    font-size: 18px;
+    margin-top: .2rem;
+    margin-bottom: .06rem;
+}
+.header .operation {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    text-align: -webkit-center;
+    margin: 0 auto;
+}
+.btn {
+    width: 80px;
+    margin:0 auto;
+    height: 30px;
+    text-align: -webkit-center;
+    /*text-align: center;*/
+    line-height: 30px;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+.btn.red{
+    background-color: #EE591D;
+}
+.btn.green{
+    background-color: #39B7A7;
+}
+
+.bottom{
+    margin-top: .2rem;
+    background-color: #fff;
+    padding: .4rem;
+}
+.tags{
+    display: flex;
+}
+/* 自定义标签 */
+.tag{
+    height: .42rem;
+    text-align: center;
+    color: #39B7A7;
+    font-size: .26rem;
+    border-radius: .16rem;
+    padding: 0 .14rem;
+    border:1px solid #39B7A7;
+    margin-right: .18rem;
+}
+.row{
+    margin-top: .18rem;
+    font-size: .24rem;
+    color: #555555;
+}

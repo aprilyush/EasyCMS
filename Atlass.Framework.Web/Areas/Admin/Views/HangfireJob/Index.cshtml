@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ibox-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="toolbar" class="btn-group">
+                
+            </div>
+            <table id="userTable"></table>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script>
+        var $userTable,warnType=0;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $userTable=$("#userTable").bootstrapTable({
+                url: '/admin/hangfirejob/getdata',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height()-50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var p = {
+                        limit: params.limit,
+                        offset: params.offset, //页码
+                        log_type: warnType,
+                       log_summary:$('#log_summary').val()
+                    }
+                    return p;
+                },
+                columns: [
+                      {
+                          field: 'task_name', title: '任务名称', align: 'center',width:100
+                    },
+                    {
+                        field: 'assembly_namespace', title: '命名空间', align: 'left'
+                    },
+                    {
+                        field: 'class_name', title: '类名', align: 'center'
+                    }, {
+                        field: 'cron_express', title: 'Cron表达式', align: 'center'
+                    }, {
+                        field: 'excute_status', title: '任务状态', align: 'center', formatter: function (v) {
+                            if (v === 1) {
+                                return '<span class="label label-primary">正常</span>';
+                            }
+                            return '<span class="label label-danger">停止</span>';
+                        }
+                    }, {
+                        field: 'excute_time', title: '上一次执行时间', align: 'center'
+                    }
+                    , {
+                        field: 'remark', title: '说明', align: 'center'
+                    },
+                     {
+                        field: 'id', title: '操作', align: 'left', formatter:renderOpts
+                    },
+                ]
+
+            });
+            jutils.initToolBarRole('#toolbar');
+        }
+
+
+        function renderOpts(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+        function add() {
+            var url = '/admin/hangfirejob/form?id=';
+            location.href = url;
+        }
+
+        function edit(obj) {
+
+            var id = $(obj).data('id');
+            var url = '/admin/hangfirejob/form?id='+id;
+            location.href = url;
+        }
+
+        function pauseJob(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认停止当前任务吗',
+                function () {
+                    jutils.ajaxGet('/admin/hangfireJob/Pause',
+                        { id: id },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+        function resumeJob(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认启动当前任务吗',
+                function () {
+                    jutils.ajaxGet('/admin/hangfireJob/Resume',
+                        { id: id },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+        function excuteTask(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认执行当前任务吗',
+                function () {
+                    jutils.ajaxGet('/admin/hangfireJob/excuteJob',
+                        { id: id },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function deleteJob(obj) {
+            var id = $(obj).data('id');
+                 jutils.confirm('确认删除当前任务吗',
+                function () {
+                    jutils.ajaxGet('/admin/hangfireJob/DelById',
+                        { id: id },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function query() {
+            $userTable.bootstrapTable('refresh');
+        }
+    </script>
+}
+
+
+
+
+
+

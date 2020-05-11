@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>咨询回复</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css"/>-->
+    <link type="text/css" rel="stylesheet" href="css/quill.snow.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.emoji.css" />
+	<link rel="stylesheet" type="text/css" href="css/webuploader.css" />
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+        }
+        .box{
+            width: 100%;
+            height: auto;
+        }
+        .box .infoList{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            box-sizing: border-box;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        .box .infoList .someQuestion{
+            padding-top: 10px;
+        }
+        .box .infoList .title{
+            width: 100%;
+            display: flex;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            color: #888;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .box .infoList .title.doctor{
+            height: auto;
+            padding: 10px 0;
+        }
+        .box .infoList .dashang{
+            width: 100%;
+            background: #fff;
+            text-align: right;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .box .infoList .dashang span{
+            color: #EE591D;
+        }
+        .box .infoList .title.doctor .time{
+            position: relative;
+            top: 14px;
+        }
+        .box .infoList .docHead{
+            width: auto;
+            height: 46px;
+            overflow: auto;
+        }
+        .box .infoList .docHead img{
+            width: 46px;
+            height: 46px;
+            float: left;
+        }
+        .box .infoList .docHead .intro{
+            width: auto;
+            height: 46px;
+            float: left;
+            margin-left: 10px;
+			overflow: hidden;
+        }
+        .box .infoList .docHead .intro h6{
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+        .box .infoList .docHead .intro span{
+            color: #A6A6A6;
+            font-size: 12px;
+            position: relative;
+            top: -10px;
+        }
+        .box .infoList .question{
+            /*padding-top: 10px;*/
+        }
+        .box .infoList .question .mask .masks{
+            font-size: 16px;
+            color: #54B8A7;
+        }
+		.box .infoList .question .mask img{
+			width: 16px;
+			height: 18px;
+			margin-left: 8px;
+			position: relative;
+			top: 3px;
+		}
+        .box .infoList .question .mask .tips{
+            font-size: 13px;
+			margin-left: 5px;
+            color: #333;
+        }
+        .box .infoList .content{
+            width: 100%;
+            height: auto;
+            padding: 10px 0;
+			font-size: 16px;
+			color: #333;
+			line-height: 20px;
+        }
+        .box .infoList .content .type{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .box .infoList .content .type span{
+            font-size: 14px;
+            color: #39B7A7;
+            height: 20px;
+            line-height: 20px;
+            padding: 0px 8px;
+            border-radius: 20px;
+            border: 1px solid #39B7A7;
+            margin-right: 10px;
+            float: left;
+        }
+        .box .infoList .content p{
+            font-size: 16px;
+            color: #333;
+            line-height: 20px;
+        }
+        .moreQuestion{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            box-sizing: border-box;
+            padding: 15px;
+        }
+        .moreQuestion .answer{
+            width: 100%;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .moreQuestion .answer span{
+            font-size: 14px;
+            color: #a6a6a6;
+            line-height: 30px;
+            float: left;
+        }
+        .moreQuestion .answer button{
+            float: right;
+            font-size: 14px;
+            color: #39B7A7;
+            border: 1px solid #39B7A7;
+            padding: 3px;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .moreQuestion textarea{
+            width: 100%;
+            height: 140px;
+            background: #F6F6F6;
+            border: none;
+            box-sizing: border-box;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        .moreQuestion .info{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        .moreQuestion .info .upImg {
+            width: 52px;
+            height: 52px;
+            margin-right: 10px;
+            margin-top: 6px;
+            float: left;
+            position: relative;
+        }
+
+        .moreQuestion .info .upImg .yourimg {
+            width: 100%;
+            height: 100%;
+        }
+        .moreQuestion .save{
+            width: 100%;
+            height: 40px;
+            background: #EE591D;
+            font-size: 16px;
+            color: #fff;
+            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
+        }
+        .emoji_container{
+            width: 92%;
+        }
+        .bg{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.4);
+			display: none;
+        }
+        .quickBox{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 500px;
+            background: #fff;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 0px 0 25px;
+            box-sizing: border-box;
+			display: none;
+			overflow: auto;
+        }
+        .quickBox .top{
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #F0F0F0;
+			position: fixed;
+			z-index: 2;
+			padding-top: 25px;
+			background: #fff;
+        }
+        .quickBox .btnList{
+            display: table;
+            width: auto;
+            height: 32px;
+            line-height: 32px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .quickBox .btnList .sameBtn{
+            float: left;
+            margin-right: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+        .quickBox .btnList .sameBtn:last-child{
+            margin-right: 0;
+        }
+        .quickBox .btnList .sameBtn.active{
+            border-bottom: 2px solid #39B7A7;
+        }
+        .quickBox .allInfo{
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            padding: 0 10px;
+			position: relative;
+			top: 60px;
+		}
+        .quickBox .allInfo .samePart,.quickBox .allInfo .samePart .list{
+            width: 100%;
+            height: auto;
+        }
+        .quickBox .allInfo .samePart{
+            display: none;
+        }
+        .quickBox .allInfo .quickInfo{
+            display: block;
+        }
+        .quickBox .allInfo .samePart .list{
+            padding: 10px 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .quickBox .allInfo .samePart .list .title{
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .quickBox .allInfo .samePart .list .title span{
+            font-size: 18px;
+            color: #222;
+        }
+        .quickBox .allInfo .samePart .list .title img{
+            width: 20px;
+            height: 16px;
+        }
+        .quickBox .allInfo .samePart .list .content{
+            width: 100%;
+            height: auto;
+            max-height: 37px;
+            overflow: hidden;
+            margin-top: 5px;
+			font-size: 14px;
+			color: #9C9C9C;
+			line-height: 18px;
+        }
+        .quickBox .allInfo .samePart .list .content p{
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            color: #9C9C9C;
+            line-height: 18px;
+        }
+        .quickBox .edit{
+            width: 33px;
+            height: 36px;
+            position: fixed;
+            right: 18px;
+            bottom: 50px;
+            z-index: 2;
+        }
+		.infoList .showUpImg{
+		    width: 100%;
+		    box-sizing: border-box;
+		    padding: 0 20px;
+		    height: auto;
+		    display: flex;
+		    flex-wrap: wrap;
+		}
+		.infoList .showUpImg img{
+		    width: 60px;
+		    height: 60px;
+		    margin: 0 10px 10px 0;
+		}
+		
+		.questionEnd{
+			display: none;
+		}
+		.questionEnd .introduct{
+		    width: 100%;
+		    height: auto;
+		    background: #fff;
+		    margin-top: 10px;
+		    box-sizing: border-box;
+		    padding: 10px;
+		}
+		.questionEnd .introduct .title{
+		    width: 100%;
+		    height: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		}
+		.questionEnd .introduct .title .score{
+		    width: auto;
+		    height: 100%;
+		    display: flex;
+		    align-items: center;
+		}
+		.questionEnd .introduct .title .score span{
+		    font-size: 12px;
+		    color: #a6a6a6;
+		}
+		.questionEnd .introduct .title .score .xing{
+		    width: auto;
+		    height: 100%;
+		    /*overflow: hidden;*/
+		    display: flex;
+		    align-items: center;
+		    margin-left: 5px;
+		}
+		.questionEnd .introduct .title .score .xing img{
+		    /*float: left;*/
+		    width: 15px;
+		    height: 15px;
+		    margin-right: 3px;
+		}
+		.questionEnd .introduct .title .time{
+		    font-size: 12px;
+		    color: #B6B6B6;
+		}
+		.questionEnd .introduct .content{
+		    margin-top: 10px;
+		}
+		.questionEnd .introduct .content p{
+		    font-size: 14px;
+		    color: #333;
+		}
+		.questionEnd .introduct .content .price{
+		    width: 100%;
+		    height: 30px;
+		    display: flex;
+		    align-items: center;
+		    margin-top: 5px;
+		}
+		.questionEnd .introduct .content .price span{
+		    width: 14px;
+		    height: 14px;
+		    font-size: 14px;
+		    color: #E35A1B;
+		    border: 1px solid #E35A1B;
+		    text-align: center;
+		    border-radius: 50%;
+		    line-height: 16px;
+		}
+		.questionEnd .introduct .content .price i{
+		    font-size: 14px;
+		    color: #E35A1B;
+		    margin-left: 5px;
+		    font-style: normal;
+		}
+		.questionEnd .return{
+		    width: 94%;
+		    height: 30px;
+		    border: 1px solid #EE591D;
+		    margin: 18px auto;
+		    background: transparent;
+		    font-size: 16px;
+		    color: #EE591D;
+		    display: table;
+		    border-radius: 4px;
+		}
+		.saveMyImg{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.saveMyImg .showImg{
+			display: flex;
+			flex-wrap: wrap;
+			margin-right: 5px;
+		}
+		.saveMyImg .showImg .imgs{
+			width: 52px;
+			height: 52px;
+			margin-right: 10px;
+			margin-top: 8px;
+			position: relative;
+		}
+		.saveMyImg .showImg .imgs .shows{
+			width: 100%;
+			height: 100%;
+		}
+		.saveMyImg .showImg .imgs .del{
+			position: absolute;
+			width: 14px;
+			height: 16px;
+			right: -7px;
+			top: -7px;
+		}
+		.closeQuick{
+			position: absolute;
+			font-size: 14px;
+			color: #BDBDBD;
+			top: 9px;
+			right: 18px;
+			z-index: 10;
+		}
+		.noInfo{
+			display: block;
+			text-align: center;
+			margin: 40px auto;
+		}
+		.showBigImg{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 100;
+			display: none;
+		}
+		.showBigImg .bg{
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.6);
+			top: 0;
+			left: 0;
+			position: absolute;
+			display: block;
+		}
+		.showBigImg img{
+			width: 100%;
+			position: relative;
+		}
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="questionAndAnswer">
+        <div class="infoList youStartQuestion">
+            <div class="someQuestion">
+                <div class="dashang"><span></span>次打赏</div>
+                <div class="title question userFirstHead">
+                    <div class="mask">
+                        <span class="masks"></span>
+						<img src="imgs/file.png" alt="" onclick="seeUserInfo()">
+                    </div>
+                    <span class="time startTime"></span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="type questionType">
+                </div>
+                <p class="yourQuestion"></p>
+            </div>
+        </div>
+		
+		<div class="doctorFirstAnswer">
+			<!-- <div class="infoList">
+			    <div class="title doctor">
+			        <div class="docHead">
+			            <img src="imgs/head.png" alt="">
+			            <div class="intro">
+			                <h6></h6>
+			                <span></span>
+			            </div>
+			        </div>
+			        <span class="time"></span>
+			    </div>
+			    <div class="content">
+			        <p>has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反</p>
+			    </div>
+			</div> -->
+		</div>
+        
+		<div class="moreInfoChat">
+			<!-- <div class="infoList">
+			    <div class="someQuestion">
+			        <!--<div class="dashang"><span>2</span>次打赏</div>-->
+			        <!-- <div class="title question">
+			            <div class="mask">
+			                <span class="masks">桐木</span>
+			                <span class="tips">追问</span>
+			            </div>
+			            <span class="time">2019.03.15 09:03</span>
+			        </div>
+			    </div>
+			    <div class="content">
+			        <p>has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反has兑换对文化地位U盾围殴违反</p>
+			    </div>
+			</div> -->
+		</div>
+        
+    </div>
+
+    <div class="moreQuestion">
+        <div class="answer">
+            <span>回复</span>
+            <button onclick="showQuickInfo()">快捷信息</button>
+        </div>
+        <!--<textarea name="" placeholder="请详细描述..." id="" cols="30" rows="10"></textarea>-->
+        <div id="editor" style="height: 140px;">
+            <!--<p>Hello World!</p>-->
+        </div>
+        <!--<div id="btn1">123</div>-->
+        <div class="info saveMyImg">
+        	<div class="showImg">
+        
+        	</div>
+        	<div class="upImg" id="upload-container">
+        		<img src="imgs/addpic.png" alt="" class="yourimg" />
+        	</div>
+        	<div id="upload-list">
+        		<!-- <div class="upload-item">
+                    <span>文件名：123</span>
+                    <span data-file_id="" class="btn-delete">删除</span>
+                    <span data-file_id="" class="btn-retry">重试</span>
+                    <div class="percentage"></div>
+                </div> -->
+        	</div>
+        	<button id="picker" style="display: none;"></button>
+        	<!--<div class="upImg">-->
+        		<!--&lt;!&ndash;<input id="uploaderInput" class="weui-uploader__input zjxfjs_file" type="file" accept="image/*" multiple="" onchange="myImgFile(event)"><input id="uploaderInput" class="weui-uploader__input zjxfjs_file" type="file" accept="image/*" multiple="" onchange="myImgFile(event)">&ndash;&gt;-->
+        		<!--<img src="imgs/addpic.png" alt="" class="yourimg" />-->
+        	<!--</div>-->
+        </div>
+        <button class="save" onclick="save()" style="margin-top: 50px;">提交</button>
+    </div>
+
+	<div class="questionEnd">
+		<div class="introduct">
+			<div class="title">
+				<div class="score">
+					<span>评分</span>
+					<div class="xing showMyXing">
+						<img src="imgs/xing3.png" alt="">
+						<img src="imgs/xing3.png" alt="">
+						<img src="imgs/xing3.png" alt="">
+						<img src="imgs/xing3.png" alt="">
+						<img src="imgs/xing3.png" alt="">
+					</div>
+				</div>
+				<div class="time">2019/03/17 15:55</div>
+			</div>
+			<div class="content">
+				<p></p>
+				<!-- <div class="price">
+					<span>￥</span>
+					<i>+10</i>
+				</div> -->
+			</div>
+		</div>
+		<button class="return" onclick="goBack()">返回</button>
+	</div>
+	
+</div>
+<div class="bg" onclick="hideQuick()"></div>
+<div class="quickBox">
+	<span class="closeQuick">x</span>
+    <div class="top">
+        <div class="btnList" id="infoBtn">
+            <div class="sameBtn active">快捷用语</div>
+            <div class="sameBtn">私人资料库</div>
+            <div class="sameBtn">相关服务</div>
+        </div>
+    </div>
+    <div class="allInfo" id="myAllInfo">
+        <div class="quickInfo samePart">
+        </div>
+        <div class="selfInfo samePart">
+        </div>
+        <div class="otherService samePart">
+            <!-- <div class="list">
+                <div class="title">
+                    <span>3显示备注信息</span>
+                    <img src="imgs/yulan.png" alt="">
+                </div>
+                <div class="content">
+                    <p>撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低</p>
+                </div>
+            </div>
+            <div class="list">
+                <div class="title">
+                    <span>显示备注信息</span>
+                    <img src="imgs/yulan.png" alt="">
+                </div>
+                <div class="content">
+                    <p>撒的感觉啥感觉挥洒感觉放假啊好过分啊功夫就好噶就会打火机放低</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="showBigImg">
+	<div class="bg"></div>
+	<img src="" alt="">
+</div>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/quill.min.js" type="text/javascript"></script>
+<script src="js/jquery.mousewheel-3.0.6.min.js" type="text/javascript"></script>
+<script src="js/jquery.mCustomScrollbar.min.js" type="text/javascript"></script>
+<script src="js/webuploader.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="js/jquery.emoji.min.js" type="text/javascript"></script>-->
+<!--http://www.jq22.com/demo/jQuery-emoji-master20160321/dist/img/qq/41.gif-->
+<script>
+	var webUrl = 'http://182.43.178.216:9006';
+	var expertId = '';//专家id
+	var imgArr = [];
+	var questionObj = {};
+	var qarr = [];
+	var types = 0;
+	var arr1 = [],arr2=[],arr3=[];
+    // var str = '<div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="请输入活动详情"><p>实打实</p><p><a href="萨" target="_blank">萨</a>达</p></div><div class="ql-clipboard" contenteditable="true" tabindex="-1"></div><div class="ql-tooltip ql-editing ql-hidden" data-mode="link" style="left: -16px; top: 46px;"><a class="ql-preview" target="_blank" href="about:blank"></a><input type="text" data-formula="e=mc^2" data-link="https://quilljs.com" data-video="Embed URL" placeholder="https://quilljs.com"><a class="ql-action"></a><a class="ql-remove"></a></div>';
+    // $('#editor').html(str);
+    // var str = '<div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="请输入活动详情"><p>实打实</p><p><a href="萨" target="_blank">萨</a>达</p></div>';
+    // $('#editor').html(str);
+	//判断有没有引用资料
+	var quill;
+	
+	if(localStorage.getItem('fullContent')){
+		var obj = JSON.parse(localStorage.getItem('fullContent'));
+		localStorage.removeItem('fullContent');
+		var str = '<div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="请详细描述">'+obj.qcontent+'</div>';
+		$('#editor').html(str);
+		var html = '';
+		var img = [];
+		if(obj.images!=''){
+			imgs = obj.images.split(',');
+		}
+		for(var i = 0;i<img.length;i++){
+			html += '<div class="imgs">\n' +
+				'<img src="'+webUrl+img[i]+'" alt="" class="shows">\n' +
+				'<img src="imgs/del2.png" alt="" class="del">\n' +
+				'</div>';
+			imgArr.push(img[i]);
+		}
+		$('.showImg').append(html);
+	}
+	quill = new Quill('#editor', {
+	    theme: 'snow',
+	    placeholder: '请详细描述'
+	});
+    
+	function showQuickInfo(){
+		getQuickInfo();
+		$('.bg').show();
+		$('.quickBox').show();
+	}
+	function hideQuick(){
+		$('.bg').hide();
+		$('.quickBox').hide();
+	}
+	//获取快捷用语等
+	function getQuickInfo(){
+		$.ajax({
+		    url: webUrl+'/api/apiExpert/GetQuickReplyList',
+		    type: "GET",
+		    data:{
+		        openId: localStorage.getItem('myOpenId')
+		    },
+		    dataType: "json",
+		    success: function(res){
+		        if(res.status){
+		            arr1 = [],arr2=[],arr3=[];
+					for(var i = 0;i<res.data.list.length;i++){
+						if(res.data.list[i].qtype == 0){
+							arr1.push(res.data.list[i])
+						}
+						if(res.data.list[i].qtype == 1){
+							arr2.push(res.data.list[i])
+						}
+					}
+					arr3 = res.data.ngoService;
+					if(arr1.length == 0){
+						$('.quickInfo').html('<span class="noInfo">暂无数据</span><img src="imgs/edit.png" alt="" class="edit" onclick="goEditQuick(0)">');
+					}else{
+						var text1 = '';
+						for(var s = 0;s<arr1.length;s++){
+							text1 += '<div class="list">'+
+											'<div class="title">'+
+												'<span onclick="quoteInfo(event)">'+arr1[s].hot_title+'</span>'+
+											'</div>'+
+											'<div class="content" onclick="quoteInfo(event)">'+arr1[s].qcontent+'</div>'+
+										'</div>'
+						}
+						text1 += '<img src="imgs/edit.png" alt="" class="edit" onclick="goEditQuick(0)">';
+						$('.quickInfo').html(text1);
+					}
+					if(arr2.length == 0){
+						$('.selfInfo').html('<span class="noInfo">暂无数据</span><img src="imgs/edit.png" alt="" class="edit" onclick="goEditQuick(1)">');
+					}else{
+						var text2 = '';
+						for(var p = 0;p<arr2.length;p++){
+							text2 += '<div class="list">'+
+											'<div class="title">'+
+												'<span onclick="quoteInfo(event)">'+arr2[p].hot_title+'</span>'+
+												'<img src="imgs/yulan.png" alt="" onclick="goPreview(event)">'+
+											'</div>'+
+											'<div class="content" onclick="quoteInfo(event)">'+arr2[p].qcontent+'</div>'+
+										'</div>'
+						}
+						text2 += '<img src="imgs/edit.png" alt="" class="edit" onclick="goEditQuick(1)">';
+						$('.selfInfo').html(text2);
+					}
+					//相关服务
+					if(arr3.length == 0){
+						$('.otherService').html('<span class="noInfo">暂无数据</span><img src="imgs/edit.png" alt="" class="edit" onclick="goEditQuick(1)">');
+					}else{
+						var text3 = '';
+						for(var t = 0;t<arr3.length;t++){
+							text3 += '<div class="list">'+
+											'<div class="title" onclick="chooseHrefInfo(event)">'+
+												'<span onclick="quoteInfo(event)">'+arr3[t].hot_title+'</span>'+
+											'</div>'+
+										'</div>'
+						}
+						$('.otherService').html(text3);
+					}
+		        }else{
+		            $.toast(res.msg,'text')
+		        }
+		    }
+		})
+	}
+	
+	function goEditQuick(ele){
+		window.location.href = './shortCut.html?type='+ele+'&expertId='+expertId;
+	}
+	function quoteInfo(ele){
+		var index = $(ele.currentTarget.closest('.list')).index();
+		var obj = {};
+		if(types == 0){
+			obj = arr1[index];
+		}
+		if(types == 1){
+			obj = arr2[index];
+		}
+		$('#editor .ql-editor').append(obj.qcontent);
+		var html = '';
+		for(var i = 0;i<obj.images.length;i++){
+			html += '<div class="imgs">\n' +
+				'<img src="'+webUrl+obj.images[i]+'" alt="" class="shows">\n' +
+				'<img src="imgs/del2.png" alt="" class="del">\n' +
+				'</div>';
+			imgArr.push(obj.images[i]);
+		}
+		$('.showImg').append(html);
+		$('.bg').hide();
+		$('.quickBox').hide();
+	}
+	function goPreview(ele){
+		var index = $(ele.currentTarget.closest('.list')).index();
+		window.location.href = './preview.html?type='+types+'&expertId='+expertId+'&id='+arr2[index].id+'&backOne=1';
+	}
+	function chooseHrefInfo(ele){
+		var index = $(ele.currentTarget.closest('.list')).index();
+		var obj = arr3[index];
+		var str = '<a href="'+obj.url+'" target="_blank">'+obj.hot_title+'</a>'
+		$('#editor .ql-editor').append(str);
+		$('.bg').hide();
+		$('.quickBox').hide();
+	}
+	function seeUserInfo(){
+		window.location.href = './userData.html?patientOpenId='+questionObj.patientOpenId+'&questionId='+ getQueryVariable('id')
+	}
+	
+    function save() {
+		var id = '';
+		if(qarr.length == 0){
+			id = questionObj.id
+		}else{
+			id = qarr[qarr.length-1].id
+		}
+		var option = {
+			id: id,
+			content: $('#editor').find('.ql-editor').html(),
+			images: imgArr.join(',')
+		}
+		$.ajax({
+			type: 'POST',
+			url: webUrl+'/api/ApiExpert/SaveReply',
+			dataType: "json",
+			data: option,
+			success: function (res) {
+				if(res.status){
+					window.location.href = './doctorSuccess.html';
+				}else{
+					$.toast('提交失败', "text")
+				}
+			}
+		});
+        // console.log($('#editor').find('.ql-editor').html(),quill)
+    }
+    // $("#editor").emoji({
+    //     button: "#btn1",
+    //     showTab: false,
+    //     animation: 'slide',
+    //     icons: [{
+    //         name: "QQ表情",
+    //         path: "imgs/qq/",
+    //         maxNum: 30,
+    //         excludeNums: [41, 45, 54],
+    //         file: ".gif"
+    //     }]
+    // });
+	
+    $(function () {
+        $('#infoBtn').on('click','.sameBtn',function () {
+            var index = $(this).index();
+            $('#infoBtn .sameBtn').removeClass('active');
+            $(this).addClass('active');
+            $('#myAllInfo .samePart').hide();
+            $('#myAllInfo .samePart').eq(index).show();
+			types = index;
+        });
+		$('.closeQuick').on('click',function(){
+			$('.bg').hide();
+			$('.quickBox').hide();
+		});
+		//删除图片
+		$('.showImg').on('click','.del',function () {
+			imgArr.splice($(this).parent().index(),1);
+			$(this).parent().remove();
+		});
+		$('#upload-container').click(function(event) {
+			$("#picker").find('input').attr('accept','image/*');
+			$("#picker").find('input').click();
+		});
+		var uploader = WebUploader.create({
+			auto: true,// 选完文件后，是否自动上传。
+			swf: 'https://cdn.bootcss.com/webuploader/0.1.1/Uploader.swf',// swf文件路径
+			server: webUrl+'/api/Upload/Uploadimg',// 文件接收服务端。
+			dnd: '#upload-container',
+			pick: '#picker',// 内部根据当前运行是创建，可能是input元素，也可能是flash. 这里是div的id
+			multiple: true, // 选择多个
+			chunked: true,// 开起分片上传。
+			threads: 5, // 上传并发数。允许同时最大上传进程数。
+			method: 'POST', // 文件上传方式，POST或者GET。
+			fileSizeLimit: 1024*1024*100*100, //验证文件总大小是否超出限制, 超出则不允许加入队列。
+			fileSingleSizeLimit: 1024*1024*100, //验证单个文件大小是否超出限制, 超出则不允许加入队列。
+			fileVal:'upload', // [默认值：'file'] 设置文件上传域的name。
+		});
+		uploader.on('fileQueued', function(file) {
+			// 选中文件时要做的事情，比如在页面中显示选中的文件并添加到文件列表，获取文件的大小，文件类型等
+			// console.log(file.ext) // 获取文件的后缀
+			// console.log(file.size) // 获取文件的大小
+			// console.log(file.name);
+			// var html = '<div class="upload-item"><span>文件名：'+file.name+'</span><span data-file_id="'+file.id+'" class="btn-delete">删除</span><span data-file_id="'+file.id+'" class="btn-retry">重试</span><div class="percentage '+file.id+'" style="width: 0%;"></div></div>';
+			// $('#upload-list').append(html);
+		});
+		uploader.on('uploadSuccess', function(file, response) {
+			var html = '<div class="imgs">\n' +
+				'<img src="'+webUrl+response.data.url+'" alt="" class="shows">\n' +
+				'<img src="imgs/del2.png" alt="" class="del">\n' +
+				'</div>';
+			$('.showImg').append(html);
+			imgArr.push(response.data.url);
+		});
+		uploader.on('uploadError', function(file) {
+			$.toast('图片上传失败','text');
+		});
+		$('.questionAndAnswer').on('click','.showUpImg img',function(){
+			$('.showBigImg img').attr('src',$(this).attr('src'));
+			$('.showBigImg').css('display','flex');
+		});
+		$('.showBigImg').on('click','.bg',function(){
+			$('.showBigImg').hide();
+		})
+		
+		detailInfo();
+    });
+	
+	//详细对话
+	function detailInfo(){
+		$.ajax({
+		    url: webUrl+'/api/ApiQuestion/QuestionDetail',
+		    type: "GET",
+		    data:{
+		        questionId: getQueryVariable('id')
+		    },
+		    dataType: "json",
+		    success: function(res){
+		        if(res.status){
+					//首次提问
+		            questionObj = res.data.question.baseQuestion;
+					expertId = questionObj.expertId;
+		            if(questionObj.pay){
+		                $('.dashang span').html('1')
+		            }else{
+		                $('.dashang span').html('0')
+		            }
+		            $('.startTime').html(questionObj.qtime);
+					if(!questionObj.patientName||questionObj.patientName==''){
+						$('.userFirstHead .masks').html('匿名')
+					}else{
+						$('.userFirstHead .masks').html(questionObj.patientName)
+					}
+					
+		            var title = questionObj.qtitle.split(',');
+		            var html = '';
+		            for(var i = 0;i<title.length;i++){
+		                html += '<span>'+title[i]+'</span>'
+		            }
+		            $('.questionType').html(html);
+		            $('.yourQuestion').html(questionObj.qcontent);
+		            var text = '';
+					var img1 = [],img2 = [],img3 = [];
+		            if(questionObj.qimgs&&questionObj.qimgs.length!=0){
+						for(var s = 0;s<questionObj.qimgs.length;s++){
+						    if(questionObj.qimgs[s].img_type == 0){
+								img1.push(questionObj.qimgs[s])
+							}
+							if(questionObj.qimgs[s].img_type == 1){
+								if(questionObj.qimgs[s].up_number == 1){
+									img2.push(questionObj.qimgs[s])
+								}
+								if(questionObj.qimgs[s].up_number == 2){
+									img3.push(questionObj.qimgs[s])
+								}
+							}
+						}
+		                text += '<div class="showUpImg">';
+		                for(var m = 0;m<img1.length;m++){
+		                    text += '<img src="'+webUrl+img1[m].img_url+'" alt="">'
+		                }
+		                text += '</div>';
+		                $('.youStartQuestion').append(text);
+		            }
+		            
+		            if(!questionObj.repContentOne){
+		                $('.doctorFirstAnswer').hide();
+						$('.moreInfoChat').hide();
+		            }else{//第一次提问有回复
+						var doctorStr = '';
+						doctorStr += '<div class="infoList">'+
+										'<div class="title doctor">'+
+											'<div class="docHead">'+
+												'<img src="imgs/head.png" alt="">'+
+												'<div class="intro">'+
+													'<h6>'+questionObj.expertName+'</h6>'+
+													'<span>'+questionObj.postion+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<span class="time">'+questionObj.replyTimeOne+'</span>'+
+										'</div>'+
+										'<div class="content">'+
+											'<p>'+questionObj.repContentOne+'</p>'+
+										'</div>';
+						doctorStr += '<div class="showUpImg">';
+						for(var p = 0;p<img2.length;p++){
+						    doctorStr += '<img src="'+webUrl+img2[p].img_url+'" alt="">'
+						}
+						doctorStr += '</div></div>';
+						$('.doctorFirstAnswer').append(doctorStr)
+		            }
+					if(questionObj.repContentTwo){
+					    var doctorStr = '';
+					    doctorStr += '<div class="infoList">'+
+					    				'<div class="title doctor">'+
+					    					'<div class="docHead">'+
+					    						'<img src="imgs/head.png" alt="">'+
+					    						'<div class="intro">'+
+					    							'<h6>'+questionObj.expertName+'</h6>'+
+					    							'<span>'+questionObj.postion+'</span>'+
+					    						'</div>'+
+					    					'</div>'+
+					    					'<span class="time">'+questionObj.replyTimeTwo+'</span>'+
+					    				'</div>'+
+					    				'<div class="content">'+
+					    					'<p>'+questionObj.repContentTwo+'</p>'+
+					    				'</div>';
+						doctorStr += '<div class="showUpImg">';
+						for(var p = 0;p<img3.length;p++){
+						    doctorStr += '<img src="'+webUrl+img3[p].img_url+'" alt="">'
+						}
+						doctorStr += '</div></div>';
+					    $('.doctorFirstAnswer').append(doctorStr)
+					}
+					
+					qarr = res.data.question.extraQuestions;
+					var str = '';
+					for(var m = 0;m<qarr.length;m++){
+						str += '<div class="infoList">'+
+									'<div class="someQuestion">'+
+										'<div class="title question">'+
+											'<div class="mask">';
+						if(!questionObj.patientName||questionObj.patientName==''){
+							str += '<span class="masks">匿名</span>'
+						}else{
+							str += '<span class="masks">'+questionObj.patientName+'</span>'
+						}					
+						str +=					'<span class="tips">追问</span>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].qtime+'</span>'+
+										'</div>'+
+									'</div>'+
+									'<div class="content">'+qarr[m].qcontent+'</div>';
+						var imgarr1 = [],imgarr2 = [],imgarr3 = [];
+						if(qarr[m].qimgs && qarr[m].qimgs.length>0){
+							for(var a = 0;a<qarr[m].qimgs.length;a++){
+							    if(qarr[m].qimgs[a].img_type == 0){
+									imgarr1.push(qarr[m].qimgs[a])
+								}
+								if(qarr[m].qimgs[a].img_type == 1){
+									if(qarr[m].qimgs[a].up_number == 1){
+										imgarr2.push(qarr[m].qimgs[a])
+									}
+									if(qarr[m].qimgs[a].up_number == 2){
+										imgarr3.push(qarr[m].qimgs[a])
+									}
+								}
+							}
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr1.length;p++){
+							    str += '<img src="'+webUrl+imgarr1[p].img_url+'" alt="">'
+							}
+							str += '</div>';
+							str += '</div>';
+						}else{
+							str += '</div>';
+						}
+						if(qarr[m].repContentOne){
+							str += '<div class="infoList">'+
+										'<div class="title doctor">'+
+											'<div class="docHead">'+
+												'<img src="imgs/head.png" alt="">'+
+												'<div class="intro">'+
+													'<h6>'+questionObj.expertName+'</h6>'+
+													'<span>'+questionObj.postion+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].replyTimeOne+'</span>'+
+										'</div>'+
+										'<div class="content">'+qarr[m].repContentOne+'</div>';
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr2.length;p++){
+							    str += '<img src="'+webUrl+imgarr2[p].img_url+'" alt="">'
+							}
+							str += '</div></div>';
+						}
+						if(qarr[m].repContentTwo){
+							str += '<div class="infoList">'+
+										'<div class="title doctor">'+
+											'<div class="docHead">'+
+												'<img src="imgs/head.png" alt="">'+
+												'<div class="intro">'+
+													'<h6>'+questionObj.expertName+'</h6>'+
+													'<span>'+questionObj.postion+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<span class="time">'+qarr[m].replyTimeTwo+'</span>'+
+										'</div>'+
+										'<div class="content">'+qarr[m].repContentTwo+'</div>';
+							str += '<div class="showUpImg">';
+							for(var p = 0;p<imgarr3.length;p++){
+							    str += '<img src="'+webUrl+imgarr3[p].img_url+'" alt="">'
+							}
+							str += '</div></div>';
+						}
+					}
+					$('.moreInfoChat').html(str);
+					//整个回合是否结束
+					if(questionObj.qend){
+						$('.moreQuestion').hide();
+						$('.questionEnd').show();
+						if(questionObj.star_num == 0){
+							$('.questionEnd .introduct').html('暂无评价')
+						}else{
+							var str2 = '';
+							for(var j = 0;j<questionObj.star_num;j++){
+								str2 += '<img src="imgs/xing3.png" alt="">'
+							}
+							for(var s = questionObj.star_num;s<5;s++){
+								str2 += '<img src="imgs/xing2.png" alt="">'
+							}
+							$('.showMyXing').html(str2);
+							if(questionObj.patientComment){
+								$('.questionEnd .content p').html('评论：'+questionObj.patientComment)
+							}else{
+								$('.questionEnd .content p').html('默认好评')
+							}
+							if(questionObj.pay){
+								var str3 = '<div class="price">'+
+												'<span>￥</span>'+
+												'<i>+'+questionObj.pay_money+'</i>'+
+											'</div>';
+								$('.questionEnd .content').append(str3);
+							}
+							$('.questionEnd .time').html(questionObj.commentTime);
+						}
+					}else{
+						$('.questionEnd').hide();
+						if(qarr.length == 0){
+							if(questionObj.replyCount==0){
+								$('.moreQuestion').show();
+							}
+							if(questionObj.replyCount==1){
+								$('.moreQuestion').show();
+								$('.moreQuestion .answer span').html('二次回复');
+							}
+							if(questionObj.replyCount==2){
+								$('.moreQuestion').hide();
+							}
+						}else{
+							var obj = qarr[qarr.length-1];
+							if(obj.replyCount==0){
+								$('.moreQuestion').show();
+							}
+							if(obj.replyCount==1){
+								$('.moreQuestion').show();
+								$('.moreQuestion .answer span').html('二次回复');
+							}
+							if(obj.replyCount==2){
+								$('.moreQuestion').hide();
+							}
+						}
+						
+					}
+		        }else{
+		            $.toast(res.msg, "text")
+		        }
+		    }
+		})
+	};
+	function goBack(){
+		window.history.back(-1); 
+	}
+	
+	function getQueryVariable(variable){
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i=0;i<vars.length;i++) {
+			var pair = vars[i].split("=");
+			if(pair[0] == variable){return pair[1];}
+		}
+		return(false);
+	};
+	if(getQueryVariable('openId')){
+		localStorage.setItem('myOpenId',getQueryVariable('openId'))
+	}
+</script>
+</body>
+</html>

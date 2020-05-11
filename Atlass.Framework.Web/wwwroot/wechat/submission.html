@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>已提交</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css"/>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+        }
+        .success{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            background: #fff;
+            padding-bottom: 20px;
+        }
+        .success img{
+            width: 100px;
+            margin-top: 50px;
+        }
+        .success .sub{
+            font-size: 14px;
+            color: #39b7a7;
+            margin-top: 10px;
+        }
+        .score{
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            margin-top: 20px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .score .say{
+            font-size: 16px;
+            color: #222;
+            margin-right: 5px;
+            width: 42px;
+        }
+        .score .xingArr{
+            width: auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .score .xingArr img{
+            width: 20px;
+            height: 20px;
+            margin-right: 3px;
+        }
+        .score .hp{
+            width: 100%;
+            font-size: 16px;
+            color: #888;
+        }
+		.score.active .hp{
+			visibility:hidden;
+		}
+        .score .more{
+            width: 20px;
+            height: 20px;
+            transform: rotate(90deg);
+        }
+		.score.active .more{
+			transform: rotate(180deg);
+		}
+        .chat{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            position: relative;
+            /* padding-bottom: 40px; */
+        }
+        .chat textarea{
+            width: 92%;
+            height: 140px;
+            background: #F6F6F6;
+            border: none;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 10px;
+			display: none;
+        }
+        .chat .nickname{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+			display: none;
+        }
+        .chat .nickname input{
+            position: relative;
+            top: 2px;
+        }
+        .save{
+            width: 92%;
+            height: 40px;
+            margin: 15px auto 0;
+            background: #EE591D;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <div class="success">
+        <img src="imgs/complete.png" alt="" />
+        <span class="sub">已完成</span>
+    </div>
+    <div class="score">
+        <span class="say">评分</span>
+        <div class="xingArr">
+            <img src="imgs/xing1.png" alt="">
+            <img src="imgs/xing1.png" alt="">
+            <img src="imgs/xing1.png" alt="">
+            <img src="imgs/xing1.png" alt="">
+            <img src="imgs/xing1.png" alt="">
+        </div>
+    </div>
+    <div class="chat">
+        <div class="score getMyScore">
+            <span class="say">评价</span>
+            <p class="hp">默认好评</p>
+            <img class="more" src="imgs/up.png" alt="">
+        </div>
+
+        <textArea placeholder="请详细描述..." id="myThinks"></textArea>
+        <div class="nickname">
+            <label><input type="checkbox" name="nickname" checked="checked" style="width: 16px;height: 16px;margin-right: 8px;">匿名评价</label>
+        </div>
+    </div>
+    <div class="score gotoShare">
+        <input type="checkbox" name="share" checked="checked" style="width: 16px;height: 16px;margin-right: 8px;"><span class="shows">分享本次咨询内容为其他用户解疑</span>
+    </div>
+    <button class="save" onclick="save()">提交</button>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var webUrl = 'http://182.43.178.216:9006';
+		var score = 5;
+		$(function(){
+			$('.xingArr').on('click','img',function(){
+				var index = $(this).index();
+				var html = '';
+				for(var i = 0;i<index+1;i++){
+					html += '<img src="imgs/xing1.png" alt="">'
+				}
+				for(var s = index+1;s<5;s++){
+					html += '<img src="imgs/xing2.png" alt="">'
+				}
+				$('.xingArr').html(html);
+				score = index+1;
+			});
+			$('.getMyScore').on('click',function(){
+				if($(this).hasClass('active')){
+					$(this).removeClass('active');
+					$('#myThinks').hide();
+					$('.nickname').hide();
+					$('.chat').css('padding-bottom','0px');
+				}else{
+					$(this).addClass('active');
+					$('#myThinks').show();
+					$('#myThinks').css('display','table');
+					$('.nickname').show();
+					$('.chat').css('padding-bottom','40px');
+				}
+			});
+		});
+		
+		function save(){
+			var option = {
+				id: getQueryVariable('qid'),
+				score: score,
+				patientReamrk: $('#myThinks').val(),
+				share: $('.gotoShare input').get(0).checked?'1':'0',
+				isAnonymous: $('.nickname input').get(0).checked?'1':'0'
+			}
+			$.ajax({
+				type: 'POST',
+				url: webUrl+'/api/ApiQuestion/SaveScore',
+				dataType: "json",
+				data: option,
+				success: function (res) {
+					if(res.status){
+						window.location.href = './reward.html?qid='+getQueryVariable('qid');
+					}else{
+						$.toast('提交失败', "text")
+					}
+				}
+			});
+		}
+		function getQueryVariable(variable){
+		    var query = window.location.search.substring(1);
+		    var vars = query.split("&");
+		    for (var i=0;i<vars.length;i++) {
+		        var pair = vars[i].split("=");
+		        if(pair[0] == variable){return pair[1];}
+		    }
+		    return(false);
+		};
+	</script>
+</body>
+</html>

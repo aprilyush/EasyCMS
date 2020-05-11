@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css"/>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+        }
+
+        .box {
+            width: 100%;
+            height: 100%;
+        }
+        .box .top{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 13px 10px 15px;
+        }
+        .box .top .think{
+            width: auto;
+            height: auto;
+        }
+        .box .top .think .sames{
+            width: 48px;
+            height: 20px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            text-align: center;
+            color: #39B7A7;
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 10px;
+        }
+        .box .top .think .xing{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .box .top .think .xing img{
+            width: 14px;
+            height: 14px;
+        }
+        .box .top .think .xing span{
+            font-size: 14px;
+            color: #FFAA00;
+        }
+        .box .top .doctor{
+            width: 80%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .box .top .doctor img{
+            width: 86px;
+            height: 86px;
+			border-radius: 50%;
+        }
+        .box .top .doctor h6{
+            font-size: 18px;
+            color: #222;
+            line-height: 30px;
+        }
+        .box .top .doctor .work{
+            width: auto;
+            height: auto;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .box .top .doctor .work a{
+            display: inline-block;
+			margin-left: 10px;
+        }
+		.box .top .doctor .work a:last-child{
+			margin-right: 0;;
+		}
+        .box .top .doctor .work a span{
+            width: 76px;
+            height: 20px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 20px;
+            background: #EE591D;
+            display: inline-block;
+        }
+        .box .top .doctor .work a:last-child span{
+            background: #39B7A7;
+        }
+        .box .top .jingyan{
+            font-size: 14px;
+            color: #A6A6A6;
+            width: 108px;
+        }
+        .box .introduce{
+            width: 100%;
+            height: auto;
+            background: #fff;
+            margin-top: 10px;
+            box-sizing: border-box;
+            padding: 15px 10px;
+        }
+        .box .introduce .major{
+            width: 100%;
+            display: flex;
+        }
+        .box .introduce .major span{
+            padding: 0px 5px;
+            border: 1px solid #39B7A7;
+            font-size: 14px;
+            display: inline-block;
+            height: 20px;
+            border-radius: 20px;
+            line-height: 20px;
+            margin-right: 10px;
+            border-radius: 10px;
+            color: #39B7A7;
+        }
+        .box .introduce .infoList{
+            width: 100%;
+            height: auto;
+            font-size: 14px;
+            color: #222;
+            margin-top: 10px;
+        }
+        .box .introduce .infoList .list{
+            margin-top: 5px;
+        }
+        .box .evaluate{
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            padding: 0 10px;
+            margin-top: 20px;
+        }
+        .box .evaluate span{
+            width: 100%;
+            height: 40px;
+            border: 1px solid #39B7A7;
+            border-radius: 8px;
+            color: #39B7A7;
+            font-size: 16px;
+            background: #fff;
+            text-align: center;
+            line-height: 40px;
+            display: inline-block;
+        }
+        .box .userThink{
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 20px 0;
+            background: #fff;
+        }
+        .box .userThink h7{
+            font-size: 14px;
+            color: #a6a6a6;
+            line-height: 15px;
+        }
+        .box .userThink .showList{
+            width: 100%;
+            height: auto;
+        }
+        .box .userThink .showList .list{
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #F0F0F0;
+            padding: 10px 0;
+        }
+        .box .userThink .showList .list .name{
+            font-size: 16px;
+            color: #333;
+            line-height: 30px;
+        }
+        .box .userThink .showList .list .score{
+            display: flex;
+            width: 100%;
+            height: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .box .userThink .showList .list .score span,.box .userThink .showList .list .score .xing span{
+            color: #B6B6B6;
+        }
+        .box .userThink .showList .list .score .xing span{
+            margin-right: 10px;
+        }
+        .box .userThink .showList .list .score .xing{
+            width: 40%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .box .userThink .showList .list .score .xing img{
+            width: 15px;
+            height: 14px;
+            margin-right: 4px;
+        }
+        .box .userThink .showList .list p{
+            font-size: 14px;
+            color: #333;
+            line-height: 30px;
+        }
+        .bg{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+        }
+        .popup{
+            position: fixed;
+            top: 50%;
+            width: 76%;
+            height: 180px;
+            background: #fff;
+            margin-top: -90px;
+            left: 50%;
+            margin-left: -38%;
+            border-radius: 8px;
+            line-height: 180px;
+            text-align: center;
+            z-index: 2;
+            display: none;
+        }
+        .popup span{
+            font-size: 16px;
+            color: #555;
+        }
+        .popup img{
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: 10px;
+            top: 10px;
+        }
+		.attention{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+		.attention .popInfo{
+			width: 95%;
+			height: 200px;
+			border-radius: 6px;
+			background: #fff;
+			overflow: hidden;
+		}
+		.attention .popInfo .someInfo{
+			width: 100%;
+			height: 150px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			border-bottom: 1px solid #d1d1d1;
+		}
+		.attention .popInfo .someInfo p{
+			font-size: 14px;
+			color: #333;
+			margin-bottom: 30px;
+		}
+		.attention .popInfo .someInfo .lian{
+			font-size: 14px;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.attention .popInfo .someInfo .lian a{
+			color: #fff;
+			padding: 10px;
+			background: #e36211;
+			border: none;
+			border-radius: 5px;
+			margin-right: 10px;
+		}
+		.attention .popInfo .someInfo .lian a:last-child{
+			margin-right: 0;;
+		}
+		.attention .popInfo .know{
+			width: 100%;
+			height: 50px;
+			font-size: 16px;
+			color: #33a3ff;
+			background: #f1f1f1;
+			line-height: 50px;
+			text-align: center;
+		}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="top">
+            <div class="think">
+                <div class="xing sames">
+                    <img src="imgs/xing3.png" alt="">
+                    <span>5.0</span>
+                </div>
+                <div class="sames">免费</div>
+            </div>
+            <div class="doctor">
+                <img src="imgs/head.png" alt="">
+                <h6>加速度计我</h6>
+                <div class="work" id="showWorks">
+                    <a href="javascript:void(0);" onclick="goQuestion()"><span>咨询</span></a>
+                </div>
+            </div>
+            <div class="jingyan">384次咨询</div>
+        </div>
+        <div class="introduce">
+            <div class="major">
+                <span>活动</span>
+                <span>检测</span>
+                <span>HIV</span>
+            </div>
+            <div class="infoList">
+                <div class="list">单位: &nbsp;&nbsp;阿萨点击阿上看到的</div>
+                <div class="list">职位: &nbsp;&nbsp;阿萨点击阿上看到的</div>
+                <div class="list">简介: &nbsp;&nbsp;身上就会撒娇客户反馈加哈减肥哈尽快恢复空间啊口角是非尽快回到家咖啡是否会看见啊哈上飞机后回复啊哈上几个符号噶会发觉时间是否回家舒服哈上解放后删繁就简啊会尽快发货快放假啊哈回家上飞机哈见上发的是死都粉碎 的身份黄金时代分地方还精神抖擞肌肤感到生活的环境规划建设大会的还是价格都是规划建设国际化</div>
+            </div>
+        </div>
+        <div class="evaluate"><span onclick="goEvaluate()">我要评价</span></div>
+        <div class="userThink">
+            <h7>用户评价</h7>
+            <div class="showList showAllCom">
+            </div>
+        </div>
+    </div>
+    <div class="bg"></div>
+    <div class="popup">
+        <span>可在咨询结束后进行评价</span>
+        <img src="imgs/close.png" alt="" onclick="closePop()">
+    </div>
+	<div class="attention">
+		<div class="popInfo">
+			<div class="someInfo">
+				<p>需先关注公众号，才能正常咨询，谢谢理解</p>
+				<div class="lian">
+					<a href="">使用说明</a>
+				</div>
+			</div>
+			<div class="know">我知道了</div>
+		</div>
+	</div>
+	<div class="weui-loadmore">
+		<i class="weui-loading"></i>
+		<span class="weui-loadmore__tips">正在加载</span>
+	</div>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var webUrl = 'http://182.43.178.216:9006';
+        var expertObj = {};
+		var subscribe = false;
+		var page = 1,psize = 10;
+		var hasMore = false;
+		var loading = false;
+		$('.bg').hide();
+		$('.attention').hide();
+        $(function () {
+			$('.attention .know').on('click',function(){
+				$('.bg').hide();
+				$('.attention').hide();
+			});
+			
+            expertsDetail();
+        });
+
+        function closePop() {
+            $('.bg').hide();
+            $('.popup').hide();
+        }
+
+        function goEvaluate() {
+            $('.bg').show();
+            $('.popup').show();
+        }
+        function goQuestion() {
+			if(subscribe){
+				var openId = localStorage.getItem('myOpenId');
+				window.location.href = './question.html?openId='+openId+'&expert_id='+expertObj.id;
+			}else{
+				$('.bg').show();
+				$('.attention').css('display','flex');
+			}
+        }
+        function getQueryVariable(variable){
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+		function validateImage(url){
+			var xmlHttp ;
+			if (window.ActiveXObject)
+			 {
+			  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			 }
+			 else if (window.XMLHttpRequest)
+			 {
+			  xmlHttp = new XMLHttpRequest();
+			 } 
+			xmlHttp.open("Get",url,false);
+			xmlHttp.send();
+			if(xmlHttp.status==404)
+			return false;
+			else
+			return true;
+		}
+
+        //详情
+        function expertsDetail() {
+            $.ajax({
+                url: webUrl+'/api/apiExpert/detail',
+                type: "GET",
+                data:{
+                    id: getQueryVariable('id')
+                },
+                dataType: "json",
+                success: function(res){
+                    if(res.status){
+                        expertObj = res.data.detail;
+						allInfo(expertObj.open_id);
+						subscribe = res.data.subscribe;
+                        $('.think .xing span').html(expertObj.star_score);
+						if(validateImage(webUrl+expertObj.head_url)){
+							$('.doctor img').attr('src',webUrl+expertObj.head_url);
+						} else {
+							$('.doctor img').attr('src','imgs/head.png');
+						}
+                        $('.doctor h6').html(expertObj.expert_name);
+                        $('.jingyan').html(expertObj.expert_count+'次咨询');
+                        $('.infoList .list').eq(0).html('单位: &nbsp;&nbsp;'+expertObj.company_name);
+                        $('.infoList .list').eq(1).html('职位: &nbsp;&nbsp;'+expertObj.position_name);
+                        $('.infoList .list').eq(2).html('简介: &nbsp;&nbsp;'+expertObj.expert_profile);
+                        var html = '';
+                        var arr = expertObj.expert_title.split(',');
+                        for(var i = 0;i<arr.length;i++){
+                            html += '<span>'+arr[i]+'</span>'
+                        }
+                        $('.major').html(html);
+                        var buttons = res.data.buttons;
+                        var text = '';
+                        for(var j = 0;j<buttons.length;j++){
+                            text += '<a href="'+buttons[j].name+'" target="_blank"><span>'+buttons[j].id+'</span></a>'
+                        }
+                        $('#showWorks').append(text);
+                    }else{
+                        $.toast(res.msg)
+                    }
+                }
+            })
+        }
+		function allInfo(id) {
+		    $.ajax({
+		        url: webUrl+'/api/ApiUser/CommentList',
+		        type: "GET",
+		        data:{
+		            openId: id,
+					page: page,
+					psize: psize
+		        },
+		        dataType: "json",
+		        success: function(res){
+		            if(res.status){
+		                var arr = res.data.comments;
+						if(arr.length>=psize){
+							hasMore = true;
+							loading = false;
+							$('.weui-loadmore').show();
+						}else{
+							hasMore = false;
+							$(document.body).destroyInfinite();
+							$('.weui-loadmore').hide();
+						}
+						var html = '';
+						for(var i = 0;i<arr.length;i++){
+							html += '<div class="list">'+
+										'<div class="name">'+arr[i].patientName+'</div>'+
+										'<div class="score">'+
+											'<div class="xing">'+
+												'<span class="mask">评分</span>';
+							for(var j = 0;j<arr[i].star;j++){
+								html += '<img src="imgs/xing3.png" alt="">';
+							}
+							for(var k = arr[i].star;k<5;k++){
+								html += '<img src="imgs/xing2.png" alt="">';
+							}
+							html +=			'</div>'+
+											'<span class="time">'+arr[i].commentTime+'</span>'+
+										'</div>'+
+										'<p>'+arr[i].comment+'</p>'+
+									'</div>';
+						}
+						$('.showAllCom').append(html);
+		            }else{
+		                $.toast(res.msg,'text')
+		            }
+		        }
+		    })
+		};
+		//加载更多
+		$(document.body).infinite(100).on("infinite", function() {
+			if(loading) return;
+			loading = true;
+			if(hasMore){
+				page ++;
+				allInfo();
+			}
+		});
+    </script>
+</body>
+</html>

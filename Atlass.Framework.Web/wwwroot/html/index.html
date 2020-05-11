@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title>咨询台后台管理</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="../hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../hplus/css/animate.css" rel="stylesheet">
+    <link href="../hplus/css/style.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">今天</span>
+                    <h5>咨询(次)</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="tq">0</h1>
+                    <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新增</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">本月</span>
+                    <h5>咨询(次)</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="mq">0</h1>
+                    <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新增</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">总计</span>
+                    <h5>咨询(次)</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="totalmq">0</h1>
+                    <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
+                    </div>
+                    <small>总计</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-warning pull-right">月</span>
+                    <h5>打赏(元)</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="mm">￥ 0</h1>
+                    <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
+                    </div>
+                    <small>总计</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="chart" style="width: 80%; height: 500px;"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 全局js -->
+<script src="../hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="../hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../hplus/js/plugins/layer/layer.min.js"></script>
+<script src="../plugins/echarts/echarts.min.js"></script>
+    
+<script>
+    var $echart, $chartOpts;
+    $(function() {
+        initChart();
+        loadData();
+    });
+
+    function loadData() {
+        $.ajax({
+            url: '/admin/home/GetChart',
+            type: 'get',
+            dataType: 'json',
+            cache: false,
+            data: null,
+            //contentType: 'application/x-www-form-urlencoded',
+            success: function (res) {
+                if (res.status) {
+                    var model = res.data.chart;
+                    $('#tq').text(model.TodayQuestionCount);
+                    $('#mq').text(model.MonthQuestionCount);
+                    $('#totalmq').text(model.TotalQuestion);
+                    $('#mm').text("￥ "+model.MonthPayCount);
+                    if (model.chart) {
+                        RefreshChart(model.chart);
+                    }
+                   
+                } 
+            }, beforeSend: function (data, textStatus, jqXHr) {
+
+            },
+            error: function (jqXHr, textStatus, errorMsg) {
+                layer.msg('请求异常');
+            }
+        });
+    }
+
+    function RefreshChart(data) {
+        $echart.setOption({
+            color: '#5793f3',
+            legend: {
+                data: data.Title
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            grid: {
+                left: '3%',
+                //right: '4%',
+                bottom: '3%',
+                containLabel: true,
+                right: '5%'
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: data.Xdata,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 40
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: {
+                    lineStyle: {
+                        color: '#5793f3'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}次' 
+                }
+            },
+            //yAxis: data.Ydata,
+            series: data.Ydata
+        },true);
+
+    }
+
+    //图表初始化
+    function initChart() {
+        $chartOpts = {
+            //title: {
+            //    text: '运动量对比'
+            //},
+            tooltip: {
+                trigger: 'axis'
+            },
+            //legend: {
+            //    data: ['实际运动量', '运动量参考值']
+            //},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: [],
+                splitLine: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'value'
+                , min: 0,
+                max: 2000
+            },
+            series: []
+        };
+
+        $echart = echarts.init(document.getElementById("chart"));
+        $chartOpts.xAxis.data = [];
+        $echart.setOption($chartOpts, true);
+    }
+</script>
+</body>
+
+</html>

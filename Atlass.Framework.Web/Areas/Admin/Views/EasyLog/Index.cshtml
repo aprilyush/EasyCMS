@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ibox-content">
+    <div class="row">
+        <div class="text-center">
+            <div class="btn-group" id="tableStatus">
+                <a href="javascript:void(0);" class="btn btn-info" data-id="0">全部</a>
+                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="1">信息</a>
+                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="2">调试</a>
+                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="3">警告</a>
+                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="4">异常</a>
+
+            </div>
+        </div>
+        <div class="div_find">
+            <p>
+                <label class="find_labela">日志简述：</label>
+                <input type="text" id="log_summary" name="log_summary" class="find_input">
+                <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
+            </p>
+        </div>
+        <div class="col-sm-12">
+            <div id="toolbar" class="btn-group">
+                <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
+            </div>
+            <table id="userTable"></table>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script>
+        var $userTable,warnType=0;
+        $(function () {
+              $('#tableStatus a').on('click',
+                function () {
+                    $(this).removeClass("btn-default").removeClass("btn-outline").addClass('btn-info')
+                        .siblings().removeClass("btn-info").addClass('btn-outline').addClass('btn-default');
+
+                    warnType = $(this).data('id');
+                    query();
+                });
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $userTable=$("#userTable").bootstrapTable({
+                url: '/admin/easylog/getdata',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height()-50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var p = {
+                        limit: params.limit,
+                        offset: params.offset, //页码
+                        log_type: warnType,
+                       log_summary:$('#log_summary').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                      {
+                        field: 'log_type', title: '日志类型', align: 'center',width:100, formatter:renderResult
+                    },
+                    {
+                        field: 'log_summary', title: '日志简述', align: 'left'
+                    },
+                    {
+                        field: 'log_time', title: '日志时间', align: 'center'
+                    },
+                     {
+                        field: 'id', title: '操作', align: 'left', formatter:renderOpts
+                    },
+                ]
+
+            });
+
+        }
+
+        function renderResult(v, d) {
+            var logTitle = 'info';
+            var logClass = 'badge-info';
+            switch (v) {
+                case 2:
+                    logTitle = 'debug';
+                    logClass = 'badge-success';
+                    break;
+                case 3:
+                    logTitle = 'warn';
+                    logClass = 'badge-warning';
+                    break;
+                  case 4:
+                    logTitle = 'error';
+                    logClass = 'badge-danger';
+                    break;
+
+            }
+            var html ='<span class="badge ' + logClass + '">'+logTitle+'</span>';
+
+            return html;
+        }
+
+        function renderOpts(v) {
+            var html = '<a class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="'+v+'"><i class="fa fa-eye"></i></a>';
+              html += '<a class="btn btn-white btn-bitbucket" title="Delete" href="javascript:void(0);" onclick="deleteLog(this)" data-id="'+v+'"><i class="fa fa-times"></i></a>';
+            return html;
+        }
+
+
+
+        function detail(obj) {
+
+            var id = $(obj).data('id');
+            var url = '/admin/easylog/detail';
+
+            jutils.dialog('日志详情', url, { id: id }, null, function () {
+
+            });
+        }
+        function deleteLog(obj) {
+
+            var id = $(obj).data('id');
+                 jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/admin/easylog/DelByIds',
+                        { ids: id },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+        function updateDevice(id) {
+            jutils.confirm('确定更新当前项目下的所以设备吗',
+                function () {
+                    jutils.ajaxGet('/project/UpdateDeviceParam',
+                        { id: id},
+                        function () {
+
+                        });
+                });
+        }
+
+
+
+        function del() {
+            var rows = $userTable.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.warn('请选择需要删除的数据行');
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+
+                ids.push(rows[i].id);
+
+            }
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/admin/easylog/DelByIds',
+                        { ids: ids.join() },
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function query() {
+            $userTable.bootstrapTable('refresh');
+        }
+    </script>
+}
+
+
+
+

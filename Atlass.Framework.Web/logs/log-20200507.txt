@@ -1,0 +1,772 @@
+2020-05-07 14:31:41.573 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-05-07 14:31:41.605 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-05-07 14:31:41.870 +08:00 [INF] Creating key "8e4c19c0-27e9-4e2a-836e-b4baf8c360a9" with creation date "2020-05-07T06:31:41.8670014+00:00", activation date "2020-05-07T06:31:41.8630720+00:00", and expiration date "2020-08-05T06:31:41.8630720+00:00".
+2020-05-07 14:31:41.883 +08:00 [WRN] No XML encryptor configured. Key "8e4c19c0-27e9-4e2a-836e-b4baf8c360a9" may be persisted to storage in unencrypted form.
+2020-05-07 14:31:42.325 +08:00 [INF] Starting Hangfire Server using job storage: 'redis://127.0.0.1:6379,allowAdmin=True/0'
+2020-05-07 14:31:42.326 +08:00 [DBG] Using the following options for Redis job storage:
+2020-05-07 14:31:42.326 +08:00 [DBG] ConnectionString: 127.0.0.1:6379,allowAdmin=True
+DN: 0
+2020-05-07 14:31:42.326 +08:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2020-05-07 14:31:42.340 +08:00 [DBG] Execution loop BackgroundServerProcess:5d4c5112 has started in 5.5221 ms
+2020-05-07 14:31:42.377 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 successfully announced in 32.9279 ms
+2020-05-07 14:31:42.380 +08:00 [DBG] Execution loop ServerHeartbeatProcess:08674f91 has started in 1.8146 ms
+2020-05-07 14:31:42.381 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, FetchedJobsWatcher, ExpiredJobsWatcher, RedisSubscription, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2020-05-07 14:31:42.387 +08:00 [DBG] Execution loop ServerWatchdog:1cbc401c has started in 5.6765 ms
+2020-05-07 14:31:42.393 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:dd90962e has started in 4.7593 ms
+2020-05-07 14:31:42.401 +08:00 [DBG] Execution loop FetchedJobsWatcher:a65ac061 has started in 1.6493 ms
+2020-05-07 14:31:42.402 +08:00 [DBG] Execution loop ExpiredJobsWatcher:800471af has started in 0.2896 ms
+2020-05-07 14:31:42.402 +08:00 [DBG] Execution loop RedisSubscription:1d4f002f has started in 0.6333 ms
+2020-05-07 14:31:42.405 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:31:42.408 +08:00 [INF] Removing expired records from the 'succeeded' list...
+2020-05-07 14:31:42.409 +08:00 [DBG] Execution loop Worker:95cf28ef has started in 5.9531 ms
+2020-05-07 14:31:42.411 +08:00 [DBG] Execution loop Worker:4c6c82c1 has started in 8.3914 ms
+2020-05-07 14:31:42.413 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:31:42.413 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:31:42.418 +08:00 [DBG] Execution loop Worker:61e8738e has started in 15.5568 ms
+2020-05-07 14:31:42.420 +08:00 [DBG] Execution loop Worker:aa201eef has started in 17.2528 ms
+2020-05-07 14:31:42.420 +08:00 [DBG] Execution loop Worker:43183fbf has started in 17.5107 ms
+2020-05-07 14:31:42.420 +08:00 [DBG] Execution loop Worker:684042a6 has started in 17.6643 ms
+2020-05-07 14:31:42.420 +08:00 [DBG] Execution loop Worker:b03e6f4d has started in 17.8178 ms
+2020-05-07 14:31:42.421 +08:00 [DBG] Execution loop Worker:647a3532 has started in 18.014 ms
+2020-05-07 14:31:42.421 +08:00 [DBG] Execution loop Worker:71740a67 has started in 18.3935 ms
+2020-05-07 14:31:42.421 +08:00 [DBG] Execution loop Worker:782076ea has started in 18.5802 ms
+2020-05-07 14:31:42.421 +08:00 [DBG] Execution loop Worker:860ba1d2 has started in 18.7 ms
+2020-05-07 14:31:42.421 +08:00 [DBG] Execution loop Worker:ce3849c5 has started in 18.8243 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:489faee7 has started in 18.9783 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:8495dd47 has started in 19.0878 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:81a643d8 has started in 19.2745 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:1b7b91bd has started in 19.3842 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:b4d5da6c has started in 19.496 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:f52def06 has started in 19.6331 ms
+2020-05-07 14:31:42.422 +08:00 [DBG] Execution loop Worker:e41a182d has started in 19.8191 ms
+2020-05-07 14:31:42.423 +08:00 [DBG] Execution loop Worker:2245dab1 has started in 19.9776 ms
+2020-05-07 14:31:42.423 +08:00 [DBG] Execution loop DelayedJobScheduler:27f85c4c has started in 0.2211 ms
+2020-05-07 14:31:42.423 +08:00 [DBG] Execution loop RecurringJobScheduler:ea12e98b has started in 0.4763 ms
+2020-05-07 14:31:42.423 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 all the dispatchers started
+2020-05-07 14:31:43.086 +08:00 [INF] Now listening on: http://127.0.0.1:32589
+2020-05-07 14:31:43.086 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-05-07 14:31:43.086 +08:00 [INF] Hosting environment: Production
+2020-05-07 14:31:43.086 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-05-07 14:31:43.229 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin  
+2020-05-07 14:31:43.236 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-05-07 14:31:43.286 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-07 14:31:43.311 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-07 14:31:43.321 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 4.8347ms
+2020-05-07 14:31:43.321 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-07 14:31:43.328 +08:00 [INF] Request finished in 98.9218ms 200 
+2020-05-07 14:31:43.424 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/Login/Index  
+2020-05-07 14:31:43.426 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-05-07 14:31:43.427 +08:00 [INF] Route matched with {action = "Index", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-05-07 14:31:43.462 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-07 14:31:43.626 +08:00 [INF] Executed ViewResult - view Index executed in 182.1423ms.
+2020-05-07 14:31:43.627 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web) in 199.857ms
+2020-05-07 14:31:43.627 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Index (Atlass.Framework.Web)'
+2020-05-07 14:31:43.628 +08:00 [INF] Request finished in 204.2961ms 200 text/html; charset=utf-8
+2020-05-07 14:31:43.666 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/vendor/bootstrap/css/bootstrap.min.css  
+2020-05-07 14:31:43.671 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css  
+2020-05-07 14:31:43.673 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/iconic/css/material-design-iconic-font.min.css  
+2020-05-07 14:31:43.674 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/css/util.css  
+2020-05-07 14:31:43.676 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/css/main.css  
+2020-05-07 14:31:43.677 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/jquery.min.js?v=2.1.4  
+2020-05-07 14:31:43.713 +08:00 [INF] Sending file. Request path: '/extui/login/css/main.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\css\main.css'
+2020-05-07 14:31:43.713 +08:00 [INF] Request finished in 37.3971ms 200 text/css
+2020-05-07 14:31:43.714 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/js/main.js  
+2020-05-07 14:31:43.715 +08:00 [INF] Sending file. Request path: '/extui/login/js/main.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\js\main.js'
+2020-05-07 14:31:43.715 +08:00 [INF] Request finished in 0.8719ms 200 application/javascript
+2020-05-07 14:31:43.754 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\font-awesome-4.7.0\css\font-awesome.min.css'
+2020-05-07 14:31:43.754 +08:00 [INF] Request finished in 83.5015ms 200 text/css
+2020-05-07 14:31:43.806 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/iconic/css/material-design-iconic-font.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\iconic\css\material-design-iconic-font.min.css'
+2020-05-07 14:31:43.806 +08:00 [INF] Request finished in 133.018ms 200 text/css
+2020-05-07 14:31:43.806 +08:00 [INF] Sending file. Request path: '/extui/login/css/util.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\css\util.css'
+2020-05-07 14:31:43.806 +08:00 [INF] Request finished in 131.9356ms 200 text/css
+2020-05-07 14:31:43.864 +08:00 [INF] Sending file. Request path: '/hplus/js/jquery.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\jquery.min.js'
+2020-05-07 14:31:43.864 +08:00 [INF] Request finished in 187.0105ms 200 application/javascript
+2020-05-07 14:31:43.924 +08:00 [INF] Sending file. Request path: '/extui/login/vendor/bootstrap/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\vendor\bootstrap\css\bootstrap.min.css'
+2020-05-07 14:31:43.924 +08:00 [INF] Request finished in 257.841ms 200 text/css
+2020-05-07 14:31:44.353 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/images/bg-01.jpg  
+2020-05-07 14:31:44.362 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/extui/login/fonts/iconic/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0  
+2020-05-07 14:31:44.476 +08:00 [INF] Sending file. Request path: '/extui/login/fonts/iconic/fonts/Material-Design-Iconic-Font.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2'
+2020-05-07 14:31:44.476 +08:00 [INF] Request finished in 114.9653ms 200 font/woff2
+2020-05-07 14:31:44.505 +08:00 [INF] Sending file. Request path: '/extui/login/images/bg-01.jpg'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\extui\login\images\bg-01.jpg'
+2020-05-07 14:31:44.505 +08:00 [INF] Request finished in 153.0467ms 200 image/jpeg
+2020-05-07 14:31:44.560 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/favicon.ico  
+2020-05-07 14:31:44.560 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\favicon.ico'
+2020-05-07 14:31:44.561 +08:00 [INF] Request finished in 1.0676ms 200 image/x-icon
+2020-05-07 14:32:12.385 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:32:26.835 +08:00 [INF] Request starting HTTP/1.1 POST http://192.168.1.210:9003/login/LoginOn application/x-www-form-urlencoded 22
+2020-05-07 14:32:26.838 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-07 14:32:26.849 +08:00 [INF] Route matched with {action = "Loginon", controller = "Login", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Loginon(Atlass.Framework.Web.Models.LoginDto) on controller Atlass.Framework.Web.Controllers.LoginController (Atlass.Framework.Web).
+2020-05-07 14:32:26.980 +08:00 [INF] Executing RedirectResult, redirecting to /admin/Home/Index.
+2020-05-07 14:32:26.980 +08:00 [INF] Executed action Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web) in 130.5219ms
+2020-05-07 14:32:26.980 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Controllers.LoginController.Loginon (Atlass.Framework.Web)'
+2020-05-07 14:32:26.980 +08:00 [INF] Request finished in 145.6231ms 302 
+2020-05-07 14:32:26.999 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/Index  
+2020-05-07 14:32:27.000 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:27.013 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-07 14:32:27.080 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-07 14:32:27.116 +08:00 [INF] Executed ViewResult - view Index executed in 41.2212ms.
+2020-05-07 14:32:27.116 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web) in 103.3161ms
+2020-05-07 14:32:27.116 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:27.116 +08:00 [INF] Request finished in 117.4446ms 200 text/html; charset=utf-8
+2020-05-07 14:32:27.160 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/bootstrap.min.css?v=3.3.6  
+2020-05-07 14:32:27.161 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.min.css?v=4.4.0  
+2020-05-07 14:32:27.163 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/animate.css  
+2020-05-07 14:32:27.164 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/style.css?v=4.1.0  
+2020-05-07 14:32:27.166 +08:00 [INF] Sending file. Request path: '/hplus/css/style.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\style.css'
+2020-05-07 14:32:27.166 +08:00 [INF] Request finished in 1.6941ms 200 text/css
+2020-05-07 14:32:27.186 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.min.css'
+2020-05-07 14:32:27.186 +08:00 [INF] Request finished in 24.3061ms 200 text/css
+2020-05-07 14:32:27.187 +08:00 [INF] Sending file. Request path: '/hplus/css/animate.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\animate.css'
+2020-05-07 14:32:27.187 +08:00 [INF] Request finished in 24.1815ms 200 text/css
+2020-05-07 14:32:27.187 +08:00 [INF] Sending file. Request path: '/hplus/css/bootstrap.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\bootstrap.min.css'
+2020-05-07 14:32:27.187 +08:00 [INF] Request finished in 27.0814ms 200 text/css
+2020-05-07 14:32:27.214 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/bootstrap.min.js?v=3.3.6  
+2020-05-07 14:32:27.215 +08:00 [INF] Sending file. Request path: '/hplus/js/bootstrap.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\bootstrap.min.js'
+2020-05-07 14:32:27.215 +08:00 [INF] Request finished in 0.9761ms 200 application/javascript
+2020-05-07 14:32:27.215 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/img/avatar.png  
+2020-05-07 14:32:27.233 +08:00 [INF] Sending file. Request path: '/hplus/img/avatar.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\img\avatar.png'
+2020-05-07 14:32:27.233 +08:00 [INF] Request finished in 17.7128ms 200 image/png
+2020-05-07 14:32:27.256 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/metisMenu/jquery.metisMenu.js  
+2020-05-07 14:32:27.257 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/metisMenu/jquery.metisMenu.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\metisMenu\jquery.metisMenu.js'
+2020-05-07 14:32:27.257 +08:00 [INF] Request finished in 0.6966ms 200 application/javascript
+2020-05-07 14:32:27.257 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js  
+2020-05-07 14:32:27.258 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/layer.min.js  
+2020-05-07 14:32:27.260 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/pace/pace.min.js  
+2020-05-07 14:32:27.261 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/locache/locache.min.js  
+2020-05-07 14:32:27.262 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/html/index.html  
+2020-05-07 14:32:27.264 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/altasTab.js  
+2020-05-07 14:32:27.265 +08:00 [INF] Sending file. Request path: '/framework/altasTab.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\altasTab.js'
+2020-05-07 14:32:27.265 +08:00 [INF] Request finished in 0.7022ms 200 application/javascript
+2020-05-07 14:32:27.270 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jui-framework.js  
+2020-05-07 14:32:27.270 +08:00 [INF] Sending file. Request path: '/framework/jui-framework.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jui-framework.js'
+2020-05-07 14:32:27.271 +08:00 [INF] Request finished in 1.1084ms 200 application/javascript
+2020-05-07 14:32:27.277 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\slimscroll\jquery.slimscroll.min.js'
+2020-05-07 14:32:27.277 +08:00 [INF] Request finished in 20.1872ms 200 application/javascript
+2020-05-07 14:32:27.286 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/layer.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\layer.min.js'
+2020-05-07 14:32:27.286 +08:00 [INF] Request finished in 28.3446ms 200 application/javascript
+2020-05-07 14:32:27.289 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/pace/pace.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\pace\pace.min.js'
+2020-05-07 14:32:27.289 +08:00 [INF] Request finished in 29.7291ms 200 application/javascript
+2020-05-07 14:32:27.294 +08:00 [INF] Sending file. Request path: '/plugins/locache/locache.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\locache\locache.min.js'
+2020-05-07 14:32:27.294 +08:00 [INF] Request finished in 32.994ms 200 application/javascript
+2020-05-07 14:32:27.300 +08:00 [INF] Sending file. Request path: '/html/index.html'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\html\index.html'
+2020-05-07 14:32:27.300 +08:00 [INF] Request finished in 37.221ms 200 text/html
+2020-05-07 14:32:27.338 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile.png  
+2020-05-07 14:32:27.342 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-1.png  
+2020-05-07 14:32:27.343 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/patterns/header-profile-skin-3.png  
+2020-05-07 14:32:27.344 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-1.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-1.png'
+2020-05-07 14:32:27.344 +08:00 [INF] Request finished in 1.937ms 200 image/png
+2020-05-07 14:32:27.362 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile-skin-3.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile-skin-3.png'
+2020-05-07 14:32:27.363 +08:00 [INF] Request finished in 19.4701ms 200 image/png
+2020-05-07 14:32:27.365 +08:00 [INF] Sending file. Request path: '/hplus/css/patterns/header-profile.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\patterns\header-profile.png'
+2020-05-07 14:32:27.366 +08:00 [INF] Request finished in 27.3245ms 200 image/png
+2020-05-07 14:32:27.370 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/fontawesome-webfont.woff2?v=4.4.0  
+2020-05-07 14:32:27.373 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/layer.css  
+2020-05-07 14:32:27.387 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\layer.css'
+2020-05-07 14:32:27.387 +08:00 [INF] Request finished in 14.7611ms 200 text/css
+2020-05-07 14:32:27.611 +08:00 [INF] Sending file. Request path: '/hplus/fonts/fontawesome-webfont.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\fontawesome-webfont.woff2'
+2020-05-07 14:32:27.611 +08:00 [INF] Request finished in 241.3177ms 200 font/woff2
+2020-05-07 14:32:27.614 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/Home/GetRoleMenu?time=Thu%20May%2007%202020%2014:32:27%20GMT+0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)&_=1588833147302  
+2020-05-07 14:32:27.615 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/font-awesome.css?v=4.4.0  
+2020-05-07 14:32:27.616 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/echarts/echarts.min.js  
+2020-05-07 14:32:27.617 +08:00 [INF] Sending file. Request path: '/hplus/css/font-awesome.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\font-awesome.css'
+2020-05-07 14:32:27.617 +08:00 [INF] Request finished in 2.4488ms 200 text/css
+2020-05-07 14:32:27.620 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-07 14:32:27.625 +08:00 [INF] Route matched with {area = "Admin", action = "GetRoleMenu", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] GetRoleMenu() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-07 14:32:27.674 +08:00 [INF] Sending file. Request path: '/plugins/echarts/echarts.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\echarts\echarts.min.js'
+2020-05-07 14:32:27.675 +08:00 [INF] Request finished in 58.246ms 200 application/javascript
+2020-05-07 14:32:27.711 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:27.712 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web) in 86.4748ms
+2020-05-07 14:32:27.712 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetRoleMenu (Atlass.Framework.Web)'
+2020-05-07 14:32:27.712 +08:00 [INF] Request finished in 97.7362ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:27.803 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/home/GetChart?_=1588833147623  
+2020-05-07 14:32:27.805 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-07 14:32:27.808 +08:00 [INF] Route matched with {area = "Admin", action = "GetChart", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetChart() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HomeController (Atlass.Framework.Web).
+2020-05-07 14:32:27.862 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:27.862 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web) in 54.2071ms
+2020-05-07 14:32:27.862 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HomeController.GetChart (Atlass.Framework.Web)'
+2020-05-07 14:32:27.862 +08:00 [INF] Request finished in 59.5931ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:30.761 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfirejob/index  
+2020-05-07 14:32:30.763 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/layer/skin/default/loading-2.gif  
+2020-05-07 14:32:30.763 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:30.765 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/layer/skin/default/loading-2.gif'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\layer\skin\default\loading-2.gif'
+2020-05-07 14:32:30.765 +08:00 [INF] Request finished in 2.5042ms 200 image/gif
+2020-05-07 14:32:30.768 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:32:30.776 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-07 14:32:30.800 +08:00 [INF] Executed ViewResult - view Index executed in 26.2282ms.
+2020-05-07 14:32:30.800 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Index (Atlass.Framework.Web) in 31.8035ms
+2020-05-07 14:32:30.800 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:30.800 +08:00 [INF] Request finished in 39.6522ms 200 text/html; charset=utf-8
+2020-05-07 14:32:30.830 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css  
+2020-05-07 14:32:30.830 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.css  
+2020-05-07 14:32:30.831 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/toastr/toastr.min.js  
+2020-05-07 14:32:30.832 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/layer.js  
+2020-05-07 14:32:30.833 +08:00 [INF] Sending file. Request path: '/plugins/layer/layer.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\layer.js'
+2020-05-07 14:32:30.833 +08:00 [INF] Request finished in 0.5971ms 200 application/javascript
+2020-05-07 14:32:30.834 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js  
+2020-05-07 14:32:30.836 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js  
+2020-05-07 14:32:30.836 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.js'
+2020-05-07 14:32:30.837 +08:00 [INF] Request finished in 0.8326ms 200 application/javascript
+2020-05-07 14:32:30.837 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/framework/jutils.js  
+2020-05-07 14:32:30.838 +08:00 [INF] Sending file. Request path: '/framework/jutils.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\framework\jutils.js'
+2020-05-07 14:32:30.838 +08:00 [INF] Request finished in 0.5649ms 200 application/javascript
+2020-05-07 14:32:30.846 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.js'
+2020-05-07 14:32:30.846 +08:00 [INF] Sending file. Request path: '/plugins/toastr/toastr.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\toastr\toastr.min.css'
+2020-05-07 14:32:30.846 +08:00 [INF] Request finished in 14.6009ms 200 application/javascript
+2020-05-07 14:32:30.846 +08:00 [INF] Request finished in 15.8886ms 200 text/css
+2020-05-07 14:32:30.853 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/js/content.js?v=1.0.0  
+2020-05-07 14:32:30.853 +08:00 [INF] Sending file. Request path: '/hplus/js/content.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\content.js'
+2020-05-07 14:32:30.854 +08:00 [INF] Request finished in 0.6754ms 200 application/javascript
+2020-05-07 14:32:30.856 +08:00 [INF] Sending file. Request path: '/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\plugins\bootstrap-table\bootstrap-table.min.css'
+2020-05-07 14:32:30.856 +08:00 [INF] Request finished in 26.0874ms 200 text/css
+2020-05-07 14:32:30.866 +08:00 [INF] Sending file. Request path: '/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\js\plugins\bootstrap-table\bootstrap-table.min.js'
+2020-05-07 14:32:30.867 +08:00 [INF] Request finished in 32.4583ms 200 application/javascript
+2020-05-07 14:32:30.934 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/theme/default/layer.css?v=3.1.1  
+2020-05-07 14:32:30.935 +08:00 [INF] Sending file. Request path: '/plugins/layer/theme/default/layer.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\theme\default\layer.css'
+2020-05-07 14:32:30.935 +08:00 [INF] Request finished in 1.0954ms 200 text/css
+2020-05-07 14:32:30.956 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfirejob/getdata?limit=15&offset=0&log_type=0 application/json 
+2020-05-07 14:32:30.958 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:30.961 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/fonts/glyphicons-halflings-regular.woff2  
+2020-05-07 14:32:30.962 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:32:30.991 +08:00 [INF] Sending file. Request path: '/hplus/fonts/glyphicons-halflings-regular.woff2'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\fonts\glyphicons-halflings-regular.woff2'
+2020-05-07 14:32:30.992 +08:00 [INF] Request finished in 30.5358ms 200 font/woff2
+2020-05-07 14:32:30.992 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:30.992 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web) in 29.2541ms
+2020-05-07 14:32:30.992 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:30.992 +08:00 [INF] Request finished in 35.9531ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:38.020 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/theme/default/icon.png  
+2020-05-07 14:32:38.022 +08:00 [INF] Sending file. Request path: '/plugins/layer/theme/default/icon.png'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\theme\default\icon.png'
+2020-05-07 14:32:38.022 +08:00 [INF] Request finished in 1.7227ms 200 image/png
+2020-05-07 14:32:38.957 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfireJob/Resume?id=5eb2c92fc1a5090d1ca688d7&_=1588833150904  
+2020-05-07 14:32:38.958 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Resume (Atlass.Framework.Web)'
+2020-05-07 14:32:38.960 +08:00 [INF] Route matched with {area = "Admin", action = "Resume", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Resume(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:32:39.015 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:39.016 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Resume (Atlass.Framework.Web) in 55.3127ms
+2020-05-07 14:32:39.016 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.Resume (Atlass.Framework.Web)'
+2020-05-07 14:32:39.016 +08:00 [INF] Request finished in 59.0211ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:39.025 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfirejob/getdata?limit=15&offset=0&log_type=0 application/json 
+2020-05-07 14:32:39.026 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:39.026 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:32:39.028 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:39.028 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web) in 1.7445ms
+2020-05-07 14:32:39.028 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:39.028 +08:00 [INF] Request finished in 2.5999ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:42.086 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/index  
+2020-05-07 14:32:42.087 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:42.092 +08:00 [INF] Route matched with {area = "Admin", action = "Index", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:42.097 +08:00 [INF] Executing ViewResult, running view Index.
+2020-05-07 14:32:42.103 +08:00 [INF] Executed ViewResult - view Index executed in 9.1529ms.
+2020-05-07 14:32:42.103 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web) in 11.252ms
+2020-05-07 14:32:42.103 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Index (Atlass.Framework.Web)'
+2020-05-07 14:32:42.103 +08:00 [INF] Request finished in 17.0231ms 200 text/html; charset=utf-8
+2020-05-07 14:32:42.302 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:42.304 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:42.307 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:42.328 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:42.328 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 20.9441ms
+2020-05-07 14:32:42.328 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:42.328 +08:00 [INF] Request finished in 26.2176ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:42.385 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:32:42.427 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:32:42.428 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:32:42.428 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:32:45.070 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=211%2C210%2C209%2C208%2C207%2C206%2C205%2C204%2C203%2C202%2C201%2C200%2C199%2C198%2C197&_=1588833162246  
+2020-05-07 14:32:45.071 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:45.074 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:45.111 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:45.111 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 36.1288ms
+2020-05-07 14:32:45.111 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:45.111 +08:00 [INF] Request finished in 40.89ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:45.121 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:45.121 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:45.122 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:45.124 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:45.124 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 2.3791ms
+2020-05-07 14:32:45.124 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:45.125 +08:00 [INF] Request finished in 4.0656ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:47.692 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=196%2C195%2C194%2C193%2C192%2C191%2C190%2C189%2C188%2C187%2C186%2C185%2C184%2C183%2C182&_=1588833162247  
+2020-05-07 14:32:47.693 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:47.693 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:47.695 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:47.695 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 2.0422ms
+2020-05-07 14:32:47.695 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:47.696 +08:00 [INF] Request finished in 3.3984ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:47.705 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:47.706 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:47.706 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:47.711 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:47.711 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 4.9999ms
+2020-05-07 14:32:47.712 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:47.712 +08:00 [INF] Request finished in 6.7317ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:50.436 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=181%2C180%2C179%2C178%2C177%2C176%2C175%2C174%2C173%2C172%2C171%2C170%2C169%2C168%2C167&_=1588833162248  
+2020-05-07 14:32:50.436 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:50.437 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:50.439 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:50.439 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 2.153ms
+2020-05-07 14:32:50.439 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:50.439 +08:00 [INF] Request finished in 3.8178ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:50.446 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:50.447 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:50.447 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:50.450 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:50.450 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 2.8277ms
+2020-05-07 14:32:50.450 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:50.450 +08:00 [INF] Request finished in 4.0723ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:53.451 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=166%2C165%2C164%2C163%2C162%2C161%2C160%2C159%2C158%2C157%2C156%2C155%2C154%2C153%2C152&_=1588833162249  
+2020-05-07 14:32:53.452 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:53.453 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:53.455 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:53.455 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 2.2758ms
+2020-05-07 14:32:53.455 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:53.455 +08:00 [INF] Request finished in 4.0849ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:53.463 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:53.464 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:53.464 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:53.467 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:53.467 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 3.0687ms
+2020-05-07 14:32:53.467 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:53.468 +08:00 [INF] Request finished in 4.1945ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:55.771 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=151%2C150%2C149%2C148%2C147%2C146%2C145%2C144%2C143%2C142%2C141%2C140%2C139%2C138%2C137&_=1588833162250  
+2020-05-07 14:32:55.772 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:55.772 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:55.774 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:55.774 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.5539ms
+2020-05-07 14:32:55.774 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:55.774 +08:00 [INF] Request finished in 2.6816ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:55.783 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:55.783 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:55.784 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:55.786 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:55.786 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 2.0909ms
+2020-05-07 14:32:55.786 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:55.787 +08:00 [INF] Request finished in 4.1003ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:57.796 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=136%2C135%2C134%2C133%2C132%2C131%2C130%2C129%2C128%2C127%2C126%2C125%2C124%2C123%2C122&_=1588833162251  
+2020-05-07 14:32:57.796 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:57.796 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:57.798 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:57.798 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.8164ms
+2020-05-07 14:32:57.798 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:57.799 +08:00 [INF] Request finished in 3.1574ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:57.808 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:57.808 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:57.809 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:57.811 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:57.811 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 2.1811ms
+2020-05-07 14:32:57.811 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:57.811 +08:00 [INF] Request finished in 3.2682ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:59.732 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=121%2C120%2C119%2C118%2C117%2C116%2C115%2C114%2C113%2C112%2C111%2C110%2C109%2C108%2C107&_=1588833162252  
+2020-05-07 14:32:59.733 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:59.733 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:59.736 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:59.736 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 3.0024ms
+2020-05-07 14:32:59.737 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:32:59.737 +08:00 [INF] Request finished in 5.1955ms 200 text/plain; charset=utf-8
+2020-05-07 14:32:59.746 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:32:59.746 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:59.747 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:32:59.750 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:32:59.751 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 3.5536ms
+2020-05-07 14:32:59.751 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:32:59.751 +08:00 [INF] Request finished in 4.8863ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:01.700 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=106%2C105%2C104%2C103%2C102%2C101%2C100%2C99%2C98%2C97%2C96%2C95%2C94%2C93%2C92&_=1588833162253  
+2020-05-07 14:33:01.700 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:01.701 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:01.703 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:01.703 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.8983ms
+2020-05-07 14:33:01.703 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:01.703 +08:00 [INF] Request finished in 3.1587ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:01.711 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:33:01.711 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:01.712 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:01.713 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:01.713 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 1.6371ms
+2020-05-07 14:33:01.713 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:01.714 +08:00 [INF] Request finished in 2.4929ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:07.323 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=91%2C90%2C89%2C88%2C87%2C86%2C85%2C84%2C83%2C82%2C81%2C80%2C79%2C78%2C77&_=1588833162254  
+2020-05-07 14:33:07.323 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:07.323 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:07.325 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:07.325 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.7072ms
+2020-05-07 14:33:07.325 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:07.325 +08:00 [INF] Request finished in 2.8435ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:07.332 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:33:07.333 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:07.333 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:07.335 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:07.335 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 1.7864ms
+2020-05-07 14:33:07.335 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:07.335 +08:00 [INF] Request finished in 2.879ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:09.563 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=76%2C75%2C74%2C73%2C72%2C71%2C70%2C69%2C68%2C67%2C66%2C65%2C64%2C63%2C61&_=1588833162255  
+2020-05-07 14:33:09.563 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:09.564 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:09.565 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:09.565 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.6287ms
+2020-05-07 14:33:09.566 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:09.566 +08:00 [INF] Request finished in 2.5546ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:09.574 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:33:09.574 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:09.574 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:09.576 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:09.577 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 1.9856ms
+2020-05-07 14:33:09.577 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:09.577 +08:00 [INF] Request finished in 3.1488ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:11.908 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/DelByIds?ids=60%2C59%2C58%2C57%2C56%2C55%2C54%2C53%2C52%2C51%2C50%2C49%2C48%2C47&_=1588833162256  
+2020-05-07 14:33:11.908 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:11.909 +08:00 [INF] Route matched with {area = "Admin", action = "DelByIds", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult DelByIds(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:11.910 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:11.910 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web) in 1.0589ms
+2020-05-07 14:33:11.910 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.DelByIds (Atlass.Framework.Web)'
+2020-05-07 14:33:11.910 +08:00 [INF] Request finished in 2.1832ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:11.917 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:33:11.917 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:11.917 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:11.919 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:11.919 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 1.4234ms
+2020-05-07 14:33:11.919 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:11.919 +08:00 [INF] Request finished in 2.3986ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:12.386 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:33:17.765 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfireJob/excuteJob?id=5eb2c92fc1a5090d1ca688d7&_=1588833150905  
+2020-05-07 14:33:17.765 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.ExcuteJob (Atlass.Framework.Web)'
+2020-05-07 14:33:17.772 +08:00 [INF] Route matched with {area = "Admin", action = "ExcuteJob", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult ExcuteJob(System.String) on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:33:17.778 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:17.779 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.ExcuteJob (Atlass.Framework.Web) in 6.9951ms
+2020-05-07 14:33:17.779 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.ExcuteJob (Atlass.Framework.Web)'
+2020-05-07 14:33:17.779 +08:00 [INF] Request finished in 14.3677ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:17.790 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/hangfirejob/getdata?limit=15&offset=0&log_type=0 application/json 
+2020-05-07 14:33:17.790 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:17.791 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "HangfireJob"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController (Atlass.Framework.Web).
+2020-05-07 14:33:17.792 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:17.792 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web) in 1.7871ms
+2020-05-07 14:33:17.793 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.HangfireJobController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:17.793 +08:00 [INF] Request finished in 2.3626ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:21.594 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/getdata?limit=15&offset=0&log_type=0&log_summary= application/json 
+2020-05-07 14:33:21.594 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:21.594 +08:00 [INF] Route matched with {area = "Admin", action = "GetData", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetData(Atlass.Framework.ViewModels.Common.BootstrapGridDto) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:33:21.596 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:33:21.596 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web) in 1.4758ms
+2020-05-07 14:33:21.596 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetData (Atlass.Framework.Web)'
+2020-05-07 14:33:21.596 +08:00 [INF] Request finished in 2.011ms 200 text/plain; charset=utf-8
+2020-05-07 14:33:42.387 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:33:42.429 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:33:42.430 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:33:42.430 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:34:04.744 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/layer/theme/default/loading-1.gif  
+2020-05-07 14:34:04.744 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/detail?id=213  
+2020-05-07 14:34:04.745 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web)'
+2020-05-07 14:34:04.746 +08:00 [INF] Route matched with {area = "Admin", action = "Detail", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Detail(Int32) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:34:04.754 +08:00 [INF] Executing ViewResult, running view Detail.
+2020-05-07 14:34:04.764 +08:00 [INF] Sending file. Request path: '/plugins/layer/theme/default/loading-1.gif'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\layer\theme\default\loading-1.gif'
+2020-05-07 14:34:04.764 +08:00 [INF] Request finished in 19.8884ms 200 image/gif
+2020-05-07 14:34:04.790 +08:00 [INF] Executed ViewResult - view Detail executed in 38.1949ms.
+2020-05-07 14:34:04.790 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web) in 43.9705ms
+2020-05-07 14:34:04.791 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.Detail (Atlass.Framework.Web)'
+2020-05-07 14:34:04.791 +08:00 [INF] Request finished in 46.4755ms 200 text/html; charset=utf-8
+2020-05-07 14:34:04.824 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css  
+2020-05-07 14:34:04.824 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/jquery.validator.css  
+2020-05-07 14:34:04.826 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/jquery.validator.js?local=zh-CN  
+2020-05-07 14:34:04.827 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/jquery.validator.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\jquery.validator.js'
+2020-05-07 14:34:04.827 +08:00 [INF] Request finished in 0.9581ms 200 application/javascript
+2020-05-07 14:34:04.827 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/vue/vue.js  
+2020-05-07 14:34:04.835 +08:00 [INF] Sending file. Request path: '/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\hplus\css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css'
+2020-05-07 14:34:04.835 +08:00 [INF] Request finished in 11.4821ms 200 text/css
+2020-05-07 14:34:04.845 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/jquery.validator.css'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\jquery.validator.css'
+2020-05-07 14:34:04.845 +08:00 [INF] Request finished in 21.0568ms 200 text/css
+2020-05-07 14:34:04.908 +08:00 [INF] Sending file. Request path: '/plugins/vue/vue.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\vue\vue.js'
+2020-05-07 14:34:04.908 +08:00 [INF] Request finished in 81.1229ms 200 application/javascript
+2020-05-07 14:34:04.920 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/plugins/nice_validate/local/zh-CN.js  
+2020-05-07 14:34:04.920 +08:00 [INF] Sending file. Request path: '/plugins/nice_validate/local/zh-CN.js'. Physical path: 'E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web\wwwroot\plugins\nice_validate\local\zh-CN.js'
+2020-05-07 14:34:04.920 +08:00 [INF] Request finished in 0.5892ms 200 application/javascript
+2020-05-07 14:34:04.974 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/admin/easylog/GetDataById?id=213&_=1588833244898  
+2020-05-07 14:34:04.974 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web)'
+2020-05-07 14:34:04.976 +08:00 [INF] Route matched with {area = "Admin", action = "GetDataById", controller = "EasyLog"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetDataById(Int32) on controller Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController (Atlass.Framework.Web).
+2020-05-07 14:34:04.980 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 14:34:04.980 +08:00 [INF] Executed action Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web) in 4.4321ms
+2020-05-07 14:34:04.980 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.Areas.Admin.Controllers.EasyLogController.GetDataById (Atlass.Framework.Web)'
+2020-05-07 14:34:04.980 +08:00 [INF] Request finished in 6.5972ms 200 text/plain; charset=utf-8
+2020-05-07 14:34:12.388 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:34:42.389 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:34:42.432 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:34:42.433 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:34:42.433 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:35:12.390 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:35:42.390 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:35:42.435 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:35:42.435 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:35:42.435 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:36:12.391 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:36:42.392 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:36:42.436 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:36:42.436 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:36:42.436 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:37:12.392 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:37:42.393 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:37:42.438 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:37:42.438 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:37:42.439 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:38:12.393 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:38:42.393 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:38:42.441 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:38:42.441 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:38:42.441 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:39:12.395 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:39:42.396 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:39:42.442 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:39:42.443 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:39:42.443 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:40:12.398 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:40:42.399 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:40:42.444 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:40:42.445 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:40:42.445 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:41:12.399 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:41:42.400 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:41:42.446 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:41:42.446 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:41:42.447 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:42:12.400 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:42:42.400 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:42:42.448 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:42:42.448 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:42:42.448 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:43:12.401 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:43:42.401 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:43:42.450 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:43:42.450 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:43:42.451 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:44:12.401 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:44:42.402 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:44:42.451 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:44:42.451 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:44:42.452 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:45:12.402 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:45:42.402 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:45:42.453 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:45:42.453 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:45:42.453 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:46:12.402 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:46:42.403 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:46:42.454 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:46:42.455 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:46:42.455 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:47:12.403 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:47:42.403 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:47:42.456 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:47:42.456 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:47:42.456 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:48:12.404 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:48:42.404 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:48:42.457 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:48:42.457 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:48:42.457 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:49:12.405 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:49:42.405 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:49:42.459 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:49:42.459 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:49:42.460 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:50:12.406 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:50:42.406 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:50:42.461 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:50:42.462 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:50:42.462 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:51:12.407 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:51:42.407 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:51:42.463 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:51:42.464 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:51:42.464 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:52:12.408 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:52:42.409 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:52:42.466 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:52:42.466 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:52:42.467 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:53:12.409 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:53:42.409 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:53:42.467 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 14:53:42.468 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 14:53:42.468 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 14:54:12.409 +08:00 [DBG] Server xttd-2020fopbkl:13776:1e1f30a4 heartbeat successfully sent
+2020-05-07 14:54:13.398 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:32589/iisintegration  0
+2020-05-07 14:54:13.398 +08:00 [INF] Request finished in 0.2172ms 202 
+2020-05-07 14:54:13.399 +08:00 [DBG] Hangfire Server is stopping...
+2020-05-07 14:54:13.399 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 caught stopping signal...
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:95cf28ef stopped in 0.0939 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:ce3849c5 stopped in 0.101 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:61e8738e stopped in 0.211 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:2245dab1 stopped in 0.2476 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop DelayedJobScheduler:27f85c4c stopped in 0.3175 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop ServerWatchdog:1cbc401c stopped in 0.343 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:dd90962e stopped in 0.4119 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop ExpiredJobsWatcher:800471af stopped in 0.0957 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:f52def06 stopped in 0.5103 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:1b7b91bd stopped in 0.6045 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:684042a6 stopped in 0.6314 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop RecurringJobScheduler:ea12e98b stopped in 0.4341 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:b4d5da6c stopped in 0.4289 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:b03e6f4d stopped in 0.8412 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop FetchedJobsWatcher:a65ac061 stopped in 0.0877 ms
+2020-05-07 14:54:13.400 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 caught stopped signal...
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:489faee7 stopped in 0.909 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:43183fbf stopped in 1.0378 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:4c6c82c1 stopped in 0.9571 ms
+2020-05-07 14:54:13.400 +08:00 [DBG] Execution loop Worker:aa201eef stopped in 0.6865 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:71740a67 stopped in 1.2562 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:782076ea stopped in 1.308 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:860ba1d2 stopped in 1.3407 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:8495dd47 stopped in 1.3743 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:647a3532 stopped in 1.425 ms
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:e41a182d stopped in 1.4465 ms
+2020-05-07 14:54:13.401 +08:00 [INF] Application is shutting down...
+2020-05-07 14:54:13.401 +08:00 [DBG] Execution loop Worker:81a643d8 stopped in 1.4943 ms
+2020-05-07 14:54:13.405 +08:00 [DBG] Execution loop RedisSubscription:1d4f002f stopped in 5.8186 ms
+2020-05-07 14:54:13.406 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 All dispatchers stopped
+2020-05-07 14:54:13.406 +08:00 [DBG] Execution loop ServerHeartbeatProcess:08674f91 stopped in 6.3723 ms
+2020-05-07 14:54:13.410 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 successfully reported itself as stopped in 1.8534 ms
+2020-05-07 14:54:13.410 +08:00 [INF] Server xttd-2020fopbkl:13776:1e1f30a4 has been stopped in total 10.0791 ms
+2020-05-07 14:54:13.410 +08:00 [DBG] Execution loop BackgroundServerProcess:5d4c5112 stopped in 9.9683 ms
+2020-05-07 16:48:05.477 +08:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2020-05-07 16:48:05.510 +08:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2020-05-07 16:48:05.746 +08:00 [INF] Creating key "2c64c32c-f451-48e3-96e6-a31787273b9f" with creation date "2020-05-07T08:48:05.7410646+00:00", activation date "2020-05-07T08:48:05.7364213+00:00", and expiration date "2020-08-05T08:48:05.7364213+00:00".
+2020-05-07 16:48:05.761 +08:00 [WRN] No XML encryptor configured. Key "2c64c32c-f451-48e3-96e6-a31787273b9f" may be persisted to storage in unencrypted form.
+2020-05-07 16:48:06.180 +08:00 [INF] Starting Hangfire Server using job storage: 'redis://127.0.0.1:6379,allowAdmin=True/0'
+2020-05-07 16:48:06.180 +08:00 [DBG] Using the following options for Redis job storage:
+2020-05-07 16:48:06.181 +08:00 [DBG] ConnectionString: 127.0.0.1:6379,allowAdmin=True
+DN: 0
+2020-05-07 16:48:06.181 +08:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2020-05-07 16:48:06.190 +08:00 [DBG] Execution loop BackgroundServerProcess:92dac00a has started in 3.7438 ms
+2020-05-07 16:48:06.214 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 successfully announced in 22.1002 ms
+2020-05-07 16:48:06.217 +08:00 [DBG] Execution loop ServerHeartbeatProcess:ca754f5a has started in 1.5615 ms
+2020-05-07 16:48:06.218 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, FetchedJobsWatcher, ExpiredJobsWatcher, RedisSubscription, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2020-05-07 16:48:06.218 +08:00 [DBG] Execution loop ServerWatchdog:c1816150 has started in 0.2673 ms
+2020-05-07 16:48:06.218 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:72c2f7ad has started in 0.301 ms
+2020-05-07 16:48:06.219 +08:00 [DBG] Execution loop FetchedJobsWatcher:735f5e7d has started in 0.7135 ms
+2020-05-07 16:48:06.221 +08:00 [DBG] Execution loop ExpiredJobsWatcher:66785ea1 has started in 1.796 ms
+2020-05-07 16:48:06.223 +08:00 [DBG] Execution loop RedisSubscription:a6f42764 has started in 0.5391 ms
+2020-05-07 16:48:06.223 +08:00 [DBG] Execution loop Worker:6b6a30a5 has started in 0.3948 ms
+2020-05-07 16:48:06.223 +08:00 [DBG] Execution loop Worker:e0443d57 has started in 0.5385 ms
+2020-05-07 16:48:06.223 +08:00 [DBG] Execution loop Worker:fa87d7a2 has started in 0.7405 ms
+2020-05-07 16:48:06.224 +08:00 [DBG] Execution loop Worker:9c26c637 has started in 0.8916 ms
+2020-05-07 16:48:06.224 +08:00 [DBG] Execution loop Worker:e080b15d has started in 1.1265 ms
+2020-05-07 16:48:06.224 +08:00 [DBG] Execution loop Worker:6fafc830 has started in 1.3792 ms
+2020-05-07 16:48:06.224 +08:00 [DBG] Execution loop Worker:79b4cf65 has started in 1.5689 ms
+2020-05-07 16:48:06.224 +08:00 [DBG] Execution loop Worker:ea814ace has started in 1.8466 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:794a61b3 has started in 1.9937 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:1657a3f0 has started in 2.1514 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:e568b56e has started in 2.2572 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:480ca690 has started in 2.4026 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:dbf25c40 has started in 2.5522 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:04854b77 has started in 2.6732 ms
+2020-05-07 16:48:06.225 +08:00 [DBG] Execution loop Worker:83fe4034 has started in 2.8253 ms
+2020-05-07 16:48:06.226 +08:00 [DBG] Execution loop Worker:7d891d6b has started in 2.9725 ms
+2020-05-07 16:48:06.226 +08:00 [DBG] Execution loop Worker:bfd93cd0 has started in 3.2253 ms
+2020-05-07 16:48:06.226 +08:00 [DBG] Execution loop Worker:a12e91a2 has started in 3.4844 ms
+2020-05-07 16:48:06.228 +08:00 [DBG] Execution loop Worker:f6370973 has started in 5.0057 ms
+2020-05-07 16:48:06.228 +08:00 [DBG] Execution loop Worker:f40dcf70 has started in 5.2356 ms
+2020-05-07 16:48:06.228 +08:00 [DBG] Execution loop DelayedJobScheduler:353e641c has started in 0.2075 ms
+2020-05-07 16:48:06.230 +08:00 [DBG] Execution loop RecurringJobScheduler:b2429a54 has started in 1.8999 ms
+2020-05-07 16:48:06.232 +08:00 [INF] Removing expired records from the 'succeeded' list...
+2020-05-07 16:48:06.232 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 all the dispatchers started
+2020-05-07 16:48:06.234 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:48:06.238 +08:00 [INF] Removing 1 expired jobs from 'succeeded' list...
+2020-05-07 16:48:06.239 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:48:06.240 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:48:06.883 +08:00 [INF] Now listening on: http://127.0.0.1:33466
+2020-05-07 16:48:06.884 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-05-07 16:48:06.884 +08:00 [INF] Hosting environment: Production
+2020-05-07 16:48:06.884 +08:00 [INF] Content root path: E:\Work2\咨询台\doctor_platform\Atlass\Atlass.Framework.Web
+2020-05-07 16:48:07.000 +08:00 [INF] Request starting HTTP/1.1 GET http://192.168.1.210:9003/api/ApiQuestion/ShareQuestionList?page=1&psize=20&category=1  
+2020-05-07 16:48:07.007 +08:00 [WRN] Failed to determine the https port for redirect.
+2020-05-07 16:48:07.059 +08:00 [INF] Executing endpoint 'Atlass.Framework.Web.ApiControllers.ApiQuestionController.ShareQuestionList (Atlass.Framework.Web)'
+2020-05-07 16:48:07.088 +08:00 [INF] Route matched with {action = "ShareQuestionList", controller = "ApiQuestion", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult ShareQuestionList(Int32, Int32) on controller Atlass.Framework.Web.ApiControllers.ApiQuestionController (Atlass.Framework.Web).
+2020-05-07 16:48:07.151 +08:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2020-05-07 16:48:07.159 +08:00 [INF] Executed action Atlass.Framework.Web.ApiControllers.ApiQuestionController.ShareQuestionList (Atlass.Framework.Web) in 66.0121ms
+2020-05-07 16:48:07.160 +08:00 [INF] Executed endpoint 'Atlass.Framework.Web.ApiControllers.ApiQuestionController.ShareQuestionList (Atlass.Framework.Web)'
+2020-05-07 16:48:07.166 +08:00 [INF] Request finished in 166.1201ms 200 text/plain; charset=utf-8
+2020-05-07 16:48:36.223 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:49:06.224 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:49:06.250 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:49:06.251 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:49:06.251 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:49:36.225 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:50:06.227 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:50:06.253 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:50:06.254 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:50:06.254 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:50:36.228 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:51:06.229 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:51:06.255 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:51:06.255 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:51:06.256 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:51:36.230 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:52:06.231 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:52:06.256 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:52:06.256 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:52:06.257 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:52:36.233 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:53:06.234 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:53:06.258 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:53:06.258 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:53:06.259 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:53:36.234 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:54:06.235 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:54:06.260 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:54:06.260 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:54:06.261 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:54:36.236 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:55:06.237 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:55:06.263 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:55:06.264 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:55:06.264 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:55:36.237 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:56:06.238 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:56:06.265 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:56:06.265 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:56:06.265 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:56:36.239 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:57:06.240 +08:00 [DBG] Server xttd-2020fopbkl:19568:c1c02530 heartbeat successfully sent
+2020-05-07 16:57:06.266 +08:00 [DBG] Acquiring the lock for the fetched list of the 'default' queue...
+2020-05-07 16:57:06.267 +08:00 [DBG] Looking for timed out jobs in the 'default' queue...
+2020-05-07 16:57:06.267 +08:00 [DBG] No timed out jobs were found in the 'default' queue
+2020-05-07 16:57:33.366 +08:00 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:33466/iisintegration  0
+2020-05-07 16:57:33.367 +08:00 [INF] Request finished in 1.1096ms 202 
+2020-05-07 16:57:33.367 +08:00 [DBG] Hangfire Server is stopping...
+2020-05-07 16:57:33.368 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 caught stopping signal...
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop FetchedJobsWatcher:735f5e7d stopped in 0.4768 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop RecurringJobScheduler:b2429a54 stopped in 0.5592 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop ServerWatchdog:c1816150 stopped in 0.6133 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:83fe4034 stopped in 0.6561 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop ServerJobCancellationWatcher:72c2f7ad stopped in 0.6896 ms
+2020-05-07 16:57:33.369 +08:00 [INF] Application is shutting down...
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:e0443d57 stopped in 0.8262 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:bfd93cd0 stopped in 0.9243 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop Worker:6fafc830 stopped in 0.4823 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:fa87d7a2 stopped in 1.104 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:480ca690 stopped in 1.2624 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:1657a3f0 stopped in 1.3401 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop ExpiredJobsWatcher:66785ea1 stopped in 0.4762 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:9c26c637 stopped in 1.4404 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop Worker:dbf25c40 stopped in 0.5696 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:6b6a30a5 stopped in 0.6687 ms
+2020-05-07 16:57:33.370 +08:00 [DBG] Execution loop Worker:f40dcf70 stopped in 1.8368 ms
+2020-05-07 16:57:33.370 +08:00 [DBG] Execution loop Worker:e080b15d stopped in 1.9908 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop Worker:794a61b3 stopped in 0.4766 ms
+2020-05-07 16:57:33.368 +08:00 [DBG] Execution loop Worker:f6370973 stopped in 0.5006 ms
+2020-05-07 16:57:33.370 +08:00 [DBG] Execution loop Worker:ea814ace stopped in 2.1372 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:04854b77 stopped in 0.9886 ms
+2020-05-07 16:57:33.370 +08:00 [DBG] Execution loop Worker:7d891d6b stopped in 2.2697 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:a12e91a2 stopped in 1.3021 ms
+2020-05-07 16:57:33.370 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 caught stopped signal...
+2020-05-07 16:57:33.370 +08:00 [DBG] Execution loop Worker:79b4cf65 stopped in 1.8426 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop DelayedJobScheduler:353e641c stopped in 0.7051 ms
+2020-05-07 16:57:33.369 +08:00 [DBG] Execution loop Worker:e568b56e stopped in 0.9485 ms
+2020-05-07 16:57:33.373 +08:00 [DBG] Execution loop RedisSubscription:a6f42764 stopped in 5.1336 ms
+2020-05-07 16:57:33.373 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 All dispatchers stopped
+2020-05-07 16:57:33.374 +08:00 [DBG] Execution loop ServerHeartbeatProcess:ca754f5a stopped in 5.7246 ms
+2020-05-07 16:57:33.378 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 successfully reported itself as stopped in 2.3783 ms
+2020-05-07 16:57:33.378 +08:00 [INF] Server xttd-2020fopbkl:19568:c1c02530 has been stopped in total 10.3495 ms
+2020-05-07 16:57:33.378 +08:00 [DBG] Execution loop BackgroundServerProcess:92dac00a stopped in 10.1174 ms

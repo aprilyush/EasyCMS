@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>日志信息</h5>
+    </div>
+    <input type="hidden" id="id" value="@(ViewBag.Id)" />
+    <div class="ibox-content">
+        <div class="well">
+            <h4 id="logTime"></h4>
+            <div class="original" id="log">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+              var index = parent.layer.getFrameIndex(window.name);
+                var area = [];
+                $(function () {
+
+                    loadData();
+                });
+
+                function loadData() {
+                    var id = $("#id").val();
+
+                    if (id !== '') {
+
+                        jutils.ajaxGet('/admin/easylog/GetDataById', { id: id }, function (res) {
+                            // console.log('返回内容：\n' + JSON.stringify(json));
+                            var model = res.data.model;
+                            if (model) {
+                                  var logtime = jutils.toLocalTime(model.log_time);
+                                  $('#logTime').text(logtime);
+                                  $('#log').text(model.log_message);
+                            }
+
+
+                        });
+                    }
+                }
+
+                function cancel() {
+                    jutils.closeForm();
+                }
+    </script>
+
+
+}
+
+
+
+

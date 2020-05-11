@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>H5图片压缩上传</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div id="jddk" class="jddk">
+		<!-- upload -->
+	    <div class="upload flex flex-wrap">
+	        <div v-for="(item,index) in imgs" class="upload-item">
+	            <img class="upload-item-img" :src="item" alt="">
+	            <img class="upload-item-del" 
+	                @click="delImg(index)"
+	                src="images/icon-del.png" alt="">
+	        </div>
+	        <div v-show="addShow" class="upload-item">
+				<img class="upload-item-img" src="images/add.png" alt="">
+				<form id="form" enctype="multipart/form-data">
+					<input class="upload-input"
+						accept="image/*" 
+						multiple
+						required
+						type="file" 
+						@change="chooseImg">
+				</form>
+	        </div>
+	    </div>
+		
+		<button class="btn-submit" @click="submit">提交</button>
+	    <!-- Toast -->
+	    <div v-show="mltoast.show"  class="toast">{{mltoast.text}}</div>
+	</div>
+
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/vue/vue.min.js"></script>
+<script src="lib/vue/axios.min.js"></script>
+<script src="lib/canvasResize/canvasResize.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
