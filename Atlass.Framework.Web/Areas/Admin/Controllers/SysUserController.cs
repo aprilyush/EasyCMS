@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Atlass.Framework.AppService;
+using Atlass.Framework.AppService.SystemApp;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
@@ -18,12 +19,13 @@ namespace Altas.Framework.Admin
     public class SysUserController : BaseController
     {
         private readonly SysUserAppService _userApp;
-
+        private readonly SysDepartmentAppService _deptApp;
 
         public SysUserController(IServiceProvider service)
         {
             RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
             _userApp = service.GetRequiredService<SysUserAppService>();
+            _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }
 
         public ActionResult Index()
@@ -55,9 +57,9 @@ namespace Altas.Framework.Admin
         {
             //var data = new DataGridEx();
 
-            string accountName = RequestHelper.GetQueryString("accountName", "");
-
-            var data=_userApp.GetData(param, accountName);
+            string accountName = RequestHelper.GetQueryString("userName");
+            string nickName = RequestHelper.GetQueryString("nickName");
+            var data=_userApp.GetData(param, accountName, nickName);
 
             return Content(data.ToJson());
         }
@@ -103,7 +105,8 @@ namespace Altas.Framework.Admin
                 var user = _userApp.GetUserById(id.ToInt64());
                 result.data.Add("model", user);
             }
-
+            var depts = _deptApp.GetDepartTree();
+            result.data.Add("depts", depts);
             return Content(result.ToJson());
         }
 

@@ -15,6 +15,10 @@ namespace Atlass.Framework.Common.NLog
 
         public static void Add(LogDto log)
         {
+            if (LogQueue.Count > 500)
+            {
+                return;
+            }
             LogQueue.Enqueue(log);
         }
 

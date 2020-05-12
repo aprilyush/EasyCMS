@@ -3,6 +3,7 @@ using Atlass.Framework.Models.Admin;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,26 +34,31 @@ namespace Atlass.Framework.Core.HostService
                 //Console.WriteLine("服务开始了吗");
                 while (true)
                 {
-                    //队列中取log
-                    LogDto log=LogQueueInstance.GetLog();
-                    if (log != null)
-                    {
-                        try
+                    List<easy_log> logs = new List<easy_log>();
+                    for (int i = 0; i < 20; i++)
+                    {    //队列中取log
+                        LogDto log = LogQueueInstance.GetLog();
+                        if (log != null)
                         {
-
                             easy_log logModel = new easy_log();
                             logModel.log_summary = log.LogSummary;
                             logModel.log_message = log.LogMessage;
                             logModel.log_type = log.LogType;
                             logModel.log_time = log.LogTime;
-                            _freeSql.Insert(logModel).ExecuteAffrows();
+                        }
 
-                        }
-                        catch(Exception ex)
+                    }
+
+                    try
+                    {
+                        if (logs.Count > 0)
                         {
-                            _logger.LogError(ex.ToString());
+                            _freeSql.Insert(logs).ExecuteAffrows();
                         }
-                      
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
                     }
                     Thread.Sleep(100);
                 }

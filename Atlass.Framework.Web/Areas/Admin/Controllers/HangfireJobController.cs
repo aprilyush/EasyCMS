@@ -61,7 +61,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             string id=_logApp.Save(dto);
             IJob job = ReflectionHelper.Instance<IJob>(dto.assembly_namespace.Trim(),dto.class_name.Trim());
             RecurringJob.AddOrUpdate(id,
-                   () => job.Excute(_wxSetting.WeixinAppId,id),dto.cron_express);
+                   () => job.Excute(_wxSetting.WeixinAppId,id),dto.cron_express, TimeZoneInfo.Local);
             return Success("任务添加完成");
 
         }
@@ -102,7 +102,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             }
             IJob job = ReflectionHelper.Instance<IJob>(dto.assembly_namespace.Trim(), dto.class_name.Trim());
             RecurringJob.AddOrUpdate(id,
-                   () => job.Excute(_wxSetting.WeixinAppId, dto.id), dto.cron_express);
+                   () => job.Excute(_wxSetting.WeixinAppId, dto.id), dto.cron_express,TimeZoneInfo.Local);
             _logApp.Resume(dto.id);
             return Success("任务启动成功");
         }

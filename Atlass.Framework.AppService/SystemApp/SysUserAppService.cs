@@ -54,15 +54,20 @@ namespace Atlass.Framework.AppService
         /// <param name="param"></param>
         /// <param name="accountName"></param>
         /// <returns></returns>
-        public BootstrapGridDto GetData(BootstrapGridDto param, string accountName)
+        public BootstrapGridDto GetData(BootstrapGridDto param, string accountName,string nickName)
         {
-            var query = Sqldb.Select<sys_user, sys_role>()
-                         .LeftJoin((u, r) => u.sys_role_id == r.id)
-                         .OrderByDescending((u, r)=>u.is_super)
-                         .OrderByDescending((u, r) => u.create_time)
+            var query = Sqldb.Select<sys_user, sys_role,sys_department>()
+                         .LeftJoin((u, r,d) => u.sys_role_id == r.id)
+                         .LeftJoin((u, r, d) => u.dept_id ==d.id)
+                         .WhereIf(!accountName.IsEmpty(),(u, r, d)=>u.account_name==accountName)
+                         .WhereIf(!nickName.IsEmpty(), (u, r, d) => u.real_name.Contains(nickName))
+                         .OrderByDescending((u, r, d) =>u.is_super)
+                         .OrderByDescending((u, r, d) => u.create_time)
                 .Count(out long total)
                 .Page(param.page, param.limit)
-                .ToList((u, r) => new { Id = u.id,IsSuper=u.is_super, AccountName = u.account_name, RealName = u.real_name, MobilePhone = u.mobile_phone, Email = u.email, CreateTime = u.create_time, RoleName = r.role_name });
+                .ToList((u, r, d) => new { Id = u.id,IsSuper=u.is_super, AccountName = u.account_name, 
+                    RealName = u.real_name, MobilePhone = u.mobile_phone, Email = u.email, 
+                    CreateTime = u.create_time, RoleName = r.role_name,DeptName=d.department_name });
 
             param.rows = query;
             param.total = total;
@@ -147,7 +152,7 @@ namespace Atlass.Framework.AppService
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
             Sqldb.Update<sys_user>().SetSource(dto)
-                .UpdateColumns(s => new { s.real_name, s.pass_word, s.mobile_phone,s.email }).ExecuteAffrows();
+                .UpdateColumns(s => new { s.real_name, s.pass_word, s.mobile_phone,s.email,s.dept_id }).ExecuteAffrows();
         }
         /// <summary>
         /// 单个数据

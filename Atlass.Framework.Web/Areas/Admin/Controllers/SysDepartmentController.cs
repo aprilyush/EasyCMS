@@ -56,13 +56,13 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         {
             var result = new ResultAdaptDto();
            
-            var depts = _deptApp.GetDepartTree();
+          
             if (id > 0)
             {
                 var model = _deptApp.GetModel(id);
                 result.data.Add("model", model);
             }
-          
+            var depts = _deptApp.GetDepartTree();
             result.data.Add("depts", depts);
             return Data(result);
         }

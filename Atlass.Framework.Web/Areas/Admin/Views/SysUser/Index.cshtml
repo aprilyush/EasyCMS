@@ -5,6 +5,15 @@
     <div class="wrapper wrapper-content  animated fadeInRight">
         <div class="ibox">
             <div class="ibox-content">
+                <div class="div_find">
+                    <div>
+                        <label class="find_labela">登录名：</label>
+                        <input type="text" class="find_input" id="userName" />
+                        <label class="find_labela">昵称：</label>
+                        <input type="text" class="find_input" id="nickName" />
+                        <button type="button" class="btn btn-primary" onclick="query();">查询</button>
+                    </div>
+                </div>
                 <div id="toolbar" class="btn-group">
                 </div>
                 <table id="userTable"></table>
@@ -38,6 +47,8 @@
                     var dto = {
                         limit: params.limit, //每页多少条
                         offset: params.offset, //从第几条开始读(默认就好)
+                        userName: $('#userName').val(),
+                        nickName:$('#nickName').val()
                     };
                     return dto;
                 },
@@ -53,6 +64,7 @@
                             return '-';
                         }
                     },
+                    { field:"DeptName",title:"部门",align:'center'},
                     { field: 'RoleName', title: '角色名称', align: 'center'  },
                     { field: 'MobilePhone', title: '联系方式', align: 'center'  },
                     { field: 'Email', title: '邮箱', align: 'center' },

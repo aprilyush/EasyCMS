@@ -68,6 +68,8 @@ namespace Atlass.Framework.Models {
 
 		[JsonProperty]
 		public int user_level { get; set; }
+		[JsonProperty]
+		public int dept_id { get; set; } = 0;
 
 	}
 
