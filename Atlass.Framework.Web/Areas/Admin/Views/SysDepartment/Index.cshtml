@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+    <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
+
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
+    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
+    <script>
+        var $table;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/admin/SysDepartment/GetData',
+                height: $(window).height(),
+                striped: true,
+                sidePagination: 'server',
+                idField: 'id',
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'department_name', title: '部门名称', align: 'left' },
+                    { field: 'sort_num', title: '排序', align: 'center' },
+                    { field: 'department_level', title: '层次', align: 'center' },
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
+                ],
+                treeShowField: 'department_name',
+                parentIdField: 'parent_id',
+                onLoadSuccess: function (data) {
+                    $table.treegrid({
+                        // initialState: 'collapsed',
+                        treeColumn: 1,
+                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
+                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function () {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+                // bootstrap-table-treetreegrid.js 插件配置
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOpts(v, d, i) {
+            return jutils.initToolBarRow(v);
+        }
+
+
+        function add() {
+            var url = '/admin/SysDepartment/Form?id=0';
+            jutils.dialog('部门信息', url, null, null, function () {
+                $table.bootstrapTable('refresh');
+            });
+        }
+        function edit(obj) {
+            var id = $(obj).data('id');
+            var url = '/admin/SysDepartment/Form';
+            jutils.dialog('部门信息', url, { id: id }, null, function () {
+                $table.bootstrapTable('refresh');
+            });
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认删除当前部门及其子部门吗", function () {
+                jutils.ajaxGet('/admin/SysDepartment/DeleteById', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+    </script>
+}
+

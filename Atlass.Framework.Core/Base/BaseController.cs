@@ -1,5 +1,7 @@
 ﻿using Atlass.Framework.Common;
 using Atlass.Framework.Core.Web;
+using Atlass.Framework.ViewModels;
+using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -36,7 +38,11 @@ namespace Atlass.Framework.Core.Base
             return Content(result.ToJson());
         }
 
-        protected virtual ContentResult Data(object dto, string dateFormatter = "yyyy-MM-dd HH:mm:ss")
+        protected virtual ContentResult Data(BootstrapGridDto dto, string dateFormatter = "yyyy-MM-dd HH:mm:ss")
+        {
+            return Content(dto.ToJson(dateFormatter));
+        }
+        protected virtual ContentResult Data(ResultAdaptDto dto, string dateFormatter = "yyyy-MM-dd HH:mm:ss")
         {
             return Content(dto.ToJson(dateFormatter));
         }

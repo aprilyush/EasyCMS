@@ -28,58 +28,39 @@
         <div class="col-sm-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-primary pull-right">今天</span>
-                    <h5>咨询(次)</h5>
+                    <span class="label label-primary pull-right"></span>
+                    <h5>NET CORE版本</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins" id="tq">0</h1>
+                    <h1 class="no-margins" id="NetCoreVersion">0</h1>
                     <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
                     </div>
-                    <small>新增</small>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-primary pull-right">本月</span>
-                    <h5>咨询(次)</h5>
+                    <span class="label label-primary pull-right"></span>
+                    <h5>当前进程名称</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins" id="mq">0</h1>
+                    <h1 class="no-margins" id="ProcessorName">0</h1>
                     <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
                     </div>
-                    <small>新增</small>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-primary pull-right">总计</span>
-                    <h5>咨询(次)</h5>
+                    <span class="label label-primary pull-right"></span>
+                    <h5>系统内存</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins" id="totalmq">0</h1>
+                    <h1 class="no-margins" id="SystemMemory">0</h1>
                     <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
                     </div>
-                    <small>总计</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-warning pull-right">月</span>
-                    <h5>打赏(元)</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins" id="mm">￥ 0</h1>
-                    <div class="stat-percent font-bold text-info"><i class="fa fa-level-up"></i>
-                    </div>
-                    <small>总计</small>
                 </div>
             </div>
         </div>
@@ -107,7 +88,7 @@
 
     function loadData() {
         $.ajax({
-            url: '/admin/home/GetChart',
+            url: '/SystemMonitor/monitor',
             type: 'get',
             dataType: 'json',
             cache: false,
@@ -115,14 +96,10 @@
             //contentType: 'application/x-www-form-urlencoded',
             success: function (res) {
                 if (res.status) {
-                    var model = res.data.chart;
-                    $('#tq').text(model.TodayQuestionCount);
-                    $('#mq').text(model.MonthQuestionCount);
-                    $('#totalmq').text(model.TotalQuestion);
-                    $('#mm').text("￥ "+model.MonthPayCount);
-                    if (model.chart) {
-                        RefreshChart(model.chart);
-                    }
+                    var model = res.data.model;
+                    $('#NetCoreVersion').text(model.NetCoreVersion);
+                    $('#ProcessorName').text(model.ProcessorName);
+                    $('#SystemMemory').text(model.SystemMemory);
                    
                 } 
             }, beforeSend: function (data, textStatus, jqXHr) {

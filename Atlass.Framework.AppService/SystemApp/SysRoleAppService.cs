@@ -62,7 +62,7 @@ namespace Atlass.Framework.AppService
         {
             dto.role_code = dto.role_code ?? string.Empty;
 
-            Sqldb.Update<sys_role>(dto).IgnoreColumns(s => new {s.create_person, s.create_time }).ExecuteAffrows();
+            Sqldb.Update<sys_role>().SetSource(dto).IgnoreColumns(s => new {s.create_person, s.create_time }).ExecuteAffrows();
         }
 
         /// <summary>

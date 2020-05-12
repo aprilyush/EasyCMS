@@ -147,7 +147,7 @@ namespace Atlass.Framework.AppService
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
             Sqldb.Update<sys_user>().SetSource(dto)
-                .Set(s => new { s.real_name, s.pass_word, s.mobile_phone,s.email }).ExecuteAffrows();
+                .UpdateColumns(s => new { s.real_name, s.pass_word, s.mobile_phone,s.email }).ExecuteAffrows();
         }
         /// <summary>
         /// 单个数据

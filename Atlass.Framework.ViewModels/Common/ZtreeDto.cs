@@ -20,4 +20,16 @@ public class ZtreeDto
         public string title { get; set; }
         public int treeLevel { get; set; }
     }
+
+    public class ZtreeSelIntDto
+    {
+        public int id { get; set; }
+        public int pId { get; set; }
+        public string name { get; set; }
+        //public string pName { get; set; }
+        /// <summary>
+        /// 下拉选择树为true 说明展开下拉树
+        /// </summary>
+        public bool open { get; set; }
+    }
 }

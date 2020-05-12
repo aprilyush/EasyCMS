@@ -77,6 +77,7 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\plugins\selectTree\MultipleTreeSelect.js" />
     <None Include="wwwroot\wechat\.idea\wechat.iml" />
   </ItemGroup>
 

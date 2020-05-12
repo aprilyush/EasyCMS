@@ -72,7 +72,7 @@ namespace Atlass.Framework.AppService
 
                 dto.dic_code = dicCode;
             }
-            Sqldb.Update<sys_dictionary>(dto).IgnoreColumns(s => new {s.create_person, s.create_time }).ExecuteAffrows();
+            Sqldb.Update<sys_dictionary>().SetSource(dto).IgnoreColumns(s => new {s.create_person, s.create_time }).ExecuteAffrows();
         }
 
         /// <summary>
