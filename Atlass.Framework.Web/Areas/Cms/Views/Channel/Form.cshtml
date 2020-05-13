@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox col-lg-offset-1">
+        <div class="ibox-title col-sm-8">
+            <h5>栏目信息</h5>
+        </div>
+        <div class="ibox-content col-sm-8">
+            <form class="form form-horizontal" id="myForm">
+                <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">上级栏目：</label>
+                    <div class="col-sm-4">
+                        <textarea id="parentDept" style="width:300px;height:50px;overflow:hidden;" checks="0" textLabel="jasontext" type="text" readonly></textarea>
+                        <input type="hidden" name="parent_id" id="parent_id" value="0" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">栏目名称：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="channel_name" id="channel_name" value="" class="form-control" data-rule="required;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">栏目索引：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="channel_index" id="channel_index" value="" class="form-control" data-rule="required;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">栏目外链：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="channel_href" id="channel_href" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">栏目图片：</label>
+                    <div class="col-sm-6">
+                        <div class="cupload-upload-box" id="uploader">
+                            <span class="cupload-upload-btn">+</span>
+                        </div>
+                        <ul class="cupload-image-boxs" id="imgList">
+                        </ul>
+                        <input type="hidden" name="channel_image" id="channel_image" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">排序：</label>
+                    <div class="col-sm-6">
+                        <input type="number" value="1" name="sort_num" id="sort_num" class="form-control" data-rule="required;integer; range[1~1000]">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="footerbar">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">保存内容</button>
+                        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script src="/plugins/selectTree/MultipleTreeSelect.js"></script>
+    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script>
+        $(function () {
+            $('#myForm').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/Cms/Channel/Save', $(form).serialize(),
+                        function (res) {
+                            cancel();
+                        });
+                }
+            });
+           
+            loadData();
+            initUpload();
+        });
+        function loadData() {
+            var id = jutils.getQueryParam("id");
+            jutils.ajaxGet('/Cms/Channel/getmodel', { id: id }, function (res) {
+                if (id != '0') {
+                    var model = res.data.model
+                    $('#myForm').initFormData(model);
+                    $('#parentDept').attr('checks', model.parent_id);
+                    if (model.channel_image) {
+                        initImage(model.channel_image);
+                    }
+                }
+                initSelectTree(res.data.channels);
+            });
+
+        }
+        function initSelectTree(treeNodes) {
+            var defaults = {
+                callback: {
+                    onCheck: zTreeOnCheck
+                },
+                chkStyle: "radio",
+                zNodes: treeNodes,
+                height: 333   // 默认自定义下拉框高度
+            }
+
+            $("#parentDept").drawMultipleTree(defaults);
+        }
+        function zTreeOnCheck(treeNodes) {
+            // console.log(treeNodes);
+
+            // alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+            //selectDepartments.length = 0;
+            if (treeNodes.length > 0) {
+                var parentId = treeNodes[0].id;
+                $('#parent_id').val(parentId);
+            } else {
+                $('#parent_id').val(0);
+            }
+
+            //console.log(selectDepartments);
+        };
+
+        function initUpload() {
+            new verUpload({
+                files: "#uploader",
+                name: "files",
+                load_list: true,
+                method: '/api/upload/Uploadimg',
+                success: function (d) {
+                    var res = JSON.parse(d);
+                    if (res.status) {
+                        initImage(res.data.url);
+                       
+                    } else {
+                        jutils.error("图片上传失败");
+                    }
+                },
+                fail: function (d) {
+                    // $('#sale_image').val('');
+                    jutils.error("图片上传失败!");
+                },
+                size: 1024 * 4,
+                ext: ['jpg', 'jpeg', 'png', 'gif']
+            });
+
+        }
+
+        function initImage(imgUrl) {
+           
+            $('#channel_image').val(imgUrl);
+            var imgHtml = '<li class="cupload-image-box" style="position:relative;">';
+            imgHtml += '<img class="cupload-image-preview" src = "' + imgUrl + '" />';
+            imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
+            imgHtml += '</li>';
+            $('#imgList').append(imgHtml);
+            $('#uploader').hide();
+            $('#imgList').show();
+            
+        }
+
+        function deletImage(obj) {
+            var url = $(obj).data('url');
+            $imgli = $(obj).parent('li');
+            jutils.confirm('确认删除图片吗?', function () {
+                $('#channel_image').val('');
+                $imgli.remove();
+                $('#imgList').hide();
+                $('#uploader').show();
+                $('.uploadFilesBox').remove();
+            })
+        }
+        function cancel() {
+            jutils.back();
+        }
+    </script>
+}
+
+
+

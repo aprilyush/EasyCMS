@@ -53,9 +53,7 @@ namespace Atlass.Framework.Web.Controllers
                     loginUserDto.AccountName = user.account_name;
                     loginUserDto.RealName = user.real_name;
                     loginUserDto.IsSuper = user.is_super;
-                    loginUserDto.City = user.city;
-                    loginUserDto.County = user.county;
-
+                    loginUserDto.DepartmentId = user.dept_id;
                     loginUserDto.UserLevel = user.user_level;
                     //if (user.account_name.ToLower() == "admin")
                     //{

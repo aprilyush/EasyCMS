@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

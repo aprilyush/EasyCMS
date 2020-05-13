@@ -43,6 +43,7 @@ namespace Atlass.Framework.AppService.SystemApp
                    pId = s.parent_id,
                    name = s.department_name
                }).ToList();
+            depts.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });
             return depts;
         }
 

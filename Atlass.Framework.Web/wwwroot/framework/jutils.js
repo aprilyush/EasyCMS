@@ -1,6 +1,6 @@
 ﻿var jutils = {};
 //参数设置，若用默认值可以省略以下面代
-$(function() {
+$(function () {
     toastr.options = {
         "closeButton": true, //是否显示关闭按钮
         "debug": false, //是否使用debug模式
@@ -31,7 +31,7 @@ function toQueryPair(key, value) {
         return key;
     }
     return key + '=' + encodeURIComponent(value === null ? '' : String(value));
-} 
+}
 function toQueryString(obj) {
     var ret = [];
     for (var key in obj) {
@@ -49,9 +49,9 @@ function toQueryString(obj) {
         }
     }
     return ret.join('&');
-} 
+}
 //dialog弹窗
-jutils.dialogForm = function(title,url,data,callFunc) {
+jutils.dialogForm = function (title, url, data, callFunc) {
     //弹出即全屏
     if (data) {
         var queryStr = toQueryString(data);
@@ -71,7 +71,7 @@ jutils.dialogForm = function(title,url,data,callFunc) {
             //    layer.close(index);
             //}
             return true;
-        }, end: function() {
+        }, end: function () {
             if ($.isFunction(callFunc)) {
                 callFunc();
             }
@@ -110,7 +110,7 @@ jutils.dialog = function (title, url, data, area, callFunc) {
 
 };
 //关闭弹出
-jutils.closeForm = function() {
+jutils.closeForm = function () {
     var index = parent.layer.getFrameIndex(window.name);
     if (index) {
         parent.layer.close(index);
@@ -126,7 +126,7 @@ jutils.ajax = function (type, asysc, url, data, okfunc) {
         type: type,
         dataType: 'json',
         cache: false,
-        data:data,
+        data: data,
         //contentType: 'application/x-www-form-urlencoded',
         success: function (res) {
             if ($.isFunction(okfunc)) {
@@ -152,14 +152,14 @@ jutils.ajaxGet = function (url, data, okfunc) {
         cache: false,
         data: data,
         //contentType: 'application/x-www-form-urlencoded',
-        success: function(res) {
+        success: function (res) {
             if ($.isFunction(okfunc)) {
                 okfunc(res);
             }
         }, beforeSend: function (data, textStatus, jqXHr) {
-           
+
         },
-        error: function(jqXHr, textStatus, errorMsg) {
+        error: function (jqXHr, textStatus, errorMsg) {
             jutils.error('请求异常');
         }
         //},
@@ -169,7 +169,7 @@ jutils.ajaxGet = function (url, data, okfunc) {
     });
 }
 //post请求
-jutils.ajaxPost= function (url, data, okfunc) {
+jutils.ajaxPost = function (url, data, okfunc) {
     $.ajax({
         url: url,
         type: 'post',
@@ -182,7 +182,7 @@ jutils.ajaxPost= function (url, data, okfunc) {
                 if (res.msg) {
                     jutils.success(res.msg);
                 }
-            }else{
+            } else {
                 if (res.msg) {
                     jutils.error(res.msg);
                 }
@@ -204,12 +204,12 @@ jutils.ajaxPost= function (url, data, okfunc) {
 
 
 //toastr通知
-jutils.success = function(msg) {
+jutils.success = function (msg) {
     //msg = msg || '操作成功';
     if (msg) {
         toastr.success(msg);
     }
-   
+
 }
 jutils.error = function (msg) {
     msg = msg || '操作失败';
@@ -236,7 +236,7 @@ jutils.confirm = function (msg, okfunc) {
         layer.close(index);
         okfunc();
     }, function () {
-      
+
     });
 }
 
@@ -251,20 +251,30 @@ $.fn.initFormData = function (formdate) {
                 type = "select";
             }
             switch (type) {
-            case "checkbox":
+                case "checkbox":
                     if (value == $id.val()) {
-                    $id.attr("checked", 'checked');
-                } else {
-                    $id.removeAttr("checked");
-                }
-                break;
-            case "select":
-                //$id.val(value).trigger("change");
-                $id.val(value);
-                break;
-            default:
-                $id.val(value);
-                break;
+                        $id.attr("checked", 'checked');
+                    } else {
+                        $id.removeAttr("checked");
+                    }
+                    break;
+                case "radio":
+                     $('input:radio[name="'+key+'"]').each(function () {
+                        var nowVal = $(this).val();
+                         if (nowVal == value) {
+                            $(this).attr("checked", true);
+                        } else {
+                            $(this).removeAttr("checked");
+                        }
+                    });
+                    break;
+                case "select":
+                    //$id.val(value).trigger("change");
+                    $id.val(value);
+                    break;
+                default:
+                    $id.val(value);
+                    break;
             }
         };
         return false;
@@ -275,19 +285,19 @@ $.fn.initFormData = function (formdate) {
         var id = $this.attr('id');
         var type = $this.attr('type');
         switch (type) {
-        case "checkbox":
-            postdata[id] = $this.is(":checked");
-            break;
-        case "select":
-            postdata[id] = $this.val();
-            break;
-        default:
-            var value = $this.val() == "" ? "&nbsp;" : $this.val();
-            if (!$.request("keyValue")) {
-                value = value.replace(/&nbsp;/g, '');
-            }
-            postdata[id] = value;
-            break;
+            case "checkbox":
+                postdata[id] = $this.is(":checked");
+                break;
+            case "select":
+                postdata[id] = $this.val();
+                break;
+            default:
+                var value = $this.val() == "" ? "&nbsp;" : $this.val();
+                if (!$.request("keyValue")) {
+                    value = value.replace(/&nbsp;/g, '');
+                }
+                postdata[id] = value;
+                break;
         }
     });
     return postdata;
@@ -335,16 +345,16 @@ jutils.padLeft = function (str, totalLen) {
     }
     return str;
 }
-jutils.padRight= function (str, totalLen) {
+jutils.padRight = function (str, totalLen) {
     var len = str.toString().length;
     while (len < totalLen) {
-        str =str + "0";
+        str = str + "0";
         len++;
     }
     return str;
 }
 //过程字符换行
-jutils.splitLine = function (str,splitLength) {
+jutils.splitLine = function (str, splitLength) {
     if (!str) {
         return '';
     }
@@ -366,7 +376,7 @@ jutils.splitLine = function (str,splitLength) {
     return splitHtml;
 }
 
-jutils.getCookie = function(name) {
+jutils.getCookie = function (name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     if (arr = document.cookie.match(reg))
         return unescape(arr[2]);
@@ -374,7 +384,7 @@ jutils.getCookie = function(name) {
         return null;
 
 };
-jutils.setCookie = function(name, value) {
+jutils.setCookie = function (name, value) {
     var date = new Date();
     var ms = 100 * 24 * 3600 * 1000;
     date.setTime(date.getTime() + ms);
@@ -387,7 +397,7 @@ jutils.toLocalTime = function (localTime) {
         return '-';
     }
     return localTime;
-   
+
 }
 jutils.toLocalDate = function (utcTime) {
     if (utcTime == '0001-01-01T00:00:00Z' || utcTime == '1900-01-01T00:00:00Z') {
@@ -443,10 +453,10 @@ jutils.initToolBar = function (id, isDefault, extBtn) {
         // html += '<div class="btn-group">';
         //html += '<button class="btn btn-success " type = "button" onclick = "refresh()" > <i class="fa fa-refresh"></i>&nbsp; 刷新</button>';
         html +=
-            '<button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;' + add+'</button>';
+            '<button class="btn btn-primary " type="button" onclick="add()"><i class="fa fa-plus"></i>&nbsp;' + add + '</button>';
         html +=
-            '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;' + edit +'</button>';
-        html += '<button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> ' + del +'</button>';
+            '<button class="btn btn-info " type="button" onclick="edit()"><i class="fa fa-edit"></i>&nbsp;' + edit + '</button>';
+        html += '<button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> ' + del + '</button>';
         //html += '</div >';
     }
 

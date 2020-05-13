@@ -58,7 +58,7 @@ namespace Atlass.Framework.Models
 
 		[JsonProperty]
 		public int parent_id { get; set; }
-
+		[JsonProperty]
 		public int sort_num { get; set; }
 
 	}

@@ -13,11 +13,13 @@ namespace Atlass.Framework.ViewModels.Common
         public bool IsSuper { get; set; }
         public long SysRoleId { get; set; }
 
-        public int Province { get; set; }
-        public int City { get; set; }
-        public int County { get; set; }
+        //public int Province { get; set; }
+        //public int City { get; set; }
+        //public int County { get; set; }
         public int UserLevel { get; set; }
-        public long CompanyId { get; set; }
-        public string CompanyName { get; set; }
+        //public long CompanyId { get; set; }
+        //public string CompanyName { get; set; }
+
+        public int DepartmentId { get; set; }
     }
 }

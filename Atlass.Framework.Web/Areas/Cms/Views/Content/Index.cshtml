@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <ul id="channelTree" class="ztree"></ul>
+            </div>
+            <div class="col-md-10">
+                <div id="toolbar" class="btn-group">
+
+                </div>
+                <table id="table"></table>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script>
+        var $table, channelTree, $dicTable, channelId = 0;
+        $(function () {
+            loadChannelTree();
+            loadGrid();
+        });
+        function loadChannelTree() {
+            var opts = {
+
+                data: {
+                    simpleData: {
+                        enable: true,
+                        pIdKey: "pId",
+                    }
+                }, callback: {
+                    onClick: DicZtreeClick
+
+                },check: {
+                    enable: true,
+                    chkStyle: "radio"
+                }
+            };
+            jutils.ajaxGet('/Cms/Channel/GetChannelTree', null, function (res) {
+                channelTree = $.fn.zTree.init($("#channelTree"), opts, res.data.channels);
+                channelTree.expandAll(true);
+            });
+        }
+
+        //单击事件
+        function DicZtreeClick(event, treeId, treeNode) {
+            channelTree.checkNode(treeNode, true, true);
+            console.log(treeNode);
+            channelId = treeNode.id;
+            $table.bootstrapTable('refresh');
+
+        }
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/cms/content/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",//
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var dto = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        channelId: channelId
+                    };
+                    return dto;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'title', title: '文章标题', align: 'left' },
+                    { field: 'insert_time', title: '发布时间', align: 'center' },
+                    {
+                        field: 'status', title: '状态', align: 'center', formatter: function (v) {
+                            if (v === 1) {
+                                return '已审核';
+                            }
+
+                            return '待审核';
+                        }
+                    },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: render
+                    }
+                ]
+
+            });
+            //jutils.initToolBar('#toolbar', true);
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function render(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+
+        function add() {
+            if (channelId == '0') {
+                layer.alert("请先选择栏目");
+                return;
+            }
+            var url = '/cms/Content/Form?id=0&channelId=' + channelId;
+            location.href = url;
+
+        }
+        function edit(obj) {
+            if (channelId == '0') {
+                layer.alert("请先选择栏目");
+                return;
+            }
+            var id = $(obj).data('id');
+            var url = '/cms/Content/Form?id=' + id + '&channelId=' + channelId;;
+            location.href = url;
+
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认删除当前文章吗", function () {
+                jutils.ajaxGet('/cms/Content/DeleteById', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+    </script>
+}
+
+
+
+
+

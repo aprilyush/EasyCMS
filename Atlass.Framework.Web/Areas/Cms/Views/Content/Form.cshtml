@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewData["Title"] = "文章信息";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5 id="titleHead">添加文章</h5>
+        </div>
+        <div class="ibox-content">
+            <form class="form form-horizontal" id="myForm">
+                <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                <input type="hidden" name="channel_id" id="channel_id" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required">文章标题：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="title" id="title" value="" class="form-control" data-rule="required;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">副标题：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="sub_title" id="sub_title" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">封面图片：</label>
+                    <div class="col-sm-8">
+                        <div class="cupload-upload-box" id="uploader">
+                            <span class="cupload-upload-btn">+</span>
+                        </div>
+                        <ul class="cupload-image-boxs" id="imgList">
+                        </ul>
+                        <input type="hidden" name="cover_image" id="cover_image" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required">内容：</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <button class="btn btn-primary " type="button"><i class="fa fa-video-camera"></i>&nbsp;插入视频</button>
+                        </div>
+                        <textarea id="content" name="content" style="height:600px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">内容摘要：</label>
+                    <div class="col-sm-8">
+                        <textarea cols="80" rows="6" id="summary" name="summary"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">作者：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="author" id="author" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">来源：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="source" id="source" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">审核状态：</label>
+                    <div class="col-sm-4">
+                        <div class="radio radio-success radio-inline">
+                            <input type="radio" id="status" value="2" name="status">
+                            <label for="status">草稿</label>
+                        </div>
+                        <div class="radio radio-success radio-inline">
+                            <input type="radio" id="status2" value="0" name="status">
+                            <label for="status2">待审核</label>
+                        </div>
+                        <div class="radio radio-success radio-inline">
+                            <input type="radio" id="status3" value="1" name="status" checked="">
+                            <label for="status3">审核通过</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">外部链接：</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="content_href" id="content_href" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">添加时间：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="insert_time" id="insert_time" value="@(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:200px;" readonly="readonly">
+                    </div>
+                </div>
+                <div class="footerbar">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">保存内容</button>
+                        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/plugins/ueditor/ueditor.config.js"></script>
+    <script src="~/plugins/ueditor/ueditor.all.js"></script>
+    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script>
+        var editor;
+        $(function () {
+            var id = jutils.getQueryParam('id');
+            var channelid = jutils.getQueryParam('channelId');
+            if (!id || id != '0') {
+                $('#titleHead').text("修改文章");
+            }
+            $('#channel_id').val(channelid);
+
+
+            $('#myForm').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/Cms/Content/Save', $(form).serialize(),
+                        function (res) {
+                            cancel();
+                        });
+                }
+            });
+            //初始化文本编辑器
+            editor = UE.getEditor('content');
+            loadData();
+            initUpload();
+        });
+        function loadData() {
+            var id = jutils.getQueryParam("id");
+            jutils.ajaxGet('/Cms/Content/getmodel', { id: id }, function (res) {
+                if (id != '0') {
+                    var model = res.data.model
+                    
+                    $('#myForm').initFormData(model);
+                    if (model.cover_image) {
+                        initImage(model.cover_image);
+                    }
+                    editor.ready(function () {
+                        editor.setContent(model.content);
+                    });
+                }
+            });
+
+        }
+
+
+        function initUpload() {
+            new verUpload({
+                files: "#uploader",
+                name: "files",
+                load_list: true,
+                method: '/api/upload/Uploadimg',
+                success: function (d) {
+                    var res = JSON.parse(d);
+                    if (res.status) {
+                        initImage(res.data.url);
+
+                    } else {
+                        jutils.error("图片上传失败");
+                    }
+                },
+                fail: function (d) {
+                    // $('#sale_image').val('');
+                    jutils.error("图片上传失败!");
+                },
+                size: 1024 * 4,
+                ext: ['jpg', 'jpeg', 'png', 'gif']
+            });
+
+        }
+
+        function initImage(imgUrl) {
+
+            $('#cover_image').val(imgUrl);
+            var imgHtml = '<li class="cupload-image-box" style="position:relative;">';
+            imgHtml += '<img class="cupload-image-preview" src = "' + imgUrl + '" />';
+            imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
+            imgHtml += '</li>';
+            $('#imgList').append(imgHtml);
+            $('#uploader').hide();
+            $('#imgList').show();
+
+        }
+
+        function deletImage(obj) {
+
+            $imgli = $(obj).parent('li');
+            jutils.confirm('确认删除图片吗?', function () {
+                $('#cover_image').val('');
+                $imgli.remove();
+                $('#imgList').hide();
+                $('#uploader').show();
+                $('.uploadFilesBox').remove();
+            })
+        }
+        function cancel() {
+            jutils.back();
+        }
+    </script>
+}
+
+
+
+
+

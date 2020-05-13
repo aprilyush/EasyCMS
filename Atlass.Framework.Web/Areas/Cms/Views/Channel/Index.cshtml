@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
+
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
+    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
+    <script>
+        var $table;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/Cms/Channel/GetData',
+                height: $(window).height(),
+                striped: true,
+                sidePagination: 'server',
+                idField: 'id',
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'channel_name', title: '栏目名称', align: 'left' },
+                    { field: 'channel_index', title: '栏目索引', align: 'center' },
+                    {
+                        field: 'channel_image', title: '栏目图片', align: 'center', formatter: function (v) {
+                            if (v) {
+                                return '<img src="'+v+'" style="width:100px;;height:50px;" />';
+                            }
+                            return '';
+                        }
+                    },
+                    { field: 'channel_href', title: '外链', align: 'center' },
+                    { field: 'sort_num', title: '排序', align: 'center' },
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
+                ],
+                treeShowField: 'channel_name',
+                parentIdField: 'parent_id',
+                onLoadSuccess: function (data) {
+                    $table.treegrid({
+                        // initialState: 'collapsed',
+                        treeColumn: 1,
+                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
+                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function () {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+                // bootstrap-table-treetreegrid.js 插件配置
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOpts(v, d, i) {
+            return jutils.initToolBarRow(v);
+        }
+
+
+        function add() {
+            var url = '/cms/Channel/Form?id=0';
+            location.href = url;
+         
+        }
+        function edit(obj) {
+            var id = $(obj).data('id');
+            var url = '/cms/Channel/Form?id='+id;
+            location.href = url;
+
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认删除当前栏目及其子栏目吗", function () {
+                jutils.ajaxGet('/cms/Channel/DeleteById', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+    </script>
+}
+
+
+
