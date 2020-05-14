@@ -412,7 +412,8 @@
 			s:      [],
 			section:[],
 			small:  [],
-			span:   ['class', 'style'],
+			//span:   ['class'],//去除复制进来的字体 电力cms使用
+            span: ['class', 'style'],
 			sub:    ['class', 'style'],
 			sup:    ['class', 'style'],
 			strong: ['class', 'style'],

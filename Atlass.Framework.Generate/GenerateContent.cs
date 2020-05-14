@@ -46,27 +46,30 @@ namespace Atlass.Framework.Generate
                     Directory.CreateDirectory(contentFolderPath);
                 }
 
-                FileStream file = null;
-                if (File.Exists(contentFilePath))
-                {
-                    file = File.OpenWrite(contentFilePath);
+                FileInfo file = new FileInfo(contentFilePath);
+
+                FileStream filestream = null;
+                 if (!file.Exists)
+                    {
+                    filestream= file.Create();
                 }
                 else
                 {
-                    file = File.Create(contentFilePath);
+                    filestream = file.OpenWrite();
                 }
-
+               
                 //加载模板
                 this.LoadTemplateFile(templatePath);
                 this.InitPageTemplate(content);
                 string renderHtml =this.Document.GetRenderText();
 
-                using (StreamWriter writer = new StreamWriter(file, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(filestream, Encoding.UTF8))
                 {
+                  
                     writer.WriteLine(renderHtml);
                 }
-                file.Close();
-                file.Dispose();
+                filestream.Close();
+                filestream.Dispose();
                  
 
             }

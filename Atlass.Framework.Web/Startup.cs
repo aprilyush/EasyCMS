@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Core;
 using Atlass.Framework.Core.DI;
 using Atlass.Framework.Core.Extensions;
 using Atlass.Framework.Core.HostService;
@@ -106,7 +107,7 @@ namespace Atlass.Framework.Web
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
-            IHostApplicationLifetime appLifetime, IOptions<Dictionary<string, string>> option,
+            IHostApplicationLifetime appLifetime, IOptions<Dictionary<string, string>> options,
             IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             //if (env.IsDevelopment())
@@ -122,14 +123,9 @@ namespace Atlass.Framework.Web
             //}
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
-            //添加新的媒体文件类型
-            var provider = new FileExtensionContentTypeProvider();
-            foreach (string key in option.Value.Keys)
-            {
-               // Console.WriteLine($"新媒体类型：{key},{option.Value[key]}");
-                provider.Mappings.Add(key, option.Value[key]);
-            }
-            app.UseStaticFiles(new StaticFileOptions() { ContentTypeProvider = provider });
+            
+            //添加新的媒体文件类型，静态文件路由
+            app.UseAtlassDefaultFiles(options);
 
             app.UseRouting();
             #region 自定义中间件

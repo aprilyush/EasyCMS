@@ -23,7 +23,7 @@
 @section scripts{
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script>
-        var $table, channelTree, $dicTable, channelId = 0;
+        var $table, channelTree, $dicTable, channelId = 0,lastChannelNode;
         $(function () {
             loadChannelTree();
             loadGrid();
@@ -52,8 +52,12 @@
 
         //单击事件
         function DicZtreeClick(event, treeId, treeNode) {
+            if (lastChannelNode) {
+                channelTree.checkNode(lastChannelNode, false, true);
+            }
             channelTree.checkNode(treeNode, true, true);
-            console.log(treeNode);
+            lastChannelNode = treeNode;
+            //console.log(treeNode);
             channelId = treeNode.id;
             $table.bootstrapTable('refresh');
 

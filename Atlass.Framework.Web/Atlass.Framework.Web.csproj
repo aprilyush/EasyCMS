@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <Compile Remove="packages\**" />
+    <Compile Remove="wwwroot\static\**" />
     <Content Remove="packages\**" />
+    <Content Remove="wwwroot\static\**" />
     <EmbeddedResource Remove="packages\**" />
+    <EmbeddedResource Remove="wwwroot\static\**" />
     <None Remove="packages\**" />
+    <None Remove="wwwroot\static\**" />
   </ItemGroup>
 
   <ItemGroup>
