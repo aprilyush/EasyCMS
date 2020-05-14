@@ -5,11 +5,21 @@ using Atlass.Framework.ViewModels;
 using System;
 using System.IO;
 using System.Text;
+using VTemplate.Engine;
 
 namespace Atlass.Framework.Generate
 {
     public class GenerateContent
     {
+        /// <summary>
+        /// 当前页面的模板文档对象
+        /// </summary>
+        protected TemplateDocument Document
+        {
+            get;
+            private set;
+        }
+
         public void CreateHtml(int contentId)
         {
             try
@@ -31,7 +41,6 @@ namespace Atlass.Framework.Generate
                     LogNHelper.Exception("模板数据不存在");
                     return;
                 }
-              
                 if (!Directory.Exists(contentFolderPath))
                 {
                     Directory.CreateDirectory(contentFolderPath);
@@ -47,14 +56,14 @@ namespace Atlass.Framework.Generate
                     file = File.Create(contentFilePath);
                 }
 
-                using (StreamReader reader = new StreamReader(templatePath, Encoding.UTF8))
+                //加载模板
+                this.LoadTemplateFile(templatePath);
+                this.InitPageTemplate(content);
+                string renderHtml =this.Document.GetRenderText();
+
+                using (StreamWriter writer = new StreamWriter(file, Encoding.UTF8))
                 {
-                    string str = reader.ReadToEnd();
-                   
-                    using (StreamWriter writer = new StreamWriter(file, Encoding.UTF8))
-                    {
-                        writer.WriteLine(str);
-                    }
+                    writer.WriteLine(renderHtml);
                 }
                 file.Close();
                 file.Dispose();
@@ -65,6 +74,44 @@ namespace Atlass.Framework.Generate
             {
                 LogNHelper.Exception(ex);
             }
+        }
+
+        /// <summary>
+        /// 当前页面的模板文档的配置参数
+        /// </summary>
+        protected virtual TemplateDocumentConfig DocumentConfig
+        {
+            get
+            {
+                return TemplateDocumentConfig.Default;
+            }
+        }
+
+        /// <summary>
+        /// 装载模板文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        protected virtual void LoadTemplateFile(string fileName)
+        {
+            this.Document = null;
+            //if ("cache".Equals(this.TestType, StringComparison.InvariantCultureIgnoreCase) || this.IsLoadCacheTemplate)
+            //{
+            //    //测试缓存模板文档
+            //    this.Document = TemplateDocument.FromFileCache(fileName, Encoding.UTF8, this.DocumentConfig);
+            //}
+            //else
+            //{
+            //    //测试实例模板文档
+            //    this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
+            //}
+            //测试实例模板文档
+            this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
+        }
+
+        protected virtual void InitPageTemplate(cms_content content)
+        {
+            this.Document.Variables.SetValue("this", this);
+            this.Document.Variables.SetValue("news", content);
         }
     }
 }

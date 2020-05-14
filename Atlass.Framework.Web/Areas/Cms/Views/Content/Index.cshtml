@@ -82,7 +82,7 @@
                 },
                 columns: [
                     { field: 'ck', checkbox: true },
-                    { field: 'title', title: '文章标题', align: 'left' },
+                    { field: 'title', title: '文章标题', align: 'left',formatter:renderTitle },
                     { field: 'insert_time', title: '发布时间', align: 'center' },
                     {
                         field: 'status', title: '状态', align: 'center', formatter: function (v) {
@@ -109,7 +109,9 @@
             return html;
         }
 
-
+        function renderTitle(v, d) {
+            return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
+        }
         function add() {
             if (channelId == '0') {
                 layer.alert("请先选择栏目");
@@ -120,10 +122,10 @@
 
         }
         function edit(obj) {
-            if (channelId == '0') {
-                layer.alert("请先选择栏目");
-                return;
-            }
+            //if (channelId == '0') {
+            //    layer.alert("请先选择栏目");
+            //    return;
+            //}
             var id = $(obj).data('id');
             var url = '/cms/Content/Form?id=' + id + '&channelId=' + channelId;;
             location.href = url;
