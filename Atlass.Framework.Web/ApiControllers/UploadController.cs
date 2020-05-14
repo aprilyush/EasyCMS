@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
+using Atlass.Framework.Core.BigFile;
 using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,5 +61,95 @@ namespace Atlass.Framework.Web.ApiControllers
             result.data.Add("url", imgurl);
             return Content(result.ToJson());
         }
+
+
+        #region 分片上传文件，可断点续传
+
+        /// <summary>
+        /// 保存文件或者分块
+        /// </summary>
+        /// <param name="md5">文件md5</param>
+        /// <param name="chunk">分块号</param>
+        /// <param name="chunks">分块总数</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult SaveFile(string md5, int? chunk, int? chunks)
+        {
+            var tempDir = "UploadTemp"; // 缓存文件夹
+            var targetDir = "UploadFile"; // 目标文件夹
+
+            var file = Request.Form.Files[0];
+
+            file.SaveFileOrChunkFile(targetDir, tempDir, md5, chunks, chunk);
+            var result = new ResultAdaptDto();
+            result.data.Add("md5", md5);
+            result.data.Add("url", Path.Combine("/", targetDir, file.FileName));
+            return Content(result.ToJson());
+        }
+
+        /// <summary>
+        /// 合并文件
+        /// </summary>
+        /// <param name="md5">文件md5</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="chunks">分块数</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult MergeFile(string md5, string fileName, int chunks)
+        {
+            var tempDir = "UploadTemp";
+            var targetDir = "UploadFile";
+
+            var (res, msg) = tempDir.Merge(targetDir, fileName, md5, chunks);
+            var result = new ResultAdaptDto();
+           
+           
+            if (!res)
+            {
+                result.msg = msg;
+                result.status = false;
+            }
+            else
+            {
+                result.data.Add("md5", md5);
+                result.data.Add("url", Path.Combine("/", targetDir, fileName));
+            }
+
+            return Content(result.ToJson());
+
+        }
+
+        /// <summary>
+        /// 检查文件或分块是否存在
+        /// </summary>
+        /// <param name="md5">文件md5</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="chunk">分块号</param>
+        /// <returns></returns>
+        public IActionResult CheckFile(string md5, string fileName, int? chunk)
+        {
+            var tempDir = "UploadTemp";
+            var targetDir = "UploadFile";
+
+            string filePath;
+
+            //分片文件
+            if (chunk != null)
+            {
+                filePath = Path.Combine(tempDir, md5, $"{chunk}.part");
+            }
+            else
+            {
+                filePath = Path.Combine(targetDir, fileName);
+            }
+
+            var exists = System.IO.File.Exists(filePath);
+            var Data = fileName != null && exists ? (object)new { md5 = md5, url = Path.Combine("/", targetDir, fileName) } : null;
+            var result = new ResultAdaptDto();
+            result.status = exists;
+            result.data.Add("file", Data);
+            return Content(result.ToJson());
+        }
+        #endregion
     }
 }
