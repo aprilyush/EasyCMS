@@ -35,7 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Test", "05-Test", "{F262
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestJob", "..\TestJob\TestJob.csproj", "{F57BEBA5-B4BC-40F0-9488-7B3B56A25ED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlass.Framework.Generate", "..\Atlass.Framework.Generate\Atlass.Framework.Generate.csproj", "{7D38996A-480F-4369-A4A4-CA99F0D58173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlass.Framework.Generate", "..\Atlass.Framework.Generate\Atlass.Framework.Generate.csproj", "{7D38996A-480F-4369-A4A4-CA99F0D58173}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTemplate.Engine", "..\VTemplate.Engine.Core\VTemplate.Engine.csproj", "{FE2B0A8E-7518-4437-8785-3BE923D4CA5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{7D38996A-480F-4369-A4A4-CA99F0D58173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D38996A-480F-4369-A4A4-CA99F0D58173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D38996A-480F-4369-A4A4-CA99F0D58173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{F01EB843-3EC6-47B2-AA8C-AF619EE7487C} = {333F7FBC-8B3C-4A15-8619-0032A5D1FA72}
 		{F57BEBA5-B4BC-40F0-9488-7B3B56A25ED9} = {F262C2A8-6EBC-4998-8321-DC09840B6D0E}
 		{7D38996A-480F-4369-A4A4-CA99F0D58173} = {333F7FBC-8B3C-4A15-8619-0032A5D1FA72}
+		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E} = {3E3EB6E5-810E-4B60-8A18-2D7C546B2DDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD4ABA64-4EA0-4FB6-852B-E43F0C93DBA4}

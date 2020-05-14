@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
     <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
+    <ProjectReference Include="..\VTemplate.Engine.Core\VTemplate.Engine.csproj" />
   </ItemGroup>
 
 </Project>

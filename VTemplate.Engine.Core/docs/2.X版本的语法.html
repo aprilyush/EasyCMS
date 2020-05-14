@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title> VTemplate 2.X版本的语法 </title>
+</head>
+<body>
+<style>
+boyd, td, p{font-size: 14px;}
+table {border-left:1px dotted #336633;border-top:1px dotted #336633;}
+table td{border-bottom:1px dotted #336633;border-right:1px dotted #336633;padding:5px;}
+</style>
+<p><strong>1、什么是VT模版元素？</strong></p>
+<p>VT模版元素VTemplate模版引擎定义的有特殊作用的模版语言元素，分为<strong>标签元素</strong>和<strong>变量元素</strong>。</p>
+<blockquote>
+<p>1.1、标签元素都是程序逻辑控制元素，是标准的HTML标签元素，如上例中用于循环处理的&lt;vt:for&gt;标签和用于计算表达式值的&lt;vt:expression&gt;标签等</p>
+<p>1.2、变量元素是数据输出元素，其格式是以&#8220;<font color="#0000ff">{$:</font>&#8221;字符开头，以&#8220;<font color="#0000ff">}</font>&#8221;字符结束。 如上例中的{<font color="#ff0000">$:i</font>}、{<font color="#ff0000">$:j</font>}和{<font color="#ff0000">$:r</font>}等</p></blockquote>
+<p><strong>2、变量与变量表达式</strong></p>
+<blockquote>
+<p><strong>2.1、</strong>变量是VTemplate模版引擎中的核心元素，用于存储或控制数据的输出，其类似于程序语言中的&#8220;变量&#8221;概念，定义格式也是一样。如上例中的<font color="#ff0000">i</font>,<font color="#ff0000">j</font>,<font color="#ff0000">r</font>变量。</p>
+<p><strong>2.2、</strong>变量表达式则是定义获取变量中某个字段、属性或函数方法结果值。</p>
+<p>定义格式为：&#8220;<font color="#800000">前缀</font>.<font color="#ff0000">变量</font>.<font color="#800080">变量字段/属性/函数方法/索引值</font>&#8221;。</p>
+<p><font color="#800000">前缀</font>：以#号开头后跟模版块的Id值，用于指示此变量是取自于对应Id的模版块下的变量，如#my.user则表示user变量是取自于Id为my的模版块下的变量；如果省略Id号，即前缀只为#号，则表示是当前模版块下的变量；而如果前缀是&#8220;##&#8221;，则表示是当前模版块的父模版块(如果不存在父级模版块则为当前模版块）下的变量；如果<font color="#008000">省略前缀，则表示是文档（根）模版块的变量</font>。</p>
+<p><font color="#800080">变量字段/属性/函数方法/索引值</font>：表示要从变量中取得数据的字段/属性/函数方法/索引值(数字)，其中函数方法只支持不带参数的方法。此段可以定义0次或多次。</p>
+<p>例子：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="886">
+<tr>
+<td valign="top" width="232">#my.user</td>
+<td valign="top" width="652">Id为my的模版块下的变量user的值</td></tr>
+<tr>
+<td valign="top" width="232">#my.user.age</td>
+<td valign="top" width="652">Id为my的模版块下的变量user的age属性/字段值</td></tr>
+<tr>
+<td valign="top" width="232">#my.user.location.getcity()</td>
+<td valign="top" width="652">Id为my的模版块下的变量user的location属性/字段值的getcity方法返回的值</td></tr>
+<tr>
+<td valign="top" width="232">#.user</td>
+<td valign="top" width="652">当前模版块下的变量user的值</td></tr>
+<tr>
+<td valign="top" width="232">#.user.age.tostring()</td>
+<td valign="top" width="652">当前模版块下的变量user的age属性/字段值的tostring方法返回的值</td></tr>
+<tr>
+<td valign="top" width="232">##.user.location.city</td>
+<td valign="top" width="652">当前模版块的父级模版块的变量user的location属性/字段值的city属性/字段的值</td></tr>
+<tr>
+<td valign="top" width="232">user.age</td>
+<td valign="top" width="652">文档（根）模版块的变量user的age属性/字段值</td></tr>
+<tr>
+<td valign="top" width="232">weeks.0</td>
+<td valign="top" width="652">文档（根）模版块的变量weeks的0索引位置的值</td></tr>
+<tr>
+<td valign="top" width="232">#.users.0.name</td>
+<td valign="top" width="652">当前模版块下变量users的0索引位置的值的name字段/属性值</td></tr></table>
+<p>注：变量表达式可在&#8220;变量元素&#8221;或&#8220;标签元素&#8221;的部分属性值中使用。</p></blockquote>
+<p><strong>3、标签元素</strong>：</p>
+<blockquote>
+<p><strong>3.1、</strong>&lt;<font color="#808000">vt:template</font>&gt;模版块标签元素</p>
+<p>此标签用于定义模版块。在VTemplate的模版规范中，变量是基于模版块存在的，同模版块下同名的变量都是引用同一个变量实例，但不同模版块中的同名变量都是互相独立互不影响的。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:template</font> <font color="#800080">id</font>="mytemplate" <font color="#800080">name</font>="mytemplate"&gt;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&lt;/<font color="#808000">vt:template</font>&gt;</p>
+<p>或自闭合的样例：</p>
+<p>&lt;<font color="#808000">vt:template</font> <font color="#800080">id</font>="filetemplate" <font color="#800080">file</font>="include/myfile.html" <font color="#800080">charset</font>="utf-8" /&gt;</p></blockquote>
+<blockquote>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">file</td>
+<td valign="top" width="779">模版块数据文件的路径地址，可以绝对或相对地址</td></tr>
+<tr>
+<td valign="top" width="141">charset</td>
+<td valign="top" width="779">模版块数据文件的编码，如果<font color="#808080">未定义</font>则如果存在父级模版块的话则采用父级模版块的编码，否则采用系统默认编码</td></tr>
+<tr>
+<td valign="top" width="141">render</td>
+<td valign="top" width="779">定义用于处理此模块数据的实例，格式："<font color="#ff00ff">类实例</font>,<font color="#800000">程序集</font>"。如果已定义此属性但未定义rendermethod属性，则<font color="#ff00ff">类实例</font>必须已实现<span style="color: #2b91af">ITemplateRender<font color="#000000">接口。<font color="#808080">(可不定义)</font></font></span></td></tr>
+<tr>
+<td valign="top" width="141">rendermethod</td>
+<td valign="top" width="779">定义用于处理此模块数据的<font color="#ff00ff">类实例</font>的方法，此方法必须已标记<span style="color: #2b91af">TemplateRenderMethodAttribute<font color="#000000">特性。<font color="#808080">(可不定义)</font></font></span></td></tr></table>
+<p>&nbsp;</p>
+<p><strong>3.2、</strong>&lt;<font color="#808000">vt:include</font>&gt;文件包含标签元素</p>
+<p>此标签用于包含外部文件。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:include</font> <font color="#800080">file</font>="include/myfile.html" <font color="#800080">charset</font>="utf-8"&gt;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&lt;/<font color="#808000">vt:include</font>&gt;</p>
+<p>或自闭合的样例：</p>
+<p>&lt;<font color="#808000">vt:include</font> <font color="#800080">file</font>="include/myfile.html" <font color="#800080">charset</font>="utf-8" /&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">file</td>
+<td valign="top" width="779">模版块数据文件的路径地址，可以绝对或相对地址</td></tr>
+<tr>
+<td valign="top" width="141">charset</td>
+<td valign="top" width="779">模版块数据文件的编码，如果<font color="#808080">未定义</font>此属性则如果存在父级模版块的话则采用父级模版块的编码，否则采用系统默认编码</td></tr></table>
+<p>&nbsp;</p>
+<p><strong>3.3、</strong>&lt;<font color="#808000">vt:for</font>&gt;循环标签元素</p>
+<p>此标签用于定义数据循环，类似于程序语言中的for循环。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:for</font> <font color="#800080">from</font>="1" <font color="#800080">to</font>="9" <font color="#800080">index</font>="i"&gt;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&lt;/<font color="#808000">vt:for</font>&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">from</td>
+<td valign="top" width="779">循环起始值，可为一个数值常量(如：1)或变量表达式（必须以$字符开头，如：$i)</td></tr>
+<tr>
+<td valign="top" width="141">to</td>
+<td valign="top" width="779">循环结束值，可为一个数值常量(如：1)或变量表达式（必须以$字符开头，如：$i)</td></tr>
+<tr>
+<td valign="top" width="141">step</td>
+<td valign="top" width="779">循环值的步值，可为一个数值常量(如：1)或变量表达式（必须以$字符开头，如：$i)，如果<font color="#808080">未定义</font>此属性，则默认为1</td></tr>
+<tr>
+<td valign="top" width="141">index</td>
+<td valign="top" width="779">定义存储循环索引值的变量，注：此索引值是一个<font color="#23b9e4">LoopIndex</font>实例。<font color="#808080">(可不定义)</font></td></tr></table>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p><strong>3.4、</strong>&lt;<font color="#808000">vt:foreach</font>&gt;集合数据循环标签元素</p>
+<p>此标签用于定义处理集合数据的循环，类似于程序语言中的foreach循环。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:foreach</font> <font color="#800080">from</font>="users" <font color="#800080">item</font>="user" <font color="#800080">index</font>="i"&gt;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&lt;/<font color="#808000">vt:foreach</font>&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">from</td>
+<td valign="top" width="779">变量表达式</td></tr>
+<tr>
+<td valign="top" width="141">item</td>
+<td valign="top" width="779">定义存储当前循环值的变量。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">index</td>
+<td valign="top" width="779">定义存储循环索引值的变量，注：此索引值是一个<font color="#23b9e4">LoopIndex</font>实例。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">groupsize</td>
+<td valign="top" width="779">
+<p>设置拆分数据集合时的组大小。<font color="#808080">(可不定义)</font><br />如果定义此属性值，并且值大于1，则模版引擎在解析此foreach标签时，先将from属性定义的变量表达式的结果值折分成一组组集合数据再进行解析。</p>
+<p>例如：from的变量表达式的结果值原是&#8220;1,2,3,4,5,6&#8221;数组集合，如果groupsize设置为2，则将会拆成"[1,2],[3,4],[5,6]"的数据集合，再用此新的数据集合进行循环解析。</p></td></tr></table>
+<p>&nbsp;</p>
+<p><strong>3.5、</strong>&lt;<font color="#808000">vt:foreachelse</font>&gt;空集合数据循环标签元素</p>
+<p>此标签用于定义当集合数据为空（数量为0）时显示处理的节点。此标签必须在&lt;<font color="#808000">vt:foreach</font>&gt;标签中定义，并且此标签为单节点标签（即不需要配对的结束标签）。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:foreach</font> <font color="#800080">from</font>="users" <font color="#800080">item</font>="user" <font color="#800080">index</font>="i"&gt;</p>
+<p>{$:i}、我叫{$:user.name},今年{$:user.age}岁</p>
+<p>&lt;<font color="#808000">vt:foreachelse /</font>&gt;</p>
+<p>没有任何用户</p>
+<p>&lt;/<font color="#808000">vt:foreach</font>&gt;</p>
+<p><font color="#008000">注：当users集合数据为空时则显示"没有任何用户"字样，否则不显示此字样。</font></p>
+<p>&nbsp;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr></table>
+<p><strong></strong></p>
+<p><strong>3.6、</strong>&lt;<font color="#808000">vt:if</font>&gt;条件判断标签元素</p>
+<p>此标签用于定义数据条件判断，类似于程序语言中的if语句。</p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:if </font><font color="#800080">var</font>="user.age" <font color="#800080">value</font>="20" <font color="#800080">compare</font>="&gt;"&gt;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&lt;/<font color="#808000">vt:if</font>&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">用于判断条件的变量表达式</td></tr>
+<tr>
+<td valign="top" width="141">value</td>
+<td valign="top" width="779">用于比较条件的值，可为数值/字符串常量或变量表达式（必须以$字符开头，如：$i) <br /><font color="#800080">注：此属性可以多次定义，当var变量表达式中的值和其中一个value属性值匹配时即符合条件。</font></td></tr>
+<tr>
+<td valign="top" width="141">compare</td>
+<td valign="top" width="779">比较的方式，可以为以下几种: <br />&gt; : 大于 <br />&gt;= : 大于等于 <br />&lt; : 小于 <br />&lt;= : 小于等于 <br />!=或&lt;&gt; : 不等于 <br />= 或== : 相等 <br />如果<font color="#808080">未定义</font>此属性则表示采用&#8220;相等&#8221;比较。</td></tr>
+<tr>
+<td valign="top" width="141">expression</td>
+<td valign="top" width="779">定义需要简单运算的表达式，表达式中支持 &#8220;{0}&#8221;标记，用于代替var属性的变量表达式的值。<font color="#808080">(可不定义)</font></td></tr></table>
+<p><strong></strong></p>
+<p><strong>3.7、</strong>&lt;<font color="#808000">vt:elseif</font>&gt;条件分支判断标签元素</p>
+<p>此标签用于定义数据条件的分支判断。类似于程序语言中的else if语句。此标签可以同时支付一个或多个。此标签只能在&lt;<font color="#808000">vt:if</font><font color="#000000">&gt;标签中定义，并且此标签为单节点标签（即不需要配对的结束标签）。</font></p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:if </font><font color="#800080">var</font>="user.age" <font color="#800080">value</font>="20"&gt;</p>
+<p>20岁用户 <br />&lt;<font color="#808000">vt:elseif </font><font color="#800080">value</font>="30&#8221; /&gt;</p>
+<p>30岁用户</p>
+<p>&lt;<font color="#808000">vt:elseif </font><font color="#800080">value</font>="40&#8221; /&gt;</p>
+<p>40岁用户</p>
+<p>&lt;/<font color="#808000">vt:if</font>&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">用于判断条件的变量表达式。如果<font color="#808080">未定义</font>此属性，则为标签所在的&lt;<font color="#808000">vt:if</font><font color="#000000">&gt;标签中的var属性值</font></td></tr>
+<tr>
+<td valign="top" width="141">value</td>
+<td valign="top" width="779">用于比较条件的值，可为数值/字符串常量或变量表达式（必须以$字符开头，如：$i) <br /><font color="#800080">注：此属性可以多次定义，当var变量表达式中的值和其中一个value属性值匹配时即符合条件。</font></td></tr>
+<tr>
+<td valign="top" width="141">compare</td>
+<td valign="top" width="779">比较的方式，可以为以下几种: <br />&gt; : 大于 <br />&gt;= : 大于等于 <br />&lt; : 小于 <br />&lt;= : 小于等于 <br />!=或&lt;&gt; : 不等于 <br />= 或== : 相等 <br />如果<font color="#808080">未定义</font>此属性则表示采用&#8220;相等&#8221;比较。</td></tr>
+<tr>
+<td valign="top" width="141">expression</td>
+<td valign="top" width="779">定义需要简单运算的表达式，表达式中支持 &#8220;{0}&#8221;标记，用于代替var属性的变量表达式的值。<font color="#808080">(可不定义)</font></td></tr></table>
+<p><strong></strong></p>
+<p><strong>3.8、</strong>&lt;<font color="#808000">vt:else</font>&gt;条件分支判断标签元素</p>
+<p>此标签用于定义数据条件的分支判断，即当&lt;<font color="#808000">vt:if</font><font color="#000000">&gt;标签</font>中的所有条件分支都条件不成立时用于显示处理的节点。类似于程序语言中的else语句。此标签只能在&lt;<font color="#808000">vt:if</font><font color="#000000">&gt;标签中定义，并且此标签为单节点标签（即不需要配对的结束标签）。</font></p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:if </font><font color="#800080">var</font>="user.age" <font color="#800080">value</font>="20"&gt;</p>
+<p>20岁用户 <br />&lt;<font color="#808000">vt:elseif </font><font color="#800080">value</font>="30&#8221; /&gt;</p>
+<p>30岁用户</p>
+<p>&lt;<font color="#808000">vt:else </font>/&gt;</p>
+<p>未知岁数</p>
+<p>&lt;/<font color="#808000">vt:if</font>&gt;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr></table>
+<p>&nbsp;</p>
+<p><strong>3.9、</strong>&lt;<font color="#808000">vt:expression</font>&gt;表达式标签元素</p>
+<p>此标签用于对变量表达式进行简单数据运算<font color="#000000">。</font></p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:expression</font> <font color="#800080">var</font>="r" <font color="#800080">args</font>="i" <font color="#800080">args</font>="j" <font color="#800080">expression</font>="{0}*{1}" /&gt;</p>
+<p>&nbsp;</p>
+<p>标签中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top">存储表达式运算结果的变量</td></tr>
+<tr>
+<td valign="top" width="141">args</td>
+<td style="width: 672px; height: 50px" valign="top">参与表达式计算的变量表达式。<font color="#808080">(可不定义)</font> <br /><font color="#800080">注：此属性可以多次定义，在表达式中分别以{0},{1}表示各个args属性的变量表达式值</font></td></tr>
+<tr>
+<td valign="top" width="141">expression</td>
+<td valign="top">要进行运算的表达式。</td></tr>
+<tr>
+<td valign="top" width="141">output</td>
+<td valign="top">是否在解析标签时输出标签的结果值true/false，如果定义此属性且值设为true，则可以不定义var属性（即不存储结果值），默认不输出标签结果值。<font color="#808080">(可不定义)</font> <br /></td></tr></table>
+<p>&nbsp;</p>
+<p><strong>3.10、</strong>&lt;<font color="#808000">vt:serverdata</font>&gt;服务器数据标签元素</p>
+<p>此标签用于获取服务器的部分数据,如Session、Application、DateTime等等<font color="#000000">。</font></p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:<font color="#808000">serverdata</font> </font><font color="#800080">var</font>="session" <font color="#800080">type</font>="session" <font color="#800080">item</font>="username" /&gt;</p>
+<p>&nbsp;</p>
+<p>标签中已定义的属性列表：</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">存储服务器数据的变量</td></tr>
+<tr>
+<td valign="top" width="141">type</td>
+<td valign="top" width="779">
+<p>要获取服务器数据的类型。支持以下几种：</p>
+<p>
+<table style="width: 765px; height: 507px" border="0" cellspacing="0" cellpadding="2" width="769">
+<tr>
+<td valign="top" width="141"><strong>类型</strong></td>
+<td valign="top"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141"><span style="color: #0000ff">Time</span></td>
+<td valign="top">
+<p>获取服务器时间</p>
+<p><span style="color: #800080">item 属性值可定义为以下值：</span></p>
+<p>today = 获取今天的日期（不带时间部分)</p>
+<p>yesterday = 获取昨天的日期（不带时间部分）</p>
+<p>tomorrow&nbsp;= 获取明天的日期（不带时间部分）</p>
+<p>其它值 = 获取服务器现在的时间</p></td></tr>
+<tr>
+<td valign="top" width="141"><span style="color: red">Random</span></td>
+<td valign="top">
+<p>获取一个0---1之间的双精度随机数</p>
+<p><span style="color: #800080">item 属性不需要定义</span></p></td></tr>
+<tr>
+<td valign="top" width="141">Application</td>
+<td valign="top">
+<p>获取服务器当前上下文的HttpApplicationState对象.如果模版引擎不在Web程序上使用则无效</p>
+<p><span style="color: #800080">item 属性值则为Application集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">Session</td>
+<td valign="top">
+<p>获取服务器当前上下文的HttpSessionState对象.如果模版引擎不在Web程序上使用则无效</p>
+<p><span style="color: #800080">item 属性值则为Session集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">Cache</td>
+<td style="height: 23px" valign="top">
+<p>获取服务器当前上下文的缓存对象</p>
+<p><span style="color: #800080">item 属性值则为Cache集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">QueryString</td>
+<td style="height: 23px" valign="top">
+<p>获取服务器当前上下文的Request.QueryString数据集合.如果模版引擎不在Web程序上使用则无效</p>
+<p><span style="color: #800080">item 属性值则为Request.QueryString集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">Form</td>
+<td style="height: 23px" valign="top">获取服务器当前上下文的Request.Form数据集合.如果模版引擎不在Web程序上使用则无效
+<p><span style="color: #800080">item 属性值则为Request.Form集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">Cookie</td>
+<td style="height: 23px" valign="top">
+<p>获取服务器当前上下文的Request.Cookie数据集合.如果模版引擎不在Web程序上使用则无效&nbsp;</p>
+<p><span style="color: #800080">item 属性值则为Request.Cookie集合的键值key，如果item值包含&#8220;.&#8221;号，则表示属于某个Cookie下的某个Value值，例如：</span></p>
+<p><span style="color: #800080">item="user"则表示是Request.Cookie["user"]值；<br />item="user.name"则表示是Requst.Cookie["user"]["name"]值</span></p></td></tr>
+<tr>
+<td valign="top" width="141">ServerVariables</td>
+<td style="height: 23px" valign="top">获取服务器当前上下文的Request.ServerVariables数据集合.如果模版引擎不在Web程序上使用则无效
+<p><span style="color: #800080">item 属性值则为Request.ServerVariables集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141">RequestParams</td>
+<td style="height: 23px" valign="top">获取服务器当前上下文的Request.Params数据集合.如果模版引擎不在Web程序上使用则无效
+<p><span style="color: #800080">item 属性值则为Request.Params集合的键值key</span></p></td></tr>
+<tr>
+<td valign="top" width="141"><span style="color: red">Request</span></td>
+<td style="width: 611px; height: 49px" valign="top">获取服务器当前上下文的HttpRequest对象.如果模版引擎不在Web程序上使用则无效
+<p><span style="color: #800080">item 属性不需要定义</span></p></td></tr>
+<tr>
+<td valign="top" width="141"><span style="color: red">Environment</span></td>
+<td style="height: 23px" valign="top">获取服务器系统平台的环境参数
+<p><span style="color: #800080">item 属性不需要定义</span></p></td></tr></table></p></td></tr>
+<tr>
+<td valign="top" width="141">item</td>
+<td valign="top" width="779">要获取的数据项，此属性值根据type值而具有不同的意义，具体的看上表。</td></tr>
+<tr>
+<td valign="top" width="141">output</td>
+<td valign="top" width="779">是否在解析标签时输出标签的结果值true/false，如果定义此属性且值设为true，则可以不定义var属性（即不存储结果值），默认不输出标签结果值。<font color="#808080">(可不定义)</font></td></tr></table></p>
+<p>&nbsp;&nbsp;</p>
+<p><strong>3.11、</strong>&lt;<font color="#808000">vt:datareader</font>&gt;数据读取标签元素</p>
+<p>此标签用于直接从数据源读取数据<font color="#000000">。<br /><strong>注意：此标签必须采用</strong><strong style="color: red">TagOpenMode=Full</strong><strong>的TemplateDocumentConfig</strong><strong>时才允许使用。</strong></font></p>
+<p>标签样例：</p>
+<p>&lt;<font color="#808000">vt:<font color="#808000"><font color="#808000">datareader</font> </font></font><font color="#800080">var</font>="members" <font color="#800080">connection</font>="memberdb" <font color="#800080">commandtext</font>="select * from [member]" /&gt;</p>
+<p>&nbsp;&nbsp;<br />标签中已定义的属性列表：</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">存储返回数据的变量</td></tr>
+<tr>
+<td valign="top" width="141">connection</td>
+<td valign="top" width="779">
+<p>数据源名称.此名称必须已在项目配置文件(如:web.config)里的connectionStrings节点里定义.</p></td></tr>
+<tr>
+<td valign="top" width="141">commandtext</td>
+<td valign="top" width="779">数据查询语句(SQL语句)&nbsp;</td></tr>
+<tr>
+<td valign="top" width="141">rowindex</td>
+<td valign="top" width="779">要获取行的行号<font color="#808080">(可不定义)<br />注：当此值不定义时将返回一个表结构(DataTable)，而如果定义此值，则将返回对应行的数据行(DataRow)，如果行不存在则返回null</font></td></tr>
+<tr>
+<td valign="top" width="141">parameters</td>
+<td valign="top" width="779">
+<p>数据查询语句中的附加参数的变量表达式<font color="#808080">(可不定义)</font><br /><font color="#800080">注：此属性可以多次定义，在数据查询语句中分别以&#64;p0,&#64;p1表示各个parameters属性的变量表达式值</font></p>
+<p><font color="#800080">例子：<br />&lt;vt:datareader var="members" connection="db" commandtext="select * from [member] where id&gt;=&#64;p0&nbsp;and sex=&#64;p1" <font color="#800080">parameters</font>="id" <font color="#800080">parameters</font>="sex" /&gt;</font></p></td></tr></table></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>3.12、</strong>&lt;<font color="#808000">vt:function</font>&gt;函数调用标签元素</p>
+<p>此标签用于直接调用函数<font color="#000000">。</font>标签样例：</p>
+<p>&lt;<font color="#808000">vt:function<font color="#808000"> </font></font><font color="#800080">var</font>="days" <font color="#800080">method</font>="DaysInMonth" <font color="#800080">type</font>="System.DateTime" <span style="color: #800080">args</span>="2009" <span style="color: #800080">args</span>="10"&nbsp;/&gt;<br />&lt;<font color="#808000">vt:function<font color="#808000"> </font></font><font color="#800080">var</font>="UTCTime" <font color="#800080">method</font>="ToUniversalTime" <font color="#800080">type</font>="$time" /&gt;</p>
+<p>&nbsp;&nbsp;<br />标签中已定义的属性列表：</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">存储函数返回值的变量</td></tr>
+<tr>
+<td valign="top" width="141">method</td>
+<td valign="top" width="779">
+<p>函数方法名.</p></td></tr>
+<tr>
+<td valign="top" width="141">type</td>
+<td valign="top" width="779">包含静态函数方法的类型或包含函数方法的变量表达式（必须以$字符开头，如：$i) </td></tr>
+<tr>
+<td valign="top" width="141">args</td>
+<td valign="top" width="779">
+<p>参与函数运算的参数，可为数值/字符串常量或变量表达式（必须以$字符开头，如：$i) <font color="#808080">(可不定义)</font><br /><font color="#800080">注：此属性可以多次定义，但其定义顺序必须与函数方法的参数顺序一致。</font></p></td></tr>
+<tr>
+<td valign="top" width="141">output</td>
+<td valign="top" width="779">是否在解析标签时输出标签的结果值true/false，如果定义此属性且值设为true，则可以不定义var属性（即不存储结果值），默认不输出标签结果值。<font color="#808080">(可不定义)</font></td></tr></table></p>
+<p>&nbsp;</p>
+<p><strong>3.13、</strong>&lt;<font color="#808000">vt:property</font>&gt;获取字段或属性值标签元素</p>
+<p>此标签用于直接获取字段或属性值<font color="#000000">。</font>标签样例：</p>
+<p>&lt;<font color="#808000">vt:<font color="#808000">property</font> </font><font color="#800080">var</font>="time" <font color="#800080">field</font>="Now" <font color="#800080">type</font>="System.DateTime" /&gt;<br />&lt;<font color="#808000">vt:<font color="#808000">property</font> </font><font color="#800080">var</font>="year" <font color="#800080"><font color="#800080">field</font></font>="Year" <font color="#800080">type</font>="$time" /&gt;</p>
+<p>&nbsp;&nbsp;<br />标签中已定义的属性列表：</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">存储字段或属性值的变量</td></tr>
+<tr>
+<td valign="top" width="141">field</td>
+<td valign="top" width="779">
+<p>字段或属性名.</p></td></tr>
+<tr>
+<td valign="top" width="141">type</td>
+<td valign="top" width="779">包含静态字段或属性的类型或包含字段或属性的变量表达式（必须以$字符开头，如：$i) </td></tr>
+<tr>
+<td valign="top" width="141">output</td>
+<td valign="top" width="779">是否在解析标签时输出标签的结果值true/false，如果定义此属性且值设为true，则可以不定义var属性（即不存储结果值），默认不输出标签结果值。<font color="#808080">(可不定义)</font></td></tr></table></p>
+<p>&nbsp;</p>
+<p><strong>3.14、</strong>&lt;<font color="#808000">vt:set</font>&gt;变量赋值标签元素</p>
+<p>此标签用于向模版变量赋值<font color="#000000">。</font>标签样例：</p>
+<p>&lt;<font color="#808000">vt:<font color="#808000">set </font></font><font color="#800080">var</font>="time"&nbsp;<font color="#800080">value="<span style="color: #000000">2009-08-09"</span></font> /&gt;<br />&lt;<font color="#808000">vt:<font color="#808000">set</font> </font><font color="#800080">var</font>="time" <font color="#800080"><font color="#800080">value</font></font>="$year" <font color="#800080">value="<span style="color: #000000">$month</span>" value="<span style="color: #000000">$day</span>" format="<span style="color: #000000">{0}-{1}-{2}</span>" </font>/&gt;</p>
+<p>&nbsp;&nbsp;<br />标签中已定义的属性列表：</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">id</td>
+<td valign="top" width="779">标签元素的Id，<font color="#ff0000">建议唯一</font>但不强制。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">name</td>
+<td valign="top" width="779">标签元素的名称。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">var</td>
+<td valign="top" width="779">需要赋值的变量名</td></tr>
+<tr>
+<td valign="top" width="141">value</td>
+<td valign="top" width="779">
+<p>要赋于变量的值，可为数值/字符串常量或变量表达式（必须以$字符开头，如：$i)<br /><font color="#800080">注：此属性可以多次定义，但如果多次定义则必须定义format属性。</font></p></td></tr>
+<tr>
+<td valign="top" width="141">format</td>
+<td valign="top" width="779">用于格式化变量值的格式。<font color="#808080">(可不定义)</font><br />注：<font color="#800080">在格式表达式中分别以{0},{1}表示各个value属性的变量值</font></td></tr>
+<tr>
+<td valign="top" width="141">output</td>
+<td valign="top" width="779">是否在解析标签时输出标签的结果值true/false，如果定义此属性且值设为true，则可以不定义var属性（即不存储结果值），默认不输出标签结果值。<font color="#808080">(可不定义)</font></td></tr></table></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></blockquote>
+<p><strong>4、变量元素</strong></p>
+<p>变量元素主要用于输出变量表达式的值。其定义格式为：</p>
+<p>{$:<font color="#ff0000">变量表达式</font> <font color="#800080">属性</font>="<font color="#ff00ff">属性值</font>"}</p>
+<p>例子：</p>
+<p>{$:<font color="#ff0000">i</font>}、{$:<font color="#800080">user</font>.<font color="#800080">age</font> format=&#8221;00&#8221;}、{$:<font color="#ff0000">user</font>.<font color="#800080">name</font> length=&#8221;20&#8221; htmlencode=&#8221;true&#8221;}</p>
+<p>{$:<font color="#800000">#my</font>.<font color="#ff0000">i</font>}、{$:<font color="#800000">##</font>.<font color="#ff0000">user</font>.<font color="#800080">age</font>}、{$:<font color="#800000">#my</font>.<font color="#ff0000">user</font>.<font color="#800080">location.getcity()</font> htmlencode=&#8221;true&#8221;}</p>
+<p>&nbsp;</p>
+<p>元素中已定义的属性列表：</p>
+<table border="0" cellspacing="0" cellpadding="2" width="922">
+<tr>
+<td valign="top" width="141"><strong>名称</strong></td>
+<td valign="top" width="779"><strong>说明</strong></td></tr>
+<tr>
+<td valign="top" width="141">htmlencode</td>
+<td valign="top" width="779">输出变量表达式的值时是否需要进行HTML字符编码。true/false，默认为false<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">urlencode</td>
+<td valign="top" width="779">输出变量表达式的值时是否需要进行URL字符编码。true/false，默认为false<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">xmlencode</td>
+<td valign="top" width="779">输出变量表达式的值时是否需要进行XML字符编码。true/false，默认为false<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">textencode</td>
+<td valign="top" width="779">输出变量表达式的值时是否需要进行文本字符编码（先进行HTML字符编码，再将&#8220;空格&#8221;转换为"&amp;nbsp;&#8221;；&#8220;回车换行&#8221;转换为"&lt;br /&gt;&#8221;字符）。true/false，默认为false<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">jsencode</td>
+<td valign="top" width="779">输出变量表达式的值时是否需要进行Javascript脚本字符编码。true/false，默认为false<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">format</td>
+<td valign="top" width="779">用于格式化变量表达式的值的格式(如果变量表达的值已实现<font color="#0080ff">IFormattable</font>接口则调用接口方法，否则调用String.Format方法)。<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">length</td>
+<td valign="top" width="779">输出变量表达的值时的最大长度。如果值的字符长度超出此定义的值，则将进行字符截取。默认为0不截取<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">charset</td>
+<td valign="top" width="779">定义在进行urlencode或length截取字符时采用的编码。默认为所在模版块的charset<font color="#808080">(可不定义)</font></td></tr>
+<tr>
+<td valign="top" width="141">appendtext</td>
+<td valign="top" width="779">
+<p>定义文本在输出时如果被裁剪后要附加显示的文本。<font color="#808080">(可不定义)</font> <br />注: 此属性必须和length属性配合使用。</p></td></tr>
+<tr>
+<td valign="top" width="141">call</td>
+<td valign="top" width="779">在输出变量表达式的值前需要调用的函数名称。<font color="#808080">(可不定义)</font> <br /><font color="#800080">注：此属性可以多次定义，模版引擎将根据定义顺序先后调用函数。函数的原型参考<span style="color: #3366ff">VariableFunction</span>委托</font></td></tr></table>
+<p>&nbsp;</p>
+<p><strong>5、注释标签：</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 注：注释标签只在2.1以上版本有效</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 格式<span style="color: red">：&lt;!--vt[</span><span style="color: #008000">注释文字</span><span style="color: red">]--&gt;</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 注释标签在解析输出时不会被输出显示，并且注释里面可以书写任何的标签元素，都不会被VTemplate模版引擎解析。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #ff0000">&lt;!--vt[</span><span style="color: #008000">这是VT的注释代码，下面的标签不会被解析到&lt;vt:serverdata type="time" output="true" /&gt;。</span><span style="color: #ff0000">]--&gt;</span></p>
+<p><strong style="color: #ff0000"></strong>&nbsp;</p>
+</body>
+</html>
