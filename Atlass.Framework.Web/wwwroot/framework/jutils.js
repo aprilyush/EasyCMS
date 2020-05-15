@@ -472,6 +472,9 @@ jutils.initToolBar = function (id, isDefault, extBtn) {
 
 //加载表格外权限按钮
 jutils.initToolBarRole = function (id, extBtn) {
+    if (window.top === window.self) {
+        return;
+    }
     extBtn = extBtn || [];
     var iframeId = self.frameElement.getAttribute('data-id');
     if (iframeId) {
@@ -498,6 +501,9 @@ jutils.initToolBarRole = function (id, extBtn) {
 
 //加载表格内按钮
 jutils.initToolBarRow = function (dataid) {
+    if (window.top === window.self) {
+        return;
+    }
     var iframeId = self.frameElement.getAttribute('data-id');
     if (iframeId) {
 

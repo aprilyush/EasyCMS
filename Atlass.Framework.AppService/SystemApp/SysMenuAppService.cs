@@ -156,6 +156,8 @@ namespace Atlass.Framework.AppService
             return
                 Sqldb.Queryable<sys_operate>()
                     .Where(s => s.menu_id == id)
+                    .OrderBy(s=>s.in_table)
+                    .OrderBy(s=>s.func_sort)
                     .Select(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name,
                         icon = s.func_icon, url = s.func_url, intable = s.in_table,
                         funcSort = s.func_sort

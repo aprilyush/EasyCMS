@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <ul id="tplTree" class="ztree"></ul>
+            </div>
+            <div class="col-md-9">
+                <div id="toolbar" class="btn-group">
+
+                </div>
+                <table id="table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script>
+        var $table, pid, lastChannelNode ;
+        $(function () {
+            loadChannelTree();
+            loadGrid();
+        });
+
+
+        function loadChannelTree() {
+            var opts = {
+
+                data: {
+                    simpleData: {
+                        enable: true,
+                        pIdKey: "pId",
+                    }
+                }, callback: {
+                    onClick: DicZtreeClick
+
+                }, check: {
+                    enable: true,
+                    chkStyle: "radio"
+                }
+            };
+            jutils.ajaxGet('/Cms/TemplateCode/TemplateCategory', null, function (res) {
+                tplTree = $.fn.zTree.init($("#tplTree"), opts, res.data.templates);
+                tplTree.expandAll(true);
+            });
+        }
+
+        //单击事件
+        function DicZtreeClick(event, treeId, treeNode) {
+            if (lastChannelNode) {
+                tplTree.checkNode(lastChannelNode, false, true);
+            }
+            tplTree.checkNode(treeNode, true, true);
+            lastChannelNode = treeNode;
+            pid = treeNode.id;
+        }
+
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/cms/templatecode/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",//
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var dto = {
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        pid: pid
+                    };
+                    return dto;
+                },
+                columns: [
+                    { field: 'template_name', title: '模板名称', align: 'left'},
+                    { field: 'template_file', title: '模板文件', align: 'center' },
+                    { field: 'file_name', title: '生成文件名', align: 'center' },
+                    {
+                        field: 'is_default', title: '默认模板', align: 'center', formatter: function (v) {
+                            if (v === 1) {
+                                return '<span class="label label-primary">默认模板</span>';
+                            }
+                            return '';
+                        }
+                    },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: render
+                    }
+                ]
+
+            });
+            //jutils.initToolBar('#toolbar', true);
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function render(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function renderTitle(v, d) {
+            return '<a href="/cms/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
+        }
+        function add() {
+            var url = '/cms/templatecode/Form?id=0';
+
+            parent.$.altasTab.open(
+                {
+                    id: 'vtemplate',
+                    title: '新标签',
+                    url: url,
+                    close: function () {
+                        $table.bootstrapTable('refresh');
+                    }
+                });
+        }
+        function edit(obj) {
+            var id = $(obj).data('id');
+            var url = '/cms/templatecode/Form?id=' + id;
+            //location.href = url;
+            parent.$.altasTab.open(
+                {
+                    id: 'vtemplate',
+                    title: '新标签',
+                    url: url,
+                    close: function () {
+                        $table.bootstrapTable('refresh');
+                    }
+                });
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认删除当前模板吗", function () {
+                jutils.ajaxGet('/cms/templatecode/DeleteById', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+    </script>
+
+}

@@ -31,5 +31,7 @@ public class ZtreeDto
         /// 下拉选择树为true 说明展开下拉树
         /// </summary>
         public bool open { get; set; }
+
+        public string title { get; set; }
     }
 }
