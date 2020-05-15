@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +54,8 @@ namespace Atlass.Framework.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-           // services.AddMvc().AddRazorRuntimeCompilation();
+            // services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddScoped<IActionResultExecutor<HtmlResult>, HtmlResultExecutor<HtmlResult>>();
             services.AddControllersWithViews(option => {
                 option.Filters.Add<GlobalExceptionFilter>();
             }).AddRazorRuntimeCompilation().AddNewtonsoftJson();

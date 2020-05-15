@@ -1,6 +1,7 @@
 ﻿using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Autofac;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -12,7 +13,7 @@ namespace Atlass.Framework.Core.DI
     {
         protected override void Load(ContainerBuilder builder)
         {
-
+            //builder.RegisterType<IActionResultExecutor<HtmlResult>,HtmlResultExecutor<HtmlResult>>().
             //领养AppService注入
             builder.RegisterAssemblyTypes(Assembly.Load("Atlass.Framework.AppService"))
                 .Where(t => t.Name.EndsWith("AppService")).AsSelf().InstancePerLifetimeScope();
