@@ -25,7 +25,7 @@ namespace Atlass.Framework.Core
             //var serialize = new YamlDotNet.Serialization.Serializer();
             //var valueString = serialize.Serialize(result.Value);
             // 把对象转成yaml字符串，用Response返回Content-Type: text/html;charset=utf-8
-            context.HttpContext.Response.ContentType = "Content-Type:text/html; charset=utf-8";
+            context.HttpContext.Response.ContentType = "text/html; charset=utf-8";
             await context.HttpContext.Response.WriteAsync(result.Value.ToString());
         }
     }

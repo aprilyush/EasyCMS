@@ -14,9 +14,10 @@ namespace Atlass.Framework.Core
     /// services.AddScoped<IActionResultExecutor<YamlHtmlResultResult>,HtmlResultExecutor<HtmlResult>>();
     /// </summary>
     public class HtmlResult: ActionResult
-    {       /// <summary>
-            /// Yaml值
-            /// </summary>
+    {       
+        /// <summary>
+        /// Html字符串
+         /// </summary>
         public object Value { get; private set; }
         /// <summary>
         /// 构造
@@ -35,7 +36,8 @@ namespace Atlass.Framework.Core
         {
             var services = context.HttpContext.RequestServices;
             var executor = services.GetRequiredService<IActionResultExecutor<HtmlResult>>();
-            await executor.ExecuteAsync(context, new HtmlResult(this));
+            //await executor.ExecuteAsync(context,new HtmlResult(this.Value));
+            await executor.ExecuteAsync(context, this);
         }
     }
 }
