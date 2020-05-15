@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
+using Atlass.Framework.Generate;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
@@ -77,7 +78,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                 dto.edit_time = DateTime.Now;
                 _templateApp.UpdateTemplate(dto);
             }
-
+            GenerateTemplate.Create(dto.template_mode, dto.template_file, dto.template_content);
             return Success("模板保存成功");
         }
 

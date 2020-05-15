@@ -114,7 +114,8 @@
         }
 
         function renderTitle(v, d) {
-            return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
+            return '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v + '</a>';
+            //return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
         }
         function add() {
             if (channelId == '0') {

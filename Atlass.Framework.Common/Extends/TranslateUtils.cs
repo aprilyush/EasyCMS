@@ -35,7 +35,15 @@ namespace Atlass.Framework.Common
         }
 
         //添加枚举：(fileAttributes | FileAttributes.ReadOnly)   判断枚举：((fileAttributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)   去除枚举：(fileAttributes ^ FileAttributes.ReadOnly)
+        public static T ToEnum<T>(string value, T defaultValue) where T : struct
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return defaultValue;
+            }
 
+            return Enum.TryParse<T>(value, true, out var result) ? result : defaultValue;
+        }
         /// <summary>
         /// 将字符串类型转换为对应的枚举类型
         /// </summary>

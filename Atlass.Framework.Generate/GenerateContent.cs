@@ -1,4 +1,5 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common;
+using Atlass.Framework.Common.NLog;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
@@ -20,6 +21,32 @@ namespace Atlass.Framework.Generate
             private set;
         }
 
+        /// <summary>
+        /// 返回渲染后的模板文件
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public (bool genStatus,string contentHtml) GenerateContentHtml(cms_content content,cms_template template)
+        {
+            try
+            {
+                this.LoadTemplate(template.template_content);
+                this.InitPageTemplate(content);
+                return (true, this.Document.GetRenderText());
+            }
+            catch(Exception ex)
+            {
+                LogNHelper.Exception(ex);
+                return (false, "");
+            }
+            return (false, "");
+        }
+
+        /// <summary>
+        /// 加载模板文件，生成模板内容
+        /// </summary>
+        /// <param name="contentId"></param>
         public void CreateHtml(int contentId)
         {
             try
@@ -46,31 +73,23 @@ namespace Atlass.Framework.Generate
                     Directory.CreateDirectory(contentFolderPath);
                 }
 
-                FileInfo file = new FileInfo(contentFilePath);
 
-                FileStream filestream = null;
-                 if (!file.Exists)
-                    {
-                    filestream= file.Create();
-                }
-                else
-                {
-                    filestream = file.OpenWrite();
-                }
-               
                 //加载模板
                 this.LoadTemplateFile(templatePath);
                 this.InitPageTemplate(content);
-                string renderHtml =this.Document.GetRenderText();
 
-                using (StreamWriter writer = new StreamWriter(filestream, Encoding.UTF8))
+                using (var filestream = new FileStream(contentFilePath, FileMode.Create, FileAccess.ReadWrite))
                 {
-                  
-                    writer.WriteLine(renderHtml);
+                    string renderHtml = this.Document.GetRenderText();
+
+                    using (StreamWriter writer = new StreamWriter(filestream, Encoding.UTF8))
+                    {
+
+                        writer.WriteLine(renderHtml);
+                        writer.Flush();
+                    }
                 }
-                filestream.Close();
-                filestream.Dispose();
-                 
+
 
             }
             catch (Exception ex)
@@ -111,6 +130,10 @@ namespace Atlass.Framework.Generate
             this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
         }
 
+        protected virtual void LoadTemplate(string templateContent)
+        {
+            this.Document = new TemplateDocument(templateContent);
+        }
         protected virtual void InitPageTemplate(cms_content content)
         {
             this.Document.Variables.SetValue("this", this);

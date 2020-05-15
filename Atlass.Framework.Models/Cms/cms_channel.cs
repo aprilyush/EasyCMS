@@ -61,6 +61,15 @@ namespace Atlass.Framework.Models
 		[JsonProperty]
 		public int sort_num { get; set; }
 
+		/// <summary>
+		/// 0-的时候取默认模板,栏目模板
+		/// </summary>
+		public int channel_template { get; set; }
+		/// <summary>
+		/// 0-的时候取默认模板，内容模板
+		/// </summary>
+		public int content_template { get; set; }
+
 	}
 
 }

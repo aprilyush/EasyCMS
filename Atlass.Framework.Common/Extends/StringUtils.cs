@@ -344,8 +344,12 @@ namespace Atlass.Framework.Common
             }
             return retVal.ToString();
         }
+        public static string UpperFirst(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+            return input.First().ToString().ToUpper() + input.Substring(1);
+        }
 
-      
 
         private static Encoding Gb2312 { get; } = Encoding.GetEncoding("gb2312");
 
