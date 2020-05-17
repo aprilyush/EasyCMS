@@ -76,6 +76,18 @@ namespace Atlass.Framework.AppService.Cms
             }
             return model;
         }
+
+
+        public string DeleteById(int id)
+        {
+            var temp = Sqldb.Select<cms_template>().Where(s => s.id == id).First(s => s.template_file);
+            if (!string.IsNullOrEmpty(temp))
+            {
+                Sqldb.Delete<cms_template>().Where(s => s.id == id).ExecuteAffrows();
+                return temp;
+            }
+            return null;
+        }
         public List<ZtreeSelIntDto> TemplateCategory()
         {
             var list = new List<ZtreeSelIntDto>();

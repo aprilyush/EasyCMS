@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
+using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Generate;
@@ -96,6 +98,19 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var templates = _templateApp.TemplateZtree();
             result.data.Add("templates", templates);
             return Data(result);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteById(int id)
+        {
+            string templateFile = _templateApp.DeleteById(id);
+            if (templateFile != null)
+            {
+                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                FileUtils.DeleteFileIfExists(filePath);
+            }
+
+            return Success("删除成功");
         }
     }
 }

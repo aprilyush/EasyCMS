@@ -9,6 +9,7 @@
     <div class="ibox-content">
         <div class="row">
             <div class="col-md-2">
+                <br/><br />
                 <ul id="tplTree" class="ztree"></ul>
             </div>
             <div class="col-md-9">
@@ -60,6 +61,7 @@
             tplTree.checkNode(treeNode, true, true);
             lastChannelNode = treeNode;
             pid = treeNode.id;
+            $table.bootstrapTable('refresh');
         }
 
 
@@ -122,7 +124,7 @@
             parent.$.altasTab.open(
                 {
                     id: 'vtemplate',
-                    title: '新标签',
+                    title: '模板设置',
                     url: url,
                     close: function () {
                         $table.bootstrapTable('refresh');
@@ -136,7 +138,7 @@
             parent.$.altasTab.open(
                 {
                     id: 'vtemplate',
-                    title: '新标签',
+                    title: '模板设置',
                     url: url,
                     close: function () {
                         $table.bootstrapTable('refresh');
