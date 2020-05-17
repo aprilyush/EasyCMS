@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div id="toolbar" class="btn-group">
+
+            </div>
+            <table id="table"></table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/cms/ipmanager/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                method: 'get',
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'start_ip', title: '起始IP', align: 'center' },
+                    { field: 'end_ip', title: '结束IP', align: 'center' },
+                    {
+                        field: 'front_limit', title: '限制前台访问', align: 'center', formatter: function (v, d, i) {
+                            if (v) {
+                                return '<span class="label label-primary">启用</span>';
+                            }
+
+                            return '<span class="label label-danger">未启用</span>';
+                        }
+                    },
+                    {
+                        field: 'enable', title: '启用状态', align: 'center', formatter: function (v, d, i) {
+                            if (v) {
+                                return '<span class="label label-primary">启用</span>';
+                            }
+
+                            return '<span class="label label-danger">未启用</span>';
+                        }
+                    },
+                    { field: 'remark', title: '备注', align: 'center' },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: renderOperation
+                    }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOperation(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function add() {
+            
+            
+            var pageSize = jutils.documentSize();
+            var height = (pageSize.height * 0.9) + 'px';
+            //console.log(width, document.body.clientHeight);
+            //console.log(window.screen.availHeight, window.screen.availWidth);
+            jutils.dialog('IP设置', '/cms/ipmanager/form', { id: 0 }, ['800px', height], function () {
+                $table.bootstrapTable('refresh');
+            });
+        }
+
+        function edit(obj) {
+            var pageSize = jutils.documentSize();
+            var height = (pageSize.height * 0.9) + 'px';
+            var id = $(obj).data('id');
+            jutils.dialog('IP设置', '/cms/ipmanager/form', { id: id }, ['800px', height], function () {
+                $table.bootstrapTable('refresh');
+            });
+
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/cms/ipmanager/DeleteByIds',
+                        { ids: id},
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function batchDel() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.alert("请选择需要删除的数据行");
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/cms/ipmanager/DeleteByIds',
+                        { ids: ids.join() },
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+     
+    </script>
+}
+

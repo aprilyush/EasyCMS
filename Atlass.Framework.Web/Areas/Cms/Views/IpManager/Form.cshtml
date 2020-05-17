@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="ibox">
+    <div class="ibox-content">
+        <form class="form form-horizontal" id="form" autocomplete="off">
+            <input type="hidden" name="id" id="id" value="">
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">起始IP地址：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="start_ip" id="start_ip" value="" class="form-control" data-rule="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">结束IP地址：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="end_ip" id="end_ip" value="" class="form-control" data-rule="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">前台访问限制</label>
+                <div class="col-sm-4">
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" id="front_limit" name="front_limit" value="true" checked="">
+                        <label for="front_limit">启用</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">管理后台访问限制</label>
+                <div class="col-sm-4">
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" id="back_limit" name="back_limit" value="true" checked="">
+                        <label for="back_limit">启用</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">启用状态</label>
+                <div class="col-sm-4">
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" id="enable" name="enable" value="true" checked="">
+                        <label for="enable">启用</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-4">
+                    <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="footerbar">
+                <div class="col-sm-12 col-sm-offset-3">
+                    <button class="btn btn-primary" type="submit">保存内容</button>
+                    <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script>
+
+        $(function () {
+            var id = jutils.getQueryParam("id");
+            $("#id").val(id);
+
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    jutils.ajaxPost('/cms/ipmanager/Save', $(form).serialize(), function (res) {
+                        if (res.status) {
+                            jutils.success("保存成功");
+                            cancel();
+                        }
+                    });
+                   
+                }
+            });
+
+            loadData();
+        });
+
+
+        function loadData() {
+            var id = $("#id").val();
+            jutils.ajaxGet('/cms/ipmanager/getmodel', { id: id }, function (res) {
+                if (id !== '0') {
+                    $('#form').initFormData(res.data.model);
+                }
+
+            });
+
+
+        }
+
+
+        function cancel() {
+            jutils.closeForm();
+        }
+    </script>
+}
