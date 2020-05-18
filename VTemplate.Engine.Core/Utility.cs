@@ -345,25 +345,31 @@ namespace VTemplate.Engine
         /// <returns></returns>
         internal static string CutString(string value, int maxLength, Encoding charset, string appendText)
         {
-            StringBuilder buffer = new StringBuilder(maxLength);
-            int length = 0;
-            int index = 0;
-            while (index < value.Length)
+
+            if (maxLength == 0||value.Length <=maxLength)
             {
-                char c = value[index];
-                length += charset.GetByteCount(new char[] { c });
-                if (length <= maxLength)
-                {
-                    buffer.Append(c);
-                }
-                else
-                {
-                    break;
-                }
-                index++;
+                  return value;
             }
-            if (index < value.Length && !string.IsNullOrEmpty(appendText)) buffer.Append(appendText);
-            return buffer.ToString();
+            return value.Substring(0, maxLength);
+            //StringBuilder buffer = new StringBuilder(maxLength);
+            //int length = 0;
+            //int index = 0;
+            //while (index < value.Length)
+            //{
+            //    char c = value[index];
+            //    length += charset.GetByteCount(new char[] { c });
+            //    if (length <= maxLength)
+            //    {
+            //        buffer.Append(c);
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+            //    index++;
+            //}
+            //if (index < value.Length && !string.IsNullOrEmpty(appendText)) buffer.Append(appendText);
+            //return buffer.ToString();
         }
 
         /// <summary>

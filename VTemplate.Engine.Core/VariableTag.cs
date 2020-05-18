@@ -282,8 +282,8 @@ namespace VTemplate.Engine
 
                 int length = this.Length == null ? 0 : Utility.ConverToInt32(this.Length.GetTextValue());
                 string appendText = this.AppendText == null ? string.Empty : this.AppendText.GetTextValue();
-                Encoding charset = this.Charset == null ? this.OwnerTemplate.Charset : Utility.GetEncodingFromCharset(this.Charset.GetTextValue(), this.OwnerTemplate.Charset);
-
+                //Encoding charset = this.Charset == null ? this.OwnerTemplate.Charset : Utility.GetEncodingFromCharset(this.Charset.GetTextValue(), this.OwnerTemplate.Charset);
+                Encoding charset = Encoding.UTF8;
                 if (removeHtml) text = Utility.RemoveHtmlCode(text);
                 if (length > 0) text = Utility.CutString(text, length, charset, appendText);
                 if (textEncode)

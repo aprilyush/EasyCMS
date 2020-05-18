@@ -14,10 +14,10 @@ namespace Atlass.Framework.Web.Controllers.Cms
     public class ContentController : CmsController
     {
 
-        private readonly ContentAppService _contentApp;
+        private readonly GenerateContentAppService _contentApp;
         public ContentController(IServiceProvider service)
         {
-            _contentApp = service.GetRequiredService<ContentAppService>();
+            _contentApp = new GenerateContentAppService();
         }
         [Route("news/{channelId:int}/{id:int}")]
         public IActionResult Index(int channelId,int id)
@@ -33,7 +33,7 @@ namespace Atlass.Framework.Web.Controllers.Cms
             {
                 return Redirect("/404.html");
             }
-            var content = _contentApp.GetDataById(id);
+            var content = _contentApp.GetContentInfo(id);
             if (content == null)
             {
                 return Redirect("/404.html");

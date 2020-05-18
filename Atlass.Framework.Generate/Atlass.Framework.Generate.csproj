@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.Cache\Atlass.Framework.Cache.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
     <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />

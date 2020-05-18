@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
@@ -72,13 +73,17 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                 dto.insert_time = DateTime.Now;
                 dto.edit_id= user.Id;
                 dto.edit_time = dto.insert_time;
-                _templateApp.InsertTemplate(dto);
+                dto=_templateApp.InsertTemplate(dto);
             }
             else
             {
                 dto.edit_id = user.Id;
                 dto.edit_time = DateTime.Now;
-                _templateApp.UpdateTemplate(dto);
+                dto = _templateApp.UpdateTemplate(dto);
+            }
+            if (dto != null)
+            {
+                TemplateManagerCache.AddTemplate(dto);
             }
             GenerateTemplate.Create(dto.template_mode, dto.template_file, dto.template_content);
             return Success("模板保存成功");

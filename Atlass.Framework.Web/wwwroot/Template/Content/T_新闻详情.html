@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{$:news.title}</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="技术">
+    <meta name="keywords" content="{$:news.title}">
+    <meta name="description" content="{$:news.title}">
 
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="/hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
@@ -21,14 +21,17 @@
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="ibox">
                     <div class="ibox-content">
+                        <div class="pull-left">
+                            {$:news.navigation}
+                        </div>
                         <div class="pull-right">
-                            <button class="btn btn-white btn-xs" type="button">700BIKE</button>
-                            <button class="btn btn-white btn-xs" type="button">BeginOne</button>
-                            <button class="btn btn-white btn-xs" type="button">发布时间</button>
+                            <button class="btn btn-white btn-xs" type="button">作者：{$:news.author}</button>
+                            <button class="btn btn-white btn-xs" type="button">来源：{$:news.source}</button>
+                            <button class="btn btn-white btn-xs" type="button">发布时间：{$:news.publish_time format="yyyy-MM-dd"}</button>
                         </div>
                         <div class="text-center article-title">
                             <h1>
-                                {$:news.title}
+                                {$:news.title length=5}
                             </h1>
                         </div>
                         <div class="article-content">

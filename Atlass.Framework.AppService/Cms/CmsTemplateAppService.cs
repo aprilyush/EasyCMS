@@ -38,7 +38,7 @@ namespace Atlass.Framework.AppService.Cms
             return dto;
         }
 
-        public void InsertTemplate(cms_template dto)
+        public cms_template InsertTemplate(cms_template dto)
         {
             var count = Sqldb.Select<cms_template>().Where(s => s.pid == dto.pid && s.is_default == 1).Count();
             if (count == 0)
@@ -47,9 +47,10 @@ namespace Atlass.Framework.AppService.Cms
             }
 
             Sqldb.Insert(dto).ExecuteAffrows();
+            return dto;
         }
 
-        public void UpdateTemplate(cms_template dto)
+        public cms_template UpdateTemplate(cms_template dto)
         {
             var oldTemp = Sqldb.Select<cms_template>()
                 .Where(s => s.id == dto.id).First(s => new cms_template
@@ -61,10 +62,11 @@ namespace Atlass.Framework.AppService.Cms
                 });
             if (oldTemp == null)
             {
-                return;
+                return null;
             }
             dto.is_default = oldTemp.is_default;
             Sqldb.Update<cms_template>().SetSource(dto).IgnoreColumns(s => new { s.insert_id, s.insert_time }).ExecuteAffrows();
+            return dto;
 
         }
         public cms_template GetModel(int id)

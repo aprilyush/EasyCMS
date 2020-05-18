@@ -27,7 +27,7 @@ namespace Atlass.Framework.Generate
         /// <param name="content"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        public (bool genStatus,string contentHtml) GenerateContentHtml(cms_content content,cms_template template)
+        public (bool genStatus,string contentHtml) GenerateContentHtml(ContentModel content,cms_template template)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Atlass.Framework.Generate
             catch(Exception ex)
             {
                 LogNHelper.Exception(ex);
-                return (false, "");
+               
             }
             return (false, "");
         }
@@ -76,7 +76,7 @@ namespace Atlass.Framework.Generate
 
                 //加载模板
                 this.LoadTemplateFile(templatePath);
-                this.InitPageTemplate(content);
+                //this.InitPageTemplate(content);
 
                 using (var filestream = new FileStream(contentFilePath, FileMode.Create, FileAccess.ReadWrite))
                 {
@@ -134,7 +134,7 @@ namespace Atlass.Framework.Generate
         {
             this.Document = new TemplateDocument(templateContent);
         }
-        protected virtual void InitPageTemplate(cms_content content)
+        protected virtual void InitPageTemplate(ContentModel content)
         {
             this.Document.Variables.SetValue("this", this);
             this.Document.Variables.SetValue("news", content);
