@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+<link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-4">
+                <table id="table"></table>
+            </div>
+            <div class="col-md-1">
+                <div style="margin-top: 200px;">
+                    <button type="button" class="btn btn-w-m btn-primary" onclick="bindChannel();">绑定栏目模板</button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>栏目模板</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul id="channelTemplateTree" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div style="margin-top: 200px;">
+                    <button type="button" class="btn btn-w-m btn-primary" onclick="bindContent();">绑定内容模板</button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>内容模板</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul id="contentTemplateTree" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
+    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
+    <script>
+        var $table, loadTime = 0, channelTree, contentTree, lastChannelNode, lastContentNode;
+        $(function () {
+            loadGrid();
+            loadData();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                data: [],
+                height: $(window).height(),
+                striped: true,
+                sidePagination: 'client',
+                idField: 'Id',
+                singleSelect: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'ChannelName', title: '栏目名称', align: 'left' },
+                    { field: 'ChannelTemplateName', title: '栏目模板', align: 'center' },
+                    { field: 'ContentTemplateName', title: '内容模板', align: 'center' },
+                ],
+                treeShowField: 'ChannelName',
+                parentIdField: 'ParentId',
+                onLoadSuccess: function (data) {
+                    $table.treegrid({
+                        // initialState: 'collapsed',
+                        treeColumn: 1,
+                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
+                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function () {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+                // bootstrap-table-treetreegrid.js 插件配置
+            });
+        }
+        function renderOpts(v, d, i) {
+            return jutils.initToolBarRow(v);
+        }
+
+
+
+        function loadData() {
+            jutils.ajaxGet('/cms/templateMatch/matchList', null, function (res) {
+                if (res.status) {
+                    $table.bootstrapTable('load', res.data.list);
+                    if (loadTime == 0) {
+                        loadChannelTree(res.data.templates);
+                    }
+
+                    loadTime = 1;
+                }
+
+            });
+        }
+
+
+
+        function loadChannelTree(channelTmeplates) {
+            var opts = {
+                data: {
+                    simpleData: {
+                        enable: true,
+                        pIdKey: "pId",
+                    }
+                }, callback: {
+                    onClick: ChannelZtreeClick
+
+                }, check: {
+                    enable: true,
+                    chkStyle: "radio"
+                }
+            };
+            var opts2 = {
+                data: {
+                    simpleData: {
+                        enable: true,
+                        pIdKey: "pId",
+                    }
+                }, callback: {
+                    onClick: ContentZtreeClick
+
+                }, check: {
+                    enable: true,
+                    chkStyle: "radio"
+                }
+            };
+
+            var channels = channelTmeplates.filter(function (v, i, r) {
+                return v.pId <3;
+            });
+            var contents = channelTmeplates.filter(function (v, i, r) {
+                return v.pId === 3;
+            });
+            channelTree = $.fn.zTree.init($("#channelTemplateTree"), opts, channels);
+            channelTree.expandAll(true);
+
+            contentTree = $.fn.zTree.init($("#contentTemplateTree"), opts2, contents);
+            contentTree.expandAll(true);
+        }
+
+        //单击事件
+        function ChannelZtreeClick(event, treeId, treeNode) {
+            if (lastChannelNode) {
+                channelTree.checkNode(lastChannelNode, false, true);
+            }
+            channelTree.checkNode(treeNode, true, true);
+            lastChannelNode = treeNode;
+            // pid = treeNode.id;
+            // $table.bootstrapTable('refresh');
+        }
+
+
+        function ContentZtreeClick(e, treeId, treeNode) {
+            if (lastContentNode) {
+                contentTree.checkNode(lastContentNode, false, true);
+            }
+            contentTree.checkNode(treeNode, true, true);
+            lastContentNode = treeNode;
+        }
+
+        function bindChannel() {
+            var channelRows = $("#table").bootstrapTable('getSelections');
+            if (channelRows.length === 0) {
+                jutils.error("请选择栏目");
+                return;
+            }
+            var selectedNodes = channelTree.getSelectedNodes();
+            if (selectedNodes.length === 0) {
+                jutils.error("请选择栏目模板");
+                return;
+            }
+            var channelId = channelRows[0].Id;
+            var templateId = selectedNodes[0].id;
+
+            jutils.confirm("确认匹配栏目模板吗？", function () {
+                jutils.ajaxGet('/cms/templatematch/SetMatch',
+                    { channelId: channelId, templateId: templateId, channelType: 2 }, function (res) {
+                        if (res.status) {
+                            jutils.success("匹配完成");
+                            $table.bootstrapTable('load', res.data.list);
+                        }
+                    });
+            });
+
+        }
+
+        function bindContent() {
+            var channelRows = $("#table").bootstrapTable('getSelections');
+            if (channelRows.length === 0) {
+                jutils.error("请选择栏目");
+                return;
+            }
+            var selectedNodes = contentTree.getSelectedNodes();
+            if (selectedNodes.length === 0) {
+
+                jutils.error("请选择内容模板");
+                return;
+            }
+            var channelId = channelRows[0].Id;
+            var templateId = selectedNodes[0].id;
+
+            jutils.confirm("确认匹配内容模板吗？", function () {
+                jutils.ajaxGet('/cms/templatematch/SetMatch',
+                    { channelId: channelId, templateId: templateId, channelType: 3 }, function (res) {
+                        if (res.status) {
+                            jutils.success("匹配完成");
+                            $table.bootstrapTable('load', res.data.list);
+                        }
+                    });
+            });
+
+        }
+    </script>
+}

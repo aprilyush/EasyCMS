@@ -70,6 +70,7 @@ namespace Atlass.Framework.Models
 		/// </summary>
 		public int content_template { get; set; }
 
+
 	}
 
 }
