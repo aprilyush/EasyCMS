@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html id="doc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$channel.name}</title>
+    <link rel='stylesheet' href='/static/css/bootstrap.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/styles.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/jquery.fancybox.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/swiper.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/slicknav.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='/static/css/font-awesome.min.css' type='text/css' media='all' />
+    <script type='text/javascript' src='/static/js/jquery.js'></script>
+    <script type='text/javascript' src='/static/js/jquery-migrate.min.js'></script>
+</head>
+<body class="home blog">
+    <div class="wrapper">
+        <vt:include file="Template/include/navi.html" charset="utf-8" />
+        <div class="container-fluid mini"></div>
+        <div class="text-center bg-info container-full" style="background:url({$channel.channel_image}); background-repeat-y: no-repeat; height:140px;">
+        </div>
+        <Section id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-9 col-xs-12 content-list">
+                        <nav class="crumbs">当前位置:{$channel.navigation}</nav>
+                        <vt:foreach id="contents" from="$contents" item="content" index="i" total="8">
+
+                            <article class="post-27 post type-post status-publish format-standard hentry category-news">
+                                <div class="row">
+                                    <figure class="entry-img col-md-4 col-sm-4 col-xs-6">
+                                        <a href="{$content.content_href}" target="_blank" title="{$content.title}">
+                                            <img src="{$content.cover_image}" alt="{$content.title}" />
+                                        </a>
+                                    </figure>
+                                    <div class="entry-content col-md-8 col-sm-8 col-xs-6">
+                                        <h2 class="entry-title">
+                                            <a href="{$content.content_href}" target="_blank">
+                                                {$content.title length='24'}
+                                            </a>
+                                        </h2>
+                                        <div class="entry-des hidden-xs">
+                                            <p>
+                                                {$content.summary length='40'}
+                                            </p>
+                                        </div>
+                                        <div class="entry-meta">
+                                            <div class="time fl hidden-xs">
+                                                <i class="fa fa-calendar-check-o"></i>
+                                                <a href="javascript:void(0);">
+                                                    {$content.publish_time formatter='yyyy-MM-dd'}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <vt:foreachelse />
+                            <article class="post-27 post type-post status-publish format-standard hentry category-news">
+                                <div class="row">
+                                    <figure class="entry-img col-md-4 col-sm-4 col-xs-6">
+                                        没有数据。。
+                                    </figure>
+                                </div>
+                            </article>
+                        </vt:foreach>
+                        <div class="page-nav">
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+         </Section>
+    </div>
+
+    <vt:include file="Template/include/footer.html" charset="utf-8" />
+    <script type='text/javascript' src='/static/js/bootstrap.min.js'></script>
+    <script type='text/javascript' src='/static/js/scripts.js'></script>
+    <script type='text/javascript' src='/static/js/swiper.jquery.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.slicknav.min.js'></script>
+    <script type='text/javascript' src='/static/js/wp-embed.min.js'></script>
+    <script type='text/javascript' src='/static/js/xs.js'></script>
+</body>
+</html>
+

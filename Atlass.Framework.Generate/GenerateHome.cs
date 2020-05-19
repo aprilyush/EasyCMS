@@ -37,8 +37,8 @@ namespace Atlass.Framework.Generate
             try
             {
 
-                var templateModel = TemplateManagerCache.GetTemplate(6);
-                if (templateModel == null)
+                var templateModel = TemplateManagerCache.GetHomeTemplate();
+                if (templateModel.id==0)
                 {
                     throw new Exception("找不到模板");
                 }
@@ -54,7 +54,7 @@ namespace Atlass.Framework.Generate
                 {
                     string total = template.Attributes.GetValue("total", "10");
                     //根据模板块里定义的type属性条件取得新闻数据
-                    var data = _generateContentApp.GetContentSummary(template.Attributes.GetValue("type"),int.Parse(total));
+                    var data = _generateContentApp.GetContentSummary(template.Attributes.GetValue("type"),1,int.Parse(total));
                     //设置变量newsdata的值
                     template.Variables.SetValue("contents", data);
 

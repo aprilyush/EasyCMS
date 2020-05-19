@@ -139,7 +139,7 @@ namespace Atlass.Framework.AppService.Cms
                 model.ChannelName = channel.channel_name;
                 if (channel.channel_template == 0)
                 {
-                    model.ChannelTemplateName = templates.Where(s => s.template_mode <3 && s.is_default == 1)
+                    model.ChannelTemplateName = templates.Where(s => s.template_mode <=2 && s.is_default == 1)
                         .Select(s => s.template_name).FirstOrDefault();
                 }
                 else

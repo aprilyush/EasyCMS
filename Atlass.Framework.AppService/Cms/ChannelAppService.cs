@@ -90,7 +90,11 @@ namespace Atlass.Framework.AppService.Cms
                 name = s.channel_name,
                 pId = s.parent_id
             });
-            list.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });
+            if (list.Count == 0)
+            {
+                list.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });
+            }
+            
             return list;
         }
     }

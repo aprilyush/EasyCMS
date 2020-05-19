@@ -23,6 +23,7 @@ namespace Atlass.Framework.Cache
         /// </summary>
         private static void AddDefaultTemplate()
         {
+            _defaultTemplates.TryAdd(1, new cms_template());
             _defaultTemplates.TryAdd(2, new cms_template());
             _defaultTemplates.TryAdd(3, new cms_template());
         }
@@ -35,7 +36,11 @@ namespace Atlass.Framework.Cache
         {
             if (template.is_default == 1)
             {
-                if (template.template_mode == 2)
+                if(template.template_mode == 1)
+                {
+                    _defaultTemplates[1] = template;
+                }
+                else if(template.template_mode == 2)
                 {
                     _defaultTemplates[2] = template;
                 }else if (template.template_mode == 3)
@@ -51,6 +56,14 @@ namespace Atlass.Framework.Cache
             _templates.TryAdd(template.id, template);
         }
 
+        /// <summary>
+        /// 获取首页模板
+        /// </summary>
+        /// <returns></returns>
+        public static cms_template GetHomeTemplate()
+        {
+            return _defaultTemplates[1];
+        }
         /// <summary>
         /// 获取栏目
         /// </summary>
@@ -73,6 +86,7 @@ namespace Atlass.Framework.Cache
 
         public static void ClearTemplates()
         {
+            _defaultTemplates[1] = new cms_template();
             _defaultTemplates[2] = new cms_template();
             _defaultTemplates[3] = new cms_template();
             _templates.Clear();
@@ -83,9 +97,9 @@ namespace Atlass.Framework.Cache
         /// </summary>
         /// <param name="channelId"></param>
         /// <returns></returns>
-        public static cms_template GetChannelTemplate(int channelId)
+        public static cms_template GetChannelTemplate(int templateId)
         {
-            if (channelId == 0)
+            if (templateId == 0)
             {
                 var defaultChannelTemplate = _defaultTemplates[2];
                 if (defaultChannelTemplate.id == 0)
@@ -95,7 +109,7 @@ namespace Atlass.Framework.Cache
                 return defaultChannelTemplate;
             }
 
-           return  GetTemplate(channelId);
+           return  GetTemplate(templateId);
         }
 
 
@@ -104,9 +118,9 @@ namespace Atlass.Framework.Cache
         /// </summary>
         /// <param name="channelId"></param>
         /// <returns></returns>
-        public static cms_template GetContentTemplate(int contentId)
+        public static cms_template GetContentTemplate(int templateId)
         {
-            if (contentId == 0)
+            if (templateId == 0)
             {
                 var defaultContentTemplate = _defaultTemplates[3];
                 if (defaultContentTemplate.id == 0)
@@ -116,7 +130,7 @@ namespace Atlass.Framework.Cache
                 return defaultContentTemplate;
             }
 
-            return GetTemplate(contentId);
+            return GetTemplate(templateId);
         }
     }
 }

@@ -19,6 +19,13 @@ namespace Atlass.Framework.Web.Controllers.Cms
         {
             _contentApp = new GenerateContentAppService();
         }
+
+        /// <summary>
+        /// 文章详情
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("news/{channelId:int}/{id:int}")]
         public IActionResult Index(int channelId,int id)
         {
@@ -40,6 +47,24 @@ namespace Atlass.Framework.Web.Controllers.Cms
             }
             GenerateContent gen = new GenerateContent();
             var ret = gen.GenerateContentHtml(content, template);
+            if (!ret.genStatus)
+            {
+                return Redirect("/404.html");
+            }
+            return Html(ret.contentHtml);
+        }
+
+
+        /// <summary>
+        /// 栏目页面
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        [Route("news/{channelId:int}")]
+        public IActionResult Channel(int channelId)
+        {
+            GenerateChannel generateChannel = new GenerateChannel();
+            var ret = generateChannel.GenerateChannelHtml(channelId);
             if (!ret.genStatus)
             {
                 return Redirect("/404.html");

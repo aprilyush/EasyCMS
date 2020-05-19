@@ -47,7 +47,7 @@ namespace Atlass.Framework.Generate
                 });
             if (model != null)
             {
-                model.navigation = GetChannels(model.channel_id);
+                model.navigation = GetNaviChannels(model.channel_id);
             }
             return model;
         }
@@ -88,7 +88,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetChannels(s.channel_id);
+                s.navigation = GetNaviChannels(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -102,7 +102,7 @@ namespace Atlass.Framework.Generate
         /// </summary>
         /// <param name="contentIds"></param>
         /// <returns></returns>
-        public List<ContentModel> GetContentSummary(string channelIndex, int psize = 10)
+        public List<ContentModel> GetContentSummary(string channelIndex,int page=1, int psize = 10)
         {
             int channelId = Sqldb.Select<cms_channel>().Where(s => s.channel_index == channelIndex)
                 .OrderBy(s=>s.id).First(s => s.id);
@@ -114,7 +114,7 @@ namespace Atlass.Framework.Generate
                .Where(s => s.channel_id == channelId)
                .OrderByDescending(s => s.is_top)
                .OrderByDescending(s => s.update_time)
-               .Page(1, psize)
+               .Page(page, psize)
                .ToList(s => new ContentModel
                {
                    id = s.id,
@@ -139,7 +139,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetChannels(s.channel_id);
+                s.navigation = GetNaviChannels(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -149,11 +149,89 @@ namespace Atlass.Framework.Generate
         }
 
         /// <summary>
+        /// 获取数据详情
+        /// </summary>
+        /// <param name="contentIds"></param>
+        /// <returns></returns>
+        public List<ContentModel> GetContentSummary(int channelId, int page = 1, int psize = 10)
+        {
+            var list = Sqldb.Select<cms_content>()
+               .Where(s => s.channel_id == channelId)
+               .OrderByDescending(s => s.is_top)
+               .OrderByDescending(s => s.update_time)
+               .Page(page, psize)
+               .ToList(s => new ContentModel
+               {
+                   id = s.id,
+                   title = s.title,
+                   sub_title = s.sub_title,
+                   summary = s.summary,
+                   cover_image = s.cover_image,
+                   author = s.author,
+                   source = s.source,
+                   channel_id = s.channel_id,
+                   ip_limit = s.ip_limit,
+                   is_top = s.is_top,
+                   tags = s.tags,
+                   content_href = s.content_href,
+                   hit_count = s.hit_count,
+                   publish_time = s.insert_time,
+                   last_edit_time = s.update_time
+               });
+            if (list.Count == 0)
+            {
+                return list;
+            }
+            list.ForEach(s =>
+            {
+                s.navigation = GetNaviChannels(s.channel_id);
+                if (string.IsNullOrEmpty(s.content_href))
+                {
+                    s.content_href = $"/news/{s.channel_id}/{s.id}";
+                }
+            });
+            return list;
+        }
+
+        #region 栏目数据
+
+        /// <summary>
+        /// 获取栏目数据
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        public ChannelModel GetChannel(int channelId)
+        {
+            var channel = ChannelManagerCache.GetChannel(channelId);
+            if (channel == null)
+            {
+                return null;
+            }
+
+            var model = new ChannelModel();
+            model.id = channel.id;
+            model.parent_id = channel.parent_id;
+            model.sort_num = channel.sort_num;
+            model.channel_name = channel.channel_name;
+            model.channel_index = channel.channel_index;
+            model.channel_image = channel.channel_image;
+            model.channel_href = channel.channel_href;
+            model.channel_template = channel.channel_template;
+            if (string.IsNullOrEmpty(model.channel_href))
+            {
+                model.channel_href = $"/news/{channelId}";
+            }
+            model.navigation = GetNaviChannels(channelId);
+            return model;
+
+        }
+        #endregion
+        /// <summary>
         /// 获取导航数据
         /// </summary>
         /// <param name="channelId"></param>
         /// <returns></returns>
-        private string GetChannels(int channelId)
+        private string GetNaviChannels(int channelId)
         {
             List<string> channelNames = new List<string>();
 

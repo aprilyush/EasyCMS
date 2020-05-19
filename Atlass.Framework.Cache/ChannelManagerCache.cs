@@ -10,6 +10,7 @@ namespace Atlass.Framework.Cache
     public static class ChannelManagerCache
     {
         private static ConcurrentDictionary<int, cms_channel> _channels;
+        private static BlockingCollection<cms_channel> _channelList;
         static ChannelManagerCache()
         {
             _channels = new ConcurrentDictionary<int, cms_channel>();
@@ -26,6 +27,7 @@ namespace Atlass.Framework.Cache
                 _channels[channel.id]= channel;
                 return;
             }
+           
             _channels.TryAdd(channel.id, channel);
         }
 
