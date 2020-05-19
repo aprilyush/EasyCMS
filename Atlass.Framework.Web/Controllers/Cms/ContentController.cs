@@ -46,5 +46,13 @@ namespace Atlass.Framework.Web.Controllers.Cms
             }
             return Html(ret.contentHtml);
         }
+
+
+        public IActionResult GenerateHome()
+        {
+            GenerateHome gen = new GenerateHome();
+            gen.GenerateHomeHtml();
+            return Content("ok");
+        }
     }
 }

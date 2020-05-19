@@ -36,11 +36,13 @@ namespace Atlass.Framework.Models
         /// </summary>
         /// <param name="param"></param>
 
-        public BootstrapGridDto GetData(BootstrapGridDto param)
+        public BootstrapGridDto GetData(BootstrapGridDto param,int channelId)
         {
             long total = 0;
             var query = Sqldb.Select<cms_content>()
-                    .OrderBy(s => s.id)
+                .WhereIf(channelId>0,s=>s.channel_id==channelId)
+                .OrderByDescending(s => s.is_top)
+                .OrderByDescending(s=>s.update_time)
                 .Page(param.page, param.limit)
                 .Count(out total)
                 .ToList();

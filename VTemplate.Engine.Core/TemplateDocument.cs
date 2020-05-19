@@ -68,14 +68,17 @@ namespace VTemplate.Engine
         /// 采用默认的文档配置并根据字符串进行解析
         /// </summary>
         /// <param name="text"></param>
-        public TemplateDocument(string text) : this(text, TemplateDocumentConfig.Default) { }
+        public TemplateDocument(string text, string fileName) : this(text, fileName, TemplateDocumentConfig.Default) { }
         /// <summary>
         /// 根据字符串进行解析
         /// </summary>
         /// <param name="text"></param>
         /// <param name="documentConfig"></param>
-        public TemplateDocument(string text, TemplateDocumentConfig documentConfig)
+        public TemplateDocument(string text,string fileName, TemplateDocumentConfig documentConfig)
         {
+            this.Charset = Encoding.UTF8;
+            this.File = Path.GetFullPath(fileName);
+            this.AddFileDependency(this.File);
             this.DocumentConfig = documentConfig;
             this.ParseString(text);
         }

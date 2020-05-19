@@ -10,13 +10,9 @@
 
   <ItemGroup>
     <Compile Remove="packages\**" />
-    <Compile Remove="wwwroot\static\**" />
     <Content Remove="packages\**" />
-    <Content Remove="wwwroot\static\**" />
     <EmbeddedResource Remove="packages\**" />
-    <EmbeddedResource Remove="wwwroot\static\**" />
     <None Remove="packages\**" />
-    <None Remove="wwwroot\static\**" />
   </ItemGroup>
   <!--Condition="'$(Configuration)' == 'Debug'"-->
   <ItemGroup>
@@ -385,6 +381,16 @@
     <None Include="wwwroot\plugins\ueditor\ueditor.config.js" />
     <None Include="wwwroot\plugins\ueditor\ueditor.parse.js" />
     <None Include="wwwroot\plugins\ueditor\ueditor.parse.min.js" />
+    <None Include="wwwroot\static\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\static\js\bootstrap.min.js" />
+    <None Include="wwwroot\static\js\hm.js" />
+    <None Include="wwwroot\static\js\jquery-migrate.min.js" />
+    <None Include="wwwroot\static\js\jquery.js" />
+    <None Include="wwwroot\static\js\jquery.slicknav.min.js" />
+    <None Include="wwwroot\static\js\scripts.js" />
+    <None Include="wwwroot\static\js\swiper.jquery.min.js" />
+    <None Include="wwwroot\static\js\wp-embed.min.js" />
+    <None Include="wwwroot\static\js\xs.js" />
   </ItemGroup>
 
 </Project>

@@ -74,6 +74,7 @@ namespace Atlass.Framework.Generate
 		 /// </summary>
 		public string navigation { get; set; }
 
+		//public string url { get; set; }
 
 		///// <summary>
 		///// 时间格式化函数

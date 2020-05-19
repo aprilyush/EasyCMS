@@ -45,6 +45,7 @@ namespace Atlass.Framework.Core.HostService
                             logModel.log_message = log.LogMessage;
                             logModel.log_type = log.LogType;
                             logModel.log_time = log.LogTime;
+                            logs.Add(logModel);
                         }
 
                     }

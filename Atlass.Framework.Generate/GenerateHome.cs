@@ -1,0 +1,123 @@
+﻿using Atlass.Framework.Cache;
+using Atlass.Framework.Common.NLog;
+using Atlass.Framework.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using VTemplate.Engine;
+
+namespace Atlass.Framework.Generate
+{
+    public class GenerateHome
+    {
+        private readonly GenerateContentAppService _generateContentApp;
+        public GenerateHome()
+        {
+            _generateContentApp = new GenerateContentAppService();
+        }
+        /// <summary>
+        /// 当前页面的模板文档对象
+        /// </summary>
+        protected TemplateDocument Document
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 返回渲染后的模板文件
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public void GenerateHomeHtml()
+        {
+            try
+            {
+
+                var templateModel = TemplateManagerCache.GetTemplate(6);
+                if (templateModel == null)
+                {
+                    throw new Exception("找不到模板");
+                }
+                //加载模板
+                //this.LoadTemplate(templateModel.template_content);
+                string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
+                this.Document = new TemplateDocument(templateModel.template_content, templateFile);
+
+                this.Document.Variables.SetValue("this", this);
+
+                ElementCollection<Template> templates = this.Document.GetChildTemplatesByName("channels");
+                foreach (Template template in templates)
+                {
+                    string total = template.Attributes.GetValue("total", "10");
+                    //根据模板块里定义的type属性条件取得新闻数据
+                    var data = _generateContentApp.GetContentSummary(template.Attributes.GetValue("type"),int.Parse(total));
+                    //设置变量newsdata的值
+                    template.Variables.SetValue("contents", data);
+
+                    //取得模板块下Id为newslist的标签(也即是在cnblogs_newsdata.html文件中定义的foreach标签)
+                    //Tag tag = template.GetChildTagById("newslist");
+                    //if (tag is ForEachTag)
+                    //{
+                    //    //如果标签为foreach标签则设置其BeforeRender事件用于设置变量表达式{$:#.news.url}的值
+                    //    tag.BeforeRender += new System.ComponentModel.CancelEventHandler(Tag_BeforeRender);
+                    //}
+                }
+
+                string contentFilePath = Path.Combine(GlobalParamsDto.WebRoot, "index.html");
+                using (var filestream = new FileStream(contentFilePath, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    string renderHtml = this.Document.GetRenderText();
+
+                    using (StreamWriter writer = new StreamWriter(filestream, Encoding.UTF8))
+                    {
+
+                        writer.WriteLine(renderHtml);
+                        writer.Flush();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogNHelper.Exception(ex);
+
+            }
+        }
+
+        /// <summary>
+        /// 当前页面的模板文档的配置参数
+        /// </summary>
+        protected virtual TemplateDocumentConfig DocumentConfig
+        {
+            get
+            {
+                return TemplateDocumentConfig.Default;
+            }
+        }
+
+        /// <summary>
+        /// 装载模板文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        protected virtual void LoadTemplateFile(string fileName)
+        {
+            this.Document = null;
+
+            this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
+           
+        }
+
+        protected virtual void LoadTemplate(string templateContent)
+        {
+              //this.Document = new TemplateDocument(templateContent);
+        }
+        protected virtual void InitPageTemplate(ContentModel content)
+        {
+            this.Document.Variables.SetValue("this", this);
+            this.Document.Variables.SetValue("news", content);
+        }
+    }
+}

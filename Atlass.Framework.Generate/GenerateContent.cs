@@ -31,7 +31,7 @@ namespace Atlass.Framework.Generate
         {
             try
             {
-                this.LoadTemplate(template.template_content);
+                this.LoadTemplate(template.template_content,template.template_file);
                 this.InitPageTemplate(content);
                 return (true, this.Document.GetRenderText());
             }
@@ -130,9 +130,9 @@ namespace Atlass.Framework.Generate
             this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
         }
 
-        protected virtual void LoadTemplate(string templateContent)
+        protected virtual void LoadTemplate(string templateContent,string fileName)
         {
-            this.Document = new TemplateDocument(templateContent);
+            this.Document = new TemplateDocument(templateContent, fileName);
         }
         protected virtual void InitPageTemplate(ContentModel content)
         {
