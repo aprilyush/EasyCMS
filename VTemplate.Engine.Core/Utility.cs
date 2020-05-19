@@ -748,17 +748,20 @@ namespace VTemplate.Engine
                 {
                     if (tag is Template)
                     {
-                        referPath = ((Template)tag).File;
+                        //referPath = ((Template)tag).File;
+                        referPath = ((Template)tag).RootDirectory;
                     }
                     else if (tag is IncludeTag)
                     {
-                        referPath = ((IncludeTag)tag).File;
+                        //referPath = ((IncludeTag)tag).File;
+                        referPath = ((Template)tag).RootDirectory;
                     }
                     tag = tag.Parent;
                 }
                 if (!string.IsNullOrEmpty(referPath))
                 {
-                    fileName = Path.Combine(Path.GetDirectoryName(referPath), fileName);
+                    //fileName = Path.Combine(Path.GetDirectoryName(referPath), fileName);
+                    fileName = Path.Combine(referPath, fileName);
                 }
                 fileName = Path.GetFullPath(fileName);
             }

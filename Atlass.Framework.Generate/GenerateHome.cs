@@ -45,7 +45,7 @@ namespace Atlass.Framework.Generate
                 //加载模板
                 //this.LoadTemplate(templateModel.template_content);
                 string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
-                this.Document = new TemplateDocument(templateModel.template_content, templateFile);
+                this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
 
                 this.Document.Variables.SetValue("this", this);
 
@@ -87,37 +87,6 @@ namespace Atlass.Framework.Generate
             }
         }
 
-        /// <summary>
-        /// 当前页面的模板文档的配置参数
-        /// </summary>
-        protected virtual TemplateDocumentConfig DocumentConfig
-        {
-            get
-            {
-                return TemplateDocumentConfig.Default;
-            }
-        }
-
-        /// <summary>
-        /// 装载模板文件
-        /// </summary>
-        /// <param name="fileName"></param>
-        protected virtual void LoadTemplateFile(string fileName)
-        {
-            this.Document = null;
-
-            this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
-           
-        }
-
-        protected virtual void LoadTemplate(string templateContent)
-        {
-              //this.Document = new TemplateDocument(templateContent);
-        }
-        protected virtual void InitPageTemplate(ContentModel content)
-        {
-            this.Document.Variables.SetValue("this", this);
-            this.Document.Variables.SetValue("news", content);
-        }
+       
     }
 }

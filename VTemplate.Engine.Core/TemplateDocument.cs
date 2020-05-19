@@ -48,17 +48,18 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="charset"></param>
-        public TemplateDocument(string fileName, Encoding charset) : this(fileName, charset, TemplateDocumentConfig.Default) { }
+        public TemplateDocument(string fileName, string rootDirectory, Encoding charset) : this(fileName, rootDirectory, charset, TemplateDocumentConfig.Default) { }
         /// <summary>
         /// 根据文件内容进行解析
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="charset"></param>
         /// <param name="documentConfig"></param>
-        public TemplateDocument(string fileName, Encoding charset, TemplateDocumentConfig documentConfig)
+        public TemplateDocument(string fileName, string rootDirectory, Encoding charset, TemplateDocumentConfig documentConfig)
         {
             string text = System.IO.File.ReadAllText(fileName, charset);
             this.File = Path.GetFullPath(fileName);
+            this.RootDirectory = rootDirectory;
             this.Charset = charset;
             this.AddFileDependency(this.File);
             this.DocumentConfig = documentConfig;
@@ -68,16 +69,17 @@ namespace VTemplate.Engine
         /// 采用默认的文档配置并根据字符串进行解析
         /// </summary>
         /// <param name="text"></param>
-        public TemplateDocument(string text, string fileName) : this(text, fileName, TemplateDocumentConfig.Default) { }
+        public TemplateDocument(string text, string rootDirectory, string fileName) : this(text, rootDirectory, fileName, TemplateDocumentConfig.Default) { }
         /// <summary>
         /// 根据字符串进行解析
         /// </summary>
         /// <param name="text"></param>
         /// <param name="documentConfig"></param>
-        public TemplateDocument(string text,string fileName, TemplateDocumentConfig documentConfig)
+        public TemplateDocument(string text,string rootDirectory, string fileName, TemplateDocumentConfig documentConfig)
         {
             this.Charset = Encoding.UTF8;
             this.File = Path.GetFullPath(fileName);
+            this.RootDirectory = rootDirectory;
             this.AddFileDependency(this.File);
             this.DocumentConfig = documentConfig;
             this.ParseString(text);

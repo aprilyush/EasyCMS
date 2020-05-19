@@ -57,6 +57,10 @@ namespace VTemplate.Engine
 
         #region 属性定义
         /// <summary>
+        /// 网站根目录，用来加载include文件
+        /// </summary>
+        public string RootDirectory { get; set; }
+        /// <summary>
         /// 模板的关联文件
         /// </summary>
         public string File { get; internal set; }

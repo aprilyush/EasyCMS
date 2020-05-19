@@ -75,8 +75,9 @@ namespace Atlass.Framework.Generate
 
 
                 //加载模板
-                this.LoadTemplateFile(templatePath);
+                //this.LoadTemplateFile(templatePath);
                 //this.InitPageTemplate(content);
+                //this.Document = new TemplateDocument(templatePath, fileName);
 
                 using (var filestream = new FileStream(contentFilePath, FileMode.Create, FileAccess.ReadWrite))
                 {
@@ -99,17 +100,6 @@ namespace Atlass.Framework.Generate
         }
 
         /// <summary>
-        /// 当前页面的模板文档的配置参数
-        /// </summary>
-        protected virtual TemplateDocumentConfig DocumentConfig
-        {
-            get
-            {
-                return TemplateDocumentConfig.Default;
-            }
-        }
-
-        /// <summary>
         /// 装载模板文件
         /// </summary>
         /// <param name="fileName"></param>
@@ -127,12 +117,12 @@ namespace Atlass.Framework.Generate
             //    this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
             //}
             //测试实例模板文档
-            this.Document = new TemplateDocument(fileName, Encoding.UTF8, this.DocumentConfig);
+            //this.Document = new TemplateDocument(fileName, Encoding.UTF8);
         }
 
         protected virtual void LoadTemplate(string templateContent,string fileName)
         {
-            this.Document = new TemplateDocument(templateContent, fileName);
+            this.Document = new TemplateDocument(templateContent, GlobalParamsDto.WebRoot,fileName);
         }
         protected virtual void InitPageTemplate(ContentModel content)
         {
