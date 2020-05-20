@@ -50,7 +50,11 @@ namespace Atlass.Framework.Generate
                 string templateFile = Path.Combine(GlobalParamsDto.WebRoot, "Template/Channel", templateModel.template_file);
                 this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
                 this.Document.Variables.SetValue("this", this);
+                //设置顶部导航条数据
+                var navigations = _generateContentApp.GetChannelTree();
+                this.Document.Variables.SetValue("navigations", navigations);
 
+                //解析文章列表模板设置数据源
                 Tag element = this.Document.GetChildTagById("contents");
                 string total = element.Attributes.GetValue("total", "8");
                 
