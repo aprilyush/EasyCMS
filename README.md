@@ -1,5 +1,5 @@
-# Altas.Framework 又名：EasyCms
-&emsp;&emsp;Atlass 后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
+# EasyCms
+&emsp;&emsp;Atlass.Framework 后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
 ## 发展目标
 &emsp;&emsp;EasyCms是基于Atlass Framework实现一个产品化的项目，Atlass Framework原来是实现一个适合自己公司项目的基础开发框架。  
  &emsp;&emsp;由于本人近两年一直和本地一家公司长期合为政府部门做CMS系统以及其他后台管理系统，自认为还是比较了解这些部门需要什么样的cms管理系统，需要哪些功能，
