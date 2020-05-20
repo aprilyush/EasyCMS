@@ -35,8 +35,12 @@ namespace Atlass.Framework.Generate
 		/// <summary>
 		/// 栏目下的文章数据
 		/// </summary>
-		public List<ContentModel> Contents { get; set; }
+		public List<ContentModel> contents { get; set; }
 
+		/// <summary>
+		/// 子栏目
+		/// </summary>
+		public List<ChannelModel> sub_channels { get; set; }
 		/// <summary>
 		/// 导航
 		/// </summary>

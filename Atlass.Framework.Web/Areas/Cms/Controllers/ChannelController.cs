@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
@@ -50,13 +51,13 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             {
                 dto.insert_id = RequestHelper.AdminInfo().Id;
                 dto.insert_time = DateTime.Now;
-                _channelApp.Insert(dto);
+                dto= _channelApp.Insert(dto);
             }
             else
             {
                 _channelApp.Update(dto);
             }
-
+            ChannelManagerCache.AddChannel(dto);
             return Success("保存成功");
         }
 
@@ -91,6 +92,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         public IActionResult DeleteById(int id)
         {
             _channelApp.DelByIds(id);
+            ChannelManagerCache.RemoveChannel(id);
             return Success("删除成功");
         }
     }

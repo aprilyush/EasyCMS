@@ -6,10 +6,14 @@ using Atlass.Framework.Generate;
 using Atlass.Framework.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Atlass.Framework.Generate
 {
+    /// <summary>
+    /// 模板数据源，通用包含了新闻内容，面包屑，栏目信息的基本数据
+    /// </summary>
     public class GenerateContentAppService
     {
         private readonly  IFreeSql Sqldb;
@@ -17,6 +21,7 @@ namespace Atlass.Framework.Generate
             Sqldb =FreesqlDbInstance.GetInstance();
         }
 
+        #region 内容数据
         /// <summary>
         /// 获取新闻详情数据
         /// </summary>
@@ -47,7 +52,7 @@ namespace Atlass.Framework.Generate
                 });
             if (model != null)
             {
-                model.navigation = GetNaviChannels(model.channel_id);
+                model.navigation = GetNaviLocation(model.channel_id);
             }
             return model;
         }
@@ -88,7 +93,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviChannels(s.channel_id);
+                s.navigation = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -98,7 +103,7 @@ namespace Atlass.Framework.Generate
         }
 
         /// <summary>
-        /// 获取数据详情
+        /// 根据栏目索引获取数据详情
         /// </summary>
         /// <param name="contentIds"></param>
         /// <returns></returns>
@@ -139,7 +144,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviChannels(s.channel_id);
+                s.navigation = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -149,7 +154,7 @@ namespace Atlass.Framework.Generate
         }
 
         /// <summary>
-        /// 获取数据详情
+        /// 根据栏目id获取数据详情
         /// </summary>
         /// <param name="contentIds"></param>
         /// <returns></returns>
@@ -184,7 +189,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviChannels(s.channel_id);
+                s.navigation = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -193,7 +198,9 @@ namespace Atlass.Framework.Generate
             return list;
         }
 
-        #region 栏目数据
+        #endregion
+
+        #region 栏目数据 栏目数据必须存在首页栏目，并且为唯一顶级栏目，这是一个约束
 
         /// <summary>
         /// 获取栏目数据
@@ -221,31 +228,131 @@ namespace Atlass.Framework.Generate
             {
                 model.channel_href = $"/news/{channelId}";
             }
-            model.navigation = GetNaviChannels(channelId);
+            model.navigation = GetNaviLocation(channelId);
             return model;
 
         }
-        #endregion
         /// <summary>
-        /// 获取导航数据
+        /// 获取栏目数据列表
         /// </summary>
-        /// <param name="channelId"></param>
         /// <returns></returns>
-        private string GetNaviChannels(int channelId)
+        public List<ChannelModel> GetChannelTree()
+        {
+            var channels = ChannelManagerCache.GetChannelList();
+            var homeId = channels.Where(s => s.channel_index == "首页").Select(s=>s.id).FirstOrDefault();
+            if (homeId == 0)
+            {
+                return new List<ChannelModel>();
+            }
+            //获取首页栏目下的第一层栏目
+            //var topChannels = channels.Where(s => s.parent_id == homeId)
+            //    .OrderBy(s => s.sort_num)
+            //    .Select(s => new ChannelModel {
+            //        id =s.id, parent_id =s.parent_id ,
+            //        sort_num=s.sort_num,
+            //        channel_name=s.channel_name,
+            //        channel_index=s.channel_index,
+            //        channel_image=s.channel_image,
+            //        channel_href=s.channel_href,
+            //        channel_template=s.channel_template,
+            //    }).ToList();
+            //if (topChannels.Count == 0)
+            //{
+            //    return topChannels;
+            //}
+            ////设置连接和导航
+            //topChannels.ForEach(s =>
+            //{
+            //    if (string.IsNullOrEmpty(s.channel_href))
+            //    {
+            //        s.channel_href = $"/news/{s.id}";
+            //        s.navigation = GetNaviLocation(s.id);
+            //    }
+            //});
+            var list = InitChild(homeId, channels);
+
+            return list;
+        }
+
+        /// <summary>
+        /// 迭代子栏目
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="channels"></param>
+        /// <returns></returns>
+        private List<ChannelModel> InitChild(int pid, List<cms_channel> channels)
+        {
+            var list = new List<ChannelModel>();
+            var topChannels = channels.Where(s => s.parent_id == pid)
+              .OrderBy(s => s.sort_num)
+              .Select(s => new ChannelModel
+              {
+                  id = s.id,
+                  parent_id = s.parent_id,
+                  sort_num = s.sort_num,
+                  channel_name = s.channel_name,
+                  channel_index = s.channel_index,
+                  channel_image = s.channel_image,
+                  channel_href = s.channel_href,
+                  channel_template = s.channel_template,
+              }).ToList();
+
+            //设置连接和导航
+            foreach (var channel in topChannels)
+            {
+                if (string.IsNullOrEmpty(channel.channel_href))
+                {
+                    channel.channel_href = $"/news/{channel.id}";
+                    channel.navigation = GetNaviLocation(channel.id);
+                }
+                var subChannels = channels.Where(s => s.parent_id == channel.id).ToList();
+                if (subChannels.Count > 0)
+                {
+                    var childs = InitChild(channel.id, channels);
+                    if (childs.Count > 0)
+                    {
+                        channel.sub_channels = childs;
+
+                    }
+                }
+
+                list.Add(channel);
+            }
+
+            return list;
+        }
+        #endregion
+
+
+
+
+
+        /// <summary>
+        /// 获取栏目定位  
+        /// </summary> 
+        /// <param name="channelId"></param>
+        /// <returns>首页>新闻中心</returns>
+        private string GetNaviLocation(int channelId)
         {
             List<string> channelNames = new List<string>();
 
             var channel = ChannelManagerCache.GetChannel(channelId);
             if (channel != null)
             {
-                channelNames.Insert(0, channel.channel_name);
+                string channelHref = $"&nbsp;&nbsp;<a href='/news/{channel.id}'>{channel.channel_name}</a>";
+                channelNames.Insert(0, channelHref);
                 int channelPid = channel.parent_id;
                 while (channelPid > 0)
                 {
                     channel= ChannelManagerCache.GetChannel(channelPid);
                     if (channel != null)
                     {
-                        channelNames.Insert(0, channel.channel_name);
+                        string channelHref2 = "<a href='/index.html'>首页</a>";
+                        if (channel.channel_index != "首页")
+                        {
+                            channelHref2 = $"&nbsp;&nbsp;<a href='/news/{channel.id}'>{channel.channel_name}</a>";
+                        }
+                        channelNames.Insert(0,channelHref2);
                         channelPid = channel.parent_id;
                     }
                 }
@@ -254,7 +361,7 @@ namespace Atlass.Framework.Generate
 
             if (channelNames.Count == 0)
             {
-                return "首页";
+                return "<a href='/index.html'>首页</a>";
             }
 
             return string.Join('>', channelNames);

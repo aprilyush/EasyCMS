@@ -79,5 +79,12 @@ namespace Atlass.Framework.Web.Controllers.Cms
             gen.GenerateHomeHtml();
             return Content("ok");
         }
+
+        public IActionResult GetChannelTree()
+        {
+            GenerateContentAppService genData = new GenerateContentAppService();
+            var channelTree = genData.GetChannelTree();
+            return Json(channelTree);
+        }
     }
 }

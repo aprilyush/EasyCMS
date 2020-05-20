@@ -129,7 +129,15 @@
                 return;
             }
             var url = '/cms/Content/Form?id=0&channelId=' + channelId;
-            location.href = url;
+            parent.$.altasTab.open(
+                {
+                    id: 'edit_content',
+                    title: '发布文章',
+                    url: url,
+                    close: function () {
+                        $table.bootstrapTable('refresh');
+                    }
+                });
 
         }
         function edit(obj) {
@@ -139,8 +147,15 @@
             //}
             var id = $(obj).data('id');
             var url = '/cms/Content/Form?id=' + id + '&channelId=' + channelId;;
-            location.href = url;
-
+            parent.$.altasTab.open(
+                {
+                    id: 'edit_content',
+                    title: '修改文章',
+                    url: url,
+                    close: function () {
+                        $table.bootstrapTable('refresh');
+                    }
+                });
         }
 
         function del(obj) {

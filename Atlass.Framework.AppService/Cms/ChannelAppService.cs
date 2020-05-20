@@ -47,9 +47,11 @@ namespace Atlass.Framework.AppService.Cms
         /// </summary>
         /// <param name="dto"></param>
 
-        public void Insert(cms_channel dto)
+        public cms_channel Insert(cms_channel dto)
         {
-            Sqldb.Insert(dto).ExecuteAffrows();
+            var id = Sqldb.Insert(dto).ExecuteIdentity();
+            dto.id = (int)id;
+            return dto;
         }
 
         /// <summary>

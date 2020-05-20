@@ -10,7 +10,6 @@ namespace Atlass.Framework.Cache
     public static class ChannelManagerCache
     {
         private static ConcurrentDictionary<int, cms_channel> _channels;
-        private static BlockingCollection<cms_channel> _channelList;
         static ChannelManagerCache()
         {
             _channels = new ConcurrentDictionary<int, cms_channel>();
@@ -32,6 +31,17 @@ namespace Atlass.Framework.Cache
         }
 
         /// <summary>
+        /// 移除栏目
+        /// </summary>
+        /// <param name="channelId"></param>
+        public static void RemoveChannel(int channelId)
+        {
+            if (_channels.ContainsKey(channelId))
+            {
+                _channels.TryRemove(channelId,out cms_channel channel);
+            }
+        }
+        /// <summary>
         /// 获取栏目
         /// </summary>
         /// <param name="channelId"></param>
@@ -51,6 +61,22 @@ namespace Atlass.Framework.Cache
             return model;
         }
 
+        /// <summary>
+        /// 获取栏目列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<cms_channel> GetChannelList()
+        {
+            var list = new List<cms_channel>();
+            foreach (var dic in _channels)
+            {
+                list.Add(dic.Value);
+            }
+            return list;
+        }
+        /// <summary>
+        /// 清空列表
+        /// </summary>
         public static void ClearChannels()
         {
             _channels.Clear();
@@ -88,5 +114,7 @@ namespace Atlass.Framework.Cache
 
             return TemplateManagerCache.GetContentTemplate(channel.content_template);
         }
+
+        
     }
 }
