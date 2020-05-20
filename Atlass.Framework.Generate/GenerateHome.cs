@@ -46,9 +46,12 @@ namespace Atlass.Framework.Generate
                 //this.LoadTemplate(templateModel.template_content);
                 string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
                 this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
-
                 this.Document.Variables.SetValue("this", this);
+                //设置顶部导航条数据
+                var navigations = _generateContentApp.GetChannelTree();
+                this.Document.Variables.SetValue("navigations", navigations);
 
+                //获取栏目文章模板
                 ElementCollection<Template> templates = this.Document.GetChildTemplatesByName("channels");
                 foreach (Template template in templates)
                 {

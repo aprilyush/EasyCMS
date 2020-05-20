@@ -53,6 +53,10 @@
                 }
             };
             jutils.ajaxGet('/Cms/TemplateCode/TemplateCategory', null, function (res) {
+
+                var templates = res.data.templates;
+                var defaultModel = { id: 0, name: "全部", pId: 0,open: true, title: '' };
+                templates.splice(0, 0, defaultModel);
                 tplTree = $.fn.zTree.init($("#tplTree"), opts, res.data.templates);
                 tplTree.expandAll(true);
             });
@@ -97,6 +101,20 @@
                     { field: 'template_file', title: '模板文件', align: 'center' },
                     { field: 'file_name', title: '生成文件名', align: 'center' },
                     {
+                        field: 'template_mode', title: '类型', align: 'center', formatter: function (v) {
+                            if (v === 1) {
+                                return '首页模板';
+                            } else if (v === 2) {
+                                return '栏目模板';
+                            } else if (v === 3) {
+                                return '内容模板';
+                            } else if (v === 4) {
+                                return '单页模板';
+                            }
+                            return '';
+                        }
+                    },
+                    {
                         field: 'is_default', title: '默认模板', align: 'center', formatter: function (v) {
                             if (v === 1) {
                                 return '<span class="label label-primary">默认模板</span>';
@@ -117,9 +135,22 @@
 
         function render(v, r, i) {
             var html = jutils.initToolBarRow(v);
+            if (r.template_mode === 1) {
+                var genHtml = '<a class="btn btn-white btn-bitbucket" title="生成首页" href="javascript:void(0);" onclick="genHome()" data-id="' + v + '"><i class="fa fa-refresh"></i></a>';
+                html = genHtml + html;
+            }
+          
             return html;
         }
 
+        function genHome(obj) {
+
+            jutils.ajaxGet('/content/GenerateHome', null, function (res) {
+                if (res.status) {
+                    jutils.success("首页生成成功");
+                }
+            });
+        }
         function renderTitle(v, d) {
             return '<a href="/cms/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
         }

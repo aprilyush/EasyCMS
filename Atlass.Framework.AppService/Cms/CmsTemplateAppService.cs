@@ -22,6 +22,7 @@ namespace Atlass.Framework.AppService.Cms
         {
             var query = Sqldb.Select<cms_template>()
                       .WhereIf(pid > 0, s => s.pid == pid)
+                      .OrderBy(s=>s.pid)
                       .OrderByDescending(s => s.id)
                       .Count(out long total)
                       .Page(dto.page, dto.limit)
@@ -30,7 +31,9 @@ namespace Atlass.Framework.AppService.Cms
                           id = s.id,
                           template_name = s.template_name,
                           template_file = s.template_file,
-                          is_default = s.is_default
+                          is_default = s.is_default,
+                          template_mode=s.template_mode,
+                          file_name=s.file_name
                       });
 
             dto.total = total;

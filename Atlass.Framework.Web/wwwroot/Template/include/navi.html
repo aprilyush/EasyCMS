@@ -10,21 +10,11 @@
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
                     <a href="/index.html">首页</a>
                 </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                    <a href="/index.html">公司介绍</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                    <a href="/index.html">企业文化</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                    <a href="/index.html">新闻动态</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                    <a href="/index.html">通知公告</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                    <a href="/index.html">联系我们</a>
-                </li>
+                <vt:foreach from="$#.navigations" item="#.navi" index="#.i">
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                        <a href="{$#.navi.channel_href}">{$#.navi.channel_name}</a>
+                    </li>
+                </vt:foreach>
             </ul>
         </div>
     </div>

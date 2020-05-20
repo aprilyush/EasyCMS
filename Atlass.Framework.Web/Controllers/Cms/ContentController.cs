@@ -6,6 +6,7 @@ using Atlass.Framework.Cache;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Generate;
 using Atlass.Framework.Models;
+using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -77,7 +78,8 @@ namespace Atlass.Framework.Web.Controllers.Cms
         {
             GenerateHome gen = new GenerateHome();
             gen.GenerateHomeHtml();
-            return Content("ok");
+            var result = new ResultAdaptDto();
+            return Json(result);
         }
 
         public IActionResult GetChannelTree()
