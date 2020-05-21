@@ -129,6 +129,15 @@ jutils.ajax = function (type, asysc, url, data, okfunc) {
         data: data,
         //contentType: 'application/x-www-form-urlencoded',
         success: function (res) {
+            if (res.status) {
+                if (res.msg) {
+                    jutils.success(res.msg);
+                }
+            } else {
+                if (res.msg) {
+                    jutils.error(res.msg);
+                }
+            }
             if ($.isFunction(okfunc)) {
                 okfunc(res);
             }
@@ -153,6 +162,15 @@ jutils.ajaxGet = function (url, data, okfunc) {
         data: data,
         //contentType: 'application/x-www-form-urlencoded',
         success: function (res) {
+            if (res.status) {
+                if (res.msg) {
+                    jutils.success(res.msg);
+                }
+            } else {
+                if (res.msg) {
+                    jutils.error(res.msg);
+                }
+            }
             if ($.isFunction(okfunc)) {
                 okfunc(res);
             }
