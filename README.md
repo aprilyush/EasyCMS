@@ -9,10 +9,11 @@
  **满足大部分企业建站需求，政府部门，事业单位使用的CMS管理系统**
 ## 技术介绍
 + 基于Aspnet core3.1  
-+ ORM使用FreeSql,默认使用mysql数据库
++ ORM使用[FreeSql](https://github.com/dotnetcore/FreeSql),默认使用mysql数据库
++ Redis操作使用[csredis](https://github.com/2881099/csredis)
 + 后台模板使用H+，如果有赞助的话，后期买个admui替换掉。
 + 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)  
-+ 定时任务采用hangfire
++ 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 ## 演示地址：
  因项目在开发中，不再提供后台演示用户，只展示前台，如果敢兴趣，请下载源码  
  本地超级管理员 admin 123123
