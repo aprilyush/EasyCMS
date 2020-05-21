@@ -76,8 +76,8 @@ namespace Atlass.Framework.Web.Controllers.Cms
 
         public IActionResult GenerateHome()
         {
-            //GenerateHome gen = new GenerateHome();
-            //gen.GenerateHomeHtml();
+            GenerateHome gen = new GenerateHome();
+            gen.GenerateHomeHtml();
             var result = new ResultAdaptDto();
             return Json(result);
         }

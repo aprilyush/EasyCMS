@@ -11,14 +11,22 @@
                     <a href="/index.html">首页</a>
                 </li>
                 <vt:foreach from="$#.navigations" item="#.navi" index="#.i">
-                    <vt:if var="$#.navi.dis_drawing" value="1" compare="<">
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                            <a href="{$#.navi.channel_href}">{$#.navi.channel_name}</a>
-                        </li>
-                    <vt:if/>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                        <a href="{$#.navi.channel_href}">{$#.navi.channel_name}</a>
+                    </li>
+
+                    <!--vt[ <vt:if var="#.i" value="1">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                <a href="{$#.navi.channel_href}">{$#.navi.channel_name}和</a>
+            </li>
+            <vt:else />
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                <a href="#">首页</a>
+            </li>
+            <vt:if />]-->
 
                 </vt:foreach>
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
+    </header>

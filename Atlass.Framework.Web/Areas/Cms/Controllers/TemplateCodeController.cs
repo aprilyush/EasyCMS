@@ -124,8 +124,11 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             if (template.id>0)
             {
                 string templateFile = template.template_file;
-
-                if (template.template_mode ==2)
+                if (template.template_mode == 1)
+                {
+                    templateFile = $"Template/{templateFile}";
+                }
+                else if (template.template_mode ==2)
                 {
                     templateFile = $"Template/Channel/{templateFile}";
                 }else if (template.template_mode == 3)
@@ -175,8 +178,10 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             if (template.id > 0)
             {
                 string templateFile = template.template_file;
-
-                if (template.template_mode == 2)
+                if (template.template_mode == 1)
+                {
+                    templateFile = $"Template/{templateFile}";
+                }else if(template.template_mode == 2)
                 {
                     templateFile = $"Template/Channel/{templateFile}";
                 }

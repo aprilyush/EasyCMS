@@ -10,7 +10,7 @@ namespace Atlass.Framework.Generate
 {
     public static class GenerateTemplate
     {
-        private static string HomeDirectory = "Template/Home";//首页模板
+        private static string HomeDirectory = "Template";//首页模板
         private static string ChannelDirectory = "Template/Channel";//栏目模板
         private static string ContentDirectory = "Template/Content";//内容模板
         private static string SingleDirectory = "Template/Single";//单页模板
