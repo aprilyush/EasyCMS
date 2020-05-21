@@ -224,6 +224,7 @@ namespace Atlass.Framework.Generate
             model.channel_image = channel.channel_image;
             model.channel_href = channel.channel_href;
             model.channel_template = channel.channel_template;
+            model.dis_drawing = channel.dis_drawing;
             if (string.IsNullOrEmpty(model.channel_href))
             {
                 model.channel_href = $"/news/{channelId}";
@@ -233,7 +234,7 @@ namespace Atlass.Framework.Generate
 
         }
         /// <summary>
-        /// 获取栏目数据列表
+        /// 获取栏目数据列表 必须设置首页栏目
         /// </summary>
         /// <returns></returns>
         public List<ChannelModel> GetChannelTree()
@@ -295,6 +296,7 @@ namespace Atlass.Framework.Generate
                   channel_image = s.channel_image,
                   channel_href = s.channel_href,
                   channel_template = s.channel_template,
+                  dis_drawing=s.dis_drawing
               }).ToList();
 
             //设置连接和导航
@@ -309,7 +311,8 @@ namespace Atlass.Framework.Generate
                 if (subChannels.Count > 0)
                 {
                     var childs = InitChild(channel.id, channels);
-                    if (childs.Count > 0)
+                    channel.sub_count = childs.Count;
+                    if (channel.sub_count > 0)
                     {
                         channel.sub_channels = childs;
 

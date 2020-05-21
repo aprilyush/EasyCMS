@@ -110,6 +110,8 @@
                                 return '内容模板';
                             } else if (v === 4) {
                                 return '单页模板';
+                            } else if (v === 5) {
+                                return '包含文件';
                             }
                             return '';
                         }
@@ -136,7 +138,7 @@
         function render(v, r, i) {
             var html = jutils.initToolBarRow(v);
             if (r.template_mode === 1) {
-                var genHtml = '<a class="btn btn-white btn-bitbucket" title="生成首页" href="javascript:void(0);" onclick="genHome()" data-id="' + v + '"><i class="fa fa-refresh"></i></a>';
+                var genHtml = '<a class="btn btn-white btn-bitbucket" title="生成首页" href="javascript:void(0);" onclick="genHome()" data-id="' + v + '"><i class="fa fa-rocket"></i></a>';
                 html = genHtml + html;
             }
           
@@ -186,6 +188,24 @@
             var id = $(obj).data('id');
             jutils.confirm("确认删除当前模板吗", function () {
                 jutils.ajaxGet('/cms/templatecode/DeleteById', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+
+        function copyFile(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认复制一份新的模板副本吗", function () {
+                jutils.ajaxGet('/cms/templatecode/copyFile', { id: id }, function (res) {
+                    $table.bootstrapTable('refresh');
+                })
+            })
+        }
+
+        function syncTemplate(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确认本地模板同步到数据库吗", function () {
+                jutils.ajaxGet('/cms/templatecode/syncTemplate', { id: id }, function (res) {
                     $table.bootstrapTable('refresh');
                 })
             })

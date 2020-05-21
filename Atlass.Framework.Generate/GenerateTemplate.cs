@@ -14,7 +14,7 @@ namespace Atlass.Framework.Generate
         private static string ChannelDirectory = "Template/Channel";//栏目模板
         private static string ContentDirectory = "Template/Content";//内容模板
         private static string SingleDirectory = "Template/Single";//单页模板
-
+        private static string IncludeDirectory = "Template/include";//包含文件
         /// <summary>
         /// 模板生成
         /// </summary>
@@ -39,6 +39,9 @@ namespace Atlass.Framework.Generate
                         break;
                     case 4:
                        // CreateContent(templateName, templateContent);
+                        break;
+                    case 5:
+                        CreateInclude(templateName, templateContent);
                         break;
                     default:
                         break;
@@ -79,6 +82,17 @@ namespace Atlass.Framework.Generate
         private static void CreateContent(string templateName, string templateContent)
         {
             string filePath = Path.Combine(GlobalParamsDto.WebRoot, ContentDirectory, templateName);
+            FileUtils.WriteText(filePath, templateContent);
+        }
+
+        /// <summary>
+        /// 生成包含文件
+        /// </summary>
+        /// <param name="templateName"></param>
+        /// <param name="templateContent"></param>
+        private static void CreateInclude(string templateName, string templateContent)
+        {
+            string filePath = Path.Combine(GlobalParamsDto.WebRoot, IncludeDirectory, templateName);
             FileUtils.WriteText(filePath, templateContent);
         }
     }

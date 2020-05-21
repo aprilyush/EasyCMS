@@ -36,15 +36,10 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
         public IActionResult Form(int id)
         {
-            var list = new List<DicKeyDto>();
-            list.Add(new DicKeyDto { id =0, name = "请选择模板" });
-            list.Add(new DicKeyDto { id =1, name = "首页模板" });
-            list.Add(new DicKeyDto { id = 2, name = "栏目模板" });
-            list.Add(new DicKeyDto { id = 3, name = "内容模板" });
-            list.Add(new DicKeyDto { id = 4, name = "单页模板" });
-
+            var category =_templateApp.TemplateCategory();
+            category.Add(new ZtreeSelIntDto { id =0, name = "请选择模板" });
             var model = _templateApp.GetModel(id);
-            ViewBag.TempCategory = new SelectList(list, "id", "name", model.pid);
+            ViewBag.TempCategory = new SelectList(category, "id", "name", model.pid);
             ViewData.Model = model;
             return View();
         }
@@ -116,6 +111,102 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             }
 
             return Success("删除成功");
+        }
+        /// <summary>
+        /// 复制模板
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult CopyFile(int id)
+        {
+            var template = _templateApp.GetModel(id);
+            if (template.id>0)
+            {
+                string templateFile = template.template_file;
+
+                if (template.template_mode ==2)
+                {
+                    templateFile = $"Template/Channel/{templateFile}";
+                }else if (template.template_mode == 3)
+                {
+                    templateFile = $"Template/Content/{templateFile}";
+                }
+                else if (template.template_mode == 4)
+                {
+                    templateFile = $"Template/Single/{templateFile}";
+                }
+                else if (template.template_mode ==5)
+                {
+                    templateFile = $"Template/include/{templateFile}";
+                }
+
+                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                FileInfo file = new FileInfo(filePath);
+
+                string copyFile = filePath.Replace(file.Name, "副本" + file.Name);
+                //Path.Combine(file.DirectoryName, "副本"+ file.Name);
+                bool status=FileUtils.CopyFile(filePath, copyFile);
+                if (status)
+                {
+                    template.id = 0;
+                    template.template_name = "副本" + template.template_name;
+                    template.template_file= template.template_file.Replace(file.Name, "副本" + file.Name);
+                    var dto =_templateApp.InsertTemplate(template);
+                    if (dto != null)
+                    {
+                        TemplateManagerCache.AddTemplate(dto);
+                    }
+                }
+            }
+
+            return Success("删除成功");
+        }
+
+        /// <summary>
+        /// 复制模板
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult SyncTemplate(int id)
+        {
+            var template = _templateApp.GetModel(id);
+            if (template.id > 0)
+            {
+                string templateFile = template.template_file;
+
+                if (template.template_mode == 2)
+                {
+                    templateFile = $"Template/Channel/{templateFile}";
+                }
+                else if (template.template_mode == 3)
+                {
+                    templateFile = $"Template/Content/{templateFile}";
+                }
+                else if (template.template_mode == 4)
+                {
+                    templateFile = $"Template/Single/{templateFile}";
+                }
+                else if (template.template_mode == 5)
+                {
+                    templateFile = $"Template/include/{templateFile}";
+                }
+
+                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                string newContent=FileUtils.ReadText(filePath);
+                if (newContent.IsEmpty())
+                {
+                    return Error("同步失败");
+                }
+                template.template_content = newContent;
+                var dto = _templateApp.UpdateTemplate(template);
+                if (dto != null)
+                {
+                    TemplateManagerCache.AddTemplate(dto);
+                }
+            }
+            return Success("同步成功");
         }
     }
 }

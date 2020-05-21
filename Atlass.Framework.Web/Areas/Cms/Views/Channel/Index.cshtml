@@ -42,6 +42,13 @@
                     },
                     { field: 'channel_href', title: '外链', align: 'center' },
                     { field: 'sort_num', title: '排序', align: 'center' },
+                    {
+                        field: 'dis_drawing', title: '顶部渲染标识', align: 'center', formatter: function (v) {
+                            if (v===1) {
+                                return '<span class="label label-danger">不渲染</span>';
+                            }
+                            return '';
+                        } },
                     { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
                 ],
                 treeShowField: 'channel_name',

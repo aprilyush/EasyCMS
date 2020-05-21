@@ -65,7 +65,7 @@ namespace Atlass.Framework.Models
 
 
 		/// <summary>
-		/// 1-首页，2-栏目模板，3-内容模板，4-单页模板
+		/// 1-首页，2-栏目模板，3-内容模板，4-单页模板,5-包含文件
 		/// </summary>
 		[JsonProperty, Column(DbType = "int(10)")]
 		public int template_mode { get; set; }

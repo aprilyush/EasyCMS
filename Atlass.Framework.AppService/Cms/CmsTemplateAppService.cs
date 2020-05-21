@@ -43,10 +43,13 @@ namespace Atlass.Framework.AppService.Cms
 
         public cms_template InsertTemplate(cms_template dto)
         {
-            var count = Sqldb.Select<cms_template>().Where(s => s.pid == dto.pid && s.is_default == 1).Count();
-            if (count == 0)
+            if (dto.template_mode < 4)
             {
-                dto.is_default = 1;
+                var count = Sqldb.Select<cms_template>().Where(s => s.pid == dto.pid && s.is_default == 1).Count();
+                if (count == 0)
+                {
+                    dto.is_default = 1;
+                }
             }
 
             Sqldb.Insert(dto).ExecuteAffrows();
@@ -86,17 +89,37 @@ namespace Atlass.Framework.AppService.Cms
             return model;
         }
 
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public string DeleteById(int id)
         {
-            var temp = Sqldb.Select<cms_template>().Where(s => s.id == id).First(s => s.template_file);
-            if (!string.IsNullOrEmpty(temp))
+            var temp = Sqldb.Select<cms_template>().Where(s => s.id == id).First();
+            if (temp == null)
             {
-                Sqldb.Delete<cms_template>().Where(s => s.id == id).ExecuteAffrows();
-                return temp;
+                return null;
             }
-            return null;
+            //删除文件时，如果当前文件是默认文件需要重新设置一个默认文件
+            int setDefaultId = 0;
+            if (temp.template_mode < 4&&temp.is_default==1)
+            {
+                setDefaultId = Sqldb.Select<cms_template>().Where(s =>s.id!=id&&s.pid ==temp.pid).OrderBy(s=>s.id).First(s=>s.id);
+            }
+
+            if (setDefaultId > 0)
+            {
+                Sqldb.Update<cms_template>().Set(s => s.is_default, 1).Where(s => s.id == setDefaultId).ExecuteAffrows();
+            }
+            Sqldb.Delete<cms_template>().Where(s => s.id == id).ExecuteAffrows();
+            return temp.template_file;
         }
+
+        /// <summary>
+        /// 获取分类
+        /// </summary>
+        /// <returns></returns>
         public List<ZtreeSelIntDto> TemplateCategory()
         {
             var list = new List<ZtreeSelIntDto>();
@@ -104,6 +127,7 @@ namespace Atlass.Framework.AppService.Cms
             list.Insert(1, new ZtreeSelIntDto { id = 2, name = "栏目模板" });
             list.Insert(2, new ZtreeSelIntDto { id = 3, name = "内容模板" });
             list.Insert(3, new ZtreeSelIntDto { id = 4, name = "单页模板" });
+            list.Insert(4, new ZtreeSelIntDto { id = 5, name = "包含文件" });
             return list;
         }
         public List<ZtreeSelIntDto> TemplateZtree()
@@ -120,6 +144,7 @@ namespace Atlass.Framework.AppService.Cms
             list.Insert(1, new ZtreeSelIntDto { id = 2, name = "栏目模板" });
             list.Insert(2, new ZtreeSelIntDto { id = 3, name = "内容模板" });
             list.Insert(3, new ZtreeSelIntDto { id = 4, name = "单页模板" });
+            list.Insert(4, new ZtreeSelIntDto { id = 5, name = "包含文件" });
             return list;
         }
 
