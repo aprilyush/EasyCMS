@@ -16,7 +16,7 @@ namespace Atlass.Framework.Models.CmsSet
         /// <summary>
         /// 网站LOGO
         /// </summary>
-        public string site_log { get; set; }
+        public string site_logo { get; set; }
         /// <summary>
         /// 地址栏图标
         /// </summary>

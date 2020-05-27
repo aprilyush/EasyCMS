@@ -62,7 +62,57 @@ namespace Atlass.Framework.Web.ApiControllers
             return Content(result.ToJson());
         }
 
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("UploadLogo")]
+        public ActionResult UploadLogo(int imageType)
+        {
+            var result = new ResultAdaptDto();
+            //long size = 0;
+            var files = Request.Form.Files;
+            if (files.Count == 0)
+            {
+                result.status = false;
+                result.msg = "没有文件信息";
+                return Content(result.ToJson());
+            }
+            string url = $"/static/images";
+            if (imageType == 2)
+            {
+                url = "";
+            }
+            var folder = GlobalParamsDto.WebRoot + url;
 
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            var file = files[0];
+            var filename = ContentDispositionHeaderValue
+                .Parse(file.ContentDisposition)
+                .FileName
+                .Trim('"');
+            int index = filename.LastIndexOf('.');
+            string extName = filename.Substring(index);
+            string guidFileName = "logo" + extName;
+            if (imageType == 2)
+            {
+                guidFileName = "favicon.ico";
+            }
+            //这个hostingEnv.WebRootPath就是要存的地址可以改下
+            filename = $"{folder}/{guidFileName}";
+            using (FileStream fs = System.IO.File.Create(filename))
+            {
+                file.CopyTo(fs);
+                fs.Flush();
+            }
+            string imgurl = $"{ url}/{guidFileName}";
+            result.data.Add("url", imgurl);
+            return Content(result.ToJson());
+        }
         #region 分片上传文件，可断点续传
 
         /// <summary>

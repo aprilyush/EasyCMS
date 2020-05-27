@@ -47,6 +47,9 @@ namespace Atlass.Framework.Generate
                 string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
                 this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
                 this.Document.Variables.SetValue("this", this);
+                //站点基本信息
+                var site = SiteManagerCache.site;
+                this.Document.Variables.SetValue("site", site);
                 //设置顶部导航条数据
                 var navigations = _generateContentApp.GetChannelTree();
                 this.Document.Variables.SetValue("navigations", navigations);
