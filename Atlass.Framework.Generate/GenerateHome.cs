@@ -55,7 +55,7 @@ namespace Atlass.Framework.Generate
 
                 this.Document.Variables.SetValue("this", this);
                 //站点基本信息
-                var site = SiteManagerCache.site;
+                var site = SiteManagerCache.GetSiteInfo();
                 this.Document.Variables.SetValue("site", site);
                 //设置顶部导航条数据
                 var navigations = _generateContentApp.GetChannelTree();

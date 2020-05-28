@@ -62,7 +62,7 @@ namespace Atlass.Framework.Generate
                 
                 this.Document.Variables.SetValue("this", this);
                 //站点数据
-                var site = SiteManagerCache.site;
+                var site = SiteManagerCache.GetSiteInfo();
                 site.site_title = channel.channel_name;
                 this.Document.Variables.SetValue("site", site);
                 //设置顶部导航条数据

@@ -48,7 +48,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         public IActionResult SaveSite(cms_site dto)
         {
             var site=_siteApp.SaveSite(dto);
-            SiteManagerCache.site = site;
+            SiteManagerCache.SetSiteInfo(site);
             return Success("保存成功");
         }
 

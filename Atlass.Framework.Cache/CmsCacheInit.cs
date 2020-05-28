@@ -35,7 +35,7 @@ namespace Atlass.Framework.Cache
                 site.site_favicon = "/favicon.ico";
                 site.site_logo = "/static/images/logo.png";
             }
-            SiteManagerCache.site = site;
+            SiteManagerCache.SetSiteInfo(site);
         }
     }
 }
