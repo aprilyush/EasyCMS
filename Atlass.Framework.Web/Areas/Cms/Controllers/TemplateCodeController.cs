@@ -79,6 +79,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             if (dto != null)
             {
                 TemplateManagerCache.AddTemplate(dto);
+                RenderDocumentCache.Clear();
             }
             GenerateTemplate.Create(dto.template_mode, dto.template_file, dto.template_content);
             return Success("模板保存成功");
@@ -108,6 +109,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             {
                 string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
                 FileUtils.DeleteFileIfExists(filePath);
+                RenderDocumentCache.Clear();
             }
 
             return Success("删除成功");
@@ -209,6 +211,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                 if (dto != null)
                 {
                     TemplateManagerCache.AddTemplate(dto);
+                    RenderDocumentCache.Clear();
                 }
             }
             return Success("同步成功");

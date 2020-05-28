@@ -54,5 +54,10 @@ namespace Atlass.Framework.Generate
             }
             return null;
         }
+
+        public static void Clear()
+        {
+            _douments.Clear();
+        }
     }
 }

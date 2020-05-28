@@ -13,7 +13,7 @@ namespace Atlass.Framework.Generate
         private static string HomeDirectory = "Template";//首页模板
         private static string ChannelDirectory = "Template/Channel";//栏目模板
         private static string ContentDirectory = "Template/Content";//内容模板
-        private static string SingleDirectory = "Template/Single";//单页模板
+        //private static string SingleDirectory = "Template/Single";//单页模板
         private static string IncludeDirectory = "Template/include";//包含文件
         /// <summary>
         /// 模板生成
