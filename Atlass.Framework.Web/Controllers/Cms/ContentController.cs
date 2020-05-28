@@ -36,18 +36,9 @@ namespace Atlass.Framework.Web.Controllers.Cms
             }
 
           
-            var template = ChannelManagerCache.GetContentTemplate(channelId);
-            if (template == null)
-            {
-                return Redirect("/404.html");
-            }
-            var content = _contentApp.GetContentInfo(id);
-            if (content == null)
-            {
-                return Redirect("/404.html");
-            }
+           
             GenerateContent gen = new GenerateContent();
-            var ret = gen.GenerateContentHtml(content, template);
+            var ret = gen.GenerateContentHtml(channelId,id);
             if (!ret.genStatus)
             {
                 return Redirect("/404.html");

@@ -36,16 +36,23 @@ namespace Atlass.Framework.Generate
         {
             try
             {
-
+                Stopwatch watcher = new Stopwatch();
+                watcher.Start();
                 var templateModel = TemplateManagerCache.GetHomeTemplate();
                 if (templateModel.id==0)
                 {
                     throw new Exception("找不到模板");
                 }
-                //加载模板
+                //加载模板 先取缓存，没有再初始化一个并且加入缓存
+                this.Document = RenderDocumentCache.GetRenderDocument(templateModel.id);
+                if (this.Document == null)
+                {
+                    string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
+                    this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                    RenderDocumentCache.AddRenderDocument(templateModel.id, this.Document);
+                }
                 //this.LoadTemplate(templateModel.template_content);
-                string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
-                this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+
                 this.Document.Variables.SetValue("this", this);
                 //站点基本信息
                 var site = SiteManagerCache.site;
@@ -85,6 +92,10 @@ namespace Atlass.Framework.Generate
                         writer.Flush();
                     }
                 }
+                watcher.Stop();
+                string msg = $"渲染首页耗时：{watcher.ElapsedMilliseconds} ms";
+
+                LogNHelper.Info(msg);
             }
             catch (Exception ex)
             {

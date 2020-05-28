@@ -3,6 +3,7 @@ using Atlass.Framework.Common.NLog;
 using Atlass.Framework.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using VTemplate.Engine;
@@ -35,6 +36,8 @@ namespace Atlass.Framework.Generate
         {
             try
             {
+                Stopwatch watcher = new Stopwatch();
+                watcher.Start();
                 var channel = _generateContentApp.GetChannel(channelId);
                 if (channel == null)
                 {
@@ -45,10 +48,17 @@ namespace Atlass.Framework.Generate
                 {
                     return(false, null);
                 }
-                //加载模板
+
+                //加载模板 先取缓存，没有再初始化一个并且加入缓存
                 //this.LoadTemplate(templateModel.template_content);"Template/Channel"
-                string templateFile = Path.Combine(GlobalParamsDto.WebRoot, "Template/Channel", templateModel.template_file);
-                this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                this.Document = RenderDocumentCache.GetRenderDocument(templateModel.id);
+                if (this.Document == null)
+                {
+                    string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
+                    this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                    RenderDocumentCache.AddRenderDocument(templateModel.id, this.Document);
+                }
+                
                 this.Document.Variables.SetValue("this", this);
                 //设置顶部导航条数据
                 var navigations = _generateContentApp.GetChannelTree();
@@ -64,6 +74,13 @@ namespace Atlass.Framework.Generate
                 this.Document.Variables.SetValue("contents", contents);
 
                 string renderHtml = this.Document.GetRenderText();
+
+
+                watcher.Stop();
+                string msg = $"渲染栏目耗时：{watcher.ElapsedMilliseconds} ms";
+
+                LogNHelper.Info(msg);
+
                 return (true, renderHtml);
             }
             catch (Exception ex)

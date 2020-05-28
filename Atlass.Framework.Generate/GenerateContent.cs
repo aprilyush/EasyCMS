@@ -1,9 +1,11 @@
-﻿using Atlass.Framework.Common;
+﻿using Atlass.Framework.Cache;
+using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using VTemplate.Engine;
@@ -12,6 +14,13 @@ namespace Atlass.Framework.Generate
 {
     public class GenerateContent
     {
+       
+        
+        private readonly GenerateContentAppService _contentApp;
+        public GenerateContent()
+        {
+            _contentApp = new GenerateContentAppService();
+        }
         /// <summary>
         /// 当前页面的模板文档对象
         /// </summary>
@@ -27,13 +36,39 @@ namespace Atlass.Framework.Generate
         /// <param name="content"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        public (bool genStatus,string contentHtml) GenerateContentHtml(ContentModel content,cms_template template)
+        public (bool genStatus,string contentHtml) GenerateContentHtml(int channelId,int id)
         {
             try
             {
-                this.LoadTemplate(template.template_content,template.template_file);
-                this.InitPageTemplate(content);
-                return (true, this.Document.GetRenderText());
+                Stopwatch watcher = new Stopwatch();
+                watcher.Start();
+                var templateModel = ChannelManagerCache.GetContentTemplate(channelId);
+                if (templateModel == null)
+                {
+                    return (false, "");
+                }
+                var content = _contentApp.GetContentInfo(id);
+                if (content == null)
+                {
+                    return (false, "");
+                }
+                //加载模板 先取缓存，没有再初始化一个并且加入缓存
+                this.Document = RenderDocumentCache.GetRenderDocument(templateModel.id);
+                if (this.Document == null)
+                {
+                    string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
+                    this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                    RenderDocumentCache.AddRenderDocument(templateModel.id, this.Document);
+                }
+
+                this.Document.Variables.SetValue("this", this);
+                this.Document.Variables.SetValue("news", content);
+                string renderHtml = this.Document.GetRenderText();
+                watcher.Stop();
+                string msg = $"渲染内容页耗时：{watcher.ElapsedMilliseconds} ms";
+
+                LogNHelper.Info(msg);
+                return (true, renderHtml);
             }
             catch(Exception ex)
             {
