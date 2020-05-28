@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Cache;
+using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
 using Atlass.Framework.ViewModels;
 using System;
@@ -36,8 +37,8 @@ namespace Atlass.Framework.Generate
         {
             try
             {
-                Stopwatch watcher = new Stopwatch();
-                watcher.Start();
+                //Stopwatch watcher = new Stopwatch();
+                //watcher.Start();
                 var channel = _generateContentApp.GetChannel(channelId);
                 if (channel == null)
                 {
@@ -60,8 +61,12 @@ namespace Atlass.Framework.Generate
                 }
                 
                 this.Document.Variables.SetValue("this", this);
+                //站点数据
+                var site = SiteManagerCache.site;
+                site.site_title = channel.channel_name;
+                this.Document.Variables.SetValue("site", site);
                 //设置顶部导航条数据
-                var navigations = _generateContentApp.GetChannelTree();
+                var navigations = _generateContentApp.GetChannelTree(channelId);
                 this.Document.Variables.SetValue("navigations", navigations);
 
                 //解析文章列表模板设置数据源
@@ -76,10 +81,10 @@ namespace Atlass.Framework.Generate
                 string renderHtml = this.Document.GetRenderText();
 
 
-                watcher.Stop();
-                string msg = $"渲染栏目耗时：{watcher.ElapsedMilliseconds} ms";
+                //watcher.Stop();
+                //string msg = $"渲染栏目耗时：{watcher.ElapsedMilliseconds} ms";
 
-                LogNHelper.Info(msg);
+                //LogNHelper.Info(msg);
 
                 return (true, renderHtml);
             }

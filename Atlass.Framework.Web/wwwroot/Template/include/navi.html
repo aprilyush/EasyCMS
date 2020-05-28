@@ -7,16 +7,22 @@
         </div>
         <div class="header-menu pull-right">
             <ul id="menu-nav" class="header-menu-con">
-                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                <!--<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
                     <a href="/index.html">首页</a>
-                </li>
+                </li>-->
                 <vt:foreach from="$navigations" item="#.navi" index="#.i">
                     <!--vt[]-->
                     <vt:if var="#.navi.dis_drawing" value="0">
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                            <a href="{$navi.channel_href}">{$navi.channel_name}</a>
-                        </li>
-                        <vt:else />
+                        <vt:if var="#.navi.current" value="1">
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home on">
+                                <a href="{$navi.channel_href}">{$navi.channel_name}</a>
+                            </li>
+                            <vt:else />
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+                                <a href="{$navi.channel_href}">{$navi.channel_name}</a>
+                            </li>
+                        </vt:if>
+					  <vt:else />
                     </vt:if>
                 </vt:foreach>
             </ul>

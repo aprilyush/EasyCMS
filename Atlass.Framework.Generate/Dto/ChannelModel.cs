@@ -26,6 +26,10 @@ namespace Atlass.Framework.Generate
 		/// </summary>
 		public string channel_name { get; set; } = string.Empty;
 
+		/// <summary>
+		/// 是否是当前访问的栏目
+		/// </summary>
+		public int current { get; set; } = 0;
 		public int id { get; set; }
 		public int parent_id { get; set; }
 		public int sort_num { get; set; }

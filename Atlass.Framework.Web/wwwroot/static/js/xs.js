@@ -25,7 +25,7 @@ $('.header-menu>ul>li').hover(function(){
 	$(this).siblings(".current-menu-item").css("background-color","#fff").children().css("color","#666");
 },function(){
      $(this).removeClass('on');
-	 $(this).siblings(".current-menu-item").css("background-color","#f00").children().css("color","#fff");
+	 //$(this).siblings(".current-menu-item").css("background-color","#f00").children().css("color","#fff");
 });
   var swiper = new Swiper('#slider .swiper-container', {
         pagination: '#slider .swiper-pagination',

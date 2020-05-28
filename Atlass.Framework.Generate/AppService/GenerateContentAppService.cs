@@ -225,6 +225,7 @@ namespace Atlass.Framework.Generate
             model.channel_href = channel.channel_href;
             model.channel_template = channel.channel_template;
             model.dis_drawing = channel.dis_drawing;
+            model.current = 1;
             if (string.IsNullOrEmpty(model.channel_href))
             {
                 model.channel_href = $"/news/{channelId}";
@@ -237,7 +238,7 @@ namespace Atlass.Framework.Generate
         /// 获取栏目数据列表 必须设置首页栏目
         /// </summary>
         /// <returns></returns>
-        public List<ChannelModel> GetChannelTree()
+        public List<ChannelModel> GetChannelTree(int channleId=0)
         {
             var channels = ChannelManagerCache.GetChannelList();
             var homeId = channels.Where(s => s.channel_index == "首页").Select(s=>s.id).FirstOrDefault();
@@ -270,8 +271,13 @@ namespace Atlass.Framework.Generate
             //        s.navigation = GetNaviLocation(s.id);
             //    }
             //});
-            var list = InitChild(homeId, channels);
-
+            var list = InitChild(homeId, channels, channleId);
+            var home = new ChannelModel { id = 0, channel_href = "/index.html", channel_name = "首页" };
+            if (channleId == 0)
+            {
+                home.current = 1;
+            }
+            list.Insert(0, home);
             return list;
         }
 
@@ -281,7 +287,7 @@ namespace Atlass.Framework.Generate
         /// <param name="pid"></param>
         /// <param name="channels"></param>
         /// <returns></returns>
-        private List<ChannelModel> InitChild(int pid, List<cms_channel> channels)
+        private List<ChannelModel> InitChild(int pid, List<cms_channel> channels,int channleId)
         {
             var list = new List<ChannelModel>();
             var topChannels = channels.Where(s => s.parent_id == pid)
@@ -307,10 +313,14 @@ namespace Atlass.Framework.Generate
                     channel.channel_href = $"/news/{channel.id}";
                     channel.navigation = GetNaviLocation(channel.id);
                 }
+                if (channel.id == channleId)
+                {
+                    channel.current = 1;
+                }
                 var subChannels = channels.Where(s => s.parent_id == channel.id).ToList();
                 if (subChannels.Count > 0)
                 {
-                    var childs = InitChild(channel.id, channels);
+                    var childs = InitChild(channel.id, channels, channleId);
                     channel.sub_count = childs.Count;
                     if (channel.sub_count > 0)
                     {
