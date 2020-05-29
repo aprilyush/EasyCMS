@@ -4,7 +4,7 @@
 &emsp;&emsp;EasyCms是基于Atlass Framework实现一个产品化的项目，Atlass Framework原来是实现一个适合自己公司项目的基础开发框架。  
  &emsp;&emsp;由于本人近两年一直和本地一家公司长期合为政府部门做CMS系统以及其他后台管理系统，自认为还是比较了解这些部门需要什么样的cms管理系统，需要哪些功能，
  所以目标是实现一个适合这些部门的功能相对完善的cms系统。  
- &emsp;&emsp;比SiteServer更好用，更灵活，更方便的CMS
+ &emsp;&emsp;努力做到比SiteServer更好用，更灵活，更方便的CMS
  ## 目标客户为：
  **满足大部分企业建站需求，政府部门，事业单位使用的CMS管理系统**
 ## 技术介绍
@@ -15,6 +15,7 @@
 + 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)  
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 ## 演示地址：
+ http://cms.atlass.cn:9090/
  因项目在开发中，不再提供后台演示用户，只演示前台，用于展示模板的渲染能力，如果感兴趣，请下载源码  
  本地超级管理员 admin 123123
 ## 依赖环境
