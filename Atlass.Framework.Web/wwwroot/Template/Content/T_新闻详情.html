@@ -22,20 +22,20 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <div class="pull-left">
-                            {$:news.navigation}
+                            当前位置：{$news.navigation}
                         </div>
                         <div class="pull-right">
-                            <button class="btn btn-white btn-xs" type="button">作者：{$:news.author}</button>
-                            <button class="btn btn-white btn-xs" type="button">来源：{$:news.source}</button>
-                            <button class="btn btn-white btn-xs" type="button">发布时间：{$:news.publish_time format="yyyy-MM-dd"}</button>
+                            <button class="btn btn-white btn-xs" type="button">作者：{$news.author}</button>
+                            <button class="btn btn-white btn-xs" type="button">来源：{$news.source}</button>
+                            <button class="btn btn-white btn-xs" type="button">发布时间：{$news.publish_time format="yyyy-MM-dd"}</button>
                         </div>
                         <div class="text-center article-title">
                             <h1>
-                                {$:news.title length=50}
+                                {$news.title length=50}
                             </h1>
                         </div>
                         <div class="article-content">
-                            {$:news.content}
+                            {$news.content}
                         </div>
                         <hr>
 

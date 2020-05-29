@@ -91,6 +91,17 @@ namespace Atlass.Framework.Web.ApiControllers
                     file.CopyTo(fs);
                     fs.Flush();
                 }
+                if(action== "uploadimage")
+                {
+                    var firstFileInfo = new FileInfo(newfilename);
+                    if (firstFileInfo.Length > 200 * 1024)
+                    {
+                        string compressFileName = IdWorkerHelper.GenObjectId() + extName;
+                        string compressFile = $"{folder}/{compressFileName}";
+                        ImageUtilities.CompressImage(newfilename, compressFile, 90, 200);
+                        guidFileName = compressFileName;
+                    }
+                }
                 result.original = filename;
                 result.title = filename;
                 result.url = $"{url}/{guidFileName}";

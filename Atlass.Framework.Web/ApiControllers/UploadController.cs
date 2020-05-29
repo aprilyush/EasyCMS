@@ -57,6 +57,14 @@ namespace Atlass.Framework.Web.ApiControllers
                 file.CopyTo(fs);
                 fs.Flush();
             }
+            var firstFileInfo = new FileInfo(filename);
+            if (firstFileInfo.Length > 200 * 1024)
+            {
+                string compressFileName = IdWorkerHelper.GenObjectId() + extName;
+                string compressFile = $"{folder}/{compressFileName}";
+                ImageUtilities.CompressImage(filename, compressFile, 90, 200);
+                guidFileName = compressFileName;
+            }
             string imgurl = $"{ url}/{guidFileName}";
             result.data.Add("url", imgurl);
             return Content(result.ToJson());

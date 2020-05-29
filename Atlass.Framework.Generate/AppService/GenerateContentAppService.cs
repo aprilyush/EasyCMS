@@ -352,7 +352,7 @@ namespace Atlass.Framework.Generate
             var channel = ChannelManagerCache.GetChannel(channelId);
             if (channel != null)
             {
-                string channelHref = $"&nbsp;&nbsp;<a href='/news/{channel.id}'>{channel.channel_name}</a>";
+                string channelHref = $"<a href='/news/{channel.id}'>{channel.channel_name}</a>";
                 channelNames.Insert(0, channelHref);
                 int channelPid = channel.parent_id;
                 while (channelPid > 0)
@@ -363,7 +363,7 @@ namespace Atlass.Framework.Generate
                         string channelHref2 = "<a href='/index.html'>首页</a>";
                         if (channel.channel_index != "首页")
                         {
-                            channelHref2 = $"&nbsp;&nbsp;<a href='/news/{channel.id}'>{channel.channel_name}</a>";
+                            channelHref2 = $"<a href='/news/{channel.id}'>{channel.channel_name}</a>";
                         }
                         channelNames.Insert(0,channelHref2);
                         channelPid = channel.parent_id;

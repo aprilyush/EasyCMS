@@ -31,7 +31,7 @@ namespace Atlass.Framework.Generate
         }
 
         /// <summary>
-        /// 返回渲染后的模板文件
+        /// 返回渲染后的页面文件
         /// </summary>
         /// <param name="content"></param>
         /// <param name="template"></param>

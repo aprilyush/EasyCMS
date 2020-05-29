@@ -30,7 +30,7 @@
                 idField: 'id',
                 columns: [
                     { field: 'ck', checkbox: true },
-                    { field: 'channel_name', title: '栏目名称', align: 'left' },
+                    { field: 'channel_name', title: '栏目名称', align: 'left', formatter: renderTitle},
                     { field: 'channel_index', title: '栏目索引', align: 'center' },
                     {
                         field: 'channel_image', title: '栏目图片', align: 'center', formatter: function (v) {
@@ -74,7 +74,14 @@
             return jutils.initToolBarRow(v);
         }
 
-
+        function renderTitle(v, d) {
+            var href = '/index.html';
+            if (v != '首页') {
+                href = '/news/'+d.id;
+            }
+            return '<a href="'+ href+'" target="_blank">' + v + '</a>';
+            //return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
+        }
         function add() {
             var url = '/cms/Channel/Form?id=0';
             location.href = url;

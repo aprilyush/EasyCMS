@@ -5,13 +5,13 @@
     <div class="wrapper">
         <vt:include file="Template/include/navi.html" charset="utf-8" />
         <div class="container-fluid mini"></div>
-        <div class="text-center bg-info container-full" style="background:url({$channel.channel_image}); background-repeat-y: no-repeat; height:140px;">
+        <div class="text-center bg-info container-full" style="background:url({$channel.channel_image}); background-repeat: no-repeat; height:140px;">
         </div>
         <Section id="content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 col-sm-9 col-xs-12 content-list">
-                        <nav class="crumbs">当前位置:{$channel.navigation}</nav>
+                        <nav class="crumbs">当前位置：{$channel.navigation}</nav>
                         <vt:foreach id="contents" from="$contents" item="content" index="i" total="8">
 
                             <article class="post-27 post type-post status-publish format-standard hentry category-news">
