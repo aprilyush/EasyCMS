@@ -72,7 +72,7 @@ namespace Atlass.Framework.Generate
 		 /// <summary>
 		 /// 导航部分，首页>新闻中心
 		 /// </summary>
-		public string navigation { get; set; }
+		public string location { get; set; }
 
 		//public string url { get; set; }
 

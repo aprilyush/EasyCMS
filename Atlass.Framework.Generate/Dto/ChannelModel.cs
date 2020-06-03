@@ -59,6 +59,6 @@ namespace Atlass.Framework.Generate
 		/// <summary>
 		/// 导航
 		/// </summary>
-		public string navigation { get; set; }
+		public string location { get; set; }
 	}
 }

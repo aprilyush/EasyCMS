@@ -52,7 +52,7 @@ namespace Atlass.Framework.Generate
                 });
             if (model != null)
             {
-                model.navigation = GetNaviLocation(model.channel_id);
+                model.location = GetNaviLocation(model.channel_id);
             }
             return model;
         }
@@ -93,7 +93,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviLocation(s.channel_id);
+                s.location = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -144,7 +144,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviLocation(s.channel_id);
+                s.location = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -189,7 +189,7 @@ namespace Atlass.Framework.Generate
             }
             list.ForEach(s =>
             {
-                s.navigation = GetNaviLocation(s.channel_id);
+                s.location = GetNaviLocation(s.channel_id);
                 if (string.IsNullOrEmpty(s.content_href))
                 {
                     s.content_href = $"/news/{s.channel_id}/{s.id}";
@@ -230,7 +230,7 @@ namespace Atlass.Framework.Generate
             {
                 model.channel_href = $"/news/{channelId}";
             }
-            model.navigation = GetNaviLocation(channelId);
+            model.location = GetNaviLocation(channelId);
             return model;
 
         }
@@ -311,7 +311,7 @@ namespace Atlass.Framework.Generate
                 if (string.IsNullOrEmpty(channel.channel_href))
                 {
                     channel.channel_href = $"/news/{channel.id}";
-                    channel.navigation = GetNaviLocation(channel.id);
+                    channel.location = GetNaviLocation(channel.id);
                 }
                 if (channel.id == channleId)
                 {
