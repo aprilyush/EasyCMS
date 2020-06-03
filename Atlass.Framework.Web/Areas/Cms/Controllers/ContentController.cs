@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Generate;
@@ -65,17 +66,20 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                 }
                 
                 long contentId=_contentApp.Insert(dto);
-                GenerateContent generate = new GenerateContent();
-                generate.CreateHtml((int)contentId);
+                ChannelManagerCache.SetChannelLink(dto.channel_id, (int)contentId);
+                //生成文章
+                //GenerateContent generate = new GenerateContent();
+                //generate.CreateHtml((int)contentId);
             }
             else
             {
                 dto.update_id = dto.insert_id;
                 dto.update_time = dto.insert_time;
                 _contentApp.Update(dto);
-
-                GenerateContent generate = new GenerateContent();
-                generate.CreateHtml(dto.id);
+                
+                //生成文章
+                // GenerateContent generate = new GenerateContent();
+                //generate.CreateHtml(dto.id);
             }
 
             return Success("保存成功");

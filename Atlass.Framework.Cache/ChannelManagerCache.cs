@@ -62,6 +62,24 @@ namespace Atlass.Framework.Cache
         }
 
         /// <summary>
+        /// 设置栏目链接方式为1的栏目链接
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <param name="contentId"></param>
+        public static void SetChannelLink(int channelId, int contentId)
+        {
+            var channel = GetChannel(channelId);
+            if (channel == null)
+            {
+                return;
+            }
+            if (channel.link_type==1)
+            {
+                channel.channel_href = $"/news/{channelId}/{contentId}";
+                AddChannel(channel);
+            }
+        }
+        /// <summary>
         /// 获取栏目列表
         /// </summary>
         /// <returns></returns>

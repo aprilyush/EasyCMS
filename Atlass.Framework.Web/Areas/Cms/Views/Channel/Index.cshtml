@@ -48,7 +48,16 @@
                                 return '<span class="label label-danger">不渲染</span>';
                             }
                             return '';
-                        } },
+                        }
+                    },
+                    {
+                        field: 'link_type', title: '链接方式', align: 'center', formatter: function (v) {
+                            if (v === 0) {
+                                return '默认';
+                            }
+                            return '链接到第一篇文章';
+                        }
+                    },
                     { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
                 ],
                 treeShowField: 'channel_name',

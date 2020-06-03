@@ -167,7 +167,7 @@ namespace Atlass.Framework.AppService.Cms
                 model.ChannelName = channel.channel_name;
                 if (channel.channel_template == 0)
                 {
-                    model.ChannelTemplateName = templates.Where(s => s.template_mode <=2 && s.is_default == 1)
+                    model.ChannelTemplateName = templates.Where(s => s.template_mode == 2 && s.is_default == 1)
                         .Select(s => s.template_name).FirstOrDefault();
                 }
                 else
@@ -201,6 +201,27 @@ namespace Atlass.Framework.AppService.Cms
                         else
                         {
                             model.ContentTemplateName = templates.Where(s => s.template_mode == 3 && s.is_default == 1)
+                            .Select(s => s.template_name).FirstOrDefault();
+                        }
+                    }
+                }
+                else
+                {
+                    if (channel.channel_template == 0)
+                    {
+                        model.ChannelTemplateName = templates.Where(s => s.template_mode == 1 && s.is_default == 1)
+                            .Select(s => s.template_name).FirstOrDefault();
+                    }
+                    else
+                    {
+                        var channelTemplate = templates.Where(s => s.id == channel.channel_template).FirstOrDefault();
+                        if (channelTemplate != null)
+                        {
+                            model.ChannelTemplateName = channelTemplate.template_name;
+                        }
+                        else
+                        {
+                            model.ChannelTemplateName = templates.Where(s => s.template_mode == 1&& s.is_default == 1)
                             .Select(s => s.template_name).FirstOrDefault();
                         }
                     }

@@ -79,6 +79,11 @@ namespace Atlass.Framework.Models
 		public int dis_drawing { get; set; }
 
 
+		/// <summary>
+		/// 0-默认，1-链接到第一篇文章
+		/// </summary>
+		[JsonProperty]
+		public int link_type { get; set; }
 	}
 
 }
