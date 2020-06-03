@@ -198,6 +198,57 @@ namespace Atlass.Framework.Generate
             return list;
         }
 
+
+        /// <summary>
+        /// 栏目页面获取数据带分页
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <param name="page"></param>
+        /// <param name="psize"></param>
+        /// <returns></returns>
+        public ContentPageModel GetContentSummaryPage(int channelId, int page = 1, int psize = 10)
+        {
+            var model = new ContentPageModel();
+            var list = Sqldb.Select<cms_content>()
+              .Where(s => s.channel_id == channelId)
+              .OrderByDescending(s => s.is_top)
+              .OrderByDescending(s => s.id)
+              .Count(out long total)
+              .Page(page, psize)
+              .ToList(s => new ContentModel
+              {
+                  id = s.id,
+                  title = s.title,
+                  sub_title = s.sub_title,
+                  summary = s.summary,
+                  cover_image = s.cover_image,
+                  author = s.author,
+                  source = s.source,
+                  channel_id = s.channel_id,
+                  ip_limit = s.ip_limit,
+                  is_top = s.is_top,
+                  tags = s.tags,
+                  content_href = s.content_href,
+                  hit_count = s.hit_count,
+                  publish_time = s.insert_time,
+                  last_edit_time = s.update_time
+              });
+            if (list.Count>0)
+            {
+                list.ForEach(s =>
+                {
+                    s.location = GetNaviLocation(s.channel_id);
+                    if (string.IsNullOrEmpty(s.content_href))
+                    {
+                        s.content_href = $"/news/{s.channel_id}/{s.id}";
+                    }
+                });
+            }
+
+            model.Contents = list;
+            model.PageHtml = GetCotentPageHtml(total,psize,channelId);
+            return model;
+        }
         #endregion
 
         #region 栏目数据 栏目数据必须存在首页栏目，并且为唯一顶级栏目，这是一个约束
@@ -388,6 +439,47 @@ namespace Atlass.Framework.Generate
             }
 
             return string.Join('>', channelNames);
+        }
+
+
+        public string GetCotentPageHtml(long total,int psize,int channelId)
+        {
+            long page = total/psize;
+            if (page == 0)
+            {
+                return "";
+            }
+            if (page > 20)
+            {
+                page = 20;
+            }
+            else
+            {
+                if (total % psize > 0)
+                {
+                    page++;
+                }
+            }
+
+          var html= "<nav aria-label=\"Page navigation\">";
+            html +="<ul class=\"pagination\">";
+            html += "<li>";
+            html += "<a href =\"#\" aria-label=\"上一页\">";
+            html += " <span aria-hidden=\"true\">&laquo;</span>";
+            html += "</a>";
+            html += "</li>";
+            for(long i = 1; i <= page; i++)
+            {
+                html += $"<li><a href=\"/channel/{channelId}/{i}\">{i}</a></li>";
+            }
+            html += "<li>";
+            html += "<a href=\"#\" aria-label=\"下一页\">";
+             html += " <span aria-hidden=\"true\">&raquo;</span>";
+            html += "</a>";
+            html += " </li>";
+            html += "</ul>";
+            html += "</nav>";
+            return html;
         }
     }
 }

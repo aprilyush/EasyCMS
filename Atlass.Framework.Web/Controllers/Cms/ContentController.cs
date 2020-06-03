@@ -52,19 +52,17 @@ namespace Atlass.Framework.Web.Controllers.Cms
         /// </summary>
         /// <param name="channelId"></param>
         /// <returns></returns>
-        [Route("news/{channelId:int}")]
-        public IActionResult Channel(int channelId)
+        [Route("news/{channelId:int}"),Route("channel/{channelId:int}/{page:int?}")]
+        public IActionResult Channel(int channelId,int page=1)
         {
             GenerateChannel generateChannel = new GenerateChannel();
-            var ret = generateChannel.GenerateChannelHtml(channelId);
+            var ret = generateChannel.GenerateChannelHtml(channelId, page);
             if (!ret.genStatus)
             {
                 return Redirect("/404.html");
             }
             return Html(ret.contentHtml);
         }
-
-
         public IActionResult GenerateHome()
         {
             GenerateHome gen = new GenerateHome();

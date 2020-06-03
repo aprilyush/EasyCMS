@@ -82,6 +82,7 @@
                 sidePagination: "server",//
                 locale: "zh-CN",
                 striped: true,
+                uniqueId: 'id',
                 queryParams: function (params) {
                     var dto = {
                         limit: params.limit, //每页多少条
@@ -146,7 +147,10 @@
             //    return;
             //}
             var id = $(obj).data('id');
-            var url = '/cms/Content/Form?id=' + id + '&channelId=' + channelId;;
+            var row = $table.bootstrapTable('getRowByUniqueId', id);
+            var channel = row.channel_id;
+          
+            var url = '/cms/Content/Form?id=' + id + '&channelId=' + channel;
             parent.$.altasTab.open(
                 {
                     id: 'edit_content',

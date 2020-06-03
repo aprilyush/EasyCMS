@@ -39,7 +39,18 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
         public ActionResult Form(int id)
         {
+            int channelId = RequestHelper.GetQueryInt("channelId");
+            if (channelId > 0)
+            {
+                var channel = ChannelManagerCache.GetChannel(channelId);
+                ViewBag.ChannelName = channel.channel_name;
+            }
+            else
+            {
+                ViewBag.ChannelName = "";
+            }
             ViewBag.Id = id;
+
             return View();
         }
 

@@ -33,7 +33,7 @@ namespace Atlass.Framework.Generate
         /// <param name="content"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        public (bool genStatus,string contentHtml) GenerateChannelHtml(int channelId)
+        public (bool genStatus,string contentHtml) GenerateChannelHtml(int channelId,int page)
         {
             try
             {
@@ -73,11 +73,11 @@ namespace Atlass.Framework.Generate
                 Tag element = this.Document.GetChildTagById("contents");
                 string total = element.Attributes.GetValue("total", "8");
                 
-                var contents = _generateContentApp.GetContentSummary(channelId, 1, int.Parse(total));
+                var contents = _generateContentApp.GetContentSummaryPage(channelId, page, int.Parse(total));
                 //设置变量newsdata的值
                 this.Document.Variables.SetValue("channel", channel);
-                this.Document.Variables.SetValue("contents", contents);
-
+                this.Document.Variables.SetValue("contents", contents.Contents);
+                this.Document.Variables.SetValue("pageHtml", contents.PageHtml);
                 string renderHtml = this.Document.GetRenderText();
 
 
