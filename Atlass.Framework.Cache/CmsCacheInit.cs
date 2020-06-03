@@ -23,6 +23,14 @@ namespace Atlass.Framework.Cache
 
             channels.ForEach(s =>
             {
+                if (s.link_type == 1&&string.IsNullOrEmpty(s.channel_href))
+                {
+                    var firstId = sqlDb.Select<cms_content>().Where(a => a.channel_id == s.id).OrderByDescending(a=> a.id).First(a =>a.id);
+                    if (firstId > 0)
+                    {
+                        s.channel_href = $"/news/{s.id}/{firstId}";
+                    }
+                }
                 ChannelManagerCache.AddChannel(s);
             });
 
