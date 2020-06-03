@@ -279,7 +279,7 @@ namespace Atlass.Framework.Generate
             model.current = 1;
             if (string.IsNullOrEmpty(model.channel_href))
             {
-                model.channel_href = $"/news/{channelId}";
+                model.channel_href = $"/channel/{channelId}";
             }
             model.location = GetNaviLocation(channelId);
             return model;
@@ -361,7 +361,7 @@ namespace Atlass.Framework.Generate
             {
                 if (string.IsNullOrEmpty(channel.channel_href))
                 {
-                    channel.channel_href = $"/news/{channel.id}";
+                    channel.channel_href = $"/channel/{channel.id}";
                     channel.location = GetNaviLocation(channel.id);
                 }
                 if (channel.id == channleId)
@@ -403,7 +403,7 @@ namespace Atlass.Framework.Generate
             var channel = ChannelManagerCache.GetChannel(channelId);
             if (channel != null)
             {
-                string href = $"/news/{channel.id}";
+                string href = $"/channel/{channel.id}";
                 if (!string.IsNullOrEmpty(channel.channel_href))
                 {
                     href = channel.channel_href;
