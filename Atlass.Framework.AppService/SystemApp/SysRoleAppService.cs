@@ -109,12 +109,12 @@ namespace Atlass.Framework.AppService
         public List<ZtreeDto> GetRoleMenuTree(long roleid)
         {
             //所有菜单
-            var menu = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).Select(s => new ZtreeDto()
+            var menu = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToList(s => new ZtreeDto()
             {
                 id = s.id.ToString(),
                 name = s.menu_name,
                 pId = s.parent_id.ToString()
-            }).ToList();
+            });
 
             var func =
                 Sqldb.Select<sys_operate, sys_menu>()
@@ -131,8 +131,7 @@ namespace Atlass.Framework.AppService
             var role =
                 Sqldb.Queryable<sys_role_authorize>()
                     .Where(s => s.role_id == roleid)
-                    .Select(s => new{s.menu_id,s.menu_pid})
-                    .ToList();
+                    .ToList(s => new{s.menu_id,s.menu_pid});
 
             //判断是否有权限
             if (role.Any())

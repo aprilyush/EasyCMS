@@ -12,6 +12,8 @@ using Atlass.Framework.Core.HostService;
 using Atlass.Framework.Core.Middleware;
 using Atlass.Framework.ViewModels;
 using Autofac;
+using EasyCaching.Core;
+using EasyCaching.ResponseCaching;
 using Hangfire;
 using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
@@ -60,6 +62,11 @@ namespace Atlass.Framework.Web
                 option.Filters.Add<GlobalExceptionFilter>();
             }).AddRazorRuntimeCompilation().AddNewtonsoftJson();
 
+            services.AddEasyCaching(options =>
+            {
+                options.UseInMemory("eayscms");
+            });
+            services.AddEasyCachingResponseCaching("eayscms").AddResponseCompression();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -137,6 +144,10 @@ namespace Atlass.Framework.Web
             #endregion
             app.UseAuthorization();
             app.UseSession();
+
+            app.UseEasyCachingResponseCaching();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

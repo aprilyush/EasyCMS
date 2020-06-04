@@ -52,7 +52,8 @@ namespace Atlass.Framework.Web.Controllers.Cms
         /// </summary>
         /// <param name="channelId"></param>
         /// <returns></returns>
-        [Route("channel/{channelId:int}"),Route("channel/{channelId:int}/{page:int?}")]
+        [Route("channel/{channelId:int}/{page:int?}")]
+        [ResponseCache(Duration = 30, VaryByQueryKeys = new string[] { "channelId", "page" })]
         public IActionResult Channel(int channelId,int page=1)
         {
             GenerateChannel generateChannel = new GenerateChannel();

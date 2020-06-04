@@ -246,7 +246,7 @@ namespace Atlass.Framework.Generate
             }
 
             model.Contents = list;
-            model.PageHtml = GetCotentPageHtml(total,psize,channelId);
+            model.PageHtml = GetPageHtml(total, page,psize, channelId);
             return model;
         }
         #endregion
@@ -441,8 +441,59 @@ namespace Atlass.Framework.Generate
             return string.Join('>', channelNames);
         }
 
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="psize"></param>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        public string GetPageHtml(long total,int pageIndex,int psize, int channelId)
+        {
+            long page = total / psize;
+            if (page == 0)
+            {
+                return "";
+            }
+            if (page > 20)
+            {
+                page = 20;
+            }
+            else
+            {
+                if (total % psize > 0)
+                {
+                    page++;
+                }
+            }
 
-        public string GetCotentPageHtml(long total,int psize,int channelId)
+            var html = "<div class=\"page-nav\">";
+            html += " <a class=\"prev page-numbers\" href=\"javascript:;\">« 上一页</a>";
+            for (long i = 1; i <= page; i++)
+            {
+                if (i == pageIndex)
+                {
+                    html += $"<span class=\"page-numbers current\">{i}</span>";
+                }
+                else
+                {
+                    html += $"<a class=\"page-numbers\" href=\"/channel/{channelId}/{i}\">{i}</a>";
+                }
+               
+            }
+            html += " <a class=\"next page-numbers\" href=\"javascript:;\"> 下一页 »</a>";
+            html += "</div>";
+            return html;
+        }
+
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="psize"></param>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        public string GetPageHtml(long total,int psize,int channelId)
         {
             long page = total/psize;
             if (page == 0)

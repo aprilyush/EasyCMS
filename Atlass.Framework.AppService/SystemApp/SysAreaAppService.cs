@@ -41,7 +41,7 @@ namespace Atlass.Framework.AppService
         public List<ZtreeDto> GetProvince()
         {
             var query = Sqldb.Queryable<sys_citys>().Where(s=>s.province_code==0)
-                .Select(s => new ZtreeDto() {id = s.zipcode.ToString(), name = s.name, pId = "0"}).ToList();
+                .ToList(s => new ZtreeDto() {id = s.zipcode.ToString(), name = s.name, pId = "0"});
             return query;
         }
         public List<SysAreaTreeDto> GetAreaTree()
@@ -223,7 +223,8 @@ namespace Atlass.Framework.AppService
         public List<CitySelDto> GetCitySel()
         {
             var data = new List<CitySelDto>();
-            var list = Sqldb.Queryable<sys_citys>().OrderBy(s => s.zipcode).Select(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code }).ToList();
+            var list = Sqldb.Queryable<sys_citys>().OrderBy(s => s.zipcode)
+                .ToList(s => new CitySelDto() { Id = s.id, Name = s.name, ParentId = s.province_code });
 
             var fdata = list.Where(s => s.ParentId == 0).ToList();
 

@@ -158,11 +158,10 @@ namespace Atlass.Framework.AppService
                     .Where(s => s.menu_id == id)
                     .OrderBy(s=>s.in_table)
                     .OrderBy(s=>s.func_sort)
-                    .Select(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name,
+                    .ToList(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name,
                         icon = s.func_icon, url = s.func_url, intable = s.in_table,
                         funcSort = s.func_sort
-                    })
-                    .ToList();
+                    });
         }
         /// <summary>
         /// 模块导航
@@ -208,7 +207,7 @@ namespace Atlass.Framework.AppService
             var list = new List<RoleMenuDto>();
             if (UserCookie.IsSuper)
             {
-                list = await Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).Select(s => new RoleMenuDto()
+                list = await Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToListAsync(s => new RoleMenuDto()
                 {
                     id = s.id,
                     menu_name = s.menu_name,
@@ -217,9 +216,9 @@ namespace Atlass.Framework.AppService
                     parent_id = s.parent_id,
                     menu_type = s.menu_type,
                     menu_icon = s.menu_icon
-                }).ToListAsync();
+                });
 
-                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.func_sort).Select(m => new RoleMenuDto()
+                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.func_sort).ToListAsync(m => new RoleMenuDto()
                 {
                     id = m.id,
                     menu_name = m.func_cname,
@@ -229,7 +228,7 @@ namespace Atlass.Framework.AppService
                     menu_type = 3,
                     menu_icon = m.func_icon,
                     in_table = m.in_table
-                }).ToListAsync();
+                });
                 return (list, funcs);
             }
             else

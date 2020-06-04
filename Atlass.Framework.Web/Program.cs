@@ -19,7 +19,7 @@ namespace Atlass.Framework.Web
         {
             Log.Logger = new LoggerConfiguration()
              .MinimumLevel.Debug()
-             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)//将Microsoft前缀的日志的最小输出级别改成Information
+             .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)//将Microsoft前缀的日志的最小输出级别改成Information
              .Enrich.FromLogContext()
              .WriteTo.File(Path.Combine(@"logs", "log-.txt"),
              rollingInterval: RollingInterval.Day,

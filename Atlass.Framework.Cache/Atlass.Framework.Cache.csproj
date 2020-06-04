@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSRedisCore" Version="3.6.1" />
+    <PackageReference Include="CSRedisCore" Version="3.6.3" />
+    <PackageReference Include="EasyCaching.InMemory" Version="0.8.9" />
   </ItemGroup>
 
   <ItemGroup>

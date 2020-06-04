@@ -68,7 +68,7 @@ namespace Atlass.Framework.AppService
             if (dto.parent_id != 0)
             {
                 var dicCode =
-                    Sqldb.Queryable<sys_dictionary>().Where(s => s.id == dto.parent_id).Select(s => s.dic_code).First();
+                    Sqldb.Queryable<sys_dictionary>().Where(s => s.id == dto.parent_id).First(s => s.dic_code);
 
                 dto.dic_code = dicCode;
             }
@@ -108,12 +108,12 @@ namespace Atlass.Framework.AppService
         public List<ZtreeDto> GetDicZtree()
         {
             var data = Sqldb.Queryable<sys_dictionary>().OrderBy(s=>s.sort_num)
-                .Where(s => s.parent_id == 0).Select(s=>new ZtreeDto()
+                .Where(s => s.parent_id == 0).ToList(s=>new ZtreeDto()
             {
                 id = s.id.ToString(),
                 name = s.dic_name,
                 pId = s.parent_id.ToString()
-            }).ToList();
+            });
 
             return data;
         }

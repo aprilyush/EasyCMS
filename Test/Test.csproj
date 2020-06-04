@@ -40,11 +40,11 @@
       <HintPath>..\Atlass.Framework.Web\packages\CSRedisCore.3.6.3\lib\net45\CSRedisCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="NewLife.Core, Version=8.7.7372.40134, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Core.8.7.2020.308\lib\net46\NewLife.Core.dll</HintPath>
+    <Reference Include="NewLife.Core, Version=8.7.7456.18647, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Core.8.7.2020.601\lib\net46\NewLife.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NewLife.Redis, Version=3.6.7372.41537, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Redis.3.6.2020.308\lib\net45\NewLife.Redis.dll</HintPath>
+    <Reference Include="NewLife.Redis, Version=3.6.7456.21154, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Redis.3.6.2020.601\lib\net45\NewLife.Redis.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>

@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Models.CmsSet;
+using EasyCaching.Core;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,14 +9,16 @@ namespace Atlass.Framework.Cache
 {
     public static class SiteManagerCache
     {
-        private static cms_site Site { get; set; }
+        private static cms_site Site;
+        private static IEasyCachingProvider _provider;
         public static cms_site GetSiteInfo()
         {
-            return Site;
+            return RedisHelper.Get<cms_site>("site");
         }
-        public static void SetSiteInfo(cms_site site)
+        public static void SetSiteInfo(cms_site siteInfo)
         {
-            Site = site;
+            RedisHelper.Set("site", siteInfo);
+         
         }
     }
 }

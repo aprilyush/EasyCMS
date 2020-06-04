@@ -37,12 +37,12 @@ namespace Atlass.Framework.AppService.SystemApp
         {
             var depts = Sqldb.Queryable<sys_department>()
                .OrderBy(s => s.sort_num)
-               .Select(s => new ZtreeSelIntDto()
+               .ToList(s => new ZtreeSelIntDto()
                {
                    id = s.id,
                    pId = s.parent_id,
                    name = s.department_name
-               }).ToList();
+               });
             depts.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });
             return depts;
         }
