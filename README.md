@@ -10,10 +10,12 @@
 ## 技术介绍
 + 基于Aspnet core3.1  
 + ORM使用[FreeSql](https://github.com/dotnetcore/FreeSql),默认使用mysql数据库
-+ Redis操作使用[csredis](https://github.com/2881099/csredis)
++ [Redis](https://github.com/tporadowski/redis)操作使用[csredis](https://github.com/2881099/csredis)
++ 缓存使用[EasyCaching](https://github.com/dotnetcore/EasyCaching)
 + 后台模板使用H+，如果有赞助的话，后期买个admui替换掉。
-+ 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)  
++ 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)强大的模板引擎能够实现任何你想要的页面静态化
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
++ 其他就不列举了。。
 ## 演示地址：
  http://cms.atlass.cn:9090  
  因项目在开发中，不再提供后台演示用户，只演示前台，用于展示模板的渲染能力，如果感兴趣，请下载源码  
