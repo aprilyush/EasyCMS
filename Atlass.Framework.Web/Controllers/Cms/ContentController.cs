@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Atlass.Framework.Web.Controllers.Cms
 {
+    
     public class ContentController : CmsController
     {
 
@@ -77,6 +78,11 @@ namespace Atlass.Framework.Web.Controllers.Cms
             GenerateContentAppService genData = new GenerateContentAppService();
             var channelTree = genData.GetChannelTree();
             return Json(channelTree);
+        }
+
+        public IActionResult Visit()
+        {
+            return Content("");
         }
     }
 }

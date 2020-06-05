@@ -1,4 +1,6 @@
 ﻿using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Core.Web;
+using Atlass.Framework.Models;
 using Atlass.Framework.Models.Admin;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -35,9 +37,13 @@ namespace Atlass.Framework.Core.HostService
                 while (true)
                 {
                     List<easy_log> logs = new List<easy_log>();
-                    for (int i = 0; i < 20; i++)
+                    for (int i = 0; i < 100; i++)
                     {    //队列中取log
                         LogDto log = LogQueueInstance.GetLog();
+                        if (log == null)
+                        {
+                            break;
+                        }
                         if (log != null)
                         {
                             easy_log logModel = new easy_log();
@@ -49,12 +55,27 @@ namespace Atlass.Framework.Core.HostService
                         }
 
                     }
+                    List<cms_visit> visits = new List<cms_visit>();
 
+                    for (int i = 0; i < 100; i++)
+                    {    //队列中取log
+                        cms_visit visit = VisitQueueInstance.GetVisit();
+                        if (visit == null)
+                        {
+                            break;
+                        }
+                        visits.Add(visit);
+
+                    }
                     try
                     {
                         if (logs.Count > 0)
                         {
                             _freeSql.Insert(logs).ExecuteAffrows();
+                        }
+                        if (visits.Count > 0)
+                        {
+                            _freeSql.Insert(visits).ExecuteAffrows();
                         }
                     }
                     catch (Exception ex)

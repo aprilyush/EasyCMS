@@ -1,4 +1,5 @@
-﻿using Atlass.Framework.ViewModels.Common;
+﻿using Atlass.Framework.Models;
+using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,8 @@ namespace Atlass.Framework.Core.Web
         public HttpRequest Request();
         public string OpenId();
         public void SetOpenId(string openId, int expireSecond);
-
+       
         public string GetClientIp();
+        public cms_visit Visit();
     }
 }

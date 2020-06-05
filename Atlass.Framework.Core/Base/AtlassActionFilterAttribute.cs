@@ -16,10 +16,10 @@ namespace Atlass.Framework.Core.Base
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AtlassActionFilterAttribute: ActionFilterAttribute
     {
-        private readonly IAtlassReuqestHelper ReuqestHelper;
+        private readonly IAtlassReuqestHelper RequestHelper;
         public AtlassActionFilterAttribute(IAtlassReuqestHelper atlassReuqest)
         {
-            ReuqestHelper = atlassReuqest;
+            RequestHelper = atlassReuqest;
         }
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -36,7 +36,7 @@ namespace Atlass.Framework.Core.Base
             //{
             //    filterContext.Result = new RedirectResult("/Login/Index");
             //}
-            if (!ReuqestHelper.IsAdminLoggin())
+            if (!RequestHelper.IsAdminLoggin())
             {
                 // context.Result = new RedirectResult("/Login/Index");
                 await context.HttpContext.Response.WriteAsync("<script>top.location.href = '/Login/Index';</script>");

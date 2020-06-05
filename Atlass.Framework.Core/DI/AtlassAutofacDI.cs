@@ -25,7 +25,7 @@ namespace Atlass.Framework.Core.DI
 
 
             builder.RegisterType<AtlassActionFilterAttribute>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<WeChatActionFilterAttribute>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<IPFilterAttribute>().AsSelf().InstancePerLifetimeScope();
         }
 
     }

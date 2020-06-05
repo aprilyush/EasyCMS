@@ -1,5 +1,6 @@
 ﻿using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -261,6 +262,19 @@ namespace Atlass.Framework.Core.Web
                 }
             }
             return ip;
+        }
+
+        /// <summary>
+        /// 获取访问信息
+        /// </summary>
+        /// <returns></returns>
+        public cms_visit Visit()
+        {
+            var model =new cms_visit();
+            model.ip = GetClientIp();
+            model.visit_time = DateTime.Now;
+            model.browser= this.HttpRequest.Headers["User-Agent"];
+            return model;
         }
 
         #region cookie

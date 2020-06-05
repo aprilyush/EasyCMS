@@ -13,6 +13,7 @@ namespace Atlass.Framework.Core.Base
     /// <summary>
     /// 返回html方式1
     /// </summary>
+    [ServiceFilter(typeof(IPFilterAttribute))]
     public class CmsController: Controller
     {
 
