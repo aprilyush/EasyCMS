@@ -1,6 +1,8 @@
-﻿using Atlass.Framework.Core.Web;
+﻿using Atlass.Framework.Core.Visit;
+using Atlass.Framework.Core.Web;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -30,6 +32,11 @@ namespace Atlass.Framework.Core.Base
             var visit = RequestHelper.Visit();
             VisitQueueInstance.Add(visit);
 
+            var inWriteList = IPHelper.InWriteList(RequestHelper.GetClientIp());
+            if (!inWriteList)
+            {
+                context.Result = new RedirectResult("/404.html");
+            }
             //允许AllowAnonymous匿名访问
             var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
             if (controllerActionDescriptor != null)

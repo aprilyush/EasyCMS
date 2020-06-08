@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atlass.Framework.Core.Web
+namespace Atlass.Framework.Core
 {
     public static class VisitQueueInstance
     {

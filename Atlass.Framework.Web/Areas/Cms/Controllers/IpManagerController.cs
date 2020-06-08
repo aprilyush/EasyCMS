@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
+using Atlass.Framework.Core.Visit;
 using Atlass.Framework.Models.Cms;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
@@ -54,34 +55,27 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             dto.start_ip_val = IPHelper.IPValue(dto.start_ip);
             dto.end_ip_val = IPHelper.IPValue(dto.end_ip);
             long id = _ipManagerApp.SaveData(dto);
-            //if (id > 0)
-            //{
-            //    var model = new LimitIpDto();
-            //    model.Id = id;
-            //    model.StartIpNum = dto.start_ip_val;
-            //    model.EndIpNum = dto.end_ip_val;
-            //    if (dto.enable)
-            //    {
-            //        IPHelper.AddIpRange(model);
-            //    }
+            if (id > 0)
+            {
+                dto.id = (int)id;
+                if (dto.enable)
+                {
+                    IPHelper.AddIpRange(dto);
+                }
 
-            //}
-            //else
-            //{
-            //    var model = new LimitIpDto();
-            //    model.Id = dto.id;
-            //    model.StartIpNum = dto.start_ip_val;
-            //    model.EndIpNum = dto.end_ip_val;
-            //    if (dto.enable)
-            //    {
-            //        IPHelper.UpdateIpRange(model);
-            //    }
-            //    else
-            //    {
-            //        IPHelper.RemoveIpRange(dto.id);
-            //    }
+            }
+            else
+            {
+                if (dto.enable)
+                {
+                    IPHelper.AddIpRange(dto);
+                }
+                else
+                {
+                    IPHelper.RemoveIpRange(dto.id);
+                }
 
-            //}
+            }
             return Success("保存成功");
 
         }
