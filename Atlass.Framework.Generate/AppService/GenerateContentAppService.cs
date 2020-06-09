@@ -466,9 +466,18 @@ namespace Atlass.Framework.Generate
                     page++;
                 }
             }
-
+            int lastPage = pageIndex - 1;
+            int nextPage = pageIndex + 1;
+            if (lastPage < 1)
+            {
+                lastPage = 1;
+            }
+            if (nextPage > page)
+            {
+                nextPage = (int)page;
+            }
             var html = "<div class=\"page-nav\">";
-            html += " <a class=\"prev page-numbers\" href=\"javascript:;\">« 上一页</a>";
+            html += $"<a class=\"prev page-numbers\" href=\"/channel/{channelId}/{lastPage}\">« 上一页</a>";
             for (long i = 1; i <= page; i++)
             {
                 if (i == pageIndex)
@@ -481,7 +490,7 @@ namespace Atlass.Framework.Generate
                 }
                
             }
-            html += " <a class=\"next page-numbers\" href=\"javascript:;\"> 下一页 »</a>";
+            html += $"<a class=\"next page-numbers\" href=\"/channel/{channelId}/{nextPage}\"> 下一页 »</a>";
             html += "</div>";
             return html;
         }
