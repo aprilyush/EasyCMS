@@ -217,10 +217,5 @@ namespace Atlass.Framework.Common
             return minTime.AddSeconds(i);
         }
         #endregion
-
-        public static  DateTime GetMinDateTime()
-        {
-            return new DateTime(1900,1,1);
-        }
     }
 }

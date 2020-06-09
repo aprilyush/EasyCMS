@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div id="toolbar" class="btn-group">
+
+            </div>
+            <table id="table"></table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/work/notice/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                method: 'get',
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                queryParams: function (params) {
+                    var params2 = {
+
+                        limit: params.limit, //每页多少条
+                        offset: params.offset, //从第几条开始读(默认就好)
+                        //ntitle: $("#ntitle").val(),
+                    };
+                    return params2;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: 'n_title', title: '主题', align: 'left'
+                    },
+                    { field: 'n_time', title: '截止时间', align: 'center' },
+                    { field: 'nick_name', title: '发件人', align: 'center' },
+                    { field: 'received_count', title: '已签收', align: 'center' },
+                    { field: 'unreceived_count', title: '待签收', align: 'center' },
+                    {
+                        field: 'is_check', title: '签收状态', align: 'center', formatter: function (v) {
+                            if (v == 1) {
+                                return '<span class="label badge-primary">已签收</span>';
+                            }
+                            return '<span class="label badge-danger">未签收</span>';
+                        }
+                    },
+                    { field: 'insert_time', title: '发布时间', align: 'center' },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: renderOperation
+                    }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOperation(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function add() {
+            location.href = '/work/notice/form?id=0';
+        }
+
+        function edit(obj) {
+            var id = $(obj).data('id');
+            location.href = '/work/notice/form?id=' + id;
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/work/notice/DeleteById',
+                        { id: id },
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+        function batchDel() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length === 0) {
+                jutils.alert("请选择需要删除的数据行");
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/cms/ipmanager/DeleteByIds',
+                        { ids: ids.join() },
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+
+    </script>
+}
+

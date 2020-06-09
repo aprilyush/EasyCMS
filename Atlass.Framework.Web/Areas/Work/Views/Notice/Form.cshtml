@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <h3 class="m-t-none m-b">会议通知</h3>
+            <form class="form form-horizontal" id="form" autocomplete="off">
+                <input type="hidden" name="id" id="id" value="0">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">标题：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="n_title" id="n_title" value="" class="form-control" data-rule="required;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">参会部门：</label>
+                    <div class="col-sm-8" id="deptDiv">
+                        <textarea id="parentDept" style="width:300px;height:100px;overflow:hidden;" textLabel="jasontext" type="text" readonly></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">截止日期：</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="n_time" id="n_time" value="" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:200px;" data-rule="required;" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label required">内容：</label>
+                    <div class="col-sm-8">
+                        <textarea id="n_content" name="n_content" style="height:600px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="footerbar form-group">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">保存内容</button>
+                        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/plugins/ueditor/ueditor.config.js"></script>
+    <script src="~/plugins/ueditor/ueditor.all.js"></script>
+    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script src="~/plugins/selectTree/MultipleTreeSelect.js"></script>
+    <script>
+        var ue,deptSelectedIds=[];
+        $(function () {
+            var id = jutils.getQueryParam("id");
+            $("#id").val(id);
+
+            $('#form').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+
+                    if (deptSelectedIds.length === 0) {
+                        layer.alert('请选择参会部门');
+                        return;
+                    }
+                    //2020-04-21 00:00:00
+                    var ntime = $('#n_time').val();
+                    if (ntime.substr(11, 2) == '00') {
+                        layer.alert('请选择会议当日具体时间');
+                        return;
+                    }
+                    var subModel = {
+                        id: $('#id').val(),
+                        n_title: $('#n_title').val(),
+                        n_time: $('#n_time').val(),
+                        n_content: ue.getContent(),
+                        deptIds: deptSelectedIds.join()
+                    };
+                    jutils.ajaxPost("/work/notice/Save", subModel, function (res) {
+                        if (res.status) {
+                            jutils.success("添加成功");
+                            cancel();
+                        } else {
+                            layer.alert(res.message);
+                        }
+                    })
+                 
+                }
+            });
+
+            ue = UE.getEditor('n_content');
+            loadData();
+        });
+
+
+        function loadData() {
+            var id = $("#id").val();
+            jutils.ajaxGet('/work/notice/getmodel', { id: id }, function (res) {
+                if (id !== '0') {
+                    var model = res.data.model;
+                    $('#form').initFormData(model);
+                    $('#parentDept').attr('checks', model.dept_ids);
+                    ue.ready(function () {
+                        ue.setContent(model.n_content);
+                    })
+                }
+
+                initSelectTree(res.data.depts);
+            });
+
+
+
+
+        }
+
+        function initSelectTree(treeNodes) {
+            var defaults = {
+                zNodes: treeNodes,
+                height: 333,  // 默认自定义下拉框高度
+                callback: {
+                    onCheck: zTreeOnCheck
+                },
+            };
+
+            deptTree=$("#parentDept").drawMultipleTree(defaults);
+        }
+        function zTreeOnCheck(treeNodes) {
+            console.log(treeNodes);
+            var ids = [];
+            for (var i = 0; i < treeNodes.length; i++) {
+                ids.push(treeNodes[i].id);
+            }
+            deptSelectedIds = ids;
+        };
+        function cancel() {
+            jutils.back();
+        }
+    </script>
+}
+
