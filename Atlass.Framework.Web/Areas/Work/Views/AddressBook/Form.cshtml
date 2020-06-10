@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label required">姓名：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="n_title" id="n_title" value="" class="form-control" data-rule="required;" />
+                        <input type="text" name="real_name" id="real_name" value="" class="form-control" data-rule="required;" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -89,12 +89,9 @@
                 timely: 2,
                 theme: "yellow_right",
                 valid: function (form) {
-                    jutils.ajaxPost("/work/addressbook/Save", subModel, function (res) {
+                    jutils.ajaxPost("/work/addressbook/Save", $(form).serialize(), function (res) {
                         if (res.status) {
-                            jutils.success("添加成功");
                             cancel();
-                        } else {
-                            layer.alert(res.message);
                         }
                     })
 
@@ -110,7 +107,7 @@
                 if (id !== '0') {
                     var model = res.data.model;
                     $('#form').initFormData(model);
-                    $('#parentDept').attr('checks', model.dept_ids);
+                    $('#parentDept').attr('checks', model.dept_id);
                 }
 
                 initSelectTree(res.data.depts);
