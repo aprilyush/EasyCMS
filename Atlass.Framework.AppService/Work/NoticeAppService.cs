@@ -86,17 +86,36 @@ namespace Atlass.Framework.AppService.Work
             var edeptIds = deptIds.Split(',').StrToIntArray();
             dto.total_depts = edeptIds.Count();
             var depts = Sqldb.Queryable<sys_department>().Where(s => edeptIds.Contains(s.id)).ToList();
+            
+            if (dto.id == 0)
+            {
+                dto.insert_time = DateTime.Now;
+                //dto.n_time = dto.insert_time.ToString("yyyy-MM-dd");
+                
+                long id= Sqldb.Insert(dto).ExecuteIdentity();
+                dto.id = (int)id;
+            }
+            else
+            {
+                var notice = Sqldb.Queryable<work_notice>().Where(s => s.id == dto.id).First();
+                if (notice == null)
+                {
+                    return;
+                }
+                Sqldb.Delete<work_notice_reply>().Where(s => s.notice_id == dto.id).ExecuteAffrows();
+                Sqldb.Update<work_notice>().SetSource(dto).IgnoreColumns(s => new { s.insert_time }).ExecuteAffrows();
+            }
             var list = new List<work_notice_reply>();
             if (depts.Count > 0)
             {
-                
+
                 foreach (var dept in depts)
                 {
-                    
+
                     var model = new work_notice_reply();
                     model.notice_id = dto.id;
-                    model.user_id = 0;
-                    model.nick_name = user.RealName;
+                    model.user_id =0;
+                    model.nick_name ="";
                     model.dept_id = dept.id;
                     model.dept_name = dept.department_name;
                     model.reply_status = 0;
@@ -113,31 +132,6 @@ namespace Atlass.Framework.AppService.Work
                     Sqldb.Insert(list).ExecuteAffrows();
                 }
             }
-            if (dto.id == 0)
-            {
-                dto.insert_time = DateTime.Now;
-                //dto.n_time = dto.insert_time.ToString("yyyy-MM-dd");
-                
-                    long id= Sqldb.Insert(dto).ExecuteIdentity();
-                dto.id = (int)id;
-              
-               
-            }
-            else
-            {
-                var notice = Sqldb.Queryable<work_notice>().Where(s => s.id == dto.id).First();
-                if (notice == null)
-                {
-                    return;
-                }
-                Sqldb.Delete<work_notice_reply>().Where(s => s.notice_id == dto.id).ExecuteAffrows();
-                if (list.Count > 0)
-                {
-                    Sqldb.Insert(list).ExecuteAffrows();
-                }
-
-                Sqldb.Update<work_notice>().SetSource(dto).IgnoreColumns(s => new { s.insert_time }).ExecuteAffrows();
-            }
         }
 
         /// <summary>
@@ -146,16 +140,17 @@ namespace Atlass.Framework.AppService.Work
         /// <param name="noticeId"></param>
         /// <param name="adminid"></param>
         /// <returns></returns>
-        public bool Delete(int noticeId, LoginUserDto user)
+        public bool Delete(string Ids, LoginUserDto user)
         {
-         
-            var notice = Sqldb.Select<work_notice>().Where(s => s.id == noticeId).First(s => s.insert_id);
-            if (notice != user.Id)
+            var noticeIds = Ids.Split(',').StrToIntArray();
+            var notices = Sqldb.Select<work_notice>()
+                .Where(s => noticeIds.Contains(s.id)&&s.insert_id==user.Id).ToList(s => s.id);
+            if (notices.Count==0)
             {
                 return false;
             }
-            Sqldb.Delete<work_notice>().Where(s => s.id == noticeId).ExecuteAffrows();
-            Sqldb.Delete<work_notice_reply>().Where(s => s.notice_id == noticeId).ExecuteAffrows();
+            Sqldb.Delete<work_notice>().Where(s => notices.Contains(s.id)).ExecuteAffrows();
+            Sqldb.Delete<work_notice_reply>().Where(s => notices.Contains(s.notice_id)).ExecuteAffrows();
             return true;
         }
 

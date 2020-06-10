@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h3 class="m-t-none m-b">会议通知</h3>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <form class="form form-horizontal" id="form" autocomplete="off">
+                        <input type="hidden" name="id" id="id" value="0">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">会议标题：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="n_title" id="n_title" value="" class="form-control" data-rule="required;" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">截止时间：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="n_time" id="n_time" value="" class="form-control" data-rule="required;" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">已签收：</label>
+                            <div class="col-sm-4" style="padding-top: 7px;">
+                                <span class="label badge-primary" id="received_count">0</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">未签收：</label>
+                            <div class="col-sm-4" style="padding-top: 7px;">
+                                <span class="label badge-danger" id="unreceived_count">0</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">签收状态：</label>
+                            <div class="col-sm-4" id="leaderDiv" style="padding-top: 7px;">
+                                <span class="label badge-danger">未签收</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required">会议内容：</label>
+                            <div class="col-sm-8" id="n_content" style="padding-top: 10px;">
+
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <button class="btn btn-primary" type="button" onclick="replyNotice()" id="reply" style="display:none;">签收</button>
+                                <button class="btn btn-white" type="button" onclick="cancel()">返回</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-5">
+                    <table id="table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+@section scripts{ 
+ <script>
+
+     $(function () {
+         var id = jutils.getQueryParam("id");
+         $("#id").val(id);
+
+         loadData();
+         loadGrid();
+     });
+
+
+     function loadData() {
+         var id = $("#id").val();
+         if (id !== '0') {
+             jutils.ajaxGet('/work/notice/GetDetailModel', { id: id }, function (res) {
+                 var model = res.data.model;
+
+                 $('#n_title').val(model.n_title);
+                 $('#n_time').val(model.n_time);
+                 $('#n_content').html(model.n_content);
+
+                 if (model.is_check == 1) {
+                     $('#leaderDiv').html('<span class="label badge-primary">已签收</span>');
+                 } else {
+                     $('#reply').show();
+                     $('#leaderDiv').html('<span class="label badge-danger">未签收</span>');
+                 }
+
+                 $('#received_count').text(model.received_count);
+                 $('#unreceived_count').text(model.unreceived_count);
+             });
+
+         }
+
+
+
+     }
+
+     function loadGrid() {
+         $table = $("#table").bootstrapTable({
+             url: '/work/notice/GetReplyList',
+             toolbar: '#toolbar',
+             pagination: true,
+             method: 'Get',
+             height: $(window).height() - 50,
+             pageSize: 15,
+             pageList: [5, 10, 15, 20],
+             showColumns: true,
+             showRefresh: true,
+             clickToSelect: true,
+             sidePagination: "server",
+             locale: "zh-CN",
+             striped: true,
+             queryParams: function (params) {
+                 var params2 = {
+
+                     limit: params.limit, //每页多少条
+                     offset: params.offset, //从第几条开始读(默认就好)
+                     noticeId: $("#id").val(),
+                 };
+                 return params2;
+             },
+             columns: [
+                 {
+                     field: 'dept_name', title: '参会部门', align: 'left'
+                 },
+                 {
+                     field: 'reply_status', title: '签收状态', align: 'left', formatter: function (v) {
+                         if (v === 1) {
+                             return '<span class="label label-primary">已签收</span>';
+                         }
+                         return '<span class="label label-danger">未签收</span>';
+                     }
+                 },
+                 {
+                     field: 'nick_name', title: '签收人', align: 'left'
+                 },
+                 {
+                     field: 'reply_time', title: '签收时间', align: 'center', formatter: function (v) {
+                         if (v === '1900-01-01 00:00:00') {
+                             return '-';
+                         }
+                         return v;
+                     }
+                 }
+             ]
+
+         });
+
+     }
+
+     function replyNotice() {
+         jutils.confirm('确认签收吗', function () {
+             jutils.ajaxGet('/api/notice/Reply', { noticeId: $("#id").val() }, function (res) {
+                 if (!res.status) {
+
+                     layer.alert(res.message);
+                     return;
+                 }
+                 $table.bootstrapTable('refresh');
+                 loadData();
+             });
+         });
+     }
+     function cancel() {
+         jutils.back();
+     }
+ </script>
+}
+
+

@@ -92,13 +92,19 @@
             var id = $(obj).data('id');
             jutils.confirm('确认删除吗',
                 function () {
-                    jutils.ajaxGet('/work/notice/DeleteById',
-                        { id: id },
+                    jutils.ajaxGet('/work/notice/DeleteByIds',
+                        { ids: id },
                         function () {
                             $table.bootstrapTable('refresh');
                         });
                 });
         }
+
+        function viewDetail(obj) {
+            var id = $(obj).data('id');
+            location.href = '/work/notice/detail?id=' + id;
+        }
+
 
         function batchDel() {
             var rows = $table.bootstrapTable('getSelections');
@@ -111,7 +117,7 @@
             }
             jutils.confirm('确认删除吗',
                 function () {
-                    jutils.ajaxGet('/cms/ipmanager/DeleteByIds',
+                    jutils.ajaxGet('/work/notice/DeleteByIds',
                         { ids: ids.join() },
                         function () {
                             $table.bootstrapTable('refresh');

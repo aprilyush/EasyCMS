@@ -82,16 +82,68 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         }
         
         [HttpGet]
-        public IActionResult DeleteById(int id)
+        public IActionResult DeleteByIds(string ids)
         {
             var user = RequestHelper.AdminInfo();
-            bool ret = _noticeApp.Delete(id, user);
+            bool ret = _noticeApp.Delete(ids, user);
             if (!ret)
             {
                 return Error("删除失败");
             }
 
             return Success("删除成功");
+        }
+
+        /// <summary>
+        /// 详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetDetailModel(int id)
+        {
+            var result = new ResultAdaptDto();
+
+            var user = RequestHelper.AdminInfo();
+            var model = _noticeApp.GetModel(id, user);
+            result.data.Add("model", model);
+            return Data(result);
+        }
+
+        /// <summary>
+        /// 回复列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetReplyList(BootstrapGridDto param)
+        {
+            var noticeId = RequestHelper.GetQueryInt("noticeId");
+            var data=_noticeApp.GetReplyList(param, noticeId);
+            return Data(data);
+        }
+
+        /// <summary>
+        /// 签收
+        /// </summary>
+        /// <param name="noticeId"></param>
+        /// <returns></returns>
+        public IActionResult Reply(int noticeId)
+        {
+            var user = RequestHelper.AdminInfo();
+            var ret=_noticeApp.Reply(noticeId, user);
+            if (!ret)
+            {
+                return Error("超过截止日期，无法签收");
+            }
+            return Success("已签收");
         }
     }
 }
