@@ -524,7 +524,7 @@ jutils.initToolBarRole = function (id, extBtn) {
     extBtn = extBtn || [];
     var iframeId = self.frameElement.getAttribute('data-id');
     if (iframeId) {
-        var jsonstr = locache.get('role_funcs');
+        var jsonstr = localStorage.getItem('role_funcs');
         var funcs = $.parseJSON(jsonstr);//JSON.parse(jsonstr);
         //console.log(funcs);
         if (funcs.length > 0) {
@@ -553,7 +553,7 @@ jutils.initToolBarRow = function (dataid) {
     var iframeId = self.frameElement.getAttribute('data-id');
     if (iframeId) {
 
-        var jsonstr = locache.get('role_funcs');
+        var jsonstr = localStorage.getItem('role_funcs');
         var funcs = JSON.parse(jsonstr);
         if (funcs.length > 0) {
             var menus = funcs.filter(function (currentValue, index, arr) {

@@ -17,9 +17,8 @@ $(function () {
                 clients.menu = res.data.menu;
                 initMenuList(clients.menu);
                 $('#side-menu').metisMenu();
-                var expressIn = 8 * 60 * 60;
                 var funcs = JSON.stringify(res.data.funcs);
-                locache.set("role_funcs", funcs, expressIn);
+                localStorage.setItem("role_funcs", funcs);
             } else {
                 clients.user.id = '0';
             }

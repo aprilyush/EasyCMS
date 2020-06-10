@@ -395,9 +395,4 @@
     <None Include="wwwroot\static\js\xs.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Work\Data\" />
-    <Folder Include="Areas\Work\Models\" />
-  </ItemGroup>
-
 </Project>
