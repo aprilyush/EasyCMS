@@ -6,7 +6,7 @@ using Atlass.Framework.AppService.CmsSet;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
-using Atlass.Framework.Models.CmsSet;
+using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

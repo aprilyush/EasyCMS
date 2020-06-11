@@ -1,6 +1,5 @@
 ﻿using Atlass.Framework.DbContext;
 using Atlass.Framework.Models;
-using Atlass.Framework.Models.CmsSet;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,6 +43,13 @@ namespace Atlass.Framework.Cache
                 site.site_logo = "/static/images/logo.png";
             }
             SiteManagerCache.SetSiteInfo(site);
+            //上传设置
+            var uploadSet = sqlDb.Select<cms_upload_set>().OrderBy(s => s.id).First();
+            if (uploadSet == null)
+            {
+                uploadSet = new cms_upload_set();
+            }
+            SiteManagerCache.SetUploadInfo(uploadSet);
         }
     }
 }

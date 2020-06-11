@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <ul class="nav nav-tabs">
+                <li class="">
+                    <a href="/BasicData/Site/Index">网站设置</a>
+                </li>
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">上传设置</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <form class="form form-horizontal" id="myForm">
+                    <div id="tab-1" class="tab-pane active">
+                        <input type="hidden" name="id" id="id" value="">
+                        <div class="ibox">
+                            <div class="ibox-title">图片设置</div>
+                            <div class="ibox-content">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label required">水印功能：</label>
+                                    <div class="col-sm-5">
+                                        <div class="radio radio-success radio-inline">
+                                            <input type="radio" id="open_watermark" value="1" name="open_watermark">
+                                            <label for="open_watermark">开启</label>
+                                        </div>
+                                        <div class="radio radio-success radio-inline">
+                                            <input type="radio" id="open_watermark2" value="0" name="open_watermark" checked>
+                                            <label for="open_watermark2">关闭</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label required">水印类型：</label>
+                                    <div class="col-sm-5">
+                                        <div class="radio radio-success radio-inline">
+                                            <input type="radio" id="watermark_type" value="0" name="watermark_type">
+                                            <label for="watermark_type">文字</label>
+                                        </div>
+                                        <div class="radio radio-success radio-inline">
+                                            <input type="radio" id="watermark_type2" value="1" name="watermark_type" checked>
+                                            <label for="watermark_type2">图片</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">水印条件：</label>
+                                    <div class="col-sm-5">
+                                        <p><input type="number" name="image_width" id="image_width" value="" class="form-control" style="width:150px;">图片宽度 单位像素(px)</p>
+                                        <p><input type="number" name="image_height" id="image_height" value="" class="form-control" style="width:150px;">图片高度 单位像素(px)</p>
+                                        提示：图片宽度和高度至少要达到以上像素才能添加水印
+                                    </div>
+                                </div>
+
+                                <div id="waterImageDiv">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">水印图片：</label>
+                                        <div class="col-sm-5">
+                                            <div class="cupload-upload-box" id="logo_uploader">
+                                                <span class="cupload-upload-btn">+</span>
+                                            </div>
+                                            <ul class="cupload-image-boxs" id="logo">
+                                            </ul>
+                                            <input type="hidden" name="watermark_image" id="watermark_image" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">水印透明度(0-100)：</label>
+                                        <div class="col-sm-5">
+                                            <input type="number" name="image_opacity" id="watermark_image" value="70" class="form-control" min="1" max="100" style="width:200px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">水印质量(0-100)：</label>
+                                        <div class="col-sm-5">
+                                            <input type="number" name="image_quality" id="image_quality" value="70" class="form-control" min="1" max="100" style="width: 200px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="waterWordDiv" style="display:none;">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">水印文字：</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="watermark_word" id="watermark_word" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">字体大小：</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="font_size" id="font_size" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">文字颜色：</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="font_color" id="font_color" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox">
+                            <div class="ibox-title">附件设置</div>
+                            <div class="ibox-content">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label required">允许上传的图片类型：</label>
+                                    <div class="col-sm-5">
+                                        <textarea rows="3" cols="100" id="image_extname" name="image_extname"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">允许上传的附件类型：</label>
+                                    <div class="col-sm-5">
+                                        <textarea rows="3" cols="100" id="attache_extname" name="attache_extname"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">允许多媒体文件类型：</label>
+                                    <div class="col-sm-5">
+                                        <textarea rows="3" cols="100" id="media_extname" name="media_extname"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">附件上传大小：</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" name="max_file_size" id="max_file_size" value="20" min="1" class="form-control" style="width: 200px;">MB
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footerbar">
+                        <div class="col-sm-12 col-sm-offset-3">
+                            <button class="btn btn-primary" type="submit">保存内容</button>
+                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@section scripts{
+    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script>
+        var editor;
+        $(function () {
+
+            $('input[name=watermark_type]').on('change', function () {
+                var v = $(this).val();
+                if (v == 0) {
+                    $('#waterImageDiv').hide();
+                    $('#waterWordDiv').show();
+                } else {
+                    $('#waterWordDiv').hide();
+                    $('#waterImageDiv').show();
+                }
+            });
+            $('#myForm').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/BasicData/UploadSet/Save', $(form).serialize(),
+                        function (res) {
+
+                        });
+                }
+            });
+
+            loadData();
+            initUpload();
+        });
+        function loadData() {
+            var id = jutils.getQueryParam("id");
+            jutils.ajaxGet('/BasicData/UploadSet/getmodel', null, function (res) {
+                if (res.status) {
+                    var model = res.data.model
+                    $('#myForm').initFormData(model);
+                    initLogoImage(model.watermark_image);
+                }
+            });
+
+        }
+
+
+        function initUpload() {
+            new verUpload({
+                files: "#logo_uploader",
+                name: "files",
+                load_list: true,
+                method: '/api/upload/UploadLogo?imageType=1',
+                success: function (d) {
+                    var res = JSON.parse(d);
+                    if (res.status) {
+
+                        initLogoImage(res.data.url);
+
+                    } else {
+                        jutils.error("图片上传失败");
+                    }
+                    $('.uploadFilesBox').remove();
+                },
+                fail: function (d) {
+                    // $('#sale_image').val('');
+                    jutils.error("图片上传失败!");
+                },
+                size: 1024 * 4,
+                ext: ['jpg', 'jpeg', 'png', 'gif']
+            });
+
+        }
+
+        function initLogoImage(imgUrl) {
+
+            $('#site_logo').val(imgUrl);
+            var imgHtml = '<li class="cupload-image-box" style="position:relative;width:320px;">';
+            imgHtml += '<img class="cupload-image-preview" style="width:300px;height:100px;" src = "' + imgUrl + '" />';
+            imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
+            imgHtml += '</li>';
+            $('#logo_uploader').hide();
+            $('#logo').append(imgHtml);
+            $('#logo').show();
+
+        }
+
+        function deletImage(obj) {
+
+            $imgli = $(obj).parent('li');
+            jutils.confirm('确认删除图片吗?', function () {
+                $('#site_logo').val('');
+                $imgli.remove();
+                $('#logo').hide();
+                $('#logo_uploader').show();
+            })
+        }
+        function cancel() {
+
+        }
+    </script>
+}
+
+
+
