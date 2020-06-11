@@ -44,6 +44,7 @@ namespace Atlass.Framework.Web
                             .UseKestrel((context, serverOptions) =>
                             {
                                 serverOptions.AllowSynchronousIO = true;
+                                serverOptions.Limits.MaxRequestBodySize = 2000*1024*1024;
                                 //serverOptions.ListenAnyIP(context.Configuration.GetValue<int>("HostingPort"));
                             })
                             //.useii((context, serverOptions) =>

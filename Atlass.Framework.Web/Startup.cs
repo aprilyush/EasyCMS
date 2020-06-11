@@ -19,6 +19,7 @@ using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -72,6 +73,12 @@ namespace Atlass.Framework.Web
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            //设置大文件上传
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 1024 * 1024 * 2000;
+                options.MultipartHeadersCountLimit = 10;
             });
             //services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //如果使用IIS进程内承载模型

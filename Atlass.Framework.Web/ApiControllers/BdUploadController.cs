@@ -73,7 +73,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 //uploadimage
                 string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
                 var uploadSet = SiteManagerCache.GetUploadInfo();
-                if (action == "uploadfile") {
+                if (action == "uploadimage") {
                     var imageExt = uploadSet.image_extname.Split(',');
                     if (!imageExt.Contains(extName))
                     {

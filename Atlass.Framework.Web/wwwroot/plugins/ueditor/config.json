@@ -82,7 +82,7 @@
   "filePathFormat": "upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
   //"fileUrlPrefix": "/ueditor/net/", /* 文件访问路径前缀 */
   "fileUrlPrefix": "../..", /* 文件访问路径前缀 */
-  "fileMaxSize": 102400000,
+  "fileMaxSize": 2147483648,
   //51200000, /* 上传大小限制，单位B，默认50MB */
   "fileAllowFiles": [
     ".png",
