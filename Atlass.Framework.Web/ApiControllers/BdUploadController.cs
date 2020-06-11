@@ -10,6 +10,7 @@ using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Atlass.Framework.Core.Web;
+using Atlass.Framework.Cache;
 
 namespace Atlass.Framework.Web.ApiControllers
 {
@@ -65,11 +66,56 @@ namespace Atlass.Framework.Web.ApiControllers
                     result.error = "请选择文件";
                     return Content(result.ToJson());
                 }
+                var file = files[0];
+                var filename = file.FileName;
+                int index = filename.LastIndexOf('.');
+                string extName = filename.Substring(index);
                 //uploadimage
                 string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
-                if(action== "uploadfile")
+                var uploadSet = SiteManagerCache.GetUploadInfo();
+                if (action == "uploadfile") {
+                    var imageExt = uploadSet.image_extname.Split(',');
+                    if (!imageExt.Contains(extName))
+                    {
+                        result.state = "FAIL";
+                        result.error = $"禁止上传图片类型:{extName}";
+                        return Content(result.ToJson());
+                    }
+
+                }else if (action== "uploadfile")
                 {
+                    var fileExt = uploadSet.attache_extname.Split(',');
+                    if (!fileExt.Contains(extName))
+                    {
+                        result.state = "FAIL";
+                        result.error = $"禁止上传附件类型:{extName}";
+                        return Content(result.ToJson());
+                    }
+
+                    if (file.Length > (uploadSet.max_file_size * 1024 * 1024))
+                    {
+                        result.state = "FAIL";
+                        result.error = $"上传附件超过{uploadSet.max_file_size}MB限制,禁止上传";
+                        return Content(result.ToJson());
+                    }
                     url = $"/upfiles/attachments/{DateTime.Now.ToString("yyyyMMdd")}";
+                }
+                else if(action=="uploadvideo"){
+
+                    var mediaExt = uploadSet.media_extname.Split(',');
+                    if (!mediaExt.Contains(extName))
+                    {
+                        result.state = "FAIL";
+                        result.error = $"禁止上传视频类型:{extName}";
+                        return Content(result.ToJson());
+                    }
+                    if (file.Length > (uploadSet.max_file_size * 1024 * 1024))
+                    {
+                        result.state = "FAIL";
+                        result.error = $"上传视频超过{uploadSet.max_file_size}MB限制,禁止上传";
+                        return Content(result.ToJson());
+                    }
+                    url = $"/upfiles/videos/{DateTime.Now.ToString("yyyyMMdd")}";
                 }
                 var folder = GlobalParamsDto.WebRoot + url;
 
@@ -77,10 +123,8 @@ namespace Atlass.Framework.Web.ApiControllers
                 {
                     Directory.CreateDirectory(folder);
                 }
-                var file = files[0];
-                var filename = file.FileName;
-                int index = filename.LastIndexOf('.');
-                string extName = filename.Substring(index);
+                
+
                 string guidstr = IdWorkerHelper.GenObjectId();
                 string guidFileName = guidstr + extName;
                 //这个hostingEnv.WebRootPath就是要存的地址可以改下

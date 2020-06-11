@@ -71,6 +71,6 @@ namespace Atlass.Framework.Models
         /// <summary>
         /// 文件最大大小
         /// </summary>
-        public int max_file_size { get; set; } = 10;
+        public long max_file_size { get; set; } = 10;
     }
 }

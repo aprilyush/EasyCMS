@@ -4,6 +4,16 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<link href="~/plugins/colorpick/colpick.css" rel="stylesheet" />
+<style>
+    #font_color {
+        margin: 0;
+        padding: 0;
+        width: 70px;
+        border-right: 40px solid green;
+        line-height: 20px;
+    }
+</style>
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="ibox">
         <div class="ibox-content">
@@ -86,19 +96,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">水印文字：</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="watermark_word" id="watermark_word" value="" class="form-control">
+                                            <input type="text" name="watermark_word" id="watermark_word" value="" class="form-control" style="width: 200px;">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">字体大小：</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="font_size" id="font_size" value="" class="form-control">
+                                            <input type="number" name="font_size" id="font_size" value="" class="form-control" style="width: 200px;">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">文字颜色：</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="font_color" id="font_color" value="" class="form-control">
+                                            <input type="text" name="font_color" id="font_color" value="" class="form-control" style="width: 200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -147,6 +157,7 @@
 </div>
 </div>
 @section scripts{
+    <script src="~/plugins/colorpick/colpick.js"></script>
     <script src="/plugins/verUpload/verUpload.js"></script>
     <script>
         var editor;
@@ -162,6 +173,24 @@
                     $('#waterImageDiv').show();
                 }
             });
+
+            // 颜色选择
+            $('#font_color').colpick({
+                flat: false,
+                layout: 'rgbhex',
+                submit: 0,
+                colorScheme: 'light',
+                color: $('#mark_txt_color').val(),
+                onChange: function (hsb, hex, rgb, el, bySetColor) {
+                    $(el).css('border-color', '#' + hex);
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) $(el).val('#' + hex);
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor('#' + this.value);
+            });
+
+
             $('#myForm').validator({
                 stopOnError: false,
                 timely: 2,
@@ -184,6 +213,13 @@
                 if (res.status) {
                     var model = res.data.model
                     $('#myForm').initFormData(model);
+                    if (model.watermark_type == 0){
+                        $('#waterImageDiv').hide();
+                        $('#waterWordDiv').show();
+                    } else {
+                        $('#waterWordDiv').hide();
+                        $('#waterImageDiv').show();
+                    }
                     initLogoImage(model.watermark_image);
                 }
             });
@@ -220,7 +256,7 @@
 
         function initLogoImage(imgUrl) {
 
-            $('#site_logo').val(imgUrl);
+            $('#watermark_image').val(imgUrl);
             var imgHtml = '<li class="cupload-image-box" style="position:relative;width:320px;">';
             imgHtml += '<img class="cupload-image-preview" style="width:300px;height:100px;" src = "' + imgUrl + '" />';
             imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
@@ -235,7 +271,7 @@
 
             $imgli = $(obj).parent('li');
             jutils.confirm('确认删除图片吗?', function () {
-                $('#site_logo').val('');
+                $('#watermark_image').val('');
                 $imgli.remove();
                 $('#logo').hide();
                 $('#logo_uploader').show();
