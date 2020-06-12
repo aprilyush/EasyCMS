@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 10/06/2020 16:17:57
+ Date: 12/06/2020 17:46:08
 */
 
 SET NAMES utf8mb4;
@@ -197,6 +197,35 @@ CREATE TABLE `cms_template_match`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for cms_upload_set
+-- ----------------------------
+DROP TABLE IF EXISTS `cms_upload_set`;
+CREATE TABLE `cms_upload_set`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `open_watermark` tinyint(1) NOT NULL,
+  `watermark_type` tinyint(1) NOT NULL,
+  `image_width` int(11) NOT NULL,
+  `image_height` int(11) NOT NULL,
+  `watermark_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_opacity` tinyint(4) NOT NULL,
+  `image_quality` tinyint(4) NOT NULL,
+  `water_postion` tinyint(255) NOT NULL,
+  `watermark_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `font_size` int(11) NOT NULL,
+  `font_color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_extname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `media_extname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `attache_extname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `max_file_size` bigint(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cms_upload_set
+-- ----------------------------
+INSERT INTO `cms_upload_set` VALUES (1, 0, 0, 300, 150, '/static/images/logo.png', 70, 60, 0, 'EasyCMS', 30, '#030d14', 'gif,jpg,jpeg,bmp,png,pneg,swf,webp', 'asf,asx,avi,flv,mid,midi,mov,mp3,mp4,mpg,mpeg,ogg,ra,rm,rmb,rmvb,rp,rt,smi,swf,wav,webm,wma,wmv,viv', 'zip,rar,7z,js,css,txt,doc,docx,ppt,pptx,xls,xlsx,pdf', 10);
+
+-- ----------------------------
 -- Table structure for cms_visit
 -- ----------------------------
 DROP TABLE IF EXISTS `cms_visit`;
@@ -206,7 +235,7 @@ CREATE TABLE `cms_visit`  (
   `browser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `visit_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_visit
@@ -233,6 +262,7 @@ INSERT INTO `cms_visit` VALUES (19, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10
 INSERT INTO `cms_visit` VALUES (20, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-10 13:05:22');
 INSERT INTO `cms_visit` VALUES (21, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-10 13:05:25');
 INSERT INTO `cms_visit` VALUES (22, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-10 13:05:27');
+INSERT INTO `cms_visit` VALUES (23, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-11 14:30:44');
 
 -- ----------------------------
 -- Table structure for easy_log
@@ -245,7 +275,7 @@ CREATE TABLE `easy_log`  (
   `log_type` tinyint(2) NOT NULL,
   `log_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 518 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 523 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of easy_log
@@ -337,6 +367,11 @@ INSERT INTO `easy_log` VALUES (514, 'hangfireJob任务', '2020/6/10 15:28:33', 1
 INSERT INTO `easy_log` VALUES (515, 'Unknown column \'a.department_name\' in \'field list\'', 'System.Exception: Unknown column \'a.department_name\' in \'field list\'\r\n ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column \'a.department_name\' in \'field list\'\r\n ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column \'a.department_name\' in \'field list\'\r\n   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 51\r\n   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet() in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlDataReader.cs:line 130\r\n   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlDataReader.cs:line 391\r\n   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(IReadOnlyList`1 commands, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 62\r\n   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior) in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlCommand.cs:line 211\r\n   at System.Data.Common.DbCommand.ExecuteReader()\r\n   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteReaderMultiple(Int32 multipleResult, DbConnection connection, DbTransaction transaction, Action`2 readerHander, CommandType cmdType, String cmdText, DbParameter[] cmdParms)\r\n   --- End of inner exception stack trace ---\r\n   at FreeSql.Internal.CommonProvider.Select0Provider`2.ToListAfPrivate(String sql, GetAllFieldExpressionTreeInfo af, ReadAnonymousTypeOtherInfo[] otherData)\r\n   at FreeSql.Internal.CommonProvider.Select0Provider`2.ToListPrivate(GetAllFieldExpressionTreeInfo af, ReadAnonymousTypeOtherInfo[] otherData)\r\n   at FreeSql.Internal.CommonProvider.Select0Provider`2.ToList(Boolean includeNestedMembers)\r\n   at FreeSql.Internal.CommonProvider.Select1Provider`1.ToList(Boolean includeNestedMembers)\r\n   at Atlass.Framework.AppService.Work.AddressBookAppService.GetList(BootstrapGridDto param, String name) in E:\\开源\\Atlass开发框架\\Altas.Framework\\Atlass.Framework.AppService\\Work\\AddressBookAppService.cs:line 24\r\n   at Atlass.Framework.Web.Areas.Work.Controllers.AddressBookController.GetData(BootstrapGridDto param) in E:\\开源\\Atlass开发框架\\Altas.Framework\\Atlass.Framework.Web\\Areas\\Work\\Controllers\\AddressBookController.cs:line 37\r\n   at lambda_method(Closure , Object , Object[] )\r\n   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2020-06-10 15:29:53');
 INSERT INTO `easy_log` VALUES (516, 'hangfireJob任务', '2020/6/10 16:00:03', 1, '2020-06-10 16:00:03');
 INSERT INTO `easy_log` VALUES (517, 'Column \'real_name\' cannot be null', 'System.Exception: Column \'real_name\' cannot be null\r\n ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Column \'real_name\' cannot be null\r\n ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Column \'real_name\' cannot be null\r\n   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 51\r\n   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet() in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlDataReader.cs:line 116\r\n   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlDataReader.cs:line 391\r\n   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(IReadOnlyList`1 commands, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 62\r\n   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlCommand.cs:line 220\r\n   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery() in /_/src/MySqlConnector/MySql.Data.MySqlClient/MySqlCommand.cs:line 67\r\n   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, DbParameter[] cmdParms)\r\n   --- End of inner exception stack trace ---\r\n   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()\r\n   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)\r\n   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()\r\n   at Atlass.Framework.AppService.Work.AddressBookAppService.Save(work_address_book dto) in E:\\开源\\Atlass开发框架\\Altas.Framework\\Atlass.Framework.AppService\\Work\\AddressBookAppService.cs:line 68\r\n   at Atlass.Framework.Web.Areas.Work.Controllers.AddressBookController.Save(work_address_book dto) in E:\\开源\\Atlass开发框架\\Altas.Framework\\Atlass.Framework.Web\\Areas\\Work\\Controllers\\AddressBookController.cs:line 56\r\n   at lambda_method(Closure , Object , Object[] )\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2020-06-10 16:02:27');
+INSERT INTO `easy_log` VALUES (518, 'hangfireJob任务', '2020/6/11 14:30:42', 1, '2020-06-11 14:30:43');
+INSERT INTO `easy_log` VALUES (519, 'hangfireJob任务', '2020/6/11 15:42:11', 1, '2020-06-11 15:42:12');
+INSERT INTO `easy_log` VALUES (520, 'hangfireJob任务', '2020/6/11 16:00:06', 1, '2020-06-11 16:00:06');
+INSERT INTO `easy_log` VALUES (521, 'hangfireJob任务', '2020/6/11 17:00:01', 1, '2020-06-11 17:00:02');
+INSERT INTO `easy_log` VALUES (522, 'hangfireJob任务', '2020/6/12 9:00:09', 1, '2020-06-12 09:00:09');
 
 -- ----------------------------
 -- Table structure for hangfire_task
@@ -357,7 +392,7 @@ CREATE TABLE `hangfire_task`  (
 -- ----------------------------
 -- Records of hangfire_task
 -- ----------------------------
-INSERT INTO `hangfire_task` VALUES ('5eaabde6c1a509138ce04e80', '测试任务', '测试写日志，1小时写一次', '2020-06-10 16:00:03', 'Atlass.Framework.Jobs', 'TestJob', '0 */1 * * *', 1);
+INSERT INTO `hangfire_task` VALUES ('5eaabde6c1a509138ce04e80', '测试任务', '测试写日志，1小时写一次', '2020-06-12 09:00:09', 'Atlass.Framework.Jobs', 'TestJob', '0 */1 * * *', 1);
 
 -- ----------------------------
 -- Table structure for pay_history
