@@ -338,3 +338,5 @@ ASALocalRun/
 /Atlass.Framework.Web/logs
 /Atlass.Framework.Web/wwwroot/upfiles/images
 /Atlass.Framework.Web/wwwroot/static
+/Atlass.Framework.Web/wwwroot/UploadTemp
+/Atlass.Framework.Web/wwwroot/upfiles/videos

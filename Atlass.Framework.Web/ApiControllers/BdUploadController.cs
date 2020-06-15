@@ -69,7 +69,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 var file = files[0];
                 var filename = file.FileName;
                 int index = filename.LastIndexOf('.');
-                string extName = filename.Substring(index);
+                string extName = filename.Substring(index+1);
                 //uploadimage
                 string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
                 var uploadSet = SiteManagerCache.GetUploadInfo();

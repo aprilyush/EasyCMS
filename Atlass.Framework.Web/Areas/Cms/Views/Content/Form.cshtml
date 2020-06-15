@@ -47,7 +47,7 @@
                     <label class="col-sm-2 control-label required">内容：</label>
                     <div class="col-sm-9">
                         <div>
-                            <button class="btn btn-primary " type="button"><i class="fa fa-video-camera"></i>&nbsp;插入视频</button>
+                            <button class="btn btn-primary " type="button" onclick="upVideo();"><i class="fa fa-video-camera"></i>&nbsp;插入视频</button>
                         </div>
                         <textarea id="content" name="content" style="height:600px;"></textarea>
                     </div>
@@ -209,6 +209,26 @@
                 $('#uploader').show();
                 $('.uploadFilesBox').remove();
             })
+        }
+
+        function upVideo() {
+            layer.open({
+                type: 2,
+                area: ['600px', '400px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/views/upvideo.html',
+                yes: function (lindex) {
+                    layer.close(lindex); //如果设定了yes回调，需进行手工关闭
+                    console.log('关闭');
+                    var videoHref = localStorage.getItem("videoUrl");
+                    if (!jutils.empty(videoHref)) {
+                        console.log(videoHref);
+                        return;
+                    }
+                    console.log('没有视频文件');
+                }
+            });
         }
         function cancel() {
             parent.$.altasTab.close('edit_content');

@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.BigFile;
+using Atlass.Framework.Core.Web;
 using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +18,19 @@ namespace Atlass.Framework.Web.ApiControllers
     [ApiController]
     public class UploadController : ControllerBase
     {
-
+        private readonly IAtlassReuqestHelper RequestHelper;
+        public UploadController(IAtlassReuqestHelper requestHelper)
+        {
+            RequestHelper = requestHelper;
+        }
+        [HttpGet("GetUploadSet")]
+        public IActionResult GetUploadSet()
+        {
+            var result = new ResultAdaptDto();
+            var set = SiteManagerCache.GetUploadInfo();
+            result.data.Add("uploadSet", set);
+            return Content(result.ToJson());
+        }
         /// <summary>
         /// 上传图片
         /// </summary>
@@ -130,20 +144,86 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="chunk">分块号</param>
         /// <param name="chunks">分块总数</param>
         /// <returns></returns>
-        [HttpPost]
-        public IActionResult SaveFile(string md5, int? chunk, int? chunks)
+        [HttpPost("SaveChunkFile")]
+        public IActionResult SaveChunkFile()
         {
-            var tempDir = "UploadTemp"; // 缓存文件夹
-            var targetDir = "UploadFile"; // 目标文件夹
+
+            string guid = RequestHelper.GetPostString("guid");
+            string fileName = RequestHelper.GetPostString("name");
+            string chunk= RequestHelper.GetPostString("chunk");
+            var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/"+ guid; // 缓存文件夹
+            var targetDir = GlobalParamsDto.WebRoot+"/upfiles/videos/"+DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
 
             var file = Request.Form.Files[0];
-
-            file.SaveFileOrChunkFile(targetDir, tempDir, md5, chunks, chunk);
+            int index = fileName.LastIndexOf('.');
+            string extName = fileName.Substring(index);
+            if (!System.IO.Directory.Exists(tempDir))
+            {
+                System.IO.Directory.CreateDirectory(tempDir);
+            }
+            string filePath = tempDir+"/"+ chunk.ToString()+ extName;
+            //file.SaveFile(filePath);
+            using (FileStream fs = System.IO.File.Create(filePath))
+            {
+                file.CopyTo(fs);
+                fs.Flush();
+            }
             var result = new ResultAdaptDto();
-            result.data.Add("md5", md5);
-            result.data.Add("url", Path.Combine("/", targetDir, file.FileName));
             return Content(result.ToJson());
         }
+        /// <summary>
+        /// 保存文件或者分块
+        /// </summary>
+        /// <param name="md5">文件md5</param>
+        /// <param name="chunk">分块号</param>
+        /// <param name="chunks">分块总数</param>
+        /// <returns></returns>
+        [HttpGet("Merge")]
+        public IActionResult Merge()
+        {
+            var result = new ResultAdaptDto();
+            try
+            {
+                string guid = RequestHelper.GetQueryString("guid");
+                string fileName = RequestHelper.GetQueryString("fileName");
+                var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/" + guid; // 缓存文件夹
+                var targetDir = GlobalParamsDto.WebRoot + "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+
+
+                if (!System.IO.Directory.Exists(targetDir))
+                {
+                    System.IO.Directory.CreateDirectory(targetDir);
+                }
+
+                int index = fileName.LastIndexOf('.');
+                string extName = fileName.Substring(index);
+                string guidFileName = IdWorkerHelper.GenObjectId() + extName;
+                var finalPath = Path.Combine(targetDir, guidFileName);
+
+                var files = System.IO.Directory.GetFiles(tempDir);//获得下面的所有文件
+                using (FileStream fs = System.IO.File.Create(finalPath))
+                {
+                    foreach (var part in files.OrderBy(x => x.Length).ThenBy(x => x))//排一下序，保证从0-N Write
+                    {
+                        var bytes = System.IO.File.ReadAllBytes(part);
+                        fs.Write(bytes, 0, bytes.Length);
+                        bytes = null;
+                        System.IO.File.Delete(part);//删除分块
+                    }
+                    fs.Flush();
+                }
+                string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
+                result.data.Add("url", returnPath);
+
+            }
+            catch(Exception ex)
+            {
+                result.status = false;
+                result.msg = ex.Message;
+            }
+            return Content(result.ToJson());
+        }
+
 
         /// <summary>
         /// 合并文件
@@ -152,7 +232,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="fileName">文件名</param>
         /// <param name="chunks">分块数</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("MergeFile")]
         public IActionResult MergeFile(string md5, string fileName, int chunks)
         {
             var tempDir = "UploadTemp";
@@ -184,6 +264,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="fileName">文件名</param>
         /// <param name="chunk">分块号</param>
         /// <returns></returns>
+        [HttpPost("CheckFile")]
         public IActionResult CheckFile(string md5, string fileName, int? chunk)
         {
             var tempDir = "UploadTemp";

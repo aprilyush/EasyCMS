@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title>视频上传</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/hplus/css/animate.css" rel="stylesheet">
+    <link href="/hplus/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/hplus/js/plugins/webuploader/webuploader.css" rel="stylesheet" />
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">请选择视频文件：</label>
+                        <div class="col-sm-8">
+                            <div id="up">上传</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">视频地址：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="video_url" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">上传进度：</label>
+                        <div class="col-sm-8">
+                           <span id="msg"></span>
+                        </div>
+                    </div>
+                    <div class="footerbar">
+                        <div class="col-sm-12 col-sm-offset-3">
+                            <button class="btn btn-primary" type="button" onclick="ok();">确定</button>
+                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="../hplus/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../hplus/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../hplus/js/plugins/layer/layer.min.js"></script>
+    <script src="../hplus/js/plugins/webuploader/webuploader.js"></script>
+    <script>
+        var uploader,fileMd5='';
+        $(function () {
+            localStorage.removeItem('videoUrl');
+            $.ajax({
+                url: '/api/upload/GetUploadSet',
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                data: null,
+                //contentType: 'application/x-www-form-urlencoded',
+                success: function (res) {
+
+                    if (!res.status) {
+                        layer.alert('文件上传初始化失败');
+                        return;
+                    }
+                    initUploader(res.data.uploadSet);
+                },
+                error: function (jqXHr, textStatus, errorMsg) {
+                    layer.alert('文件上传初始化失败');
+                }
+
+            });
+        });
+
+
+        function initUploader(set) {
+            var GUID = WebUploader.Base.guid();//一个GUID
+            uploader = WebUploader.create({
+                swf: '/hplus/plugins/webuploader/Uploader.swf',
+                server: '/api/upload/SaveChunkFile',
+                pick: '#up',
+                resize: false,
+                auto: true,
+                chunked: true,//开始分片上传
+                chunkSize: 5242880,//每一片的大小
+                fileNumLimit: 1,
+                //fileSizeLimit: set.max_file_size,
+                formData: {
+                    guid: GUID,
+                    action: 'uploadvideo', //自定义参数，待会儿解释
+                    md5:''
+                },
+                accept: {
+                    title: '视频文件',
+                    extensions: set.media_extname,
+                    mimeTypes: '*'
+                }
+            });
+            uploader.on('beforeFileQueued',
+                function (file) {
+                    var exts = set.media_extname.split(',');
+                    if (exts.indexOf(file.ext) < 0) {
+                        layer.alert("文件格式不允许上传");
+                        return false;
+                    }
+                    var maxLength = set.max_file_size * 1024 * 1024;
+                    if (file.size > maxLength) {
+                        layer.alert("文件大小超出限制，无法上传");
+                        return false;
+                    }
+                    //console.log(file);
+                    //return true;
+
+                });
+            //uploader.on('fileQueued', function (file) {
+            //    uploader.md5File(file)
+            //        // 及时显示进度
+            //        .progress(function (percentage) {
+            //            var perText = percentage.toFixed(2) * 100;
+            //            $('#msg').text('计算文件MD5,进度：' + perText);
+                        
+            //        })
+            //        // 完成
+            //        .then(function (val) {
+            //            $('#msg').text('计算文件MD5完成,等待上传：' + val);
+            //            fileMd5= val;
+            //        });
+
+            //});
+            //uploader.on('uploadBeforeSend',
+            //    function (file, data, headers) {
+            //        data.md5 = fileMd5;
+            //    }); 
+            uploader.on('uploadProgress',
+                function (file, percentage) {
+                    var perText = percentage.toFixed(2) * 100;
+                    $('#msg').text('上传中，进度：' + perText);
+                });
+            uploader.on('uploadSuccess',
+                function (file, res) {
+                    $('#msg').text('文件合并中。。。');
+                    if (res.status) {
+                        $.getJSON('/api/upload/Merge', { guid: GUID, fileName: file.name }, function (res) {
+                          
+                            if (res.status) {
+                                $('#msg').text('上传成功。。。');
+                                $('#video_url').val(res.data.url);
+                                return;
+                            }
+                            $('#msg').text('上传失败。。。');
+                        });
+                    }
+                });
+
+            uploader.on('uploadError',
+                function (file, reason) {
+                    $('#msg').text('上传失败：' + reason);
+                    //console.log(reason);
+                });
+            uploader.on('uploadComplete',
+                function () {
+                    fileMd5 = '';
+                    uploader.reset();
+                });
+
+        }
+
+        function ok() {
+            var videoUrl = $('#video_url').val();
+            if (isEmpty(videoUrl)) {
+                layer.alert('请先上传视频文件');
+                return;
+            }
+            localStorage.setItem('videoUrl', videoUrl);
+        }
+
+        function cancel() {
+            var index = parent.layer.getFrameIndex(window.name);
+            if (index) {
+                parent.layer.close(index);
+            }
+        }
+
+        function isEmpty(str) {
+            if (!str || str == "")
+                return true;
+
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
+        }
+    </script>
+</body>
+</html>

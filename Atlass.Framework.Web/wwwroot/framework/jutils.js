@@ -354,6 +354,15 @@ jutils.loadFormData = function (form, data) {
 
 };
 
+//判断空字符串
+jutils.empty = function (str) {
+    if (!str || str == "")
+        return true;
+
+    var regu = "^[ ]+$";
+    var re = new RegExp(regu);
+    return re.test(str);
+}
 
 jutils.padLeft = function (str, totalLen) {
     var len = str.toString().length;
