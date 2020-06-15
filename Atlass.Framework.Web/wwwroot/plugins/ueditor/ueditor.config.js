@@ -401,7 +401,7 @@
 			header: [],
 			hr:     [],
 			i:      ['class', 'style'],
-            img: ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex', 'style'],
+            img: ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex', 'style','playurl'],
 			ins:    ['datetime'],
 			li:     ['class', 'style'],
 			mark:   [],

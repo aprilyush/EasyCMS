@@ -147,7 +147,8 @@ namespace Atlass.Framework.Web.ApiControllers
         [HttpPost("SaveChunkFile")]
         public IActionResult SaveChunkFile()
         {
-
+            //uploadfile,uploadvideo
+            string action = RequestHelper.GetPostString("action");
             string guid = RequestHelper.GetPostString("guid");
             string fileName = RequestHelper.GetPostString("name");
             string chunk= RequestHelper.GetPostString("chunk");
@@ -188,8 +189,13 @@ namespace Atlass.Framework.Web.ApiControllers
                 string fileName = RequestHelper.GetQueryString("fileName");
                 var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/" + guid; // 缓存文件夹
                 var targetDir = GlobalParamsDto.WebRoot + "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+                 //uploadfile,uploadvideo
+                string action = RequestHelper.GetPostString("action");
+                if(action== "uploadfile")
+                {
+                    targetDir = GlobalParamsDto.WebRoot + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
 
-
+                }
                 if (!System.IO.Directory.Exists(targetDir))
                 {
                     System.IO.Directory.CreateDirectory(targetDir);

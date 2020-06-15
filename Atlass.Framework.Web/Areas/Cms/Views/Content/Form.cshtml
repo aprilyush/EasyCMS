@@ -223,17 +223,12 @@
                     console.log('关闭');
                     var videoHref = localStorage.getItem("videoUrl");
                     if (!jutils.empty(videoHref)) {
-                      
-                        //var videoHtml = '<div id="' + id+'" class="easycms-video" style="background:url(/static/images/video-clip.png) no-repeat 10px center;width:400px;height:400px;" playurl="' + videoHref + '"></div>';
-                       // var videoHtml2 = '<embed src="/plugins/ckplayer/ckplayer.swf" flashvars="video=' + videoHref+'"  quality="high" width="480" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>';
-                        //var videoHtml = '<img class="siteserver-stl-player" src="/static/images/video-clip.png" playurl="' + videoHref + '" style="width: 333px; height: 333px;">';
-
                         var videoHtml = getVideoHtml(videoHref);
-                        console.log(videoHtml);
+                       // console.log(videoHtml);
                         editor.execCommand('insertHtml', videoHtml);
                         return;
                     }
-                    console.log('没有视频文件');
+                   // console.log('没有视频文件');
                 }
             });
         }
@@ -243,10 +238,12 @@
 
 
         function getVideoHtml(videoUrl) {
-            var id = jutils.localTimeString();
-            var videoHtml = '<div id="' + id + '" class="easycms-video" style="background:url(/static/images/video-clip.png) no-repeat 10px center;width:400px;height:400px;">';
-            videoHtml += '<embed src="/plugins/ckplayer/ckplayer.swf" flashvars="video=' + videoUrl + '"  quality="high" width="400" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>';
-            videoHtml += '</div>';
+            //var id = jutils.localTimeString();
+            //var videoHtml = '<div id="' + id + '" class="easycms-video" style="background:url(/static/images/video-clip.png) no-repeat 10px center;width:400px;height:400px;">';
+            //videoHtml += '<embed src="/plugins/ckplayer/ckplayer.swf" flashvars="video=' + videoUrl + '"  quality="high" width="400" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>';
+            //videoHtml += '</div>';
+
+            var videoHtml = '<img class="easycms-player" src="/static/images/video-clip.png" playurl="' + videoUrl + '" style="width:400px; height: 400px;">';
             return videoHtml;
         }
     </script>

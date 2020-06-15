@@ -20,7 +20,8 @@ namespace Test
 
                 //RedisTest.Test();
                 //RedisTest.Proformance();
-                RedisTestEx.Test();
+                // RedisTestEx.Test();
+                HtmlHelper.Replace();
             }
             catch(Exception ex)
             {
