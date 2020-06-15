@@ -48,6 +48,7 @@
                     <div class="col-sm-9">
                         <div>
                             <button class="btn btn-primary " type="button" onclick="upVideo();"><i class="fa fa-video-camera"></i>&nbsp;插入视频</button>
+                            <button class="btn btn-primary " type="button" onclick="upFile();"><i class="fa fa-video-tags"></i>&nbsp;添加附件</button>
                         </div>
                         <textarea id="content" name="content" style="height:600px;"></textarea>
                     </div>
@@ -213,6 +214,7 @@
 
         function upVideo() {
             layer.open({
+                title:'视频上传',
                 type: 2,
                 area: ['600px', '400px'],
                 fixed: false, //不固定
@@ -229,6 +231,28 @@
                         return;
                     }
                    // console.log('没有视频文件');
+                }
+            });
+        }
+        function upFile() {
+            layer.open({
+                title: '附件上传',
+                type: 2,
+                area: ['600px', '400px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/views/file.html',
+                end: function (lindex) {
+                    layer.close(lindex); //如果设定了yes回调，需进行手工关闭
+               
+                    var fileJson= localStorage.getItem("attachmentFile");
+                    if (!jutils.empty(fileJson)) {
+                        //var fileHtml = getVideoHtml(videoHref);
+                        var attachmentFile = JSON.parse(fileJson);
+                        var fileHtml = '<a href="' + attachmentFile.url + '">' + attachmentFile.name + '</a>';
+                        editor.execCommand('insertHtml', fileHtml);
+                        return;
+                    }
                 }
             });
         }

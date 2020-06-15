@@ -53,9 +53,9 @@
     <script src="../hplus/js/plugins/layer/layer.min.js"></script>
     <script src="../hplus/js/plugins/webuploader/webuploader.js"></script>
     <script>
-        var uploader,fileMd5='';
+        var uploader, fileMd5 = '', attachmentFile;
         $(function () {
-            localStorage.removeItem('videoUrl');
+            localStorage.removeItem('attachmentFile');
             $.ajax({
                 url: '/api/upload/GetUploadSet',
                 type: 'get',
@@ -98,13 +98,13 @@
                 },
                 accept: {
                     title: '视频文件',
-                    extensions: set.media_extname,
+                    extensions: set.attache_extname,
                     mimeTypes: '*'
                 }
             });
             uploader.on('beforeFileQueued',
                 function (file) {
-                    var exts = set.media_extname.split(',');
+                    var exts = set.attache_extname.split(',');
                     if (exts.indexOf(file.ext) < 0) {
                         layer.alert("文件格式不允许上传");
                         return false;
@@ -114,29 +114,8 @@
                         layer.alert("文件大小超出限制，无法上传");
                         return false;
                     }
-                    //console.log(file);
-                    //return true;
-
                 });
-            //uploader.on('fileQueued', function (file) {
-            //    uploader.md5File(file)
-            //        // 及时显示进度
-            //        .progress(function (percentage) {
-            //            var perText = percentage.toFixed(2) * 100;
-            //            $('#msg').text('计算文件MD5,进度：' + perText);
-                        
-            //        })
-            //        // 完成
-            //        .then(function (val) {
-            //            $('#msg').text('计算文件MD5完成,等待上传：' + val);
-            //            fileMd5= val;
-            //        });
 
-            //});
-            //uploader.on('uploadBeforeSend',
-            //    function (file, data, headers) {
-            //        data.md5 = fileMd5;
-            //    }); 
             uploader.on('uploadProgress',
                 function (file, percentage) {
                     var perText = percentage.toFixed(2) * 100;
@@ -147,10 +126,15 @@
                     $('#msg').text('文件合并中。。。');
                     if (res.status) {
                         $.getJSON('/api/upload/Merge', { guid: GUID, fileName: file.name }, function (res) {
-                          
+
                             if (res.status) {
                                 $('#msg').text('上传成功。。。');
                                 $('#video_url').val(res.data.url);
+                                attachmentFile = {
+                                    name: res.data.fileName,
+                                    url: res.data.url
+                                };
+                                
                                 return;
                             }
                             $('#msg').text('上传失败。。。');
@@ -177,7 +161,13 @@
                 layer.alert('请先上传视频文件');
                 return;
             }
-            localStorage.setItem('videoUrl', videoUrl);
+            if (!attachmentFile) {
+                layer.alert('请先上传视频文件');
+                return;
+            }
+            var fileJson = JSON.stringify(attachmentFile);
+            localStorage.setItem("attachmentFile", fileJson);
+           // localStorage.setItem('fileJson', videoUrl);
             var index = parent.layer.getFrameIndex(window.name);
             if (index) {
                 parent.layer.close(index);
@@ -185,7 +175,7 @@
         }
 
         function cancel() {
-            localStorage.removeItem('videoUrl');
+            localStorage.removeItem('attachmentFile');
             var index = parent.layer.getFrameIndex(window.name);
             if (index) {
                 parent.layer.close(index);

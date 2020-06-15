@@ -220,7 +220,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 }
                 string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
                 result.data.Add("url", returnPath);
-
+                result.data.Add("fileName", fileName);
             }
             catch(Exception ex)
             {
