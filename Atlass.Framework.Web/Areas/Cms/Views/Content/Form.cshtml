@@ -147,7 +147,7 @@
             jutils.ajaxGet('/Cms/Content/getmodel', { id: id }, function (res) {
                 if (id != '0') {
                     var model = res.data.model
-                    
+
                     $('#myForm').initFormData(model);
                     if (model.cover_image) {
                         initImage(model.cover_image);
@@ -218,12 +218,14 @@
                 fixed: false, //不固定
                 maxmin: true,
                 content: '/views/upvideo.html',
-                yes: function (lindex) {
+                end: function (lindex) {
                     layer.close(lindex); //如果设定了yes回调，需进行手工关闭
                     console.log('关闭');
                     var videoHref = localStorage.getItem("videoUrl");
                     if (!jutils.empty(videoHref)) {
                         console.log(videoHref);
+                        var videoHtml = '<img class="siteserver-stl-player" src="/static/images/video-clip.png" playurl="' + videoHref + '" style="width: 333px; height: 333px;">';
+                        editor.execCommand('insertHtml', videoHtml);
                         return;
                     }
                     console.log('没有视频文件');
