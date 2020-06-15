@@ -72,6 +72,12 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\plugins\ckplayer\ckplayer.js" />
+    <None Include="wwwroot\plugins\ckplayer\ckplayer.min.js" />
+    <None Include="wwwroot\plugins\ckplayer\ckplayer.swf" />
+    <None Include="wwwroot\plugins\ckplayer\hls\hls.js" />
+    <None Include="wwwroot\plugins\ckplayer\hls\hls.min.js" />
+    <None Include="wwwroot\plugins\ckplayer\hls\LICENSE" />
     <None Include="wwwroot\plugins\codemirror\addon\comment\comment.js" />
     <None Include="wwwroot\plugins\codemirror\addon\comment\continuecomment.js" />
     <None Include="wwwroot\plugins\codemirror\addon\dialog\dialog.js" />

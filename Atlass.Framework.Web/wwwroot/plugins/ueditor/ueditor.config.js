@@ -353,7 +353,7 @@
 
         //默认过滤规则相关配置项目
         //,disabledTableInTable:true  //禁止表格嵌套
-        //,allowDivTransToP:true      //允许进入编辑器的div标签自动变成p标签
+        ,allowDivTransToP:false      //允许进入编辑器的div标签自动变成p标签
         //,rgb2Hex:true               //默认产出的数据中的color自动从rgb格式变成16进制格式
 
 		// xss 过滤是否开启,inserthtml等操作
@@ -386,7 +386,7 @@
 			dd:     ['class', 'style'],
 			del:    ['datetime'],
 			details: ['open'],
-			div:    ['class', 'style'],
+            div: ['class', 'style','id'],
 			dl:     ['class', 'style'],
 			dt:     ['class', 'style'],
 			em:     ['class', 'style'],
@@ -427,7 +427,8 @@
 			tt:     [],
 			u:      [],
 			ul:     ['class', 'style'],
-			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
+            video: ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style'],
+            embed: ['type', 'src', 'flashvars', 'allowscriptaccess', 'allowfullscreen', 'quality', 'width', 'height','align']
 		}
     };
 

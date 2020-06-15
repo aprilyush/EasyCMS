@@ -417,7 +417,9 @@ jutils.setCookie = function (name, value) {
     date.setTime(date.getTime() + ms);
     document.cookie = name + "=" + escape(value) + ";expires=" + date.toGMTString();
 };
-
+function formatFunc(str) {    //格式化显示
+    return str > 9 ? str : '0' + str
+}
 jutils.toLocalTime = function (localTime) {
     if (!localTime || localTime == '0001-01-01 00:00:00' ||
         localTime == '1900-01-01 00:00:00' || localTime == '1753-01-01 00:00:00') {
@@ -465,6 +467,20 @@ jutils.localTime = function () {
     var min = formatFunc(jsDate.getMinutes());
     var seconds = formatFunc(jsDate.getSeconds());
     var dateStr = year + '-' + mon + '-' + day + ' ' + hour + ':' + min + ':' + seconds;
+    return dateStr;
+};
+jutils.localTimeString = function () {
+    var jsDate = new Date();
+    var year = jsDate.getFullYear();
+    var mon = formatFunc(jsDate.getMonth() + 1);
+    var day = formatFunc(jsDate.getDate());
+    var hour = jsDate.getHours();
+    //var noon = hour >= 12 ? 'PM' : 'AM';
+    //hour = hour >= 12 ? hour - 12 : hour;
+    hour = formatFunc(hour);
+    var min = formatFunc(jsDate.getMinutes());
+    var seconds = formatFunc(jsDate.getSeconds());
+    var dateStr = year +mon +day +hour+ min+ seconds;
     return dateStr;
 };
 /*
