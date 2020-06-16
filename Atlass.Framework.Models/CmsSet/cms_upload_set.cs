@@ -31,9 +31,9 @@ namespace Atlass.Framework.Models
         /// </summary>
         public string watermark_image { get; set; } = "/static/images/logo.png";
         /// <summary>
-        /// 水印透明度 0-100
+        /// 水印透明度 0-10
         /// </summary>
-        public int image_opacity { get; set; } = 80;
+        public int image_opacity { get; set; } = 6;
         /// <summary>
         /// JPEG 水印质量0-100
         /// </summary>

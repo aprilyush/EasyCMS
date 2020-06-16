@@ -110,7 +110,7 @@ namespace Atlass.Framework.Web.ApiControllers
                                     string waterMarkIamge = GlobalParamsDto.WebRoot + imageSet.watermark_image;
                                     if (System.IO.File.Exists(waterMarkIamge))
                                     {
-                                        marker.AddImageSignPic(image, imageSet.watermark_image, sourcePath, imageSet.water_postion, imageSet.image_quality, imageSet.image_opacity);
+                                        marker.AddImageSignPic(image, sourcePath, waterMarkIamge, imageSet.water_postion, imageSet.image_quality, imageSet.image_opacity);
                                     }
                                    
                                 }
@@ -118,12 +118,6 @@ namespace Atlass.Framework.Web.ApiControllers
                                 {
                                     marker.AddWatermarkText(image, sourcePath, imageSet.watermark_word, imageSet.water_postion, imageSet.font_size, imageSet.font_color);
                                 }
-                            }
-                            
-                            using (StreamReader sr = new StreamReader(sourcePath))
-                            {
-                               
-
                             }
                         }
                     }

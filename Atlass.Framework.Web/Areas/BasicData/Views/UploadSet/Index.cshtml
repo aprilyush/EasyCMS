@@ -80,15 +80,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">水印透明度(0-100)：</label>
+                                        <label class="col-sm-2 control-label">水印透明度(0-10)：</label>
                                         <div class="col-sm-5">
-                                            <input type="number" name="image_opacity" id="watermark_image" value="70" class="form-control" min="1" max="100" style="width:200px;">
+                                            <input type="number" name="image_opacity" id="watermark_image" value="6" class="form-control" min="1" max="10" style="width:200px;" data-rule="integer[+]; range[1~10]">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">水印质量(0-100)：</label>
                                         <div class="col-sm-5">
-                                            <input type="number" name="image_quality" id="image_quality" value="70" class="form-control" min="1" max="100" style="width: 200px;">
+                                            <input type="number" name="image_quality" id="image_quality" value="70" class="form-control" min="1" max="100" style="width: 200px;" data-rule="integer[+]; range[1~100]">
                                         </div>
                                     </div>
                                 </div>
