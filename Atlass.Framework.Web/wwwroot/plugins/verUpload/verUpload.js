@@ -70,7 +70,7 @@ window.verUpload = (function () {
         if (size > 0) {
             var s = FILES.size / 1024;
             if (s > size) {
-                return fail("Upload files over the size limit【" + size + "KB】");
+                return fail("上传文件大小超出限制【" + size + "KB】");
             }
         }
         var toarray = btn.getAttribute("data-upload-ext");
@@ -83,7 +83,7 @@ window.verUpload = (function () {
             var ext = FILES.name.split(".");
             ext = ext[ext.length - 1];
             if (!EXT.test(ext)) {
-                return fail("Unsupported file format【" + ext + "】");
+                return fail("不支持文件格式【" + ext + "】");
             }
         }
         var rs = /^(image)/;
@@ -92,7 +92,7 @@ window.verUpload = (function () {
         if (upload_send == "false") {
             var inputs = btn.getAttribute("data-upload-inputs");
             if (!inputs) {
-                return fail("Missing essential parameters！");
+                return fail("缺少必要的参数！");
             }
             inputs = this.parentElement.querySelector(inputs);
             if (rs.test(FILES.type)) {
@@ -112,7 +112,7 @@ window.verUpload = (function () {
                 inputs.value = e.target.result;
             };
             reader.readAsDataURL(FILES);
-            return success("Uploaded successfully");
+            return success("上传成功");
         }
 
         //if (rs.test(FILES.type) && !more) {
@@ -238,7 +238,7 @@ window.verUpload = (function () {
     var move_saves = function () {
         var as = this.parentElement.parentElement.querySelectorAll(".uploadFileClose");
         if (as.length < 1) {
-            return fail("No file uploaded！");
+            return fail("请选择文件！");
         }
         var items_children = {
             statics: this.parentElement.parentElement.querySelector(".uploadFileprocess-static"),
@@ -298,20 +298,20 @@ window.verUpload = (function () {
                             format.delete(name);
                             var span = document.createElement("b");
                             span.className = "uploadFileOk";
-                            span.innerText = "Uploaded successfully";
+                            span.innerText = "上传成功";
                             item.parentElement.appendChild(span);
                         }
                     });
                     success(d);
                 } else {
-                    items_children.text.innerText = "Upload failed";
+                    items_children.text.innerText = "上传失败";
                     items_children.actives.classList.add("uploadFileError");
                     items_children.actives.classList.remove("uploadFileSuccess");
                     items_children.statics.classList.add("uploadFileError");
                     items_children.statics.classList.remove("uploadFileSuccess");
                     [].forEach.call(as, function (item) {
                         item.style.display = "inline-block";
-                        item.innerText = "Upload failed";
+                        item.innerText = "上传失败";
                     });
                     fail(xhr.responseText);
                 }
@@ -337,9 +337,9 @@ window.verUpload = (function () {
             if (lists) {
                 uploadFileprocess_active.style.width = width;
                 if (pro < 100) {
-                    uploadFileLodaingText.innerText = "uploaded：" + width;
+                    uploadFileLodaingText.innerText = "已上传：" + width;
                 } else {
-                    uploadFileLodaingText.innerText = "File processing...";
+                    uploadFileLodaingText.innerText = "文件处理中...";
                 }
             } else {
               //  console.log(width);
@@ -354,7 +354,7 @@ window.verUpload = (function () {
                         uploadFileprocess_active.classList.add("uploadFileSuccess");
                         uploadFileprocess_static.classList.remove("uploadFileError");
                         uploadFileprocess_static.classList.add("uploadFileSuccess");
-                        uploadFileLodaingText.innerText = "Uploaded successfully！";
+                        uploadFileLodaingText.innerText = "上传成功！";
                     }
                     success(xhr.responseText);
                 } else {
@@ -364,7 +364,7 @@ window.verUpload = (function () {
                         uploadFileprocess_active.classList.remove("uploadFileSuccess");
                         uploadFileprocess_static.classList.add("uploadFileError");
                         uploadFileprocess_static.classList.remove("uploadFileSuccess");
-                        uploadFileLodaingText.innerText = "Upload failed！";
+                        uploadFileLodaingText.innerText = "上传失败！";
                     }
                     fail(xhr.responseText);
                 }

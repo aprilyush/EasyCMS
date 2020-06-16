@@ -23,11 +23,11 @@
             <div class="ibox-content">
                 <table class="table table-bordered">
                     <tr>
-                        <td style="width:150px;">请选择视频文件：</td>
+                        <td style="width:150px;">请选择附件：</td>
                         <td><div id="up">上传</div></td>
                     </tr>
                     <tr>
-                        <td style="width:150px;">视频地址：</td>
+                        <td style="width:150px;">附件地址：</td>
                         <td><input type="text" id="video_url" class="form-control" /></td>
                     </tr>
                     <tr>
@@ -93,7 +93,7 @@
                 //fileSizeLimit: set.max_file_size,
                 formData: {
                     guid: GUID,
-                    action: 'uploadvideo', //自定义参数，待会儿解释
+                    action: 'uploadfile', //自定义参数，待会儿解释
                     md5:''
                 },
                 accept: {
