@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
+using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.BigFile;
 using Atlass.Framework.Core.Web;
@@ -40,6 +42,8 @@ namespace Atlass.Framework.Web.ApiControllers
         {
             var result = new ResultAdaptDto();
             //long size = 0;
+            //当设置了开始水印的时候，可以使用nomark来过滤图片不加水印
+            int nomark = RequestHelper.GetPostInt("nomark");
             var files = Request.Form.Files;
             if (files.Count == 0)
             {
@@ -78,6 +82,57 @@ namespace Atlass.Framework.Web.ApiControllers
                 string compressFile = $"{folder}/{compressFileName}";
                 ImageUtilities.CompressImage(filename, compressFile, 90, 200);
                 guidFileName = compressFileName;
+            }
+            if (nomark == 0)
+            {
+                var imageSet = SiteManagerCache.GetUploadInfo();
+                if (imageSet.open_watermark == 1)
+                {
+                    try
+                    {
+                        string sourcePath = $"{folder}/{guidFileName}";
+                        if (System.IO.File.Exists(sourcePath))
+                        {
+                            FileStream fs = new FileStream(sourcePath, FileMode.Open);
+                            //把文件读取到字节数组 
+                            byte[] data = new byte[fs.Length];
+                            fs.Read(data, 0, data.Length);
+                            fs.Close();
+                            //实例化一个内存流--->把从文件流中读取的内容[字节数组]放到内存流中去 
+                            MemoryStream ms = new MemoryStream(data);
+                            Image image = Image.FromStream(ms);
+                            if (image.Width > imageSet.image_width && image.Height > imageSet.image_height)
+                            {
+                                ImageWatermarker marker = new ImageWatermarker();
+                                //图片水印
+                                if (imageSet.watermark_type == 1)
+                                {
+                                    string waterMarkIamge = GlobalParamsDto.WebRoot + imageSet.watermark_image;
+                                    if (System.IO.File.Exists(waterMarkIamge))
+                                    {
+                                        marker.AddImageSignPic(image, imageSet.watermark_image, sourcePath, imageSet.water_postion, imageSet.image_quality, imageSet.image_opacity);
+                                    }
+                                   
+                                }
+                                else
+                                {
+                                    marker.AddWatermarkText(image, sourcePath, imageSet.watermark_word, imageSet.water_postion, imageSet.font_size, imageSet.font_color);
+                                }
+                            }
+                            
+                            using (StreamReader sr = new StreamReader(sourcePath))
+                            {
+                               
+
+                            }
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        LogNHelper.Exception(ex);
+                    }
+                    
+                }
             }
             string imgurl = $"{ url}/{guidFileName}";
             result.data.Add("url", imgurl);

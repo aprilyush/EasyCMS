@@ -41,7 +41,7 @@ namespace Atlass.Framework.Models
         /// <summary>
         /// 水印位置
         /// </summary>
-        public int water_postion { get; set; }
+        public int water_postion { get; set; } = 9;
 
         /// <summary>
         /// 水印文字
@@ -72,5 +72,6 @@ namespace Atlass.Framework.Models
         /// 文件最大大小
         /// </summary>
         public long max_file_size { get; set; } = 10;
+        public long max_media_size { get; set; } = 100;
     }
 }

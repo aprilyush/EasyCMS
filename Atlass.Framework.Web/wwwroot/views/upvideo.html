@@ -109,7 +109,7 @@
                         layer.alert("文件格式不允许上传");
                         return false;
                     }
-                    var maxLength = set.max_file_size * 1024 * 1024;
+                    var maxLength = set.max_media_size * 1024 * 1024;
                     if (file.size > maxLength) {
                         layer.alert("文件大小超出限制，无法上传");
                         return false;
