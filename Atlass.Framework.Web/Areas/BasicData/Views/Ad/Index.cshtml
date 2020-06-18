@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div id="toolbar" class="btn-group">
+
+            </div>
+            <table id="table"></table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            $table = $("#table").bootstrapTable({
+                url: '/BasicData/Ad/GetData',
+                toolbar: '#toolbar',
+                pagination: true,
+                method: 'get',
+                height: $(window).height() - 50,
+                pageSize: 15,
+                pageList: [5, 10, 15, 20],
+                showColumns: true,
+                showRefresh: true,
+                clickToSelect: true,
+                sidePagination: "server",
+                locale: "zh-CN",
+                striped: true,
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'ad_title', title: '广告标题', align: 'center' },
+                    { field: 'ad_href', title: '广告链接', align: 'center' },
+                    {
+                        field: 'ad_image', title: '广告图片', align: 'center', formatter: function (v, d, i) {
+                            if (v) {
+                                return '<img src="'+v+'" width="50" height="50"/>';
+                            }
+
+                            return '';
+                        }
+                    },
+                    {
+                        field: 'ad_status', title: '启用状态', align: 'center', formatter: function (v, d, i) {
+                            if (v===1) {
+                                return '<span class="label label-primary">启用</span>';
+                            }
+
+                            return '<span class="label label-danger">未启用</span>';
+                        }
+                    },
+                    {
+                        field: 'id', title: '操作', align: 'center',
+                        formatter: renderOperation
+                    }
+                ]
+
+            });
+
+            jutils.initToolBarRole('#toolbar');
+        }
+
+        function renderOperation(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function add() {
+
+            location.href = '/BasicData/Ad/form?id=0' + 0;
+
+        }
+
+        function edit(obj) {
+            var id = $(obj).data('id');
+            location.href = '/BasicData/Ad/form?id='+ id;
+        }
+        function ban(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm("确定禁用广告吗？", function () {
+                jutils.ajaxGet('/BasicData/Ad/ban',
+                    { id: id },
+                    function () {
+                        $table.bootstrapTable('refresh');
+                    });
+            });
+
+         
+        }
+
+        function del(obj) {
+            var id = $(obj).data('id');
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/BasicData/Ad/DeleteById',
+                        { ids: id},
+                        function () {
+                            $table.bootstrapTable('refresh');
+                        });
+                });
+        }
+
+
+
+
+    </script>
+}
+
+

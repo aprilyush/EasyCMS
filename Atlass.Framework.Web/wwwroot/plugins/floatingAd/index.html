@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <title>漂浮广告 floatingAd.js</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="css/ad.css" />
+   <script src="http://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/floatingAd.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.floatingAd({
+			step: 1, 
+			isLinkClosed: true,  //超链接后是否关闭漂浮
+			delay: 50,   //频率
+			//漂浮内容
+			ad:	[{
+				'headFilter': 0.3,  //关闭区域背景透明度(0.1-1)
+				'img': 'images/ijquery.jpg', //图片
+				'imgHeight': 51,  //图片高度
+				'imgWidth': 226, //图片宽度
+				'linkUrl': 'http://www.ijquery.cn/',  //图片链接
+				'z-index': 100, //浮动层级别
+				'closed-icon': 'images/close.png'  //关闭按键图片
+			},
+			{
+				'img': 'images/dakaifa.png',
+				'imgHeight': 122,
+				'imgWidth': 412,
+				'linkUrl': 'http://www.dakaifa.cn/',
+				'z-index': 101,
+				'title': '大开发知识网',
+				'closed-icon': 'images/close2.png'  //关闭按键图片
+			},
+			{
+				'img': 'images/360sites.png',
+				'imgHeight': 80,
+				'imgWidth': 342,
+				'linkUrl': 'http://www.360sites.cn/',
+				'z-index': 101,
+				'title': '',
+				'closed-icon': 'images/close3.png',  //关闭按键图片
+				'headFilter': 0
+			}],
+			//关闭事件
+			onClose: function(elem){
+				alert('这再个站都是我开发的站！');
+			}
+		});
+	});
+	</script>
+  </head>
+  <body style="height: 1000px;width: 2000px;">
+  </body>
+</html>
