@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Models;
+using Atlass.Framework.Models.BaseData;
 using EasyCaching.Core;
 using System;
 using System.Collections.Concurrent;
@@ -12,12 +13,15 @@ namespace Atlass.Framework.Cache
     {
         private static ConcurrentDictionary<string,cms_site> SiteDic;
         private static ConcurrentDictionary<string, cms_upload_set> UploadSetDic;
+        private static ConcurrentDictionary<int, cms_ad> AdDic;
         static SiteManagerCache()
         {
             SiteDic = new ConcurrentDictionary<string, cms_site>();
             UploadSetDic = new ConcurrentDictionary<string, cms_upload_set>();
+            AdDic = new ConcurrentDictionary<int, cms_ad>();
         }
 
+        #region 站点基本信息
         /// <summary>
         /// 获取站点缓存信息
         /// </summary>
@@ -31,6 +35,7 @@ namespace Atlass.Framework.Cache
 
             return new cms_site();
         }
+       
         /// <summary>
         /// 设置站点缓存信息
         /// </summary>
@@ -44,7 +49,9 @@ namespace Atlass.Framework.Cache
             }
             SiteDic.TryAdd("cms_site", siteInfo);
         }
+        #endregion
 
+        #region 上传设置
         /// <summary>
         /// 获取上传设置
         /// </summary>
@@ -72,5 +79,33 @@ namespace Atlass.Framework.Cache
             }
             UploadSetDic.TryAdd("cms_upload_set", siteInfo);
         }
+        #endregion
+
+        #region 广告设置
+        /// <summary>
+        /// 设置广告
+        /// </summary>
+        /// <param name="dto"></param>
+         public static void AddAdvertising(cms_ad dto)
+        {
+            if (AdDic.ContainsKey(dto.id))
+            {
+                AdDic[dto.id] = dto;
+                return;
+            }
+            AdDic.TryAdd(dto.id, dto);
+        }
+        /// <summary>
+        /// 移除广告
+        /// </summary>
+        /// <param name="id"></param>
+        public static void RemoveAdvertising(int id)
+        {
+            if (AdDic.ContainsKey(id))
+            {
+                AdDic.TryRemove(id,out cms_ad dto);
+            }
+        }
+        #endregion
     }
 }

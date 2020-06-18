@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService.BasicData;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models.BaseData;
@@ -51,18 +52,21 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         public IActionResult Save(cms_ad dto)
         {
             dto.insert_id = RequestHelper.AdminInfo().Id;
-            _adApp.Save(dto);
+            dto=_adApp.Save(dto);
+            SiteManagerCache.AddAdvertising(dto);
             return Success("数据保存成功");
         }
         public IActionResult DeleteById(int id)
         {
             _adApp.DeleteById(id);
+            SiteManagerCache.RemoveAdvertising(id);
             return Success("删除成功");
         }
 
         public IActionResult Ban(int id)
         {
             _adApp.Ban(id);
+            SiteManagerCache.RemoveAdvertising(id);
             return Success("删除成功");
         }
 

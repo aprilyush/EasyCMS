@@ -27,7 +27,7 @@ namespace Atlass.Framework.AppService.BasicData
             return dto;
         }
 
-        public void Save(cms_ad dto)
+        public cms_ad Save(cms_ad dto)
         {
             dto.ad_href = dto.ad_href ?? "";
             dto.image_height = dto.image_height < 0 ? 100 : dto.image_height;
@@ -36,12 +36,13 @@ namespace Atlass.Framework.AppService.BasicData
             if (dto.id == 0)
             {
                
-                Sqldb.Insert(dto).ExecuteAffrows();
+                dto.id=(int)Sqldb.Insert(dto).ExecuteIdentity();
             }
             else
             {
                 Sqldb.Update<cms_ad>().SetSource(dto).ExecuteAffrows();
             }
+            return dto;
         }
 
         public cms_ad GetModel(int id)

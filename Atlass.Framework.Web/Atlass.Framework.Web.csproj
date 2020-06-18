@@ -295,6 +295,9 @@
     <None Include="wwwroot\plugins\codemirror\mode\yaml-frontmatter\yaml-frontmatter.js" />
     <None Include="wwwroot\plugins\codemirror\mode\yaml\yaml.js" />
     <None Include="wwwroot\plugins\codemirror\mode\z80\z80.js" />
+    <None Include="wwwroot\plugins\floatingAd\js\floatingAd.js" />
+    <None Include="wwwroot\plugins\floatingAd\psd\floatingAd.psd" />
+    <None Include="wwwroot\plugins\floatingAd\README.md" />
     <None Include="wwwroot\plugins\My97DatePicker\calendar.js" />
     <None Include="wwwroot\plugins\My97DatePicker\lang\en.js" />
     <None Include="wwwroot\plugins\My97DatePicker\lang\zh-cn.js" />
