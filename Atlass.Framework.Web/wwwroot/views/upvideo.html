@@ -14,6 +14,7 @@
     <link href="/hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="/hplus/css/animate.css" rel="stylesheet">
     <link href="/hplus/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" />
     <link href="/hplus/js/plugins/webuploader/webuploader.css" rel="stylesheet" />
 </head>
 
@@ -29,6 +30,19 @@
                     <tr>
                         <td style="width:150px;">视频地址：</td>
                         <td><input type="text" id="video_url" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px;">Ckplayer播放器类型：</td>
+                        <td>
+                            <div class="radio radio-success radio-inline">
+                                <input type="radio" id="player_type" value="h5" name="player_type" checked="">
+                                <label for="player_type">H5播放器</label>
+                            </div>
+                            <div class="radio radio-success radio-inline">
+                                <input type="radio" id="player_type2" value="flash" name="player_type" >
+                                <label for="player_type2">Flash</label>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td style="width:150px;">上传进度：</td>
@@ -55,7 +69,7 @@
     <script>
         var uploader,fileMd5='';
         $(function () {
-            localStorage.removeItem('videoUrl');
+            localStorage.removeItem('video');
             $.ajax({
                 url: '/api/upload/GetUploadSet',
                 type: 'get',
@@ -140,7 +154,7 @@
             uploader.on('uploadProgress',
                 function (file, percentage) {
                     var perText = percentage.toFixed(2) * 100;
-                    $('#msg').text('上传中，进度：' + perText);
+                    $('#msg').text('上传中，进度：' + perText+"%");
                 });
             uploader.on('uploadSuccess',
                 function (file, res) {
@@ -149,7 +163,7 @@
                         $.getJSON('/api/upload/Merge', { guid: GUID, fileName: file.name }, function (res) {
                           
                             if (res.status) {
-                                $('#msg').text('上传成功。。。');
+                                $('#msg').text('文件已上传100%，上传成功。。。');
                                 $('#video_url').val(res.data.url);
                                 return;
                             }
@@ -177,7 +191,12 @@
                 layer.alert('请先上传视频文件');
                 return;
             }
-            localStorage.setItem('videoUrl', videoUrl);
+            var video = {
+                videoUrl: videoUrl,
+                player: $('input:radio[name="player_type"]:checked').val()
+            }
+            var videoJson = JSON.stringify(video);
+            localStorage.setItem('video', videoJson);
             var index = parent.layer.getFrameIndex(window.name);
             if (index) {
                 parent.layer.close(index);
@@ -185,7 +204,7 @@
         }
 
         function cancel() {
-            localStorage.removeItem('videoUrl');
+            localStorage.removeItem('video');
             var index = parent.layer.getFrameIndex(window.name);
             if (index) {
                 parent.layer.close(index);

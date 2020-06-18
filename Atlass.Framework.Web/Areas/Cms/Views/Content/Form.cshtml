@@ -211,6 +211,7 @@
         }
 
         function upVideo() {
+            localStorage.removeItem("video");
             layer.open({
                 title:'视频上传',
                 type: 2,
@@ -220,13 +221,15 @@
                 content: '/views/upvideo.html',
                 end: function (lindex) {
                     layer.close(lindex); //如果设定了yes回调，需进行手工关闭
-                    console.log('关闭');
-                    var videoHref = localStorage.getItem("videoUrl");
-                    if (!jutils.empty(videoHref)) {
-                        var videoHtml = getVideoHtml(videoHref);
-                       // console.log(videoHtml);
-                        editor.execCommand('insertHtml', videoHtml);
-                        return;
+                    //console.log('关闭');
+                    var videoJson = localStorage.getItem("video");
+                    if (videoJson) {
+                        var video = JSON.parse(videoJson);
+                        if (!jutils.empty(video.videoUrl)) {
+                            var videoHtml = getVideoHtml(video);
+                            // console.log(videoHtml);
+                            editor.execCommand('insertHtml', videoHtml);
+                        }
                     }
                    // console.log('没有视频文件');
                 }
@@ -259,13 +262,13 @@
         }
 
 
-        function getVideoHtml(videoUrl) {
-            //var id = jutils.localTimeString();
+        function getVideoHtml(video) {
+            var id = jutils.localTimeString();
             //var videoHtml = '<div id="' + id + '" class="easycms-video" style="background:url(/static/images/video-clip.png) no-repeat 10px center;width:400px;height:400px;">';
             //videoHtml += '<embed src="/plugins/ckplayer/ckplayer.swf" flashvars="video=' + videoUrl + '"  quality="high" width="400" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>';
             //videoHtml += '</div>';
 
-            var videoHtml = '<img class="easycms-player" src="/static/images/video-clip.png" playurl="' + videoUrl + '" style="width:400px; height: 400px;">';
+            var videoHtml = '<img id="' + id+'" class="easycms-player" src="/static/images/video-clip.png" player="' + video.player+'" playurl="' + video.videoUrl + '" style="width:400px; height: 400px;">';
             return videoHtml;
         }
     </script>
