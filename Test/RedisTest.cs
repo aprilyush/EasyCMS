@@ -27,7 +27,7 @@ namespace Test
             //Console.WriteLine(list[list.Count - 1].ToFullString());
 
             // 字典
-            //var dic = redisHelper.GetDictionary<DateTime>("dic");
+            var dic = redisHelper.GetDictionary<DateTime>("dic");
             //dic.Add("dic", DateTime.Now);
             //dic.Add("dic2", DateTime.Now.AddDays(1));
             //Console.WriteLine(dic["dic"].ToFullString());

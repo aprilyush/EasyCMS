@@ -19,7 +19,7 @@ namespace Atlass.Framework.Core.Web
         private readonly IQueryCollection QueryString;
         private Dictionary<string, object> _postData;
 
-        private string CookieClaim = "atlass_user";
+        private string CookieClaim = "easycms_user";
         private bool _isAdminLoggin = false;
         private LoginUserDto _adminInfo;
         public AtlassReuqestHelper(IHttpContextAccessor context)
