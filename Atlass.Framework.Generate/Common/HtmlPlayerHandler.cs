@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Atlass.Framework.Generate
 {
-    public class HtmlElementHandler
+    public class HtmlPlayerHandler
     {
         public static string CreateVideo(string html)
         {
@@ -18,7 +18,7 @@ namespace Atlass.Framework.Generate
                 var bodyNode = htmlDoc.DocumentNode.SelectSingleNode("//body");
                 var videoNodes = bodyNode.SelectNodes("//img[@class='easycms-player']");
                 Dictionary<string, string> playList = new Dictionary<string, string>();
-               
+                byte needPlayer = 0;
                 foreach (var node in videoNodes)
                 {
                     string videoUrl = node.Attributes["playurl"].Value;
@@ -29,9 +29,11 @@ namespace Atlass.Framework.Generate
                     {
                         videoPlayer = H5Player(videoId);
                         playList.Add(videoId, videoUrl);
+                        needPlayer = 1;
                     }
                     else
                     {
+                        needPlayer = 1;
                         videoPlayer = FlashPlayer(videoUrl);
                     }
                     HtmlNode newChild = HtmlNode.CreateNode(videoPlayer);
@@ -41,15 +43,19 @@ namespace Atlass.Framework.Generate
                 }
 
                 //获取ckplayerjs引用
-                HtmlNode CkPlayerNode = HtmlNode.CreateNode(CkPlayerJs());
-                bodyNode.AppendChild(CkPlayerNode);
-
-                if (playList.Count > 0)
+                if (needPlayer == 1)
                 {
-                    var h5PlayerScript = H5PlayerJs(playList);
-                    HtmlNode h5PlayerJsNode = HtmlNode.CreateNode(h5PlayerScript);
-                    
-                    bodyNode.AppendChild(h5PlayerJsNode);
+                    HtmlNode CkPlayerNode = HtmlNode.CreateNode(CkPlayerJs());
+                    bodyNode.AppendChild(CkPlayerNode);
+
+                    //如果是h5播放器，需要添加额外控制脚本
+                    if (playList.Count > 0)
+                    {
+                        var h5PlayerScript = H5PlayerJs(playList);
+                        HtmlNode h5PlayerJsNode = HtmlNode.CreateNode(h5PlayerScript);
+
+                        bodyNode.AppendChild(h5PlayerJsNode);
+                    }
                 }
 
                 return htmlDoc.DocumentNode.InnerHtml; ;

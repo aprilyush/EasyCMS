@@ -64,7 +64,7 @@ namespace Atlass.Framework.Generate
                 this.Document.Variables.SetValue("this", this);
                 this.Document.Variables.SetValue("news", content);
                 string renderHtml = this.Document.GetRenderText();
-                renderHtml = HtmlElementHandler.CreateVideo(renderHtml);
+                renderHtml = HtmlPlayerHandler.CreateVideo(renderHtml);
                 watcher.Stop();
                 string msg = $"渲染内容页耗时：{watcher.ElapsedMilliseconds} ms";
 
