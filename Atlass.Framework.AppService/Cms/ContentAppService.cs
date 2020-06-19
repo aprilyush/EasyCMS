@@ -71,7 +71,7 @@ namespace Atlass.Framework.Models
         public void Update(cms_content dto)
         {
             Sqldb.Update<cms_content>().SetSource(dto)
-                .IgnoreColumns(s=>new { s.dept_id,s.insert_id,s.status,s.is_top,s.channel_id}).ExecuteAffrows();
+                .IgnoreColumns(s=>new { s.dept_id,s.insert_id,s.channel_id}).ExecuteAffrows();
         }
 
         /// <summary>

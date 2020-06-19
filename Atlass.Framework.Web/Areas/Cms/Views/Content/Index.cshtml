@@ -98,10 +98,10 @@
                     {
                         field: 'status', title: '状态', align: 'center', formatter: function (v) {
                             if (v === 1) {
-                                return '已审核';
+                                return '<span class="label label-primary">已审核</span>';
                             }
 
-                            return '待审核';
+                            return '<span class="label">待审核</span>';
                         }
                     },
                     {
