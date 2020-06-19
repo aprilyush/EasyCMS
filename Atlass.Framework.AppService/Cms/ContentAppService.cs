@@ -42,7 +42,7 @@ namespace Atlass.Framework.Models
             var query = Sqldb.Select<cms_content>()
                 .WhereIf(channelId>0,s=>s.channel_id==channelId)
                 .OrderByDescending(s => s.is_top)
-                .OrderByDescending(s=>s.update_time)
+                .OrderByDescending(s=>s.id)
                 .Page(param.page, param.limit)
                 .Count(out total)
                 .ToList();

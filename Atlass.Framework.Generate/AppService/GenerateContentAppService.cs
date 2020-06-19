@@ -67,7 +67,7 @@ namespace Atlass.Framework.Generate
             var list = Sqldb.Select<cms_content>()
                .Where(s => s.channel_id == channelId)
                .OrderByDescending(s=>s.is_top)
-               .OrderByDescending(s=>s.update_time)
+               .OrderByDescending(s=>s.id)
                .Page(1,psize)
                .ToList(s => new ContentModel
                {
@@ -118,7 +118,7 @@ namespace Atlass.Framework.Generate
             var list = Sqldb.Select<cms_content>()
                .Where(s => s.channel_id == channelId)
                .OrderByDescending(s => s.is_top)
-               .OrderByDescending(s => s.update_time)
+               .OrderByDescending(s => s.id)
                .Page(page, psize)
                .ToList(s => new ContentModel
                {
@@ -163,7 +163,7 @@ namespace Atlass.Framework.Generate
             var list = Sqldb.Select<cms_content>()
                .Where(s => s.channel_id == channelId)
                .OrderByDescending(s => s.is_top)
-               .OrderByDescending(s => s.update_time)
+               .OrderByDescending(s => s.id)
                .Page(page, psize)
                .ToList(s => new ContentModel
                {

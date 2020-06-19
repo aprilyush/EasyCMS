@@ -121,7 +121,16 @@
         }
 
         function renderTitle(v, d) {
-            return '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v + '</a>';
+            var thtml = '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v;
+            if (d.is_top==1) {
+                thtml += '<img src="/static/images/top.gif"/>&nbsp;&nbsp;';
+            }
+            if (d.hit_count > 100) {
+                thtml += '<img src="/static/images/hot.gif"/>&nbsp;&nbsp;';
+            }
+            thtml += '</a>';
+            return thtml;
+
             //return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
         }
         function add() {
