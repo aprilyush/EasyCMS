@@ -121,12 +121,15 @@
         }
 
         function renderTitle(v, d) {
-            var thtml = '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v;
+            var thtml = '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v +'&nbsp;&nbsp;';
             if (d.is_top==1) {
                 thtml += '<img src="/static/images/top.gif"/>&nbsp;&nbsp;';
             }
             if (d.hit_count > 100) {
                 thtml += '<img src="/static/images/hot.gif"/>&nbsp;&nbsp;';
+            }
+            if (d.is_recommend) {
+                thtml += '<img src="/static/images/tuijian.png"/>&nbsp;&nbsp;';
             }
             thtml += '</a>';
             return thtml;
@@ -178,6 +181,43 @@
                     $table.bootstrapTable('refresh');
                 })
             })
+        }
+
+
+        function setTop() {
+            var rows = $table.bootstrapTable('getSelections');
+
+            if (rows.length == 0) {
+                jutils.error("请选择需要置顶的文章数据行");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm("确认置顶选择的文章吗？", function () {
+                jutils.ajaxGet('/cms/content/SetTop', { ids: ids }, function (res) {
+                    $table.bootstrapTable('refresh');
+                });
+            });
+        }
+
+        function setRecomend() {
+            var rows = $table.bootstrapTable('getSelections');
+            if (rows.length == 0) {
+                jutils.error("请选择需要推荐的文章数据行");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm("确认置顶选择的文章吗？", function () {
+                jutils.ajaxGet('/cms/content/SetRecomend', { ids: ids }, function (res) {
+                    $table.bootstrapTable('refresh');
+                });
+            });
+
         }
     </script>
 }

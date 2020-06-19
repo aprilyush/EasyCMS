@@ -101,10 +101,15 @@ namespace Atlass.Framework.Models
 		 public string content_href { get; set; }
 
 		/// <summary>
-		/// 点击量
+		/// 点击量 用来统计是否热门，比如超过100自动为热门
 		/// </summary>
 		[JsonProperty]
 		public int hit_count { get; set; }
+		/// <summary>
+		/// 设置推荐
+		/// </summary>
+		[JsonProperty]
+		public int is_recommend { get; set; }
 		[JsonProperty]
 		public long insert_id { get; set; }
 

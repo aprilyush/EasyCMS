@@ -118,5 +118,18 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             _contentApp.DelByIds(id);
             return Success("删除成功");
         }
+
+        public IActionResult SetTop(string ids)
+        {
+            _contentApp.SetTop(ids);
+            return Success("删除成功");
+        }
+
+        public IActionResult SetRecomend(string ids)
+        {
+            _contentApp.SetRecomend(ids);
+            return Success("删除成功");
+        }
+        
     }
 }
