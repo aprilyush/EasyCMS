@@ -64,6 +64,10 @@ namespace Atlass.Framework.Generate
 		/// 点击量
 		/// </summary>
 		public int hit_count { get; set; }
+		/// <summary>
+		/// 是否推荐
+		/// </summary>
+		public int recommend { get; set; }
 	    
 		public DateTime publish_time { get; set; }
 		public DateTime last_edit_time { get; set; }

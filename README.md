@@ -1,5 +1,5 @@
 # EasyCms
-&emsp;&emsp;Atlass.Framework 后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
+&emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
 ## 发展目标
 &emsp;&emsp;EasyCms是基于Atlass Framework实现一个产品化的项目，Atlass Framework原来是实现一个适合自己公司项目的基础开发框架。  
  &emsp;&emsp;由于本人近两年一直和本地一家公司长期合为政府部门做CMS系统以及其他后台管理系统，自认为还是比较了解这些部门需要什么样的cms管理系统，需要哪些功能，
@@ -20,6 +20,8 @@
  http://cms.atlass.cn:9090  
  因项目在开发中，不再提供后台演示用户，只演示前台，用于展示模板的渲染能力，如果感兴趣，请下载源码  
  本地超级管理员 admin 123123
+## 依赖环境
+  [模板使用文档](https://www.yuque.com/jasonyush/easycms/dorh3a)
 ## 依赖环境
 asp.net core3.1, redis,mysql
 ## 功能列表（只列出CMS模块的）
