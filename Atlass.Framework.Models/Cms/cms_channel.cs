@@ -80,7 +80,7 @@ namespace Atlass.Framework.Models
 
 
 		/// <summary>
-		/// 0-默认，1-链接到第一篇文章
+		/// 0-默认，1-链接到第一篇文章,2-链接到子栏目
 		/// </summary>
 		[JsonProperty]
 		public int link_type { get; set; }

@@ -54,6 +54,16 @@ namespace Atlass.Framework.AppService.Cms
             return dto;
         }
 
+        public List<DicKeyDto> GetSubChannel(int channelId)
+        {
+            if (channelId == 0)
+            {
+                return new List<DicKeyDto>();
+            }
+            var subChannels = Sqldb.Select<cms_channel>().Where(s => s.parent_id == channelId)
+                .ToList(s => new DicKeyDto { id = s.id, name = s.channel_name });
+            return subChannels;
+        }
         /// <summary>
         ///更新数据
         /// </summary>

@@ -11,6 +11,7 @@ using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Atlass.Framework.Web.Areas.Cms.Controllers
@@ -39,14 +40,25 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         public ActionResult Form(int id)
         {
             ViewBag.Id = id;
+            var subChannels = _channelApp.GetSubChannel(id);
+            subChannels.Insert(0, new DicKeyDto { id = 0, name = "请选择子栏目链接" });
+            ViewBag.SubChannels = new SelectList(subChannels, "id", "name");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Save(cms_channel dto)
+        public IActionResult Save(cms_channel dto,int sub_channel)
         {
             dto.channel_href = dto.channel_href ?? "";
             dto.channel_image = dto.channel_image ?? "";
+
+            if (dto.link_type == 2)
+            {
+                if (sub_channel > 0)
+                {
+                    dto.channel_href = $"/channel/{sub_channel}";
+                }
+            }
             if (dto.id == 0)
             {
                 dto.insert_id = RequestHelper.AdminInfo().Id;
