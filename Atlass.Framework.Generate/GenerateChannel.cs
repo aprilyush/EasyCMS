@@ -13,10 +13,10 @@ namespace Atlass.Framework.Generate
 {
     public class GenerateChannel
     {
-        private readonly GenerateContentAppService _generateContentApp;
+        private readonly GenerateAppService _generateContentApp;
         public GenerateChannel()
         {
-            _generateContentApp = new GenerateContentAppService();
+            _generateContentApp = new GenerateAppService();
         }
         /// <summary>
         /// 当前页面的模板文档对象

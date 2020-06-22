@@ -16,10 +16,10 @@ namespace Atlass.Framework.Generate
     {
        
         
-        private readonly GenerateContentAppService _contentApp;
+        private readonly GenerateAppService _contentApp;
         public GenerateContent()
         {
-            _contentApp = new GenerateContentAppService();
+            _contentApp = new GenerateAppService();
         }
         /// <summary>
         /// 当前页面的模板文档对象

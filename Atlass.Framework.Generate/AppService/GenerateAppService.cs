@@ -14,10 +14,10 @@ namespace Atlass.Framework.Generate
     /// <summary>
     /// 模板数据源，通用包含了新闻内容，面包屑，栏目信息的基本数据
     /// </summary>
-    public class GenerateContentAppService
+    public class GenerateAppService
     {
         private readonly  IFreeSql Sqldb;
-        public GenerateContentAppService() {
+        public GenerateAppService() {
             Sqldb =FreesqlDbInstance.GetInstance();
         }
 
