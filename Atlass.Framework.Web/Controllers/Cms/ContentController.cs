@@ -16,10 +16,10 @@ namespace Atlass.Framework.Web.Controllers.Cms
     public class ContentController : CmsController
     {
 
-        private readonly GenerateContentAppService _contentApp;
+        private readonly GenerateAppService _contentApp;
         public ContentController(IServiceProvider service)
         {
-            _contentApp = new GenerateContentAppService();
+            _contentApp = new GenerateAppService();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Atlass.Framework.Web.Controllers.Cms
 
         public IActionResult GetChannelTree()
         {
-            GenerateContentAppService genData = new GenerateContentAppService();
+            GenerateAppService genData = new GenerateAppService();
             var channelTree = genData.GetChannelTree();
             return Json(channelTree);
         }
