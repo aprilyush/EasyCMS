@@ -286,8 +286,10 @@ namespace Atlass.Framework.Core.Web
                 Expires = DateTime.UtcNow.AddHours(10),
                 Path = "/",
                 HttpOnly = false,
-                Secure = true,
-                SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
+                IsEssential = true,
+                Secure = false
+                //Secure = true,
+                //SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
             });
         }
         public void RemoveCookie()
@@ -303,8 +305,10 @@ namespace Atlass.Framework.Core.Web
                 Expires = DateTime.UtcNow.AddSeconds(expireSecond),
                 Path = "/",
                 HttpOnly = false,
-                Secure = true,
-                SameSite= Microsoft.AspNetCore.Http.SameSiteMode.None
+                IsEssential = true,
+                Secure = false,
+                //Secure = true,
+                //SameSite= Microsoft.AspNetCore.Http.SameSiteMode.None
             });
         }
         public void RemoveCookie(string key)
@@ -347,8 +351,10 @@ namespace Atlass.Framework.Core.Web
                 Expires = DateTime.UtcNow.AddSeconds(expireSecond),
                 Path = "/",
                 HttpOnly = false,
-                Secure = true,
-                SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
+                IsEssential=true,
+                Secure=false
+                //Secure = true,
+                //SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
             });
         }
         #endregion 
