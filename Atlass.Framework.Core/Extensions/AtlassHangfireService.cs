@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Atlass.Framework.Core.HangfireExtend;
+using Hangfire;
 using Hangfire.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,12 @@ namespace Atlass.Framework.Core.Extensions
             hgOpts.Password = redisPwd;
 
             var _redisContext = ConnectionMultiplexer.Connect(hgOpts);
-            services.AddHangfire(x => x.UseRedisStorage(_redisContext, new RedisStorageOptions()
+
+
+            //hangfire
+            GlobalStateHandlers.Handlers.Add(new SucceededStateExpireHandler(30));
+            services.AddHangfire(x => x.UseLogProvider(new CustomLogProvider())
+            .UseRedisStorage(_redisContext, new RedisStorageOptions()
             {
                 Prefix = "{doctorPlatform}:{auto_job}:"
             }));
