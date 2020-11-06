@@ -8,6 +8,7 @@ using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core;
 using Atlass.Framework.Core.DI;
 using Atlass.Framework.Core.Extensions;
+using Atlass.Framework.Core.HangfireExtend;
 using Atlass.Framework.Core.HostService;
 using Atlass.Framework.Core.Middleware;
 using Atlass.Framework.ViewModels;
@@ -15,7 +16,6 @@ using Autofac;
 using EasyCaching.Core;
 using EasyCaching.ResponseCaching;
 using Hangfire;
-using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +26,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Senparc.CO2NET;
@@ -36,7 +35,6 @@ using Senparc.Weixin.Entities;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.RegisterServices;
 using Senparc.Weixin.TenPay;
-using StackExchange.Redis;
 
 namespace Atlass.Framework.Web
 {
@@ -169,11 +167,11 @@ namespace Atlass.Framework.Web
             {
                 Queues = new[] { "default"}
             });
-            app.UseHangfireDashboard();
-            //app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-            //{
-            //    Authorization = new[] { new HangfireAuthorizeFilter() }
-            //});
+          //  app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
+            {
+                Authorization = new[] { new HangfireAuthorizeFilter() }
+            });
 
 
             //关于 UseSenparcGlobal() 的更多用法见 CO2NET Demo：

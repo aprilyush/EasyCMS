@@ -36,8 +36,8 @@
     <Reference Include="Cronos, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Cronos.0.7.0\lib\net45\Cronos.dll</HintPath>
     </Reference>
-    <Reference Include="CSRedisCore, Version=3.6.3.0, Culture=neutral, PublicKeyToken=9aa6a3079358d437, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\CSRedisCore.3.6.3\lib\net45\CSRedisCore.dll</HintPath>
+    <Reference Include="CSRedisCore, Version=3.6.5.0, Culture=neutral, PublicKeyToken=9aa6a3079358d437, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\CSRedisCore.3.6.5\lib\net45\CSRedisCore.dll</HintPath>
     </Reference>
     <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
@@ -45,15 +45,15 @@
     <Reference Include="Fizzler.Systems.HtmlAgilityPack, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Fizzler.Systems.HtmlAgilityPack.1.2.1\lib\netstandard2.0\Fizzler.Systems.HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.26.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\HtmlAgilityPack.1.11.26\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="NewLife.Core, Version=8.7.7456.18647, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Core.8.7.2020.601\lib\net46\NewLife.Core.dll</HintPath>
+    <Reference Include="NewLife.Core, Version=8.10.7610.22741, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Core.8.10.2020.1101\lib\net46\NewLife.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NewLife.Redis, Version=3.6.7456.21154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Redis.3.6.2020.601\lib\net45\NewLife.Redis.dll</HintPath>
+    <Reference Include="NewLife.Redis, Version=3.8.7610.23764, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\NewLife.Redis.3.8.2020.1101\lib\net45\NewLife.Redis.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
