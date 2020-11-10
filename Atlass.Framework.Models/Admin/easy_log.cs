@@ -11,6 +11,7 @@ namespace Atlass.Framework.Models.Admin
         [Column(IsIdentity =true)]
         public int id { get; set; }
         public string log_summary { get; set; }
+        [Column(StringLength = -1)]
         public string log_message { get; set; }
         /// <summary>
         /// 1-info,2-debug,3-warn,4-error
