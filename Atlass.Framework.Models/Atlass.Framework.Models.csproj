@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="1.10.3" />
+    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.0.101" />
+    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.0.101" />
+    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.0.101" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
