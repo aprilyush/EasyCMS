@@ -26,7 +26,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         public HangfireJobController(IServiceProvider service, IOptionsMonitor<SenparcWeixinSetting> senparcWeixinSetting)
         {
             _wxSetting = senparcWeixinSetting.CurrentValue;
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _logApp = service.GetRequiredService<HangfireJobAppService>();
         }
         public IActionResult Index()

@@ -21,7 +21,7 @@ namespace Altas.Framework.Admin
 
         public SysRoleController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _roleApp = service.GetRequiredService<SysRoleAppService>();
         }
         public ActionResult Index()

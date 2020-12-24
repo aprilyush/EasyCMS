@@ -26,7 +26,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         private readonly CmsTemplateAppService _templateApp;
         public TemplateCodeController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _templateApp = service.GetRequiredService<CmsTemplateAppService>();
         }
         public IActionResult Index()

@@ -22,7 +22,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         private readonly ChannelAppService _channelApp;
         public ChannelController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _channelApp=service.GetRequiredService<ChannelAppService>();
 
         }

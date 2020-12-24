@@ -23,7 +23,7 @@ namespace Altas.Framework.Admin
 
         public SysUserController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _userApp = service.GetRequiredService<SysUserAppService>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }

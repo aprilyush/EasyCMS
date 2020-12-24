@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Atlass.Framework.Core.Web
 {
-    public class AtlassReuqestHelper: IAtlassReuqestHelper
+    public class AtlassRequest: IAtlassRequest
     {
         private readonly HttpContext _context;
         private readonly HttpRequest HttpRequest;
@@ -23,7 +23,7 @@ namespace Atlass.Framework.Core.Web
         private string CookieClaim = "easycms_user";
         private bool _isAdminLoggin = false;
         private LoginUserDto _adminInfo;
-        public AtlassReuqestHelper(IHttpContextAccessor context)
+        public AtlassRequest(IHttpContextAccessor context)
         {
             _context = context.HttpContext;
             HttpRequest = _context.Request;
@@ -101,11 +101,20 @@ namespace Atlass.Framework.Core.Web
         }
 
 
+        /// <summary>
+        /// 判断是否存在参数
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool IsQueryExists(string name)
         {
             return QueryString.ContainsKey(name);
         }
-
+        /// <summary>
+        /// 获取GET请求参数的值 string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string GetQueryString(string name)
         {
             if (IsQueryExists(name))
@@ -114,6 +123,11 @@ namespace Atlass.Framework.Core.Web
             }
             return null;
         }
+        /// <summary>
+        /// 获取GET请求参数的值 string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string GetQueryString(string name, string defaultValue = "")
         {
             if (IsQueryExists(name))
@@ -122,6 +136,11 @@ namespace Atlass.Framework.Core.Web
             }
             return defaultValue;
         }
+        /// <summary>
+        /// 获取GET请求参数的值 int
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public int GetQueryInt(string name, int defaultValue = 0)
         {
             if (IsQueryExists(name))
@@ -131,7 +150,26 @@ namespace Atlass.Framework.Core.Web
             return defaultValue;
 
         }
+        /// <summary>
+        /// 获取GET参数的值 Int64
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public long GetQueryInt64(string name, long defaultValue = 0)
+        {
+            var value = GetPostObject(name);
+            if (value == null) return defaultValue;
+            if (value is long) return (long)value;
+            return value.ToInt64();
+        }
 
+
+
+        /// <summary>
+        /// 获取GET请求参数的值 Decimal
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public decimal GetQueryDecimal(string name, decimal defaultValue = 0)
         {
             if (IsQueryExists(name))
@@ -141,7 +179,11 @@ namespace Atlass.Framework.Core.Web
             return defaultValue;
 
         }
-
+        /// <summary>
+        /// 获取GET请求参数的值 Bool
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool GetQueryBool(string name, bool defaultValue = false)
         {
             if (IsQueryExists(name))
@@ -151,14 +193,18 @@ namespace Atlass.Framework.Core.Web
             return defaultValue;
 
         }
-
+        /// <summary>
+        /// 判断Post请求参数是否存在
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool IsPostExists(string name)
         {
             return PostData.ContainsKey(name);
         }
 
         /// <summary>
-        /// 
+        /// 参数转为对象T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name"></param>
@@ -188,13 +234,22 @@ namespace Atlass.Framework.Core.Web
             return default(T);
         }
 
+        /// <summary>
+        /// 获取Post参数的值
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private object GetPostObject(string name)
         {
             if (string.IsNullOrEmpty(name)) return null;
 
             return PostData.TryGetValue(name, out var value) ? value : null;
         }
-
+        /// <summary>
+        /// 获取Post参数的值 String
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string GetPostString(string name)
         {
             var value = GetPostObject(name);
@@ -202,6 +257,12 @@ namespace Atlass.Framework.Core.Web
             if (value is string) return (string)value;
             return value.ToString();
         }
+
+        /// <summary>
+        /// 获取Post参数的值 String
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string GetPostString(string name, string defaultValue = "")
         {
             var value = GetPostObject(name);
@@ -210,6 +271,11 @@ namespace Atlass.Framework.Core.Web
             return value.ToString();
         }
 
+        /// <summary>
+        /// 获取Post参数的值 Int
+        /// </summary> 
+        /// <param name="name"></param>
+        /// <returns></returns>
         public int GetPostInt(string name, int defaultValue = 0)
         {
             var value = GetPostObject(name);
@@ -217,13 +283,25 @@ namespace Atlass.Framework.Core.Web
             if (value is int) return (int)value;
             return value.ToInt() ;
         }
-        public long GetPostBigInt(string name, long defaultValue = 0)
+
+        /// <summary>
+        /// 获取Post参数的值 Int64
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public long GetPostInt64(string name, long defaultValue = 0)
         {
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is long) return (long)value;
             return value.ToInt64();
         }
+
+        /// <summary>
+        /// 获取Post参数的值 Decimal
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public decimal GetPostDecimal(string name, decimal defaultValue = 0)
         {
             var value = GetPostObject(name);
@@ -231,7 +309,11 @@ namespace Atlass.Framework.Core.Web
             if (value is decimal) return (decimal)value;
             return value.ToDecimal();
         }
-
+        /// <summary>
+        /// 获取Post参数的值 Bool
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool GetPostBool(string name, bool defaultValue = false)
         {
             var value = GetPostObject(name);
@@ -239,7 +321,11 @@ namespace Atlass.Framework.Core.Web
             if (value is bool) return (bool)value;
             return value.ToBool();
         }
-
+        /// <summary>
+        /// 获取Post参数的值 DateTime
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public DateTime GetPostDateTime(string name, DateTime defaultValue)
         {
             var value = GetPostObject(name);

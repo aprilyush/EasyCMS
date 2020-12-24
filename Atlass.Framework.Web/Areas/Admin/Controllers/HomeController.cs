@@ -21,7 +21,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         private readonly SysMenuAppService _menuApp;
         public HomeController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _menuApp = service.GetRequiredService<SysMenuAppService>();
         }
         public IActionResult Index()

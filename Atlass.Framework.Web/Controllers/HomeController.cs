@@ -28,8 +28,8 @@ namespace Atlass.Framework.Web.Controllers
     {
 
         public SenparcWeixinSetting _wxSetting;
-        private readonly IAtlassReuqestHelper RequestHelper;
-        public HomeController(IOptions<SenparcWeixinSetting> senparcWeixinSetting, IAtlassReuqestHelper requestHelper)
+        private readonly IAtlassRequest RequestHelper;
+        public HomeController(IOptions<SenparcWeixinSetting> senparcWeixinSetting, IAtlassRequest requestHelper)
         {
             _wxSetting = senparcWeixinSetting.Value;
             RequestHelper = requestHelper;

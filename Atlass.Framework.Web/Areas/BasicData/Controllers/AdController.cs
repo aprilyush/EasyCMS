@@ -21,7 +21,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         private readonly AdAppService _adApp;
         public AdController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _adApp = service.GetRequiredService<AdAppService>();
         }
         public IActionResult Index()

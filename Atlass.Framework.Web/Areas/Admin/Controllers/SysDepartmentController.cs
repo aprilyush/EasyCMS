@@ -19,7 +19,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         private readonly SysDepartmentAppService _deptApp;
         public SysDepartmentController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }
         [HttpGet]

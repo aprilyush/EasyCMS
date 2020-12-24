@@ -16,8 +16,8 @@ namespace Atlass.Framework.Web.Controllers
     public class LoginController : Controller
     {
         private readonly SysUserAppService _userApp;
-        private readonly IAtlassReuqestHelper RequestHelper;
-        public LoginController(SysUserAppService userApp, IAtlassReuqestHelper AtlassRequestHelper)
+        private readonly IAtlassRequest RequestHelper;
+        public LoginController(SysUserAppService userApp, IAtlassRequest AtlassRequestHelper)
         {
             _userApp = userApp;
             RequestHelper = AtlassRequestHelper;

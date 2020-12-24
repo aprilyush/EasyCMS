@@ -18,8 +18,8 @@ namespace Atlass.Framework.Web.ApiControllers
     [ApiController]
     public class BdUploadController : ControllerBase
     {
-        private readonly IAtlassReuqestHelper RequestHelper;
-        public BdUploadController(IAtlassReuqestHelper atlassReuqest)
+        private readonly IAtlassRequest RequestHelper;
+        public BdUploadController(IAtlassRequest atlassReuqest)
         {
             RequestHelper = atlassReuqest;
         }

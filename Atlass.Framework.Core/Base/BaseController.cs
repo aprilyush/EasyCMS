@@ -12,7 +12,7 @@ namespace Atlass.Framework.Core.Base
     [ServiceFilter(typeof(AtlassActionFilterAttribute))]
     public class BaseController: Controller
     {
-        protected IAtlassReuqestHelper RequestHelper;
+        protected IAtlassRequest RequestHelper;
         public BaseController()
         {
             

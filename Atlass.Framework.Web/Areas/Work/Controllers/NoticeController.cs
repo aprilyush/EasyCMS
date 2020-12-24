@@ -21,7 +21,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         private readonly SysDepartmentAppService _deptApp;
         public NoticeController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _noticeApp=service.GetRequiredService<NoticeAppService>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }

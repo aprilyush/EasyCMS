@@ -20,7 +20,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
 
         public WeiXinSetController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _weiXinSetApp = service.GetRequiredService<WeiXinSetAppService>();
         }
         public IActionResult Index()

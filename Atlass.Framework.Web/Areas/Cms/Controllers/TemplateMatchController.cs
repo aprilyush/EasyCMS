@@ -18,7 +18,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
         public TemplateMatchController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _tempApp = service.GetRequiredService<CmsTemplateAppService>();
 
         }

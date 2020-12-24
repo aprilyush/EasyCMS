@@ -20,8 +20,8 @@ namespace Atlass.Framework.Web.ApiControllers
     [ApiController]
     public class UploadController : ControllerBase
     {
-        private readonly IAtlassReuqestHelper RequestHelper;
-        public UploadController(IAtlassReuqestHelper requestHelper)
+        private readonly IAtlassRequest RequestHelper;
+        public UploadController(IAtlassRequest requestHelper)
         {
             RequestHelper = requestHelper;
         }

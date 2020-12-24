@@ -24,7 +24,7 @@ namespace Altas.Framework.Admin
 
         public SysAreaController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _areaApp= service.GetRequiredService<SysAreaAppService>();
         }
         public ActionResult Index()

@@ -21,7 +21,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         private readonly ContentAppService _contentApp;
         public ContentController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _contentApp = service.GetRequiredService<ContentAppService>();
 
         }

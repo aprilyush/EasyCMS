@@ -23,7 +23,7 @@ namespace Altas.Framework.Admin
 
         public SysDicController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _dicApp = service.GetRequiredService<SysDicAppService>();
         }
         public ActionResult Index()

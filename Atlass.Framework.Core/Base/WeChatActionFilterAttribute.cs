@@ -12,8 +12,8 @@ namespace Atlass.Framework.Core.Base
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class WeChatActionFilterAttribute: ActionFilterAttribute
     {
-        private readonly IAtlassReuqestHelper ReuqestHelper;
-        public WeChatActionFilterAttribute(IAtlassReuqestHelper atlassReuqest)
+        private readonly IAtlassRequest ReuqestHelper;
+        public WeChatActionFilterAttribute(IAtlassRequest atlassReuqest)
         {
             ReuqestHelper = atlassReuqest;
         }

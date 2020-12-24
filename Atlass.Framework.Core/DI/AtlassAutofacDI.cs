@@ -21,7 +21,7 @@ namespace Atlass.Framework.Core.DI
 
             //dbcontext注入
             //builder.RegisterType<MySqlDbContext>().As<IAltasDbContext>().InstancePerLifetimeScope();
-            builder.RegisterType<AtlassReuqestHelper>().As<IAtlassReuqestHelper>().InstancePerLifetimeScope();
+            builder.RegisterType<AtlassRequest>().As<IAtlassRequest>().InstancePerLifetimeScope();
 
 
             builder.RegisterType<AtlassActionFilterAttribute>().AsSelf().InstancePerLifetimeScope();

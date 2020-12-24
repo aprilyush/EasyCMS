@@ -20,7 +20,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         private readonly EasyLogAppService _logApp;
         public EasyLogController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _logApp = service.GetRequiredService<EasyLogAppService>();
         }
         public IActionResult Index()

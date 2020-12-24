@@ -22,7 +22,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         private readonly SysDepartmentAppService _deptApp;
         public AddressBookController(IServiceProvider service)
         {
-            RequestHelper = service.GetRequiredService<IAtlassReuqestHelper>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _addressBookApp = service.GetRequiredService<AddressBookAppService>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }

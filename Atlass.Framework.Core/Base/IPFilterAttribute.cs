@@ -16,8 +16,8 @@ namespace Atlass.Framework.Core.Base
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class IPFilterAttribute: ActionFilterAttribute
     {
-        private readonly IAtlassReuqestHelper RequestHelper;
-        public IPFilterAttribute(IAtlassReuqestHelper atlassReuqest)
+        private readonly IAtlassRequest RequestHelper;
+        public IPFilterAttribute(IAtlassRequest atlassReuqest)
         {
             RequestHelper = atlassReuqest;
         }

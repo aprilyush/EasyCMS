@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Atlass.Framework.Core.Web
 {
-    public interface IAtlassReuqestHelper
+    public interface IAtlassRequest
     {
         public bool IsAdminLoggin();
         public LoginUserDto AdminInfo();
@@ -18,7 +18,7 @@ namespace Atlass.Framework.Core.Web
         public bool GetPostBool(string name, bool defaultValue = false);
         public decimal GetPostDecimal(string name, decimal defaultValue = 0);
         public int GetPostInt(string name, int defaultValue = 0);
-        public long GetPostBigInt(string name, long defaultValue = 0);
+        public long GetPostInt64(string name, long defaultValue = 0);
         // T GetPostObject<T>(string name = "");
         public string GetPostString(string name);
         public string GetPostString(string name, string defaultValue = "");
