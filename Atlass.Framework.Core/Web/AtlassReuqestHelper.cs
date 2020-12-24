@@ -85,7 +85,7 @@ namespace Atlass.Framework.Core.Web
 
                 if (string.IsNullOrEmpty(bodyJson)) return _postData;
 
-                var dict = TranslateUtils.JsonDeserialize<Dictionary<string, object>>(bodyJson);
+                var dict = CommHelper.JsonDeserialize<Dictionary<string, object>>(bodyJson);
                 if (dict == null)
                 {
                     return _postData;
@@ -125,7 +125,7 @@ namespace Atlass.Framework.Core.Web
         {
             if (IsQueryExists(name))
             {
-                return TranslateUtils.ToIntWithNagetive(QueryString[name]);
+                return QueryString[name].ToInt();
             }
             return defaultValue;
 
@@ -135,7 +135,7 @@ namespace Atlass.Framework.Core.Web
         {
             if (IsQueryExists(name))
             {
-                return TranslateUtils.ToDecimalWithNagetive(QueryString[name]);
+                return QueryString[name].ToDecimal();
             }
             return defaultValue;
 
@@ -145,7 +145,7 @@ namespace Atlass.Framework.Core.Web
         {
             if (IsQueryExists(name))
             {
-                return TranslateUtils.ToBool(QueryString[name]);
+                return QueryString[name].ToBool();
             }
             return defaultValue;
 
@@ -200,21 +200,21 @@ namespace Atlass.Framework.Core.Web
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is int) return (int)value;
-            return TranslateUtils.ToIntWithNagetive(value.ToString(), defaultValue);
+            return value.ToInt() ;
         }
         public long GetPostBigInt(string name, long defaultValue = 0)
         {
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is long) return (long)value;
-            return TranslateUtils.ToBigIntWithNagetive(value.ToString(), defaultValue);
+            return value.ToInt64();
         }
         public decimal GetPostDecimal(string name, decimal defaultValue = 0)
         {
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is decimal) return (decimal)value;
-            return TranslateUtils.ToDecimalWithNagetive(value.ToString(), defaultValue);
+            return value.ToDecimal();
         }
 
         public bool GetPostBool(string name, bool defaultValue = false)
@@ -222,7 +222,7 @@ namespace Atlass.Framework.Core.Web
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is bool) return (bool)value;
-            return TranslateUtils.ToBool(value.ToString(), defaultValue);
+            return value.ToBool();
         }
 
         public DateTime GetPostDateTime(string name, DateTime defaultValue)
@@ -230,7 +230,7 @@ namespace Atlass.Framework.Core.Web
             var value = GetPostObject(name);
             if (value == null) return defaultValue;
             if (value is DateTime) return (DateTime)value;
-            return TranslateUtils.ToDateTime(value.ToString(), defaultValue);
+            return value.ToDate();
         }
 
         /// <summary>

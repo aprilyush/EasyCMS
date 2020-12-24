@@ -12,8 +12,11 @@ using System.Threading.Tasks;
 
 namespace Atlass.Framework.Common
 {
-    public class TranslateUtils
+    public class CommHelper
     {
+        private static Encoding Gb2312 { get; } = Encoding.GetEncoding("gb2312");
+
+        #region 类型转换
         public static T Cast<T>(object value, T defaultValue = default(T))
         {
             switch (value)
@@ -60,216 +63,15 @@ namespace Atlass.Framework.Common
             }
             return retVal;
         }
+        #endregion
 
-        public static List<int> ToIntList(int intValue)
+        #region 字符串操作
+        public static bool EqualsIgnoreCase(string a, string b)
         {
-            return new List<int> { intValue };
-        }
+            if (a == b) return true;
+            if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b)) return false;
 
-        public static int ToInt(string intStr, int defaultValue = 0)
-        {
-            if (!int.TryParse(intStr?.Trim().TrimStart('0'), out var i))
-            {
-                i = defaultValue;
-            }
-            if (i < 0)
-            {
-                i = defaultValue;
-            }
-            return i;
-        }
-
-        public static int ToIntWithNagetive(string intStr, int defaultValue = 0)
-        {
-            if (!int.TryParse(intStr?.Trim(), out var i))
-            {
-                i = defaultValue;
-            }
-            return i;
-        }
-        public static long ToBigIntWithNagetive(string intStr, long defaultValue = 0)
-        {
-            if (!long.TryParse(intStr?.Trim(), out var i))
-            {
-                i = defaultValue;
-            }
-            return i;
-        }
-        public static decimal ToDecimal(string intStr, decimal defaultValue = 0)
-        {
-            if (!decimal.TryParse(intStr?.Trim(), out var i))
-            {
-                i = defaultValue;
-            }
-            if (i < 0)
-            {
-                i = defaultValue;
-            }
-            return i;
-        }
-
-        public static decimal ToDecimalWithNagetive(string intStr, decimal defaultValue = 0)
-        {
-            if (!decimal.TryParse(intStr?.Trim(), out var i))
-            {
-                i = defaultValue;
-            }
-            return i;
-        }
-
-        public static long ToLong(string intStr, long defaultValue = 0)
-        {
-            if (!long.TryParse(intStr?.Trim(), out var l))
-            {
-                l = defaultValue;
-            }
-            if (l < 0)
-            {
-                l = defaultValue;
-            }
-            return l;
-        }
-
-        public static bool ToBool(string boolStr)
-        {
-            if (!bool.TryParse(boolStr?.Trim(), out var boolean))
-            {
-                boolean = false;
-            }
-            return boolean;
-        }
-
-        public static bool ToBool(string boolStr, bool defaultValue)
-        {
-            if (!bool.TryParse(boolStr?.Trim(), out var boolean))
-            {
-                boolean = defaultValue;
-            }
-            return boolean;
-        }
-
-        //public static DateTime ToDateTime(string dateTimeStr)
-        //{
-        //    var datetime = DateUtils.SqlMinValue;
-        //    if (!string.IsNullOrEmpty(dateTimeStr))
-        //    {
-        //        if (!DateTime.TryParse(dateTimeStr.Trim(), out datetime))
-        //        {
-        //            datetime = DateUtils.SqlMinValue;
-        //        }
-        //    }
-        //    if (datetime < DateUtils.SqlMinValue)
-        //    {
-        //        datetime = DateUtils.SqlMinValue;
-        //    }
-        //    return datetime;
-        //}
-
-        public static DateTime ToDateTime(string dateTimeStr, DateTime defaultValue)
-        {
-            var datetime = defaultValue;
-            if (!string.IsNullOrEmpty(dateTimeStr))
-            {
-                if (!DateTime.TryParse(dateTimeStr.Trim(), out datetime))
-                {
-                    datetime = defaultValue;
-                }
-                return datetime;
-            }
-            return datetime;
-        }
-
-     
-
-
-
-        public static string ToTwoCharString(int i)
-        {
-            return i >= 0 && i <= 9 ? $"0{i}" : i.ToString();
-        }
-
-        public static List<int> StringCollectionToIntList(string collection)
-        {
-            var list = new List<int>();
-            if (!string.IsNullOrEmpty(collection))
-            {
-                var array = collection.Split(',');
-                foreach (var s in array)
-                {
-                    int.TryParse(s.Trim(), out var i);
-                    list.Add(i);
-                }
-            }
-            return list;
-        }
-
-        public static List<string> StringCollectionToStringList(string collection, char split = ',')
-        {
-            var list = new List<string>();
-            if (!string.IsNullOrEmpty(collection))
-            {
-                var array = collection.Split(split);
-                foreach (var s in array)
-                {
-                    list.Add(s);
-                }
-            }
-            return list;
-        }
-
-        public static IDictionary<string, object> ToDictionary(NameValueCollection collection)
-        {
-            var dict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            if (collection == null) return dict;
-
-            foreach (var key in collection.AllKeys)
-            {
-                dict[key] = collection[key];
-            }
-
-            return dict;
-        }
-
-        public static StringCollection StringCollectionToStringCollection(string collection, char separator = ',')
-        {
-            var arraylist = new StringCollection();
-            if (!string.IsNullOrEmpty(collection))
-            {
-                var array = collection.Split(separator);
-                foreach (var s in array)
-                {
-                    arraylist.Add(s.Trim());
-                }
-            }
-            return arraylist;
-        }
-
-        public static string ObjectCollectionToString(ICollection collection)
-        {
-            var builder = new StringBuilder();
-            if (collection != null)
-            {
-                foreach (var obj in collection)
-                {
-                    builder.Append(obj.ToString().Trim()).Append(",");
-                }
-                if (builder.Length != 0) builder.Remove(builder.Length - 1, 1);
-            }
-            return builder.ToString();
-        }
-
-        public static string ObjectCollectionToString(ICollection collection, string separatorStr)
-        {
-            var builder = new StringBuilder();
-            if (collection != null)
-            {
-                foreach (var obj in collection)
-                {
-                    builder.Append(obj.ToString().Trim()).Append(separatorStr);
-                }
-                if (builder.Length != 0) builder.Remove(builder.Length - separatorStr.Length, separatorStr.Length);
-            }
-            return builder.ToString();
+            return a.Equals(b, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -311,6 +113,65 @@ namespace Atlass.Framework.Common
         }
 
 
+        public static string ValueFromUrl(string value)
+        {
+            var retVal = string.Empty;
+            if (!string.IsNullOrEmpty(value))
+            {
+                retVal = value.Replace("_equals_", "=").Replace("_and_", "&").Replace("_question_", "?").Replace("_quote_", "'").Replace("_add_", "+");
+            }
+            return retVal;
+        }
+
+        public static string ValueToUrl(string value)
+        {
+            var retVal = string.Empty;
+            if (!string.IsNullOrEmpty(value))
+            {
+                //替换url中的换行符，update by sessionliang at 20151211
+                retVal = value.Replace("=", "_equals_").Replace("&", "_and_").Replace("?", "_question_").Replace("'", "_quote_").Replace("+", "_add_").Replace("\r", "").Replace("\n", "");
+            }
+            return retVal;
+        }
+        public static string ToJsString(string value)
+        {
+            var retVal = string.Empty;
+            if (!string.IsNullOrEmpty(value))
+            {
+                retVal = value.Replace("'", @"\'").Replace("\r", "\\r").Replace("\n", "\\n");
+            }
+            return retVal;
+        }
+        public static string UpperFirst(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+            return input.First().ToString().ToUpper() + input.Substring(1);
+        }
+
+
+     
+
+        public static bool StartsWithIgnoreCase(string text, string startString)
+        {
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(startString)) return false;
+            return text.Trim().ToLower().StartsWith(startString.Trim().ToLower()) || string.Equals(text.Trim(), startString.Trim(), StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static bool EndsWithIgnoreCase(string text, string endString)
+        {
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(endString)) return false;
+            return text.Trim().ToLower().EndsWith(endString.Trim().ToLower());
+        }
+
+        public static bool StartsWith(string text, string startString)
+        {
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(startString)) return false;
+            return text.StartsWith(startString);
+        }
+        #endregion
+
+
+        #region 字典项，NameValueCollection，Dictionary 转换
         public static NameValueCollection ToNameValueCollection(string separateString)
         {
             if (!string.IsNullOrEmpty(separateString))
@@ -330,8 +191,8 @@ namespace Atlass.Framework.Common
                 {
                     if (pair.IndexOf("=", StringComparison.Ordinal) != -1)
                     {
-                        var name = StringUtils.ValueFromUrl(pair.Split('=')[0]);
-                        var value = StringUtils.ValueFromUrl(pair.Split('=')[1]);
+                        var name = ValueFromUrl(pair.Split('=')[0]);
+                        var value =ValueFromUrl(pair.Split('=')[1]);
                         attributes.Add(name, value);
                     }
                 }
@@ -346,8 +207,7 @@ namespace Atlass.Framework.Common
             var builder = new StringBuilder();
             foreach (string key in attributes.Keys)
             {
-                builder.Append(
-                    $@"{StringUtils.ValueToUrl(key)}={StringUtils.ValueToUrl(attributes[key])}{seperator}");
+                builder.Append($@"{ValueToUrl(key)}={ValueToUrl(attributes[key])}{seperator}");
             }
             builder.Length--;
             return builder.ToString();
@@ -432,6 +292,20 @@ namespace Atlass.Framework.Common
             return jsonString.ToString();
         }
 
+        public static NameValueCollection NewIgnoreCaseNameValueCollection()
+        {
+            var comparer = StringComparer.OrdinalIgnoreCase;
+            var caseInsensitiveDictionary = new NameValueCollection(comparer);
+            return caseInsensitiveDictionary;
+        }
+        #endregion
+
+
+        /// <summary>
+        /// byte到kb的长度转换
+        /// </summary>
+        /// <param name="byteSize"></param>
+        /// <returns></returns>
         public static long GetKbSize(long byteSize)
         {
             long fileKbSize = Convert.ToUInt32(Math.Ceiling((double)byteSize / 1024));
@@ -576,6 +450,9 @@ namespace Atlass.Framework.Common
 
         #endregion
 
+
+        #region Json 序列化
+
         public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
@@ -624,22 +501,11 @@ namespace Atlass.Framework.Common
         {
             return new Dictionary<string, object>(json.ToObject<IDictionary<string, object>>(), StringComparer.CurrentCultureIgnoreCase);
         }
-
-        public const string EncryptStingIndicator = "0secret0";
-
+        #endregion
 
 
-       
 
-     
-
-        public static NameValueCollection NewIgnoreCaseNameValueCollection()
-        {
-            var comparer = StringComparer.OrdinalIgnoreCase;
-            var caseInsensitiveDictionary = new NameValueCollection(comparer);
-            return caseInsensitiveDictionary;
-        }
-
+        #region Base64编码解码
         public static string Base64Encode(string unencodedText)
         {
             try
@@ -669,5 +535,6 @@ namespace Atlass.Framework.Common
 
             return string.Empty;
         }
+        #endregion
     }
 }

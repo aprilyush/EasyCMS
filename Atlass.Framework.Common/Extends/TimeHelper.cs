@@ -70,6 +70,12 @@ namespace Atlass.Framework.Common
         #endregion
 
         #region 返回时间差
+        /// <summary>
+        /// 返回时间差
+        /// </summary>
+        /// <param name="DateTime1"></param>
+        /// <param name="DateTime2"></param>
+        /// <returns></returns>
         public static string DateDiff(DateTime DateTime1, DateTime DateTime2)
         {
             string dateDiff = null;
@@ -100,9 +106,38 @@ namespace Atlass.Framework.Common
             return dateDiff;
         }
 
+        /// <summary>
+        /// 最小时间 1753-01-01
+        /// </summary>
+        /// <returns></returns>
         public static DateTime MinDateTime()
         {
             return new DateTime(1753, 1, 1);
+        }
+        #endregion
+        #region 获取日期天的最小时间
+        /// <summary>
+        /// 获取日期天的最小时间
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime GetDayMinDate(DateTime dt)
+        {
+            DateTime min = new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0);
+            return min;
+        }
+        #endregion
+
+        #region 获取日期天的最大时间
+        /// <summary>
+        /// 获取日期天的最大时间
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime GetDayMaxDate(DateTime dt)
+        {
+            DateTime max = new DateTime(dt.Year, dt.Month, dt.Day, 23, 59, 59);
+            return max;
         }
         #endregion
 
@@ -113,7 +148,7 @@ namespace Atlass.Framework.Common
         /// <param name="DateTime1">日期一。</param>
         /// <param name="DateTime2">日期二。</param>
         /// <returns>日期间隔TimeSpan。</returns>
-        public static TimeSpan DateDiff2(DateTime DateTime1, DateTime DateTime2)
+        public static TimeSpan DateDiffTs(DateTime DateTime1, DateTime DateTime2)
         {
             TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
             TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
@@ -127,7 +162,8 @@ namespace Atlass.Framework.Common
         /// 格式化日期时间
         /// </summary>
         /// <param name="dateTime1">日期时间</param>
-        /// <param name="dateMode">显示模式</param>
+        /// <param name="dateMode">显示模式:0-yyyy-MM-dd;1-yyyy-MM-dd HH:mm:ss;2-yyyy/MM/dd;3-yyyy年MM月dd日;
+        /// 4-MM-dd;5-MM/dd;6-MM月dd日;7-yyyy-MM;8-yyyy/MM;9-yyyy年MM月;</param>
         /// <returns>0-9种模式的日期</returns>
         public static string FormatDate(DateTime dateTime1, string dateMode)
         {
@@ -215,6 +251,45 @@ namespace Atlass.Framework.Common
             int i = random.Next(System.Math.Abs(maxValue));
 
             return minTime.AddSeconds(i);
+        }
+        #endregion
+
+        #region 时间戳
+        /// <summary>
+        ///  时间戳转本地时间-时间戳精确到秒
+        /// </summary> 
+        public static DateTime ToLocalTimeDateBySeconds(long unix)
+        {
+            var dto = DateTimeOffset.FromUnixTimeSeconds(unix);
+            return dto.ToLocalTime().DateTime;
+        }
+
+        /// <summary>
+        ///  时间转时间戳Unix-时间戳精确到秒
+        /// </summary> 
+        public static long ToUnixTimestampBySeconds(DateTime dt)
+        {
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            return dto.ToUnixTimeSeconds();
+        }
+
+
+        /// <summary>
+        ///  时间戳转本地时间-时间戳精确到毫秒
+        /// </summary> 
+        public static DateTime ToLocalTimeDateByMilliseconds(long unix)
+        {
+            var dto = DateTimeOffset.FromUnixTimeMilliseconds(unix);
+            return dto.ToLocalTime().DateTime;
+        }
+
+        /// <summary>
+        ///  时间转时间戳Unix-时间戳精确到毫秒
+        /// </summary> 
+        public static long ToUnixTimestampByMilliseconds(DateTime dt)
+        {
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            return dto.ToUnixTimeMilliseconds();
         }
         #endregion
     }

@@ -49,7 +49,7 @@ namespace Atlass.Framework.Common
 
         public static bool IsExtension(string ext, params string[] extensions)
         {
-            return extensions.Any(extension => StringUtils.EqualsIgnoreCase(ext, extension));
+            return extensions.Any(extension => CommHelper.EqualsIgnoreCase(ext, extension));
         }
 
         public static bool IsFilePath(string val)
@@ -129,7 +129,7 @@ namespace Atlass.Framework.Common
 
         public static string GetSafeFilename(string filename)
         {
-            if (string.IsNullOrEmpty(filename)) return StringUtils.GetShortGuid().ToLower();
+            if (string.IsNullOrEmpty(filename)) return IdWorkerHelper.GenObjectId().ToLower();
 
             return string.Join("_", filename.Split(GetInvalidChars()));
         }
@@ -157,7 +157,7 @@ namespace Atlass.Framework.Common
 
         public static string GetPathDifference(string rootPath, string path)
         {
-            if (!string.IsNullOrEmpty(path) && StringUtils.StartsWithIgnoreCase(path, rootPath))
+            if (!string.IsNullOrEmpty(path) && CommHelper.StartsWithIgnoreCase(path, rootPath))
             {
                 var retVal = path.Substring(rootPath.Length, path.Length - rootPath.Length);
                 return retVal.Trim('/', '\\');
@@ -182,14 +182,14 @@ namespace Atlass.Framework.Common
             }
             sAllowedExt = sAllowedExt.Replace("|", ",");
             var aExt = sAllowedExt.Split(',');
-            return aExt.Any(t => StringUtils.EqualsIgnoreCase(sExt, t));
+            return aExt.Any(t => CommHelper.EqualsIgnoreCase(sExt, t));
         }
 
        
 
         public static string GetLibraryFileName(string filePath)
         {
-            return $"{StringUtils.GetShortGuid(false)}{GetExtension(filePath)}";
+            return $"{IdWorkerHelper.GenObjectId()}{GetExtension(filePath)}";
         }
 
        

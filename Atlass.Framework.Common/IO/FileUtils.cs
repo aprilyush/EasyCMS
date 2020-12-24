@@ -305,7 +305,7 @@ namespace Atlass.Framework.Common
                 var r = new BinaryReader(fs, Encoding.Default);
                 //int i;
                 //int.TryParse(fs.Length.ToString(), out i);
-                var i = TranslateUtils.ToInt(fs.Length.ToString());
+                var i = (int)fs.Length;
                 var ss = r.ReadBytes(i);
                 if (IsUtf8Bytes(ss) || ss[0] == 0xEF && ss[1] == 0xBB && ss[2] == 0xBF)
                 {
@@ -434,7 +434,7 @@ namespace Atlass.Framework.Common
 
         public static bool IsZip(string typeStr)
         {
-            return StringUtils.EqualsIgnoreCase(".zip", typeStr);
+            return CommHelper.EqualsIgnoreCase(".zip", typeStr);
         }
 
         public static bool IsFlash(string fileExtName)
@@ -494,7 +494,7 @@ namespace Atlass.Framework.Common
 
         public static FileType GetType(string typeStr)
         {
-            return TranslateUtils.ToEnum(StringUtils.UpperFirst(typeStr), FileType.Unknown);
+            return CommHelper.ToEnum(CommHelper.UpperFirst(typeStr), FileType.Unknown);
         }
 
         //public static bool IsType(FileType type, string typeStr)

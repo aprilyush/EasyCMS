@@ -11,7 +11,7 @@ namespace Atlass.Framework.Common.GeoArea
         public double lng;
     }
 
-    public class GpsPolygonHelper
+    public class GeoHelper
     {
         /// <summary>
         /// 坐标点是否在多边形内判断

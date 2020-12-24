@@ -44,7 +44,7 @@ namespace Atlass.Framework.Core.Visit
         public static bool InWriteList(string ip)
         {
 
-            if (!ISIP(ip))
+            if (!IsIP(ip))
             {
                 return false;
             }
@@ -68,7 +68,13 @@ namespace Atlass.Framework.Core.Visit
             return inlist;
         }
 
-        public static bool ISIP(string IP)
+
+        /// <summary>
+        /// 判断是否是IP地址
+        /// </summary>
+        /// <param name="_ip"></param>
+        /// <returns></returns>
+        public static bool IsIP(this string IP)
         {
             bool result;
             try
@@ -76,7 +82,7 @@ namespace Atlass.Framework.Core.Visit
                 if (string.IsNullOrEmpty(IP))
                 {
                     return false;
-                   
+
                 }
                 if (IP.Length > 15)
                 {
@@ -104,7 +110,11 @@ namespace Atlass.Framework.Core.Visit
             return result;
         }
 
-
+        /// <summary>
+        /// 获取ip的值
+        /// </summary>
+        /// <param name="IP"></param>
+        /// <returns></returns>
         public static uint IPValue(string IP)
         {
             string[] array = IP.Split(new char[]
