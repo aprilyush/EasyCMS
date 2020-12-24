@@ -12,5 +12,6 @@ namespace Atlass.Framework.ViewModels.OS
         public string SystemCore { get; set; }
         public DateTime ProcessStartTime { get; set; }
         public string SystemName { get; set; }
+
     }
 }

@@ -1,90 +1,68 @@
-﻿using System;
+﻿using Atlass.Framework.Common.NLog;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Management;
 using System.Text;
 
-namespace Atlass.Framework.Common.OS
+namespace Atlass.Framework.Common
 {
-    public class WindowsMachineInfo
+    public class WindowsMachineInfo: IMachineInfo
     {
-        #region 字段
-
-        private const int GwHwndfirst = 0;
-        private const int GwHwndnext = 2;
-        private const int GwlStyle = -16;
-        private const int WsVisible = 268435456;
-        private const int WsBorder = 8388608;
-        private static readonly PerformanceCounter PcCpuLoad; //CPU计数器 
-
-        private static readonly PerformanceCounter MemoryCounter = new PerformanceCounter();
-        private static readonly PerformanceCounter CpuCounter = new PerformanceCounter();
-        private static readonly PerformanceCounter DiskReadCounter = new PerformanceCounter();
-        private static readonly PerformanceCounter DiskWriteCounter = new PerformanceCounter();
-
-        private static readonly string[] InstanceNames;
-        private static readonly PerformanceCounter[] NetRecvCounters;
-        private static readonly PerformanceCounter[] NetSentCounters;
-
-        #endregion
-
         /// <summary>
-        /// 获取物理内存总数，单位B
+        /// 获取内存使用信息
         /// </summary>
         /// <returns></returns>
-        public static decimal GetTotalPhysicalMemory()
+        public MemoryMetrics GetMetrics()
         {
-            string s = QueryComputerSystem("totalphysicalmemory");
-            return s.ToDecimal();
+            string output = ShellHelper.Cmd("wmic", "OS get FreePhysicalMemory,TotalVisibleMemorySize /Value");
+
+            var lines = output.Trim().Split("\n");
+            var freeMemoryParts = lines[0].Split("=", StringSplitOptions.RemoveEmptyEntries);
+            var totalMemoryParts = lines[1].Split("=", StringSplitOptions.RemoveEmptyEntries);
+
+            var metrics = new MemoryMetrics();
+            metrics.Total = Math.Round(double.Parse(totalMemoryParts[1]) / 1024, 0);
+            metrics.Free = Math.Round(double.Parse(freeMemoryParts[1]) / 1024, 0);
+            metrics.Used = metrics.Total - metrics.Free;
+
+            return metrics;
         }
 
         /// <summary>
-        /// 获取空闲的物理内存数，单位B
+        /// cpu使用率
         /// </summary>
         /// <returns></returns>
-        public static decimal GetFreePhysicalMemory()
+        public string GetCPURate()
         {
-            return GetCounterValue(MemoryCounter, "Memory", "Available Bytes", null);
+           
+            string output = ShellHelper.Cmd("wmic", "cpu get LoadPercentage");
+            string cpuRate = output.Replace("LoadPercentage", string.Empty).Trim();
+            return cpuRate;
         }
 
         /// <summary>
-        /// 获取已经使用了的物理内存数，单位B
+        /// 系统内核
         /// </summary>
         /// <returns></returns>
-        public static decimal GetUsedPhysicalMemory()
+        public string GetRunTime()
         {
-            return GetTotalPhysicalMemory() - GetFreePhysicalMemory();
-        }
-
-        /// <summary>
-        /// 查询计算机系统信息
-        /// </summary>
-        /// <param name="type">类型名</param>
-        /// <returns></returns>
-        public static string QueryComputerSystem(string type)
-        {
+            string runTime = string.Empty;
             try
             {
-                string str = null;
-                var mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
-                foreach (var mo in mos.Get())
+                string output = ShellHelper.Cmd("wmic", "OS get LastBootUpTime/Value");
+                string[] outputArr = output.Split("=", StringSplitOptions.RemoveEmptyEntries);
+                if (outputArr.Length == 2)
                 {
-                    str = mo[type].ToString();
+                    runTime = TimeHelper.FormatTime((DateTime.Now - outputArr[1].Split('.')[0].ToDate()).TotalMilliseconds.ToString().Split('.')[0].ToInt64());
                 }
-                return str;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return "未能获取到当前计算机系统信息，可能是当前程序无管理员权限，如果是web应用程序，请将应用程序池的高级设置中的进程模型下的标识设置为：LocalSystem；如果是普通桌面应用程序，请提升管理员权限后再操作。异常信息：" + e.Message;
+                LogNHelper.Exception(ex);
             }
+            return runTime;
         }
 
-        private static decimal GetCounterValue(PerformanceCounter pc, string categoryName, string counterName, string instanceName)
-        {
-            pc.CategoryName = categoryName;
-            pc.CounterName = counterName;
-            pc.InstanceName = instanceName;
-            return pc.NextValue().ToDecimal();
-        }
     }
 }

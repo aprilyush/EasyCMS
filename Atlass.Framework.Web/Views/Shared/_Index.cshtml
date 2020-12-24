@@ -15,7 +15,14 @@
 
 </head>
 <body class="gray-bg">
-    @RenderBody()
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="ibox">
+            @*<div class="ibox-content">*@
+                @RenderBody()
+            @*</div>*@
+        </div>
+    </div>
+   
     <!-- 全局js -->
     <script src="~/hplus/js/jquery.min.js?v=2.1.4"></script>
     <script src="~/hplus/js/bootstrap.min.js?v=3.3.6"></script>

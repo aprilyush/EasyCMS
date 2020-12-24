@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ibox-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right"></span>
+                    <h5>NET CORE版本</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="NetCoreVersion">0</h1>
+                    <div class="stat-percent font-bold text-info">
+                        <i class="fa fa-level-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right"></span>
+                    <h5>当前进程名称</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="ProcessorName">0</h1>
+                    <div class="stat-percent font-bold text-info">
+                        <i class="fa fa-level-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right"></span>
+                    <h5>系统内存</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="SystemMemory">0</h1>
+                    <div class="stat-percent font-bold text-info">
+                        <i class="fa fa-level-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="chart" style="width: 80%; height: 500px;"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        $(function () {
+            loadData();
+        });
+
+        function loadData() {
+            $.ajax({
+                url: '/SystemMonitor/monitor',
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                data: null,
+                //contentType: 'application/x-www-form-urlencoded',
+                success: function (res) {
+                    if (res.status) {
+                        var model = res.data.model;
+                        $('#NetCoreVersion').text(model.NetCoreVersion);
+                        $('#ProcessorName').text(model.ProcessorName);
+                        $('#SystemMemory').text(model.SystemMemory);
+
+                    }
+                }, beforeSend: function (data, textStatus, jqXHr) {
+
+                },
+                error: function (jqXHr, textStatus, errorMsg) {
+                    layer.msg('请求异常');
+                }
+            });
+        }
+
+
+    </script>
+}
