@@ -1,4 +1,5 @@
-﻿using Atlass.Framework.Core.DI;
+﻿
+using Atlass.Framework.DbContext;
 using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -25,10 +26,11 @@ namespace Atlass.Framework.Core.Extensions
                 //GlobalVariableModel.BackUpHost = configuration.GetSection("BackupHost").Value;
                 services.Configure<FreeSqlConfig>(configuration.GetSection("FreeSqlConfig"));
                 var freeSql = configuration.GetSection("FreeSqlConfig").Get<FreeSqlConfig>();
-                if (freeSql.MasterConnetion != GlobalParamsDto.LastConnectionString)
+                if (freeSql.MasterConnetion != FreesqlDbInstance.FreeSqlConfig.MasterConnetion)
                 {
                     services.RemoveAll<IFreeSql>();
                     services.AddFreeSql();
+                    FreesqlDbInstance.FreeSqlConfig = freeSql;
                 }
 
             });

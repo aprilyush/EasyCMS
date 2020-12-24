@@ -17,7 +17,8 @@
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 + 其他就不列举了。。
 ## 演示地址：
- http://cms.atlass.cn:9090  
+ windows2016服务器：http://cms.atlass.cn:9090  
+ debian10服务器：http://cmsl.atlass.cn/  
  因项目在开发中，不再提供后台演示用户，只演示前台，用于展示模板的渲染能力，如果感兴趣，请下载源码  
  本地超级管理员 admin 123123  
  包含Mysql,SqlServer,PostgreSql三个数据库的脚本

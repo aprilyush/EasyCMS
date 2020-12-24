@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atlass.Framework.Core.DI
+namespace Atlass.Framework.DbContext
 {
-    public class FreeSqlConfig: IOptions<FreeSqlConfig>
+    public class FreeSqlConfig : IOptions<FreeSqlConfig>
     {
         /// <summary>
         /// 主库

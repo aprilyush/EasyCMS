@@ -58,5 +58,11 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             _logApp.DelByIds(ids);
             return Success();
         }
+
+        public IActionResult ClearTable()
+        {
+            _logApp.ClearTable();
+            return Success();
+        }
     }
 }

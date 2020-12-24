@@ -26,6 +26,7 @@
         <div class="col-sm-12">
             <div id="toolbar" class="btn-group">
                 <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
+                <button class="btn btn-danger" type="button" onclick="clearAll()"><i class="fa fa-trash"></i> 清空日志</button>
             </div>
             <table id="userTable"></table>
         </div>
@@ -178,6 +179,15 @@
                 });
         }
 
+        function clearAll() {
+            jutils.confirm('确认清空日志吗',
+                function () {
+                    jutils.ajaxGet('/admin/easylog/ClearTable',null,
+                        function () {
+                            $userTable.bootstrapTable('refresh');
+                        });
+                });
+        }
         function query() {
             $userTable.bootstrapTable('refresh');
         }

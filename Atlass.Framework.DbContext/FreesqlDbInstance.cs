@@ -8,7 +8,7 @@ namespace Atlass.Framework.DbContext
     {
         private static IFreeSql _freeSql;
         private static readonly object locker = new object();
-
+        public static FreeSqlConfig FreeSqlConfig = new FreeSqlConfig();
         static FreesqlDbInstance()
         {
 
@@ -45,7 +45,7 @@ namespace Atlass.Framework.DbContext
                     if (_freeSql == null)
                     {
                         _freeSql =new FreeSqlBuilder()
-                        .UseConnectionString(DataType.MySql, GlobalParamsDto.LastConnectionString)
+                        .UseConnectionString(FreeSqlConfig.DataType, FreeSqlConfig.MasterConnetion)
                          .UseLazyLoading(true).Build();
                     }
                 }

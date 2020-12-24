@@ -52,6 +52,9 @@ namespace Atlass.Framework.Web
                             //     serverOptions.AllowSynchronousIO = true;
                             //     //serverOptions.ListenAnyIP(context.Configuration.GetValue<int>("HostingPort"));
                             // })
+                            //.UseUrls("http://*:9046")
+                            //.UseUrls("http://cmsl.atlass:80")
+                            //.UseUrls("http://www.cmsl.atlass:80")
                             .UseStartup<Startup>();
                     });
         }

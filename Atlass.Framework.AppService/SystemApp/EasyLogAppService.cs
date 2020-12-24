@@ -41,5 +41,11 @@ namespace Atlass.Framework.AppService.SystemApp
             var idsArray = ids.SplitToArrayInt();
             Sqldb.Delete<easy_log>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
+
+
+        public void ClearTable()
+        {
+            Sqldb.Ado.ExecuteScalar("truncate table easy_log");
+        }
     }
 }

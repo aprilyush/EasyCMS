@@ -17,7 +17,8 @@ namespace Atlass.Framework.Core.Extensions
         public static void AddFreeSql(this IServiceCollection service)
         {
             var freeSql = service.BuildServiceProvider().GetRequiredService<IOptionsMonitor<FreeSqlConfig>>().CurrentValue;
-            GlobalParamsDto.LastConnectionString = freeSql.MasterConnetion;
+            //GlobalParamsDto.LastConnectionString = freeSql.MasterConnetion;
+            FreesqlDbInstance.FreeSqlConfig = freeSql;
             service.AddSingleton<IFreeSql>(f =>
             {
                 return FreesqlDbInstance.GetInstance(freeSql.DataType, freeSql.MasterConnetion);
