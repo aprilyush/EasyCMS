@@ -38,7 +38,7 @@ namespace Atlass.Framework.AppService.SystemApp
 
         public void DelByIds(string ids)
         {
-            var idsArray = ids.Split(',').StrToIntArray();
+            var idsArray = ids.SplitToArrayInt();
             Sqldb.Delete<easy_log>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
     }

@@ -18,6 +18,7 @@ namespace Atlass.Framework.Core.Web
         private readonly HttpRequest HttpRequest;
         private readonly IQueryCollection QueryString;
         private Dictionary<string, object> _postData;
+        private string _bodyJson = string.Empty;
 
         private string CookieClaim = "easycms_user";
         private bool _isAdminLoggin = false;
@@ -62,7 +63,7 @@ namespace Atlass.Framework.Core.Web
             {
                 if (_postData != null) return _postData;
 
-                var bodyJson = string.Empty;
+               // var bodyJson = string.Empty;
                 //HttpRequest.EnableBuffering();
                 // HttpRequest.Body.Position = 0;
                 _postData = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -79,13 +80,13 @@ namespace Atlass.Framework.Core.Web
                     using (var buffer = new StreamReader(HttpRequest.Body))
                     {
                         buffer.BaseStream.Seek(0, SeekOrigin.Begin);
-                        bodyJson = buffer.ReadToEnd();
+                        _bodyJson = buffer.ReadToEnd();
                     }
                 }
 
-                if (string.IsNullOrEmpty(bodyJson)) return _postData;
+                if (string.IsNullOrEmpty(_bodyJson)) return _postData;
 
-                var dict = CommHelper.JsonDeserialize<Dictionary<string, object>>(bodyJson);
+                var dict = _bodyJson.ToDictionary();
                 if (dict == null)
                 {
                     return _postData;
@@ -156,22 +157,36 @@ namespace Atlass.Framework.Core.Web
             return PostData.ContainsKey(name);
         }
 
-        //public T GetPostObject<T>(string name = "")
-        //{
-        //    string json;
-        //    if (string.IsNullOrEmpty(name))
-        //    {
-        //        var bodyStream = new StreamReader(HttpRequest.InputStream);
-        //        bodyStream.BaseStream.Seek(0, SeekOrigin.Begin);
-        //        json = bodyStream.ReadToEnd();
-        //    }
-        //    else
-        //    {
-        //        json = GetPostString(name);
-        //    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public T GetPostObject<T>(string name = "")
+        {
+            string json;
+            try
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                   if(!_bodyJson.IsEmpty())
+                    return _bodyJson.ToObject<T>();
+                }
+                else
+                {
+                    json = GetPostString(name);
+                    return json.ToObject<T>();
+                }
+            }
+            catch(Exception ex)
+            {
+                LogNHelper.Exception(ex);
+            }
+          
 
-        //    return TranslateUtils.JsonDeserialize<T>(json);
-        //}
+            return default(T);
+        }
 
         private object GetPostObject(string name)
         {

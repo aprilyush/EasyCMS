@@ -60,7 +60,7 @@ namespace Atlass.Framework.AppService.Cms
 
         public int[] DeleteByIds(string ids)
         {
-            var idsArry = ids.Split(',').StrToIntArray();
+            var idsArry = ids.SplitToArrayInt();
             SqlDb.Delete<cms_ip_manager>().Where(s => idsArry.Contains(s.id)).ExecuteAffrows();
 
             return idsArry;

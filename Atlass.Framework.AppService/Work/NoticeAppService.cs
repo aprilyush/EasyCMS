@@ -83,7 +83,7 @@ namespace Atlass.Framework.AppService.Work
         public void Save(work_notice dto, string deptIds, LoginUserDto user)
         {
             dto.dept_ids = deptIds;
-            var edeptIds = deptIds.Split(',').StrToIntArray();
+            var edeptIds = deptIds.SplitToArrayInt();
             dto.total_depts = edeptIds.Count();
             var depts = Sqldb.Queryable<sys_department>().Where(s => edeptIds.Contains(s.id)).ToList();
             
@@ -142,7 +142,7 @@ namespace Atlass.Framework.AppService.Work
         /// <returns></returns>
         public bool Delete(string Ids, LoginUserDto user)
         {
-            var noticeIds = Ids.Split(',').StrToIntArray();
+            var noticeIds = Ids.SplitToArrayInt();
             var notices = Sqldb.Select<work_notice>()
                 .Where(s => noticeIds.Contains(s.id)&&s.insert_id==user.Id).ToList(s => s.id);
             if (notices.Count==0)

@@ -83,7 +83,7 @@ namespace Atlass.Framework.AppService
         {
             if (!string.IsNullOrEmpty(ids))
             {
-                var idsArray = ids.Split(',').StrToLongArray();
+                var idsArray = ids.SplitToArrayInt64();
 
                 Sqldb.Delete<sys_role>().Where(s=> idsArray.Contains(s.id)).ExecuteAffrows();
                 Sqldb.Delete<sys_role_authorize>().Where(s => idsArray.Contains(s.role_id)).ExecuteAffrows();

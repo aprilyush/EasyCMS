@@ -101,7 +101,7 @@ namespace Atlass.Framework.Models
         /// <param name="id"></param>
         public void SetTop(string ids)
         {
-            var idsArray = ids.Split(',').StrToIntArray();
+            var idsArray = ids.SplitToArrayInt();
             Sqldb.Update<cms_content>().Set(s=>s.is_top,1).Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
         /// <summary>
@@ -110,7 +110,7 @@ namespace Atlass.Framework.Models
         /// <param name="id"></param>
         public void SetRecomend(string ids)
         {
-            var idsArray = ids.Split(',').StrToIntArray();
+            var idsArray = ids.SplitToArrayInt();
             Sqldb.Update<cms_content>().Set(s => s.is_recommend, 1).Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
         

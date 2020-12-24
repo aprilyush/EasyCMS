@@ -93,7 +93,7 @@ namespace Atlass.Framework.AppService
         {
             if (!string.IsNullOrEmpty(ids))
             {
-                var idsArray = ids.Split(',').StrToLongArray();
+                var idsArray = ids.SplitToArrayInt64();
 
                 Sqldb.Delete<sys_dictionary>().Where(s=>idsArray.Contains(s.id)).ExecuteAffrows();
             }

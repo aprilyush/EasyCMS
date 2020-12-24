@@ -44,11 +44,11 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         public IActionResult Save(cms_ip_manager dto)
         {
          
-            if (!IPHelper.ISIP(dto.start_ip))
+            if (!IPHelper.IsIP(dto.start_ip))
             {
                 return Error("起始IP地址错误");
             }
-            if (!IPHelper.ISIP(dto.end_ip))
+            if (!IPHelper.IsIP(dto.end_ip))
             {
                 return Error("结束IP地址错误");
             }

@@ -76,7 +76,7 @@ namespace Atlass.Framework.AppService.Work
 
         public void DeleteByIds(string ids)
         {
-            var idsArray = ids.Split(',').StrToIntArray();
+            var idsArray = ids.SplitToArrayInt();
             Sqldb.Delete<work_address_book>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
     }

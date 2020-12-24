@@ -279,8 +279,8 @@ namespace Atlass.Framework.AppService
         {
             if (!string.IsNullOrEmpty(ids))
             {
-                var idsArray = ids.Split(',');
-                long[] arri = idsArray.StrToLongArray();
+                var arri = ids.SplitToArrayInt64();
+               
                 Sqldb.Transaction(() =>
                 {
                     var affrows=Sqldb.Delete<sys_menu>().Where(s=> arri.Contains(s.id)).ExecuteAffrows();

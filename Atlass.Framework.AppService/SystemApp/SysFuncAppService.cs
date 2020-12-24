@@ -80,9 +80,8 @@ namespace Atlass.Framework.AppService
             {
                 if (!string.IsNullOrEmpty(ids))
                 {
-                    var idsArray = ids.Split(',');
-                    long[] arri = idsArray.StrToLongArray();
-
+                    var arri = ids.SplitToArrayInt64();
+                   
                     //Sqldb.Ado.co();
                     Sqldb.Delete<sys_operate>().Where(s=> arri.Contains(s.id)).ExecuteAffrows();
                     Sqldb.Delete<sys_menu_ref_operate>().Where(s => arri.Contains(s.operate_id)).ExecuteAffrows();

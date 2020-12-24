@@ -449,62 +449,6 @@ namespace Atlass.Framework.Common
         }
 
         #endregion
-
-
-        #region Json 序列化
-
-        public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            Converters = new List<JsonConverter>
-            {
-                new IsoDateTimeConverter {DateTimeFormat = "yyyy-MM-dd HH:mm:ss"}
-            }
-        };
-
-        public static string JsonSerialize(object obj)
-        {
-            try
-            {
-                //var settings = new JsonSerializerSettings
-                //{
-                //    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                //};
-                //var timeFormat = new IsoDateTimeConverter {DateTimeFormat = "yyyy-MM-dd HH:mm:ss"};
-                //settings.Converters.Add(timeFormat);
-
-                return JsonConvert.SerializeObject(obj, JsonSettings);
-            }
-            catch
-            {
-                return string.Empty;
-            }
-        }
-
-        public static T JsonDeserialize<T>(string json, T defaultValue = default(T))
-        {
-            try
-            {
-                //var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-                //var timeFormat = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
-                //settings.Converters.Add(timeFormat);
-
-                return JsonConvert.DeserializeObject<T>(json, JsonSettings);
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
-
-        public static Dictionary<string, object> JsonGetDictionaryIgnorecase(JObject json)
-        {
-            return new Dictionary<string, object>(json.ToObject<IDictionary<string, object>>(), StringComparer.CurrentCultureIgnoreCase);
-        }
-        #endregion
-
-
-
         #region Base64编码解码
         public static string Base64Encode(string unencodedText)
         {
