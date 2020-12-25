@@ -44,6 +44,8 @@ asp.net core3.1, redis,mysql,SqlServer,PostgreSql
 + [ ] 栏目权限，文章数据权限
 + [ ] 意见反馈
 + [ ] 前台用户中心(这个功能感觉不是很必要，除非需要实现普通用户投稿)
+## [样图]  
+![Image](资料/home.png)
 ## [更新日志(详细)](Update.md) 
 ## 2020-05-19
 1. 首页模板渲染静态页面
