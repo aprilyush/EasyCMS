@@ -1,86 +1,87 @@
 ﻿@{
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox-content">
-    <form class="form form-horizontal" id="form" autocomplete="off">
-        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-        <div class="form-group">
-            <label class="col-sm-3 control-label required">任务名称：</label>
-            <div class="col-sm-4">
-                <input type="text" name="task_name" id="task_name" value="" class="form-control" data-rule="required">
+<div class="ibox">
+    <div class="ibox-content">
+        <form class="form form-horizontal" id="form" autocomplete="off">
+            <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">任务名称：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="task_name" id="task_name" value="" class="form-control" data-rule="required">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label required">命名空间：</label>
-            <div class="col-sm-4">
-                <input type="text" name="assembly_namespace" id="assembly_namespace" value="" class="form-control" data-rule="required">
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">命名空间：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="assembly_namespace" id="assembly_namespace" value="" class="form-control" data-rule="required">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label required">类名：</label>
-            <div class="col-sm-4">
-                <input type="text" name="class_name" id="class_name" value="" class="form-control" data-rule="required;">
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">类名：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="class_name" id="class_name" value="" class="form-control" data-rule="required;">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label required">Cron表达式：</label>
-            <div class="col-sm-4">
-                <input type="text" name="cron_express" id="cron_express" class="form-control" data-rule="required;">
+            <div class="form-group">
+                <label class="col-sm-3 control-label required">Cron表达式：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="cron_express" id="cron_express" class="form-control" data-rule="required;">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">任务说明：</label>
-            <div class="col-sm-9">
-                <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">任务说明：</label>
+                <div class="col-sm-9">
+                    <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="hr-line-dashed"></div>
-        <div class="form-group">
-            <div class="col-sm-12 col-sm-offset-3">
-                <button class="btn btn-primary" type="submit">保存内容</button>
-                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-12 col-sm-offset-3">
+                    <button class="btn btn-primary" type="submit">保存内容</button>
+                    <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+            $(function () {
+                $('#form').validator({
+                    stopOnError: false,
+                    timely: 2,
+                    theme: "yellow_right",
+                    valid: function (form) {
+                        // 表单验证通过，提交表单
+                        jutils.ajaxPost('/admin/hangfirejob/Save', $(form).serialize(),
+                            function (res) {
+                                jutils.back();
+                            });
+                    }
+                });
 
-@section scripts{
-    <script type="text/javascript">
-        $(function () {
-            $('#form').validator({
-                stopOnError: false,
-                timely: 2,
-                theme: "yellow_right",
-                valid: function (form) {
-                    // 表单验证通过，提交表单
-                    jutils.ajaxPost('/admin/hangfirejob/Save', $(form).serialize(),
-                        function (res) {
-                            jutils.back();
-                        });
-                }
+                loadData();
             });
 
-            loadData();
-        });
 
+            function loadData() {
+                var id = $("#id").val();
 
-        function loadData() {
-            var id = $("#id").val();
-
-            if (id !== '') {
-                jutils.ajaxGet('/admin/hangfirejob/GetDataById', { id: id }, function (res) {
-                    $('#form').initFormData(res.data.model);
-                });
+                if (id !== '') {
+                    jutils.ajaxGet('/admin/hangfirejob/GetDataById', { id: id }, function (res) {
+                        $('#form').initFormData(res.data.model);
+                    });
+                }
             }
-        }
 
-        function cancel() {
-            jutils.back();
-        }
-    </script>
+            function cancel() {
+                jutils.back();
+            }
+        </script>
 
 
-}
+    }
 
 
 

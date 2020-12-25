@@ -2,25 +2,23 @@
     ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-    <div class="wrapper wrapper-content  animated fadeInRight">
-        <div class="ibox">
-            <div class="ibox-content">
-                <div class="div_find">
-                    <div>
-                        <label class="find_labela">登录名：</label>
-                        <input type="text" class="find_input" id="userName" />
-                        <label class="find_labela">昵称：</label>
-                        <input type="text" class="find_input" id="nickName" />
-                        <button type="button" class="btn btn-primary" onclick="query();">查询</button>
-                    </div>
-                </div>
-                <div id="toolbar" class="btn-group">
-                </div>
-                <table id="userTable"></table>
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="div_find">
+            <div>
+                <label class="find_labela">登录名：</label>
+                <input type="text" class="find_input" id="userName" />
+                <label class="find_labela">昵称：</label>
+                <input type="text" class="find_input" id="nickName" />
+                <button type="button" class="btn btn-primary" onclick="query();">查询</button>
             </div>
-
         </div>
+        <div id="toolbar" class="btn-group">
+        </div>
+        <table id="userTable"></table>
     </div>
+
+</div>
 @section scripts
 {
     <script>

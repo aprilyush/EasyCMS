@@ -4,178 +4,176 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox">
-        <div class="ibox-content">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">网站设置</a>
-                </li>
-                <li class="">
-                    <a href="/BasicData/UploadSet/Index" aria-expanded="false">上传设置</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane active">
-                    <br/>
-                    <form class="form form-horizontal" id="myForm">
-                        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label required">站点名称：</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="site_name" id="site_name" value="" class="form-control" data-rule="required;">
-                            </div>
+<div class="ibox">
+    <div class="ibox-content">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#tab-1" aria-expanded="true">网站设置</a>
+            </li>
+            <li class="">
+                <a href="/BasicData/UploadSet/Index" aria-expanded="false">上传设置</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+                <br />
+                <form class="form form-horizontal" id="myForm">
+                    <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label required">站点名称：</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_name" id="site_name" value="" class="form-control" data-rule="required;">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">网站LOGO：</label>
-                            <div class="col-sm-5">
-                                <div class="cupload-upload-box" id="logo_uploader">
-                                    <span class="cupload-upload-btn">+</span>
-                                </div>
-                                <ul class="cupload-image-boxs" id="logo">
-                                </ul>
-                                <input type="hidden" name="site_log" id="site_log" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">网站LOGO：</label>
+                        <div class="col-sm-5">
+                            <div class="cupload-upload-box" id="logo_uploader">
+                                <span class="cupload-upload-btn">+</span>
                             </div>
+                            <ul class="cupload-image-boxs" id="logo">
+                            </ul>
+                            <input type="hidden" name="site_log" id="site_log" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">网站网址：</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="site_url" id="site_url" value="" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">网站网址：</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_url" id="site_url" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">首页标题：</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="site_title" id="site_title" value="" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">首页标题：</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_title" id="site_title" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">首页关键词：</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="site_keyword" id="site_keyword" value="" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">首页关键词：</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_keyword" id="site_keyword" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">首页描述：</label>
-                            <div class="col-sm-5">
-                                <textarea rows="5" cols="60" id="site_description" name="site_description" style="height:60px;">EasyCms演示站点
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">首页描述：</label>
+                        <div class="col-sm-5">
+                            <textarea rows="5" cols="60" id="site_description" name="site_description" style="height:60px;">EasyCms演示站点
                                 </textarea>
-                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">版权信息：</label>
-                            <div class="col-sm-5">
-                                <textarea rows="5" cols="60" id="site_copyright" name="site_copyright" style="height:80px;">Copyright © 2012-2018 EasyCms，易思CMS 版权所有
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">版权信息：</label>
+                        <div class="col-sm-5">
+                            <textarea rows="5" cols="60" id="site_copyright" name="site_copyright" style="height:80px;">Copyright © 2012-2018 EasyCms，易思CMS 版权所有
                                 </textarea>
-                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">备案号：</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="site_icp" id="site_icp" value="苏ICP备xxxxxxxx号" class="form-control">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备案号：</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_icp" id="site_icp" value="苏ICP备xxxxxxxx号" class="form-control">
                         </div>
-                        <div class="footerbar">
-                            <div class="col-sm-12 col-sm-offset-3">
-                                <button class="btn btn-primary" type="submit">保存内容</button>
-                                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
-                            </div>
+                    </div>
+                    <div class="footerbar">
+                        <div class="col-sm-12 col-sm-offset-3">
+                            <button class="btn btn-primary" type="submit">保存内容</button>
+                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-    @section scripts{
-        <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
-        <script src="/plugins/verUpload/verUpload.js"></script>
-        <script>
-            var editor;
-            $(function () {
+@section scripts{
+    <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script>
+        var editor;
+        $(function () {
 
-                $('#myForm').validator({
-                    stopOnError: false,
-                    timely: 2,
-                    theme: "yellow_right",
-                    valid: function (form) {
-                        // 表单验证通过，提交表单
-                        jutils.ajaxPost('/BasicData/Site/SaveSite', $(form).serialize(),
-                            function (res) {
-                               
-                            });
-                    }
-                });
+            $('#myForm').validator({
+                stopOnError: false,
+                timely: 2,
+                theme: "yellow_right",
+                valid: function (form) {
+                    // 表单验证通过，提交表单
+                    jutils.ajaxPost('/BasicData/Site/SaveSite', $(form).serialize(),
+                        function (res) {
 
-                loadData();
-                initUpload();
+                        });
+                }
             });
-            function loadData() {
-                var id = jutils.getQueryParam("id");
-                jutils.ajaxGet('/BasicData/Site/getSitemodel', null, function (res) {
+
+            loadData();
+            initUpload();
+        });
+        function loadData() {
+            var id = jutils.getQueryParam("id");
+            jutils.ajaxGet('/BasicData/Site/getSitemodel', null, function (res) {
+                if (res.status) {
+                    var model = res.data.model
+                    $('#myForm').initFormData(model);
+                    initLogoImage(model.site_logo);
+                }
+            });
+
+        }
+
+
+        function initUpload() {
+            new verUpload({
+                files: "#logo_uploader",
+                name: "files",
+                load_list: true,
+                method: '/api/upload/UploadLogo?imageType=1',
+                success: function (d) {
+                    var res = JSON.parse(d);
                     if (res.status) {
-                        var model = res.data.model
-                        $('#myForm').initFormData(model);
-                        initLogoImage(model.site_logo);
+
+                        initLogoImage(res.data.url);
+
+                    } else {
+                        jutils.error("图片上传失败");
                     }
-                });
+                    $('.uploadFilesBox').remove();
+                },
+                fail: function (d) {
+                    // $('#sale_image').val('');
+                    jutils.error("图片上传失败!");
+                },
+                size: 1024 * 4,
+                ext: ['jpg', 'jpeg', 'png', 'gif']
+            });
 
-            }
+        }
 
+        function initLogoImage(imgUrl) {
 
-            function initUpload() {
-                new verUpload({
-                    files: "#logo_uploader",
-                    name: "files",
-                    load_list: true,
-                    method: '/api/upload/UploadLogo?imageType=1',
-                    success: function (d) {
-                        var res = JSON.parse(d);
-                        if (res.status) {
-                          
-                            initLogoImage(res.data.url);
-                           
-                        } else {
-                            jutils.error("图片上传失败");
-                        }
-                        $('.uploadFilesBox').remove();
-                    },
-                    fail: function (d) {
-                        // $('#sale_image').val('');
-                        jutils.error("图片上传失败!");
-                    },
-                    size: 1024 * 4,
-                    ext: ['jpg', 'jpeg', 'png', 'gif']
-                });
+            $('#site_logo').val(imgUrl);
+            var imgHtml = '<li class="cupload-image-box" style="position:relative;width:320px;">';
+            imgHtml += '<img class="cupload-image-preview" style="width:300px;height:100px;" src = "' + imgUrl + '" />';
+            imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
+            imgHtml += '</li>';
+            $('#logo_uploader').hide();
+            $('#logo').append(imgHtml);
+            $('#logo').show();
 
-            }
+        }
 
-            function initLogoImage(imgUrl) {
+        function deletImage(obj) {
 
-                $('#site_logo').val(imgUrl);
-                var imgHtml = '<li class="cupload-image-box" style="position:relative;width:320px;">';
-                imgHtml += '<img class="cupload-image-preview" style="width:300px;height:100px;" src = "' + imgUrl + '" />';
-                imgHtml += '<div class="cupload-image-delete" onclick="deletImage(this)" data-url="' + imgUrl + '">x</div>';
-                imgHtml += '</li>';
-                $('#logo_uploader').hide();
-                $('#logo').append(imgHtml);
-                $('#logo').show();
+            $imgli = $(obj).parent('li');
+            jutils.confirm('确认删除图片吗?', function () {
+                $('#site_logo').val('');
+                $imgli.remove();
+                $('#logo').hide();
+                $('#logo_uploader').show();
+            })
+        }
+        function cancel() {
 
-            }
-
-            function deletImage(obj) {
-
-                $imgli = $(obj).parent('li');
-                jutils.confirm('确认删除图片吗?', function () {
-                    $('#site_logo').val('');
-                    $imgli.remove();
-                    $('#logo').hide();
-                    $('#logo_uploader').show();
-                })
-            }
-            function cancel() {
-               
-            }
-        </script>
-    }
+        }
+    </script>
+}
 

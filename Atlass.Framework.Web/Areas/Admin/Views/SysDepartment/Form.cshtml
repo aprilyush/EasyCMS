@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
     <link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox col-lg-offset-3">
+    <div class="ibox">
         <div class="ibox-content">
             <form class="form form-horizontal" id="myForm">
                 <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
@@ -38,7 +37,6 @@
             </form>
         </div>
     </div>
-</div>
 @section scripts{
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script src="~/plugins/selectTree/MultipleTreeSelect.js"></script>

@@ -3,13 +3,11 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox">
-        <div class="ibox-content">
-            <div id="toolbar" class="btn-group">
-            </div>
-            <table id="table"></table>
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
         </div>
+        <table id="table"></table>
     </div>
 </div>
 @section scripts
@@ -19,7 +17,7 @@
     <script>
         var $table;
 
-        $(function() {
+        $(function () {
             loadGrid();
         });
 
@@ -31,13 +29,13 @@
                 sidePagination: 'server',
                 idField: 'id',
                 columns: [
-                    {field: 'ck',checkbox: true},
+                    { field: 'ck', checkbox: true },
                     { field: 'menu_name', title: '名称', align: 'left' },
                     { field: 'menu_url', title: '菜单路径', align: 'center' },
                     { field: 'menu_icon', title: '菜单图片', align: 'center' },
                     { field: 'menu_sort', title: '排序', align: 'center' },
                     { field: 'remark', title: '排序', align: 'center' },
-                    { field: 'id', title: '操作', align: 'center',formatter:renderOpts }
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
                 ],
                 treeShowField: 'menu_name',
                 parentIdField: 'parent_id',
@@ -47,7 +45,7 @@
                         treeColumn: 1,
                         // expanderExpandedClass: 'glyphicon glyphicon-minus',
                         // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function() {
+                        onChange: function () {
                             $table.bootstrapTable('resetWidth');
                         }
                     });
@@ -61,7 +59,7 @@
             return jutils.initToolBarRow(v);
         }
         function renderIcon(rowdata, index, value) {
-            return '<i class="' + value+'"></i>';
+            return '<i class="' + value + '"></i>';
         }
 
         function add() {
@@ -111,9 +109,9 @@
                 ids.push(rows[i].id);
 
             }
-          
+
             jutils.confirm('确认删除选中的数据吗', function () {
-               
+
                 jutils.ajaxGet('/admin/sysmenu/del', { ids: ids.join() }, function () {
                     jutils.success('删除成功');
                     $table.bootstrapTable('refresh');

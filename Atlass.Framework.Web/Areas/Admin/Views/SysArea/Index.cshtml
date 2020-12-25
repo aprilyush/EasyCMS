@@ -5,30 +5,31 @@
 }
 <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
 <link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="ibox ">
-                <ul id="pTree" class="ztree"></ul>
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="ibox ">
-                <div id="toolbar" class="btn-group">
-
+    <div class="ibox">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="ibox ">
+                    <ul id="pTree" class="ztree"></ul>
                 </div>
-                <table id="areaTable"></table>
+            </div>
+            <div class="col-sm-10">
+                <div class="ibox ">
+                    <div id="toolbar" class="btn-group">
+
+                    </div>
+                    <table id="areaTable"></table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 @section scripts
 {
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
     <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
     <script>
-        var $table,$ptree;
+        var $table, $ptree;
         $(function () {
             loadpTree();
             loadGrid();
@@ -54,7 +55,7 @@
         function DicZtreeClick(event, treeId, treeNode) {
             var pid = treeNode.id;
 
-            $table.bootstrapTable('refresh', { query: { pid: pid }});
+            $table.bootstrapTable('refresh', { query: { pid: pid } });
 
         }
         function loadGrid() {
@@ -69,17 +70,17 @@
                     { field: 'ck', checkbox: true },
                     { field: 'name', title: '行政区域名称', align: 'left' },
                     { field: 'zipcode', title: '编码', align: 'center' }
-                   
+
                 ],
                 treeShowField: 'name',
                 parentIdField: 'pid',
-                onLoadSuccess: function(data) {
+                onLoadSuccess: function (data) {
                     $table.treegrid({
                         // initialState: 'collapsed',
                         treeColumn: 1,
                         // expanderExpandedClass: 'glyphicon glyphicon-minus',
                         // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function() {
+                        onChange: function () {
                             $table.bootstrapTable('resetWidth');
                         }
                     });
@@ -94,7 +95,7 @@
             jutils.dialogForm('字典信息',
                 '/admin/sysdic/formtest',
                 null,
-                function() {
+                function () {
 
                 });
         }
@@ -106,7 +107,7 @@
                 jutils.dialogForm('字典信息',
                     '/admin/sysdic/form',
                     { id: rows[0].id },
-                    function() {
+                    function () {
                         $table.bootstrapTable('refresh', { query: { pid: pid } });
 
                     });
@@ -131,10 +132,10 @@
             }
 
             jutils.confirm('确认删除吗',
-                function() {
+                function () {
                     jutils.ajaxGet('/admin/sysdic/del',
                         { ids: ids.join() },
-                        function() {
+                        function () {
                             $table.bootstrapTable('refresh');
 
                         });

@@ -4,17 +4,14 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox">
-        <div class="ibox-content">
-            <div id="toolbar" class="btn-group">
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
 
-            </div>
-            <table id="table"></table>
         </div>
+        <table id="table"></table>
     </div>
 </div>
-
 @section scripts{
     <script>
         $(function () {
@@ -43,7 +40,7 @@
                     {
                         field: 'ad_image', title: '广告图片', align: 'center', formatter: function (v, d, i) {
                             if (v) {
-                                return '<img src="'+v+'" width="50" height="50"/>';
+                                return '<img src="' + v + '" width="50" height="50"/>';
                             }
 
                             return '';
@@ -51,7 +48,7 @@
                     },
                     {
                         field: 'ad_status', title: '启用状态', align: 'center', formatter: function (v, d, i) {
-                            if (v===1) {
+                            if (v === 1) {
                                 return '<span class="label label-primary">启用</span>';
                             }
 
@@ -82,7 +79,7 @@
 
         function edit(obj) {
             var id = $(obj).data('id');
-            location.href = '/BasicData/Ad/form?id='+ id;
+            location.href = '/BasicData/Ad/form?id=' + id;
         }
         function ban(obj) {
             var id = $(obj).data('id');
@@ -94,7 +91,7 @@
                     });
             });
 
-         
+
         }
 
         function del(obj) {
@@ -102,7 +99,7 @@
             jutils.confirm('确认删除吗',
                 function () {
                     jutils.ajaxGet('/BasicData/Ad/DeleteById',
-                        { ids: id},
+                        { ids: id },
                         function () {
                             $table.bootstrapTable('refresh');
                         });

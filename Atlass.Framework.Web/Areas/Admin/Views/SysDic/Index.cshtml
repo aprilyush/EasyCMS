@@ -4,31 +4,28 @@
 }
 @*<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />*@
 <link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox">
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="ibox ">
-                        <ul id="dicTree" class="ztree"></ul>
-                    </div>
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="ibox ">
+                    <ul id="dicTree" class="ztree"></ul>
                 </div>
-                <div class="col-sm-10">
-                    <div id="toolbar" class="btn-group">
+            </div>
+            <div class="col-sm-10">
+                <div id="toolbar" class="btn-group">
 
-                    </div>
-                    <table id="dicTable"></table>
                 </div>
+                <table id="dicTable"></table>
             </div>
         </div>
     </div>
-
 </div>
 @section scripts
     {
     <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
     <script>
-        var ptree, $dicTable,pid=0;
+        var ptree, $dicTable, pid = 0;
         $(function () {
             loadDicTree();
             loadGrid();
@@ -121,7 +118,7 @@
         }
         function edit(obj) {
             var id = $(obj).data('id');
-            jutils.dialog('字典信息', '/admin/sysdic/form', { id: id },null,
+            jutils.dialog('字典信息', '/admin/sysdic/form', { id: id }, null,
                 function () {
                     $dicTable.bootstrapTable('refresh');
                     if (pid === '0') {
@@ -133,7 +130,7 @@
         function delSingle(obj) {
             var id = $(obj).data('id');
             jutils.confirm('确认删除吗', function () {
-                jutils.ajaxGet('/admin/sysdic/del', { ids: id}, function () {
+                jutils.ajaxGet('/admin/sysdic/del', { ids: id }, function () {
                     $dicTable.bootstrapTable('refresh');
                     loadDicTree();
                 });

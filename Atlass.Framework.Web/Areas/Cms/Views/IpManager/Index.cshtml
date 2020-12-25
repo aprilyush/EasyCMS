@@ -4,14 +4,12 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox">
-        <div class="ibox-content">
-            <div id="toolbar" class="btn-group">
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
 
-            </div>
-            <table id="table"></table>
         </div>
+        <table id="table"></table>
     </div>
 </div>
 
@@ -76,8 +74,8 @@
         }
 
         function add() {
-            
-            
+
+
             var pageSize = jutils.documentSize();
             var height = (pageSize.height * 0.9) + 'px';
             //console.log(width, document.body.clientHeight);
@@ -102,7 +100,7 @@
             jutils.confirm('确认删除吗',
                 function () {
                     jutils.ajaxGet('/cms/ipmanager/DeleteByIds',
-                        { ids: id},
+                        { ids: id },
                         function () {
                             $table.bootstrapTable('refresh');
                         });
@@ -128,7 +126,7 @@
                 });
         }
 
-     
+
     </script>
 }
 

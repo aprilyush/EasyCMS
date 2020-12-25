@@ -3,16 +3,14 @@
     Layout = "_Index";
 }
 <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
-<div class="wrapper wrapper-content  animated fadeInRight">
-    <div class="ibox ">
-        <div class="ibox-content">
-            <div id="toolbar" class="btn-group">
+<div class="ibox ">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
 
-            </div>
-            <table id="dicTable"></table>
         </div>
-
+        <table id="dicTable"></table>
     </div>
+
 </div>
 @section scripts
 {
@@ -26,16 +24,16 @@
         });
 
         function loadGrid() {
-          
-           $table = $("#dicTable").bootstrapTable({
-               url:'/admin/sysdic/GetTreeGrid',
+
+            $table = $("#dicTable").bootstrapTable({
+                url: '/admin/sysdic/GetTreeGrid',
                 height: $(window).height(),
                 striped: true,
-               sidePagination: 'server',
-               idField: 'id',
-               uniqueId: 'id',
+                sidePagination: 'server',
+                idField: 'id',
+                uniqueId: 'id',
                 columns: [
-                    {field: 'ck',checkbox: true},
+                    { field: 'ck', checkbox: true },
                     { field: 'dic_name', title: '字典名称', align: 'left' },
                     { field: 'sort_num', title: '排序', align: 'center' },
                     { field: 'dic_code', title: '字典编码', align: 'center' },
@@ -47,19 +45,19 @@
                 ],
                 treeShowField: 'dic_name',
                 parentIdField: 'parent_id',
-               onLoadSuccess: function (data) {
+                onLoadSuccess: function (data) {
                     $table.treegrid({
                         // initialState: 'collapsed',
                         treeColumn: 1,
                         // expanderExpandedClass: 'glyphicon glyphicon-minus',
                         // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function() {
+                        onChange: function () {
                             $table.bootstrapTable('resetWidth');
                         }
                     });
                 }
                 // bootstrap-table-treetreegrid.js 插件配置
-           });
+            });
             jutils.initToolBarRole('#toolbar', true);
         }
 
@@ -69,9 +67,9 @@
         }
         function add() {
             jutils.dialog('字典信息',
-                '/admin/sysdic/form',null,null,
+                '/admin/sysdic/form', null, null,
                 function () {
-                   
+
                 });
         }
 
@@ -95,7 +93,7 @@
                         { ids: id },
                         function () {
                             $table.bootstrapTable('refresh');
-                            
+
                         });
                 });
         }

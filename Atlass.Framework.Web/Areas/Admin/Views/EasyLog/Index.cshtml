@@ -4,34 +4,35 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<div class="ibox-content">
-    <div class="row">
-        <div class="text-center">
-            <div class="btn-group" id="tableStatus">
-                <a href="javascript:void(0);" class="btn btn-info" data-id="0">全部</a>
-                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="1">信息</a>
-                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="2">调试</a>
-                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="3">警告</a>
-                <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="4">异常</a>
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="text-center">
+                <div class="btn-group" id="tableStatus">
+                    <a href="javascript:void(0);" class="btn btn-info" data-id="0">全部</a>
+                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="1">信息</a>
+                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="2">调试</a>
+                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="3">警告</a>
+                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="4">异常</a>
 
+                </div>
             </div>
-        </div>
-        <div class="div_find">
-            <p>
-                <label class="find_labela">日志简述：</label>
-                <input type="text" id="log_summary" name="log_summary" class="find_input">
-                <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
-            </p>
-        </div>
-        <div class="col-sm-12">
-            <div id="toolbar" class="btn-group">
-                <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
-                <button class="btn btn-danger" type="button" onclick="clearAll()"><i class="fa fa-trash"></i> 清空日志</button>
+            <div class="div_find">
+                <p>
+                    <label class="find_labela">日志简述：</label>
+                    <input type="text" id="log_summary" name="log_summary" class="find_input">
+                    <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
+                </p>
             </div>
-            <table id="userTable"></table>
+            <div class="col-sm-12">
+                <div id="toolbar" class="btn-group">
+                    <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
+                    <button class="btn btn-danger" type="button" onclick="clearAll()"><i class="fa fa-trash"></i> 清空日志</button>
+                </div>
+                <table id="userTable"></table>
+            </div>
         </div>
     </div>
-
 </div>
 @section scripts
 {

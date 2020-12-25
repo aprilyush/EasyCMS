@@ -2,23 +2,21 @@
     ViewBag.Title = "角色管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-    <div class="wrapper wrapper-content  animated fadeInRight">
-        <div class="ibox">
-            <div class="ibox-content">
-                <div id="toolbar" class="btn-group">
-                </div>
-                <div>
-                    <table id="roleTable"></table>
-                </div>
-            </div>
-          
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="toolbar" class="btn-group">
+        </div>
+        <div>
+            <table id="roleTable"></table>
         </div>
     </div>
+
+</div>
 @section scripts
 {
     <script>
         var $roleTable;
-        $(function() {
+        $(function () {
             loadGrid();
         });
 
@@ -36,7 +34,7 @@
                 sidePagination: "server",
                 locale: "zh-CN",
                 striped: true,
-                uniqueId:'id',
+                uniqueId: 'id',
                 columns: [
                     { field: 'ck', checkbox: true },
                     { field: 'role_name', title: '角色名称', align: 'center' },
@@ -47,7 +45,7 @@
                         field: 'role_super',
                         title: '是否超级管理员',
                         align: 'center',
-                        formatter: function(value, row, index) {
+                        formatter: function (value, row, index) {
                             if (value) {
                                 return '是';
                             } else {
@@ -55,7 +53,7 @@
                             }
                         }
                     },
-                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts}
+                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
                 ]
 
             });
@@ -68,8 +66,8 @@
         }
 
         function add() {
-            jutils.dialogForm('角色信息', '/admin/sysrole/form/', {id:''},
-                function() {
+            jutils.dialogForm('角色信息', '/admin/sysrole/form/', { id: '' },
+                function () {
                     $roleTable.bootstrapTable('refresh');
                 });
         }
@@ -77,7 +75,7 @@
         function edit(obj) {
 
             var id = $(obj).data('id');
-            jutils.dialogForm('角色信息', '/admin/sysrole/form', { id: id},
+            jutils.dialogForm('角色信息', '/admin/sysrole/form', { id: id },
                 function () {
                     $roleTable.bootstrapTable('refresh');
                 });
@@ -88,10 +86,10 @@
 
 
             jutils.confirm('确认删除吗',
-                function() {
+                function () {
                     jutils.ajaxGet('/admin/sysrole/DelRoleByIds',
-                        { ids: id},
-                        function() {
+                        { ids: id },
+                        function () {
                             $roleTable.bootstrapTable('refresh');
                         });
                 });
@@ -102,13 +100,13 @@
             var id = $(obj).data('id');
             var row = $roleTable.bootstrapTable('getRowByUniqueId', id);//行的数据
             var name = row.role_name;
-           
-            jutils.dialogForm('角色权限信息', '/admin/sysrole/SetRoleAuthNew', { id:id,roleName:name},
-                function() {
+
+            jutils.dialogForm('角色权限信息', '/admin/sysrole/SetRoleAuthNew', { id: id, roleName: name },
+                function () {
                     $roleTable.bootstrapTable('refresh');
                 });
         }
-        
+
     </script>
 
 
