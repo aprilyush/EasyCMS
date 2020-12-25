@@ -127,7 +127,49 @@ namespace Atlass.Framework.Common
             DateTime result;
             return DateTime.TryParse(data.ToString(), out result) ? result : DateTime.MinValue;
         }
-
+        /// <summary>
+        /// 转换为日期
+        /// </summary>
+        /// <param name="data">数据</param>
+        public static DateTime ToDate(this string data)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(data))
+                {
+                    return DateTime.MinValue;
+                }
+                if (data.Contains("-") || data.Contains("/"))
+                {
+                    return DateTime.Parse(data);
+                }
+                else
+                {
+                    int length = data.Length;
+                    switch (length)
+                    {
+                        case 4:
+                            return DateTime.ParseExact(data, "yyyy", System.Globalization.CultureInfo.CurrentCulture);
+                        case 6:
+                            return DateTime.ParseExact(data, "yyyyMM", System.Globalization.CultureInfo.CurrentCulture);
+                        case 8:
+                            return DateTime.ParseExact(data, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture);
+                        case 10:
+                            return DateTime.ParseExact(data, "yyyyMMddHH", System.Globalization.CultureInfo.CurrentCulture);
+                        case 12:
+                            return DateTime.ParseExact(data, "yyyyMMddHHmm", System.Globalization.CultureInfo.CurrentCulture);
+                        case 14:
+                            return DateTime.ParseExact(data, "yyyyMMddHHmmss", System.Globalization.CultureInfo.CurrentCulture);
+                        default:
+                            return DateTime.ParseExact(data, "yyyyMMddHHmmss", System.Globalization.CultureInfo.CurrentCulture);
+                    }
+                }
+            }
+            catch
+            {
+                return DateTime.MinValue;
+            }
+        }
         /// <summary>
         /// 转换为可空日期
         /// </summary>

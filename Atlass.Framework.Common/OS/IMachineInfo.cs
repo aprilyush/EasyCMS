@@ -27,6 +27,16 @@ namespace Atlass.Framework.Common
         /// 系统内核
         /// </summary>
         /// <returns></returns>
-        string GetRunTime();
+        string GetOSRunTime();
+
+        /// <summary>
+        /// 获取硬盘容量
+        /// </summary>
+        ComputerInfo GetDiskSize();
+
+        /// 查找cpu的名称，主频, 核心数
+        /// </summary>
+        /// <returns></returns>
+        Tuple<string, string> GetCPU();
     }
 }

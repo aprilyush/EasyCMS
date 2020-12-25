@@ -3,62 +3,192 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
+@using Atlass.Framework.ViewModels.OS
+@model SystemMonitor
+<div class="ibox">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>CPU</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-hover no-margins">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>处理器</td>
+                                    <td>@ViewData["CPU"]</td>
+                                </tr>
+                                <tr>
+                                    <td>核心数</td>
+                                    <td>@(Model.ProcessorCount)</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU使用率</td>
+                                    <td><span id="CPURate"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-<div class="ibox-content">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right"></span>
-                    <h5>NET CORE版本</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins" id="NetCoreVersion">0</h1>
-                    <div class="stat-percent font-bold text-info">
-                        <i class="fa fa-level-up"></i>
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>内存</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            <a class="close-link"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-hover no-margins">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>内存</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>总内存</td>
+                                    <td id="RAMTotal"></td>
+                                </tr>
+                                <tr>
+                                    <td>内存使用率</td>
+                                    <td id="RAMRate"></td>
+                                </tr>
+                                <tr>
+                                    <td>硬盘</td>
+                                    <td>@ViewData["Disk"]</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right"></span>
-                    <h5>当前进程名称</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins" id="ProcessorName">0</h1>
-                    <div class="stat-percent font-bold text-info">
-                        <i class="fa fa-level-up"></i>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>服务器信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-hover margin bottom">
+                                    <tbody>
+                                        <tr>
+                                            <td>服务器名称</td>
+                                            <td>@Model.MachineName</td>
+                                            <td>操作系统</td>
+                                            <td>@Model.OSDescription</td>
+                                        </tr>
+                                        <tr>
+                                            <td>外网Ip</td>
+                                            <td>
+                                                <span id="wanIp"></span>
+                                            </td>
+                                            <td>局域网Ip</td>
+                                            <td>@Model.LanIp</td>
+                                        </tr>
+                                        <tr>
+                                            <td>系统运行时长</td>
+                                            <td><span id="RunTime">@(Model.OsRuntime)</span></td>
+                                            <td>系统架构</td>
+                                            <td>@Model.OSArchitecture</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right"></span>
-                    <h5>系统内存</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins" id="SystemMemory">0</h1>
-                    <div class="stat-percent font-bold text-info">
-                        <i class="fa fa-level-up"></i>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>站点信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-hover margin bottom">
+                                    <tbody>
+                                        @*<tr>
+                                            <td>环境变量</td>
+                                            <td>@Html.Raw(env.EnvironmentName)</td>
+                                        </tr>*@
+                                        <tr>
+                                            <td>网站根目录</td>
+                                            <td>@(Model.ContentRootPath)</td>
+                                            <td>网站资源目录</td>
+                                            <td>@(Model.WebRootPath)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>.NET Core版本</td>
+                                            <td>@(Model.NetCoreVersion)</td>
+                                            <td>内存占用</td>
+                                            <td id="ProcessMemory">@(Model.ProcessMemory)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>启动时间</td>
+                                            <td>@(Model.ProcessStartTime)</td>
+                                            <td>GC模式</td>
+                                            <td>@(Model.WorkGC)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div id="chart" style="width: 80%; height: 500px;"></div>
-        </div>
+
     </div>
 </div>
 @section scripts{
 
     <script>
         $(function () {
+            setInterval(function () { loadData() }, 10000);
             loadData();
         });
 
@@ -72,11 +202,18 @@
                 //contentType: 'application/x-www-form-urlencoded',
                 success: function (res) {
                     if (res.status) {
-                        var model = res.data.model;
-                        $('#NetCoreVersion').text(model.NetCoreVersion);
-                        $('#ProcessorName').text(model.ProcessorName);
-                        $('#SystemMemory').text(model.SystemMemory);
-
+                        var resData = res.data;
+                        var model = resData.model;
+                        $('#CPURate').text(resData.cpuRate);
+                        $('#ProcessMemory').text(resData.ProcessMemory);
+                        var totalHtml = '<span style="color:red;">' + model.RAMUsed + 'M</span>/<span style="color:green;">' + model.RAMTotal +'M</span>'
+                        $('#RAMTotal').html(totalHtml);
+                        if (model.RAMRate > 70) {
+                            totalHtml = ' <span style = "color:red;" >' + model.RAMRate + '%</span >';
+                        } else {
+                            totalHtml = ' <span style = "color:green;" >' + model.RAMRate + '%</span >';
+                        }
+                        $('#RAMRate').html(totalHtml);
                     }
                 }, beforeSend: function (data, textStatus, jqXHr) {
 

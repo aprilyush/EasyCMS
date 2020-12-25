@@ -315,6 +315,23 @@ namespace Atlass.Framework.Common
             }
             return fileKbSize;
         }
+        /// <summary>  
+        /// 将字节转换为GB
+        /// </summary>  
+        /// <param name="size">字节值</param>  
+        /// <param name="mod">除数，硬盘除以1000，内存除以1024</param>  
+        /// <returns></returns>  
+        public static string ToGB(double size, double mod)
+        {
+            String[] units = new String[] { "B", "KB", "MB", "GB", "TB", "PB" };
+            int i = 0;
+            while (size >= mod)
+            {
+                size /= mod;
+                i++;
+            }
+            return Math.Round(size) + units[i];
+        }
 
         #region 汉字转拼音
 

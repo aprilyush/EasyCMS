@@ -125,6 +125,7 @@ namespace Atlass.Framework.Web
             IHostApplicationLifetime appLifetime, IOptions<Dictionary<string, string>> options,
             IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
+            GlobalContext.HostingEnvironment = env;
             //if (env.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();

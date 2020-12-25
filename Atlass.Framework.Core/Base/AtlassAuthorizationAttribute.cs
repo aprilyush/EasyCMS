@@ -35,13 +35,18 @@ namespace Atlass.Framework.Core.Base
 
 
 
+        /// <summary>
+        /// 获取路由信息
+        /// </summary>
+        /// <param name="routes"></param>
+        /// <returns></returns>
         private string GetRouteInfo(IDictionary<string,string> routes)
         {
             StringBuilder  route =new StringBuilder();
-            if (routes.ContainsKey("area"))
+            string area = routes["area"];
+            if (area.IsEmpty())
             {
-               
-                route.Append(routes["area"]);
+                route.Append(area);
                 route.Append("_");
             }
             route.Append(routes["controller"]);

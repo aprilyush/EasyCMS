@@ -46,6 +46,7 @@ namespace Atlass.Framework.Web
                                 serverOptions.AllowSynchronousIO = true;
                                 serverOptions.Limits.MaxRequestBodySize = 2000*1024*1024;
                                 //serverOptions.ListenAnyIP(context.Configuration.GetValue<int>("HostingPort"));
+                              
                             })
                             //.useii((context, serverOptions) =>
                             // {
@@ -53,8 +54,9 @@ namespace Atlass.Framework.Web
                             //     //serverOptions.ListenAnyIP(context.Configuration.GetValue<int>("HostingPort"));
                             // })
                             //.UseUrls("http://*:9046")
-                            //.UseUrls("http://cmsl.atlass:80")
-                            //.UseUrls("http://www.cmsl.atlass:80")
+                            .UseUrls("http://cmsl.atlass:80")
+                            .UseUrls("http://www.cmsl.atlass:80")
+                            //.UseUrls(context)
                             .UseStartup<Startup>();
                     });
         }
