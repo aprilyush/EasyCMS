@@ -1,0 +1,16 @@
+﻿[Unit]
+Description=EasyCMS
+
+[Service]
+Type=notify
+
+## WorkingDirectory是上面的AntDeployAgentLinuxService所在目录
+WorkingDirectory=/www/wwwroot/root/easycms
+## ExecStart是AntDeployAgentLinuxService执行文件的完整路径
+ExecStart=/www/wwwroot/root/easycms/Atlass.Framework.Web
+SyslogIdentifier=EasyCMS
+Restart=always        
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
