@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -20,17 +21,10 @@ namespace Atlass.Framework.Web.Controllers
 
         private readonly IMachineInfo _machineInfo;
        
-        public SystemMonitorController(IAtlassRequest atlassRequest)
+        public SystemMonitorController(IAtlassRequest atlassRequest, IMachineInfo machineInfo)
         {
             RequestHelper = atlassRequest;
-            if (Runtime.Windows)
-            {
-                _machineInfo = new WindowsMachineInfo();
-            }
-            else
-            {
-                _machineInfo = new LinuxMachineInfo();
-            }
+            _machineInfo = machineInfo;
         }
         public IActionResult Index()
         {
@@ -74,7 +68,6 @@ namespace Atlass.Framework.Web.Controllers
         {
             try
             {
-                int limit = 4 * 1024;
 
                 MemoryMetrics memoryMetrics = _machineInfo.GetMetrics();
                 //var model = new SystemMonitor();
@@ -83,6 +76,8 @@ namespace Atlass.Framework.Web.Controllers
                 //{
 
                 //}
+
+
                 string ProcessMemory = ((Double)Process.GetCurrentProcess().WorkingSet64 / 1048576).ToString("N2") + " MB";
                 var result = new ResultAdaptDto();
                 result.data.Add("model", memoryMetrics);
@@ -96,6 +91,19 @@ namespace Atlass.Framework.Web.Controllers
                 return Error(ex.Message);
             }
 
+        }
+
+
+        public IActionResult GetIp()
+        {
+            //UnicastIPAddressInformation[] nest = NetworkInterface.GetAllNetworkInterfaces()
+            //     .Select(p => p.GetIPProperties()).SelectMany(p => p.UnicastAddresses)
+            //     .Where(p => p.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && !System.Net.IPAddress.IsLoopback(p.Address))
+            // .ToArray();
+
+            var result = new ResultAdaptDto();
+            result.data.Add("nest", "nest");
+            return Data(result);
         }
     }
 }

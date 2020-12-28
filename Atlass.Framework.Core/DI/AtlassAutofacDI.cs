@@ -1,4 +1,5 @@
-﻿using Atlass.Framework.Core.Base;
+﻿using Atlass.Framework.Common;
+using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Autofac;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -26,6 +27,15 @@ namespace Atlass.Framework.Core.DI
 
             builder.RegisterType<AtlassActionFilterAttribute>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<IPFilterAttribute>().AsSelf().InstancePerLifetimeScope();
+
+            if (Runtime.Windows)
+            {
+                builder.RegisterType<WindowsMachineInfo>().As<IMachineInfo>().SingleInstance();
+            }
+            else
+            {
+                builder.RegisterType<LinuxMachineInfo>().As<IMachineInfo>().SingleInstance();
+            }
         }
 
     }

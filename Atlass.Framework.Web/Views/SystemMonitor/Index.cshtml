@@ -190,6 +190,7 @@
         $(function () {
             setInterval(function () { loadData() }, 10000);
             loadData();
+            test();
         });
 
         function loadData() {
@@ -225,5 +226,12 @@
         }
 
 
+        function test(){
+
+            jutils.ajaxPost('http://211.159.219.206:8094/api/Device/Login', { Account: 'admin', PassWord: 'fofia123' }, function (res) {
+
+            });
+            
+        }
     </script>
 }

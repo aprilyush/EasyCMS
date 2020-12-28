@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Net.NetworkInformation;
 
 namespace Atlass.Framework.Common
 {
@@ -26,10 +27,15 @@ namespace Atlass.Framework.Common
                 //    }
                 //}
 
-               return System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces()
+               var nets= NetworkInterface.GetAllNetworkInterfaces()
                .Select(p => p.GetIPProperties()).SelectMany(p => p.UnicastAddresses)
                .Where(p => p.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && !System.Net.IPAddress.IsLoopback(p.Address))
-                .FirstOrDefault()?.Address.ToString();
+                .ToList();
+                if (nets.Count > 0)
+                {
+                    string[] ip = nets.Where(s=>s.IsDnsEligible).Select(s => s.Address.ToString()).ToArray();
+                    return string.Join(',', ip);
+                }
             }
             catch (Exception ex)
             {
