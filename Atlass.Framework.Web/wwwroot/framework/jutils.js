@@ -1,7 +1,29 @@
-﻿;wubdiws.jutils = {};
+﻿;window.jutils = {};
 (function($, jutils) {
     "use strict";
     $.extend(jutils, {
+        initToastr: function () {
+            console.log('initToastr');
+            //参数设置，若用默认值可以省略以下面代
+            toastr.options = {
+                "closeButton": true, //是否显示关闭按钮
+                "debug": false, //是否使用debug模式
+                "newestOnTop": false,
+                "progressBar": true,//进度条
+                //"positionClass": "toast-top-full-width", //弹出窗的位置
+                "preventDuplicates": true,//允许重复弹出
+                "onclick": null,
+                "showDuration": "300", //显示的动画时间
+                "hideDuration": "1000", //消失的动画时间
+                "timeOut": "3000", //展现时间
+                "extendedTimeOut": "0", //加长展示时间
+                "showEasing": "swing", //显示时的动画缓冲方式
+                "hideEasing": "linear", //消失时的动画缓冲方式
+                "showMethod": "fadeIn", //显示时的动画方式
+                "hideMethod": "fadeOut" //消失时的动画方式
+
+            };
+        },
         getQueryParam : function (paramName) {
             var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
@@ -213,7 +235,7 @@
             msg = msg || '信息提示';
             toastr.info(msg);
         },
-        confirm = function (msg, okfunc) {
+        confirm : function (msg, okfunc) {
             var btn = ['确认', '取消'];
             var title = "温馨提示";
             layer.confirm(msg, {
@@ -273,7 +295,7 @@
             }
             return str;
         },
-        padRight = function (str, totalLen) {
+        padRight : function (str, totalLen) {
             var len = str.toString().length;
             while (len < totalLen) {
                 str = str + "0";
@@ -510,6 +532,8 @@
             return '';
         }
     });
+
+    jutils.initToastr();
 })(window.jQuery, window.jutils);
 
 $.fn.initFormData = function (formdate) {
