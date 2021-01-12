@@ -3,7 +3,7 @@
     "use strict";
     $.extend(jutils, {
         initToastr: function () {
-            console.log('initToastr');
+            //console.log('initToastr');
             //参数设置，若用默认值可以省略以下面代
             toastr.options = {
                 "closeButton": true, //是否显示关闭按钮
