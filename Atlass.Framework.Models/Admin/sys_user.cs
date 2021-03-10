@@ -21,55 +21,121 @@ namespace Atlass.Framework.Models {
 	
 	public partial class sys_user {
 
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string account_name { get; set; } = string.Empty;
+		/// <summary>
+		/// 用户id
+		/// </summary>
+		[JsonProperty, Column(IsPrimary = true)]
+		public long id { get; set; }
 
-		[JsonProperty, Column(DbType = "int(20)")]
-		public int city { get; set; }
+		/// <summary>
+		/// 创建人
+		/// </summary>
+		[JsonProperty, Column(StringLength = 30)]
+		public string create_by { get; set; } = string.Empty;
 
-		[JsonProperty, Column(DbType = "int(20)")]
-		public int county { get; set; }
-
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string create_person { get; set; } = string.Empty;
-
+		/// <summary>
+		/// 创建时间
+		/// </summary>
 		[JsonProperty]
 		public DateTime create_time { get; set; }
 
-		[JsonProperty, Column(DbType = "varchar(50)")]
+		/// <summary>
+		/// 删除标志（0代表存在 1代表删除）
+		/// </summary>
+		[JsonProperty, Column(DbType = "int(1)")]
+		public int del_flag { get; set; }
+
+		/// <summary>
+		/// 部门
+		/// </summary>
+		[JsonProperty]
+		public int dept_id { get; set; }
+
+		/// <summary>
+		/// 部门
+		/// </summary>
+		[JsonProperty]
+		public string dept_name { get; set; } = string.Empty;
+
+		/// <summary>
+		/// 邮箱
+		/// </summary>
+		[JsonProperty, Column(StringLength = 50)]
 		public string email { get; set; } = string.Empty;
 
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string fax { get; set; } = string.Empty;
+		/// <summary>
+		/// 用户性别（1男 0女 2未知）
+		/// </summary>
+		[JsonProperty, Column(DbType = "int(1)")]
+		public int gender { get; set; }
 
-		[JsonProperty]
-		public long id { get; set; }
+		/// <summary>
+		/// 是否是超管(0-不是，1-是)
+		/// </summary>
+		[JsonProperty, Column(DbType = "int(1)")]
+		public int is_super { get; set; }
 
-		[JsonProperty, Column(DbType = "tinyint(1)")]
-		public bool is_super { get; set; }
+		/// <summary>
+		/// 登录账号
+		/// </summary>
+		[JsonProperty, Column(StringLength = 30)]
+		public string login_name { get; set; } = string.Empty;
 
-		[JsonProperty, Column(DbType = "varchar(20)")]
+		/// <summary>
+		/// 手机号码
+		/// </summary>
+		[JsonProperty, Column(StringLength = 20)]
 		public string mobile_phone { get; set; } = string.Empty;
 
-		[JsonProperty, Column(DbType = "varchar(100)")]
+		/// <summary>
+		/// 密码
+		/// </summary>
+		[JsonProperty, Column(StringLength = 50)]
 		public string pass_word { get; set; } = string.Empty;
 
-		[JsonProperty, Column(DbType = "int(20)")]
-		public int province { get; set; }
-
-		[JsonProperty, Column(DbType = "varchar(100)")]
-		public string real_name { get; set; } = string.Empty;
-
+		/// <summary>
+		/// 备注
+		/// </summary>
 		[JsonProperty]
 		public string remark { get; set; } = string.Empty;
 
+		/// <summary>
+		/// 角色id
+		/// </summary>
 		[JsonProperty]
-		public long sys_role_id { get; set; }
+		public long role_id { get; set; }
 
+		/// <summary>
+		/// 更新人
+		/// </summary>
+		[JsonProperty, Column(StringLength = 30)]
+		public string update_by { get; set; } = string.Empty;
+
+		/// <summary>
+		/// 更新时间
+		/// </summary>
+		[JsonProperty, Column(DbType = "datetime")]
+		public DateTime update_time { get; set; }
+
+		/// <summary>
+		/// 用户头像
+		/// </summary>
 		[JsonProperty]
-		public int user_level { get; set; }
-		[JsonProperty]
-		public int dept_id { get; set; } = 0;
+		public string user_avatar { get; set; } = string.Empty;
+
+		/// <summary>
+		/// 用户名
+		/// </summary>
+		[JsonProperty, Column(StringLength = 30)]
+		public string user_name { get; set; } = string.Empty;
+
+		/// <summary>
+		/// 账号状态(0-正常，1-禁用)
+		/// </summary>
+		[JsonProperty, Column(DbType = "int(1)")]
+		public int user_status { get; set; }
+		[Column(IsIgnore =true)]
+		public string role_name { get; set; }
 
 	}
 

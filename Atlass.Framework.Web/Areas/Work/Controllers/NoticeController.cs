@@ -33,7 +33,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         {
             var user = RequestHelper.AdminInfo();
             var data = _noticeApp.GetList(dto, "", user);
-            return Data(data);
+            return Json(data);
         }
 
         public IActionResult Form(int id)
@@ -78,7 +78,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
             }
             var depts = _deptApp.GetDepartTree();
             result.data.Add("depts", depts);
-            return Data(result);
+            return Json(result);
         }
         
         [HttpGet]
@@ -114,7 +114,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
             var user = RequestHelper.AdminInfo();
             var model = _noticeApp.GetModel(id, user);
             result.data.Add("model", model);
-            return Data(result);
+            return Json(result);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         {
             var noticeId = RequestHelper.GetQueryInt("noticeId");
             var data=_noticeApp.GetReplyList(param, noticeId);
-            return Data(data);
+            return Json(data);
         }
 
         /// <summary>

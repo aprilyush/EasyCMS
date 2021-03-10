@@ -35,7 +35,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         {
             var name = RequestHelper.GetQueryString("name");
             var data = _addressBookApp.GetList(param, name);
-            return Data(data);
+            return Json(data);
         }
 
         public IActionResult Form(int id)
@@ -69,7 +69,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
 
             var depts = _deptApp.GetDepartTree();
             result.data.Add("depts", depts);
-            return Data(result);
+            return Json(result);
         }
 
         [HttpGet]

@@ -8,6 +8,7 @@ using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Atlass.Framework.ViewModels.SystemApp;
 using Microsoft.Extensions.DependencyInjection;
+using NPOI.OpenXmlFormats.Dml;
 
 namespace Atlass.Framework.AppService
 {
@@ -19,17 +20,40 @@ namespace Atlass.Framework.AppService
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
+
+
         /// <summary>
-        /// 数据表格
+        /// 首页导航菜单全部
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public List<sys_menu> GetMenuList(BootstrapGridDto param)
+        public List<sys_menu> GetNaviMenu()
         {
 
             //int total = 0;
-            var query = Sqldb.Queryable<sys_menu>().OrderBy(s=>s.menu_sort).ToList();
-            return query;
+            var menus = Sqldb.Queryable<sys_menu>().OrderBy(s=>s.menu_sort).ToList();
+
+            if (menus.Count > 0)
+            {
+                List<sys_menu> tops = menus.Where(s => s.parent_id == 0).ToList();
+                tops.ForEach(menu =>
+                {
+                    menu.tab_id = CommHelper.GetMenuTabId(menu.menu_url);
+                    var sons = menus.Where(s => s.parent_id == menu.id).ToList();
+                    sons.ForEach(son =>
+                    {
+                        son.tab_id = CommHelper.GetMenuTabId(son.menu_url);
+                        var sons2= menus.Where(s => s.parent_id == son.id).ToList();
+                        sons2.ForEach(s => {
+                            s.tab_id = CommHelper.GetMenuTabId(son.menu_url);
+                        });
+                        son.children = sons2;
+                    });
+                    menu.children = sons;
+                });
+                return tops;
+            }
+            return menus;
         }
 
         /// <summary>

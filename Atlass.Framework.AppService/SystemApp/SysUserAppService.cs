@@ -29,8 +29,8 @@ namespace Atlass.Framework.AppService
         /// <returns></returns>
         public sys_user LoginValidate(string uname, string pwd)
         {
-            pwd = Encrypt.DesEncrypt(pwd);
-            return Sqldb.Queryable<sys_user>().Where(s => s.account_name == uname && s.pass_word == pwd).First();
+            //pwd = Encrypt.DesEncrypt(pwd);
+            return Sqldb.Queryable<sys_user>().Where(s => s.login_name == uname && s.pass_word == pwd).First();
         }
         //public plat_user LoginPlatValidate(string uname, string pwd)
         //{
@@ -44,7 +44,7 @@ namespace Atlass.Framework.AppService
         /// <param name="pwd"></param>
         public void UpdateUserPwd(long id, string pwd)
         {
-            pwd = Encrypt.DesDecrypt(pwd);
+            //pwd = Encrypt.DesDecrypt(pwd);
             Sqldb.Update<sys_user>().Set(s => new sys_user { pass_word = pwd }).Where(s => s.id == id).ExecuteAffrows();
         }
 
@@ -54,20 +54,18 @@ namespace Atlass.Framework.AppService
         /// <param name="param"></param>
         /// <param name="accountName"></param>
         /// <returns></returns>
-        public BootstrapGridDto GetData(BootstrapGridDto param, string accountName,string nickName)
+        public BootstrapGridDto GetData(BootstrapGridDto param, string loginName,string userName,string phone)
         {
-            var query = Sqldb.Select<sys_user, sys_role,sys_department>()
-                         .LeftJoin((u, r,d) => u.sys_role_id == r.id)
-                         .LeftJoin((u, r, d) => u.dept_id ==d.id)
-                         .WhereIf(!accountName.IsEmpty(),(u, r, d)=>u.account_name==accountName)
-                         .WhereIf(!nickName.IsEmpty(), (u, r, d) => u.real_name.Contains(nickName))
-                         .OrderByDescending((u, r, d) =>u.is_super)
-                         .OrderByDescending((u, r, d) => u.create_time)
+            var query = Sqldb.Select<sys_user>()
+                         //.LeftJoin((u, r) => u.role_id == r.id)
+                         .WhereIf(!loginName.IsEmpty(),u=>u.login_name== loginName)
+                         .WhereIf(!userName.IsEmpty(),u => u.user_name.Contains(userName))
+                         .WhereIf(!phone.IsEmpty(), u => u.mobile_phone.Contains(phone))
+                         .OrderByDescending(u =>u.is_super)
+                         .OrderByDescending(u=> u.create_time)
                 .Count(out long total)
-                .Page(param.page, param.limit)
-                .ToList((u, r, d) => new { Id = u.id,IsSuper=u.is_super, AccountName = u.account_name, 
-                    RealName = u.real_name, MobilePhone = u.mobile_phone, Email = u.email, 
-                    CreateTime = u.create_time, RoleName = r.role_name,DeptName=d.department_name });
+                .Page(param.pageNumber, param.pageSize)
+                .ToList();
 
             param.rows = query;
             param.total = total;
@@ -90,12 +88,12 @@ namespace Atlass.Framework.AppService
             long count = 0;
             if (id == 0)
             {
-                count = Sqldb.Select<sys_user>().Where(s => s.account_name == uname.Trim()).Count();
+                count = Sqldb.Select<sys_user>().Where(s => s.login_name == uname.Trim()).Count();
                
             }
             else
             {
-                count = Sqldb.Select<sys_user>().Where(s => s.account_name == uname.Trim() && s.id != id).Count();
+                count = Sqldb.Select<sys_user>().Where(s => s.login_name == uname.Trim() && s.id != id).Count();
               
             }
             if (count == 0)
@@ -115,10 +113,9 @@ namespace Atlass.Framework.AppService
         {
             dto.id = IdWorkerHelper.NewId();
             dto.create_time = DateTime.Now;
-            dto.create_person = UserCookie.AccountName;
+            dto.create_by = UserCookie.AccountName;
 
-
-            dto.fax = dto.fax ?? string.Empty;
+           
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
 
@@ -133,12 +130,12 @@ namespace Atlass.Framework.AppService
         public void UpdateData(sys_user dto, string refExperts)
         {
 
-            dto.fax = dto.fax ?? string.Empty;
+          
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
 
             Sqldb.Update<sys_user>().SetSource(dto)
-                .IgnoreColumns(s => new { s.create_person, s.create_time, s.account_name }).ExecuteAffrows();
+                .IgnoreColumns(s => new { s.create_by, s.create_time, s.user_name }).ExecuteAffrows();
 
         }
         /// <summary>
@@ -148,11 +145,11 @@ namespace Atlass.Framework.AppService
         public void UpdateProfile(sys_user dto)
         {
 
-            dto.fax = dto.fax ?? string.Empty;
+          
             dto.email = dto.email ?? string.Empty;
             dto.mobile_phone = dto.mobile_phone ?? string.Empty;
             Sqldb.Update<sys_user>().SetSource(dto)
-                .UpdateColumns(s => new { s.real_name, s.pass_word, s.mobile_phone,s.email,s.dept_id }).ExecuteAffrows();
+                .UpdateColumns(s => new { s.user_name, s.pass_word, s.mobile_phone,s.email,s.dept_id }).ExecuteAffrows();
         }
         /// <summary>
         /// 单个数据

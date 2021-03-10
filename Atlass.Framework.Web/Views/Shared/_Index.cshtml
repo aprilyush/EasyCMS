@@ -2,37 +2,46 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <title>@ViewBag.Title</title>
-    <link href="~/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="~/hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="~/hplus/css/style.css?v=4.1.0" rel="stylesheet">
-    <!-- bootstrap-table -->
-    <link href="~/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
-    <link href="~/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" />
-    <link href="~/plugins/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="~/plugins/nice_validate/jquery.validator.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="~/ui/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/ui/easycms/css/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+    <link href="~/ui/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- bootstrap-table 表格插件样式 -->
+    <link href="~/ui/plugins/bootstrap-table/182/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="~/ui/css/animate.css" rel="stylesheet" />
+    <link href="~/ui/css/style.css?v=20200903" rel="stylesheet" />
+    <link href="~/ui/easycms/css/ry-ui.css?v=4.6.0" rel="stylesheet" />
 
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content  animated fadeInRight">
         @RenderBody()
     </div>
-   
-    <!-- 全局js -->
-    <script src="~/hplus/js/jquery.min.js?v=2.1.4"></script>
-    <script src="~/hplus/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="~/plugins/toastr/toastr.min.js"></script>
-    <!-- layui -->
-    <script src="~/plugins/layer/layer.js"></script>
-    <!-- bootstrap-table-->
-    <script src="~/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="~/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
-    <script src="~/plugins/nice_validate/jquery.validator.js?local=zh-CN"></script>
-    <script src="~/plugins/vue/vue.js"></script>
-    <!-- 自定义js -->
-    <script src="~/framework/jutils.js"></script>
-    @*<script src="~/hplus/js/content.js?v=1.0.0"></script>*@
+
+    <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+    <script src="~/ui/js/jquery.min.js"></script>
+    <script src="~/ui/js/bootstrap.min.js"></script>
+    <!-- bootstrap-table 表格插件 -->
+    <script src="~/ui/plugins/bootstrap-table/182/bootstrap-table.min.js"></script>
+    <script src="~/ui/plugins/bootstrap-table/182/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/ui/plugins/bootstrap-table/182/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+
+    <script src="~/ui/plugins/nice-validator-1.1.5/dist/jquery.validator.min.js?local=zh-CN"></script>
+
+    <script src="~/ui/plugins/blockUI/jquery.blockUI.js"></script>
+    <script src="~/ui/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/ui/plugins/layer/layer.min.js"></script>
+    <!--扩展-->
+    <script src="~/ui/easycms/js/easy-table-plugin.js"></script>
+    <script src="~/ui/easycms/js/easy-treetable-plugin.js"></script>
+    <script src="~/ui/easycms/js/common.js"></script>
+    <script src="~/ui/easycms/js/jutils.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSRedisCore" Version="3.6.5" />
-    <PackageReference Include="EasyCaching.InMemory" Version="1.1.0" />
+    <PackageReference Include="CSRedisCore" Version="3.6.6" />
+    <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>

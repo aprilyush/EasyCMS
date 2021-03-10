@@ -497,5 +497,26 @@ namespace Atlass.Framework.Common
             return string.Empty;
         }
         #endregion
+
+
+
+        /// <summary>
+        /// 菜单的tabid
+        /// </summary>
+        /// <param name="menuUrl"></param>
+        /// <returns></returns>
+        public static string GetMenuTabId(String menuUrl)
+        {
+            if (menuUrl == "#")
+            {
+                return menuUrl;
+            }
+            string tabId = menuUrl.Replace("/", "_");
+            if (tabId.IndexOf("_") == 0)
+            {
+                tabId = tabId.Substring(1);
+            }
+            return tabId;
+        }
     }
 }

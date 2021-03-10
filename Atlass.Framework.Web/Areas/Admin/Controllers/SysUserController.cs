@@ -28,11 +28,22 @@ namespace Altas.Framework.Admin
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }
 
+        /// <summary>
+        /// 用户列表页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 用户表单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
@@ -42,37 +53,44 @@ namespace Altas.Framework.Admin
             return View();
         }
 
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetAllUser()
         {
             var data = _userApp.GetAllUser();
-            return Content(data.ToJson());
+            return Json(data);
         }
+
         /// <summary>
         /// 数据表格
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-     
+        [HttpPost]
         public ActionResult GetData(BootstrapGridDto param)
         {
             //var data = new DataGridEx();
 
-            string accountName = RequestHelper.GetQueryString("userName");
-            string nickName = RequestHelper.GetQueryString("nickName");
-            var data=_userApp.GetData(param, accountName, nickName);
+            string loginName = RequestHelper.GetPostString("loginName");
+            string userName = RequestHelper.GetPostString("userName");
+            string phone = RequestHelper.GetPostString("phone");
+            var data=_userApp.GetData(param, loginName, userName, phone);
 
-            return Content(data.ToJson());
+            return Json(data);
+            
         }
 
         /// <summary>
-        /// 提交数据
+        /// 用户提交数据
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult SaveData(sys_user dto,string refExperts)
         {
-            var exist = _userApp.CheckUserName(dto.account_name, dto.id);
+            var exist = _userApp.CheckUserName(dto.login_name, dto.id);
             if (exist)
             {
                 return Error("用户名已存在");
@@ -96,6 +114,7 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult GetUserById(string id)
         {
             var result=new ResultAdaptDto();
@@ -107,9 +126,14 @@ namespace Altas.Framework.Admin
             }
             var depts = _deptApp.GetDepartTree();
             result.data.Add("depts", depts);
-            return Content(result.ToJson());
+            return Json(result);
         }
-
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult DelUserByIds(string ids)
         {
             _userApp.DelUserByIds(ids);
@@ -117,13 +141,24 @@ namespace Altas.Framework.Admin
             return Success("删除成功");
         }
 
+        /// <summary>
+        /// 个人资料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Profile(string id)
         {
             ViewBag.Id = id;
             return View();
         }
 
-
+        /// <summary>
+        /// 更新个人资料
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
         public ActionResult UpdateProfile(sys_user dto)
         {
             dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());

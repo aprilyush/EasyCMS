@@ -34,7 +34,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         {
             int channelId = RequestHelper.GetQueryInt("channelId");
             var data = _contentApp.GetData(dto, channelId);
-            return Data(data);
+            return Json(data);
         }
 
         public ActionResult Form(int id)
@@ -109,7 +109,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
             //var channels = _contentApp.ChannelZtree();
             //result.data.Add("channels", channels);
-            return Data(result);
+            return Json(result);
         }
 
 

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Atlass.Framework.Common
 {
-    public static class ToJsonEx
+    public static partial class ToJsonEx
     {
         public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {

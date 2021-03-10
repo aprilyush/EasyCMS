@@ -84,7 +84,7 @@ namespace Atlass.Framework.Web.Controllers
                 result.data.Add("cpuRate", _machineInfo.GetCPURate());
                 result.data.Add("runtime", _machineInfo.GetOSRunTime());
                 result.data.Add("ProcessMemory", ProcessMemory);
-                return Data(result);
+                return Json(result);
             }
             catch(Exception ex)
             {
@@ -103,7 +103,7 @@ namespace Atlass.Framework.Web.Controllers
 
             var result = new ResultAdaptDto();
             result.data.Add("nest", "nest");
-            return Data(result);
+            return Json(result);
         }
     }
 }

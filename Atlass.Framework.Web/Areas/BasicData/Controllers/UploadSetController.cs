@@ -32,7 +32,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
             var result = new ResultAdaptDto();
             var model = _uploadSetApp.GetModel();
             result.data.Add("model", model);
-            return Data(result);
+            return Json(result);
         }
 
 

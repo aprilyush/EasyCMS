@@ -34,7 +34,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             var log_type = RequestHelper.GetQueryString("log_type", "0").ToInt();
             var log_summary = RequestHelper.GetQueryString("log_summary", "");
             var data = _logApp.GetList(dto, log_type, log_summary);
-            return Data(data);
+            return Json(data);
         }
 
         public IActionResult Detail(int id)

@@ -37,7 +37,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var result = new ResultAdaptDto();
             result.data.Add("list", ret.matchs);
             result.data.Add("templates", ret.templates);
-            return Data(result);
+            return Json(result);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var ret = _tempApp.MatchList();
             var result = new ResultAdaptDto();
             result.data.Add("list", ret.matchs);
-            return Data(result);
+            return Json(result);
         }
     }
 }

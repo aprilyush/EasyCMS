@@ -64,7 +64,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             }
             var depts = _deptApp.GetDepartTree();
             result.data.Add("depts", depts);
-            return Data(result);
+            return Json(result);
         }
         [HttpGet]
         public IActionResult DeleteById(int id)

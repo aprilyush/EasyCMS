@@ -17,5 +17,9 @@ namespace Atlass.Framework.ViewModels
         public int statusCode { get; set; }
         public string msg { get; set; }
         public Dictionary<string, object> data { get; set; }
+        public void Add(string key,object val)
+        {
+            this.data[key] = val;
+        }
     }
 }

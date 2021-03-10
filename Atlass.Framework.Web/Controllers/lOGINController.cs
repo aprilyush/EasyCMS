@@ -50,11 +50,11 @@ namespace Atlass.Framework.Web.Controllers
                 if (user != null)
                 {
                     loginUserDto.Id = user.id;
-                    loginUserDto.AccountName = user.account_name;
-                    loginUserDto.RealName = user.real_name;
-                    loginUserDto.IsSuper = user.is_super;
+                    loginUserDto.AccountName = user.login_name;
+                    loginUserDto.RealName = user.user_name;
+                    loginUserDto.IsSuper = user.is_super==1;
                     loginUserDto.DepartmentId = user.dept_id;
-                    loginUserDto.UserLevel = user.user_level;
+                 
                     //if (user.account_name.ToLower() == "admin")
                     //{
                     //    loginUserDto.IsSuper = true; //user.IsSuper;
@@ -63,7 +63,7 @@ namespace Atlass.Framework.Web.Controllers
                     //{
                     //    loginUserDto.IsSuper = user.is_super; //user.IsSuper;
                     //}
-                    loginUserDto.SysRoleId = user.sys_role_id;
+                    loginUserDto.SysRoleId = user.role_id;
                     //设置cookie
                     // FormsAuthentication.SetAuthCookie(loginUserDto.AccountName, false);
                     string claimstr = loginUserDto.ToJson();

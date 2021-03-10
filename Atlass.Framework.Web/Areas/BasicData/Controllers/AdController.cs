@@ -39,14 +39,14 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         public IActionResult GetData(BootstrapGridDto dto)
         {
             var data = _adApp.GetData(dto);
-            return Data(data);
+            return Json(data);
         }
         public IActionResult GetModel(int id)
         {
             var result = new ResultAdaptDto();
             var model = _adApp.GetModel(id);
             result.data.Add("model", model);
-            return Data(result);
+            return Json(result);
         }
 
         public IActionResult Save(cms_ad dto)

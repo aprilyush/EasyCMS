@@ -35,6 +35,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             ViewBag.Id = userDto.Id.ToString();
             ViewBag.AccountName = userDto.AccountName;
             ViewBag.UserName = userDto.RealName;
+            ViewData.Model = _menuApp.GetNaviMenu();
             return View();
         }
         public async Task<ActionResult> GetRoleMenu()
@@ -68,6 +69,15 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             }
 
             return Content(result.ToJson());
+        }
+
+        /// <summary>
+        /// 皮肤切换
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SwitchSkin()
+        {
+            return View();
         }
     }
 }

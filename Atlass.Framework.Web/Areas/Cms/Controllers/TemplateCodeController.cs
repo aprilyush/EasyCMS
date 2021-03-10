@@ -48,7 +48,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         {
             int pid = RequestHelper.GetQueryInt("pid");
             var data = _templateApp.GetData(dto, pid);
-            return Data(data);
+            return Json(data);
         }
 
 
@@ -90,7 +90,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var result = new ResultAdaptDto();
             var templates = _templateApp.TemplateCategory();
             result.data.Add("templates", templates);
-            return Data(result);
+            return Json(result);
         }
 
         public IActionResult GetTemplateTree()
@@ -98,7 +98,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var result = new ResultAdaptDto();
             var templates = _templateApp.TemplateZtree();
             result.data.Add("templates", templates);
-            return Data(result);
+            return Json(result);
         }
 
         [HttpGet]

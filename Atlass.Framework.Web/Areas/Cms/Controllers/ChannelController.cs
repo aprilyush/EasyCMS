@@ -86,7 +86,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
             var channels = _channelApp.ChannelZtree();
             result.data.Add("channels", channels);
-            return Data(result);
+            return Json(result);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var result = new ResultAdaptDto();
             var channels = _channelApp.ChannelZtree();
             result.data.Add("channels", channels);
-            return Data(result);
+            return Json(result);
         }
         public IActionResult DeleteById(int id)
         {

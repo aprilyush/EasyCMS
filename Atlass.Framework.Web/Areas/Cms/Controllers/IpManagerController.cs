@@ -37,7 +37,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         public IActionResult GetData(BootstrapGridDto dto)
         {
             var data = _ipManagerApp.GetList(dto);
-            return Data(data);
+            return Json(data);
         }
 
         [HttpPost]
@@ -86,7 +86,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             var result = new ResultAdaptDto();
             var model = _ipManagerApp.GetModel(id);
             result.data.Add("model", model);
-            return Data(result);
+            return Json(result);
         }
 
         [HttpGet]

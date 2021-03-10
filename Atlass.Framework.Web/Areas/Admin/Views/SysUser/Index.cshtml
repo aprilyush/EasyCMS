@@ -2,104 +2,193 @@
     ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="div_find">
-            <div>
-                <label class="find_labela">登录名：</label>
-                <input type="text" class="find_input" id="userName" />
-                <label class="find_labela">昵称：</label>
-                <input type="text" class="find_input" id="nickName" />
-                <button type="button" class="btn btn-primary" onclick="query();">查询</button>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            登录名：<input type="text" id="loginName" />
+                        </li>
+                        <li>
+                            用户名：<input type="text" id="userName" />
+                        </li>
+                        <li>
+                            手机号：<input type="text" id="phone" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-        <div id="toolbar" class="btn-group">
-        </div>
-        <table id="userTable"></table>
-    </div>
 
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="system:user:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:user:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:user:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning single disabled" onclick="resetPwd(this);" data-id="0" data-role="system:user:password">
+                <i class="fa fa-key"></i> 重置密码
+            </a>
+            <a class="btn btn-info" onclick="exportExcel()" data-role="system:user:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
 </div>
 @section scripts
 {
-    <script>
-        var $userTable;
-        $(function() {
-            loadGrid();
+    <script type="text/javascript">
+        let $table;
+        $(function () {
+            loadData();
+
+            jutils.handleMessage(function (res) {
+                //console.log(res);
+                if (res.title === 'userForm') {
+                    $table.easyTable('search');
+                }
+
+            });
+
+            // console.log('按钮权限',top.buttonPermissionModel);
         });
 
-        function loadGrid() {
-            $userTable=$("#userTable").bootstrapTable({
-                url: '/admin/sysuser/getdata',
-                toolbar: '#toolbar',       
-                pagination: true,
-                height: $(window).height()-50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true, 
-                sidePagination: "server", 
-                locale: "zh-CN",
-                striped: true,
+
+        function loadData() {
+            let options = {
+                url: '/admin/sysuser/GetData',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
                 queryParams: function (params) {
-                    var dto = {
-                        limit: params.limit, //每页多少条
-                        offset: params.offset, //从第几条开始读(默认就好)
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        loginName: $('#loginName').val(),
                         userName: $('#userName').val(),
-                        nickName:$('#nickName').val()
-                    };
-                    return dto;
+                        phone: $('#phone').val()
+                    }
+                    return p;
                 },
                 columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'AccountName', title: '登录名', align: 'center' },
-                    { field: 'RealName', title: '用户名', align: 'center' },
+                    { field: 'selectItem', checkbox: true },
                     {
-                        field: 'IsSuper', title: '是否超管', align: 'center', formatter: function (v) {
-                            if (v) {
-                                return '<span class="label label-primary">是</span>';
+                        field: 'login_name', title: '登录账号', align: "center"
+                    },
+                    { field: 'user_name', title: '用户名', align: "center" },
+                    { field: 'mobile_phone', title: '联系电话', align: "center" },
+                    { field: 'email', title: '邮箱', align: "center" },
+                    { field: 'dept_name', title: '部门', align: "center" },
+                    {
+                        field: 'is_super', title: '超管', align: 'center', formatter: function (value, row, index) {
+                            if (value === 1) {
+                                return '<span class="badge badge-primary">是</span>'
                             }
-                            return '-';
                         }
                     },
-                    { field:"DeptName",title:"部门",align:'center'},
-                    { field: 'RoleName', title: '角色名称', align: 'center'  },
-                    { field: 'MobilePhone', title: '联系方式', align: 'center'  },
-                    { field: 'Email', title: '邮箱', align: 'center' },
-                    { field: 'Id', title: '操作', align: 'center', formatter: renderOpts }
+                    { field: 'role_ame', title: '归属角色', align: "center" },
+                    {
+                        field: 'user_status', title: '用户状态', align: 'center', formatter: function (value, row, index) {
+                            if (value === 1) {
+                                return '<span class="badge badge-primary">正常</span>';
+                            }
+                            return '<span class="badge danger">停用</span>';
+                        }
+                    },
+                    { field: 'create_time', title: '创建时间', align: "center" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                    }
                 ]
-                
-            });
-            jutils.initToolBarRole('#toolbar');
+            };
+
+            $table = $('#dataTable').easyTable(options);
+            $table.easyTable('selectedEvent');
         }
 
-        function renderOpts(v, d, i) {
-            return jutils.initToolBarRow(v);
+        function renderOperationButton(value, row, index) {
+            let actions = [];
+            actions.push({
+                roleTag: 'system:user:edit',
+                button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+            });
+            actions.push({
+                roleTag: 'system:user:delete',
+                button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+            });
+
+            return jutils.buttonPermissions(actions);
         }
+
+
         function add() {
-            location.href = '/admin/SysUser/form?id=0';
+            jutils.openTab('userTab', '添加用户', '/admin/sysuser/form?id=' + 0);
         }
 
         function edit(obj) {
-            var id = $(obj).data('id');
-            location.href = '/admin/SysUser/form?id=' + id;
+            let id = $(obj).data('id');
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                id = rows[0].id;
+            }
+
+            jutils.openTab('userTab', '修改用户', '/admin/sysuser/form?id=' + id);
         }
 
-        function del(obj) {
-            var id = $(obj).data('id');
-            jutils.confirm('确认删除吗',
-                function() {
-                    jutils.ajaxGet('/admin/SysUser/DelUserByIds',
-                        { ids: id},
-                        function() {
-                            $userTable.bootstrapTable('refresh');
-                        });
+        function removeAll(obj) {
+            const id = $(obj).data('id');
+            let del = false;
+            let ids = [];
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    ids.push(rows[i].id);
+                }
+            } else {
+                ids.push(id);
+            }
+
+
+            jutils.confirm("确认删除用户数据吗？", function () {
+                jutils.ajaxGet("/admin/sysuser/removeAll", { ids: ids.join() }, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
                 });
+            });
         }
 
-        function query() {
-            $userTable.bootstrapTable('refresh');
-        }
+        function resetPwd() {
+            const rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
 
+            jutils.dialog('重置密码', '/admin/sysuser/resetPasswordView', { id: rows[0].id, loginName: rows[0].loginName }, ["600px", "300px"], function () {
+
+            });
+        }
     </script>
 }

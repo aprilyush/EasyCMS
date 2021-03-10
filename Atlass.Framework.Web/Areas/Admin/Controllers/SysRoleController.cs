@@ -163,5 +163,19 @@ namespace Altas.Framework.Admin
 
             return Content(result.ToJson());
         }
-	}
+
+        public ActionResult GetButtonPermission()
+        {
+            string author = RequestHelper.GetQueryString("author");
+            if (author.IsEmpty())
+            {
+                return Error("请求权限失败");
+            }
+
+            ResultAdaptDto result = new ResultAdaptDto();
+            result.data.Add("isAdmin", true);
+            return Json(result);
+        }
+
+    }
 }

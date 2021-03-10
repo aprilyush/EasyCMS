@@ -37,7 +37,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         public ActionResult GetData(BootstrapGridDto dto)
         {
             var data = _logApp.GetList(dto);
-            return Data(data);
+            return Json(data);
         }
 
         public IActionResult Form(string id)
