@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-03-10 16:53:18
+ * @LastEditTime: 2021-03-10 16:54:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
 -->
 
 # EasyCms
-<font face="黑体" color=#FF0000>禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构</font>  
+<font face="黑体" color="#FF0000">禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构</font>  
 &emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
 ## 发展目标
 &emsp;&emsp;EasyCms是基于Atlass Framework实现一个产品化的项目，Atlass Framework原来是实现一个适合自己公司项目的基础开发框架。  
