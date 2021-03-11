@@ -83,9 +83,9 @@ namespace Atlass.Framework.AppService.Work
         public void Save(work_notice dto, string deptIds, LoginUserDto user)
         {
             dto.dept_ids = deptIds;
-            var edeptIds = deptIds.SplitToArrayInt();
+            var edeptIds = deptIds.SplitToArrayInt64();
             dto.total_depts = edeptIds.Count();
-            var depts = Sqldb.Queryable<sys_department>().Where(s => edeptIds.Contains(s.id)).ToList();
+            var depts = Sqldb.Queryable<sys_dept>().Where(s => edeptIds.Contains(s.id)).ToList();
             
             if (dto.id == 0)
             {
@@ -117,7 +117,7 @@ namespace Atlass.Framework.AppService.Work
                     model.user_id =0;
                     model.nick_name ="";
                     model.dept_id = dept.id;
-                    model.dept_name = dept.department_name;
+                    model.dept_name = dept.dept_name;
                     model.reply_status = 0;
                     if (user.DepartmentId == dept.id)
                     {

@@ -14,7 +14,7 @@ namespace Atlass.Framework.Models.Work
         public string nick_name { get; set; }
         public DateTime reply_time { get; set; }
 
-        public int dept_id { get; set; }
+        public long dept_id { get; set; }
         public string dept_name { get; set; }
         /// <summary>
         /// 0-未签收，1-已签收

@@ -48,7 +48,7 @@ namespace Atlass.Framework.Web.ApiControllers
             if (files.Count == 0)
             {
                 result.status = false;
-                result.msg = "没有文件信息";
+                result.message = "没有文件信息";
                 return Content(result.ToJson());
             }
             string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
@@ -146,7 +146,7 @@ namespace Atlass.Framework.Web.ApiControllers
             if (files.Count == 0)
             {
                 result.status = false;
-                result.msg = "没有文件信息";
+                result.message = "没有文件信息";
                 return Content(result.ToJson());
             }
             string url = $"/static/images";
@@ -274,7 +274,7 @@ namespace Atlass.Framework.Web.ApiControllers
             catch(Exception ex)
             {
                 result.status = false;
-                result.msg = ex.Message;
+                result.message = ex.Message;
             }
             return Content(result.ToJson());
         }
@@ -299,7 +299,7 @@ namespace Atlass.Framework.Web.ApiControllers
            
             if (!res)
             {
-                result.msg = msg;
+                result.message = msg;
                 result.status = false;
             }
             else

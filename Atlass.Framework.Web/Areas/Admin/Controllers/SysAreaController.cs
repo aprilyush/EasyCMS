@@ -8,6 +8,7 @@ using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
+using Atlass.Framework.Web.Areas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 

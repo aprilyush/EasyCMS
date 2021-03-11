@@ -165,5 +165,15 @@ namespace Altas.Framework.Admin
             _userApp.UpdateProfile(dto);
             return Success("修改成功");
         }
+
+
+        /// <summary>
+        /// 用户选择
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult UserSelect()
+        {
+            return View();
+        }
     }
 }

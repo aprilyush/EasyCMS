@@ -21,32 +21,33 @@ namespace Atlass.Framework.Models {
 	
 	public partial class sys_operate {
 
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string func_cname { get; set; } = string.Empty;
-
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string func_icon { get; set; } = string.Empty;
-
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string func_name { get; set; } = string.Empty;
-
-		[JsonProperty]
-		public int func_sort { get; set; }
-
-		[JsonProperty, Column(DbType = "varchar(50)")]
-		public string func_url { get; set; } = string.Empty;
-
-		[JsonProperty]
+		[JsonProperty, Column(IsPrimary = true)]
 		public long id { get; set; }
 
-		[JsonProperty, Column(DbType = "tinyint(2)")]
-		public int in_table { get; set; }
+		/// <summary>
+		/// 排序
+		/// </summary>
+		[JsonProperty, Column(DbType = "int(5)")]
+		public int func_sort { get; set; }
 
+		/// <summary>
+		/// 按钮名称
+		/// </summary>
+		[JsonProperty, Column(StringLength = 50)]
+		public string func_title { get; set; } = string.Empty;
+
+		/// <summary>
+		/// 菜单Id
+		/// </summary>
 		[JsonProperty]
 		public long menu_id { get; set; }
 
-		[JsonProperty]
-		public string remark { get; set; } = string.Empty;
+		/// <summary>
+		/// 权限标识
+		/// </summary>
+		[JsonProperty, Column(StringLength = 50)]
+		public string role_tag { get; set; } = string.Empty;
+
 
 	}
 

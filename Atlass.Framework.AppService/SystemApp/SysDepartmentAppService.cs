@@ -20,63 +20,87 @@ namespace Atlass.Framework.AppService.SystemApp
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public List<sys_department> GetData()
+        public List<sys_dept> GetData()
         {
-            var list = Sqldb.Select<sys_department>().OrderBy(s=>s.sort_num).ToList();
+            var list = Sqldb.Select<sys_dept>().OrderBy(s=>s.order_num).ToList();
             return list;
         }
 
-
-        public sys_department GetModel(int id)
+        /// <summary>
+        /// 部门信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public sys_dept GetModel(int id)
         {
-            return Sqldb.Select<sys_department>().Where(s => s.id == id).First();
+            return Sqldb.Select<sys_dept>().Where(s => s.id == id).First();
 
         }
-
-        public List<ZtreeSelIntDto> GetDepartTree()
+        /// <summary>
+        /// ztree下拉选择树
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeSelInt64Dto> GetDepartTree()
         {
-            var depts = Sqldb.Queryable<sys_department>()
-               .OrderBy(s => s.sort_num)
-               .ToList(s => new ZtreeSelIntDto()
+            var depts = Sqldb.Queryable<sys_dept>()
+               .OrderBy(s => s.order_num)
+               .ToList(s => new ZtreeSelInt64Dto()
                {
                    id = s.id,
                    pId = s.parent_id,
-                   name = s.department_name
+                   name = s.dept_name
                });
-            depts.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });
+            //depts.Insert(0, new ZtreeSelInt64Dto { id = 0, name = "请选择" });
             return depts;
         }
 
-
-        public void SaveDepartment(sys_department dto)
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="user"></param>
+        public void SaveDepartment(sys_dept dto,LoginUserDto user)
         {
-            if (dto.parent_id == 0)
+
+            dto.update_by = user.AccountName;
+            dto.update_time = DateTime.Now;
+            dto.ancestors = "";
+            dto.phone = dto.phone ?? "";
+            dto.email = dto.email ?? "";
+            dto.remark = dto.remark ?? "";
+            if (dto.leader_id == 0)
             {
-                dto.department_level = 1;
+                dto.leader = "";
             }
             else
             {
-                dto.department_level = Sqldb.Select<sys_department>().Where(s => s.id == dto.parent_id).First(s => s.parent_id) + 1;
+                string leader = Sqldb.Select<sys_user>().Where(s => s.id == dto.leader_id).First(s => s.user_name);
+                dto.leader = leader ?? "";
             }
             if (dto.id == 0)
             {
+                dto.create_by = user.AccountName;
+                dto.create_time = DateTime.Now;
                 Sqldb.Insert(dto).ExecuteAffrows();
             }
             else
             {
-                Sqldb.Update<sys_department>().SetSource(dto).IgnoreColumns(s=>new { s.insert_id,s.insert_time})
+                Sqldb.Update<sys_dept>().SetSource(dto).IgnoreColumns(s=>new { s.create_by,s.create_time,s.del_flag})
                     .Where(s => s.id == dto.id).ExecuteAffrows();
             }
         }
 
-
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteById(int id)
         {
-            var sons = Sqldb.Select<sys_department>().Where(s => s.parent_id == id).ToList(s => s.id);
-            Sqldb.Delete<sys_department>().Where(s => s.id == id).ExecuteAffrows();
+            var sons = Sqldb.Select<sys_dept>().Where(s => s.parent_id == id).ToList(s => s.id);
+            Sqldb.Delete<sys_dept>().Where(s => s.id == id).ExecuteAffrows();
             if (sons.Count > 0)
             {
-                Sqldb.Delete<sys_department>().Where(s => sons.Contains(s.id)).ExecuteAffrows();
+                Sqldb.Delete<sys_dept>().Where(s => sons.Contains(s.id)).ExecuteAffrows();
             }
         }
     }

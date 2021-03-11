@@ -2,126 +2,138 @@
     ViewBag.Title = "菜单管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-content">
-        <div id="toolbar" class="btn-group">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="menu-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            菜单名称：<input type="text" name="menu_name" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick=""><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick=""><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-        <table id="table"></table>
+
+        <div class="btn-group-sm" role="group" id="toolbar">
+            <a class="btn btn-success" onclick="add();" data-role="system:menu:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-info" onclick="expandAll();" data-role="0">
+                <i class="fa fa-exchange"></i> 展开/折叠
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
     </div>
 </div>
 @section scripts
 {
-    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
-    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
-    <script>
-        var $table;
-
+    <script type="text/javascript" src="~/ui/plugins/bootstrap-treetable/bootstrap-treetable.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        let $table;
         $(function () {
-            loadGrid();
+
+            initTreeGrid();
+            jutils.handleMessage(function (res) {
+                //console.log(res);
+                if (res.title === 'admin_sysmenu_form') {
+                    // $("#dataTable").bootstrapTreeTable("refresh");
+                    $table.easyTreeTable('search');
+                }
+
+            });
+
         });
 
-        function loadGrid() {
-            $table = $("#table").bootstrapTable({
-                url: '/admin/SysMenu/GetData',
-                height: $(window).height(),
-                striped: true,
-                sidePagination: 'server',
-                idField: 'id',
-                columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'menu_name', title: '名称', align: 'left' },
-                    { field: 'menu_url', title: '菜单路径', align: 'center' },
-                    { field: 'menu_icon', title: '菜单图片', align: 'center' },
-                    { field: 'menu_sort', title: '排序', align: 'center' },
-                    { field: 'remark', title: '排序', align: 'center' },
-                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
-                ],
-                treeShowField: 'menu_name',
-                parentIdField: 'parent_id',
-                onLoadSuccess: function (data) {
-                    $table.treegrid({
-                        // initialState: 'collapsed',
-                        treeColumn: 1,
-                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
-                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function () {
-                            $table.bootstrapTable('resetWidth');
-                        }
-                    });
-                }
-                // bootstrap-table-treetreegrid.js 插件配置
-            });
-            jutils.initToolBarRole('#toolbar');
 
+        function initTreeGrid() {
+            var options = {
+                id: 'dataTable',
+                url: '/admin/sysmenu/GetData',
+                code: "id",
+                parentCode: "parent_id",
+                uniqueId: "id",
+                toolbar: '#toolbar',
+                rootIdValue: 0,
+                striped: false,
+                expandColumn: 1,
+                showSearch: true,
+                showRefresh: true,
+                showColumns: true,
+                expandAll: true,
+                expandFirst: true,
+                columns: [
+                    { field: 'selectItem', radio: true },
+                    {
+                        field: 'menu_name', title: '菜单名称', formatter: function (v, r, i) {
+                            return '<i class="' + r.menuIcon + '"></i>' + v;
+                        }
+                    },
+                    { field: 'menu_url', title: '路由', align: "left" },
+                    { field: 'role_tag', title: '权限标识', align: "left" },
+                    { field: 'menu_sort', title: '排序', align: "left" },
+                    { field: 'create_time', title: '创建时间', align: "left" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                    }
+                ],
+                onLoadSuccess: function (data) {
+                    // console.log('from data load ok');
+                    // console.log(data);
+                }
+            }
+
+            //$table = $.treeTable.init(options);
+            $table = $("#dataTable").easyTreeTable(options);
         }
-        function renderOpts(v, d, i) {
-            return jutils.initToolBarRow(v);
-        }
-        function renderIcon(rowdata, index, value) {
-            return '<i class="' + value + '"></i>';
+
+
+        function renderOperationButton(value, row, index) {
+            var actions = [];
+            actions.push({
+                roleTag: 'system:menu:edit',
+                button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+            });
+            actions.push({
+                roleTag: 'system:menu:delete',
+                button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="del(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+            });
+
+            return jutils.buttonPermissions(actions);
         }
 
         function add() {
-            var url = '/admin/sysmenu/form';
-            parent.$.altasTab.open({
-                id: 'menuformTab',
-                title: '菜单信息',
-                url: url,
-                close: function () {
-                    $table.bootstrapTable('refresh');
-                }
-            });
+            // jutils.dialogFull("添加菜单",'/admin/sysmenu/form',{id:0},function(){
+            //       console.log('回调');
+            // });
+            jutils.openTab('admin_sysmenu_form', '添加菜单', '/admin/sysmenu/form');
         }
+
         function edit(obj) {
-            var id = $(obj).data('id');
-            var url = '/admin/sysmenu/form/' + id;
-            parent.$.altasTab.open({
-                id: 'menuformTab',
-                title: '菜单信息',
-                url: url,
-                close: function () {
-                    $table.bootstrapTable('refresh');
-                }
-            });
+            var dataId = $(obj).data('id');
+            jutils.openTab('admin_sysmenu_form', '修改菜单', '/admin/sysmenu/form?id=' + dataId);
+            //console.log("from edit", dataId);
         }
+
         function del(obj) {
-
-            var id = $(obj).data('id');
-
-            jutils.confirm('确认删除选中的数据吗', function () {
-
-                jutils.ajaxGet('/admin/sysmenu/del', { ids: id }, function () {
-                    jutils.success('删除成功');
-                    $table.bootstrapTable('refresh');
+            var dataId = $(obj).data('id');
+            jutils.confirm("删除菜单信息可能会影响角色权限，确认删除吗？", function () {
+                jutils.ajaxGet('/admin/sysmenu/delById', { id: dataId }, function (res) {
+                    //$table.bootstrapTreeTable('refresh');
+                    $table.easyTreeTable('search');
                 });
             });
+
         }
-        function batchDel() {
-            var rows = $table.bootstrapTable('getSelections');
-            if (rows.length === 0) {
-                jutils.warn('请选中需要删除的数据行');
-                return;
-            }
-            var ids = [];
-            for (var i = 0; i < rows.length; i++) {
-
-                ids.push(rows[i].id);
-
-            }
-
-            jutils.confirm('确认删除选中的数据吗', function () {
-
-                jutils.ajaxGet('/admin/sysmenu/del', { ids: ids.join() }, function () {
-                    jutils.success('删除成功');
-                    $table.bootstrapTable('refresh');
-                });
-            });
-        }
-
-        function refresh() {
-            $table.bootstrapTable('refresh');
+        function expandAll() {
+            $table.easyTreeTable('expandAll');
         }
     </script>
-
 }

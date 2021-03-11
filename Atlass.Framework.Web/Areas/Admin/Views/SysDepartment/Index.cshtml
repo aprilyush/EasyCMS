@@ -1,85 +1,174 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "组织单位";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-    <link href="~/plugins/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-content">
-        <div id="toolbar" class="btn-group">
-
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="menu-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            名称：<input type="text" name="deptName" id="deptName" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="query(1);"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="query(0);"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-        <table id="table"></table>
+
+        <div class="btn-group-sm" role="group" id="toolbar">
+            <a class="btn btn-success" onclick="add();" data-role="system:dept:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary" onclick="edit(this);" data-id="0" data-role="system:dept:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger" onclick="removeAll(this);" data-id="0" data-role="system:dept:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-info" onclick="expandAll();" data-role="0">
+                <i class="fa fa-exchange"></i> 展开/折叠
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
     </div>
 </div>
 @section scripts{
-    <script src="~/plugins/bootstrapTableTree/bootstrap-table-treegrid.js"></script>
-    <script src="~/plugins/jquery-treegrid/jquery.treegrid.min.js"></script>
-    <script>
-        var $table;
+<script type="text/javascript" src="~/ui/plugins/bootstrap-treetable/bootstrap-treetable.js"></script>
+    <script type="text/javascript">
+        let $table;
         $(function () {
-            loadGrid();
+
+            initTreeGrid();
+
         });
 
-        function loadGrid() {
-            $table = $("#table").bootstrapTable({
-                url: '/admin/SysDepartment/GetData',
-                height: $(window).height(),
-                striped: true,
-                sidePagination: 'server',
-                idField: 'id',
+
+        function initTreeGrid() {
+            var options = {
+                id: 'dataTable',
+                url: '/admin/SysDepartment/GetList',
+                code: "id",
+                parentCode: "parent_id",
+                uniqueId: "id",
+                toolbar: '#toolbar',
+                rootIdValue: '0',
+                striped: false,
+                expandColumn: 1,
+                showSearch: true,
+                showRefresh: true,
+                showColumns: true,
+                expandAll: true,
+                expandFirst: true,
                 columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'department_name', title: '部门名称', align: 'left' },
-                    { field: 'sort_num', title: '排序', align: 'center' },
-                    { field: 'department_level', title: '层次', align: 'center' },
-                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
-                ],
-                treeShowField: 'department_name',
-                parentIdField: 'parent_id',
-                onLoadSuccess: function (data) {
-                    $table.treegrid({
-                        // initialState: 'collapsed',
-                        treeColumn: 1,
-                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
-                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
-                        onChange: function () {
-                            $table.bootstrapTable('resetWidth');
+                    { field: 'selectItem', radio: true },
+                    {
+                        field: 'dept_name', title: '名称', align: "left", width: '20%'
+                    },
+                    { field: 'leader', title: '负责人', align: "center" },
+
+                    { field: 'phone', title: '联系电话', align: "center" },
+                    { field: 'email', title: '邮箱', align: "center" },
+                    { field: 'order_num', title: '排序', align: "center" },
+                    {
+                        field: 'deptType', title: '分类', align: "center", formatter: function (v, r, i) {
+                            if (v === '0') {
+                                if (r.parentId === '0') {
+                                    return '<span class="badge badge-primary">总公司</span>';
+                                }
+                                return '<span class="badge badge-primary">分公司</span>';
+                            }
+                            return '<span class="badge badge-success">部门</span>';
                         }
-                    });
+                    },
+                    { field: 'create_time', title: '创建时间', align: "center" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                    }
+                ],
+                onLoadSuccess: function (data) {
+                    // console.log('from data load ok');
+                    // console.log(data);
                 }
-                // bootstrap-table-treetreegrid.js 插件配置
+            }
+
+            //$table = $.treeTable.init(options);
+            $table = $("#dataTable").easyTreeTable(options);
+        }
+
+
+        function renderOperationButton(value, row, index) {
+            var actions = [];
+            actions.push({
+                roleTag: 'system:dept:edit',
+                button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+            });
+            actions.push({
+                roleTag: 'system:dept:delete',
+                button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="del(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
             });
 
-            jutils.initToolBarRole('#toolbar');
+            return jutils.buttonPermissions(actions);
         }
-
-        function renderOpts(v, d, i) {
-            return jutils.initToolBarRow(v);
-        }
-
 
         function add() {
-            var url = '/admin/SysDepartment/Form?id=0';
-            jutils.dialog('部门信息', url, null, null, function () {
-                $table.bootstrapTable('refresh');
-            });
-        }
-        function edit(obj) {
-            var id = $(obj).data('id');
-            var url = '/admin/SysDepartment/Form';
-            jutils.dialog('部门信息', url, { id: id }, null, function () {
-                $table.bootstrapTable('refresh');
+            jutils.dialogFull("添加部门", '/admin/SysDepartment/form', { id: 0 }, function () {
+                $table.easyTreeTable('search');
             });
         }
 
-        function del(obj) {
-            var id = $(obj).data('id');
-            jutils.confirm("确认删除当前部门及其子部门吗", function () {
-                jutils.ajaxGet('/admin/SysDepartment/DeleteById', { id: id }, function (res) {
-                    $table.bootstrapTable('refresh');
-                })
-            })
+        function edit(obj) {
+            let dataId = $(obj).data('id');
+            if (dataId == '0') {
+                let rows = $table.easyTreeTable('selected');
+                if (rows.length == 0) {
+                    jutils.error("请选择数据行");
+                    return;
+                }
+                dataId = rows[0].id;
+            }
+            jutils.dialogFull("修改部门", '/admin/SysDepartment/form', { id: dataId }, function () {
+                $table.easyTreeTable('search');
+            });
+        }
+
+        function query(flag) {
+            if (flag == 0) {
+                $('#deptName').val('');
+            }
+
+            $table.easyTreeTable('search', { deptName: $('#deptName').val() });
+        }
+        function removeAll(obj) {
+            let dataId = $(obj).data('id');
+            if (dataId == '0') {
+                let rows = $table.easyTreeTable('selected');
+                if (rows.length == 0) {
+                    jutils.error("请选择数据行");
+                    return;
+                }
+                dataId = rows[0].id;
+            }
+            jutils.confirm("确认删除部门数据吗？", function () {
+                jutils.ajaxGet('/admin/SysDepartment/delete', { id: dataId }, function (res) {
+                    //$table.bootstrapTreeTable('refresh');
+                    if (res.status) {
+                        $table.easyTreeTable('search');
+                    }
+
+                });
+            });
+
+        }
+        function expandAll() {
+            $table.easyTreeTable('expandAll');
         }
     </script>
 }

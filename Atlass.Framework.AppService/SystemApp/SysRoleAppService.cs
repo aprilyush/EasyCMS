@@ -124,7 +124,7 @@ namespace Atlass.Framework.AppService
                     {
                         id = o.id.ToString(),
                         pId = o.menu_id.ToString(),
-                        name = o.func_cname
+                        name = o.func_title
                     });
             menu.AddRange(func);
             //所有权限

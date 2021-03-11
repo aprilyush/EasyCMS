@@ -25,42 +25,62 @@ namespace Altas.Framework.Controllers.Admin
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _menuApp = service.GetRequiredService<SysMenuAppService>();
         }
+
+        /// <summary>
+        /// 菜单页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-
+        /// <summary>
+        /// 菜单表单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
-            var menuList = _menuApp.GetMenuList().Where(s=>s.menu_type==0).OrderBy(s=>s.menu_level).ToList();
-            menuList.Insert(0, new sys_menu(){id=0,  menu_name= "请选择" });
-            ViewBag.MenuSel = new SelectList(menuList, "id", "menu_name");
+            var menuList = _menuApp.GetMenuDicSelect();
+            
+            ViewBag.MenuSel = new SelectList(menuList, "id", "name");
 
-            //按钮
-            //var funcSelList = _menuApp.GetFuncSelList();
-            //funcSelList.Insert(0, new sys_operate(){ id = 0, func_cname = "请选择" });
-            //ViewBag.FuncSel = new SelectList(funcSelList, "id", "func_cname");
             return View();
         }
+
+        /// <summary>
+        /// 菜单列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult GetData()
         {
             var data = _menuApp.GetMenuList();
-            return Content(data.ToJson());
+            return Json(data);
         }
+
+
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="funcs"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SaveData(sys_menu dto, string funcs)
         {
             if (dto.parent_id == 0)
             {
-                dto.menu_url =string.Empty;
-                dto.menu_icon = dto.menu_icon ?? "fa fa-desktop";
+                dto.menu_url = "#";
+                dto.menu_icon = dto.menu_icon ?? "fa fa-bookmark";
             }
             else
             {
-                dto.menu_url = dto.menu_url ?? string.Empty;
+                dto.menu_url = dto.menu_url ?? "#";
                 dto.menu_icon = dto.menu_icon ?? "fa fa-tag";
             }
             
@@ -80,7 +100,7 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult GetDataById(string id)
+        public ActionResult GetModel(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -91,7 +111,7 @@ namespace Altas.Framework.Controllers.Admin
             var result = new ResultAdaptDto();
             result.data.Add("model", data);
             result.data.Add("funcs", funcs);
-            return Content(result.ToJson());
+            return Json(result);
         }
 
         /// <summary>
@@ -99,6 +119,7 @@ namespace Altas.Framework.Controllers.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Delfunc(string id)
         {
             _menuApp.Delfunc(id.ToInt64());
@@ -111,14 +132,14 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Del(string ids)
+        public ActionResult delById(string id)
         {
-            if (string.IsNullOrEmpty(ids))
+            if (string.IsNullOrEmpty(id))
             {
                 return Error("参数错误");
             }
 
-            _menuApp.DelByIds(ids);
+            _menuApp.DelByIds(id.ToInt64());
             return Success("删除成功");
         }
 

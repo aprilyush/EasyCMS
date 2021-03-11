@@ -22,35 +22,55 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
         }
+
+        /// <summary>
+        /// 部门首页
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
+        /// <summary>
+        /// 部门数据
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult GetData()
+        public IActionResult GetList()
         {
             var data = _deptApp.GetData();
-            return Content(data.ToJson());
+            return Json(data);
         }
-
+        /// <summary>
+        /// 部门表单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Form(int id)
         {
             ViewBag.Id = id;
             return View();
         }
 
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Save(sys_department dto)
+        public ActionResult Save(sys_dept dto)
         {
             var user = RequestHelper.AdminInfo();
-            dto.insert_id = user.Id;
-            dto.insert_time = DateTime.Now;
-            _deptApp.SaveDepartment(dto);
+
+            _deptApp.SaveDepartment(dto,RequestHelper.AdminInfo());
             return Success("保存成功");
         }
-
+        /// <summary>
+        /// 获取部门数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetModel(int id)
         {
@@ -63,9 +83,15 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
                 result.data.Add("model", model);
             }
             var depts = _deptApp.GetDepartTree();
-            result.data.Add("depts", depts);
+            result.data.Add("ztreeData", depts);
             return Json(result);
         }
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult DeleteById(int id)
         {

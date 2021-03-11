@@ -2,185 +2,142 @@
 @{
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="tabs-container">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">菜单</a>
-                </li>
-                <li class="">
-                    <a data-toggle="tab" href="#tab-2" aria-expanded="false">操作</a>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane active">
-                    <div class="panel-body">
-                        <form class="form form-horizontal" id="menuForm" autocomplete="off">
-                            <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">父菜单：</label>
-                                <div class="col-sm-4">
-                                    @Html.DropDownList("parent_id", ViewBag.MenuSel as SelectList, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label required">菜单名称：</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="menu_name" id="menu_name" class="form-control" data-rule="required">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">url：</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="menu_url" id="menu_url" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">图标：</label>
-                                <div class="col-sm-4">
-                                    <div class="input-group">
-                                        <input type="text" name="menu_icon" id="menu_icon" class="form-control"> <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="showicon();">
-                                                搜索图标
-                                            </button>
-                                        </span>
+<link href="~/ui/plugins/select2/select2.min.css" rel="stylesheet"/>
+<link href="~/ui/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+<div class="container-div">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true">菜单</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#tab-2" aria-expanded="false">操作</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <form class="form form-horizontal" id="menuForm" autocomplete="off">
+                                <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">父菜单：</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownList("parent_id", ViewBag.MenuSel as SelectList, new {@class="form-control m-b"})
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label required">排序：</label>
-                                <div class="col-sm-4">
-                                    <input type="number" name="menu_sort" id="menu_sort" class="form-control" data-rule="required">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label is-required">菜单名称：</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="menu_name" id="menu_name" class="form-control" data-rule="required">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">备注：</label>
-                                <div class="col-sm-9">
-                                    <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label is-required">请求地址：</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="menu_url" id="menu_url" class="form-control" value="#" data-rule="required">
+                                    </div>
                                 </div>
-                            </div>
-                            <input type="hidden" name="funcs" id="funcs" class="form-control">
-                        </form>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label is-required">权限标识：</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="role_tag" id="role_tag"  value="#" data-rule="required">
+                                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 控制器中定义的权限标识，如：[RequiresPermissions("")]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label is-required">图标：</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="text" name="menu_icon" id="menu_icon" class="form-control" value="fa fa-bookmark" data-rule="required"> <span class="input-group-btn">
+                                                <button type="button" class="btn btn-primary" onclick="showicon();">
+                                                    搜索图标
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label is-required">排序：</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" name="menu_sort" id="menu_sort" value="1" class="form-control" data-rule="required">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">备注：</label>
+                                    <div class="col-sm-9">
+                                        <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="funcs" id="funcs" class="form-control">
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div id="tab-2" class="tab-pane">
-                    <div class="panel-body">
-                        <form class="form form-horizontal" id="funcForm" autocomplete="off">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>位置(表格内)</th>
-                                        <th>名称</th>
-                                        <th>js方法名称</th>
-                                        <th>url</th>
-                                        <th>设置图标</th>
-                                        <th>图标</th>
-                                        <th>排序</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="optbody">
-                                    <tr>
-                                        <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="新增" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="add" data-rule="required"></td>
-                                        <td><input type="text" placeholder="url" class="form-control" value="/controller/form"></td>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <form class="form form-horizontal" id="funcForm" autocomplete="off">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>名称</th>
+                                            <th>权限标识</th>
+                                            <th>排序</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="optbody">
+                                        <tr>
+                                            <td> <input type="text" placeholder="名称" class="form-control" value="新增" data-rule="required"></td>
+                                            <td> <input type="text" placeholder="权限标识" class="form-control" value="admin:sysmenu:add" data-rule="required"></td>
+                                            <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
+                                            <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
+                                            <td style="display:none;"><input type="hidden" value="0"></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <TR>
+                                            <TD colspan="8">
+                                                <button class="btn btn-info " onclick="addrow(this)"><i class="fa fa-plus"></i></button>
+                                            </TD>
+                                        </TR>
 
-                                        <td>
-                                            <div class="input-group">
-                                                <input type="text" id="icon1" class="form-control icon" value="fa fa-plus" data-rule="required"> <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-primary" onclick="showicon(1);">
-                                                        搜索
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <i class="fa fa-plus"></i>
-                                        </td>
-                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
-                                        <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
-                                        <td style="display:none;"><input type="hidden" value="0"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="修改" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="edit" data-rule="required"></td>
-                                        <td><input type="text" placeholder="url" class="form-control" value="/controller/form" data-rule="required"></td>
-
-                                        <td>
-
-                                            <div class="input-group">
-                                                <input type="text" id="icon2" class="form-control icon" value="fa fa-edit" data-rule="required"> <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-primary" onclick="showicon(2);">
-                                                        搜索
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <i class="fa fa-edit"></i>
-                                        </td>
-                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
-                                        <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
-                                        <td style="display:none;"><input type="hidden" value="0"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="form-control" value="0"></td>
-                                        <td> <input type="text" placeholder="名称" class="form-control" value="删除" data-rule="required"></td>
-                                        <td> <input type="text" placeholder="方法名称" class="form-control" value="del" data-rule="required"></td>
-                                        <td><input type="text" placeholder="url" class="form-control" value="/controller/del"></td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input type="text" id="icon3" class="form-control icon" value="fa fa-trash" data-rule="required"> <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-primary" onclick="showicon(3);">
-                                                        搜索
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <i class="fa fa-trash"></i>
-                                        </td>
-                                        <td width="100"> <input type="number" placeholder="排序" class="form-control" value="1" data-rule="required" min="1"></td>
-                                        <td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>
-                                        <td style="display:none;"><input type="hidden" value="0"></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <TR>
-                                        <TD colspan="8">
-                                            <button class="btn btn-info " onclick="addrow(this)"><i class="fa fa-plus"></i></button>
-                                        </TD>
-                                    </TR>
-
-                                </tfoot>
-                            </table>
-                        </form>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
                     </div>
+
+
                 </div>
-
-
-            </div>
-            <div class="footerbar">
-                <div class="col-sm-12 col-sm-offset-3">
-                    <button class="btn btn-primary" type="button" onclick="save()">保存内容</button>
-                    <button class="btn btn-white" type="button" onclick="cancel()">返回</button>
+                <div class="footerbar">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="button" onclick="save()">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button class="btn btn-danger" type="button" onclick="cancel()">
+                            <i class="fa fa-reply-all"></i>关闭
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
 @section scripts
     {
+<script type="text/javascript" src="~/ui/plugins/select2/select2.min.js"></script>
     <script type="text/javascript">
         var rowIndex = 3, menuform = false, funcstatus = false;
         $(function () {
+            $("#parent_id").select2();
+            // $('#parentId').on('select2:select', function (e) {
+            //     // 处理自己的业务
+            //     console.log(e);
+            //     console($(e).select2('val'));
+            // });
             $('#menuForm').validator({
                 stopOnError: false,
                 timely: 2,
@@ -204,90 +161,48 @@
                     // console.log(errors);
                 }
             });
-
-            $("#optbody").on('change', ':checkbox', function () {
-                if ($(this).is(':checked')) {
-                    $(this).val(1);
-                } else {
-                    $(this).val(0);
+            jutils.handleMessage(function (res) {
+                if (res.title == 'fontPick') {
+                    $('#menuIcon').val(res.icon);
                 }
+
             });
+
             loadData();
 
-            window.addEventListener('message',
-                function (e) {
-                    var iconData = e.data;
-                    if (iconData.rowId === '0') {
-                        $('#menu_icon').val(iconData.icon);
-                    } else {
-                        var iconId = '#icon' + iconData.rowId;
-                        $(iconId).val(iconData.icon);
-                        var $nextTD = $(iconId).parent().parent().next('td');
-                        var iconHtml = '<i class="' + iconData.icon + '"></i>';
-                        $($nextTD).html(iconHtml);
-                    }
-                    // console.log(e);
-                },
-                false);
         });
 
 
         function loadData() {
-            var id = $("#id").val();
-
-            if (id !== '') {
-                jutils.ajaxGet('/admin/sysmenu/GetDataById',
-                    { id: id },
-                    function (res) {
-
-                        $('#menuForm').initFormData(res.data.model);
-                        var funcs = res.data.funcs;
-                        // jutils.loadFormData($('#menuForm'), res.data.model);
-                        var flen = funcs.length;
-                        rowIndex = 0;
-                        var html = '';
-                        if (flen > 0) {
-                            for (var i = 0; i < flen; i++) {
-                                var model = funcs[i];
-                                rowIndex++;
-                                html += '<tr>';
-                                if (model.intable === 1) {
-                                    html += ' <td><input type="checkbox"  class="form-control" value="1" checked></td>';
-                                } else {
-                                    html += ' <td><input type="checkbox"  class="form-control" value="0"></td>';
-                                }
-
-                                html += '<td> <input type="text" placeholder="名称" class="form-control" value="' +
-                                    model.title +
-                                    '" data-rule="required"></td>';
-                                html += '<td> <input type="text" placeholder="方法名称" class="form-control" value="' +
-                                    model.funcname +
-                                    '" data-rule="required"></td>';
-                                html += ' <td><input type="text" placeholder="url" class="form-control" value="' +
-                                    model.url +
-                                    '" data-rule="required"></td>';
-                                html += '<td> <div class="input-group">';
-                                html +=
-                                    '<input type="text" id="icon' +
-                                    rowIndex +
-                                    '" class="form-control icon" value="' +
-                                    model.icon +
-                                    '" data-rule="required"> <span class="input-group-btn">';
-                                html += '<button type="button" class="btn btn-primary" onclick="showicon(' +
-                                    rowIndex +
-                                    ');">搜索</button>';
-                                html += '</span></div></td>';
-                                html += '<td><i class="' + model.icon + '"></i></td>';
-                                html += '<td width="100"> <input type="number" placeholder="排序" class="form-control" value="' + model.funcSort + '" data-rule="required" min="1"></td>';
-                                html +=
-                                    '<td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>';
-                                html += '<td style="display:none;"><input type="hidden" value="' + model.id + '"></td>';
-                                html += ' </tr>';
-                            }
-                        }
-                        $('#optbody').html(html);
-                    });
+            const id = $("#id").val();
+            if (jutils.emptyId(id)) {
+                return;
             }
+            jutils.ajaxGet('/admin/sysmenu/GetModel', { id: id },
+                function (res) {
+                    const model = res.data.model;
+                    $('#menuForm').initFormData(model);
+                    $("#parent_id").select2("val", [model.parent_id]);
+                    const funcs = res.data.funcs;
+                    const flen = funcs.length;
+                    rowIndex = 0;
+                    let html = '';
+                    if (flen > 0) {
+                        for (let i = 0; i < flen; i++) {
+                            let model = funcs[i];
+                            rowIndex++;
+                            html += '<tr>';
+                            html += '<td> <input type="text" placeholder="名称" class="form-control" value="' + model.title + '" data-rule="required"></td>';
+                            html += '<td> <input type="text" placeholder="权限标识" class="form-control" value="' + model.roleTag + '" data-rule="required"></td>';
+                            html += '<td width="100"> <input type="number" placeholder="排序" class="form-control" value="' + model.funcSort + '" data-rule="required" min="1"></td>';
+                            html +=
+                                '<td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>';
+                            html += '<td style="display:none;"><input type="hidden" value="' + model.id + '"></td>';
+                            html += ' </tr>';
+                        }
+                    }
+                    $('#optbody').html(html);
+                });
         }
 
         function save() {
@@ -309,11 +224,8 @@
                 $('#optbody').find("tr").each(function () {
                     var func = {
                         id: 0,
-                        intable: 0,
                         title: '',
-                        funcname: '',
-                        url: '',
-                        icon: '',
+                        roleTag: '',
                         funcSort: 1
                     };
 
@@ -322,18 +234,12 @@
                     $(this).find('input').each(function (index, element) {
                         var itext = $(this).val();
                         if (index === 0) {
-                            func.intable = itext;
-                        } else if (index === 1) {
                             func.title = itext;
+                        } else if (index === 1) {
+                            func.roleTag = itext;
                         } else if (index === 2) {
-                            func.funcname = itext;
-                        } else if (index === 3) {
-                            func.url = itext;
-                        } else if (index === 4) {
-                            func.icon = itext;
-                        } else if (index === 5) {
                             func.funcSort = itext;
-                        } else if (index === 6) {
+                        } else if (index === 3) {
                             func.id = itext;
                         }
                     });
@@ -347,7 +253,7 @@
             // console.log(funcArry);
             //return;
             if (funcArry.length > 0) {
-                var fjson = JSON.stringify(funcArry);
+                const fjson = JSON.stringify(funcArry);
                 $('#funcs').val(fjson);
             }
 
@@ -364,7 +270,7 @@
             if (id !== '0') {
                 jutils.confirm('删除当前操作，可能会影响系统权限，确认删除吗？',
                     function () {
-                        jutils.ajaxPost('/admin/sysmenu/delfunc',
+                        jutils.ajaxGet('/admin/sysmenu/delfunc',
                             { id: id },
                             function (res) {
                                 var $tr = $(obj).parent().parent('tr');
@@ -384,20 +290,10 @@
         function addrow() {
             rowIndex++;
             var html = '<tr>';
-            html += ' <td><input type="checkbox"  class="form-control" value="0" ></td>';
+
             html += '<td> <input type="text" placeholder="名称" class="form-control" value="" data-rule="required"></td>';
             html +=
-                '<td> <input type="text" placeholder="方法名称" class="form-control" value="" data-rule="required"></td>';
-            html +=
-                ' <td><input type="text" placeholder="url" class="form-control" value="/controller/action" data-rule="required"></td>';
-            html += '<td> <div class="input-group">';
-            html +=
-                '<input type="text" id="icon' +
-                rowIndex +
-                '" class="form-control icon" value="fa fa-plus" data-rule="required"> <span class="input-group-btn">';
-            html += '<button type="button" class="btn btn-primary" onclick="showicon(' + rowIndex + ');">搜索</button>';
-            html += '</span></div></td>';
-            html += '<td><i class="fa fa-plus"></i></td>';
+                '<td> <input type="text" placeholder="权限标识" class="form-control" value="system:roletag:new" data-rule="required"></td>';
             html += '<td width="100"> <input type="number" placeholder="排序" class="form-control" value="0" data-rule="required" min="1"></td>';
             html +=
                 '<td><button class="btn btn-danger " onclick="delrow(this)"><i class="fa fa-trash"></i></button></td>';
@@ -408,22 +304,24 @@
         }
 
         function cancel() {
-            parent.$.altasTab.close('menuformTab');
 
+            // jutils.closeDialog();
+            jutils.postMessage('admin_sysmenu_form', "message from menu form hehe");
+            jutils.closeTab('admin_sysmenu_form');
         }
 
         function showicon(rowIndex) {
             rowIndex = rowIndex || 0;
             var findex = layer.open({
+                'title': '设置图标',
                 type: 2,
                 area: ['700px', '450px'],
                 fixed: false, //不固定
                 maxmin: true,
-                content: '/views/fontawesome.html?id=' + rowIndex
+                content: '/fontawesome.html?id=' + rowIndex
             });
             layer.full(findex);
         }
     </script>
-
 
 }

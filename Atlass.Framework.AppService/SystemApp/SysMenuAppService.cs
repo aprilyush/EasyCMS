@@ -79,7 +79,11 @@ namespace Atlass.Framework.AppService
             dto.create_time = DateTime.Now;
             dto.create_person = "admin";
             //dto.menu_icon = dto.menu_font;
-            if (!string.IsNullOrEmpty(dto.menu_url))
+            if (dto.menu_url=="#")
+            {
+                dto.menu_type =0;
+            }
+            else
             {
                 dto.menu_type = 1;
             }
@@ -102,11 +106,8 @@ namespace Atlass.Framework.AppService
                 {
                     var funcModel = new sys_operate();
                     funcModel.menu_id = dto.id;
-                    funcModel.func_cname = func.title;
-                    funcModel.func_name = func.funcname;
-                    funcModel.func_icon = func.icon;
-                    funcModel.func_url = func.url;
-                    funcModel.in_table = func.intable;
+                    funcModel.func_title = func.title;
+                    funcModel.role_tag = func.roleTag;
                     funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
                     funcModel.func_sort = func.funcSort;
                     list.Add(funcModel);
@@ -122,7 +123,11 @@ namespace Atlass.Framework.AppService
         public void UpdateMenu(sys_menu dto, string funcs)
         {
 
-            if (!string.IsNullOrEmpty(dto.menu_url))
+            if (dto.menu_url=="#")
+            {
+                dto.menu_type =0;
+            }
+            else
             {
                 dto.menu_type = 1;
             }
@@ -147,11 +152,8 @@ namespace Atlass.Framework.AppService
                 {
                     var funcModel = new sys_operate();
                     funcModel.menu_id = dto.id;
-                    funcModel.func_cname = func.title;
-                    funcModel.func_name = func.funcname;
-                    funcModel.func_icon = func.icon;
-                    funcModel.func_url = func.url;
-                    funcModel.in_table = func.intable;
+                    funcModel.func_title = func.title;
+                    funcModel.role_tag = func.roleTag;
                     funcModel.id = func.id > 0 ? func.id : IdWorkerHelper.NewId();
                     funcModel.func_sort = func.funcSort;
                     list.Add(funcModel);
@@ -170,6 +172,7 @@ namespace Atlass.Framework.AppService
 
             return Sqldb.Queryable<sys_menu>().Where(s => s.id == id).First();
         }
+       
         /// <summary>
         /// 获取菜单下按钮
         /// </summary>
@@ -180,48 +183,102 @@ namespace Atlass.Framework.AppService
             return
                 Sqldb.Queryable<sys_operate>()
                     .Where(s => s.menu_id == id)
-                    .OrderBy(s=>s.in_table)
                     .OrderBy(s=>s.func_sort)
-                    .ToList(s => new SysFuncDto() { id = s.id, title = s.func_cname, funcname = s.func_name,
-                        icon = s.func_icon, url = s.func_url, intable = s.in_table,
+                    .ToList(s => new SysFuncDto() { id = s.id, title = s.func_title,roleTag=s.role_tag,
                         funcSort = s.func_sort
                     });
         }
+        
+
         /// <summary>
-        /// 模块导航
+        /// 批量删除
         /// </summary>
-        /// <returns></returns>
-        public List<sys_menu> GetTopMenuList(LoginUserDto UserCookie)
+        /// <param name="ids"></param>
+        public void DelByIds(long id)
         {
-
-            var list = new List<sys_menu>();
-
-            if (UserCookie.IsSuper)
+            if (id == 0)
             {
-                list =
-                    Sqldb.Queryable<sys_menu>()
-                        .Where(s => s.parent_id==0)
-                        .OrderBy(s => s.menu_sort)
-                        .ToList();
+                return;
             }
-            else
+            Sqldb.Transaction(() =>
             {
-                list =
-                    Sqldb.Select<sys_menu, sys_role_authorize>()
-                        .LeftJoin((m, r) => m.id == r.menu_id)
-                        .Where((m, r) => r.role_id == UserCookie.SysRoleId && m.parent_id == 0)
-                        .OrderBy((m, r) => m.menu_sort)
-                        .ToList((m, r) => m);
-            }
-
-            return list;
-
+                var affrows = Sqldb.Delete<sys_menu>().Where(s =>s.id== id).ExecuteAffrows();
+                if (affrows < 1)
+                    throw new Exception("sys_menu");
+                affrows = Sqldb.Delete<sys_operate>().Where(s => s.menu_id==id).ExecuteAffrows();
+                //if (affrows < 1)
+                //    throw new Exception("sys_menu");
+                affrows = Sqldb.Delete<sys_role_authorize>()
+                    .Where(s =>s.menu_id==id)
+                    .ExecuteAffrows();
+                affrows = Sqldb.Delete<sys_role_authorize>()
+               .Where(s =>s.menu_pid == id)
+               .ExecuteAffrows();
+                //if (affrows < 1)
+                //    throw new Exception("sys_menu");
+            });
 
         }
+
         /// <summary>
-        /// 根据权限获取菜单
+        /// 删除操作
+        /// </summary>
+        /// <param name="funcId"></param>
+        public void Delfunc(long funcId)
+        {
+            Sqldb.Delete<sys_operate>().Where(s => s.id == funcId).ExecuteAffrows();
+            Sqldb.Delete<sys_role_authorize>().Where(s => s.menu_id == funcId).ExecuteAffrows();
+        }
+
+
+        /// <summary>
+        /// 获取菜单目录的下拉
         /// </summary>
         /// <returns></returns>
+        public List<ZtreeSelInt64Dto> GetMenuDicSelect()
+        {
+            var menus = Sqldb.Select<sys_menu>()
+                .Where(s => s.menu_type == 0)
+                .OrderBy(s => s.menu_sort)
+                .ToList(s=>new ZtreeSelInt64Dto {id=s.id,name=s.menu_name, treeLevel=s.menu_level,pId=s.parent_id });
+
+            List<ZtreeSelInt64Dto> list = new List<ZtreeSelInt64Dto>();
+            if (menus.Count > 0)
+            {
+                List<ZtreeSelInt64Dto> tops = menus.Where(s => s.pId == 0).ToList();
+                tops.ForEach(menu =>
+                {
+                    list.Add(menu);
+                    var sons = menus.Where(s => s.pId == menu.id).ToList();
+                    sons.ForEach(son =>
+                    {
+                        son.name = GetMenuNamePre(son.treeLevel-1) + son.name;
+                        list.Add(son);
+                          var sons2 = menus.Where(s => s.pId == son.id).ToList();
+                        sons2.ForEach(son2 => {
+                            son2.name = GetMenuNamePre(son2.treeLevel - 1) + son2.name;
+                            list.Add(son2);
+                        });
+                       
+                    });
+                  
+                });
+            }
+
+            list.Insert(0, new ZtreeSelInt64Dto { id = 0, name = "请选择" });
+            return list;
+        }
+
+        private string GetMenuNamePre(int level)
+        {
+            string pre = "";
+            for(int i = 0; i < level; i++)
+            {
+                pre += "¦┄┄";
+            }
+            return pre.Insert(0," ");
+        }
+
         /// <summary>
         /// 根据权限获取菜单
         /// </summary>
@@ -245,13 +302,10 @@ namespace Atlass.Framework.AppService
                 var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.func_sort).ToListAsync(m => new RoleMenuDto()
                 {
                     id = m.id,
-                    menu_name = m.func_cname,
-                    func_name = m.func_name,
-                    menu_url = m.func_url,
+                    menu_name = m.func_title,
                     parent_id = m.menu_id,
                     menu_type = 3,
-                    menu_icon = m.func_icon,
-                    in_table = m.in_table
+
                 });
                 return (list, funcs);
             }
@@ -281,67 +335,17 @@ namespace Atlass.Framework.AppService
                         .ToListAsync((m, r) => new RoleMenuDto()
                         {
                             id = m.id,
-                            menu_name = m.func_cname,
-                            func_name = m.func_name,
-                            menu_url = m.func_url,
+                            menu_name = m.func_title,
+
                             parent_id = m.menu_id,
                             menu_type = 3,
-                            menu_icon = m.func_icon,
-                            in_table = m.in_table
                         });
 
                 return (list, funcs);
 
             }
-           
-        }
-        /// <summary>
-        /// 批量删除
-        /// </summary>
-        /// <param name="ids"></param>
-        public void DelByIds(string ids)
-        {
-            if (!string.IsNullOrEmpty(ids))
-            {
-                var arri = ids.SplitToArrayInt64();
-               
-                Sqldb.Transaction(() =>
-                {
-                    var affrows=Sqldb.Delete<sys_menu>().Where(s=> arri.Contains(s.id)).ExecuteAffrows();
-                    if (affrows < 1)
-                        throw new Exception("sys_menu");
-                    affrows = Sqldb.Delete<sys_operate>().Where(s => arri.Contains(s.menu_id)).ExecuteAffrows();
-                    //if (affrows < 1)
-                    //    throw new Exception("sys_menu");
-                    affrows = Sqldb.Delete<sys_role_authorize>()
-                        .Where(s => arri.Contains(s.menu_id) || arri.Contains(s.menu_pid))
-                        .ExecuteAffrows();
-                    //if (affrows < 1)
-                    //    throw new Exception("sys_menu");
-                });
-
-            }
 
         }
 
-        /// <summary>
-        /// 删除操作
-        /// </summary>
-        /// <param name="funcId"></param>
-        public void Delfunc(long funcId)
-        {
-            Sqldb.Delete<sys_operate>().Where(s => s.id == funcId).ExecuteAffrows();
-            Sqldb.Delete<sys_role_authorize>().Where(s => s.menu_id == funcId).ExecuteAffrows();
-        }
-
-        public List<sys_operate> GetFuncSelList()
-        {
-            return Sqldb.Queryable<sys_operate>().OrderBy(s => s.func_sort).ToList();
-        }
-
-
-
-
-        
     }
 }

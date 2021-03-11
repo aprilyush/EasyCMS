@@ -33,5 +33,21 @@ public class ZtreeDto
         public bool open { get; set; }
 
         public string title { get; set; }
+        public int treeLevel { get; set; }
+    }
+
+    public class ZtreeSelInt64Dto
+    {
+        public long id { get; set; }
+        public long pId { get; set; }
+        public string name { get; set; }
+        //public string pName { get; set; }
+        /// <summary>
+        /// 下拉选择树为true 说明展开下拉树
+        /// </summary>
+        public bool open { get; set; }
+
+        public string title { get; set; }
+        public int treeLevel { get; set; }
     }
 }

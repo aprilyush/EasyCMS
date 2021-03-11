@@ -3,76 +3,163 @@
     ViewData["Title"] = "Form";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-    <link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
-    <div class="ibox">
+    <link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
+    <div class="container-div white-bg">
         <div class="ibox-content">
-            <form class="form form-horizontal" id="myForm">
-                <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+            <form class="form-horizontal m" id="deptForm" autocomplete="off">
+                <input type="hidden" id="id" name="id" value="@(ViewBag.Id)">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">部门名称：</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="department_name" id="department_name" value="" class="form-control">
+                    <label class="col-sm-3 control-label is-required">上级：</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="hidden" name="parent_id" id="parent_id">
+                        <input type="text" class="form-control" id="parentDept" checks="0" readonly textLabel="jasontext" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">上级部门：</label>
-                    <div class="col-sm-4">
-                        <textarea id="parentDept" style="width:300px;height:50px;overflow:hidden;" textLabel="jasontext" type="text" readonly></textarea>
-                        <input type="hidden" name="parent_id" id="parent_id" value="0" class="form-control">
+                    <label class="col-sm-3 control-label is-required">单位名称：</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" name="dept_name" id="dept_name" data-rule="required">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label required">排序：</label>
-                    <div class="col-sm-4">
-                        <input type="text" value="1" name="sort_num" id="sort_num" class="form-control" data-rule="required;integer; range[1~1000]">
+                    <label class="col-sm-3 control-label">负责人：</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input class="form-control" type="hidden" name="leader_id" id="leader_id" readonly>
+                            <input class="form-control" type="text" name="leader" id="leader" readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-danger" style="height: 31px;" onclick="clearUser();">清除</button>
+                                <button type="button" class="btn btn-primary" style="height: 31px;" onclick="selectUser();">选择</button>
+                            </span>
+                        </div>
+
                     </div>
                 </div>
-                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label is-required">显示顺序：</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="number" name="order_num" value="1" id="order_num" data-rule="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">联系电话：</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" name="phone" id="phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">邮箱：</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" name="email" id="email" data-rule="email;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">部门类型：</label>
+                    <div class="col-sm-8">
+
+                        <label class="check-box checkbox-success">
+                            <input type="radio" class="icheck" id="dept_type" name="dept_type" value="0" />
+                            分公司
+                        </label>
+                        <label class="check-box checkbox-success">
+                            <input type="radio" class="icheck" id="dept_type1" name="dept_type" value="1" checked="" />
+                            部门
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">状态：</label>
+                    <div class="col-sm-8">
+
+                        <label class="check-box checkbox-success">
+                            <input type="radio" class="icheck" id="dept_status" name="dept_status" value="0" checked="" />
+                            启动
+                        </label>
+                        <label class="check-box checkbox-success">
+                            <input type="radio" class="icheck" id="dept_status1" name="dept_status" value="1" />
+                            停用
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">备注：</label>
+                    <div class="col-sm-8">
+                        <input id="remark" name="remark" class="form-control" type="text">
+                    </div>
+                </div>
                 <div class="footerbar">
                     <div class="col-sm-12 col-sm-offset-3">
-                        <button class="btn btn-primary" type="submit">保存内容</button>
-                        <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button class="btn btn-danger" type="button" onclick="cancel()">
+                            <i class="fa fa-reply-all"></i>关闭
+                        </button>
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 @section scripts{
-    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
-    <script src="~/plugins/selectTree/MultipleTreeSelect.js"></script>
-    <script>
+    <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+    <script src="~/ui/easycms/js/multiple-tree-select.js"></script>
+    <script type="text/javascript" th:inline="javascript">
         $(function () {
-            $('#myForm').validator({
+            $('#deptForm').validator({
                 stopOnError: false,
                 timely: 2,
                 theme: "yellow_right",
                 valid: function (form) {
-                    // 表单验证通过，提交表单
-                    jutils.ajaxPost('/admin/SysDepartment/Save', $(form).serialize(),
-                        function (res) {
+                    //console.log(form);
+                    let parentIds = $('#parentDept_checkedIds').val();
+                    $('#parent_id').val(parentIds);
+                    jutils.ajaxPost("/admin/SysDepartment/save", $(form).serialize(), function (res) {
+                        if (res.status) {
                             cancel();
-                        });
-                }
+                        }
+                    });
+                },
             });
+            jutils.handleMessage(function (res) {
+                console.log(res);
+                if (res.title == 'userSelect') {
+                    $('#leader').val(res.data.user_name);
+                    $('#leader_id').val(res.data.id);
+                }
 
-            loadData();
+            });
+            loadModel();
         });
-        function loadData() {
-            var id = jutils.getQueryParam("id");
-            jutils.ajaxGet('/admin/SysDepartment/getmodel', { id: id }, function (res) {
-                if (id != '0') {
-                    var model = res.data.model
-                    $('#myForm').initFormData(model);
-                    if (model.parent_id != 0) {
-                        $('#parentDept').attr('checks', model.parent_id);
-                    }
-                }
-                initSelectTree(res.data.depts);
-            });
+        function loadModel() {
+            let id = $('#id').val();
 
+            jutils.ajaxGet('/admin/SysDepartment/getmodel', { id: id }, function (res) {
+                if (res.status) {
+                    if (!jutils.emptyId(id)) {
+                        let model = res.data.model;
+                        $('#deptForm').initFormData(model);
+                        $('#parentDept').attr('checks', model.parentId);
+                    }
+                    initSelectTree(res.data.ztreeData);
+                }
+            });
         }
+
+
+        function selectUser() {
+            let url = '/admin/sysuser/userSelect';
+            jutils.dialog('选择负责人', url);
+        }
+
+        function clearUser() {
+            $('#leader').val('');
+            $('#leader_id').val(0);
+        }
+
         function initSelectTree(treeNodes) {
-            var defaults = {
+            let defaults = {
                 callback: {
                     onCheck: zTreeOnCheck
                 },
@@ -81,25 +168,16 @@
                 height: 333   // 默认自定义下拉框高度
             }
 
-            $("#parentDept").drawMultipleTree(defaults);
+            let tree = $("#parentDept").drawMultipleTree(defaults);
+
         }
         function zTreeOnCheck(treeNodes) {
-           // console.log(treeNodes);
 
-            // alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
-            //selectDepartments.length = 0;
-            if (treeNodes.length > 0) {
-                var parentId = treeNodes[0].id;
-                $('#parent_id').val(parentId);
-            } else {
-                $('#parent_id').val(0);
-            }
-
-            //console.log(selectDepartments);
         };
         function cancel() {
-            jutils.closeForm();
+            jutils.closeDialog();
         }
+
     </script>
 }
 

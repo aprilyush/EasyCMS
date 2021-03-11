@@ -27,7 +27,7 @@ namespace Atlass.Framework.Core.Base
         /// <returns></returns>
         protected virtual ContentResult Success(string msg)
         {
-            var result = new { status = true, msg = msg };
+            var result = new { status = true, message = msg };
             return Content(result.ToJson());
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace Atlass.Framework.Core.Base
         /// <returns></returns>
         protected virtual ContentResult Success()
         {
-            var result = new { status = true, msg = "操作成功" };
+            var result = new { status = true, message = "操作成功" };
             return Content(result.ToJson());
         }
         /// <summary>
@@ -47,7 +47,7 @@ namespace Atlass.Framework.Core.Base
         /// <returns></returns>
         protected virtual ContentResult Error()
         {
-            var result = new { status = false, msg = "操作失败" };
+            var result = new { status = false, message = "操作失败" };
             return Content(result.ToJson());
         }
 
@@ -58,7 +58,7 @@ namespace Atlass.Framework.Core.Base
         /// <returns></returns>
         protected virtual ContentResult Error(string msg)
         {
-            var result = new { status = false, msg = msg };
+            var result = new { status = false, message = msg };
             return Content(result.ToJson());
         }
 
@@ -69,9 +69,10 @@ namespace Atlass.Framework.Core.Base
         /// <param name="dto"></param>
         /// <param name="dateFormatter"></param>
         /// <returns></returns>
-        protected virtual ContentResult Json(BootstrapGridDto dto, string dateFormatter = "yyyy-MM-dd HH:mm:ss")
+        protected virtual ContentResult Json(BootstrapGridDto dto)
         {
-            return Content(dto.ToJson(dateFormatter));
+      
+            return Content(dto.ToJson());
         }
         /// <summary>
         /// json result ResultAdaptDto
@@ -79,9 +80,9 @@ namespace Atlass.Framework.Core.Base
         /// <param name="dto"></param>
         /// <param name="dateFormatter"></param>
         /// <returns></returns>
-        protected virtual ContentResult Json(ResultAdaptDto dto, string dateFormatter = "yyyy-MM-dd HH:mm:ss")
+        protected virtual ContentResult Json(ResultAdaptDto dto)
         {
-            return Content(dto.ToJson(dateFormatter));
+            return Content(dto.ToJson());
         }
         /// <summary>
         /// json result object

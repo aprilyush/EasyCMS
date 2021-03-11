@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "UserSelect";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            登录名：<input type="text" id="loginName" />
+                        </li>
+                        <li>
+                            用户名：<input type="text" id="userName" />
+                        </li>
+                       
+                    </ul>
+                    <ul>
+                        <li>
+                            手机号：<input type="text" id="phone" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-primary single disabled" onclick="selectOk();">
+                <i class="fa fa-check"></i> 确认选择
+            </a>
+            <button class="btn btn-danger" type="button" onclick="cancel()">
+                <i class="fa fa-reply-all"></i>关闭
+            </button>
+
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+</div>
+@section scripts{ 
+    <script type="text/javascript" th:inline="javascript">
+        let $table;
+        $(function () {
+            loadData();
+
+        });
+
+
+        function loadData() {
+            let options = {
+                url: '/admin/sysuser/GetData',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        loginName: $('#loginName').val(),
+                        userName: $('#userName').val(),
+                        phone: $('#phone').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'selectItem', radio: true },
+                    {
+                        field: 'login_name', title: '登录账号', align: "center"
+                    },
+                    { field: 'user_Name', title: '用户名', align: "center" },
+                    { field: 'mobile_phone', title: '联系电话', align: "center" },
+                    { field: 'email', title: '邮箱', align: "center" },
+
+                ]
+            };
+
+            $table = $('#dataTable').easyTable(options);
+            $table.easyTable('selectedEvent');
+        }
+
+
+
+
+        function selectOk() {
+            const rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+
+            jutils.postMessage('userSelect', rows[0]);
+            cancel();
+        }
+
+        function cancel() {
+            jutils.closeDialog();
+        }
+    </script>
+}

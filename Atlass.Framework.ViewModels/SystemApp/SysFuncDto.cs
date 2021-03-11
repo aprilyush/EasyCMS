@@ -7,11 +7,8 @@ namespace Atlass.Framework.ViewModels.SystemApp
 public class SysFuncDto
     {
         public long id { get; set; }
-        public int intable { get; set; }
+        public string roleTag { get; set; }
         public string title { get; set; }
-        public string funcname { get; set; }
-        public string url { get; set; }
-        public string icon { get; set; }
         public int funcSort { get; set; }
     }
 }
