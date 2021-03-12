@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService;
 using Atlass.Framework.Common;
-
+using Atlass.Framework.Enum;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +30,7 @@ namespace Atlass.Framework.AppService
         {
           
             var query = Sqldb.Queryable<sys_role>()
-                .OrderBy(s => s.sort)
+                .OrderBy(s => s.role_sort)
                 .Count(out long total)
                 .Page(param.page, param.limit).ToList();
 
@@ -38,6 +38,19 @@ namespace Atlass.Framework.AppService
             param.rows = query;
 
             return param;
+        }
+
+        /// <summary>
+        /// 获取权限下拉
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeSelInt64Dto> GetRoleSelect()
+        {
+            var query = Sqldb.Queryable<sys_role>()
+                .Where(s => s.role_status == DataStatusConstant.ENABLE)
+                 .OrderBy(s => s.role_sort)
+                 .ToList(s => new ZtreeSelInt64Dto { id = s.id, name = s.role_name });
+            return query;
         }
 
         /// <summary>

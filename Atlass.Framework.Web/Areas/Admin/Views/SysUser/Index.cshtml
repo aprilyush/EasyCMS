@@ -57,7 +57,7 @@
 
             jutils.handleMessage(function (res) {
                 //console.log(res);
-                if (res.title === 'userForm') {
+                if (res.title === 'admin_sysuser_form') {
                     $table.easyTable('search');
                 }
 
@@ -99,7 +99,7 @@
                             }
                         }
                     },
-                    { field: 'role_ame', title: '归属角色', align: "center" },
+                    { field: 'role_name', title: '归属角色', align: "center" },
                     {
                         field: 'user_status', title: '用户状态', align: 'center', formatter: function (value, row, index) {
                             if (value === 1) {
@@ -135,7 +135,7 @@
 
 
         function add() {
-            jutils.openTab('userTab', '添加用户', '/admin/sysuser/form?id=' + 0);
+            jutils.openTab('admin_sysuser_form', '添加用户', '/admin/sysuser/form?id=' + 0);
         }
 
         function edit(obj) {
@@ -149,12 +149,11 @@
                 id = rows[0].id;
             }
 
-            jutils.openTab('userTab', '修改用户', '/admin/sysuser/form?id=' + id);
+            jutils.openTab('admin_sysuser_form', '修改用户', '/admin/sysuser/form?id=' + id);
         }
 
         function removeAll(obj) {
             const id = $(obj).data('id');
-            let del = false;
             let ids = [];
             if (id == 0) {
                 const rows = $table.easyTable("selected");

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
+    <ProjectReference Include="..\Atlass.Framework.Enum\Atlass.Framework.Enum.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
     <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
   </ItemGroup>

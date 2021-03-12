@@ -82,5 +82,17 @@ namespace Atlass.Framework.AppService.SystemApp
             long[] idsL = ids.SplitToArrayInt64();
             Sqldb.Delete<sys_position>().Where(s=> idsL.Contains(s.id)).ExecuteAffrows();
         }
+
+        /// <summary>
+        /// 获取职位下拉列表
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeSelInt64Dto> GetPositionSelectList()
+        {
+            var query = Sqldb.Select<sys_position>()
+                        .OrderBy(s => s.post_sort)
+                        .ToList(s => new ZtreeSelInt64Dto { id = s.id, name = s.post_name });
+            return query;
+        }
     }
 }

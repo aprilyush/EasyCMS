@@ -98,5 +98,18 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             _deptApp.DeleteById(id);
             return Success("删除成功");
         }
+
+        /// <summary>
+        /// 部门下拉数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetDeptZtree()
+        {
+            ResultAdaptDto ret = new ResultAdaptDto();
+            var depts = _deptApp.GetDepartTree();
+            ret.data.Add("ztreeData", depts);
+            return Json(ret);
+        }
     }
 }

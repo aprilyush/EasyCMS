@@ -20,12 +20,16 @@ namespace Altas.Framework.Admin
     {
         private readonly SysUserAppService _userApp;
         private readonly SysDepartmentAppService _deptApp;
+        private readonly PositionAppService  _positionApp;
+        private readonly SysRoleAppService _roleApp;
 
         public SysUserController(IServiceProvider service)
         {
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _userApp = service.GetRequiredService<SysUserAppService>();
             _deptApp = service.GetRequiredService<SysDepartmentAppService>();
+            _positionApp = service.GetRequiredService<PositionAppService>();
+            _roleApp = service.GetRequiredService<SysRoleAppService>();
         }
 
         /// <summary>
@@ -47,20 +51,11 @@ namespace Altas.Framework.Admin
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
-            var role = _userApp.GetRoleList();
-            role.Insert(0,new sys_role(){id = 0,role_name = "请选择"});
-            ViewBag.RoleList = new SelectList(role, "id", "role_name");
+            var roles = _roleApp.GetRoleSelect();
+            var positions = _positionApp.GetPositionSelectList();
+            ViewBag.RoleList = roles;
+            ViewBag.Positions = new SelectList(positions,"id","name");
             return View();
-        }
-
-        /// <summary>
-        /// 获取所有用户
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult GetAllUser()
-        {
-            var data = _userApp.GetAllUser();
-            return Json(data);
         }
 
         /// <summary>
@@ -88,7 +83,7 @@ namespace Altas.Framework.Admin
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveData(sys_user dto,string refExperts)
+        public ActionResult SaveData(sys_user dto,List<long> position)
         {
             var exist = _userApp.CheckUserName(dto.login_name, dto.id);
             if (exist)
@@ -96,15 +91,9 @@ namespace Altas.Framework.Admin
                 return Error("用户名已存在");
             }
 
-            dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());
-            if (dto.id == 0)
-            {
-                _userApp.InsertData(dto,RequestHelper.AdminInfo(), refExperts);
-            }
-            else
-            {
-                _userApp.UpdateData(dto, refExperts);
-            }
+
+            _userApp.SaveData(dto, position, RequestHelper.AdminInfo());
+
 
             return Success();
         }
@@ -134,8 +123,12 @@ namespace Altas.Framework.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult DelUserByIds(string ids)
+        public ActionResult removeAll(string ids)
         {
+            if (ids.IsEmpty())
+            {
+                return Error("删除失败");
+            }
             _userApp.DelUserByIds(ids);
 
             return Success("删除成功");

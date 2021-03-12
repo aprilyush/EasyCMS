@@ -1,183 +1,272 @@
 ﻿@{
+    ViewData["Title"] = "用户信息";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-title">
-        用户信息
-    </div>
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-sm-5">
-                <form class="form form-horizontal" id="form" autocomplete="off">
-                    <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label required">登录名：</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="account_name" id="account_name" value="" class="form-control" data-rule="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label required">姓名：</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="real_name" id="real_name" value="" class="form-control" data-rule="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label required">密码：</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="pass_word" id="pass_word" class="form-control" data-rule="密码:required;password;">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label required">确认密码：</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="SurePassWord" id="SurePassWord" class="form-control" data-rule="确认密码:required;password;match(pass_word)">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">部门：</label>
-                        <div class="col-sm-4">
-                            <textarea id="parentDept" style="width:300px;height:50px;overflow:hidden;" textLabel="jasontext" type="text" readonly></textarea>
-                            <input type="hidden" name="dept_id" id="dept_id" value="0" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label ">联系方式：</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="mobile_phone" id="mobile_phone" class="form-control" data-rule="mobile;">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">邮箱：</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="email" id="email" value="" class="form-control" data-rule="email;">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">超管：</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox checkbox-success checkbox-inline">
-                                <input type="checkbox" id="is_super" name="is_super" value="true">
-                                <label for="is_super">是否超级管理员</label>
+<link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
+<link href="~/ui/plugins/select2/select2.min.css" rel="stylesheet" />
+<link href="~/ui/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+<style type="text/css">
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        color: #fff !important;
+        cursor: pointer !important;
+        display: inline-block !important;
+        font-weight: 700 !important;
+        margin-right: 3px !important;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #1AB394 !important;
+        border-color: #1AB394 !important;
+        padding: 1px 10px !important;
+        color: #fff !important;
+    }
+</style>
+<div class="container-div white-bg">
+    <div class="ibox">
+        <div class="ibox-content">
+            <form class="form form-horizontal" id="userForm" autocomplete="off">
+                <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                <h4 class="form-header h4">基本信息</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label is-required">登录账号：</label>
+                            <div class="col-sm-6">
+                                <input id="login_name" name="login_name" placeholder="请输入登录账号" class="form-control" type="text" maxlength="30" data-rule="required;username;" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">系统角色：</label>
-                        <div class="col-sm-9">
-                            @Html.DropDownList("sys_role_id", ViewBag.RoleList as SelectList, new { @class = "form-control" })
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">归属部门：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="hidden" name="dept_id" id="dept_id" placeholder="" class="form-control" value="0">
+                                    <input type="text" class="form-control" id="parentDept" checks="0" readonly textLabel="jasontext" />
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label is-required">用户名：</label>
+                            <div class="col-sm-6">
+                                <input id="user_name" name="user_name" placeholder="请输入用户名" class="form-control" type="text" maxlength="30" data-rule="required;length(1~30)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label is-required">登录密码：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input id="pass_word" name="pass_word" placeholder="请输入登录密码" class="form-control" type="text" value="123456" maxlength="30" data-rule="required;password">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号码：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input id="mobile_phone" name="mobile_phone" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" data-rule="mobile">
+                                    <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input id="email" name="email" class="form-control email" type="text" maxlength="50" placeholder="请输入邮箱" data-rule="email;">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户性别：</label>
+                            <div class="col-sm-6">
+                                <select name="gender" class="form-control m-b">
+                                    <option value="1">男</option>
+                                    <option value="0">女</option>
+                                    <option value="2">未知</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">用户状态：</label>
+                            <div class="col-sm-4">
+                                <label class="toggle-switch switch-solid">
+                                    <input type="checkbox" id="user_status" value="1" name="user_status" checked="checked">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">超管：</label>
+                            <div class="col-sm-6">
+                                <label class="toggle-switch switch-solid">
+                                    <input type="checkbox" id="is_super" value="1" name="isSuper">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">岗位：</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownList("position", ViewBag.Positions as SelectList, new { @class = "form-control select2-multiple", multiple = "multiple" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
 
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">备注：</label>
-                        <div class="col-sm-9">
-                            <textarea name="remark" id="remark" cols="50" rows="4"></textarea>
-                        </div>
-                    </div>
-                    <input type="hidden" name="refExperts" id="refExperts" />
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-                        <div class="col-sm-12 col-sm-offset-3">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
-                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4">
-                @*<div class=" ibox">
-                        <div class="ibox-title">
-                            <h5>关联专家信息</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <ul id="expertTree" class="ztree">
-                            </ul>
-                        </div>
-                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">角色：</label>
+                            <div class="col-xs-8">
 
-            </div>
+                                @{
+                                    var roles = ViewBag.RoleList as List<Atlass.Framework.ViewModels.Common.ZtreeSelInt64Dto>;
+                                    @for (int i = 0; i < roles.Count; i++)
+                                    {
+                                        var chkId = "role_id";
+                                        if (i > 0)
+                                        {
+                                            chkId = chkId + i;
+                                        }
+                                        <label class="check-box checkbox-success">
+                                            <input type="radio" class="icheck" id="@(chkId)" name="role_id" value="@(roles[i].id)">
+                                            @(roles[i].name)
+                                        </label>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="form-header h4">其他信息</h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">备注：</label>
+                            <div class="col-xs-6">
+                                <textarea id="remark" name="remark" maxlength="500" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footerbar">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button class="btn btn-danger" type="button" onclick="cancel()">
+                            <i class="fa fa-reply-all"></i>关闭
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-
     </div>
-
 </div>
 
 @section scripts{
-    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
-    <script src="~/plugins/selectTree/MultipleTreeSelect.js"></script>
+    <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+    <script src="~/ui/easycms/js/multiple-tree-select.js"></script>
+    <script type="text/javascript" src="~/ui/plugins/select2/select2.min.js"></script>
     <script type="text/javascript">
-        var eTree;
+        let postSelect2;
         $(function () {
-            $('#form').validator({
+            $('#userForm').validator({
                 stopOnError: false,
                 timely: 2,
                 theme: "yellow_right",
                 valid: function (form) {
-                    // 表单验证通过，提交表单
-                    jutils.ajaxPost('/admin/sysuser/SaveData', $(form).serialize(),
-                        function (res) {
+                    //console.log(form);
+                    let deptId = $('#parentDept_checkedIds').val();
+                    $('#dept_id').val(deptId);
+                    jutils.ajaxPost("/admin/sysuser/SaveData", $(form).serialize(), function (res) {
+                        if (res.status) {
+                            jutils.postMessage('admin_sysuser_form', "message from user");
                             cancel();
-                        });
-                }
-            });
-
-            loadData();
-        });
-
-
-        function loadData() {
-            var id = $("#id").val();
-
-            jutils.ajaxGet('/admin/sysuser/GetUserById', { id: id }, function (res) {
-
-                //loadDicTree(res.data.expertTree);
-                var model = res.data.model;
-                if (id != '0') {
-                    $('#form').initFormData(model);
-                    $('#SurePassWord').val(model.pass_word);
-                    if (model.dept_id != 0) {
-                        $('#parentDept').attr('checks', model.dept_id);
-                    }
-                }
-
-                initSelectTree(res.data.depts);
-            });
-        }
-        function initSelectTree(treeNodes) {
-            var defaults = {
-                callback: {
-                    onCheck: zTreeOnCheck
+                        }
+                    });
                 },
-                chkStyle: "radio",
-                zNodes: treeNodes,
-                height: 333   // 默认自定义下拉框高度
-            }
+            });
 
-            $("#parentDept").drawMultipleTree(defaults);
+            postSelect2 = $('#position').select2({
+                placeholder: "请选择岗位",
+                allowClear: true
+            });
+
+            loadModel();
+        });
+        function loadModel() {
+            let id = $('#id').val();
+            if (jutils.emptyId(id)) {
+
+                initSelectTree();
+                return;
+            }
+            jutils.ajaxGet('/admin/sysuser/GetUserById', { id: id }, function (res) {
+                // console.log(res);
+                if (res.status) {
+                    let model = res.data.model;
+                    $('#userForm').initFormData(model);
+                    $('#parentDept').attr('checks', model.dept_id);
+
+                    postSelect2.val(model.positionList).trigger("change");
+                    initSelectTree();
+                }
+            });
         }
-        function zTreeOnCheck(treeNodes) {
-            // console.log(treeNodes);
 
-            // alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
-            //selectDepartments.length = 0;
-            if (treeNodes.length > 0) {
-                var parentId = treeNodes[0].id;
-                $('#dept_id').val(parentId);
-            } else {
-                $('#dept_id').val(0);
-            }
+        function initSelectTree() {
 
-            //console.log(selectDepartments);
-        };
+            jutils.ajax('get', false, '/admin/SysDepartment/getDeptZtree', null, function (res) {
+                if (res.status) {
+                    let defaults = {
+                        chkStyle: "radio",
+                        zNodes: res.data.ztreeData,
+                        height: 333   // 默认自定义下拉框高度
+                    }
+                    let tree = $("#parentDept").drawMultipleTree(defaults);
+                }
+            })
+
+
+        }
+
         function cancel() {
-            jutils.back();
+            jutils.closeTab('admin_sysuser_form');
         }
+
     </script>
-
-
 }
 
 

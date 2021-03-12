@@ -134,8 +134,18 @@ namespace Atlass.Framework.Models {
 		/// </summary>
 		[JsonProperty, Column(DbType = "int(1)")]
 		public int user_status { get; set; }
-		[Column(IsIgnore =true)]
+
+
+		/// <summary>
+		/// 角色名称
+		/// </summary>
+		[JsonProperty, Column(IsIgnore = true)]
 		public string role_name { get; set; }
+		/// <summary>
+		/// 职位信息
+		/// </summary>
+		[JsonProperty, Column(IsIgnore =true)]
+		public List<long> positionList { get; set; }
 
 	}
 

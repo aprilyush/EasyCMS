@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Form";
+    ViewData["Title"] = "部门信息";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
     <link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
@@ -105,7 +105,7 @@
 @section scripts{
     <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
     <script src="~/ui/easycms/js/multiple-tree-select.js"></script>
-    <script type="text/javascript" th:inline="javascript">
+    <script type="text/javascript">
         $(function () {
             $('#deptForm').validator({
                 stopOnError: false,
