@@ -116,15 +116,15 @@
                                             <label class="col-sm-2 control-label">性别：</label>
                                             <div class="col-sm-6">
                                                 <div class="radio-box">
-                                                    <input type="radio" id="gender"  name="gender" value="1"/>
+                                                    <input type="radio" id="gender"  name="gender" value="1" @(Model.Gender==1?"checked":"")/>
                                                     <label for="gender">男</label>
                                                 </div>
                                                 <div class="radio-box">
-                                                    <input type="radio" id="gender1" name="gender" value="0"/>
+                                                    <input type="radio" id="gender1" name="gender" value="0" @(Model.Gender==0?"checked":"")/>
                                                     <label for="gender1">女</label>
                                                 </div>
                                                 <div class="radio-box">
-                                                    <input type="radio" id="gender2" name="gender" value="2" />
+                                                    <input type="radio" id="gender2" name="gender" value="2" @(Model.Gender==2?"checked":"")/>
                                                     <label for="gender2">未知</label>
                                                 </div>
                                             </div>
