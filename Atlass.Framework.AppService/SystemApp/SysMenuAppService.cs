@@ -314,7 +314,7 @@ namespace Atlass.Framework.AppService
                 list =
                     await Sqldb.Select<sys_menu, sys_role_authorize>()
                         .LeftJoin((m, r) => m.id == r.menu_id)
-                       .Where((m, r) => r.role_id == UserCookie.SysRoleId)
+                       .Where((m, r) => r.role_id == UserCookie.RoleId)
                        .OrderBy((m, r) => m.menu_sort)
                        .ToListAsync((m, r) => new RoleMenuDto()
                        {
@@ -330,7 +330,7 @@ namespace Atlass.Framework.AppService
 
                 var funcs = await Sqldb.Select<sys_operate, sys_role_authorize>()
                              .LeftJoin((m, r) => m.id == r.menu_id)
-                        .Where((m, r) => r.role_id == UserCookie.SysRoleId)
+                        .Where((m, r) => r.role_id == UserCookie.RoleId)
                         .OrderBy((m, r) => m.id)
                         .ToListAsync((m, r) => new RoleMenuDto()
                         {

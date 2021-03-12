@@ -62,7 +62,7 @@ namespace Atlass.Framework.AppService.SystemApp
         public void SaveDepartment(sys_dept dto,LoginUserDto user)
         {
 
-            dto.update_by = user.AccountName;
+            dto.update_by = user.LoginName;
             dto.update_time = DateTime.Now;
             dto.ancestors = "";
             dto.phone = dto.phone ?? "";
@@ -79,7 +79,7 @@ namespace Atlass.Framework.AppService.SystemApp
             }
             if (dto.id == 0)
             {
-                dto.create_by = user.AccountName;
+                dto.create_by = user.LoginName;
                 dto.create_time = DateTime.Now;
                 Sqldb.Insert(dto).ExecuteAffrows();
             }

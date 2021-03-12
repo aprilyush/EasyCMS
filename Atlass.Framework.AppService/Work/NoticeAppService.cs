@@ -119,7 +119,7 @@ namespace Atlass.Framework.AppService.Work
                     model.dept_id = dept.id;
                     model.dept_name = dept.dept_name;
                     model.reply_status = 0;
-                    if (user.DepartmentId == dept.id)
+                    if (user.DeptId == dept.id)
                     {
                         model.reply_status = 1;
                     }
@@ -186,7 +186,7 @@ namespace Atlass.Framework.AppService.Work
                 else
                 {
                     model.is_check = Sqldb.Select<work_notice_reply>()
-                        .Where(s => s.notice_id == id && s.dept_id == user.DepartmentId)
+                        .Where(s => s.notice_id == id && s.dept_id == user.DeptId)
                         .First(s => s.reply_status);
                 }
 
@@ -209,7 +209,7 @@ namespace Atlass.Framework.AppService.Work
         {
             var nowTime = DateTime.Now;
 
-            if (user.DepartmentId > 0)
+            if (user.DeptId > 0)
             {
                 var notice = Sqldb.Queryable<work_notice>().Where(s => s.id == noticeId).First();
                 if (notice != null)
@@ -218,7 +218,7 @@ namespace Atlass.Framework.AppService.Work
                     {
                         return false;
                     }
-                    var replyId = Sqldb.Select<work_notice_reply>().Where(s => s.notice_id == noticeId && s.dept_id == user.DepartmentId)
+                    var replyId = Sqldb.Select<work_notice_reply>().Where(s => s.notice_id == noticeId && s.dept_id == user.DeptId)
                         .OrderBy(s => s.id).First(s => s.id);
                     if (replyId == 0)
                     {
@@ -227,7 +227,7 @@ namespace Atlass.Framework.AppService.Work
                     Sqldb.Update<work_notice_reply>().Set(s => new work_notice_reply
                     {
                         reply_time = DateTime.Now,
-                        nick_name = user.RealName,
+                        nick_name = user.UserName,
                         user_id = user.Id,
                         reply_status = 1
 

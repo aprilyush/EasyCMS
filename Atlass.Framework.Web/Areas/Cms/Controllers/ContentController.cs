@@ -68,7 +68,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
            
             if (dto.id == 0)
             {
-                dto.dept_id = user.DepartmentId;
+                dto.dept_id = user.DeptId;
                 dto.insert_id = user.Id;
                 if (dto.insert_time == DateTime.MinValue)
                 {

@@ -43,7 +43,7 @@ namespace Atlass.Framework.AppService
         public void InsertDicData(sys_dictionary dto,LoginUserDto UserCookie)
         {
             dto.id = IdWorkerHelper.NewId();
-            dto.create_person = UserCookie.AccountName;
+            dto.create_person = UserCookie.LoginName;
             dto.create_time = DateTime.Now;
 
             if (dto.parent_id != 0)

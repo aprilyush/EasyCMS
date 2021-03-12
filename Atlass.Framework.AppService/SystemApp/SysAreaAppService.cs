@@ -136,7 +136,7 @@ namespace Atlass.Framework.AppService
             //}
             //dto.lat_lng = dto.lat_lng ?? string.Empty;
             //dto.id = IdWorkerHelper.NewId();
-            //dto.create_person = UserCookie.AccountName;
+            //dto.create_person = UserCookie.LoginName;
             //dto.create_time = DateTime.Now;
 
             Sqldb.Insert(dto).ExecuteAffrows();

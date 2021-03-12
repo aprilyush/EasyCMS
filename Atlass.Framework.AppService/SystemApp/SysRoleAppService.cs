@@ -61,7 +61,7 @@ namespace Atlass.Framework.AppService
         {
             dto.role_code = dto.role_code ?? string.Empty;
             dto.id = IdWorkerHelper.NewId();
-            dto.create_person = UserCookie.AccountName;
+            dto.create_person = UserCookie.LoginName;
             dto.create_time=DateTime.Now;
             Sqldb.Insert(dto).ExecuteAffrows();
 
@@ -187,7 +187,7 @@ namespace Atlass.Framework.AppService
                     model.menu_id = mid.id.ToInt64();
                     model.menu_pid = mid.pId.ToInt64();
                     model.create_time = DateTime.Now;
-                    model.create_person = UserCookie.AccountName;
+                    model.create_person = UserCookie.LoginName;
                     list.Add(model);
                 }
 
@@ -220,7 +220,7 @@ namespace Atlass.Framework.AppService
                 list =
                    Sqldb.Select<sys_operate, sys_role_authorize>()
                    .LeftJoin((f, r) => f.id == r.menu_id)
-                   .Where((f,r)=>r.role_id==UserCookie.SysRoleId&&r.menu_pid == menuId)
+                   .Where((f,r)=>r.role_id==UserCookie.RoleId&&r.menu_pid == menuId)
                        .ToList((f, m) => f);
             }
 

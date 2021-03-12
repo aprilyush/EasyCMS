@@ -46,11 +46,11 @@ namespace Atlass.Framework.AppService.SystemApp
         {
            
             dto.post_code = dto.post_code ?? "";
-            dto.update_by = user.AccountName;
+            dto.update_by = user.LoginName;
             dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
-                dto.create_by = user.AccountName;
+                dto.create_by = user.LoginName;
                 dto.create_time = DateTime.Now;
                 Sqldb.Insert(dto).ExecuteAffrows();
             }
@@ -93,6 +93,27 @@ namespace Atlass.Framework.AppService.SystemApp
                         .OrderBy(s => s.post_sort)
                         .ToList(s => new ZtreeSelInt64Dto { id = s.id, name = s.post_name });
             return query;
+        }
+
+        /// <summary>
+        /// 获取用户的职位信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public string GetUserPositionName(long userId)
+        {
+            var positionIds = Sqldb.Select<sys_user_position>().Where(s => s.user_id == userId)
+                .ToList(s => s.position_id);
+            if (positionIds.Count > 0)
+            {
+                var positionNames = Sqldb.Select<sys_position>().Where(s => positionIds.Contains(s.id))
+                    .ToList(s => s.post_name);
+                if (positionNames.Count > 0)
+                {
+                    return string.Join(',', positionNames);
+                }
+            }
+            return "暂无职务";
         }
     }
 }

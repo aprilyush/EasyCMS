@@ -8,6 +8,7 @@ using Atlass.Framework.Common;
 using Atlass.Framework.Enum;
 using Atlass.Framework.Models;
 using Atlass.Framework.Models.Admin;
+using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.Extensions.DependencyInjection;
 using NPOI.SS.Formula.Functions;
@@ -49,7 +50,7 @@ namespace Atlass.Framework.AppService
         /// 获取数据表格
         /// </summary>
         /// <param name="param"></param>
-        /// <param name="accountName"></param>
+        /// <param name="LoginName"></param>
         /// <returns></returns>
         public BootstrapGridDto GetData(BootstrapGridDto param, string loginName,string userName,string phone)
         {
@@ -130,14 +131,14 @@ namespace Atlass.Framework.AppService
                 dto.user_avatar = "/ui/img/profile.jpg";
             }
 
-            dto.update_by = userDto.AccountName;
+            dto.update_by = userDto.LoginName;
             dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
                 dto.id = IdWorkerHelper.NewId();
                 dto.del_flag = DataStatusConstant.NOT_DELETED;
                 dto.create_time = DateTime.Now;
-                dto.create_by = userDto.AccountName;
+                dto.create_by = userDto.LoginName;
                 Sqldb.Insert(dto).ExecuteAffrows();
                
             }
@@ -158,7 +159,7 @@ namespace Atlass.Framework.AppService
                     sys_user_position positionMoel = new sys_user_position();
                     positionMoel.user_id = dto.id;
                     positionMoel.position_id = pid;
-                    positionMoel.create_by = userDto.AccountName;
+                    positionMoel.create_by = userDto.LoginName;
                     positionMoel.create_time = dto.update_time;
                     positionsList.Add(positionMoel);
                 }
@@ -207,6 +208,40 @@ namespace Atlass.Framework.AppService
             var idsArray = ids.SplitToArrayInt64();
 
             Sqldb.Delete<sys_user>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
+        }
+
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="loginName"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        public ResultAdaptDto UpdatePassword(long id,string loginName,string oldPassword,string newPassword)
+        {
+            ResultAdaptDto ret = new ResultAdaptDto();
+            var user = Sqldb.Select<sys_user>().Where(s => s.id == id).First();
+            if (user == null)
+            {
+                ret.status = false;
+                ret.message = "用户不存在";
+                return ret;
+            }
+
+            //个人中心的密码更新
+            if (loginName.IsEmpty()&&user.pass_word != oldPassword)
+            {
+                ret.status = false;
+                ret.message = "用户密码比对失败，禁止更新";
+                return ret;
+            }
+
+            Sqldb.Update<sys_user>()
+                .Set(s => s.pass_word, newPassword)
+                .Where(s => s.id == id).ExecuteAffrows();
+
+            ret.message = "密码更新成功";
+            return ret;
         }
     }
 }

@@ -33,8 +33,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             var userDto = RequestHelper.AdminInfo();
 
             ViewBag.Id = userDto.Id.ToString();
-            ViewBag.AccountName = userDto.AccountName;
-            ViewBag.UserName = userDto.RealName;
+            ViewBag.AccountName = userDto.LoginName;
+            ViewBag.UserName = userDto.UserName;
             ViewData.Model = _menuApp.GetNaviMenu();
             return View();
         }

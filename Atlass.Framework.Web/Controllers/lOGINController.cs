@@ -6,6 +6,7 @@ using Atlass.Framework.AppService;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core.Web;
+using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
 using Atlass.Framework.Web.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -16,10 +17,12 @@ namespace Atlass.Framework.Web.Controllers
     public class LoginController : Controller
     {
         private readonly SysUserAppService _userApp;
+        private readonly SysRoleAppService _roleApp;
         private readonly IAtlassRequest RequestHelper;
-        public LoginController(SysUserAppService userApp, IAtlassRequest AtlassRequestHelper)
+        public LoginController(SysUserAppService userApp, SysRoleAppService roleApp, IAtlassRequest AtlassRequestHelper)
         {
             _userApp = userApp;
+            _roleApp = roleApp;
             RequestHelper = AtlassRequestHelper;
         }
         public IActionResult Index()
@@ -50,20 +53,26 @@ namespace Atlass.Framework.Web.Controllers
                 if (user != null)
                 {
                     loginUserDto.Id = user.id;
-                    loginUserDto.AccountName = user.login_name;
-                    loginUserDto.RealName = user.user_name;
+                    loginUserDto.LoginName = user.login_name;
+                    loginUserDto.UserName = user.user_name;
                     loginUserDto.IsSuper = user.is_super==1;
-                    loginUserDto.DepartmentId = user.dept_id;
-                 
-                    //if (user.account_name.ToLower() == "admin")
-                    //{
-                    //    loginUserDto.IsSuper = true; //user.IsSuper;
-                    //}
-                    //else
-                    //{
-                    //    loginUserDto.IsSuper = user.is_super; //user.IsSuper;
-                    //}
-                    loginUserDto.SysRoleId = user.role_id;
+                    loginUserDto.DeptId = user.dept_id;
+                    loginUserDto.Avatar = user.user_avatar;
+                    loginUserDto.RoleId = user.role_id;
+                    loginUserDto.DeptName = user.dept_name;
+                    loginUserDto.Gender = user.gender;
+                    loginUserDto.Phone = user.mobile_phone;
+                    loginUserDto.Email = user.email;
+                    if (user.role_id > 0)
+                    {
+                        sys_role role = _roleApp.GetRoleById(user.role_id);
+                        if (role != null)
+                        {
+                            loginUserDto.RoleCode = role.role_code;
+                            loginUserDto.RoleName = role.role_name;
+                        }
+                    }
+                   
                     //设置cookie
                     // FormsAuthentication.SetAuthCookie(loginUserDto.AccountName, false);
                     string claimstr = loginUserDto.ToJson();

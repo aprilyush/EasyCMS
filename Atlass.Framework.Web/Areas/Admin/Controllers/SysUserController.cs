@@ -19,8 +19,8 @@ namespace Altas.Framework.Admin
     public class SysUserController : BaseController
     {
         private readonly SysUserAppService _userApp;
+        private readonly PositionAppService _positionApp;
         private readonly SysDepartmentAppService _deptApp;
-        private readonly PositionAppService  _positionApp;
         private readonly SysRoleAppService _roleApp;
 
         public SysUserController(IServiceProvider service)
@@ -142,7 +142,10 @@ namespace Altas.Framework.Admin
         [HttpGet]
         public ActionResult Profile(string id)
         {
-            ViewBag.Id = id;
+            var user = RequestHelper.AdminInfo();
+            ViewData.Model = user;
+            ViewBag.PostGroup = _positionApp.GetUserPositionName(user.Id);
+            ViewBag.LoginIp = RequestHelper.GetClientIp();
             return View();
         }
 
@@ -154,12 +157,44 @@ namespace Altas.Framework.Admin
         [HttpPost]
         public ActionResult UpdateProfile(sys_user dto)
         {
-            dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());
+           // dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());
             _userApp.UpdateProfile(dto);
             return Success("修改成功");
         }
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            string id = RequestHelper.GetQueryString("id", "0");
+            string loginName = RequestHelper.GetQueryString("loginName", "");
+            if (id == "0")
+            {
+                LoginUserDto userDto = RequestHelper.AdminInfo();
+                id = userDto.Id.ToString();
+                loginName = userDto.LoginName;
+            }
+            ViewBag.Id = id;
+            ViewBag.loginName = loginName;
+            return View();
+        }
 
-
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult UpdatePassword()
+        {
+            long id = RequestHelper.GetPostInt64("id",0);
+            String oldPassword = RequestHelper.GetPostString("oldPassword", "");
+            String newPassword = RequestHelper.GetPostString("newPassword", "");
+            String accountName = RequestHelper.GetPostString("loginName", "");
+            ResultAdaptDto resultAdaptDto = _userApp.UpdatePassword(id, accountName, oldPassword, newPassword);
+            return Json(resultAdaptDto);
+        }
         /// <summary>
         /// 用户选择
         /// </summary>
