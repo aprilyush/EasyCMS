@@ -1,6 +1,5 @@
 ﻿
 using Atlass.Framework.Cache;
-using Atlass.Framework.Common.IdHelper;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Generate;
 using Atlass.Framework.Models;

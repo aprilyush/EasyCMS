@@ -4,12 +4,13 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Atlass.Framework.Common.IdHelper;
+
 using Snowflake.Core;
+using Yitter.IdGenerator;
 
 namespace Atlass.Framework.Common
 {
-    public class IdWorkerHelper
+    public class IdHelper
     {
         /// <summary>
         /// snowflake
@@ -19,11 +20,11 @@ namespace Atlass.Framework.Common
 
         //有序guid
         private static SequentialGuidGenerator _generator = null;
-        private IdWorkerHelper()
+        private IdHelper()
         {
         }
 
-        static IdWorkerHelper()
+        static IdHelper()
         {
             if (worker == null)
             {
@@ -32,9 +33,13 @@ namespace Atlass.Framework.Common
 
 
             //有序guid
-           // _generator.DatabaseType = SequentialGuidGenerator.SequentialGuidDatabaseType.SqlServer;
+            // _generator.DatabaseType = SequentialGuidGenerator.SequentialGuidDatabaseType.SqlServer;
             //_generator = SequentialGuidGenerator.Instance;
-            
+
+            //新雪花算法,位数更短
+            var options = new IdGeneratorOptions() { WorkerId = 1 };
+            Yitter.IdGenerator.IdHelper.SetIdGenerator(options);
+
         }
 
         #region Snowflake
@@ -62,27 +67,46 @@ namespace Atlass.Framework.Common
             }
             return worker;
         }
-        
+
+        /// <summary>
+        /// 原始雪花算法
+        /// </summary>
+        /// <returns></returns>
         public static long NewId()
         {
             // return GetInstance().NextId();
             return worker.NextId();
         }
+
+        /// <summary>
+        /// 新雪花算法
+        /// </summary>
+        /// <returns></returns>
+        public static long NextId()
+        {
+            return Yitter.IdGenerator.IdHelper.NextId();
+        }
         #endregion
         #region Mongodb ObjectId
-
-        public static string GenObjectId()
+        /// <summary>
+        /// 24位MongoDb的objectId算法
+        /// </summary>
+        /// <returns></returns>
+        public static string ObjectId()
         {
-            return ObjectId.GenerateNewStringId();
+            return MongoObjectId.GenerateNewStringId();
         }
-
+        /// <summary>
+        ///  24位MongoDb的objectId算法 0
+        /// </summary>
+        /// <returns></returns>
         public static string GenOId()
         {
             return "000000000000000000000000";
         }
 
         /// <summary>
-        /// 24位mongodb的objectid算法
+        /// 28位微信的空openId
         /// </summary>
         /// <returns></returns>
         public static string GenOopenId()
@@ -91,7 +115,10 @@ namespace Atlass.Framework.Common
         }
         #endregion
         #region 有序GUid
-
+        /// <summary>
+        /// 有序guid
+        /// </summary>
+        /// <returns></returns>
         public static Guid GenGuidId()
         {
             return _generator.Create();

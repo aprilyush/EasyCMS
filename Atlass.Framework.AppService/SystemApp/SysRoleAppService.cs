@@ -60,7 +60,7 @@ namespace Atlass.Framework.AppService
         public void InsertRoleData(sys_role dto,LoginUserDto UserCookie)
         {
             dto.role_code = dto.role_code ?? string.Empty;
-            dto.id = IdWorkerHelper.NewId();
+            dto.id = IdHelper.NewId();
             dto.create_person = UserCookie.LoginName;
             dto.create_time=DateTime.Now;
             Sqldb.Insert(dto).ExecuteAffrows();
@@ -182,7 +182,7 @@ namespace Atlass.Framework.AppService
                 {
                     mid.pId = mid.pId ?? "0";
                     var model=new sys_role_authorize();
-                    model.id = IdWorkerHelper.NewId();
+                    model.id = IdHelper.NewId();
                     model.role_id = roleId.ToInt64();
                     model.menu_id = mid.id.ToInt64();
                     model.menu_pid = mid.pId.ToInt64();

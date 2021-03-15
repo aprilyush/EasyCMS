@@ -46,7 +46,7 @@ namespace Atlass.Framework.Web.Controllers
         {
 
             AccessTokenContainer.RegisterAsync(_wxSetting.WeixinAppId, _wxSetting.WeixinAppSecret, "doctor_platform");
-            string state1 = IdWorkerHelper.GenObjectId();//随机数，用于识别请求可靠性
+            string state1 = IdHelper.ObjectId();//随机数，用于识别请求可靠性
             HttpContext.Session.SetString("State", state1);//储存随机数到Session
             string signUrl =Request.AbsoluteUri();
             // LogNHelper.Info(signUrl);
@@ -108,7 +108,7 @@ namespace Atlass.Framework.Web.Controllers
             }
             else
             {
-                string state1 = IdWorkerHelper.GenObjectId();//随机数，用于识别请求可靠性
+                string state1 = IdHelper.ObjectId();//随机数，用于识别请求可靠性
                 // signUrl = signUrl + "/WxExpert/Index";
                 var url = string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_base&state={2}#wechat_redirect", _wxSetting.WeixinAppId, signUrl.UrlEncode(), state1);
                 return Redirect(url);

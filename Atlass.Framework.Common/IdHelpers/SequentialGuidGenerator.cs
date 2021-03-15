@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 
 
-namespace Atlass.Framework.Common.IdHelper
+namespace Atlass.Framework.Common
 {
     /// <summary>
     /// ABP有序Guid

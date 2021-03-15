@@ -78,7 +78,7 @@ namespace Atlass.Framework.Web.ApiControllers
             var firstFileInfo = new FileInfo(filename);
             if (firstFileInfo.Length > 200 * 1024)
             {
-                string compressFileName = IdWorkerHelper.GenObjectId() + extName;
+                string compressFileName = IdHelper.ObjectId() + extName;
                 string compressFile = $"{folder}/{compressFileName}";
                 ImageUtilities.CompressImage(filename, compressFile, 90, 200);
                 guidFileName = compressFileName;
@@ -252,7 +252,7 @@ namespace Atlass.Framework.Web.ApiControllers
 
                 int index = fileName.LastIndexOf('.');
                 string extName = fileName.Substring(index);
-                string guidFileName = IdWorkerHelper.GenObjectId() + extName;
+                string guidFileName = IdHelper.ObjectId() + extName;
                 var finalPath = Path.Combine(targetDir, guidFileName);
 
                 var files = System.IO.Directory.GetFiles(tempDir);//获得下面的所有文件

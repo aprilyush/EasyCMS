@@ -129,7 +129,7 @@ namespace Atlass.Framework.Common
 
         public static string GetSafeFilename(string filename)
         {
-            if (string.IsNullOrEmpty(filename)) return IdWorkerHelper.GenObjectId().ToLower();
+            if (string.IsNullOrEmpty(filename)) return IdHelper.ObjectId().ToLower();
 
             return string.Join("_", filename.Split(GetInvalidChars()));
         }
@@ -189,7 +189,7 @@ namespace Atlass.Framework.Common
 
         public static string GetLibraryFileName(string filePath)
         {
-            return $"{IdWorkerHelper.GenObjectId()}{GetExtension(filePath)}";
+            return $"{IdHelper.ObjectId()}{GetExtension(filePath)}";
         }
 
        

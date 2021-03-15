@@ -6,16 +6,16 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
-namespace Atlass.Framework.Common.IdHelper {
+namespace Atlass.Framework.Common {
     /// <summary>
     /// Id生成器，代码出自：https://github.com/tangxuehua/ecommon/blob/master/src/ECommon/Utilities/ObjectId.cs
     /// </summary>
-    internal struct ObjectId : IComparable<ObjectId>, IEquatable<ObjectId>{
+    internal struct MongoObjectId : IComparable<MongoObjectId>, IEquatable<MongoObjectId>{
         // private static fields
         private static readonly DateTime __unixEpoch;
         private static readonly long __dateTimeMaxValueMillisecondsSinceEpoch;
         private static readonly long __dateTimeMinValueMillisecondsSinceEpoch;
-        private static ObjectId __emptyInstance = default( ObjectId );
+        private static MongoObjectId __emptyInstance = default( MongoObjectId );
         private static int __staticMachine;
         private static short __staticPid;
         private static int __staticIncrement; // high byte will be masked out when generating new ObjectId
@@ -33,7 +33,7 @@ namespace Atlass.Framework.Common.IdHelper {
         private int _increment;
 
         // static constructor
-        static ObjectId() {
+        static MongoObjectId() {
             __unixEpoch = new DateTime( 1970, 1, 1, 0, 0, 0, DateTimeKind.Utc );
             __dateTimeMaxValueMillisecondsSinceEpoch = ( DateTime.MaxValue - __unixEpoch ).Ticks / 10000;
             __dateTimeMinValueMillisecondsSinceEpoch = ( DateTime.MinValue - __unixEpoch ).Ticks / 10000;
@@ -47,7 +47,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// Initializes a new instance of the ObjectId class.
         /// </summary>
         /// <param name="bytes">The bytes.</param>
-        public ObjectId( byte[] bytes ) {
+        public MongoObjectId( byte[] bytes ) {
             if( bytes == null ) {
                 throw new ArgumentNullException( "bytes" );
             }
@@ -61,7 +61,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="machine">The machine hash.</param>
         /// <param name="pid">The PID.</param>
         /// <param name="increment">The increment.</param>
-        public ObjectId( DateTime timestamp, int machine, short pid, int increment )
+        public MongoObjectId( DateTime timestamp, int machine, short pid, int increment )
             : this( GetTimestampFromDateTime( timestamp ), machine, pid, increment ) {
         }
 
@@ -72,7 +72,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="machine">The machine hash.</param>
         /// <param name="pid">The PID.</param>
         /// <param name="increment">The increment.</param>
-        public ObjectId( int timestamp, int machine, short pid, int increment ) {
+        public MongoObjectId( int timestamp, int machine, short pid, int increment ) {
             if( ( machine & 0xff000000 ) != 0 ) {
                 throw new ArgumentOutOfRangeException( "machine", "The machine value must be between 0 and 16777215 (it must fit in 3 bytes)." );
             }
@@ -90,7 +90,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// Initializes a new instance of the ObjectId class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public ObjectId( string value ) {
+        public MongoObjectId( string value ) {
             if( value == null ) {
                 throw new ArgumentNullException( "value" );
             }
@@ -101,7 +101,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <summary>
         /// Gets an instance of ObjectId where the value is empty.
         /// </summary>
-        public static ObjectId Empty {
+        public static MongoObjectId Empty {
             get { return __emptyInstance; }
         }
 
@@ -148,7 +148,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId</param>
         /// <returns>True if the first ObjectId is less than the second ObjectId.</returns>
-        public static bool operator <( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator <( MongoObjectId lhs, MongoObjectId rhs ) {
             return lhs.CompareTo( rhs ) < 0;
         }
 
@@ -158,7 +158,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId</param>
         /// <returns>True if the first ObjectId is less than or equal to the second ObjectId.</returns>
-        public static bool operator <=( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator <=( MongoObjectId lhs, MongoObjectId rhs ) {
             return lhs.CompareTo( rhs ) <= 0;
         }
 
@@ -168,7 +168,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId.</param>
         /// <returns>True if the two ObjectIds are equal.</returns>
-        public static bool operator ==( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator ==( MongoObjectId lhs, MongoObjectId rhs ) {
             return lhs.Equals( rhs );
         }
 
@@ -178,7 +178,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId.</param>
         /// <returns>True if the two ObjectIds are not equal.</returns>
-        public static bool operator !=( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator !=( MongoObjectId lhs, MongoObjectId rhs ) {
             return !( lhs == rhs );
         }
 
@@ -188,7 +188,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId</param>
         /// <returns>True if the first ObjectId is greather than or equal to the second ObjectId.</returns>
-        public static bool operator >=( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator >=( MongoObjectId lhs, MongoObjectId rhs ) {
             return lhs.CompareTo( rhs ) >= 0;
         }
 
@@ -198,7 +198,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="lhs">The first ObjectId.</param>
         /// <param name="rhs">The other ObjectId</param>
         /// <returns>True if the first ObjectId is greather than the second ObjectId.</returns>
-        public static bool operator >( ObjectId lhs, ObjectId rhs ) {
+        public static bool operator >( MongoObjectId lhs, MongoObjectId rhs ) {
             return lhs.CompareTo( rhs ) > 0;
         }
 
@@ -207,7 +207,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// Generates a new ObjectId with a unique value.
         /// </summary>
         /// <returns>An ObjectId.</returns>
-        public static ObjectId GenerateNewId() {
+        public static MongoObjectId GenerateNewId() {
             return GenerateNewId( GetTimestampFromDateTime( DateTime.UtcNow ) );
         }
 
@@ -216,7 +216,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// </summary>
         /// <param name="timestamp">The timestamp component (expressed as a DateTime).</param>
         /// <returns>An ObjectId.</returns>
-        public static ObjectId GenerateNewId( DateTime timestamp ) {
+        public static MongoObjectId GenerateNewId( DateTime timestamp ) {
             return GenerateNewId( GetTimestampFromDateTime( timestamp ) );
         }
 
@@ -225,9 +225,9 @@ namespace Atlass.Framework.Common.IdHelper {
         /// </summary>
         /// <param name="timestamp">The timestamp component.</param>
         /// <returns>An ObjectId.</returns>
-        public static ObjectId GenerateNewId( int timestamp ) {
+        public static MongoObjectId GenerateNewId( int timestamp ) {
             int increment = Interlocked.Increment( ref __staticIncrement ) & 0x00ffffff; // only use low order 3 bytes
-            return new ObjectId( timestamp, __staticMachine, __staticPid, increment );
+            return new MongoObjectId( timestamp, __staticMachine, __staticPid, increment );
         }
 
         /// <summary>
@@ -275,14 +275,14 @@ namespace Atlass.Framework.Common.IdHelper {
         /// </summary>
         /// <param name="s">The string value.</param>
         /// <returns>A ObjectId.</returns>
-        public static ObjectId Parse( string s ) {
+        public static MongoObjectId Parse( string s ) {
             if( s == null ) {
                 throw new ArgumentNullException( "s" );
             }
             if( s.Length != 24 ) {
                 throw new ArgumentOutOfRangeException( "s", "ObjectId string value must be 24 characters." );
             }
-            return new ObjectId( ParseHexString( s ) );
+            return new MongoObjectId( ParseHexString( s ) );
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// </summary>
         /// <param name="other">The other ObjectId.</param>
         /// <returns>A 32-bit signed integer that indicates whether this ObjectId is less than, equal to, or greather than the other.</returns>
-        public int CompareTo( ObjectId other ) {
+        public int CompareTo( MongoObjectId other ) {
             int r = _timestamp.CompareTo( other._timestamp );
             if( r != 0 ) { return r; }
             r = _machine.CompareTo( other._machine );
@@ -349,7 +349,7 @@ namespace Atlass.Framework.Common.IdHelper {
         /// </summary>
         /// <param name="rhs">The other ObjectId.</param>
         /// <returns>True if the two ObjectIds are equal.</returns>
-        public bool Equals( ObjectId rhs ) {
+        public bool Equals( MongoObjectId rhs ) {
             return
                 _timestamp == rhs._timestamp &&
                 _machine == rhs._machine &&
@@ -363,8 +363,8 @@ namespace Atlass.Framework.Common.IdHelper {
         /// <param name="obj">The other object.</param>
         /// <returns>True if the other object is an ObjectId and equal to this one.</returns>
         public override bool Equals( object obj ) {
-            if( obj is ObjectId ) {
-                return Equals( (ObjectId)obj );
+            if( obj is MongoObjectId ) {
+                return Equals( (MongoObjectId)obj );
             }
             else {
                 return false;

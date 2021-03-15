@@ -42,7 +42,7 @@ namespace Atlass.Framework.AppService
         /// <param name="dto"></param>
         public void InsertDicData(sys_dictionary dto,LoginUserDto UserCookie)
         {
-            dto.id = IdWorkerHelper.NewId();
+            dto.id = IdHelper.NewId();
             dto.create_person = UserCookie.LoginName;
             dto.create_time = DateTime.Now;
 

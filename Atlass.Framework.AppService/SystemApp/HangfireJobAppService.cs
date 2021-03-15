@@ -46,7 +46,7 @@ namespace Atlass.Framework.AppService.SystemApp
                 {
                     throw new Exception($"任务{dto.assembly_namespace}.{dto.class_name}已存在");
                 }
-                dto.id = IdWorkerHelper.GenObjectId();
+                dto.id = IdHelper.ObjectId();
                 dto.excute_time = DateTime.Now;
                 dto.excute_status = 1;
                 int affect=Sqldb.Insert(dto).ExecuteAffrows();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Atlass.Framework.Common.IdHelper
+namespace Atlass.Framework.Common
 {
     /// <summary>
     /// Extension methods to make locking easier.

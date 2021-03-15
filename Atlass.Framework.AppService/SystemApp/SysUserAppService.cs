@@ -135,7 +135,7 @@ namespace Atlass.Framework.AppService
             dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
-                dto.id = IdWorkerHelper.NewId();
+                dto.id = IdHelper.NewId();
                 dto.del_flag = DataStatusConstant.NOT_DELETED;
                 dto.create_time = DateTime.Now;
                 dto.create_by = userDto.LoginName;

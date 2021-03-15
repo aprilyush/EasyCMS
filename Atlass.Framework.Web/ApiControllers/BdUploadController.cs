@@ -125,7 +125,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 }
                 
 
-                string guidstr = IdWorkerHelper.GenObjectId();
+                string guidstr = IdHelper.ObjectId();
                 string guidFileName = guidstr + extName;
                 //这个hostingEnv.WebRootPath就是要存的地址可以改下
                 string newfilename = $"{folder}/{guidFileName}";
@@ -140,7 +140,7 @@ namespace Atlass.Framework.Web.ApiControllers
                     var firstFileInfo = new FileInfo(newfilename);
                     if (firstFileInfo.Length > 200 * 1024)
                     {
-                        string compressFileName = IdWorkerHelper.GenObjectId() + extName;
+                        string compressFileName = IdHelper.ObjectId() + extName;
                         string compressFile = $"{folder}/{compressFileName}";
                         ImageUtilities.CompressImage(newfilename, compressFile, 90, 200);
                         guidFileName = compressFileName;
