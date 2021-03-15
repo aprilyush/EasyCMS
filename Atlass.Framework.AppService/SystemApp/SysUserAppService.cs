@@ -36,17 +36,6 @@ namespace Atlass.Framework.AppService
         }
 
         /// <summary>
-        /// 更新密码
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="pwd"></param>
-        public void UpdateUserPwd(long id, string pwd)
-        {
-            //pwd = Encrypt.DesDecrypt(pwd);
-            Sqldb.Update<sys_user>().Set(s => new sys_user { pass_word = pwd }).Where(s => s.id == id).ExecuteAffrows();
-        }
-
-        /// <summary>
         /// 获取数据表格
         /// </summary>
         /// <param name="param"></param>

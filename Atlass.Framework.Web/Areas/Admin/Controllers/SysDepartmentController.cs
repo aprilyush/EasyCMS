@@ -40,7 +40,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         public IActionResult GetList()
         {
             var data = _deptApp.GetData();
-            return Json(data);
+            return JsonEx(data);
         }
         /// <summary>
         /// 部门表单

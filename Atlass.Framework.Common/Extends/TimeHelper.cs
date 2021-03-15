@@ -45,7 +45,7 @@ namespace Atlass.Framework.Common
         /// <returns></returns>
         public string GetFormatDate(DateTime dt, char Separator)
         {
-            if (dt != null && !dt.Equals(DBNull.Value))
+            if (!dt.Equals(DBNull.Value))
             {
                 string tem = string.Format("yyyy{0}MM{1}dd", Separator, Separator);
                 return dt.ToString(tem);
@@ -63,7 +63,7 @@ namespace Atlass.Framework.Common
         /// <returns></returns>
         public string GetFormatTime(DateTime dt, char Separator)
         {
-            if (dt != null && !dt.Equals(DBNull.Value))
+            if (!dt.Equals(DBNull.Value))
             {
                 string tem = string.Format("hh{0}mm{1}ss", Separator, Separator);
                 return dt.ToString(tem);

@@ -89,7 +89,7 @@ namespace Atlass.Framework.Core.Base
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        protected virtual ContentResult Json(object dto)
+        protected virtual ContentResult JsonEx(object dto)
         {
             return Content(dto.ToJson());
         }

@@ -60,7 +60,7 @@ namespace Altas.Framework.Controllers.Admin
         public ActionResult GetData()
         {
             var data = _menuApp.GetMenuList();
-            return Json(data);
+            return JsonEx(data);
         }
 
 
