@@ -172,14 +172,18 @@ namespace Atlass.Framework.AppService
         /// 更新个人资料
         /// </summary>
         /// <param name="dto"></param>
-        public void UpdateProfile(sys_user dto)
+        public void UpdateProfile(long id, string userName, string mobilePhone, string email, int gender)
         {
 
-          
-            dto.email = dto.email ?? string.Empty;
-            dto.mobile_phone = dto.mobile_phone ?? string.Empty;
-            Sqldb.Update<sys_user>().SetSource(dto)
-                .UpdateColumns(s => new { s.user_name, s.pass_word, s.mobile_phone,s.email,s.dept_id }).ExecuteAffrows();
+
+            mobilePhone = mobilePhone ?? string.Empty;
+            email = email ?? string.Empty;
+            Sqldb.Update<sys_user>()
+                .Set(s => s.user_name, userName)
+                .Set(s=>s.mobile_phone,mobilePhone)
+                .Set(s=>s.email,email)
+                .Set(s=>s.gender,gender)
+                .Where(s=>s.id==id).ExecuteAffrows();
         }
         /// <summary>
         /// 单个数据

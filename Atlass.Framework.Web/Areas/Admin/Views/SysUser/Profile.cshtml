@@ -97,7 +97,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">用户名称：</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="userName" value="@(Model.LoginName)" placeholder="请输入用户名称" data-rule="required;">
+                                                <input type="text" class="form-control" name="userName" value="@(Model.UserName)" placeholder="请输入用户名称" data-rule="required;">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -177,7 +177,7 @@
 </div>
 
 @section scripts{
-    <script type="text/javascript" th:inline="javascript">
+    <script type="text/javascript">
         $(function () {
             $('#form-user-edit').validator({
                 stopOnError: false,
@@ -201,10 +201,10 @@
                 valid: function (form) {
                     let model = $(form).getFormData();
                     model.id = $('#user_id').val();
-                    jutils.ajaxPost("/admin/sysuser/updatePassword", model, function (res) {
-                        if (res.status) {
-                            jutils.refreshTab();
-                        }
+                    jutils.ajaxPost("/admin/sysuser/UpdatePassword", model, function (res) {
+                        //if (res.status) {
+                        //    jutils.refreshTab();
+                        //}
                     });
                 },
             });

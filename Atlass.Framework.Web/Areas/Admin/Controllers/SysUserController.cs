@@ -155,10 +155,32 @@ namespace Altas.Framework.Admin
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UpdateProfile(sys_user dto)
+        public ActionResult UpdateProfile()
         {
-           // dto.pass_word = Encrypt.DesEncrypt(dto.pass_word.Trim());
-            _userApp.UpdateProfile(dto);
+            long id = RequestHelper.GetPostInt64("id", 0);
+            string userName = RequestHelper.GetPostString("userName", "");
+            string mobilePhone = RequestHelper.GetPostString("mobilePhone", "");
+            string email = RequestHelper.GetPostString("email", "");
+            int gender = RequestHelper.GetPostInt("gender", 2);
+            if (id == 0)
+            {
+                return Error("用户不存在");
+            }
+            var user = _userApp.GetUserById(id);
+            if (user == null)
+            {
+                return Error("用户不存在");
+            }
+            _userApp.UpdateProfile(id, userName, mobilePhone, email, gender);
+            LoginUserDto userCookie = RequestHelper.AdminInfo();
+            userCookie.UserName = userName;
+            userCookie.Phone = mobilePhone;
+            userCookie.Email = email;
+            userCookie.Gender = gender;
+
+
+            string claimstr = userCookie.ToJson();
+            RequestHelper.SetCookie(claimstr);
             return Success("修改成功");
         }
         /// <summary>

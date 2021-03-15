@@ -105,7 +105,13 @@ namespace Atlass.Framework.Web.Controllers
             string ip = RequestHelper.GetClientIp();
             return Content(ip);
         }
-        public ActionResult LogOff()
+
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult LogOut()
         {
 
             //HttpContext.SignOutAsync(LoginCookieDto.CookieScheme);
