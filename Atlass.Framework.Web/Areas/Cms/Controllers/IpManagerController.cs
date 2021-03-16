@@ -34,7 +34,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetData(BootstrapGridDto dto)
+        public IActionResult GetData(DataTableDto dto)
         {
             var data = _ipManagerApp.GetList(dto);
             return Json(data);

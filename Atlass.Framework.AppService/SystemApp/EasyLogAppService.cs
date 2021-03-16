@@ -18,7 +18,7 @@ namespace Atlass.Framework.AppService.SystemApp
         }
 
 
-        public BootstrapGridDto GetList(BootstrapGridDto param, int logType, string log_summary)
+        public DataTableDto GetList(DataTableDto param, int logType, string log_summary)
         {
             
             var query = Sqldb.Select<easy_log>()

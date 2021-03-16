@@ -78,13 +78,17 @@
                 var queryStr = jutils.toQueryString(data);
                 url += "?" + queryStr;
             }
-            area = area || ['900px', '600px'];
+           
+            let area2 =['900px', '600px'];
+            if (area) {
+                area2 = [area[0] + 'px', area[1] +'px'];
+            }
             var index1 = layer.open({
                 title: title,
                 type: 2,
                 content: url,
                 //skin: 'layui-layer-lan',
-                area: area,
+                area: area2,
                 maxmin: true,
                 yes: function (index, layero) {
                     layer.close(index);
@@ -106,12 +110,15 @@
                 var queryStr = jutils.toQueryString(data);
                 url += "?" + queryStr;
             }
-            area = area || [$(window).width() + 'px', $(window).height() + 'px'];
-            let index1 = layer.open({
+            let area2 = [$(window).width() + 'px', $(window).height() + 'px'];
+            if (area) {
+                area2 = [area[0] + 'px', area[1] + 'px'];
+            }
+            let index1 = parent.layer.open({
                 title: title,
                 type: 2,
                 content: url,
-                area: area,
+                area: area2,
                 maxmin: false,
                 yes: function (index, layero) {
                     layer.close(index);
@@ -248,7 +255,7 @@
         },
         msg: function(content, type) {
             if (type) {
-                layer.msg(content, { icon:type, time: 2000, shift: 5 });
+                layer.msg(content, { icon:type, time: 3000, shift: 5 });
             } else {
                 layer.msg(content);
             }

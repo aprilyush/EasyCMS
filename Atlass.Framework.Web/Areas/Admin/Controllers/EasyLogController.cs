@@ -28,7 +28,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult GetData(BootstrapGridDto dto)
+        public ActionResult GetData(DataTableDto dto)
         {
 
             var log_type = RequestHelper.GetQueryString("log_type", "0").ToInt();

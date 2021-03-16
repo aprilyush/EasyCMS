@@ -2,109 +2,184 @@
     ViewBag.Title = "角色管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox">
-    <div class="ibox-content">
-        <div id="toolbar" class="btn-group">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            角色名称：<input type="text" id="roleName" />
+                        </li>
+                        <li>
+                            角色编码：<input type="text" id="roleCode" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-        <div>
-            <table id="roleTable"></table>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="system:role:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:role:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:role:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-primary single disabled" onclick="setPermission(this);" data-id="0" data-role="system:role:permission">
+                <i class="fa fa-graduation-cap"></i> 授权
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
         </div>
     </div>
-
 </div>
 @section scripts
 {
-    <script>
-        var $roleTable;
+    <script type="text/javascript">
+        let $table;
         $(function () {
-            loadGrid();
-        });
+            loadData();
 
-        function loadGrid() {
-            $roleTable = $("#roleTable").bootstrapTable({
-                url: '/admin/sysrole/GetData',
-                toolbar: '#toolbar',
-                pagination: true,
-                height: $(window).height() - 50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "server",
-                locale: "zh-CN",
-                striped: true,
-                uniqueId: 'id',
-                columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'role_name', title: '角色名称', align: 'center' },
-                    { field: 'role_code', title: '角色编码', align: 'center' },
-                    { field: 'sort', title: '排序', align: 'center' },
-                    { field: 'remark', title: '备注', align: 'center' },
-                    {
-                        field: 'role_super',
-                        title: '是否超级管理员',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            if (value) {
-                                return '是';
-                            } else {
-                                return '否';
-                            }
-                        }
-                    },
-                    { field: 'id', title: '操作', align: 'center', formatter: renderOpts }
-                ]
+            jutils.handleMessage(function (res) {
+                //console.log(res);
+                if (res.title === 'close') {
+                    $table.easyTable('search');
+                }
 
             });
+        });
 
-            jutils.initToolBarRole('#toolbar', true);
+
+        function loadData() {
+            let options = {
+                url: '/admin/sysrole/GetData',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        roleName: $('#roleName').val(),
+                        roleCode: $('#roleCode').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'selectItem', checkbox: true },
+                    {
+                        field: 'role_name', title: '角色名称', align: "center"
+                    },
+                    { field: 'role_code', title: '角色编码', align: "center" },
+                    { field: 'role_sort', title: '排序', align: "center" },
+                    {
+                        field: 'role_status', title: '角色状态', align: "center", formatter: function (value, row, index) {
+                            if (value === 1) {
+                                return '<span class="badge badge-primary">正常</span>'
+                            }
+                            return '<span class="badge badge-danger">禁用</span>';
+
+                        }
+                    },
+                    { field: 'create_time', title: '创建时间', align: "center" },
+                    { field: 'remark', title: '备注', align: "center" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                    }
+                ]
+            };
+
+            $table = $('#dataTable').easyTable(options);
+            $table.easyTable('selectedEvent');
         }
 
-        function renderOpts(v, d, i) {
-            return jutils.initToolBarRow(v);
+        function renderOperationButton(value, row, index) {
+            var actions = [];
+            actions.push({
+                roleTag: 'system:role:edit',
+                button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+            });
+            actions.push({
+                roleTag: 'system:role:delete',
+                button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+            });
+
+            return jutils.buttonPermissions(actions);
         }
+
 
         function add() {
-            jutils.dialogForm('角色信息', '/admin/sysrole/form/', { id: '' },
-                function () {
-                    $roleTable.bootstrapTable('refresh');
-                });
+            //jutils.openTab('userTab','添加用户','/admin/sysuser/form?id='+0);
+            jutils.dialog('添加角色', '/admin/sysrole/form', { id: 0 }, null, function () {
+                $table.easyTable("search");
+            })
         }
 
         function edit(obj) {
-
-            var id = $(obj).data('id');
-            jutils.dialogForm('角色信息', '/admin/sysrole/form', { id: id },
-                function () {
-                    $roleTable.bootstrapTable('refresh');
-                });
+            let id = $(obj).data('id');
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                id = rows[0].id;
+            }
+            jutils.dialog('修改角色', '/admin/sysrole/form', { id: id }, null, function () {
+                $table.easyTable("search");
+            })
+            // jutils.openTab('userTab','修改用户','/admin/sysuser/form?id='+id);
         }
 
-        function del(obj) {
-            var id = $(obj).data('id');
+        function removeAll(obj) {
+            const id = $(obj).data('id');
+            let del = false;
+            let ids = [];
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    ids.push(rows[i].id);
+                }
+            } else {
+                ids.push(id);
+            }
 
 
-            jutils.confirm('确认删除吗',
-                function () {
-                    jutils.ajaxGet('/admin/sysrole/DelRoleByIds',
-                        { ids: id },
-                        function () {
-                            $roleTable.bootstrapTable('refresh');
-                        });
+            jutils.confirm("确认删除角色和权限数据吗？", function () {
+                jutils.ajaxGet("/admin/sysrole/DelRoleByIds", { ids: ids.join() }, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
                 });
+            });
         }
 
-        function setrole(obj) {
+        //授权
+        function setPermission(obj) {
+            const rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
 
-            var id = $(obj).data('id');
-            var row = $roleTable.bootstrapTable('getRowByUniqueId', id);//行的数据
-            var name = row.role_name;
+            const roleId = rows[0].id;
+            const title = '权限设置：当前角色【' + rows[0].role_name + '】';
+            jutils.dialogFull(title, '/admin/sysrole/setPermission', { id: roleId, roleName: rows[0].role_name }, function () {
 
-            jutils.dialogForm('角色权限信息', '/admin/sysrole/SetRoleAuthNew', { id: id, roleName: name },
-                function () {
-                    $roleTable.bootstrapTable('refresh');
-                });
+            })
         }
 
     </script>

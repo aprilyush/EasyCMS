@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Atlass.Framework.ViewModels.Common
 {
-    public class BootstrapGridDto
+    public class DataTableDto
     {
         public object rows { get; set; }
         public long total { get; set; }

@@ -48,7 +48,7 @@ namespace Altas.Framework.Admin
        
         public ActionResult GetData()
         {
-            var data=new BootstrapGridDto();
+            var data=new DataTableDto();
 
             var list = _dicApp.GetData();
             //data.list = list;

@@ -69,7 +69,7 @@ namespace Atlass.Framework.Core.Base
         /// <param name="dto"></param>
         /// <param name="dateFormatter"></param>
         /// <returns></returns>
-        protected virtual ContentResult Json(BootstrapGridDto dto)
+        protected virtual ContentResult Json(DataTableDto dto)
         {
       
             return Content(dto.ToJson());

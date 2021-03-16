@@ -44,7 +44,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return View();
         }
 
-        public IActionResult GetData(BootstrapGridDto dto)
+        public IActionResult GetData(DataTableDto dto)
         {
             int pid = RequestHelper.GetQueryInt("pid");
             var data = _templateApp.GetData(dto, pid);

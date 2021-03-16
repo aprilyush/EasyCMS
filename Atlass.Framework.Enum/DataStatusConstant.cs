@@ -2,6 +2,9 @@
 
 namespace Atlass.Framework.Enum
 {
+    /// <summary>
+    /// 数据状态字段
+    /// </summary>
     public class DataStatusConstant
     {
         /// <summary>

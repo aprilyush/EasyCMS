@@ -41,7 +41,7 @@ namespace Atlass.Framework.AppService
         /// <param name="param"></param>
         /// <param name="LoginName"></param>
         /// <returns></returns>
-        public BootstrapGridDto GetData(BootstrapGridDto param, string loginName,string userName,string phone)
+        public DataTableDto GetData(DataTableDto param, string loginName,string userName,string phone)
         {
             var query = Sqldb.Select<sys_user>()
                          //.LeftJoin((u, r) => u.role_id == r.id)
@@ -124,7 +124,7 @@ namespace Atlass.Framework.AppService
             dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
-                dto.id = IdHelper.NewId();
+                dto.id = IdHelper.NextId();
                 dto.del_flag = DataStatusConstant.NOT_DELETED;
                 dto.create_time = DateTime.Now;
                 dto.create_by = userDto.LoginName;

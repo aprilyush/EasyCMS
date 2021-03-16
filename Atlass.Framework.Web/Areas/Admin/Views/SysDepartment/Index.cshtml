@@ -28,7 +28,7 @@
             <a class="btn btn-primary" onclick="edit(this);" data-id="0" data-role="system:dept:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger" onclick="removeAll(this);" data-id="0" data-role="system:dept:delete">
+            <a class="btn btn-danger" onclick="del(this);" data-id="0" data-role="system:dept:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
             <a class="btn btn-info" onclick="expandAll();" data-role="0">
@@ -78,9 +78,9 @@
                     { field: 'email', title: '邮箱', align: "center" },
                     { field: 'order_num', title: '排序', align: "center" },
                     {
-                        field: 'deptType', title: '分类', align: "center", formatter: function (v, r, i) {
-                            if (v === '0') {
-                                if (r.parentId === '0') {
+                        field: 'dept_type', title: '分类', align: "center", formatter: function (v, r, i) {
+                            if (v === 0) {
+                                if (r.parent_id === '0') {
                                     return '<span class="badge badge-primary">总公司</span>';
                                 }
                                 return '<span class="badge badge-primary">分公司</span>';
@@ -119,7 +119,7 @@
         }
 
         function add() {
-            jutils.dialogFull("添加部门", '/admin/SysDepartment/form', { id: 0 }, function () {
+            jutils.dialogTop("添加部门", '/admin/SysDepartment/form', { id: 0 },null, function () {
                 $table.easyTreeTable('search');
             });
         }
@@ -146,7 +146,7 @@
 
             $table.easyTreeTable('search', { deptName: $('#deptName').val() });
         }
-        function removeAll(obj) {
+        function del(obj) {
             let dataId = $(obj).data('id');
             if (dataId == '0') {
                 let rows = $table.easyTreeTable('selected');
@@ -157,7 +157,7 @@
                 dataId = rows[0].id;
             }
             jutils.confirm("确认删除部门数据吗？", function () {
-                jutils.ajaxGet('/admin/SysDepartment/delete', { id: dataId }, function (res) {
+                jutils.ajaxGet('/admin/SysDepartment/DeleteById', { id: dataId }, function (res) {
                     //$table.bootstrapTreeTable('refresh');
                     if (res.status) {
                         $table.easyTreeTable('search');

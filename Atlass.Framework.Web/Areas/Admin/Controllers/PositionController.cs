@@ -39,7 +39,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="param"></param>
 
-        public ActionResult getList(BootstrapGridDto param)
+        public ActionResult getList(DataTableDto param)
         {
             var data = _positionApp.GetData(param);
             return Json(data);

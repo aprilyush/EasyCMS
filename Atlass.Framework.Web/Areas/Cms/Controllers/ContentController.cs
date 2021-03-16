@@ -30,7 +30,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return View();
         }
 
-        public IActionResult GetData(BootstrapGridDto dto)
+        public IActionResult GetData(DataTableDto dto)
         {
             int channelId = RequestHelper.GetQueryInt("channelId");
             var data = _contentApp.GetData(dto, channelId);

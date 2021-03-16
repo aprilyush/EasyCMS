@@ -18,7 +18,7 @@ namespace Atlass.Framework.AppService.Work
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
-        public BootstrapGridDto GetList(BootstrapGridDto param, string ntitle,LoginUserDto user)
+        public DataTableDto GetList(DataTableDto param, string ntitle,LoginUserDto user)
         {
           
             long total = 0;
@@ -154,7 +154,7 @@ namespace Atlass.Framework.AppService.Work
             return true;
         }
 
-        public BootstrapGridDto GetReplyList(BootstrapGridDto param, int noticeId)
+        public DataTableDto GetReplyList(DataTableDto param, int noticeId)
         {
            
             long total = 0;

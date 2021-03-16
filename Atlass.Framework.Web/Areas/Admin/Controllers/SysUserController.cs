@@ -64,7 +64,7 @@ namespace Altas.Framework.Admin
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult GetData(BootstrapGridDto param)
+        public ActionResult GetData(DataTableDto param)
         {
             //var data = new DataGridEx();
 

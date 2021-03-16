@@ -36,7 +36,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
 
             return View();
         }
-        public IActionResult GetData(BootstrapGridDto dto)
+        public IActionResult GetData(DataTableDto dto)
         {
             var data = _adApp.GetData(dto);
             return Json(data);

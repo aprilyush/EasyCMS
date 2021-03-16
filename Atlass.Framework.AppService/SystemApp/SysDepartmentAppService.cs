@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Models;
+using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -94,14 +95,17 @@ namespace Atlass.Framework.AppService.SystemApp
         /// 删除数据
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteById(int id)
+        public ResultAdaptDto DeleteById(int id)
         {
+            ResultAdaptDto ret = new ResultAdaptDto();
             var sons = Sqldb.Select<sys_dept>().Where(s => s.parent_id == id).ToList(s => s.id);
-            Sqldb.Delete<sys_dept>().Where(s => s.id == id).ExecuteAffrows();
             if (sons.Count > 0)
             {
-                Sqldb.Delete<sys_dept>().Where(s => sons.Contains(s.id)).ExecuteAffrows();
+                ret.message = "请先删除当前部门下面的子部门";
+                ret.status = false;
             }
+            Sqldb.Delete<sys_dept>().Where(s => s.id == id).ExecuteAffrows();
+            return ret;
         }
     }
 }

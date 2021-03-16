@@ -18,7 +18,7 @@ namespace Atlass.Framework.AppService.Cms
             SqlDb = service.GetRequiredService<IFreeSql>();
         }
 
-        public BootstrapGridDto GetList(BootstrapGridDto param)
+        public DataTableDto GetList(DataTableDto param)
         {
             long total = 0;
             var query = SqlDb.Select<cms_ip_manager>()

@@ -18,7 +18,7 @@ namespace Atlass.Framework.AppService.Cms
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
-        public BootstrapGridDto GetData(BootstrapGridDto dto, int pid)
+        public DataTableDto GetData(DataTableDto dto, int pid)
         {
             var query = Sqldb.Select<cms_template>()
                       .WhereIf(pid > 0, s => s.pid == pid)

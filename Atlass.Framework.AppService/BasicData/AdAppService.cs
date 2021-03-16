@@ -15,7 +15,7 @@ namespace Atlass.Framework.AppService.BasicData
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
-        public BootstrapGridDto GetData(BootstrapGridDto dto)
+        public DataTableDto GetData(DataTableDto dto)
         {
             var query = Sqldb.Select<cms_ad>()
                 .OrderByDescending(s => s.id)

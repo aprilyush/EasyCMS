@@ -23,7 +23,7 @@ namespace Atlass.Framework.AppService.SystemApp
         /// </summary>
         /// <param name="param"></param>
 
-        public BootstrapGridDto GetData(BootstrapGridDto param)
+        public DataTableDto GetData(DataTableDto param)
         {
             long total = 0;
             var query = Sqldb.Select<sys_position>()

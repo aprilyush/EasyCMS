@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "设置权限";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
+<div class="container-div white-bg">
+    <div class="ibox-content">
+        <form class="form-horizontal m" id="roleForm" autocomplete="off">
+            <input type="hidden" id="roleId" name="roleId" value="@(ViewBag.Id)">
+            <div class="form-group">
+                <ul id="menuTree" class="ztree"></ul>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="footerbar">
+                <div class="col-sm-12 col-sm-offset-3">
+                    <button class="btn btn-primary" type="button" onclick="setPermission()">
+                        <i class="fa fa-check"></i>
+                        保存
+                    </button>
+                    <button class="btn btn-danger" type="button" onclick="cancel()">
+                        <i class="fa fa-reply-all"></i>关闭
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript">
+        let ptree = null;
+        $(function () {
+            loadMenuTree();
+
+        });
+        function loadMenuTree() {
+            let opts = {
+                data: {
+                    simpleData: {
+                        enable: true,
+                        pIdKey: "pId",
+                    },
+                    key: {
+                        checked: 'checkstate'
+                    }
+
+                }, callback: {
+                    onClick: ZtreeClick
+                },
+                check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    autoCheckTrigger: true,
+                    chkboxType: { "Y": "ps", "N": "s" }
+                }
+            };
+
+            var roleId = $("#roleId").val();
+            jutils.ajaxGet('/admin/SysRole/getPermissions', { roleId: roleId }, function (res) {
+                if (res.status) {
+                    ptree = $.fn.zTree.init($("#menuTree"), opts, res.data.permsList);
+                    ptree.expandAll(true);
+                }
+
+            });
+        }
+
+        //单击事件
+        function ZtreeClick(event, treeId, treeNode) {
+            var productId = treeNode.id;
+            //$('#j_datagrid').datagrid('filter', { pid: productId });
+
+        }
+
+
+        function setPermission() {
+            var ids = [];
+            var nodes = ptree.getCheckedNodes(true);
+            if (nodes.length > 0) {
+                //jutils.warn('选择一条数据行编辑');
+                //return;
+                for (var i = 0; i < nodes.length; i++) {
+                    console.log(nodes[i]);
+                    var newobj = {
+                        id: nodes[i].id,
+                        pId: nodes[i].pId
+                    }
+                    if (jutils.empty(newobj.pId)) {
+                        newobj.pId = '0';
+                    }
+                    ids.push(newobj);
+
+                }
+            }
+            var roleId = $("#roleId").val();
+            var rolemenus = JSON.stringify(ids);
+            //console.log(rolemenus);
+            jutils.confirm('确认修改权限吗', function () {
+                jutils.ajaxPost('/admin/sysrole/savePermissions', { roleId: roleId, ids: rolemenus }, function () {
+                    jutils.success('设置完成');
+                    cancel();
+                });
+            });
+
+
+
+        }
+
+        function cancel() {
+            jutils.closeDialog();
+        }
+
+    </script>
+}

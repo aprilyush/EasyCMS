@@ -24,11 +24,21 @@ namespace Altas.Framework.Admin
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _roleApp = service.GetRequiredService<SysRoleAppService>();
         }
+        /// <summary>
+        /// 角色列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
+        /// <summary>
+        /// 角色表单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
@@ -40,13 +50,13 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        //[HttpPost]
-        public ActionResult GetData(BootstrapGridDto param)
+        [HttpPost]
+        public ActionResult GetData(DataTableDto param)
         {
-            var data=new BootstrapGridDto();
-
-            data = _roleApp.GetData(param);
-            return Content(data.ToJson());
+            string roleName = RequestHelper.GetPostString("roleName", "");
+            string roleCode = RequestHelper.GetPostString("roleCode", "");
+            var data = _roleApp.GetData(param, roleName, roleCode);
+            return Json(data);
         }
 
         /// <summary>
@@ -74,18 +84,20 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult GetRoleByIds(string id)
         {
             var result=new ResultAdaptDto();
             var data=_roleApp.GetRoleById(id.ToInt64());
             result.data.Add("model",data);
-            return Content(result.ToJson());
+            return Json(result);
         }
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult DelRoleByIds(string ids)
         {
             _roleApp.DelRoleByIds(ids);
@@ -98,12 +110,8 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult SetRoleAuth(string id)
-        {
-            ViewBag.Id = id;
-            return View();
-        }
-        public ActionResult SetRoleAuthNew(string id,string roleName)
+        [HttpGet]
+        public ActionResult SetPermission(string id,string roleName)
         {
             ViewBag.Id = id;
             ViewBag.RoleName = roleName;
@@ -111,32 +119,18 @@ namespace Altas.Framework.Admin
         }
 
         /// <summary>
-        /// 获取权限菜单
-        /// </summary>
-        /// <param name="roleId"></param>
-        /// <returns></returns>
-        public ActionResult GetRoleAuthById(string roleId)
-        {
-            var result = new ResultAdaptDto();
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
-            //result.Data = _roleApp.GetRoleAuthMenu(roleId);
-
-            return Content(result.ToJson());
-        }
-
-        /// <summary>
         /// 权限菜单ztree
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public ActionResult GetRoleMenuTree(string roleId)
+        public ActionResult GetPermissions(string roleId)
         {
             var result = new ResultAdaptDto();
             
-            var data = _roleApp.GetRoleMenuTree(roleId.ToInt64());
+            var data = _roleApp.GetPermissions(roleId.ToInt64());
 
-            result.data.Add("roleMenu",data);
-            return Content(result.ToJson());
+            result.data.Add("permsList", data);
+            return Json(result);
         }
         /// <summary>
         /// 保存权限
@@ -145,25 +139,19 @@ namespace Altas.Framework.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveRoleAuth(string roleId, string ids)
+        public ActionResult SavePermissions(string roleId, string ids)
         {
             var result = new ResultAdaptDto();
             ////result.statusCodeCode = JuiJsonEnum.Ok;
-            _roleApp.SaveRoleAuth(roleId.ToInt64(),ids,RequestHelper.AdminInfo());
+            _roleApp.SavePermissions(roleId.ToInt64(),ids,RequestHelper.AdminInfo());
 
-            return Content(result.ToJson());
+            return Json(result);
         }
 
-
-        public ActionResult GetRoleMenuButton(string menuId)
-        {
-            var result = new ResultAdaptDto();
-            //result.statusCode = true;
-            //result.Data=_roleApp.GetOperateByRole(menuId);
-
-            return Content(result.ToJson());
-        }
-
+        /// <summary>
+        /// 获取前台按钮权限
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetButtonPermission()
         {
             string author = RequestHelper.GetQueryString("author");

@@ -75,7 +75,7 @@ namespace Atlass.Framework.AppService
         public void AddMenu(sys_menu dto,string funcs)
         {
 
-            dto.id = IdHelper.NewId();
+            dto.id = IdHelper.NextId();
             dto.create_time = DateTime.Now;
             dto.create_person = "admin";
             //dto.menu_icon = dto.menu_font;
@@ -108,7 +108,7 @@ namespace Atlass.Framework.AppService
                     funcModel.menu_id = dto.id;
                     funcModel.func_title = func.title;
                     funcModel.role_tag = func.roleTag;
-                    funcModel.id = func.id > 0 ? func.id : IdHelper.NewId();
+                    funcModel.id = func.id > 0 ? func.id : IdHelper.NextId();
                     funcModel.func_sort = func.funcSort;
                     list.Add(funcModel);
                 }
@@ -154,7 +154,7 @@ namespace Atlass.Framework.AppService
                     funcModel.menu_id = dto.id;
                     funcModel.func_title = func.title;
                     funcModel.role_tag = func.roleTag;
-                    funcModel.id = func.id > 0 ? func.id : IdHelper.NewId();
+                    funcModel.id = func.id > 0 ? func.id : IdHelper.NextId();
                     funcModel.func_sort = func.funcSort;
                     list.Add(funcModel);
                 }

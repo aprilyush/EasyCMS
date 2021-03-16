@@ -140,7 +140,7 @@
                     if (!jutils.emptyId(id)) {
                         let model = res.data.model;
                         $('#deptForm').initFormData(model);
-                        $('#parentDept').attr('checks', model.parentId);
+                        $('#parentDept').attr('checks', model.parent_id);
                     }
                     initSelectTree(res.data.ztreeData);
                 }

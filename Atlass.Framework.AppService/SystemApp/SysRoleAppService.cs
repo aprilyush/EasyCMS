@@ -26,10 +26,12 @@ namespace Atlass.Framework.AppService
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public BootstrapGridDto GetData(BootstrapGridDto param)
+        public DataTableDto GetData(DataTableDto param, string roleName, string roleCode)
         {
           
             var query = Sqldb.Queryable<sys_role>()
+                .WhereIf(!roleName.IsEmpty(),s=>s.role_name.Contains(roleName))
+               .WhereIf(!roleCode.IsEmpty(), s => s.role_code.Contains(roleCode))
                 .OrderBy(s => s.role_sort)
                 .Count(out long total)
                 .Page(param.page, param.limit).ToList();
@@ -60,7 +62,7 @@ namespace Atlass.Framework.AppService
         public void InsertRoleData(sys_role dto,LoginUserDto UserCookie)
         {
             dto.role_code = dto.role_code ?? string.Empty;
-            dto.id = IdHelper.NewId();
+            dto.id = IdHelper.NextId();
             dto.create_person = UserCookie.LoginName;
             dto.create_time=DateTime.Now;
             Sqldb.Insert(dto).ExecuteAffrows();
@@ -103,59 +105,52 @@ namespace Atlass.Framework.AppService
             }
         }
 
+
         /// <summary>
-        /// 获取角色菜单权限
+        /// 设置角色权限，获取对应角色权限
         /// </summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public List<sys_menu> GetRoleAuthMenu(long roleid)
-        {
-           var data=
-                Sqldb.Select<sys_menu, sys_role_authorize>()
-                     .LeftJoin((m, r) => m.id == r.menu_id)
-                    .Where((m,r)=> r.role_id == roleid)
-                    .ToList((m, r) => m);
-
-            return data;
-        }
-
-        public List<ZtreeDto> GetRoleMenuTree(long roleid)
+        public List<ZtreeSelInt64Dto> GetPermissions(long roleid)
         {
             //所有菜单
-            var menu = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToList(s => new ZtreeDto()
+            var menu = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToList(s => new ZtreeSelInt64Dto()
             {
-                id = s.id.ToString(),
+                id = s.id,
                 name = s.menu_name,
-                pId = s.parent_id.ToString()
+                pId = s.parent_id
             });
 
             var func =
                 Sqldb.Select<sys_operate, sys_menu>()
                      .LeftJoin((o, m) => o.menu_id == m.id)
-
-                     .ToList((o, m) => new ZtreeDto()
+                     .ToList((o, m) => new ZtreeSelInt64Dto()
                     {
-                        id = o.id.ToString(),
-                        pId = o.menu_id.ToString(),
+                        id = o.id,
+                        pId = o.menu_id,
                         name = o.func_title
                     });
             menu.AddRange(func);
             //所有权限
-            var role =
+            var roleAuthors =
                 Sqldb.Queryable<sys_role_authorize>()
                     .Where(s => s.role_id == roleid)
                     .ToList(s => new{s.menu_id,s.menu_pid});
 
             //判断是否有权限
-            if (role.Any())
+            if (roleAuthors.Count>0)
             {
+                Dictionary<long, long> dic = new Dictionary<long, long>();
+                roleAuthors.ForEach(s =>
+                {
+                    dic.Add(s.menu_id, s.menu_pid);
+                });
+
                 foreach (var item in menu)
                 {
-                    var isok = role.Where(s => s.menu_id == item.id.ToInt64() &&s.menu_pid == item.pId.ToInt64()).Count();
-
-                    if (isok > 0)
+                    if (dic.ContainsKey(item.id))
                     {
-                        item.checkstate =true;
+                        item.checkstate = true;
                     }
                 }
             }
@@ -163,12 +158,13 @@ namespace Atlass.Framework.AppService
 
             return menu;
         }
+
         /// <summary>
         /// 保存权限
         /// </summary>
         /// <param name="roleId"></param>
         /// <param name="ids"></param>
-        public void SaveRoleAuth(long roleId, string ids,LoginUserDto UserCookie)
+        public void SavePermissions(long roleId, string ids,LoginUserDto UserCookie)
         {
             Sqldb.Delete<sys_role_authorize>().Where(s => s.role_id ==roleId).ExecuteAffrows();
 
@@ -177,16 +173,17 @@ namespace Atlass.Framework.AppService
                 var list = new List<sys_role_authorize>();
 
                 //var menuIds = ids.Split(',');
-                var menuIds = ids.ToObject<List<ZtreeDto>>();
+                var menuIds = ids.ToObject<List<ZtreeSelInt64Dto>>();
+                var nowTime = DateTime.Now;
                 foreach (var mid in menuIds)
                 {
-                    mid.pId = mid.pId ?? "0";
+                   
                     var model=new sys_role_authorize();
-                    model.id = IdHelper.NewId();
-                    model.role_id = roleId.ToInt64();
-                    model.menu_id = mid.id.ToInt64();
-                    model.menu_pid = mid.pId.ToInt64();
-                    model.create_time = DateTime.Now;
+                    model.id = IdHelper.NextId();
+                    model.role_id = roleId;
+                    model.menu_id = mid.id;
+                    model.menu_pid = mid.pId;
+                    model.create_time = nowTime;
                     model.create_person = UserCookie.LoginName;
                     list.Add(model);
                 }
@@ -200,31 +197,6 @@ namespace Atlass.Framework.AppService
 
         }
 
-        /// <summary>
-        /// 根据权限获取操作按钮
-        /// </summary>
-        /// <param name="menuId"></param>
-        /// <returns></returns>
-        public List<sys_operate> GetOperateByRole(long menuId, LoginUserDto UserCookie)
-        {
-            var list=new List<sys_operate>();
-            if (UserCookie.IsSuper)
-            {
-                list =
-                    Sqldb.Select<sys_operate, sys_menu_ref_operate>()
-                         .LeftJoin((f, m) => f.id == m.operate_id && m.menu_id == menuId)
-                        .ToList((f, m) => f).ToList();
-            }
-            else
-            {
-                list =
-                   Sqldb.Select<sys_operate, sys_role_authorize>()
-                   .LeftJoin((f, r) => f.id == r.menu_id)
-                   .Where((f,r)=>r.role_id==UserCookie.RoleId&&r.menu_pid == menuId)
-                       .ToList((f, m) => f);
-            }
 
-            return list;
-        }
     }
 }

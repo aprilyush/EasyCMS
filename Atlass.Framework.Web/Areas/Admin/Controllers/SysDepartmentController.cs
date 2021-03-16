@@ -95,8 +95,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult DeleteById(int id)
         {
-            _deptApp.DeleteById(id);
-            return Success("删除成功");
+            var ret=_deptApp.DeleteById(id);
+            return Json(ret);
         }
 
         /// <summary>

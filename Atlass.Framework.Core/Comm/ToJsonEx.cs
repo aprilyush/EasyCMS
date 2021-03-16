@@ -20,7 +20,7 @@ namespace Atlass.Framework.Core.Comm
                 ,new FormatLongAsTextConverter()
             }
         };
-        public static string ToJson(this BootstrapGridDto grid)
+        public static string ToJson(this DataTableDto grid)
         {
             return JsonConvert.SerializeObject(grid, JsonSettings);
         }
@@ -28,7 +28,7 @@ namespace Atlass.Framework.Core.Comm
         {
             return JsonConvert.SerializeObject(resultAdaptDto, JsonSettings);
         }
-        public static string ToJson(this BootstrapGridDto grid, string datetimeformats)
+        public static string ToJson(this DataTableDto grid, string datetimeformats)
         {
             var timeConverter = new IsoDateTimeConverter { DateTimeFormat = datetimeformats };
             return JsonConvert.SerializeObject(grid, Formatting.Indented, timeConverter);

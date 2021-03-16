@@ -36,7 +36,7 @@ namespace Atlass.Framework.Models
         /// </summary>
         /// <param name="param"></param>
 
-        public BootstrapGridDto GetData(BootstrapGridDto param,int channelId)
+        public DataTableDto GetData(DataTableDto param,int channelId)
         {
             long total = 0;
             var query = Sqldb.Select<cms_content>()

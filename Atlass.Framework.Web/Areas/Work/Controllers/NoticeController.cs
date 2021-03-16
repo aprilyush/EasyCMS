@@ -29,7 +29,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         {
             return View();
         }
-        public IActionResult GetData(BootstrapGridDto dto)
+        public IActionResult GetData(DataTableDto dto)
         {
             var user = RequestHelper.AdminInfo();
             var data = _noticeApp.GetList(dto, "", user);
@@ -123,7 +123,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetReplyList(BootstrapGridDto param)
+        public IActionResult GetReplyList(DataTableDto param)
         {
             var noticeId = RequestHelper.GetQueryInt("noticeId");
             var data=_noticeApp.GetReplyList(param, noticeId);

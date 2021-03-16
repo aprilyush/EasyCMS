@@ -31,7 +31,7 @@ namespace Atlass.Framework.Web.Areas.Work.Controllers
             return View();
         }
 
-        public IActionResult GetData(BootstrapGridDto param)
+        public IActionResult GetData(DataTableDto param)
         {
             var name = RequestHelper.GetQueryString("name");
             var data = _addressBookApp.GetList(param, name);

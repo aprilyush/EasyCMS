@@ -26,6 +26,7 @@ public class ZtreeDto
         public int id { get; set; }
         public int pId { get; set; }
         public string name { get; set; }
+        public bool checkstate { get; set; }
         //public string pName { get; set; }
         /// <summary>
         /// 下拉选择树为true 说明展开下拉树
@@ -41,7 +42,7 @@ public class ZtreeDto
         public long id { get; set; }
         public long pId { get; set; }
         public string name { get; set; }
-        //public string pName { get; set; }
+        public bool checkstate { get; set; }
         /// <summary>
         /// 下拉选择树为true 说明展开下拉树
         /// </summary>

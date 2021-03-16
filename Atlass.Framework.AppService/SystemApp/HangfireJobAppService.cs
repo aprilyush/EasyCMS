@@ -18,7 +18,7 @@ namespace Atlass.Framework.AppService.SystemApp
         }
 
 
-        public BootstrapGridDto GetList(BootstrapGridDto param)
+        public DataTableDto GetList(DataTableDto param)
         {
 
             var query = Sqldb.Select<hangfire_task>()
