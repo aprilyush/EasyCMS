@@ -155,13 +155,16 @@ namespace Altas.Framework.Admin
         public ActionResult GetButtonPermission()
         {
             string author = RequestHelper.GetQueryString("author");
-            if (author.IsEmpty())
+            if (author.IsEmpty()||author!="easycms")
             {
                 return Error("请求权限失败");
             }
 
+            LoginUserDto loginUserDto = RequestHelper.AdminInfo();
             ResultAdaptDto result = new ResultAdaptDto();
-            result.data.Add("isAdmin", true);
+            var buttonTags = _roleApp.GetButtonPermissionList(loginUserDto.RoleId);
+            result.Add("isAdmin", loginUserDto.IsSuper);
+            result.Add("buttonPermissions", buttonTags);
             return Json(result);
         }
 

@@ -212,7 +212,9 @@
         });
         /*用户管理-头像*/
         function avatar() {
-            var url = ctx + 'system/user/profile/avatar';
+            jutils.warn('暂不支持');
+            return;
+            var url ='/system/user/profile/avatar';
             top.layer.open({
                 type: 2,
                 area: [$(window).width() + 'px', $(window).height() + 'px'],

@@ -18,11 +18,12 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : BaseController
     {
-        private readonly SysMenuAppService _menuApp;
+
+        private readonly SysRoleAppService roleApp;
         public HomeController(IServiceProvider service)
         {
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
-            _menuApp = service.GetRequiredService<SysMenuAppService>();
+            roleApp = service.GetRequiredService<SysRoleAppService>();
         }
         public IActionResult Index()
         {
@@ -35,18 +36,10 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             ViewBag.Id = userDto.Id.ToString();
             ViewBag.AccountName = userDto.LoginName;
             ViewBag.UserName = userDto.UserName;
-            ViewData.Model = _menuApp.GetNaviMenu();
+            ViewData.Model = roleApp.GetNaviMenu(userDto);
             return View();
         }
-        public async Task<ActionResult> GetRoleMenu()
-        {
-            var result = new ResultAdaptDto();
-            var menu = await _menuApp.GetRoleMenu(RequestHelper.AdminInfo());
-            result.data.Add("menu", menu.Item1);
-            result.data.Add("funcs", menu.Item2);
-            return Content(result.ToJson());
-        }
-
+    
 
 
         /// <summary>

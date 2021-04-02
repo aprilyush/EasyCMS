@@ -8,6 +8,7 @@ using Atlass.Framework.AppService;
 using Atlass.Framework.Common;
 using Atlass.Framework.Enum;
 using Atlass.Framework.Models;
+using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -197,6 +198,90 @@ namespace Atlass.Framework.AppService
 
         }
 
+        /// <summary>
+        /// 首页导航菜单全部
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public List<sys_menu> GetNaviMenu(LoginUserDto user)
+        {
 
+            //int total = 0;
+            List<sys_menu> menus = new List<sys_menu>();
+            if (user.IsSuper)
+            {
+                menus = Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToList();
+            }
+            else
+            {
+                menus = Sqldb.Select<sys_menu, sys_role_authorize>()
+                .InnerJoin((m, r) => m.id == r.menu_id)
+                .Where((m, r) => r.role_id == user.RoleId)
+                .ToList((m, r) => m);
+            }
+
+            if (menus.Count > 0)
+            {
+                List<sys_menu> tops = menus.Where(s => s.parent_id == 0).ToList();
+                tops.ForEach(menu =>
+                {
+                    menu.tab_id = CommHelper.GetMenuTabId(menu.menu_url.ToLower());
+                    var sons = menus.Where(s => s.parent_id == menu.id).ToList();
+                    sons.ForEach(son =>
+                    {
+                        son.tab_id = CommHelper.GetMenuTabId(son.menu_url.ToLower());
+                        var sons2 = menus.Where(s => s.parent_id == son.id).ToList();
+                        sons2.ForEach(s => {
+                            s.tab_id = CommHelper.GetMenuTabId(son.menu_url.ToLower());
+                        });
+                        son.children = sons2;
+                    });
+                    menu.children = sons;
+                });
+                return tops;
+            }
+            return menus;
+        }
+
+
+        /// <summary>
+        /// 获取前台按钮权限
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        public List<RoleButtonPermissionDto> GetButtonPermissionList(long roleId)
+        {
+            List<RoleButtonPermissionDto> permissionList = new List<RoleButtonPermissionDto>();
+
+            //菜单权限
+            var menuRoleTags = Sqldb.Select<sys_menu, sys_role_authorize>()
+                .InnerJoin((m, r) => m.id == r.menu_id)
+                .Where((m, r) => r.role_id == roleId && m.role_tag != "#")
+                .ToList((m, r) => m);
+            if (menuRoleTags.Count > 0)
+            {
+                //按钮权限
+                var buttonRoleTags = Sqldb.Select<sys_operate, sys_role_authorize>()
+                    .InnerJoin((o, r) => o.id == r.menu_id)
+                    .Where((o, r) => r.role_id == roleId)
+                    .ToList((o, r) => o);
+
+                foreach (sys_menu menu in menuRoleTags)
+                {
+                    RoleButtonPermissionDto model = new RoleButtonPermissionDto();
+                    model.menuId = CommHelper.GetMenuTabId(menu.menu_url.ToLower());
+                    List<sys_operate> buttons = buttonRoleTags.Where(s => s.menu_id == menu.id).ToList();
+                    foreach (sys_operate button in buttons)
+                    {
+                        model.add(button.role_tag.ToLower());
+                    }
+
+                    permissionList.Add(model);
+                }
+
+            }
+
+            return permissionList;
+        }
     }
 }

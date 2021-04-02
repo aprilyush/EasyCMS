@@ -20,42 +20,6 @@ namespace Atlass.Framework.AppService
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
-
-
-        /// <summary>
-        /// 首页导航菜单全部
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        public List<sys_menu> GetNaviMenu()
-        {
-
-            //int total = 0;
-            var menus = Sqldb.Queryable<sys_menu>().OrderBy(s=>s.menu_sort).ToList();
-
-            if (menus.Count > 0)
-            {
-                List<sys_menu> tops = menus.Where(s => s.parent_id == 0).ToList();
-                tops.ForEach(menu =>
-                {
-                    menu.tab_id = CommHelper.GetMenuTabId(menu.menu_url);
-                    var sons = menus.Where(s => s.parent_id == menu.id).ToList();
-                    sons.ForEach(son =>
-                    {
-                        son.tab_id = CommHelper.GetMenuTabId(son.menu_url);
-                        var sons2= menus.Where(s => s.parent_id == son.id).ToList();
-                        sons2.ForEach(s => {
-                            s.tab_id = CommHelper.GetMenuTabId(son.menu_url);
-                        });
-                        son.children = sons2;
-                    });
-                    menu.children = sons;
-                });
-                return tops;
-            }
-            return menus;
-        }
-
         /// <summary>
         /// 获取菜单表格
         /// </summary>
@@ -277,74 +241,6 @@ namespace Atlass.Framework.AppService
                 pre += "¦┄┄";
             }
             return pre.Insert(0," ");
-        }
-
-        /// <summary>
-        /// 根据权限获取菜单
-        /// </summary>
-        /// <returns></returns>
-        public async Task<(List<RoleMenuDto>, List<RoleMenuDto>)> GetRoleMenu(LoginUserDto UserCookie)
-        {
-            var list = new List<RoleMenuDto>();
-            if (UserCookie.IsSuper)
-            {
-                list = await Sqldb.Queryable<sys_menu>().OrderBy(s => s.menu_sort).ToListAsync(s => new RoleMenuDto()
-                {
-                    id = s.id,
-                    menu_name = s.menu_name,
-                    menu_sort = s.menu_sort,
-                    menu_url = s.menu_url,
-                    parent_id = s.parent_id,
-                    menu_type = s.menu_type,
-                    menu_icon = s.menu_icon
-                });
-
-                var funcs = await Sqldb.Queryable<sys_operate>().OrderBy(m => m.func_sort).ToListAsync(m => new RoleMenuDto()
-                {
-                    id = m.id,
-                    menu_name = m.func_title,
-                    parent_id = m.menu_id,
-                    menu_type = 3,
-
-                });
-                return (list, funcs);
-            }
-            else
-            {
-                list =
-                    await Sqldb.Select<sys_menu, sys_role_authorize>()
-                        .LeftJoin((m, r) => m.id == r.menu_id)
-                       .Where((m, r) => r.role_id == UserCookie.RoleId)
-                       .OrderBy((m, r) => m.menu_sort)
-                       .ToListAsync((m, r) => new RoleMenuDto()
-                       {
-                           id = m.id,
-                           menu_name = m.menu_name,
-
-                           menu_sort = m.menu_sort,
-                           menu_url = m.menu_url,
-                           parent_id = m.parent_id,
-                           menu_type = m.menu_type,
-                           menu_icon = m.menu_icon
-                       });
-
-                var funcs = await Sqldb.Select<sys_operate, sys_role_authorize>()
-                             .LeftJoin((m, r) => m.id == r.menu_id)
-                        .Where((m, r) => r.role_id == UserCookie.RoleId)
-                        .OrderBy((m, r) => m.id)
-                        .ToListAsync((m, r) => new RoleMenuDto()
-                        {
-                            id = m.id,
-                            menu_name = m.func_title,
-
-                            parent_id = m.menu_id,
-                            menu_type = 3,
-                        });
-
-                return (list, funcs);
-
-            }
-
         }
 
     }
