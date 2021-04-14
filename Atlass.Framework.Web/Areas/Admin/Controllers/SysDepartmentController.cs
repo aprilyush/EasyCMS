@@ -28,6 +28,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:dept:view")]
         public IActionResult Index()
         {
             return View();
@@ -37,6 +38,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:dept:view")]
         public IActionResult GetList()
         {
             var data = _deptApp.GetData();
@@ -47,6 +49,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:dept:add,system:dept:edit")]
         public IActionResult Form(int id)
         {
             ViewBag.Id = id;
@@ -59,6 +63,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:dept:add,system:dept:edit")]
         public ActionResult Save(sys_dept dto)
         {
             var user = RequestHelper.AdminInfo();
@@ -72,6 +77,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:dept:add,system:dept:edit")]
         public IActionResult GetModel(int id)
         {
             var result = new ResultAdaptDto();
@@ -93,6 +99,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:dept:delete")]
         public IActionResult DeleteById(int id)
         {
             var ret=_deptApp.DeleteById(id);

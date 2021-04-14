@@ -37,9 +37,30 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:user:view")]
         public ActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 数据表格
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [RequirePermission("system:user:view")]
+        public ActionResult GetData(DataTableDto param)
+        {
+            //var data = new DataGridEx();
+
+            string loginName = RequestHelper.GetPostString("loginName");
+            string userName = RequestHelper.GetPostString("userName");
+            string phone = RequestHelper.GetPostString("phone");
+            var data = _userApp.GetData(param, loginName, userName, phone);
+
+            return Json(data);
+
         }
 
         /// <summary>
@@ -48,6 +69,7 @@ namespace Altas.Framework.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:user:add,system:user:edit")]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
@@ -58,24 +80,7 @@ namespace Altas.Framework.Admin
             return View();
         }
 
-        /// <summary>
-        /// 数据表格
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult GetData(DataTableDto param)
-        {
-            //var data = new DataGridEx();
 
-            string loginName = RequestHelper.GetPostString("loginName");
-            string userName = RequestHelper.GetPostString("userName");
-            string phone = RequestHelper.GetPostString("phone");
-            var data=_userApp.GetData(param, loginName, userName, phone);
-
-            return Json(data);
-            
-        }
 
         /// <summary>
         /// 用户提交数据
@@ -83,6 +88,7 @@ namespace Altas.Framework.Admin
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:user:add,system:user:edit")]
         public ActionResult SaveData(sys_user dto,List<long> position)
         {
             var exist = _userApp.CheckUserName(dto.login_name, dto.id);
@@ -90,10 +96,7 @@ namespace Altas.Framework.Admin
             {
                 return Error("用户名已存在");
             }
-
-
             _userApp.SaveData(dto, position, RequestHelper.AdminInfo());
-
 
             return Success();
         }
@@ -104,6 +107,7 @@ namespace Altas.Framework.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:user:add,system:user:edit")]
         public ActionResult GetUserById(string id)
         {
             var result=new ResultAdaptDto();
@@ -123,6 +127,7 @@ namespace Altas.Framework.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:user:delete")]
         public ActionResult removeAll(string ids)
         {
             if (ids.IsEmpty())

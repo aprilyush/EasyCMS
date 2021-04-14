@@ -29,6 +29,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="dto"></param>
 
+        [HttpGet]
+        [RequirePermission("system:post:view")]
         public ActionResult Index()
         {
             return View();
@@ -38,7 +40,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         ///获取数据列表
         /// </summary>
         /// <param name="param"></param>
-
+        [HttpPost]
+        [RequirePermission("system:post:view")]
         public ActionResult getList(DataTableDto param)
         {
             var data = _positionApp.GetData(param);
@@ -48,7 +51,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <summary>
         ///表单页面
         /// </summary>
-
+        [HttpGet]
+        [RequirePermission("system:post:add,system:post:edit")]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
@@ -62,6 +66,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <returns></returns>
 
         [HttpPost]
+        [RequirePermission("system:post:add,system:post:edit")]
         public ActionResult SaveData(sys_position dto)
         {
             var result = new ResultAdaptDto();
@@ -76,6 +81,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         ///<param name="id"></param>
         [HttpGet]
+        [RequirePermission("system:post:add,system:post:edit")]
         public ActionResult GetModel(string id)
         {
             var result = new ResultAdaptDto();
@@ -95,6 +101,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:post:delete")]
         public ActionResult RemoveAll(string ids)
         {
             var result = new ResultAdaptDto();

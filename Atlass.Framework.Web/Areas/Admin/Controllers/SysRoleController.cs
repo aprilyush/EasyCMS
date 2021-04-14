@@ -29,19 +29,9 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:role:view")]
         public ActionResult Index()
         {
-            return View();
-        }
-        /// <summary>
-        /// 角色表单
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Form(string id)
-        {
-            ViewBag.Id = id;
             return View();
         }
 
@@ -51,6 +41,7 @@ namespace Altas.Framework.Admin
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:role:view")]
         public ActionResult GetData(DataTableDto param)
         {
             string roleName = RequestHelper.GetPostString("roleName", "");
@@ -60,11 +51,27 @@ namespace Altas.Framework.Admin
         }
 
         /// <summary>
+        /// 角色表单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:role:add,system:role:edit")]
+        public ActionResult Form(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+
+
+
+        /// <summary>
         /// 提交数据
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:role:add,system:role:edit")]
         public ActionResult SaveData(sys_role dto)
         {
             if (dto.id == 0)
@@ -85,6 +92,7 @@ namespace Altas.Framework.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:role:edit")]
         public ActionResult GetRoleByIds(string id)
         {
             var result=new ResultAdaptDto();
@@ -98,6 +106,7 @@ namespace Altas.Framework.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:role:delete")]
         public ActionResult DelRoleByIds(string ids)
         {
             _roleApp.DelRoleByIds(ids);
@@ -111,6 +120,7 @@ namespace Altas.Framework.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:role:permission")]
         public ActionResult SetPermission(string id,string roleName)
         {
             ViewBag.Id = id;
@@ -123,6 +133,7 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
+        [RequirePermission("system:role:permission")]
         public ActionResult GetPermissions(string roleId)
         {
             var result = new ResultAdaptDto();
@@ -139,6 +150,7 @@ namespace Altas.Framework.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:role:permission")]
         public ActionResult SavePermissions(string roleId, string ids)
         {
             var result = new ResultAdaptDto();

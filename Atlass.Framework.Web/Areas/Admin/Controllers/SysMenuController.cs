@@ -31,9 +31,22 @@ namespace Altas.Framework.Controllers.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:menu:view")]
         public ActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 菜单列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:menu:view")]
+        public ActionResult GetData()
+        {
+            var data = _menuApp.GetMenuList();
+            return JsonEx(data);
         }
 
         /// <summary>
@@ -42,6 +55,7 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:menu:add,system:menu:edit")]
         public ActionResult Form(string id)
         {
             ViewBag.Id = id;
@@ -52,16 +66,7 @@ namespace Altas.Framework.Controllers.Admin
             return View();
         }
 
-        /// <summary>
-        /// 菜单列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetData()
-        {
-            var data = _menuApp.GetMenuList();
-            return JsonEx(data);
-        }
+
 
 
         /// <summary>
@@ -71,6 +76,7 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="funcs"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:menu:add,system:menu:edit")]
         public ActionResult SaveData(sys_menu dto, string funcs)
         {
             if (dto.parent_id == 0)
@@ -83,7 +89,11 @@ namespace Altas.Framework.Controllers.Admin
                 dto.menu_url = dto.menu_url ?? "#";
                 dto.menu_icon = dto.menu_icon ?? "fa fa-tag";
             }
-            
+            if (dto.role_tag.IsEmpty())
+            {
+                dto.role_tag = "#";
+            }
+
             if (dto.id==0)
             {
                 _menuApp.AddMenu(dto, funcs);
@@ -94,12 +104,14 @@ namespace Altas.Framework.Controllers.Admin
             }
             return Success("保存成功");
         }
+
         /// <summary>
         /// 获取单条数据
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:menu:add,system:menu:edit")]
         public ActionResult GetModel(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -120,6 +132,7 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:menu:delete")]
         public ActionResult Delfunc(string id)
         {
             _menuApp.Delfunc(id.ToInt64());
@@ -132,13 +145,13 @@ namespace Altas.Framework.Controllers.Admin
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("system:menu:delete")]
         public ActionResult delById(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return Error("参数错误");
             }
-
             _menuApp.DelByIds(id.ToInt64());
             return Success("删除成功");
         }
