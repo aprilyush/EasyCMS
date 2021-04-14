@@ -164,6 +164,7 @@ namespace Altas.Framework.Admin
         /// 获取前台按钮权限
         /// </summary>
         /// <returns></returns>
+        [RequirePermission("#")]
         public ActionResult GetButtonPermission()
         {
             string author = RequestHelper.GetQueryString("author");

@@ -145,6 +145,7 @@ namespace Altas.Framework.Admin
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("#")]
         public ActionResult Profile(string id)
         {
             var user = RequestHelper.AdminInfo();
@@ -160,6 +161,7 @@ namespace Altas.Framework.Admin
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("#")]
         public ActionResult UpdateProfile()
         {
             long id = RequestHelper.GetPostInt64("id", 0);
@@ -193,6 +195,7 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("#")]
         public IActionResult ResetPassword()
         {
             string id = RequestHelper.GetQueryString("id", "0");
@@ -213,6 +216,7 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("#")]
         public IActionResult UpdatePassword()
         {
             long id = RequestHelper.GetPostInt64("id",0);
@@ -226,6 +230,7 @@ namespace Altas.Framework.Admin
         /// 用户选择
         /// </summary>
         /// <returns></returns>
+        [RequirePermission("#")]
         public IActionResult UserSelect()
         {
             return View();

@@ -111,6 +111,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("#")]
         public IActionResult GetDeptZtree()
         {
             ResultAdaptDto ret = new ResultAdaptDto();

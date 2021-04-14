@@ -11,7 +11,7 @@ namespace Atlass.Framework.Core.Base
 {
 
     /// <summary>
-    /// 需要先注入容器，如果不想注入容器可以使用TypeFilterAttribute
+    /// 弃用 需要先注入容器，如果不想注入容器可以使用TypeFilterAttribute
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AtlassActionFilterAttribute: ActionFilterAttribute

@@ -25,7 +25,15 @@ namespace Atlass.Framework.Core.Base
         {
             
         }
+        /// <summary>
+        /// 权限标识
+        /// #：只判断是否登录，不判断具体权限
+        /// </summary>
         private string PermissionTag { get; set; }
+
+        /// <summary>
+        /// 角色的权限标识
+        /// </summary>
         public string RoleTag { get; set; }
         public RequirePermissionAttribute(string permissions)
         {
@@ -70,6 +78,11 @@ namespace Atlass.Framework.Core.Base
             }
             else
             {
+                //#只判断是否登录，不判断具体权限
+                if (PermissionTag == "#")
+                {
+                    user.IsSuper = true;
+                }
                 if (!user.IsSuper)
                 {
                     var roleApp = GetRoleAppService();
