@@ -14,6 +14,9 @@ namespace Atlass.Framework.ViewModels
         }
 
         public bool status { get; set; }
+        /// <summary>
+        /// 401-未授权，403-未登录
+        /// </summary>
         public int statusCode { get; set; }
         public string message { get; set; }
         public Dictionary<string, object> data { get; set; }

@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Atlass.Framework.AppService\Atlass.Framework.AppService.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Common\Atlass.Framework.Common.csproj" />
     <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
     <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />

@@ -366,6 +366,36 @@ namespace Atlass.Framework.Core.Web
         }
 
         /// <summary>
+        /// 是否是ajax请求
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAjax()
+        {
+            if (this.HttpRequest.Headers != null)
+            {
+                return this.HttpRequest.Headers["X-Requested-With"] == "XMLHttpRequest";
+            }
+            string accept = this.HttpRequest.Headers["accept"];
+            if (accept != null && accept.IndexOf("application/json") != -1)
+            {
+                return true;
+            }
+
+            string xRequestedWith = this.HttpRequest.Headers["X-Requested-With"];
+            if (xRequestedWith != null && xRequestedWith == "XMLHttpRequest")
+            {
+                return true;
+            }
+
+            string uri = this.HttpRequest.AbsoluteUri();
+            if (uri.Contains(".json")|| uri.Contains(".xml"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 获取访问信息
         /// </summary>
         /// <returns></returns>

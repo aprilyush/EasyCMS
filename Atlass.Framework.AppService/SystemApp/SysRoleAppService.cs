@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Enum;
 using Atlass.Framework.Models;
@@ -196,6 +197,9 @@ namespace Atlass.Framework.AppService
                 }
             }
 
+            //移除全部权限
+            PermissionCache.RemoveAllPermission(roleId);
+
         }
 
         /// <summary>
@@ -214,6 +218,13 @@ namespace Atlass.Framework.AppService
             }
             else
             {
+                //获取权限缓存
+                menus = PermissionCache.GetMenuPermission(user.RoleId);
+
+                if (menus != null)
+                {
+                    return menus;
+                }
                 menus = Sqldb.Select<sys_menu, sys_role_authorize>()
                 .InnerJoin((m, r) => m.id == r.menu_id)
                 .Where((m, r) => r.role_id == user.RoleId)
@@ -222,6 +233,7 @@ namespace Atlass.Framework.AppService
 
             if (menus.Count > 0)
             {
+                List<string> roleTags = new List<string>();
                 List<sys_menu> tops = menus.Where(s => s.parent_id == 0).ToList();
                 tops.ForEach(menu =>
                 {
@@ -238,6 +250,11 @@ namespace Atlass.Framework.AppService
                     });
                     menu.children = sons;
                 });
+
+                if (tops.Count > 0)
+                {   // 设置权限缓存
+                    PermissionCache.AddMenuPermission(user.RoleId, tops);
+                }
                 return tops;
             }
             return menus;
@@ -251,14 +268,24 @@ namespace Atlass.Framework.AppService
         /// <returns></returns>
         public List<RoleButtonPermissionDto> GetButtonPermissionList(long roleId)
         {
-            List<RoleButtonPermissionDto> permissionList = new List<RoleButtonPermissionDto>();
+           
+            List<RoleButtonPermissionDto> permissionList = PermissionCache.GetFrontOperatesPermission(roleId);
+            if (permissionList != null)
+            {
+                return permissionList;
+            }
+
+            permissionList=new List<RoleButtonPermissionDto>();
 
             //菜单权限
-            var menuRoleTags = Sqldb.Select<sys_menu, sys_role_authorize>()
+            var menus = Sqldb.Select<sys_menu, sys_role_authorize>()
                 .InnerJoin((m, r) => m.id == r.menu_id)
                 .Where((m, r) => r.role_id == roleId && m.role_tag != "#")
                 .ToList((m, r) => m);
-            if (menuRoleTags.Count > 0)
+
+            List<string> roleTags = new List<string>();
+
+            if (menus.Count > 0)
             {
                 //按钮权限
                 var buttonRoleTags = Sqldb.Select<sys_operate, sys_role_authorize>()
@@ -266,22 +293,109 @@ namespace Atlass.Framework.AppService
                     .Where((o, r) => r.role_id == roleId)
                     .ToList((o, r) => o);
 
-                foreach (sys_menu menu in menuRoleTags)
+                foreach (sys_menu menu in menus)
                 {
+                    //菜单权限标识
+                    roleTags.Add(menu.role_tag.ToLower());
+
                     RoleButtonPermissionDto model = new RoleButtonPermissionDto();
                     model.menuId = CommHelper.GetMenuTabId(menu.menu_url.ToLower());
                     List<sys_operate> buttons = buttonRoleTags.Where(s => s.menu_id == menu.id).ToList();
                     foreach (sys_operate button in buttons)
                     {
                         model.add(button.role_tag.ToLower());
+                        //操作权限标识
+                        roleTags.Add(button.role_tag.ToLower());
                     }
-
                     permissionList.Add(model);
                 }
 
             }
 
+            //添加缓存
+            if (permissionList.Count > 0)
+            {
+                PermissionCache.AddFrontOperatesPermission(roleId,permissionList);
+            }
+            if (roleTags.Count > 0)
+            {
+                PermissionCache.AddOperatePermission(roleId, roleTags);
+            }
             return permissionList;
+        }
+
+
+        /// <summary>
+        /// 获取菜单和操作权限字符串
+        /// </summary>
+        /// <param name="roleId"></param>
+        public bool  HasPermission(long roleId,string permissionTags)
+        {
+            if (roleId == 0)
+            {
+                return false;
+            }
+
+            string[] permissionTagsArray = permissionTags.ToLower().Split(',');
+            var permissionList = PermissionCache.GetOperatePermission(roleId);
+            if (permissionList != null)
+            {
+                var tag = permissionList.Where(s => permissionTagsArray.Contains(s)).FirstOrDefault();
+                if (tag == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            //没缓存的化直接取数据
+            var menus = Sqldb.Select<sys_menu, sys_role_authorize>()
+                .InnerJoin((m, r) => m.id == r.menu_id)
+                .Where((m, r) => r.role_id == roleId)
+                .ToList((m, r) => m.role_tag);
+            
+            var buttonRoleTags = Sqldb.Select<sys_operate, sys_role_authorize>()
+                  .InnerJoin((o, r) => o.id == r.menu_id)
+                  .Where((o, r) => r.role_id == roleId)
+                  .ToList((o, r) => o.role_tag);
+
+            List<string> roleTags = new List<string>();
+            if (menus.Count > 0)
+            {
+                foreach(var menu in menus)
+                {
+                    if (menu.IsEmpty() || menu == "#")
+                    {
+                        continue;
+                    }
+                    roleTags.Add(menu);
+                }
+            }
+            if (buttonRoleTags.Count > 0)
+            {
+                foreach (var btag in buttonRoleTags)
+                {
+                    if (btag.IsEmpty() || btag == "#")
+                    {
+                        continue;
+                    }
+                    roleTags.Add(btag);
+                }
+            }
+
+            if (roleTags.Count > 0)
+            {
+                PermissionCache.AddOperatePermission(roleId, roleTags);
+
+                var tag = roleTags.Where(s => permissionTagsArray.Contains(s)).FirstOrDefault();
+                if (tag == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            return false;
         }
     }
 }

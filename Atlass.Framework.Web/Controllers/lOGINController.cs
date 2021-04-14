@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.AppService;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
@@ -100,10 +101,17 @@ namespace Atlass.Framework.Web.Controllers
             return Content("InitOk");
         }
 
+        [RequirePermission("login:getip")]
         public ActionResult GetIp()
         {
             string ip = RequestHelper.GetClientIp();
             return Content(ip);
+        }
+
+
+        public IActionResult NoPermission()
+        {
+            return View();
         }
 
         /// <summary>

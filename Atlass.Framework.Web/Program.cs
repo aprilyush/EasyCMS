@@ -26,7 +26,9 @@ namespace Atlass.Framework.Web
              rollOnFileSizeLimit: true,
              fileSizeLimitBytes: 31457280)
              .CreateLogger();
-            CreateHostBuilder(args).Build().Run();
+            IHost host = CreateHostBuilder(args).Build();
+            
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args)

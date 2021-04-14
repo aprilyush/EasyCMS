@@ -10,8 +10,8 @@ using System.Text;
 
 namespace Atlass.Framework.Core.Base
 {
-    [TypeFilterAttribute(typeof(AtlassAuthorizationAttribute))]
-    [ServiceFilter(typeof(AtlassActionFilterAttribute))]   
+   // [TypeFilterAttribute(typeof(RequirePermissionAttribute))]
+    //[ServiceFilter(typeof(AtlassActionFilterAttribute))]   
     public class BaseController: Controller
     {
         protected IAtlassRequest RequestHelper;

@@ -140,6 +140,9 @@
                 parent.layer.close(index);
             }
         },
+        toLogin:function() {
+            if (window.top !== window.self) { window.top.location ="/login/index"; }
+        },
         ajax : function (type, asysc, url, data, okfunc) {
             var isasync = asysc || true;
             $.ajax({
@@ -159,6 +162,14 @@
                         if (res.message) {
                             jutils.error(res.message);
                         }
+                    }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
                     }
                     if ($.isFunction(okfunc)) {
                         okfunc(res);
@@ -192,6 +203,14 @@
                             jutils.error(res.message);
                         }
                     }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
+                    }
                     if ($.isFunction(okfunc)) {
                         okfunc(res);
                     }
@@ -223,6 +242,14 @@
                         if (res.message) {
                             jutils.error(res.message);
                         }
+                    }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
                     }
                     if ($.isFunction(okfunc)) {
                         okfunc(res);

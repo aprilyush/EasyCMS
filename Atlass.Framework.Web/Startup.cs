@@ -13,6 +13,7 @@ using Atlass.Framework.Core.HostService;
 using Atlass.Framework.Core.Middleware;
 using Atlass.Framework.ViewModels;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using EasyCaching.Core;
 using EasyCaching.ResponseCaching;
 using Hangfire;
@@ -126,6 +127,8 @@ namespace Atlass.Framework.Web
             IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             GlobalContext.HostingEnvironment = env;
+            //GlobalContext.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+            AutofacUtil.Container= app.ApplicationServices.GetAutofacRoot();
             //if (env.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();

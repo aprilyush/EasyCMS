@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Common.NLog;
+using Autofac;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
