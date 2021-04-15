@@ -45,6 +45,12 @@ namespace Atlass.Framework.Core.Base
             RoleTag = roles;
         }
 
+        /// <summary>
+        /// 执行前
+        /// </summary>
+        /// <param name="filterContext"></param>
+        /// <param name="next"></param>
+        /// <returns></returns>
         public override async Task OnActionExecutionAsync(ActionExecutingContext filterContext, ActionExecutionDelegate next)
         {
             //if (!ValidateToken(filterContext.HttpContext.Request.Headers["token"]))
@@ -115,7 +121,20 @@ namespace Atlass.Framework.Core.Base
         }
 
 
-
+        /// <summary>
+        /// 执行后
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="next"></param>
+        /// <returns></returns>
+        public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
+        {
+            //if (context.HttpContext.Response.StatusCode == 404)
+            //{
+            //    context.HttpContext.Response.Redirect("login/InternalError");
+            //}
+            await base.OnResultExecutionAsync(context,next);
+        }
         /// <summary>
         /// 获取路由信息
         /// </summary>

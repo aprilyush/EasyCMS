@@ -129,17 +129,12 @@ namespace Atlass.Framework.Web
             GlobalContext.HostingEnvironment = env;
             //GlobalContext.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
             AutofacUtil.Container= app.ApplicationServices.GetAutofacRoot();
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            // //  app.AddRazorRuntimeCompilation();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
+
+            //异常处理
+            // app.UseExceptionHandler("/Home/Error");
+            app.UseStatusCodePagesWithRedirects("/Login/Error/{0}");
+
+            //cookie策略
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
             

@@ -8,6 +8,7 @@ using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
+using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Atlass.Framework.Web.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -98,6 +99,7 @@ namespace Atlass.Framework.Web.Controllers
         /// <returns></returns>
         public ActionResult Init()
         {
+            throw new Exception("自定义500页面异常");
             return Content("InitOk");
         }
 
@@ -109,11 +111,67 @@ namespace Atlass.Framework.Web.Controllers
         }
 
 
+
+
+        [Route("login/error/{statusCode}")]
+        [HttpGet]
+        public IActionResult Error(int statusCode)
+        {
+            string viewName = "NotFind";
+            ResultAdaptDto result = new ResultAdaptDto();
+            switch (statusCode)
+            {
+                case 401:
+                    viewName = "NoPermission";
+                    result.message = "抱歉，没有操作权限";
+                    break;
+                case 404:
+                    viewName = "NotFind";
+                    result.message = "请求不存在，禁止访问";
+                    break;
+                case 500:
+                    viewName = "InternalError";
+                    result.message = "系统异常，请稍后再试";
+                    break;
+            }
+            if (RequestHelper.IsAjax())
+            {
+                return Json(result);
+            }
+
+            Response.StatusCode = statusCode;
+            return View(viewName);
+        }
+
+        /// <summary>
+        /// 401 无权限
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public IActionResult NoPermission()
         {
             return View();
         }
+        /// <summary>
+        /// 404内部异常
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult NotFind()
+        {
+            return View();
+        }
 
+        /// <summary>
+        /// 500内部异常
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult InternalError()
+        {
+            return View();
+        }
+       
         /// <summary>
         /// 退出登录
         /// </summary>
