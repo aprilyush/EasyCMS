@@ -51,10 +51,12 @@ namespace Atlass.Framework.Core.Base
             //{
             //    filterContext.Result = new UnauthorizedResult();
             //}
-            IDictionary<string, string> RouteValues = filterContext.ActionDescriptor.RouteValues;
-            string route = GetRouteInfo(RouteValues);
+            //记录路由日志
+            //IDictionary<string, string> RouteValues = filterContext.ActionDescriptor.RouteValues;
+            //string route = GetRouteInfo(RouteValues);
+            //LogNHelper.Info(route,"路由记录");
 
-            LogNHelper.Info(route,"路由记录");
+
             IAtlassRequest requestHelper = GetAtlassRequest();
             var user = requestHelper.AdminInfo();
             if (user==null)

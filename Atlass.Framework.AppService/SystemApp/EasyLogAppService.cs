@@ -18,11 +18,12 @@ namespace Atlass.Framework.AppService.SystemApp
         }
 
 
-        public DataTableDto GetList(DataTableDto param, int logType, string log_summary)
+        public DataTableDto GetList(DataTableDto param, int logType, string log_summary,DateTime logDate)
         {
             
             var query = Sqldb.Select<easy_log>()
                 .WhereIf(logType > 0, s => s.log_type == logType)
+                .Where(s=>s.log_time>=logDate)
                 .WhereIf(!string.IsNullOrEmpty(log_summary), s => s.log_summary == log_summary)
                 .OrderByDescending(s => s.id).Count(out long total).Page(param.page, param.limit).ToList();
             param.total = total;

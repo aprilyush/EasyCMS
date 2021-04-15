@@ -9,10 +9,10 @@
             <a class="btn btn-success" onclick="add();" data-role="system:post:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:post:edit">
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:hangfire:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger single disabled" onclick="removeAll(this);" data-id="0" data-role="system:post:delete">
+            <a class="btn btn-danger single disabled" onclick="removeAll(this);" data-id="0" data-role="system:hangfire:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
         </div>
@@ -24,7 +24,7 @@
     @section scripts
 {
         <script>
-            var $userTable, warnType = 0;
+            var $table;
             $(function () {
                 loadGrid();
             });
@@ -81,11 +81,11 @@
             function renderOperationButton(value, row, index) {
                 var actions = [];
                 actions.push({
-                    roleTag: 'system:post:edit',
+                    roleTag: 'system:hangfire:edit',
                     button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
                 });
                 actions.push({
-                    roleTag: 'system:post:delete',
+                    roleTag: 'system:hangfire:delete',
                     button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
                 });
 
@@ -102,9 +102,19 @@
             }
 
             function edit(obj) {
+                var taskId = $(obj).data('id');
+                if (jutils.emptyId(taskId)) {
+                    var rows = $table.easyTable("selected");
+                    if (rows.length == 0) {
+                        jutils.warn("请选择数据行");
+                        return;
+                    }
+                    taskId = rows[0].id;
+                }
+               
 
                 var url = '/admin/hangfirejob/form';
-                jutils.dialog('修改任务', url, { id: '' }, null, function () {
+                jutils.dialog('修改任务', url, { id: taskId }, null, function () {
                     $table.easyTable("search");
                 })
             }
@@ -116,7 +126,7 @@
                         jutils.ajaxGet('/admin/hangfireJob/Pause',
                             { id: id },
                             function () {
-                                $userTable.bootstrapTable('refresh');
+                                $table.easyTable("search");
                             });
                     });
             }
@@ -127,7 +137,7 @@
                         jutils.ajaxGet('/admin/hangfireJob/Resume',
                             { id: id },
                             function () {
-                                $userTable.bootstrapTable('refresh');
+                                $table.easyTable("search");
                             });
                     });
             }
@@ -138,25 +148,25 @@
                         jutils.ajaxGet('/admin/hangfireJob/excuteJob',
                             { id: id },
                             function () {
-                                $userTable.bootstrapTable('refresh');
+                                $table.easyTable("search");
                             });
                     });
             }
 
-            function deleteJob(obj) {
+            function removeAll(obj) {
                 var id = $(obj).data('id');
                 jutils.confirm('确认删除当前任务吗',
                     function () {
                         jutils.ajaxGet('/admin/hangfireJob/DelById',
                             { id: id },
                             function () {
-                                $userTable.bootstrapTable('refresh');
+                                $table.easyTable("search");
                             });
                     });
             }
 
             function query() {
-                $userTable.bootstrapTable('refresh');
+                $table.easyTable("search");
             }
         </script>
     }

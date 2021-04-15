@@ -1,75 +1,76 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "异常日志";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
 <div class="ibox">
     <div class="ibox-content">
         <div class="row">
-            <div class="text-center">
-                <div class="btn-group" id="tableStatus">
-                    <a href="javascript:void(0);" class="btn btn-info" data-id="0">全部</a>
-                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="1">信息</a>
-                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="2">调试</a>
-                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="3">警告</a>
-                    <a href="javascript:void(0);" class="btn btn-default btn-outline" data-id="4">异常</a>
-
-                </div>
+            <div class="col-sm-12 search-collapse">
+                <form id="searchForm">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                日志类型：
+                                <select id="logType">
+                                    <option value="0">全部</option>
+                                    <option value="1">信息</option>
+                                    <option value="2">调试</option>
+                                    <option value="3">警告</option>
+                                    <option value="4">异常</option>
+                                </select>
+                            </li>
+                            <li>
+                                日志简述：<input type="text" id="log_summary" name="log_summary">
+                            </li>
+                            <li>
+                                日期：<input type="text" id="logDate" name="logDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
             </div>
-            <div class="div_find">
-                <p>
-                    <label class="find_labela">日志简述：</label>
-                    <input type="text" id="log_summary" name="log_summary" class="find_input">
-                    <button class="btn btn-outline btn-primary find_but" type="button" onclick="query()">查询</button>
-                </p>
+            <div class="btn-group-sm" role="group" id="toolbar">
+                <a class="btn btn-danger multiple disabled" onclick="del(this);" data-id="0" data-role="system:log:delete">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:log:clear">
+                    <i class="fa fa-remove"></i> 清空日志
+                </a>
             </div>
-            <div class="col-sm-12">
-                <div id="toolbar" class="btn-group">
-                    <button class="btn btn-danger" type="button" onclick="del()"><i class="fa fa-trash"></i> 删除</button>
-                    <button class="btn btn-danger" type="button" onclick="clearAll()"><i class="fa fa-trash"></i> 清空日志</button>
-                </div>
-                <table id="userTable"></table>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="dataTable"></table>
             </div>
+            
         </div>
     </div>
 </div>
 @section scripts
 {
     <script>
-        var $userTable,warnType=0;
+        var $table;
         $(function () {
-              $('#tableStatus a').on('click',
-                function () {
-                    $(this).removeClass("btn-default").removeClass("btn-outline").addClass('btn-info')
-                        .siblings().removeClass("btn-info").addClass('btn-outline').addClass('btn-default');
-
-                    warnType = $(this).data('id');
-                    query();
-                });
             loadGrid();
         });
 
         function loadGrid() {
-            $userTable=$("#userTable").bootstrapTable({
+            let options = {
                 url: '/admin/easylog/getdata',
-                toolbar: '#toolbar',
-                pagination: true,
-                height: $(window).height()-50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "server",
-                locale: "zh-CN",
-                striped: true,
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
                 queryParams: function (params) {
-                    var p = {
-                        limit: params.limit,
-                        offset: params.offset, //页码
-                        log_type: warnType,
-                       log_summary:$('#log_summary').val()
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        logType: $('logType').val(),
+                        logDate:$('#logDate').val(),
+                        log_summary: $('#log_summary').val()
                     }
                     return p;
                 },
@@ -84,13 +85,13 @@
                     {
                         field: 'log_time', title: '日志时间', align: 'center'
                     },
-                     {
-                        field: 'id', title: '操作', align: 'left', formatter:renderOpts
-                    },
+                    {
+                        field: 'id', title: '操作', align: 'center', formatter: renderOpts
+                    }
                 ]
 
-            });
-
+            };
+            $table = $('#dataTable').easyTable(options);
         }
 
         function renderResult(v, d) {
@@ -117,8 +118,7 @@
         }
 
         function renderOpts(v) {
-            var html = '<a class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="'+v+'"><i class="fa fa-eye"></i></a>';
-              html += '<a class="btn btn-white btn-bitbucket" title="Delete" href="javascript:void(0);" onclick="deleteLog(this)" data-id="'+v+'"><i class="fa fa-times"></i></a>';
+            var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="'+v+'"><i class="fa fa-eye"></i></a>';
             return html;
         }
 
@@ -133,33 +133,9 @@
 
             });
         }
-        function deleteLog(obj) {
-
-            var id = $(obj).data('id');
-                 jutils.confirm('确认删除吗',
-                function () {
-                    jutils.ajaxGet('/admin/easylog/DelByIds',
-                        { ids: id },
-                        function () {
-                            $userTable.bootstrapTable('refresh');
-                        });
-                });
-        }
-        function updateDevice(id) {
-            jutils.confirm('确定更新当前项目下的所以设备吗',
-                function () {
-                    jutils.ajaxGet('/project/UpdateDeviceParam',
-                        { id: id},
-                        function () {
-
-                        });
-                });
-        }
-
-
 
         function del() {
-            var rows = $userTable.bootstrapTable('getSelections');
+            var rows = $table.easyTable('selected');
             if (rows.length === 0) {
                 jutils.warn('请选择需要删除的数据行');
                 return;
@@ -175,7 +151,7 @@
                     jutils.ajaxGet('/admin/easylog/DelByIds',
                         { ids: ids.join() },
                         function () {
-                            $userTable.bootstrapTable('refresh');
+                            $table.easyTable('search');
                         });
                 });
         }
@@ -185,12 +161,13 @@
                 function () {
                     jutils.ajaxGet('/admin/easylog/ClearTable',null,
                         function () {
-                            $userTable.bootstrapTable('refresh');
+                            $table.easyTable('search');
                         });
                 });
         }
+
         function query() {
-            $userTable.bootstrapTable('refresh');
+            $table.easyTable('search');
         }
     </script>
 }
