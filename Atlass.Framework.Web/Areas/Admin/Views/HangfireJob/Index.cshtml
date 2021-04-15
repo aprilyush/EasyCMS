@@ -1,21 +1,26 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "定时任务";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="toolbar" class="btn-group">
-
-                </div>
-                <table id="userTable"></table>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="system:post:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:post:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger single disabled" onclick="removeAll(this);" data-id="0" data-role="system:post:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
         </div>
-
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
     </div>
-    </div>
+</div>
     @section scripts
 {
         <script>
@@ -25,29 +30,20 @@
             });
 
             function loadGrid() {
-                $userTable = $("#userTable").bootstrapTable({
+                var options ={
                     url: '/admin/hangfirejob/getdata',
-                    toolbar: '#toolbar',
-                    pagination: true,
-                    height: $(window).height() - 50,
-                    pageSize: 15,
-                    pageList: [5, 10, 15, 20],
-                    showColumns: true,
-                    showRefresh: true,
-                    clickToSelect: true,
-                    sidePagination: "server",
-                    locale: "zh-CN",
-                    striped: true,
+                    pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                    pageSize: 10,                       // 每页的记录行数（*）
+                    pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
                     queryParams: function (params) {
-                        var p = {
-                            limit: params.limit,
-                            offset: params.offset, //页码
-                            log_type: warnType,
-                            log_summary: $('#log_summary').val()
+                        let p = {
+                            pageNumber: params.pageNumber,
+                            pageSize: params.pageSize
                         }
                         return p;
                     },
                     columns: [
+                        { field: 'selectItem', radio: true },
                         {
                             field: 'task_name', title: '任务名称', align: 'center', width: 100
                         },
@@ -72,29 +68,45 @@
                             field: 'remark', title: '说明', align: 'center'
                         },
                         {
-                            field: 'id', title: '操作', align: 'left', formatter: renderOpts
+                            field: 'id', title: '操作', align: 'left', formatter: renderOperationButton
                         },
                     ]
 
+                };
+
+                $table = $('#dataTable').easyTable(options);
+                //$table.easyTable('selectedEvent');
+            }
+
+            function renderOperationButton(value, row, index) {
+                var actions = [];
+                actions.push({
+                    roleTag: 'system:post:edit',
+                    button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
                 });
-                jutils.initToolBarRole('#toolbar');
+                actions.push({
+                    roleTag: 'system:post:delete',
+                    button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+                });
+
+                return jutils.buttonPermissions(actions);
             }
 
 
-            function renderOpts(v, r, i) {
-                var html = jutils.initToolBarRow(v);
-                return html;
-            }
+
             function add() {
-                var url = '/admin/hangfirejob/form?id=';
-                location.href = url;
+                var url = '/admin/hangfirejob/form';
+                jutils.dialog('添加任务', url, { id:'' }, null, function () {
+                    $table.easyTable("search");
+                })
             }
 
             function edit(obj) {
 
-                var id = $(obj).data('id');
-                var url = '/admin/hangfirejob/form?id=' + id;
-                location.href = url;
+                var url = '/admin/hangfirejob/form';
+                jutils.dialog('修改任务', url, { id: '' }, null, function () {
+                    $table.easyTable("search");
+                })
             }
 
             function pauseJob(obj) {

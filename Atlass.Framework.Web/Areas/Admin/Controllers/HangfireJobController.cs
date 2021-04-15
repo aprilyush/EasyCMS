@@ -29,23 +29,33 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _logApp = service.GetRequiredService<HangfireJobAppService>();
         }
+
+        [HttpGet]
+        [RequirePermission("system:hangfire:view")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
+        [RequirePermission("system:hangfire:view")]
         public ActionResult GetData(DataTableDto dto)
         {
             var data = _logApp.GetList(dto);
             return Json(data);
         }
 
+
+        [HttpGet]
+        [RequirePermission("system:hangfire:add,system:hangfire:edit")]
         public IActionResult Form(string id)
         {
             ViewBag.Id = id;
             return View();
         }
 
+        [HttpGet]
+        [RequirePermission("system:hangfire:view")]
         public ActionResult GetDataById(string id)
         {
             var result = new ResultAdaptDto();
@@ -56,6 +66,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [RequirePermission("system:hangfire:add,system:hangfire:edit")]
         public IActionResult Save(hangfire_task dto)
         {
             string id=_logApp.Save(dto);
@@ -66,6 +77,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
 
         }
 
+        [HttpGet]
+        [RequirePermission("system:hangfire:delete")]
         public ActionResult DelById(string id)
         {
             RecurringJob.RemoveIfExists(id);
@@ -79,6 +92,9 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /// 
+        [HttpGet]
+        [RequirePermission("system:hangfire:pause")]
         public ActionResult Pause(string id)
         {
             RecurringJob.RemoveIfExists(id);
@@ -92,6 +108,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:hangfire:resume")]
         public ActionResult Resume(string id)
         {
 
@@ -107,6 +125,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             return Success("任务启动成功");
         }
 
+        [HttpGet]
+        [RequirePermission("system:hangfire:excute")]
         public ActionResult ExcuteJob(string id)
         {
             RecurringJob.Trigger(id);

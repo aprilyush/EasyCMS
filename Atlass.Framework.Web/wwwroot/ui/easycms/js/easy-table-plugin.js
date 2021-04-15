@@ -11,6 +11,8 @@
         let target = $(this);
         target.bootstrapTable(_option);
 
+        //初始化后自执行
+        target.easyTable("selectedEvent");
         return target;
     };
 
@@ -18,9 +20,20 @@
         search: function (target) {
             // 从第一页开始
            // target.bootstrapTable('refresh', {pageNumber: 1});
+
+            if($('#toolbar .multiple')){
+                $('#toolbar .multiple').addClass('disabled');
+            }
+
+            // 非单个禁用
+            if ($('#toolbar .single')) {
+                $('#toolbar .single').addClass('disabled');
+            }
+
             target.bootstrapTable("refresh",{
                 silent: true
             });
+
         },
         getPagination: function (target, params) {
             var pagination = {

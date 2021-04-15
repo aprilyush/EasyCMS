@@ -1,37 +1,38 @@
 ﻿@{
+    ViewData["Title"] = "定时任务";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<div class="ibox">
+<div class="container-div white-bg">
     <div class="ibox-content">
         <form class="form form-horizontal" id="form" autocomplete="off">
             <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
             <div class="form-group">
                 <label class="col-sm-3 control-label required">任务名称：</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <input type="text" name="task_name" id="task_name" value="" class="form-control" data-rule="required">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label required">命名空间：</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <input type="text" name="assembly_namespace" id="assembly_namespace" value="" class="form-control" data-rule="required">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label required">类名：</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <input type="text" name="class_name" id="class_name" value="" class="form-control" data-rule="required;">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label required">Cron表达式：</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <input type="text" name="cron_express" id="cron_express" class="form-control" data-rule="required;">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">任务说明：</label>
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                     <textarea name="remark" id="remark" cols="60" rows="4"></textarea>
                 </div>
             </div>
@@ -56,7 +57,7 @@
                         // 表单验证通过，提交表单
                         jutils.ajaxPost('/admin/hangfirejob/Save', $(form).serialize(),
                             function (res) {
-                                jutils.back();
+                                cancel();
                             });
                     }
                 });
@@ -67,16 +68,16 @@
 
             function loadData() {
                 var id = $("#id").val();
-
-                if (id !== '') {
-                    jutils.ajaxGet('/admin/hangfirejob/GetDataById', { id: id }, function (res) {
-                        $('#form').initFormData(res.data.model);
-                    });
+                if (jutils.emptyId(id)) {
+                    return;
                 }
+                jutils.ajaxGet('/admin/hangfirejob/GetDataById', { id: id }, function (res) {
+                    $('#form').initFormData(res.data.model);
+                });
             }
 
             function cancel() {
-                jutils.back();
+                jutils.closeDialog();
             }
         </script>
 
