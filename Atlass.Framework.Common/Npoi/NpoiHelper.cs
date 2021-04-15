@@ -90,9 +90,9 @@ namespace Atlass.Framework.Common
 
                 fs.Close();
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
             finally
             {

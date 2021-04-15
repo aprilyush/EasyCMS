@@ -26,18 +26,15 @@ namespace Altas.Framework.Admin
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _dicApp = service.GetRequiredService<SysDicAppService>();
         }
+
+        /// <summary>
+        /// 字典页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:dic:view")]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Form(string id)
-        {
-            ViewBag.Id = id;
-            var pid = RequestHelper.GetQueryString("pid", "0");
-            var dicSel = _dicApp.GetDicSelList();
-            dicSel.Insert(0, new sys_dictionary() {id = 0, dic_name = "全部"});
-            ViewBag.DicSelList = new SelectList(dicSel, "id", "dic_name", pid);
             return View();
         }
 
@@ -45,48 +42,60 @@ namespace Altas.Framework.Admin
         /// 数据表格
         /// </summary>
         /// <returns></returns>
-       
-        public ActionResult GetData()
+        [RequirePermission("system:dic:view")]
+        [HttpPost]
+        public ActionResult GetData(DataTableDto dto)
         {
-            var data=new DataTableDto();
-
-            var list = _dicApp.GetData();
-            //data.list = list;
-            //data.pageSize = list.Count;
-            return Content(data.ToJson());
+            string dicCode = RequestHelper.GetPostString("dicCode");
+            string dicName = RequestHelper.GetPostString("dicName");
+            var list = _dicApp.GetData(dto,dicCode,dicName);
+            return Json(list);
         }
 
-        
-        public ActionResult GetGridDataBypId()
+        /// <summary>
+        /// 表单页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:dic:add,system:dic:edit")]
+        public ActionResult Form(string id)
         {
-            //var data = new BootstrapGridDto();
-            string pid = RequestHelper.GetQueryString("pid", "0");
-            //if (HttpContextExt.Current.Request.Form.Count > 0 && HttpContextExt.Current.Request.Form.ContainsKey("pid"))
-            //{
-            //    var pid = HttpContext.Request.Form["pid"];
-               
-                
-            //}
-            var list = _dicApp.GetGridDataBypId(pid.ToInt64());
-           // data.rows = list;
-            //data.total = list.Count;
-            return Content(list.ToJson());
-
+            ViewBag.Id = id;
+            return View();
         }
+
+
+        /// <summary>
+        /// 获取单个数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("system:dic:add,system:dic:edit")]
+        [HttpGet]
+        public ActionResult GetModel(string id)
+        {
+            var result = new ResultAdaptDto();
+            var data = _dicApp.GetDicById(id.ToInt64());
+            result.data.Add("model", data);
+            return Json(result);
+        }
+
         /// <summary>
         /// 保存数据
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("system:dic:add,system:dic:edit")]
         public ActionResult SaveData(sys_dictionary dto)
         {
-            dto.dic_code = dto.dic_code??"";
+            dto.dic_code = dto.dic_code ?? "";
             dto.dic_name = dto.dic_name.Trim();
             dto.dic_value = dto.dic_name;
             if (dto.id == 0)
             {
-                _dicApp.InsertDicData(dto,RequestHelper.AdminInfo());
+                _dicApp.InsertDicData(dto, RequestHelper.AdminInfo());
             }
             else
             {
@@ -97,48 +106,74 @@ namespace Altas.Framework.Admin
         }
 
         /// <summary>
-        /// 获取单个数据
+        /// 表单页面
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult GetDicById(string id)
+        [HttpGet]
+        [RequirePermission("system:dic:son")]
+        public ActionResult SonView(string parentId)
         {
-            var result=new ResultAdaptDto();
-            var data = _dicApp.GetDicById(id.ToInt64());
-            result.data.Add("model",data);
-            //result.Data = _dicApp.GetDicById(id);
-            ////result.statusCodeCode=JuiJsonEnum.Ok;
-            return Content(result.ToJson());
+            ViewBag.Id = parentId;
+            var list = _dicApp.GetDicSelList();
+            ViewBag.DicList = new SelectList(list, "id", "name", parentId);
+            return View();
         }
 
-        public ActionResult del(string ids)
+
+        /// <summary>
+        /// 字典数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [RequirePermission("system:dic:son")]
+        public ActionResult GetSonList(DataTableDto dto)
+        {
+            long pid = RequestHelper.GetPostInt64("pid",0);
+            string name = RequestHelper.GetPostString("name");
+            var list = _dicApp.GetSonList(dto,pid, name);
+
+            return Json(list);
+
+        }
+        
+        /// <summary>
+        /// 添加字典数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:dic:son")]
+        public ActionResult SonForm()
+        {
+            string id = RequestHelper.GetQueryString("id", "0");
+            string parentId = RequestHelper.GetQueryString("parentId", "0");
+            var parent = _dicApp.GetDicById(parentId.ToInt64());
+            ViewBag.DicCode = parent.dic_code;
+            ViewBag.Id = id;
+            ViewBag.ParentId = parentId;
+            return View();
+        }
+
+        /// <summary>
+        /// 删除字典
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:dic:delete")]
+        public ActionResult removeAll(string ids)
         {
             _dicApp.DelByIds(ids);
             return Success("删除成功");
         }
-        public ActionResult GetDicZtree()
+
+        [HttpGet]
+        [RequirePermission("system:dic:son")]
+        public IActionResult DeleteSonByIds(string ids)
         {
-            var result = new ResultAdaptDto();
-            var data = _dicApp.GetDicZtree();
-            data.Insert(0,new ZtreeDto(){id ="0",name = "通用字典"});
-            result.data.Add("dicTree",data);
-            //result.Data = data;
-            //result.statusCode = true;
-            return Content(result.ToJson());
-        }
-
-
-        public ActionResult TreeView()
-        {
-            return View();
-        }
-
-        public ActionResult GetTreeGrid()
-        {
-
-           var list = _dicApp.GetTreeGrid();
-            
-            return Content(list.ToJson());
+            _dicApp.DeleteSonByIds(ids);
+            return Success("删除成功");
         }
 
         public ActionResult FormTest()

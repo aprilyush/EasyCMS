@@ -2,162 +2,164 @@
     ViewBag.Title = "字典管理";
     Layout = "_Index";
 }
-@*<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />*@
-<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="ibox ">
-                    <ul id="dicTree" class="ztree"></ul>
-                </div>
-            </div>
-            <div class="col-sm-10">
-                <div id="toolbar" class="btn-group">
 
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            字典名称：<input type="text" id="name" />
+                        </li>
+                        <li>
+                            字典编码：<input type="text" id="code" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
                 </div>
-                <table id="dicTable"></table>
-            </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="system:dic:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:dic:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:dic:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
         </div>
     </div>
 </div>
-@section scripts
+    @section scripts
     {
-    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
-    <script>
-        var ptree, $dicTable, pid = 0;
-        $(function () {
-            loadDicTree();
-            loadGrid();
-        });
+        <script>
+            let $table;
+            $(function () {
+                loadData();
 
-        function loadDicTree() {
-            var opts = {
+            });
 
-                data: {
-                    simpleData: {
-                        enable: true
+            function loadData() {
+                let options = {
+                    url: '/admin/sysdic/GetData',
+                    pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                    pageSize: 10,                       // 每页的记录行数（*）
+                    pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                    queryParams: function (params) {
+                        let p = {
+                            pageNumber: params.pageNumber,
+                            pageSize: params.pageSize,
+                            dicName: $('#name').val(),
+                            dicCode: $('#code').val()
+                        }
+                        return p;
+                    },
+                    columns: [
+                        { field: 'selectItem', checkbox: true },
+                        {
+                            field: 'dic_name', title: '字典名称', align: "center", formatter(v, r, i) {
+                                return '<a href="javascript:void(0)" onclick="sonList(this);" data-id="' + r.id + '">' + v + '</a>'
+                            }
+                        },
+                        { field: 'dic_code', title: '字典编码', align: "center" },
+                        { field: 'sort_num', title: '排序', align: "center" },
+                        { field: 'remark', title: '备注', align: "center" },
+                        { field: 'create_time', title: '创建时间', align: "center" },
+                        {
+                            field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                        }
+                    ]
+                };
+
+                $table = $('#dataTable').easyTable(options);
+                $table.easyTable('selectedEvent');
+            }
+
+            function renderOperationButton(value, row, index) {
+                let actions = [];
+                actions.push({
+                    roleTag: 'system:dic:edit',
+                    button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+                });
+                actions.push({
+                    roleTag: 'system:dic:son',
+                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" onclick="sonList(this);" data-id="' + value + '"><i class="fa fa-list-ul"></i>列表</a>'
+                })
+                actions.push({
+                    roleTag: 'system:dic:delete',
+                    button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+                });
+
+                return jutils.buttonPermissions(actions);
+            }
+
+
+            function add() {
+
+                jutils.dialog("添加字典项", '/admin/sysdic/form', { id: 0 }, null, function () {
+                    $table.easyTable('search');
+                });
+            }
+
+            function edit(obj) {
+                let id = $(obj).data('id');
+                if (id == 0) {
+                    const rows = $table.easyTable("selected");
+                    if (rows.length == 0) {
+                        jutils.warn("请选择数据行");
+                        return;
                     }
-                }, callback: {
-                    onClick: DicZtreeClick
-
+                    id = rows[0].id;
                 }
-            };
-            jutils.ajaxGet('/admin/sysdic/getdicztree', null, function (res) {
-                ptree = $.fn.zTree.init($("#dicTree"), opts, res.data.dicTree);
-                ptree.expandAll(true);
-            });
-        }
-
-        //单击事件
-        function DicZtreeClick(event, treeId, treeNode) {
-            pid = treeNode.id;
-
-            $dicTable.bootstrapTable('refresh');
-
-        }
-
-        function loadGrid() {
-            $dicTable = $("#dicTable").bootstrapTable({
-                url: '/admin/sysdic/GetGridDataBypId',
-                toolbar: '#toolbar',
-                pagination: true,
-                height: $(window).height() - 50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "client",//server
-                locale: "zh-CN",
-                striped: true,
-                queryParams: function (params) {
-                    var dto = {
-                        limit: params.limit, //每页多少条
-                        offset: params.offset, //从第几条开始读(默认就好)
-                        pid: pid
-                    };
-                    return dto;
-                },
-                columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'dic_name', title: '字典名称', align: 'center' },
-                    { field: 'dic_code', title: '字典编码', align: 'center' },
-                    { field: 'sort_num', title: '排序', align: 'center' },
-                    { field: 'remark', title: '备注', align: 'center' },
-                    {
-                        field: 'id', title: '操作', align: 'center',
-                        formatter: render
-                    }
-                ]
-
-            });
-            //jutils.initToolBar('#toolbar', true);
-            jutils.initToolBarRole('#toolbar');
-        }
-
-        function render(v, r, i) {
-            var html = jutils.initToolBarRow(v);
-            return html;
-        }
-
-        function add() {
-            var node = ptree.getSelectedNodes();
-            if (node.length === 0) {
-                jutils.warn("请先选择左侧通用字典项");
-                return;
-            }
-            var id = node[0].id;
-            jutils.dialog('字典信息', '/admin/sysdic/form', { id: '', pid: id }, null,
-                function () {
-                    $dicTable.bootstrapTable('refresh');
-                    if (id === '0') {
-                        loadDicTree();
-                    }
+                jutils.dialog("修改字典项", '/admin/sysdic/form', { id: id }, null, function () {
+                    $table.easyTable('search');
                 });
-        }
-        function edit(obj) {
-            var id = $(obj).data('id');
-            jutils.dialog('字典信息', '/admin/sysdic/form', { id: id }, null,
-                function () {
-                    $dicTable.bootstrapTable('refresh');
-                    if (pid === '0') {
-                        loadDicTree();
-                    }
-                });
-        }
-
-        function delSingle(obj) {
-            var id = $(obj).data('id');
-            jutils.confirm('确认删除吗', function () {
-                jutils.ajaxGet('/admin/sysdic/del', { ids: id }, function () {
-                    $dicTable.bootstrapTable('refresh');
-                    loadDicTree();
-                });
-            });
-        }
-        function del() {
-            var rows = $dicTable.bootstrapTable('getSelections');
-            if (rows.length === 0) {
-                jutils.warn('请选中需要删除的数据行');
-                return;
             }
 
-            var ids = [];
-            for (var i = 0; i < rows.length; i++) {
+            function removeAll(obj) {
+                const id = $(obj).data('id');
+                let del = false;
+                let ids = [];
+                if (id == 0) {
+                    const rows = $table.easyTable("selected");
+                    if (rows.length == 0) {
+                        jutils.warn("请选择数据行");
+                        return;
+                    }
+                    for (let i = 0; i < rows.length; i++) {
+                        ids.push(rows[i].id);
+                    }
+                } else {
+                    ids.push(id);
+                }
 
-                ids.push(rows[i].id);
 
+                jutils.confirm("确认删除当前字典和字典数据吗？", function () {
+                    jutils.ajaxGet("/admin/sysdic/removeAll", { ids: ids.join() }, function (res) {
+                        if (res.status) {
+                            $table.easyTable('search');
+                        }
+                    });
+                });
             }
 
-            jutils.confirm('确认删除吗', function () {
-                jutils.ajaxGet('/admin/sysdic/del', { ids: ids.join() }, function () {
-                    $dicTable.bootstrapTable('refresh');
-                    loadDicTree();
-                });
-            });
-        }
-    </script>
+            function sonList(obj) {
+                const id = $(obj).data('id');
+                //console.log(id);
+                jutils.openTab("sondic", '字典数据', '/admin/sysdic/sonView?parentId=' + id);
+            }
+
+        </script>
 
 
-}
+    }

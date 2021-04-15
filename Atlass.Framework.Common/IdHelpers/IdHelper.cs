@@ -4,7 +4,6 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Snowflake.Core;
 using Yitter.IdGenerator;
 
@@ -20,6 +19,8 @@ namespace Atlass.Framework.Common
 
         //有序guid
         private static SequentialGuidGenerator _generator = null;
+        //new snowflake
+        private static IIdGenerator _IdGenInstance = null;
         private IdHelper()
         {
         }
@@ -37,8 +38,7 @@ namespace Atlass.Framework.Common
             //_generator = SequentialGuidGenerator.Instance;
 
             //新雪花算法,位数更短
-            var options = new IdGeneratorOptions() { WorkerId = 1 };
-            Yitter.IdGenerator.IdHelper.SetIdGenerator(options);
+            _IdGenInstance = new DefaultIdGenerator(new IdGeneratorOptions() { WorkerId = 1 });
 
         }
 
@@ -84,7 +84,7 @@ namespace Atlass.Framework.Common
         /// <returns></returns>
         public static long NextId()
         {
-            return Yitter.IdGenerator.IdHelper.NextId();
+            return _IdGenInstance.NewLong();
         }
         #endregion
         #region Mongodb ObjectId

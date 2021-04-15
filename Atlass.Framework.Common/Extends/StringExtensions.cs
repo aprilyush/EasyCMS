@@ -199,7 +199,7 @@ namespace System
         /// <param name="startIndex">搜索的开始位置</param>
         /// <param name="positions">位置数组，两个元素分别记录头尾位置</param>
         /// <returns></returns>
-        public static String? Substring(this String str, String after, String? before = null, Int32 startIndex = 0, Int32[]? positions = null)
+        public static String Substring(this String str, String after, String? before = null, Int32 startIndex = 0, Int32[]? positions = null)
         {
             if (String.IsNullOrEmpty(str)) return str;
             if (String.IsNullOrEmpty(after) && String.IsNullOrEmpty(before)) return str;

@@ -23,18 +23,19 @@ namespace Atlass.Framework.AppService
         /// 数据列表
         /// </summary>
         /// <returns></returns>
-        public List<sys_dictionary> GetData()
+        public DataTableDto GetData(DataTableDto dto, string code, string name)
         {
-            return Sqldb.Queryable<sys_dictionary>().OrderBy(s => s.sort_num).ToList();
-        }
+            var query= Sqldb.Queryable<sys_dictionary>()
+                      .Where(s=>s.parent_id==0)
+                      .WhereIf(!code.IsEmpty(),s=>s.dic_code==code)
+                      .WhereIf(!name.IsEmpty(),s=>s.dic_name==name)
+                      .OrderBy(s => s.sort_num)
+                       .Count(out long total)
+                .Page(dto.page, dto.limit).ToList();
 
-        public List<sys_dictionary> GetGridDataBypId(long pid)
-        {
-            //if (pid > 0)
-            //{
-                return Sqldb.Queryable<sys_dictionary>().OrderBy(s => s.sort_num).Where(s => s.parent_id == pid).ToList();
-            //}
-            //return new List<sys_dictionary>();
+            dto.rows = query;
+            dto.total = total;
+            return dto;
         }
         /// <summary>
         /// 新增
@@ -52,10 +53,6 @@ namespace Atlass.Framework.AppService
                     Sqldb.Select<sys_dictionary>().Where(s => s.id == dto.parent_id).First(s => s.dic_code);
 
                 dto.dic_code = dicCode;
-            }
-            else
-            {
-                dto.dic_code = "";
             }
             Sqldb.Insert(dto).ExecuteAffrows();
         }
@@ -96,32 +93,58 @@ namespace Atlass.Framework.AppService
                 var idsArray = ids.SplitToArrayInt64();
 
                 Sqldb.Delete<sys_dictionary>().Where(s=>idsArray.Contains(s.id)).ExecuteAffrows();
+                Sqldb.Delete<sys_dictionary>().Where(s => idsArray.Contains(s.parent_id)).ExecuteAffrows();
             }
         }
 
-
-        public List<sys_dictionary> GetDicSelList()
+        /// <summary>
+        /// 删除子项
+        /// </summary>
+        /// <param name="ids"></param>
+        public void DeleteSonByIds(string ids)
         {
-            return Sqldb.Queryable<sys_dictionary>().Where(s => s.parent_id == 0).ToList();
-        }
-
-        public List<ZtreeDto> GetDicZtree()
-        {
-            var data = Sqldb.Queryable<sys_dictionary>().OrderBy(s=>s.sort_num)
-                .Where(s => s.parent_id == 0).ToList(s=>new ZtreeDto()
+            if (!string.IsNullOrEmpty(ids))
             {
-                id = s.id.ToString(),
-                name = s.dic_name,
-                pId = s.parent_id.ToString()
-            });
+                var idsArray = ids.SplitToArrayInt64();
 
-            return data;
+                Sqldb.Delete<sys_dictionary>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
+            }
         }
 
-
-        public List<sys_dictionary> GetTreeGrid()
+        /// <summary>
+        /// 字典数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="pid"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public DataTableDto GetSonList(DataTableDto dto,long pid,string name)
         {
-            return Sqldb.Queryable<sys_dictionary>().OrderBy(s => s.sort_num).ToList();
+            var query = Sqldb.Queryable<sys_dictionary>()
+                    .Where(s=>s.parent_id==pid)
+                    .WhereIf(!name.IsEmpty(), s => s.dic_name == name)
+                    .OrderBy(s => s.sort_num)
+                     .Count(out long total)
+              .Page(dto.page, dto.limit).ToList();
+
+            dto.rows = query;
+            dto.total = total;
+            return dto;
         }
+
+
+        /// <summary>
+        /// 获取下来数据
+        /// </summary>
+        /// <returns></returns>
+        public List<DicKeyInt64Dto> GetDicSelList()
+        {
+            var query= Sqldb.Queryable<sys_dictionary>()
+                .Where(s => s.parent_id == 0)
+                .OrderBy(s => s.sort_num)
+                .ToList(s=>new DicKeyInt64Dto { id=s.id,name=s.dic_name});
+            return query;
+        }
+
     }
 }

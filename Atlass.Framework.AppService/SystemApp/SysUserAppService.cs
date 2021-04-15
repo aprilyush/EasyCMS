@@ -79,7 +79,6 @@ namespace Atlass.Framework.AppService
         /// <returns></returns>
         public bool CheckUserName(string uname, long id)
         {
-            long count = 0;
             var user = Sqldb.Select<sys_user>().Where(s => s.login_name == uname.Trim()).First();
             if (user == null)
             {

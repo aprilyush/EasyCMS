@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "字典数据";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            字典名称：
+                            @Html.DropDownList("dictParentId", ViewBag.DicList as SelectList)
+                        </li>
+                        <li>
+                            字典标签：<input type="text" id="dictName" />
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="0">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="0">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="0">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger" onclick="cancel()" data-role="0">
+                <i class="fa fa-reply-all"></i>关闭
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+</div>
+
+@section scripts{ 
+    <script type="text/javascript">
+        let $table;
+        $(function () {
+            loadData();
+
+        });
+        function loadData() {
+            let options = {
+                url: '/admin/sysdic/getSonList',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        pid: $('#dictParentId').val(),
+                        name: $('#dictName').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'selectItem', checkbox: true },
+                    {
+                        field: 'dic_name', title: '字典标签', align: "center", formatter(v, r, i) {
+                            return '<span class="badge badge-info">' + v + '</span>';
+                        }
+                    },
+                    { field: 'dic_code', title: '字典编码', align: "center" },
+                    { field: 'sort_num', title: '排序', align: "center" },
+                    { field: 'remark', title: '备注', align: "center" },
+                    { field: 'create_time', title: '创建时间', align: "center" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOperationButton
+                    }
+                ]
+            };
+
+            $table = $('#dataTable').easyTable(options);
+            $table.easyTable('selectedEvent');
+        }
+
+        function renderOperationButton(value, row, index) {
+            let actions = [];
+            actions.push({
+                roleTag: '0',
+                button: '<a class="btn btn-success btn-xs" href="javascript:void(0);" onclick="edit(this);" data-id="' + value + '"><i class="fa fa-edit"></i>编辑</a>'
+            });
+            actions.push({
+                roleTag: '0',
+                button: '<a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="removeAll(this);" data-id="' + value + '"><i class="fa fa-trash"></i>删除</a>'
+            });
+
+            return jutils.buttonPermissions(actions);
+        }
+
+
+        function add() {
+            const parentDictName = $('#dictParentId').selectText();
+            const title = '添加字典项【' + parentDictName + '】的字典数据';
+            jutils.dialog(title, '/admin/sysdic/sonForm', { id: 0, parentId: $('#dictParentId').val() }, null, function () {
+                $table.easyTable('search');
+            });
+        }
+
+        function edit(obj) {
+            let id = $(obj).data('id');
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                id = rows[0].id;
+            }
+            const parentDictName = $('#dictParentId').selectText();
+            const title = '修改字典项【' + parentDictName + '】的字典数据';
+            jutils.dialog(title, '/admin/sysdic/sonForm', { id: id, parentId: $('#dictParentId').val() }, null, function () {
+                $table.easyTable('search');
+            });
+        }
+
+        function removeAll(obj) {
+            const id = $(obj).data('id');
+            let del = false;
+            let ids = [];
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    ids.push(rows[i].id);
+                }
+            } else {
+                ids.push(id);
+            }
+
+
+            jutils.confirm("确认删除字典数据吗？", function () {
+                jutils.ajaxGet("/admin/sysdic/DeleteSonByIds", { ids: ids.join() }, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
+                });
+            });
+        }
+
+        function sonList(obj) {
+            const id = $(obj).data('id');
+            console.log(id);
+        }
+
+        function cancel() {
+            jutils.closeTab('sondic');
+        }
+    </script>
+} 
