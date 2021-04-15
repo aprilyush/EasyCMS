@@ -22,8 +22,8 @@ namespace Atlass.Framework.AppService.SystemApp
         {
             
             var query = Sqldb.Select<easy_log>()
+                .Where(s => s.log_time >= logDate)
                 .WhereIf(logType > 0, s => s.log_type == logType)
-                .Where(s=>s.log_time>=logDate)
                 .WhereIf(!string.IsNullOrEmpty(log_summary), s => s.log_summary == log_summary)
                 .OrderByDescending(s => s.id).Count(out long total).Page(param.page, param.limit).ToList();
             param.total = total;

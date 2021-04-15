@@ -15,6 +15,16 @@
             <a class="btn btn-danger single disabled" onclick="removeAll(this);" data-id="0" data-role="system:hangfire:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
+
+            <a class="btn btn-danger single disabled" onclick="pauseJob(this);" data-id="0" data-role="system:hangfire:pause">
+                <i class="fa fa-power-off"></i> 停止
+            </a>
+            <a class="btn btn-success single disabled" onclick="excuteTask(this);" data-id="0" data-role="system:hangfire:resume">
+                <i class="fa fa-check"></i> 启动
+            </a>
+            <a class="btn btn-primary single disabled" onclick="removeAll(this);" data-id="0" data-role="system:hangfire:excute">
+                <i class="fa fa-bolt"></i> 执行
+            </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="dataTable"></table>
@@ -120,7 +130,12 @@
             }
 
             function pauseJob(obj) {
-                var id = $(obj).data('id');
+                let rows = $table.easyTable('selected');
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                var id = rows[0].id;
                 jutils.confirm('确认停止当前任务吗',
                     function () {
                         jutils.ajaxGet('/admin/hangfireJob/Pause',
@@ -131,7 +146,12 @@
                     });
             }
             function resumeJob(obj) {
-                var id = $(obj).data('id');
+                let rows = $table.easyTable('selected');
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                var id = rows[0].id;
                 jutils.confirm('确认启动当前任务吗',
                     function () {
                         jutils.ajaxGet('/admin/hangfireJob/Resume',
@@ -142,7 +162,12 @@
                     });
             }
             function excuteTask(obj) {
-                var id = $(obj).data('id');
+                let rows = $table.easyTable('selected');
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                var id = rows[0].id;
                 jutils.confirm('确认执行当前任务吗',
                     function () {
                         jutils.ajaxGet('/admin/hangfireJob/excuteJob',
