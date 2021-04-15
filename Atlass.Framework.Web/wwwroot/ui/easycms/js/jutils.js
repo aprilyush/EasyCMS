@@ -300,7 +300,7 @@
         },
         warn: function (msg) {
             msg = msg || '操作警告';
-            jutils.msg(msg,0)
+            jutils.msg(msg,5)
         },
         confirm : function (msg, okfunc) {
             layer.confirm(msg, {
