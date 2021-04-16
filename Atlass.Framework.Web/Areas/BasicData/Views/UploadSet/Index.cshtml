@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "上传设置";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
@@ -14,220 +14,229 @@
         line-height: 20px;
     }
 </style>
-    <div class="ibox">
-        <div class="ibox-content">
-            <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="">
-                    <a href="/BasicData/Site/Index">网站设置</a>
-                </li>
-                <li class="active">
-                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">上传设置</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <form class="form form-horizontal" id="myForm">
-                    <div id="tab-1" class="tab-pane active">
+<div class="container-div white-bg">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#image_set" aria-expanded="true">图片设置</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#attach_set" aria-expanded="false">附件设置</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+                <div id="image_set" class="tab-pane active">
+                    <form class="form form-horizontal" id="imageForm">
                         <input type="hidden" name="id" id="id" value="">
-                        <div class="ibox">
-                            <div class="ibox-title">图片设置</div>
-                            <div class="ibox-content">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label required">水印功能：</label>
-                                    <div class="col-sm-5">
-                                        <div class="radio radio-success radio-inline">
-                                            <input type="radio" id="open_watermark" value="1" name="open_watermark">
-                                            <label for="open_watermark">开启</label>
-                                        </div>
-                                        <div class="radio radio-success radio-inline">
-                                            <input type="radio" id="open_watermark2" value="0" name="open_watermark" checked>
-                                            <label for="open_watermark2">关闭</label>
-                                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required">水印功能：</label>
+                                <div class="col-sm-5">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="open_watermark" value="1" name="open_watermark">
+                                        <label for="open_watermark">开启</label>
+                                    </div>
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="open_watermark2" value="0" name="open_watermark" checked>
+                                        <label for="open_watermark2">关闭</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label required">水印类型：</label>
-                                    <div class="col-sm-5">
-                                        <div class="radio radio-success radio-inline">
-                                            <input type="radio" id="watermark_type" value="0" name="watermark_type">
-                                            <label for="watermark_type">文字</label>
-                                        </div>
-                                        <div class="radio radio-success radio-inline">
-                                            <input type="radio" id="watermark_type2" value="1" name="watermark_type" checked>
-                                            <label for="watermark_type2">图片</label>
-                                        </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required">水印类型：</label>
+                                <div class="col-sm-5">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="watermark_type" value="0" name="watermark_type">
+                                        <label for="watermark_type">文字</label>
+                                    </div>
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="watermark_type2" value="1" name="watermark_type" checked>
+                                        <label for="watermark_type2">图片</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">水印条件：</label>
-                                    <div class="col-sm-5">
-                                        <p><input type="number" name="image_width" id="image_width" value="" class="form-control" style="width:150px;">图片宽度 单位像素(px)</p>
-                                        <p><input type="number" name="image_height" id="image_height" value="" class="form-control" style="width:150px;">图片高度 单位像素(px)</p>
-                                        提示：图片宽度和高度至少要达到以上像素才能添加水印
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">水印条件：</label>
+                                <div class="col-sm-5">
+                                    <p><input type="number" name="image_width" id="image_width" value="" class="form-control" style="width:150px;">图片宽度 单位像素(px)</p>
+                                    <p><input type="number" name="image_height" id="image_height" value="" class="form-control" style="width:150px;">图片高度 单位像素(px)</p>
+                                    提示：图片宽度和高度至少要达到以上像素才能添加水印
                                 </div>
+                            </div>
 
-                                <div id="waterImageDiv">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">水印图片：</label>
-                                        <div class="col-sm-5">
-                                            <div class="cupload-upload-box" id="logo_uploader">
-                                                <span class="cupload-upload-btn">+</span>
-                                            </div>
-                                            <ul class="cupload-image-boxs" id="logo">
-                                            </ul>
-                                            <input type="hidden" name="watermark_image" id="watermark_image" value="" class="form-control">
+                            <div id="waterImageDiv">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">水印图片：</label>
+                                    <div class="col-sm-5">
+                                        <div class="cupload-upload-box" id="logo_uploader">
+                                            <span class="cupload-upload-btn">+</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">水印透明度(0-10)：</label>
-                                        <div class="col-sm-5">
-                                            <input type="number" name="image_opacity" id="watermark_image" value="6" class="form-control" min="1" max="10" style="width:200px;" data-rule="integer[+]; range[1~10]">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">水印质量(0-100)：</label>
-                                        <div class="col-sm-5">
-                                            <input type="number" name="image_quality" id="image_quality" value="70" class="form-control" min="1" max="100" style="width: 200px;" data-rule="integer[+]; range[1~100]">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="waterWordDiv" style="display:none;">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">水印文字：</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" name="watermark_word" id="watermark_word" value="" class="form-control" style="width: 200px;">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">字体大小：</label>
-                                        <div class="col-sm-5">
-                                            <input type="number" name="font_size" id="font_size" value="" class="form-control" style="width: 200px;">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">文字颜色：</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" name="font_color" id="font_color" value="" class="form-control" style="width: 200px;">
-                                        </div>
+                                        <ul class="cupload-image-boxs" id="logo">
+                                        </ul>
+                                        <input type="hidden" name="watermark_image" id="watermark_image" value="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">水印位置：</label>
+                                    <label class="col-sm-2 control-label">水印透明度(0-10)：</label>
                                     <div class="col-sm-5">
-                                        <table class="table table-bordered" style="width: 400px;">
-                                            <tr>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion" value="1" name="water_postion">
-                                                        <label for="water_postion">顶部居左</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion2" value="2" name="water_postion">
-                                                        <label for="water_postion2">顶部居中</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion3" value="3" name="water_postion">
-                                                        <label for="water_postion3">顶部居右</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion4" value="4" name="water_postion">
-                                                        <label for="water_postion4">中部居左</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion5" value="5" name="water_postion">
-                                                        <label for="water_postion5">中部居中</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion6" value="6" name="water_postion">
-                                                        <label for="water_postion6">中部居右</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion7" value="7" name="water_postion">
-                                                        <label for="water_postion7">底部居左</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion8" value="8" name="water_postion">
-                                                        <label for="water_postion8">底部居中</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="radio radio-success radio-inline">
-                                                        <input type="radio" id="water_postion9" value="9" name="water_postion">
-                                                        <label for="water_postion9">底部居右</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <input type="number" name="image_opacity" id="image_opacity" value="6" class="form-control" min="1" max="10" style="width:200px;" data-rule="integer[+]; range[1~10]">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">水印质量(0-100)：</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" name="image_quality" id="image_quality" value="70" class="form-control" min="1" max="100" style="width: 200px;" data-rule="integer[+]; range[1~100]">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="ibox">
-                            <div class="ibox-title">附件设置</div>
-                            <div class="ibox-content">
+                            <div id="waterWordDiv" style="display:none;">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label required">允许上传的图片类型：</label>
+                                    <label class="col-sm-2 control-label">水印文字：</label>
                                     <div class="col-sm-5">
-                                        <textarea rows="3" cols="100" id="image_extname" name="image_extname"></textarea>
+                                        <input type="text" name="watermark_word" id="watermark_word" value="" class="form-control" style="width: 200px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">允许上传的附件类型：</label>
+                                    <label class="col-sm-2 control-label">字体大小：</label>
                                     <div class="col-sm-5">
-                                        <textarea rows="3" cols="100" id="attache_extname" name="attache_extname"></textarea>
+                                        <input type="number" name="font_size" id="font_size" value="" class="form-control" style="width: 200px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">视频文件类型：</label>
+                                    <label class="col-sm-2 control-label">文字颜色：</label>
                                     <div class="col-sm-5">
-                                        <textarea rows="3" cols="100" id="media_extname" name="media_extname"></textarea>
+                                        <input type="text" name="font_color" id="font_color" value="" class="form-control" style="width: 200px;">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">附件上传大小：</label>
-                                    <div class="col-sm-5">
-                                        <input type="number" name="max_file_size" id="max_file_size" value="20" min="1" class="form-control" style="width: 200px;">MB
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">水印位置：</label>
+                                <div class="col-sm-5">
+                                    <table class="table table-bordered" style="width: 400px;">
+                                        <tr>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion" value="1" name="water_postion">
+                                                    <label for="water_postion">顶部居左</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion2" value="2" name="water_postion">
+                                                    <label for="water_postion2">顶部居中</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion3" value="3" name="water_postion">
+                                                    <label for="water_postion3">顶部居右</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion4" value="4" name="water_postion">
+                                                    <label for="water_postion4">中部居左</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion5" value="5" name="water_postion">
+                                                    <label for="water_postion5">中部居中</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion6" value="6" name="water_postion">
+                                                    <label for="water_postion6">中部居右</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion7" value="7" name="water_postion">
+                                                    <label for="water_postion7">底部居左</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion8" value="8" name="water_postion">
+                                                    <label for="water_postion8">底部居中</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="radio radio-success radio-inline">
+                                                    <input type="radio" id="water_postion9" value="9" name="water_postion">
+                                                    <label for="water_postion9">底部居右</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">视频文件上传大小：</label>
-                                    <div class="col-sm-5">
-                                        <input type="number" name="max_media_size" id="max_media_size" value="20" min="1" class="form-control" style="width: 200px;">MB
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
-                    </div>
-                    <div class="footerbar">
-                        <div class="col-sm-12 col-sm-offset-3">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
-                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                        <div class="footerbar">
+                            <div class="col-sm-12 col-sm-offset-5">
+                                <button class="btn btn-primary" type="button" onclick="save()">
+                                    <i class="fa fa-check"></i>保存图片设置
+                                </button>
+                                <button class="btn btn-danger" type="button" onclick="cancel()">
+                                    <i class="fa fa-reply-all"></i>关闭
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+                <div id="attach_set" class="tab-pane">
+                    <form class="form form-horizontal" id="attachForm">
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required">允许上传的图片类型：</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="3" cols="100" id="image_extname" name="image_extname"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">允许上传的附件类型：</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="3" cols="100" id="attache_extname" name="attache_extname"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">视频文件类型：</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="3" cols="100" id="media_extname" name="media_extname"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">附件上传大小（MB）：</label>
+                                <div class="col-sm-5">
+                                    <input type="number" name="max_file_size" id="max_file_size" value="20" min="1" class="form-control" style="width: 200px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">视频文件上传大小（MB）：</label>
+                                <div class="col-sm-5">
+                                    <input type="number" name="max_media_size" id="max_media_size" value="20" min="1" class="form-control" style="width: 200px;">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="footerbar">
+                            <div class="col-sm-12 col-sm-offset-5">
+                                <button class="btn btn-primary" type="button" onclick="save();">
+                                    <i class="fa fa-check"></i>保存附件设置
+                                </button>
+                                <button class="btn btn-danger" type="button" onclick="cancel()"><i class="fa fa-reply-all"></i>关闭</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
         </div>
+
     </div>
 </div>
 
@@ -266,28 +275,39 @@
             });
 
 
-            $('#myForm').validator({
-                stopOnError: false,
-                timely: 2,
-                theme: "yellow_right",
-                valid: function (form) {
-                    // 表单验证通过，提交表单
-                    jutils.ajaxPost('/BasicData/UploadSet/Save', $(form).serialize(),
-                        function (res) {
+            //$('#myForm').validator({
+            //    stopOnError: false,
+            //    timely: 2,
+            //    theme: "yellow_right",
+            //    valid: function (form) {
+            //        // 表单验证通过，提交表单
+            //        jutils.ajaxPost('/BasicData/UploadSet/Save', $(form).serialize(),
+            //            function (res) {
 
-                        });
-                }
-            });
+            //            });
+            //    }
+            //});
 
             loadData();
             initUpload();
         });
+
+        function save() {
+            var imageModel = $('#imageForm').getFormData();
+            var attachModel = $('#attachForm').getFormData();
+            var data = Object.assign(imageModel, attachModel);
+            jutils.ajaxPost('/BasicData/UploadSet/Save', data,
+                        function (res) {
+
+                       });
+        }
         function loadData() {
             var id = jutils.getQueryParam("id");
             jutils.ajaxGet('/BasicData/UploadSet/getmodel', null, function (res) {
                 if (res.status) {
                     var model = res.data.model
-                    $('#myForm').initFormData(model);
+                    $('#imageForm').initFormData(model);
+                    $('#attachForm').initFormData(model);
                     if (model.watermark_type == 0){
                         $('#waterImageDiv').hide();
                         $('#waterWordDiv').show();
@@ -353,7 +373,7 @@
             })
         }
         function cancel() {
-
+            jutils.closeTab();
         }
     </script>
 }

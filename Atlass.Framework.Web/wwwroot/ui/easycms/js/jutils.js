@@ -527,11 +527,11 @@
       },
       refreshTab: function () {
           refreshItem();
-        },
+       },
      parentTab: function (title, url) {
             //选卡页同一页签打开
         var dataId = window.frameElement.getAttribute('data-id');
-        createMenuItem(url, title);
+         createMenuItem(dataId,url, title);
         closeItem(dataId);
     },
     // 关闭选项卡

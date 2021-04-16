@@ -23,14 +23,14 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         }
 
         [HttpGet]
-        [RequirePermission("site:set:view")]
+        [RequirePermission("site:uploadset:view")]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [RequirePermission("site:set:view")]
+        [RequirePermission("site:uploadset:view")]
         public IActionResult GetModel()
         {
             var result = new ResultAdaptDto();
@@ -41,7 +41,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
 
 
         [HttpPost]
-        [RequirePermission("site:set:view")]
+        [RequirePermission("site:uploadset:view")]
         public IActionResult Save(cms_upload_set dto)
         {
             var upload = _uploadSetApp.SaveSite(dto);
