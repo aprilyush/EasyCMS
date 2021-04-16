@@ -9,7 +9,7 @@
     <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
-    <PackageReference Include="Mapster" Version="7.1.5" />
+    <PackageReference Include="Mapster" Version="7.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 

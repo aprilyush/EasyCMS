@@ -28,15 +28,15 @@
     <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
-    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.19" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.4" />
-    <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.1.13" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
+    <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.1.14" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Senparc.Weixin.MP" Version="16.11.200" />
-    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.6.200.2" />
-    <PackageReference Include="Serilog.AspNetCore" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
+    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.6.400" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
