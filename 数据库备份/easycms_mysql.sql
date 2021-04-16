@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50726
  Source Host           : localhost:3306
- Source Schema         : easy_cms
+ Source Schema         : easycms_net5
 
  Target Server Type    : MySQL
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 19/06/2020 16:46:34
+ Date: 16/04/2021 08:45:55
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,7 @@ CREATE TABLE `cms_ad`  (
 -- ----------------------------
 -- Records of cms_ad
 -- ----------------------------
-INSERT INTO `cms_ad` VALUES (1, 'å›½åº†å‘¨å¹´', 'www.badu.com', '/upfiles/images/20200618/5eeb525dc4cd292320311058.jpg', 1, 100, 150, '2020-06-18 19:39:13', 11297175912976384);
+INSERT INTO `cms_ad` VALUES (1, '广告测试', 'www.badu.com', '/upfiles/images/20200618/5eeb525dc4cd292320311058.jpg', 1, 100, 150, '2020-06-22 11:35:01', 11297175912976384);
 
 -- ----------------------------
 -- Table structure for cms_channel
@@ -71,6 +71,7 @@ INSERT INTO `cms_channel` VALUES (7, '通知公告', '通知公告', 4, '/upfile
 INSERT INTO `cms_channel` VALUES (8, '联系我们', '联系我们', 4, '/upfiles/images/20200529/5ed06558569ee4607c7214aa.png', '', 5, '2020-05-19 12:33:01', 11297175912976384, 0, 0, 0, 1);
 INSERT INTO `cms_channel` VALUES (9, '公司相册', '公司相册', 4, '/upfiles/images/20200529/5ed069c7569ee46898974956.png', '', 6, '2020-05-19 12:39:49', 11297175912976384, 7, 0, 1, 0);
 INSERT INTO `cms_channel` VALUES (10, 'Banner', 'Banner', 4, '/upfiles/images/20200529/5ed069c1569ee46898974955.png', '', 10, '2020-05-19 12:41:15', 11297175912976384, 0, 0, 1, 0);
+INSERT INTO `cms_channel` VALUES (11, '新闻中心', '新闻中心', 6, '/upfiles/images/20200529/5ed06540569ee4607c7214a7.png', '', 1, '2020-05-20 10:13:59', 11297175912976384, 7, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for cms_content
@@ -99,7 +100,7 @@ CREATE TABLE `cms_content`  (
   `hit_count` int(11) NOT NULL DEFAULT 0,
   `is_recommend` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_content
@@ -124,7 +125,8 @@ INSERT INTO `cms_content` VALUES (21, '真源新闻内容哦', '真源的新闻�
 INSERT INTO `cms_content` VALUES (22, '推出定制跑鞋和机器人工厂，阿迪达斯找到未来的方向了吗？', '做汽车维修技师的在线学习和技术支持平台，「总监修车」目前已有1800多家付费用户', '<p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"box-sizing: border-box; font-weight: 700;\"><span style=\"box-sizing: border-box; font-size: 20px;\">关键词：</span></span><span style=\"box-sizing: border-box; font-size: 20px;\">响应式、</span><span style=\"box-sizing: border-box; font-size: 20px;\">HTML5、企业展示、图片新闻列表、手机端</span></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; line-height: 2em;\"><span style=\"box-sizing: border-box; font-size: 20px;\">&nbsp; &nbsp; &nbsp; &nbsp;<span style=\"box-sizing: border-box; font-size: 16px;\">这是一套响应式网站模版，适应于企业、产品型公司以及各种企业集团网站模板所有图片在手机端都进行过处理</span></span>，基于bootstrap响应式布局，可切换主题颜色，兼容PC、平板、手机等主流媒体浏览。</p><p><br/></p>', '', '/upfiles/images/20200603/a17fc9e062814c09b30d37c7d21b1652.jpg', 0, 6, 0, '', 1, 1, '', '', 11297175912976384, '2020-06-03 16:20:30', 0, '2020-06-03 16:20:30', '', 0, 0);
 INSERT INTO `cms_content` VALUES (23, 'jasonyu', '真源的新闻内容', '<p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"box-sizing: border-box; font-weight: 700;\"><span style=\"box-sizing: border-box; font-size: 20px;\">关键词：</span></span><span style=\"box-sizing: border-box; font-size: 20px;\">响应式、</span><span style=\"box-sizing: border-box; font-size: 20px;\">HTML5、企业展示、图片新闻列表、手机端</span></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; line-height: 2em;\"><span style=\"box-sizing: border-box; font-size: 20px;\">&nbsp; &nbsp; &nbsp; &nbsp;<span style=\"box-sizing: border-box; font-size: 16px;\">这是一套响应式网站模版，适应于企业、产品型公司以及各种企业集团网站模板所有图片在手机端都进行过处理</span></span>，基于bootstrap响应式布局，可切换主题颜色，兼容PC、平板、手机等主流媒体浏览。</p><p><br/></p>', '', '/upfiles/images/20200603/4338cd8953654cf8add9e153053b7a79.jpg', 0, 6, 0, '', 1, 0, '', '', 11297175912976384, '2020-06-03 16:20:37', 0, '2020-06-03 16:20:37', '', 0, 1);
 INSERT INTO `cms_content` VALUES (24, '联系我们', '技术人员正在对一次风机静心验收', '<p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"box-sizing: border-box; font-weight: 700;\"><span style=\"box-sizing: border-box; font-size: 20px;\">关键词：</span></span><span style=\"box-sizing: border-box; font-size: 20px;\">响应式、</span><span style=\"box-sizing: border-box; font-size: 20px;\">HTML5、企业展示、图片新闻列表、手机端</span></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; line-height: 2em;\"><span style=\"box-sizing: border-box; font-size: 20px;\">&nbsp; &nbsp; &nbsp; &nbsp;<span style=\"box-sizing: border-box; font-size: 16px;\">这是一套响应式网站模版，适应于企业、产品型公司以及各种企业集团网站模板所有图片在手机端都进行过处理</span></span>，基于bootstrap响应式布局，可切换主题颜色，兼容PC、平板、手机等主流媒体浏览。</p><p><br/></p>', '', '/upfiles/images/20200603/4b342cc162224f2f9fa1a74bdfb48de0.jpg', 0, 6, 0, '', 1, 1, '', '', 11297175912976384, '2020-06-03 16:20:44', 0, '2020-06-03 16:20:44', '', 0, 0);
-INSERT INTO `cms_content` VALUES (25, '我的第一篇博客', '技术人员正在对一次风机静心验收', '<p style=\"text-align:center\"><img id=\"20200619150329\" class=\"easycms-player\" src=\"/static/images/video-clip.png\" player=\"h5\" playurl=\"/upfiles/videos/20200619/5eec633d569ee4192065b235.mp4\" style=\"width:400px; height: 400px;\"/></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"box-sizing: border-box; font-weight: 700;\"><span style=\"box-sizing: border-box; font-size: 20px;\">关键词：</span></span><span style=\"box-sizing: border-box; font-size: 20px;\">响应式、</span><span style=\"box-sizing: border-box; font-size: 20px;\">HTML5、企业展示、图片新闻列表、手机端</span><br/></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; line-height: 2em;\"><span style=\"box-sizing: border-box; font-size: 20px;\">&nbsp; &nbsp; &nbsp; &nbsp;<span style=\"box-sizing: border-box; font-size: 16px;\">这是一套响应式网站模版，适应于企业、产品型公司以及各种企业集团网站模板所有图片在手机端都进行过处理</span></span>，基于bootstrap响应式布局，可切换主题颜色，兼容PC、平板、手机等主流媒体浏览。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 附件&nbsp;<a href=\"http://192.168.1.210:9005/upfiles/videos/20200616/5ee81bd9569ee451d0f892d3.rar\" style=\"text-align: center; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 20px; font-weight: 700; background-color: rgb(236, 236, 236);\">publish.rar</a><br/></p>', '', '/upfiles/images/20200603/57a613b3d0d34e308859aa76d6f23bba.jpg', 0, 6, 0, '', 1, 1, '于硕', '软件开发部', 11297175912976384, '2020-06-03 16:21:00', 0, '2020-06-03 16:21:00', '', 110, 1);
+INSERT INTO `cms_content` VALUES (25, '我的第一篇博客', '', '<p style=\"text-align:center\"><img id=\"20200619150329\" class=\"easycms-player\" src=\"/static/images/video-clip.png\" player=\"h5\" playurl=\"/upfiles/videos/20200619/5eec633d569ee4192065b235.mp4\" style=\"width:400px; height: 400px;\"/></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"box-sizing: border-box; font-weight: 700;\"><span style=\"box-sizing: border-box; font-size: 20px;\">关键词：</span></span><span style=\"box-sizing: border-box; font-size: 20px;\">响应式、</span><span style=\"box-sizing: border-box; font-size: 20px;\">HTML5、企业展示、图片新闻列表、手机端</span><br/></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; font-size: 12.88px; white-space: normal; background-color: rgb(236, 236, 236); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; line-height: 2em;\"><span style=\"box-sizing: border-box; font-size: 20px;\">&nbsp; &nbsp; &nbsp; &nbsp;<span style=\"box-sizing: border-box; font-size: 16px;\">这是一套响应式网站模版，适应于企业、产品型公司以及各种企业集团网站模板所有图片在手机端都进行过处理</span></span>，基于bootstrap响应式布局，可切换主题颜色，兼容PC、平板、手机等主流媒体浏览。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 附件&nbsp;<a href=\"http://192.168.1.210:9005/upfiles/videos/20200616/5ee81bd9569ee451d0f892d3.rar\" style=\"text-align: center; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 20px; font-weight: 700; background-color: rgb(236, 236, 236);\">publish.rar</a><br/></p>', '', '/upfiles/images/20200603/57a613b3d0d34e308859aa76d6f23bba.jpg', 0, 6, 0, '', 1, 1, '于硕', '软件开发部', 11297175912976384, '2020-06-03 16:21:00', 0, '2020-06-03 16:21:00', '', 110, 1);
+INSERT INTO `cms_content` VALUES (26, '文章待审核', '', '<p>大萨达撒</p>', '', '', 0, 1, 0, '', 0, 0, '', '', 11297175912976384, '2020-06-19 17:16:31', 0, '0001-01-01 00:00:00', '', 1, 0);
 
 -- ----------------------------
 -- Table structure for cms_content_image
@@ -263,7 +265,7 @@ CREATE TABLE `cms_upload_set`  (
 -- ----------------------------
 -- Records of cms_upload_set
 -- ----------------------------
-INSERT INTO `cms_upload_set` VALUES (1, 1, 1, 300, 150, '/static/images/logo.png', 6, 60, 9, 'EasyCMS', 50, '#e81c9a', 'gif,jpg,jpeg,bmp,png,pneg,webp', 'asf,asx,avi,flv,mid,midi,mov,mp3,mp4,mpg,mpeg,ogg,ra,rm,rmb,rmvb,rp,rt,smi,swf,wav,webm,wma,wmv', 'zip,rar,7z,js,css,txt,doc,docx,ppt,pptx,xls,xlsx,pdf', 300, 500);
+INSERT INTO `cms_upload_set` VALUES (1, 1, 1, 300, 150, '/static/images/logo.png', 6, 60, 9, 'EasyCMS', 50, '#e81c9a', 'gif,jpg,jpeg,bmp,png,pneg,webp', 'flv,mid,midi,mov,mp3,mp4,mpg,mpeg,ogg', 'zip,rar,7z,js,css,txt,doc,docx,ppt,pptx,xls,xlsx,pdf', 300, 500);
 
 -- ----------------------------
 -- Table structure for cms_visit
@@ -275,7 +277,7 @@ CREATE TABLE `cms_visit`  (
   `browser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `visit_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_visit
@@ -335,6 +337,26 @@ INSERT INTO `cms_visit` VALUES (52, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10
 INSERT INTO `cms_visit` VALUES (53, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-19 15:03:33');
 INSERT INTO `cms_visit` VALUES (54, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-19 15:35:32');
 INSERT INTO `cms_visit` VALUES (55, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-19 16:10:20');
+INSERT INTO `cms_visit` VALUES (56, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-19 17:17:11');
+INSERT INTO `cms_visit` VALUES (57, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-22 10:06:15');
+INSERT INTO `cms_visit` VALUES (58, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-22 10:37:29');
+INSERT INTO `cms_visit` VALUES (59, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-22 11:18:02');
+INSERT INTO `cms_visit` VALUES (60, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-22 11:18:03');
+INSERT INTO `cms_visit` VALUES (61, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-06-22 11:18:06');
+INSERT INTO `cms_visit` VALUES (62, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-08-17 09:59:10');
+INSERT INTO `cms_visit` VALUES (63, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-08-17 12:52:28');
+INSERT INTO `cms_visit` VALUES (64, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-08-17 14:38:24');
+INSERT INTO `cms_visit` VALUES (65, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-11-02 10:58:14');
+INSERT INTO `cms_visit` VALUES (66, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-11-06 16:12:43');
+INSERT INTO `cms_visit` VALUES (67, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-11-16 09:33:46');
+INSERT INTO `cms_visit` VALUES (68, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-11-17 11:10:30');
+INSERT INTO `cms_visit` VALUES (69, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', '2020-11-19 13:58:39');
+INSERT INTO `cms_visit` VALUES (70, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2020-12-23 11:18:54');
+INSERT INTO `cms_visit` VALUES (71, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2020-12-28 16:02:12');
+INSERT INTO `cms_visit` VALUES (72, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2021-03-10 10:55:01');
+INSERT INTO `cms_visit` VALUES (73, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2021-03-15 09:42:08');
+INSERT INTO `cms_visit` VALUES (74, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2021-03-30 10:10:15');
+INSERT INTO `cms_visit` VALUES (75, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2021-03-31 08:42:23');
 
 -- ----------------------------
 -- Table structure for easy_log
@@ -346,18 +368,232 @@ CREATE TABLE `easy_log`  (
   `log_message` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `log_type` tinyint(2) NOT NULL,
   `log_time` datetime(0) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 601 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_time`(`log_time`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of easy_log
 -- ----------------------------
-INSERT INTO `easy_log` VALUES (595, 'hangfireJob任务', '2020/6/19 14:54:55', 1, '2020-06-19 14:54:55');
-INSERT INTO `easy_log` VALUES (596, 'hangfireJob任务', '2020/6/19 15:00:10', 1, '2020-06-19 15:00:10');
-INSERT INTO `easy_log` VALUES (597, '日志信息', '渲染内容页耗时：244 ms', 1, '2020-06-19 15:03:33');
-INSERT INTO `easy_log` VALUES (598, '日志信息', '渲染内容页耗时：104 ms', 1, '2020-06-19 15:35:33');
-INSERT INTO `easy_log` VALUES (599, 'hangfireJob任务', '2020/6/19 16:00:12', 1, '2020-06-19 16:00:12');
-INSERT INTO `easy_log` VALUES (600, '日志信息', '渲染内容页耗时：103 ms', 1, '2020-06-19 16:10:20');
+INSERT INTO `easy_log` VALUES (1, '自定义500页面异常', 'System.Exception: 自定义500页面异常\r\n   at Atlass.Framework.Web.Controllers.LoginController.Init() in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Web\\Controllers\\lOGINController.cs:line 101\r\n   at lambda_method626(Closure , Object , Object[] )\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2021-04-15 14:59:55');
+INSERT INTO `easy_log` VALUES (2, 'hangfireJob任务', '2021/4/15 15:00:22', 1, '2021-04-15 15:00:23');
+INSERT INTO `easy_log` VALUES (3, 'hangfireJob任务', '2021/4/15 15:00:23', 1, '2021-04-15 15:00:23');
+INSERT INTO `easy_log` VALUES (4, 'hangfireJob任务', '2021/4/15 15:00:23', 1, '2021-04-15 15:00:24');
+INSERT INTO `easy_log` VALUES (5, 'hangfireJob任务', '2021/4/15 15:00:23', 1, '2021-04-15 15:00:24');
+INSERT INTO `easy_log` VALUES (6, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:24');
+INSERT INTO `easy_log` VALUES (7, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:24');
+INSERT INTO `easy_log` VALUES (8, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:25');
+INSERT INTO `easy_log` VALUES (9, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:25');
+INSERT INTO `easy_log` VALUES (10, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:25');
+INSERT INTO `easy_log` VALUES (11, 'hangfireJob任务', '2021/4/15 15:00:24', 1, '2021-04-15 15:00:25');
+INSERT INTO `easy_log` VALUES (12, 'hangfireJob任务', '2021/4/15 15:00:25', 1, '2021-04-15 15:00:25');
+INSERT INTO `easy_log` VALUES (13, 'hangfireJob任务', '2021/4/15 15:00:25', 1, '2021-04-15 15:00:26');
+INSERT INTO `easy_log` VALUES (14, 'hangfireJob任务', '2021/4/15 15:00:25', 1, '2021-04-15 15:00:26');
+INSERT INTO `easy_log` VALUES (15, 'hangfireJob任务', '2021/4/15 15:00:26', 1, '2021-04-15 15:00:26');
+INSERT INTO `easy_log` VALUES (16, 'hangfireJob任务', '2021/4/15 15:00:27', 1, '2021-04-15 15:00:27');
+INSERT INTO `easy_log` VALUES (17, 'hangfireJob任务', '2021/4/15 15:00:28', 1, '2021-04-15 15:00:28');
+INSERT INTO `easy_log` VALUES (18, 'hangfireJob任务', '2021/4/15 15:00:28', 1, '2021-04-15 15:00:29');
+INSERT INTO `easy_log` VALUES (19, 'hangfireJob任务', '2021/4/15 15:00:29', 1, '2021-04-15 15:00:29');
+INSERT INTO `easy_log` VALUES (20, '自定义500页面异常', 'System.Exception: 自定义500页面异常\r\n   at Atlass.Framework.Web.Controllers.LoginController.Init() in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Web\\Controllers\\lOGINController.cs:line 102\r\n   at lambda_method570(Closure , Object , Object[] )\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2021-04-15 15:22:53');
+INSERT INTO `easy_log` VALUES (21, 'hangfireJob任务', '2021/4/15 16:00:22', 1, '2021-04-15 16:00:22');
+INSERT INTO `easy_log` VALUES (22, 'hangfireJob任务', '2021/4/15 16:00:22', 1, '2021-04-15 16:00:23');
+INSERT INTO `easy_log` VALUES (23, 'hangfireJob任务', '2021/4/15 16:00:23', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (24, 'hangfireJob任务', '2021/4/15 16:00:23', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (25, 'hangfireJob任务', '2021/4/15 16:00:23', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (26, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (27, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (28, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (29, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:24');
+INSERT INTO `easy_log` VALUES (30, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:25');
+INSERT INTO `easy_log` VALUES (31, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:25');
+INSERT INTO `easy_log` VALUES (32, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:25');
+INSERT INTO `easy_log` VALUES (33, 'hangfireJob任务', '2021/4/15 16:00:24', 1, '2021-04-15 16:00:25');
+INSERT INTO `easy_log` VALUES (34, 'hangfireJob任务', '2021/4/15 16:00:25', 1, '2021-04-15 16:00:25');
+INSERT INTO `easy_log` VALUES (35, 'hangfireJob任务', '2021/4/15 16:00:25', 1, '2021-04-15 16:00:26');
+INSERT INTO `easy_log` VALUES (36, 'hangfireJob任务', '2021/4/15 16:00:25', 1, '2021-04-15 16:00:26');
+INSERT INTO `easy_log` VALUES (37, 'hangfireJob任务', '2021/4/15 16:00:26', 1, '2021-04-15 16:00:26');
+INSERT INTO `easy_log` VALUES (38, 'hangfireJob任务', '2021/4/15 16:00:26', 1, '2021-04-15 16:00:27');
+INSERT INTO `easy_log` VALUES (39, 'hangfireJob任务', '2021/4/15 16:00:26', 1, '2021-04-15 16:00:27');
+INSERT INTO `easy_log` VALUES (40, 'hangfireJob任务', '2021/4/15 16:00:26', 1, '2021-04-15 16:00:27');
+INSERT INTO `easy_log` VALUES (41, 'hangfireJob任务', '2021/4/15 17:00:12', 1, '2021-04-15 17:00:13');
+
+-- ----------------------------
+-- Table structure for exam_record
+-- ----------------------------
+DROP TABLE IF EXISTS `exam_record`;
+CREATE TABLE `exam_record`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '课程代码',
+  `course_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '课程名称',
+  `course_score` int(255) NOT NULL COMMENT '得分',
+  `exam_time` datetime(0) NOT NULL COMMENT '考试时间',
+  `remark` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '备注',
+  `course_flag` int(255) NOT NULL COMMENT '专业课1：是 0：你收',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of exam_record
+-- ----------------------------
+INSERT INTO `exam_record` VALUES (1, '00015', '英语（二）', 89, '2019-04-14 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (2, '03708', '中国近现代史纲要', 70, '2019-04-13 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (3, '03709', '马克思主义基本原理概论', 72, '2019-04-13 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (4, '03871', '市场调查与市场分析', 64, '2020-08-01 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (5, '05962', '招聘管理', 66, '2019-06-29 00:00:00', '                    ', 1);
+INSERT INTO `exam_record` VALUES (6, '05963', '绩效管理', 68, '2019-10-20 00:00:00', '                    ', 1);
+INSERT INTO `exam_record` VALUES (7, '06090', '人员素质测评理论与方法', 61, '2020-01-05 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (8, '06091', '薪酬管理', 60, '2019-10-20 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (9, '06092', '工作分析', 62, '2020-04-01 00:00:00', '2020年10月17日 上午 ：52\r\n2019年10月19日 上午 ：62', 1);
+INSERT INTO `exam_record` VALUES (10, '06093', '人力资源开发与管理', 54, '2020-08-01 00:00:00', '2020年08月01日 下午    48\r\n2019年06月30日 下午    54\r\n', 1);
+INSERT INTO `exam_record` VALUES (11, '10052', '职业生涯规划与管理', 71, '2019-04-14 00:00:00', '                    ', 1);
+INSERT INTO `exam_record` VALUES (12, '30466', '员工关系管理', 62, '2019-10-19 00:00:00', '                    ', 0);
+INSERT INTO `exam_record` VALUES (13, '30584', '员工培训管理', 65, '2020-08-03 00:00:00', '2020年08月03日 下午  65\r\n2020年01月04日 下午   49', 0);
+
+-- ----------------------------
+-- Table structure for fh_product
+-- ----------------------------
+DROP TABLE IF EXISTS `fh_product`;
+CREATE TABLE `fh_product`  (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '产品名称',
+  `sort_num` int(11) NOT NULL COMMENT '排序',
+  `create_time` datetime(0) NOT NULL,
+  `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `product_type` int(255) NOT NULL COMMENT '0-产品，1-调配工时',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fh_product
+-- ----------------------------
+INSERT INTO `fh_product` VALUES (1, 'PT289', 1, '2021-03-30 11:25:54', 'admin', 0, '备注');
+INSERT INTO `fh_product` VALUES (2, '调配工时', 2, '2021-03-30 11:40:06', 'admin', 1, '独立计算');
+
+-- ----------------------------
+-- Table structure for fh_product_process
+-- ----------------------------
+DROP TABLE IF EXISTS `fh_product_process`;
+CREATE TABLE `fh_product_process`  (
+  `id` bigint(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
+  `process_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '工序名称',
+  `sort_num` int(255) NOT NULL,
+  `fix_num` int(11) NOT NULL COMMENT '产品的定额数量',
+  `process_type` int(255) NOT NULL COMMENT '0-产品，1-调配工时',
+  `deploy_hour` decimal(5, 1) NOT NULL COMMENT '调配的工时',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fh_product_process
+-- ----------------------------
+INSERT INTO `fh_product_process` VALUES (142989528420421, 1, '镭刻', 1, 3000, 0, 0.0);
+INSERT INTO `fh_product_process` VALUES (142989528424517, 1, '打胶', 2, 5000, 0, 0.0);
+INSERT INTO `fh_product_process` VALUES (142993017999429, 2, '调配工时', 1, 0, 1, 1.5);
+
+-- ----------------------------
+-- Table structure for fh_staff
+-- ----------------------------
+DROP TABLE IF EXISTS `fh_staff`;
+CREATE TABLE `fh_staff`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `hiredate` datetime(0) NOT NULL,
+  `create_time` datetime(0) NOT NULL,
+  `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `staff_disable` int(255) NOT NULL COMMENT '0-正常，1-禁用',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fh_staff
+-- ----------------------------
+INSERT INTO `fh_staff` VALUES (1, '蒲晓渝', '2021-03-30 00:00:00', '2021-03-30 10:15:53', 'admin', 0);
+INSERT INTO `fh_staff` VALUES (2, '蒲华磊', '2017-03-30 00:00:00', '2021-03-30 10:16:02', 'admin', 0);
+INSERT INTO `fh_staff` VALUES (3, '于硕', '2021-03-30 00:00:00', '2021-03-30 10:20:13', 'admin', 0);
+
+-- ----------------------------
+-- Table structure for fh_time_bill
+-- ----------------------------
+DROP TABLE IF EXISTS `fh_time_bill`;
+CREATE TABLE `fh_time_bill`  (
+  `id` bigint(11) NOT NULL,
+  `staff_id` int(11) NOT NULL COMMENT '员工id',
+  `staff_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '员工名称',
+  `work_num` int(11) NOT NULL COMMENT '实际配额数量',
+  `deploy_hour` decimal(5, 1) NOT NULL COMMENT '调配工时',
+  `work_date` datetime(0) NOT NULL COMMENT '工作日期',
+  `is_holiday` int(11) NOT NULL COMMENT '0-不是，1-是',
+  `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `create_time` datetime(0) NOT NULL,
+  `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `update_time` datetime(0) NOT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_staff`(`staff_id`, `work_date`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fh_time_bill
+-- ----------------------------
+INSERT INTO `fh_time_bill` VALUES (143323429118021, 3, '于硕', 1, 100.0, '2021-03-31 00:00:00', 1, 'admin', '2021-03-31 10:04:34', 'admin', '2021-03-31 10:04:34', '嘿嘿');
+INSERT INTO `fh_time_bill` VALUES (143323952558149, 2, '蒲华磊', 1553, 0.0, '2021-03-31 00:00:00', 0, 'admin', '2021-03-31 10:06:41', 'admin', '2021-03-31 10:06:41', NULL);
+INSERT INTO `fh_time_bill` VALUES (143324256452677, 1, '蒲晓渝', 2765, 0.0, '2021-03-31 00:00:00', 0, 'admin', '2021-03-31 10:07:56', 'admin', '2021-03-31 10:07:56', '哈哈');
+INSERT INTO `fh_time_bill` VALUES (143341757521989, 3, '于硕', 10000, 0.0, '2021-03-30 00:00:00', 0, 'admin', '2021-03-31 11:19:08', 'admin', '2021-03-31 11:19:08', '哈哈');
+
+-- ----------------------------
+-- Table structure for fh_time_process
+-- ----------------------------
+DROP TABLE IF EXISTS `fh_time_process`;
+CREATE TABLE `fh_time_process`  (
+  `id` bigint(20) NOT NULL,
+  `bill_id` bigint(11) NOT NULL COMMENT '工时表Id',
+  `product_id` bigint(20) NOT NULL COMMENT '产品id',
+  `process_id` bigint(20) NOT NULL COMMENT '工序id',
+  `process_type` int(255) NOT NULL COMMENT '0-产品，1-调配工时',
+  `work_num` int(11) NOT NULL COMMENT '实际配额数量',
+  `deploy_hour` decimal(5, 1) NOT NULL COMMENT '调配工时',
+  `staff_id` int(11) NOT NULL,
+  `work_date` datetime(0) NOT NULL,
+  `is_holiday` int(11) NOT NULL COMMENT '法定假日',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_bill`(`bill_id`) USING BTREE,
+  INDEX `idx_process`(`process_id`) USING BTREE,
+  INDEX `idx_staff`(`staff_id`, `work_date`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fh_time_process
+-- ----------------------------
+INSERT INTO `fh_time_process` VALUES (143316198641733, 143316198576197, 1, 142989528420421, 0, 3000, 0.0, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143316198654021, 143316198576197, 2, 142993017999429, 1, 0, 1.5, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143316198654022, 143316198576197, 1, 142989528424517, 0, 2000, 0.0, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323429179461, 143323429118021, 2, 142993017999429, 1, 0, 100.0, 3, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323429191749, 143323429118021, 1, 142989528420421, 0, 1, 0.0, 3, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323952562245, 143323952558149, 1, 142989528420421, 0, 1553, 0.0, 2, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143324256456773, 143324256452677, 1, 142989528420421, 0, 1333, 0.0, 1, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143324256456774, 143324256452677, 1, 142989528424517, 0, 1432, 0.0, 1, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143341757567045, 143341757521989, 1, 142989528420421, 0, 10000, 0.0, 3, '2021-03-30 00:00:00', 0);
+
+-- ----------------------------
+-- Table structure for gateway_info
+-- ----------------------------
+DROP TABLE IF EXISTS `gateway_info`;
+CREATE TABLE `gateway_info`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `collector_mac` char(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `display_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `insert_time` datetime(0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of gateway_info
+-- ----------------------------
+INSERT INTO `gateway_info` VALUES (1, '95DE5F0B', '哈尔滨商业大学', NULL, '2020-12-04 10:13:29');
+INSERT INTO `gateway_info` VALUES (2, 'AE29F600', '哈尔滨商业大学', NULL, '2020-12-04 10:13:53');
 
 -- ----------------------------
 -- Table structure for hangfire_task
@@ -378,7 +614,7 @@ CREATE TABLE `hangfire_task`  (
 -- ----------------------------
 -- Records of hangfire_task
 -- ----------------------------
-INSERT INTO `hangfire_task` VALUES ('5eaabde6c1a509138ce04e80', '测试任务', '测试写日志，1小时写一次', '2020-06-19 16:00:12', 'Atlass.Framework.Jobs', 'TestJob', '0 */1 * * *', 1);
+INSERT INTO `hangfire_task` VALUES ('5eaabde6c1a509138ce04e80', '测试任务', '测试写日志，1小时写一次', '2021-04-15 17:00:13', 'Atlass.Framework.Jobs', 'TestJob', '0 */1 * * *', 0);
 
 -- ----------------------------
 -- Table structure for pay_history
@@ -640,21 +876,6 @@ INSERT INTO `pay_history` VALUES ('5e81737b3ad0d013b80fcffc', '5e81695e3ad0d012c
 INSERT INTO `pay_history` VALUES ('5e83409c3ad0d00788a9d54d', '5e833fc23ad0d01250b084b8', 'oAVzdjpdETSE6OCwQU8qTUSSCqPc', '4200000552202003312153304074', 20200331210747, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-31 21:07:47', '000000000000000000000000');
 INSERT INTO `pay_history` VALUES ('5e8c2a553ad0d00ef0948ef7', '5e8c28ab3ad0d012c84afed1', 'oAVzdjhjA7h2bJZp8N1w_coIE6_s', '4200000571202004077051636821', 20200407152306, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2020-04-07 15:23:06', '000000000000000000000000');
 INSERT INTO `pay_history` VALUES ('5e8d6f3a3ad0d010943ccbd8', '5e8c8a883ad0d006c01734a8', 'oAVzdjl8gwJfnf-6_6c2-ryE3A6c', '4200000557202004082368287659', 20200408142917, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-04-08 14:29:17', '000000000000000000000000');
-
--- ----------------------------
--- Table structure for serial_totals
--- ----------------------------
-DROP TABLE IF EXISTS `serial_totals`;
-CREATE TABLE `serial_totals`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `serial_num` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of serial_totals
--- ----------------------------
-INSERT INTO `serial_totals` VALUES (1, 4194);
 
 -- ----------------------------
 -- Table structure for sys_citys
@@ -3906,27 +4127,40 @@ INSERT INTO `sys_citys` VALUES (973480327517442819, 460400, '儋州市', 46, 460
 INSERT INTO `sys_citys` VALUES (973480327517442820, 350527, '金门县', 35, 3505, 3);
 
 -- ----------------------------
--- Table structure for sys_department
+-- Table structure for sys_dept
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_department`;
-CREATE TABLE `sys_department`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `department_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `parent_id` int(11) NOT NULL,
-  `sort_num` int(11) NOT NULL,
-  `department_level` int(11) NOT NULL,
-  `department_type` int(11) NOT NULL,
-  `insert_time` datetime(0) NOT NULL,
-  `insert_id` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `sys_dept`;
+CREATE TABLE `sys_dept`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
+  `parent_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '父部门id',
+  `dept_type` int(1) NOT NULL COMMENT '部门类型（0公司，1部门）',
+  `ancestors` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '祖级列表',
+  `dept_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '部门名称',
+  `order_num` int(4) NOT NULL DEFAULT 0 COMMENT '显示顺序',
+  `leader_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '负责人ID',
+  `leader` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '负责人',
+  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '联系电话',
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '邮箱',
+  `dept_status` int(1) NOT NULL DEFAULT 0 COMMENT '部门状态（0正常 1停用）',
+  `del_flag` int(1) NOT NULL DEFAULT 0 COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NOT NULL COMMENT '更新时间',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sys_department
+-- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_department` VALUES (1, '锡山区公安分局', 0, 1, 1, 0, '2020-05-12 10:25:27', 11297175912976384);
-INSERT INTO `sys_department` VALUES (2, '后桥派出所', 1, 1, 1, 0, '2020-05-12 10:32:01', 11297175912976384);
-INSERT INTO `sys_department` VALUES (3, '云林派出所', 1, 2, 1, 0, '2020-05-12 10:34:04', 11297175912976384);
+INSERT INTO `sys_dept` VALUES (3, 104, 1, '', '硬件研发部', 1, 1365226597967335424, '曲奇伟', '15888888888', 'fofia@fofia.com', 0, 0, 'admin', '2021-02-25 13:56:27', 'admin', '2021-03-15 17:39:33', '');
+INSERT INTO `sys_dept` VALUES (104, 110, 0, '', '无锡源致科技', 2, 1259416358429528064, '陈总', '', '', 0, 0, 'admin', '2021-02-26 15:08:54', 'admin', '2021-03-15 17:37:03', '');
+INSERT INTO `sys_dept` VALUES (105, 110, 0, '', '江苏真源科技', 1, 1365226715747586048, '毛总', '', '', 0, 0, 'admin', '2021-02-26 15:09:37', 'admin', '2021-03-15 17:36:12', '');
+INSERT INTO `sys_dept` VALUES (106, 111, 1, '', '销售部', 1, 1214101543947735040, '浦总', '', '', 0, 0, 'admin', '2021-02-26 15:10:16', 'admin', '2021-03-15 17:37:53', '');
+INSERT INTO `sys_dept` VALUES (107, 111, 1, '', '技术部', 1, 1365226215618777088, '于硕', '', '', 0, 0, 'admin', '2021-02-26 15:10:41', 'admin', '2021-03-15 17:38:01', '');
+INSERT INTO `sys_dept` VALUES (110, 0, 0, '', '无锡富华科技有限公司', 1, 1356081913244291072, '罗总', '', '', 0, 0, 'admin', '2021-03-15 17:35:53', 'admin', '2021-03-15 17:35:53', '备注');
+INSERT INTO `sys_dept` VALUES (111, 110, 0, '', '江苏真源网络', 1, 1365223127751200768, '潘总', '', '', 0, 0, 'admin', '2021-03-15 17:37:45', 'admin', '2021-03-15 17:37:45', '');
 
 -- ----------------------------
 -- Table structure for sys_diagnosis
@@ -3954,25 +4188,26 @@ CREATE TABLE `sys_diagnosis`  (
 DROP TABLE IF EXISTS `sys_dictionary`;
 CREATE TABLE `sys_dictionary`  (
   `id` bigint(20) NOT NULL,
-  `dic_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `dic_value` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `parent_id` bigint(20) NOT NULL,
-  `dic_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `sort_num` int(11) NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `create_time` datetime(3) NOT NULL,
+  `dic_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '字典名称',
+  `dic_value` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '字典值',
+  `parent_id` bigint(20) NOT NULL COMMENT '字典项',
+  `dic_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '字典编码',
+  `sort_num` int(11) NOT NULL COMMENT '排序',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `create_time` datetime(3) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dictionary
 -- ----------------------------
-INSERT INTO `sys_dictionary` VALUES (1019111558921457664, '标签颜色', '标签颜色', 0, 'TagColor', 1, NULL, 'admin', '2018-07-17 14:48:24.481');
-INSERT INTO `sys_dictionary` VALUES (1019111641473748992, '橙色', '橙色', 1019111558921457664, 'TagColor', 1, NULL, 'admin', '2018-07-17 14:48:44.163');
-INSERT INTO `sys_dictionary` VALUES (1019112978110353408, '白色', '白色', 1019111558921457664, 'TagColor', 2, NULL, 'admin', '2018-07-17 14:54:02.842');
-INSERT INTO `sys_dictionary` VALUES (1259770456668508160, '羊', '羊', 0, 'sheep', 2, NULL, 'admin', '2020-05-11 17:00:56.930');
-INSERT INTO `sys_dictionary` VALUES (1259772493040848896, '苏尼特', '苏尼特', 1259770456668508160, 'sheep', 1, NULL, 'admin', '2020-05-11 17:09:02.440');
+INSERT INTO `sys_dictionary` VALUES (138030650765381, '性别', '性别', 0, 'gender', 1, NULL, 'admin', '2021-04-15 10:55:56.131');
+INSERT INTO `sys_dictionary` VALUES (138030650765382, '品种', '品种', 0, 'variety', 2, NULL, 'admin', '2021-04-15 10:57:57.835');
+INSERT INTO `sys_dictionary` VALUES (138030650765383, '男', '男', 1382528084493864960, 'gender', 1, NULL, 'admin', '2021-04-15 11:11:18.580');
+INSERT INTO `sys_dictionary` VALUES (138030650765384, '女', '女', 1382528084493864960, 'gender', 1, NULL, 'admin', '2021-04-15 11:13:12.747');
+INSERT INTO `sys_dictionary` VALUES (138030650765385, '阿拉斯加', '阿拉斯加', 1382528594957438976, 'variety', 1, NULL, 'admin', '2021-04-15 11:13:53.811');
+INSERT INTO `sys_dictionary` VALUES (138030650765386, '金毛犬', '金毛犬', 1382528594957438976, 'variety', 1, NULL, 'admin', '2021-04-15 11:14:05.218');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -3980,62 +4215,40 @@ INSERT INTO `sys_dictionary` VALUES (1259772493040848896, '苏尼特', '苏尼�
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
   `id` bigint(20) NOT NULL,
-  `menu_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `menu_url` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `menu_sort` int(11) NOT NULL,
-  `parent_id` bigint(20) NOT NULL,
-  `remark` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `menu_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单名称',
+  `menu_url` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单链接',
+  `role_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '#' COMMENT '权限标识',
+  `menu_sort` int(11) NOT NULL COMMENT '排序',
+  `parent_id` bigint(20) NOT NULL COMMENT '上级菜单',
+  `remark` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_time` datetime(3) NOT NULL,
-  `iframe` tinyint(1) NOT NULL DEFAULT 0,
-  `menu_level` tinyint(4) NOT NULL,
-  `menu_type` tinyint(4) NOT NULL,
-  `menu_icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `iframe` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否在iframe打开现在都是',
+  `menu_level` tinyint(4) NOT NULL COMMENT '菜单层级',
+  `menu_type` tinyint(4) NOT NULL COMMENT '类型：0-目录，1-菜单',
+  `menu_icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单icon',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (15435793829888, '菜单管理', '/admin/SysMenu/Index', 1, 2210184760004608, NULL, 'admin', '0001-01-01 00:00:00.000', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (2185453096800256, '系统用户', '/admin/SysUser/Index', 2, 2210184760004608, '1', 'admin', '2017-08-30 10:36:57.803', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (2210184760004608, '系统管理', '', 100, 0, '1', 'admin', '2017-08-30 10:36:57.803', 0, 1, 0, 'fa fa-cogs');
-INSERT INTO `sys_menu` VALUES (2268647309578240, '系统角色', '/admin/SysRole/Index', 3, 2210184760004608, '1', 'admin', '2017-08-31 15:57:41.670', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (17100431729758208, '字典管理', '/admin/SysDic/Index', 2, 1028884516753772544, NULL, 'admin', '0001-01-01 00:00:00.000', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (1001014641423421440, '字典树表格', '/admin/sysdic/TreeView', 5, 2210184760004608, NULL, 'admin', '2018-05-28 16:17:43.125', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1028884516753772544, '基础数据', '', 99, 0, NULL, 'admin', '2018-08-13 14:02:39.201', 0, 1, 0, 'fa fa-database');
-INSERT INTO `sys_menu` VALUES (1028884578670088192, '行政区域', '/admin/sysarea/index', 1, 1028884516753772544, NULL, 'admin', '2018-08-13 14:02:53.963', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1115252266694217728, '打赏记录', '/Consulting/payhistory/index', 5, 1109453332491145216, NULL, 'admin', '2019-04-08 21:57:15.422', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1118807375571193856, '定时任务', '/admin/hangfirejob/index', 10, 2210184760004608, NULL, 'admin', '2019-04-18 17:23:59.429', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1248828814058983424, '异常日志', '/admin/easylog/index', 10, 2210184760004608, NULL, 'admin', '2020-04-11 12:22:46.047', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1252480208326496256, '站点设置', '', 10, 0, NULL, 'admin', '2020-04-21 14:12:06.280', 0, 1, 0, 'fa fa-graduation-cap');
-INSERT INTO `sys_menu` VALUES (1255776606476177408, '消息推送设置', '/BasicData/WeiXinSet/index', 5, 1028884516753772544, NULL, 'admin', '2020-04-30 16:30:48.842', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (1260014451432755200, '部门管理', '/admin/SysDepartment/index', 3, 1028884516753772544, NULL, 'admin', '2020-05-12 09:10:29.816', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1260379801370365952, '内容管理', '', 1, 0, NULL, 'admin', '2020-05-13 09:22:16.029', 0, 1, 0, 'fa fa-pencil-square-o');
-INSERT INTO `sys_menu` VALUES (1260380742849007616, '栏目管理', '/Cms/Channel/Index', 2, 1260379801370365952, NULL, 'admin', '2020-05-13 09:26:00.495', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1260440725762478080, '文章管理', '/cms/content/index', 1, 1260379801370365952, NULL, 'admin', '2020-05-13 13:24:21.536', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1261113321919221760, '模板管理', '/cms/TemplateCode/index', 1, 1273873688743251968, NULL, 'admin', '2020-05-15 09:57:00.955', 0, 2, 1, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (1261922565883039744, 'IP限制', '/cms/ipmanager/index', 3, 1252480208326496256, NULL, 'admin', '2020-05-17 15:32:39.752', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1262282270564290560, '模板匹配', '/cms/TemplateMatch/index', 2, 1273873688743251968, NULL, 'admin', '2020-05-18 15:22:00.030', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1264755891471781888, '网站设置', '/BasicData/Site/Index', 1, 1252480208326496256, NULL, 'admin', '2020-05-25 11:11:17.212', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1270270323199184896, '工作信息', '', 3, 0, NULL, 'admin', '2020-06-09 16:23:40.190', 0, 1, 0, 'fa fa-desktop');
-INSERT INTO `sys_menu` VALUES (1270270643232968704, '会议通知', '/work/notice/index', 1, 1270270323199184896, NULL, 'admin', '2020-06-09 16:24:56.491', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1270619053597265920, '通讯录', '/work/addressbook/index', 2, 1270270323199184896, NULL, 'admin', '2020-06-10 15:29:23.995', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1273872893457076224, '广告管理', '/BasicData/ad/index', 2, 1252480208326496256, NULL, 'admin', '2020-06-19 14:58:59.871', 0, 2, 1, 'fa fa-tag');
-INSERT INTO `sys_menu` VALUES (1273873688743251968, '模板管理', '', 2, 0, NULL, 'admin', '2020-06-19 15:02:09.483', 0, 1, 0, 'fa fa-newspaper-o');
-
--- ----------------------------
--- Table structure for sys_menu_ref_operate
--- ----------------------------
-DROP TABLE IF EXISTS `sys_menu_ref_operate`;
-CREATE TABLE `sys_menu_ref_operate`  (
-  `menu_id` bigint(20) NULL DEFAULT NULL,
-  `operate_id` bigint(20) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_menu_ref_operate
--- ----------------------------
+INSERT INTO `sys_menu` VALUES (138030650765081, '系统用户', '/admin/SysUser/Index', 'system:user:view', 1, 138030650765088, '1', 'admin', '2017-08-30 10:36:57.803', 0, 2, 1, 'fa fa-users');
+INSERT INTO `sys_menu` VALUES (138030650765082, '系统角色', '/admin/SysRole/Index', 'system:role:view', 2, 138030650765088, '1', 'admin', '2017-08-31 15:57:41.670', 0, 2, 1, 'fa fa-user-secret');
+INSERT INTO `sys_menu` VALUES (138030650765083, '菜单管理', '/admin/SysMenu/Index', 'system:menu:view', 3, 138030650765088, '', 'admin', '0001-01-01 00:00:00.000', 0, 2, 1, 'fa fa-navicon');
+INSERT INTO `sys_menu` VALUES (138030650765084, '字典管理', '/admin/sysdic/index', 'system:dic:view', 5, 138030650765088, '', 'admin', '2018-05-28 16:17:43.125', 0, 2, 1, 'fa fa-mortar-board');
+INSERT INTO `sys_menu` VALUES (138030650765085, '职位信息', '/admin/position/index', 'system:post:view', 2, 138030650765089, '', 'yushuo', '2021-02-25 14:29:03.846', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (138030650765086, '部门管理', '/admin/SysDepartment/index', 'system:dept:view', 1, 138030650765089, '', 'admin', '2020-05-12 09:10:29.816', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (138030650765088, '系统管理', '#', '#', 100, 0, '1', 'admin', '2017-08-30 10:36:57.803', 0, 1, 0, 'fa fa-cogs');
+INSERT INTO `sys_menu` VALUES (138030650765089, '单位组织', '#', '#', 99, 0, '', 'admin', '2018-08-13 14:02:39.201', 0, 1, 0, 'fa fa-sitemap');
+INSERT INTO `sys_menu` VALUES (138030650765090, '行政区域', '/admin/sysarea/index', '#', 11, 138030650765088, '', 'admin', '2018-08-13 14:02:53.963', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (138030650765092, '定时任务', '/admin/hangfirejob/index', 'system:hangfirejob:view', 10, 138030650765088, NULL, 'admin', '2019-04-18 17:23:59.429', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (138030650765093, '异常日志', '/admin/easylog/index', '#', 10, 138030650765088, NULL, 'admin', '2020-04-11 12:22:46.047', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (142971618836549, '生产管理', '#', '#', 1, 0, NULL, 'admin', '2021-03-30 10:13:02.400', 0, 1, 0, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (142971913965637, '员工管理', '/fuhua/staff/index', 'fh:staff:view', 5, 142971618836549, NULL, 'admin', '2021-03-30 10:14:14.454', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (142984211783749, '产品工序', '/fuhua/product/index', 'fh:product:view', 4, 142971618836549, NULL, 'admin', '2021-03-30 11:04:16.851', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (143026935611461, '工时管理', '/fuhua/timebill/index', 'fh:timebill:view', 3, 142971618836549, NULL, 'admin', '2021-03-30 13:58:07.473', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (143326710992965, '工时统计', '/fuhua/WorkTimeReport/index', 'fh:worktimereport:view', 1, 142971618836549, NULL, 'admin', '2021-03-31 10:17:54.822', 0, 2, 1, 'fa fa-bookmark');
 
 -- ----------------------------
 -- Table structure for sys_operate
@@ -4043,77 +4256,82 @@ CREATE TABLE `sys_menu_ref_operate`  (
 DROP TABLE IF EXISTS `sys_operate`;
 CREATE TABLE `sys_operate`  (
   `id` bigint(20) NOT NULL,
-  `func_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `func_cname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `func_icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `func_sort` int(11) NULL DEFAULT NULL,
-  `func_url` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `menu_id` bigint(20) NOT NULL,
-  `in_table` tinyint(2) NOT NULL DEFAULT 0,
+  `func_title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '按钮名称',
+  `role_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '权限标识',
+  `func_sort` int(5) NOT NULL COMMENT '排序',
+  `menu_id` bigint(20) NOT NULL COMMENT '菜单Id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_operate
 -- ----------------------------
-INSERT INTO `sys_operate` VALUES (1255826342612701184, 'add', '添加任务', 'fa fa-plus', 1, '/controller/action', '', 1118807375571193856, 0);
-INSERT INTO `sys_operate` VALUES (1255826342612701185, 'edit', '修改任务', 'fa fa-edit', 2, '/controller/action', '', 1118807375571193856, 1);
-INSERT INTO `sys_operate` VALUES (1255826342612701186, 'excuteTask', '执行任务', 'fa fa-bolt', 1, '/controller/action', '', 1118807375571193856, 1);
-INSERT INTO `sys_operate` VALUES (1255826342612701187, 'deleteJob', '删除任务', 'fa fa-remove', 3, '/controller/action', '', 1118807375571193856, 1);
-INSERT INTO `sys_operate` VALUES (1257951749478682624, 'pauseJob', '停止任务', 'fa fa-ban', 4, '/controller/action', '', 1118807375571193856, 1);
-INSERT INTO `sys_operate` VALUES (1257951749478682625, 'resumeJob', '启动任务', 'fa fa-refresh', 5, '/controller/action', '', 1118807375571193856, 1);
-INSERT INTO `sys_operate` VALUES (1259761160639614976, 'add', '添加', 'fa fa-plus', 1, '/controller/action', '', 15435793829888, 0);
-INSERT INTO `sys_operate` VALUES (1259761160639614977, 'edit', '修改', 'fa fa-edit', 1, '/controller/action', '', 15435793829888, 1);
-INSERT INTO `sys_operate` VALUES (1259761160639614978, 'del', '删除', 'fa fa-remove', 2, '/controller/action', '', 15435793829888, 1);
-INSERT INTO `sys_operate` VALUES (1259761160639614979, 'batchDel', '批量删除', 'fa fa-remove', 2, '/controller/action', '', 15435793829888, 0);
-INSERT INTO `sys_operate` VALUES (1259763761208758272, 'add', '添加', 'fa fa-plus', 1, '/controller/action', '', 2185453096800256, 0);
-INSERT INTO `sys_operate` VALUES (1259763761208758273, 'edit', '修改', 'fa fa-edit', 1, '/controller/action', '', 2185453096800256, 1);
-INSERT INTO `sys_operate` VALUES (1259763761208758274, 'del', '删除', 'fa fa-remove', 2, '/controller/action', '', 2185453096800256, 1);
-INSERT INTO `sys_operate` VALUES (1259765090907983872, 'add', '添加', 'fa fa-plus', 0, '/controller/action', '', 2268647309578240, 0);
-INSERT INTO `sys_operate` VALUES (1259765090907983873, 'edit', '修改', 'fa fa-edit', 1, '/controller/action', '', 2268647309578240, 1);
-INSERT INTO `sys_operate` VALUES (1259765090907983874, 'del', '删除', 'fa fa-remove', 2, '/controller/action', '', 2268647309578240, 1);
-INSERT INTO `sys_operate` VALUES (1259765090907983875, 'setrole', '设置权限', 'fa fa-graduation-cap', 3, '/controller/action', '', 2268647309578240, 1);
-INSERT INTO `sys_operate` VALUES (1259766360607690752, 'add', '添加', 'fa fa-plus', 1, '/controller/action', '', 1001014641423421440, 0);
-INSERT INTO `sys_operate` VALUES (1259766360607690753, 'edit', '修改', 'fa fa-edit', 1, '/controller/action', '', 1001014641423421440, 1);
-INSERT INTO `sys_operate` VALUES (1259766360607690754, 'del', '删除', 'fa fa-remove', 2, '/controller/action', '', 1001014641423421440, 1);
-INSERT INTO `sys_operate` VALUES (1259769117272051712, 'add', '添加', 'fa fa-plus', 1, '/controller/action', '', 17100431729758208, 0);
-INSERT INTO `sys_operate` VALUES (1259769117272051713, 'del', '批量删除', 'fa fa-remove', 2, '/controller/action', '', 17100431729758208, 0);
-INSERT INTO `sys_operate` VALUES (1259769117272051714, 'edit', '修改', 'fa fa-edit', 1, '/controller/action', '', 17100431729758208, 1);
-INSERT INTO `sys_operate` VALUES (1259769117272051715, 'delSingle', '删除', 'fa fa-remove', 2, '/controller/action', '', 17100431729758208, 1);
-INSERT INTO `sys_operate` VALUES (1260014451864768512, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1260014451432755200, 0);
-INSERT INTO `sys_operate` VALUES (1260014451864768513, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1260014451432755200, 1);
-INSERT INTO `sys_operate` VALUES (1260014451864768514, 'del', '删除', 'fa fa-trash', 2, '/controller/del', '', 1260014451432755200, 1);
-INSERT INTO `sys_operate` VALUES (1260380743071305728, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1260380742849007616, 0);
-INSERT INTO `sys_operate` VALUES (1260380743071305729, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1260380742849007616, 1);
-INSERT INTO `sys_operate` VALUES (1260380743071305730, 'del', '删除', 'fa fa-trash', 2, '/controller/del', '', 1260380742849007616, 1);
-INSERT INTO `sys_operate` VALUES (1260440725993164800, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1260440725762478080, 0);
-INSERT INTO `sys_operate` VALUES (1260440725993164801, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1260440725762478080, 1);
-INSERT INTO `sys_operate` VALUES (1260440725993164802, 'del', '删除', 'fa fa-trash', 2, '/controller/del', '', 1260440725762478080, 1);
-INSERT INTO `sys_operate` VALUES (1260440725993164803, 'batchDel', '批量删除', 'fa fa-remove', 4, '/controller/action', '', 1260440725762478080, 0);
-INSERT INTO `sys_operate` VALUES (1261136124076756992, 'add', '添加模板', 'fa fa-plus', 1, '/controller/action', '', 1261113321919221760, 0);
-INSERT INTO `sys_operate` VALUES (1261136124076756993, 'edit', '修改模板', 'fa fa-edit', 3, '/controller/action', '', 1261113321919221760, 1);
-INSERT INTO `sys_operate` VALUES (1261136124076756994, 'del', '删除模板', 'fa fa-remove', 4, '/controller/action', '', 1261113321919221760, 1);
-INSERT INTO `sys_operate` VALUES (1261136124076756995, 'copyFile', '快速复制', 'fa fa-clone', 2, '/controller/action', '', 1261113321919221760, 1);
-INSERT INTO `sys_operate` VALUES (1261922566415716352, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1261922565883039744, 0);
-INSERT INTO `sys_operate` VALUES (1261922566415716353, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1261922565883039744, 1);
-INSERT INTO `sys_operate` VALUES (1261922566415716354, 'del', '删除', 'fa fa-trash', 2, '/controller/del', '', 1261922565883039744, 1);
-INSERT INTO `sys_operate` VALUES (1261922566415716355, 'batchDel', '批量删除', 'fa fa-remove', 2, '/controller/action', '', 1261922565883039744, 0);
-INSERT INTO `sys_operate` VALUES (1263648002594181120, 'syncTemplate', '同步本地文件', 'fa fa-refresh', 1, '/controller/action', '', 1261113321919221760, 1);
-INSERT INTO `sys_operate` VALUES (1270270643526569984, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1270270643232968704, 0);
-INSERT INTO `sys_operate` VALUES (1270270643526569985, 'edit', '修改', 'fa fa-edit', 2, '/controller/form', '', 1270270643232968704, 1);
-INSERT INTO `sys_operate` VALUES (1270270643526569986, 'del', '删除', 'fa fa-trash', 3, '/controller/del', '', 1270270643232968704, 1);
-INSERT INTO `sys_operate` VALUES (1270270643526569987, 'viewDetail', '查看', 'fa fa-eye', 1, '/controller/action', '', 1270270643232968704, 1);
-INSERT INTO `sys_operate` VALUES (1270619053811175424, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1270619053597265920, 0);
-INSERT INTO `sys_operate` VALUES (1270619053811175425, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1270619053597265920, 1);
-INSERT INTO `sys_operate` VALUES (1270619053811175426, 'del', '删除', 'fa fa-trash', 2, '/controller/del', '', 1270619053597265920, 1);
-INSERT INTO `sys_operate` VALUES (1270619053811175427, 'batchDel', '批量删除', 'fa fa-trash', 2, '/controller/action', '', 1270619053597265920, 0);
-INSERT INTO `sys_operate` VALUES (1273872893788426240, 'add', '新增', 'fa fa-plus', 1, '/controller/form', '', 1273872893457076224, 0);
-INSERT INTO `sys_operate` VALUES (1273872893788426241, 'edit', '修改', 'fa fa-edit', 1, '/controller/form', '', 1273872893457076224, 1);
-INSERT INTO `sys_operate` VALUES (1273872893788426242, 'del', '删除', 'fa fa-trash', 3, '/controller/del', '', 1273872893457076224, 1);
-INSERT INTO `sys_operate` VALUES (1273872893788426243, 'ban', '停用', 'fa fa-ban', 2, '/controller/action', '', 1273872893457076224, 1);
-INSERT INTO `sys_operate` VALUES (1273896286864674816, 'setTop', '置顶', 'fa fa-arrow-up', 2, '/controller/action', '', 1260440725762478080, 0);
-INSERT INTO `sys_operate` VALUES (1273896286864674817, 'setRecomend', '推荐', 'fa fa-thumbs-up', 3, '/controller/action', '', 1260440725762478080, 0);
+INSERT INTO `sys_operate` VALUES (138030650765481, '新增', 'system:user:add', 1, 138030650765081);
+INSERT INTO `sys_operate` VALUES (138030650765482, '修改', 'system:user:edit', 2, 138030650765081);
+INSERT INTO `sys_operate` VALUES (138030650765483, '删除', 'system:user:delete', 3, 138030650765081);
+INSERT INTO `sys_operate` VALUES (138030650765484, '导出', 'system:user:export', 5, 138030650765081);
+INSERT INTO `sys_operate` VALUES (138030650765485, '新增', 'system:role:add', 1, 138030650765082);
+INSERT INTO `sys_operate` VALUES (138030650765486, '修改', 'system:role:edit', 2, 138030650765082);
+INSERT INTO `sys_operate` VALUES (138030650765487, '删除', 'system:role:delete', 2, 138030650765082);
+INSERT INTO `sys_operate` VALUES (138030650765488, '新增', 'system:menu:add', 1, 138030650765083);
+INSERT INTO `sys_operate` VALUES (138030650765489, '修改', 'system:menu:edit', 2, 138030650765083);
+INSERT INTO `sys_operate` VALUES (138030650765490, '删除', 'system:menu:delete', 3, 138030650765083);
+INSERT INTO `sys_operate` VALUES (138030650765491, '授权', 'system:role:permission', 4, 138030650765082);
+INSERT INTO `sys_operate` VALUES (138030650765492, '新增', 'system:dic:add', 1, 138030650765084);
+INSERT INTO `sys_operate` VALUES (138030650765493, '修改', 'system:dic:edit', 2, 138030650765084);
+INSERT INTO `sys_operate` VALUES (138030650765494, '删除', 'system:dic:delete', 3, 138030650765084);
+INSERT INTO `sys_operate` VALUES (138030650765495, '字典子项', 'system:dic:son', 4, 138030650765084);
+INSERT INTO `sys_operate` VALUES (138030650765496, '新增', 'system:post:add', 1, 138030650765085);
+INSERT INTO `sys_operate` VALUES (138030650765497, '修改', 'system:post:edit', 2, 138030650765085);
+INSERT INTO `sys_operate` VALUES (138030650765498, '删除', 'system:post:delete', 3, 138030650765085);
+INSERT INTO `sys_operate` VALUES (138030650765499, '新增', 'system:dept:add', 1, 138030650765086);
+INSERT INTO `sys_operate` VALUES (138030650765500, '修改', 'system:dept:edit', 2, 138030650765086);
+INSERT INTO `sys_operate` VALUES (138030650765501, '删除', 'system:dept:delete', 3, 138030650765086);
+INSERT INTO `sys_operate` VALUES (138030650765502, '重置密码', 'system:user:password', 4, 138030650765081);
+INSERT INTO `sys_operate` VALUES (142971914113093, '新增', 'fh:staff:add', 1, 142971913965637);
+INSERT INTO `sys_operate` VALUES (142971914113094, '修改', 'fh:staff:edit', 2, 142971913965637);
+INSERT INTO `sys_operate` VALUES (142971914113095, '删除', 'fh:staff:delete', 3, 142971913965637);
+INSERT INTO `sys_operate` VALUES (142984211955781, '新增', 'fh:product:add', 1, 142984211783749);
+INSERT INTO `sys_operate` VALUES (142984211959877, '修改', 'fh:product:edit', 2, 142984211783749);
+INSERT INTO `sys_operate` VALUES (142984211959878, '删除', 'fh:product:delete', 3, 142984211783749);
+INSERT INTO `sys_operate` VALUES (142984211959879, '查看工序', 'fh:product:process', 4, 142984211783749);
+INSERT INTO `sys_operate` VALUES (143026935791685, '新增', 'fh:timebill:add', 1, 143026935611461);
+INSERT INTO `sys_operate` VALUES (143026935791686, '修改', 'fh:timebill:edit', 2, 143026935611461);
+INSERT INTO `sys_operate` VALUES (143026935791687, '删除', 'fh:timebill:delete', 3, 143026935611461);
+INSERT INTO `sys_operate` VALUES (143321190735941, '查看工序', 'fh:timebill:process', 4, 143026935611461);
+INSERT INTO `sys_operate` VALUES (148653715939397, '添加', 'system:hangfirejob:add', 1, 138030650765092);
+INSERT INTO `sys_operate` VALUES (148653715943493, '修改', 'system:hangfirejob:edit', 2, 138030650765092);
+INSERT INTO `sys_operate` VALUES (148653715943494, '删除', 'system:hangfirejob:delete', 3, 138030650765092);
+INSERT INTO `sys_operate` VALUES (148653715943495, '暂停', 'system:hangfire:pause', 4, 138030650765092);
+INSERT INTO `sys_operate` VALUES (148653715943496, '继续', 'system:hangfire:resume', 5, 138030650765092);
+INSERT INTO `sys_operate` VALUES (148653715943497, '执行', 'system:hangfire:excute', 6, 138030650765092);
+
+-- ----------------------------
+-- Table structure for sys_position
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_position`;
+CREATE TABLE `sys_position`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
+  `post_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '岗位编码',
+  `post_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '岗位名称',
+  `post_sort` int(4) NOT NULL COMMENT '显示顺序',
+  `post_status` int(1) NOT NULL COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NOT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_position
+-- ----------------------------
+INSERT INTO `sys_position` VALUES (5, 'boos', '董事长', 1, 0, 'admin', '2021-02-25 15:11:26', 'admin', '2021-02-25 15:23:24', '董事长');
+INSERT INTO `sys_position` VALUES (7, 'cto', '技术总监', 2, 0, 'admin', '2021-02-25 15:23:43', 'admin', '2021-02-25 15:23:43', 'cto');
+INSERT INTO `sys_position` VALUES (8, 'java', 'JAVA开发工程师', 3, 0, 'admin', '2021-02-25 15:24:01', 'admin', '2021-02-25 15:24:01', 'java');
+INSERT INTO `sys_position` VALUES (9, 'web', '前端开发工程师', 4, 0, 'admin', '2021-02-25 15:24:22', 'admin', '2021-02-25 15:24:22', 'web');
+INSERT INTO `sys_position` VALUES (10, 'accountant', '财务', 5, 0, 'admin', '2021-02-25 15:25:11', 'admin', '2021-02-25 15:25:11', 'accountant');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -4121,23 +4339,22 @@ INSERT INTO `sys_operate` VALUES (1273896286864674817, 'setRecomend', '推荐', 
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `id` bigint(20) NOT NULL,
-  `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `role_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `sort` int(11) NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `create_time` datetime(3) NOT NULL,
-  `role_super` tinyint(1) NOT NULL DEFAULT 0,
+  `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '角色名称',
+  `role_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '角色编码',
+  `role_sort` int(11) NOT NULL COMMENT '排序',
+  `role_super` int(1) NOT NULL DEFAULT 0 COMMENT '超管(1:是，0:不是)',
+  `role_status` int(1) NOT NULL DEFAULT 0 COMMENT '角色状态(0:正常，1:禁用)',
+  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `create_time` datetime(3) NOT NULL COMMENT '创建时间',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1000985679938850816, '管理员', 'role', 1, 'ddsa', 'admin', '2018-05-28 14:22:38.169', 0);
-INSERT INTO `sys_role` VALUES (1022659898300829696, '经销商管理员', '111', 2, NULL, 'admin', '2018-07-27 09:48:14.514', 0);
-INSERT INTO `sys_role` VALUES (1022660017620389888, '咨询师', '222', 3, NULL, 'admin', '2018-07-27 09:48:42.962', 0);
-INSERT INTO `sys_role` VALUES (1259415836452589568, '测试', '333', 4, NULL, 'admin', '2020-05-10 17:31:48.883', 0);
+INSERT INTO `sys_role` VALUES (138027723972674, '管理员', 'admin', 1, 0, 1, 'admin', '2018-05-28 14:22:38.169', 'ddsa');
+INSERT INTO `sys_role` VALUES (138027723972677, '组长', 'group_leader', 1, 0, 1, 'admin', '2021-03-16 10:56:16.818', NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_authorize
@@ -4145,82 +4362,91 @@ INSERT INTO `sys_role` VALUES (1259415836452589568, '测试', '333', 4, NULL, 'a
 DROP TABLE IF EXISTS `sys_role_authorize`;
 CREATE TABLE `sys_role_authorize`  (
   `id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NULL DEFAULT NULL,
-  `menu_id` bigint(20) NULL DEFAULT NULL,
-  `menu_pid` bigint(20) NULL DEFAULT NULL,
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  `role_id` bigint(20) NOT NULL,
+  `menu_id` bigint(20) NOT NULL,
+  `menu_pid` bigint(20) NOT NULL,
+  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `create_time` datetime(3) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_roleid`(`role_id`, `menu_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_authorize
 -- ----------------------------
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663304, 1000985679938850816, 1028884516753772544, 0, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663305, 1000985679938850816, 1028884578670088192, 1028884516753772544, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663306, 1000985679938850816, 17100431729758208, 1028884516753772544, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663307, 1000985679938850816, 2210184760004608, 0, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663308, 1000985679938850816, 15435793829888, 2210184760004608, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663309, 1000985679938850816, 2185453096800256, 2210184760004608, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663310, 1000985679938850816, 2268647309578240, 2210184760004608, 'admin', '2020-02-05 16:06:16.039');
-INSERT INTO `sys_role_authorize` VALUES (1224967460516663311, 1000985679938850816, 1001014641423421440, 2210184760004608, 'admin', '2020-02-05 16:06:16.039');
-
--- ----------------------------
--- Table structure for sys_setting
--- ----------------------------
-DROP TABLE IF EXISTS `sys_setting`;
-CREATE TABLE `sys_setting`  (
-  `id` bigint(20) NOT NULL,
-  `min_num` bigint(20) NOT NULL,
-  `max_num` bigint(20) NOT NULL,
-  `set_type` int(11) NOT NULL,
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `create_time` datetime(3) NOT NULL,
-  `ds_warn` int(20) NOT NULL,
-  `ds_pd` int(20) NOT NULL,
-  `temp_min` float(255, 0) NOT NULL,
-  `temp_max` float(255, 0) NOT NULL,
-  `step_warn_percent` decimal(5, 2) NOT NULL DEFAULT 0.00,
-  `last_count_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_setting
--- ----------------------------
+INSERT INTO `sys_role_authorize` VALUES (144022310834245, 138027723972677, 142971618836549, 0, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838341, 138027723972677, 143326710992965, 142971618836549, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838342, 138027723972677, 143026935611461, 142971618836549, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838343, 138027723972677, 143026935791685, 143026935611461, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838344, 138027723972677, 143026935791686, 143026935611461, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838345, 138027723972677, 143026935791687, 143026935611461, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838346, 138027723972677, 143321190735941, 143026935611461, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838347, 138027723972677, 142984211783749, 142971618836549, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838348, 138027723972677, 142984211955781, 142984211783749, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838349, 138027723972677, 142984211959877, 142984211783749, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838350, 138027723972677, 142984211959879, 142984211783749, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838351, 138027723972677, 142971913965637, 142971618836549, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838352, 138027723972677, 142971914113093, 142971913965637, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838353, 138027723972677, 142971914113094, 142971913965637, 'admin', '2021-04-02 09:28:18.496');
+INSERT INTO `sys_role_authorize` VALUES (144022310838354, 138027723972677, 142971914113095, 142971913965637, 'admin', '2021-04-02 09:28:18.496');
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `id` bigint(20) NOT NULL,
-  `account_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `pass_word` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `real_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `mobile_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `fax` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `create_time` datetime(3) NOT NULL,
-  `is_super` tinyint(1) NOT NULL,
-  `sys_role_id` bigint(20) NOT NULL,
-  `province` int(20) NOT NULL,
-  `city` int(20) NOT NULL,
-  `county` int(20) NOT NULL,
-  `user_level` int(11) NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dept_id` int(11) NOT NULL DEFAULT 0,
+  `id` bigint(20) NOT NULL COMMENT '用户id',
+  `login_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '登录账号',
+  `pass_word` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
+  `user_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
+  `mobile_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '手机号码',
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
+  `gender` int(1) NOT NULL COMMENT '用户性别（1男 0女 2未知）',
+  `is_super` int(1) NOT NULL COMMENT '是否是超管(0-不是，1-是)',
+  `role_id` bigint(20) NOT NULL COMMENT '角色id',
+  `dept_id` int(11) NOT NULL DEFAULT 0 COMMENT '部门',
+  `dept_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '部门',
+  `user_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户头像',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `user_status` int(1) NOT NULL DEFAULT 0 COMMENT '账号状态(0-正常，1-禁用)',
+  `del_flag` int(1) NOT NULL DEFAULT 0 COMMENT '删除标志（0代表存在 1代表删除）',
+  `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
+  `create_time` datetime(3) NOT NULL COMMENT '创建时间',
+  `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '更新人',
+  `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (11297175912976384, 'admin', 'rZXjUab5HSM=', '管理员1', '15961820351', '2@qq.com', '', 'admin', '2017-08-30 10:36:57.803', 1, 0, 0, 0, 0, 0, NULL, 0);
-INSERT INTO `sys_user` VALUES (1000978173896298496, 'ceshi', 'rZXjUab5HSM=', '测试用户', '15961820352', '461733078@qq.com', '', 'admin', '2018-05-28 13:52:48.589', 0, 1000985679938850816, 0, 0, 0, 2, NULL, 0);
-INSERT INTO `sys_user` VALUES (1214101543947735040, 'lyh', 'o2LslsMzO+mw/KuOongosQ==', '周折', '', '50487703@qq.com', '', 'admin', '2020-01-06 16:28:59.650', 0, 1000985679938850816, 0, 0, 0, 0, NULL, 0);
-INSERT INTO `sys_user` VALUES (1259416358429528064, 'gyz', 'rZXjUab5HSM=', 'gyz', '', '', '', 'admin', '2020-05-10 17:33:53.332', 0, 1259415836452589568, 0, 0, 0, 0, NULL, 1);
+INSERT INTO `sys_user` VALUES (138030650765371, 'admin', '123456', '管理员122', '15961820351', 'admin2@fofia.com', 0, 1, 0, 0, '无锡市富华科技', '/ui/img/profile.jpg', '', 1, 0, 'admin', '2017-08-30 10:36:57.803', 'admin', '2021-02-27 16:40:44');
+INSERT INTO `sys_user` VALUES (138030650765372, 'pxw', '123123', '浦总', '18012388691', 'pxw@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/img/profile.jpg', '', 1, 0, 'admin', '2020-01-06 16:28:59.650', 'admin', '2021-02-27 15:22:05');
+INSERT INTO `sys_user` VALUES (138030650765373, 'cxq', '123123', '陈总', '', 'cxq@fofia.com', 1, 0, 1000985679938850816, 104, '无锡源致科技', '/ui/img/profile.jpg', '备注', 1, 0, 'admin', '2020-05-10 17:33:53.332', 'admin', '2021-02-27 15:21:58');
+INSERT INTO `sys_user` VALUES (138030650765374, 'lyy', '123456', '罗总', '15961820351', 'lyy@fofia.com', 1, 0, 1000985679938850816, 100, '无锡市富华科技', '/ui/img/profile.jpg', '备注事实上111', 1, 0, 'yushuo', '2021-02-01 11:28:17.561', 'admin', '2021-03-12 13:50:27');
+INSERT INTO `sys_user` VALUES (138030650765375, 'phh', '123123', '潘总', '13861451731', 'pdd@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/img/profile.jpg', '备注', 1, 0, 'admin', '2021-02-26 16:52:12.934', 'admin', '2021-02-27 15:21:28');
+INSERT INTO `sys_user` VALUES (138030650765376, 'yushuo', '123123', '于硕', '15961820351', '461733078@qq.com', 1, 0, 1000985679938850816, 107, '技术部', '/ui/img/profile.jpg', '于硕', 1, 0, 'admin', '2021-02-26 17:04:29.137', 'admin', '2021-02-27 16:30:37');
+INSERT INTO `sys_user` VALUES (138030650765377, 'qqw', '123456', '曲奇伟', '', 'qqw@fofia.com', 1, 0, 1000985679938850816, 3, '硬件研发部', '/ui/img/profile.jpg', '曲奇伟', 1, 0, 'admin', '2021-02-26 17:06:00.296', 'admin', '2021-02-27 15:21:36');
+INSERT INTO `sys_user` VALUES (138030650765378, 'mdf', '123123', '毛总', '', 'mdf@fofia.com', 1, 0, 1000985679938850816, 105, '江苏真源科技', '/ui/img/profile.jpg', '毛东方', 1, 0, 'admin', '2021-02-26 17:06:28.377', 'admin', '2021-03-02 13:57:34');
+INSERT INTO `sys_user` VALUES (138030650765381, 'ceshi', '123456', '于硕', '15961820351', '', 1, 0, 138027723972677, 0, '', '/ui/img/profile.jpg', NULL, 1, 0, 'admin', '2021-03-16 11:08:11.368', 'admin', '2021-04-02 09:27:40');
+
+-- ----------------------------
+-- Table structure for sys_user_position
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_position`;
+CREATE TABLE `sys_user_position`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL COMMENT '用户id',
+  `position_id` bigint(20) NOT NULL COMMENT '职位id',
+  `create_time` datetime(0) NOT NULL,
+  `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_uid`(`user_id`, `position_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user_position
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_validate_code

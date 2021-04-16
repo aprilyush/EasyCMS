@@ -1,0 +1,57 @@
+﻿# Logging
+Logging:
+  LogLevel:
+    Default: "Debug"
+    System: "Information"
+    Microsoft: "Information"
+#开始ServerGC模式
+configProperties:
+   System.GC.Server: true
+   System.GC.Concurrent: true
+
+# 站点host http://*:80;
+HostUrl: "http://cmsl.atlass:80"
+
+#跨域
+AllowedHosts: "*"
+
+#数据库配置
+DbConfigs: 
+  -
+   Enable: true
+   DataType: 0 #mysql
+   MasterConnection: "Data Source=127.0.0.1;Port=3306;Initial Catalog=easycms_net5;user id=root;password=123123;Max Pool Size=10;Connection Timeout=5;CharSet=utf8mb4;"
+   SlaveConnections: []
+  -
+   Enable: false
+   DataType: 1 #SqlServer
+   MasterConnection: "Data Source=.;Initial Catalog=RealidSystem;User ID=sa;Password=123;Max Pool Size=10;Connection Timeout=5;"
+   SlaveConnections: []
+  -
+   Enable: false
+   DataType: 2 #PostgreSQL
+   MasterConnection: "Server=localhost;Port=5433;Username=postgres;Password=123456;Database=easy_cms;Max Pool Size=10;Connection Timeout=5;"
+   SlaveConnections: []
+  -
+   Enable: false
+   DataType: 3 #Oracle
+   MasterConnection: ""
+   SlaveConnections: []
+  -
+   Enable: false
+   DataType: 4 #Sqlite
+   MasterConnection: ""
+   SlaveConnections: []
+#Redis配置
+RedisConfig: 
+  Enable: true
+  Host: "127.0.0.1:6379"
+  User: "" #redis6.0需要
+  Password: ""
+  Db: 0
+  MaxPoolSize: 200 
+  MinPoolSize: 10
+  ConnectTimeout: 5000
+  ConnectionName: "easycms"
+  PreKey: "{easycms}:"
+  

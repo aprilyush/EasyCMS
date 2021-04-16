@@ -19,10 +19,10 @@
             <a class="btn btn-danger single disabled" onclick="pauseJob(this);" data-id="0" data-role="system:hangfire:pause">
                 <i class="fa fa-power-off"></i> 停止
             </a>
-            <a class="btn btn-success single disabled" onclick="excuteTask(this);" data-id="0" data-role="system:hangfire:resume">
+            <a class="btn btn-success single disabled" onclick="resumeJob(this);" data-id="0" data-role="system:hangfire:resume">
                 <i class="fa fa-check"></i> 启动
             </a>
-            <a class="btn btn-primary single disabled" onclick="removeAll(this);" data-id="0" data-role="system:hangfire:excute">
+            <a class="btn btn-primary single disabled" onclick="excuteTask(this);" data-id="0" data-role="system:hangfire:excute">
                 <i class="fa fa-bolt"></i> 执行
             </a>
         </div>
@@ -67,7 +67,7 @@
                         }, {
                             field: 'excute_status', title: '任务状态', align: 'center', formatter: function (v) {
                                 if (v === 1) {
-                                    return '<span class="label label-primary">正常</span>';
+                                    return '<span class="label label-primary">运行中</span>';
                                 }
                                 return '<span class="label label-danger">停止</span>';
                             }
