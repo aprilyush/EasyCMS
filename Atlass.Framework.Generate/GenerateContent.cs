@@ -87,7 +87,7 @@ namespace Atlass.Framework.Generate
         {
             try
             {
-                var sqlDb = FreesqlDbInstance.GetInstance();
+                var sqlDb = DbInstanceFactory.GetInstance();
                 var content = sqlDb.Select<cms_content>().Where(s => s.id == contentId).First();
                 if (content == null)
                 {

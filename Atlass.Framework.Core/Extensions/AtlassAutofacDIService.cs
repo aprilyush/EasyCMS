@@ -16,12 +16,10 @@ namespace Atlass.Framework.Core.Extensions
     {
         public static void AddFreeSql(this IServiceCollection service)
         {
-            var freeSql = service.BuildServiceProvider().GetRequiredService<IOptionsMonitor<FreeSqlConfig>>().CurrentValue;
-            //GlobalParamsDto.LastConnectionString = freeSql.MasterConnetion;
-            FreesqlDbInstance.FreeSqlConfig = freeSql;
+            var freeSql = GlobalContext.DefaultDbConfig;
             service.AddSingleton<IFreeSql>(f =>
             {
-                return FreesqlDbInstance.GetInstance(freeSql.DataType, freeSql.MasterConnetion);
+                return DbInstanceFactory.GetInstance(freeSql.DataType, freeSql.MasterConnection);
             });
 
 

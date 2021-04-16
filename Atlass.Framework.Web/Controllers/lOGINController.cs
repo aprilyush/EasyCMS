@@ -99,7 +99,7 @@ namespace Atlass.Framework.Web.Controllers
         /// <returns></returns>
         public ActionResult Init()
         {
-            throw new Exception("自定义500页面异常");
+            //throw new Exception("自定义500页面异常");
             return Content("InitOk");
         }
 

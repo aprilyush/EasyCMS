@@ -17,7 +17,7 @@ namespace Atlass.Framework.Generate
     {
         private readonly  IFreeSql Sqldb;
         public GenerateAppService() {
-            Sqldb =FreesqlDbInstance.GetInstance();
+            Sqldb =DbInstanceFactory.GetInstance();
         }
 
         #region 内容数据

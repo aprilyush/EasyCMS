@@ -13,7 +13,7 @@ namespace Atlass.Framework.Jobs
         {
             try
             {
-                var Sqldb = FreesqlDbInstance.GetInstance();
+                var Sqldb = DbInstanceFactory.GetInstance();
                 var log = new easy_log();
                 log.log_summary = "hangfireJob任务";
                 log.log_message = DateTime.Now.ToString();

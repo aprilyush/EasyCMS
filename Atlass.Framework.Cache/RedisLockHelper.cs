@@ -1,4 +1,4 @@
-﻿using CSRedis;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +18,8 @@ namespace Atlass.Framework.Cache
         /// </summary>
         public static void DeleteLock()
         {
-            RedisHelper.Del(_lockKey);
+            var redisClient = RedisFactory.GetRedisClient();
+            redisClient.Del(_lockKey);
         }
 
         /// <summary>
@@ -28,8 +29,11 @@ namespace Atlass.Framework.Cache
         /// <returns></returns>
         public static bool SetLock(string lockId)
         {
-            var success = RedisHelper.Set(_lockKey, lockId, expireSeconds: 5, exists: RedisExistence.Nx);
-            return success;
+            var redisClient = RedisFactory.GetRedisClient();
+            //var success = redisClient.Set(_lockKey, lockId, expireSeconds: 5, exists: RedisExistence.Nx);
+            // var success = redisClient.Set(_lockKey, lockId, expireSeconds: 5, exists: false);
+            //return success;
+            return false;
         }
 
         /// <summary>
@@ -38,7 +42,8 @@ namespace Atlass.Framework.Cache
         /// <param name="lockId"></param>
         public static void ReleaseLock(string lockId)
         {
-            RedisHelper.Eval(_luaScript, _lockKey, lockId);
+            var redisClient = RedisFactory.GetRedisClient();
+            redisClient.Eval(_luaScript, new string[] { _lockKey }, lockId);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Cache;
+using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core.HangfireExtend;
+using Atlass.Framework.ViewModels.YmlConfigs;
 using Hangfire;
 using Hangfire.SQLite;
 using Microsoft.Extensions.Configuration;
@@ -15,17 +17,18 @@ namespace Atlass.Framework.Core.Extensions
     {
         public static IServiceCollection AddAtlassHangfire(this IServiceCollection services, IConfiguration configuration)
         {
-            string redisConn = configuration.GetSection("redisConn:redisConnStr").Value;
-            string redisPwd = configuration.GetSection("redisConn:redisPwd").Value;
-            //var hgOpts = ConfigurationOptions.Parse(redisConn);
-            //hgOpts.AllowAdmin = true;
-            //hgOpts.Password = redisPwd;
+            var redis = configuration.GetSection("RedisConfig").Get<RedisConfigDto>();
 
-          //  var _redisContext = ConnectionMultiplexer.Connect(hgOpts);
-
-
+            GlobalContext.RedisConfig = redis;
+            try
+            {
+                RedisFactory.Init(redis);
+            }
+            catch (Exception ex)
+            {
+                LogNHelper.Exception(ex);
+            }
             //hangfire
-            //  
             try
             {
                 //Version=3;Pooling=true;FailIfMissing=false;
@@ -43,17 +46,7 @@ namespace Atlass.Framework.Core.Extensions
                 LogNHelper.Exception(ex);
             }
 
-            try
-            {
-                string pre_name = "{easy_cms}:";
-                //redis缓存初始化
-                var csredis = new CSRedis.CSRedisClient($"{redisConn},password={redisPwd},defaultDatabase=0,poolsize=20,ssl=false,writeBuffer=10240,prefix={pre_name}");
-                RedisHelper.Initialization(csredis);
-            }
-            catch(Exception ex)
-            {
-                LogNHelper.Exception(ex);
-            }
+           
 
 
             return services;

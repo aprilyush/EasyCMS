@@ -21,6 +21,7 @@ using Senparc.Weixin.MP.Containers;
 using Atlass.Framework.Core.Web;
 using Senparc.CO2NET.Extensions;
 using Atlass.Framework.Core.Base;
+using Atlass.Framework.Cache;
 
 namespace Atlass.Framework.Web.Controllers
 {
@@ -67,7 +68,8 @@ namespace Atlass.Framework.Web.Controllers
                 //LogNHelper.Info(json);
                 //Task.Factory.StartNew(() => GetUserInfo(result.access_token, result.openid));
                 string key = "{access_token}:wxtoken";
-                RedisHelper.Set(key, result, result.expires_in);
+                var redisClient = RedisFactory.GetRedisClient();
+                redisClient.Set(key, result, result.expires_in);
 
                 RequestHelper.SetOpenId(result.openid, result.expires_in);
                 string homeUrl = $"/wechat/index.html?openId={result.openid}"; 

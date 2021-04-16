@@ -75,7 +75,7 @@ namespace Atlass.Framework.Cache
             {
                 return _templates[template];
             }
-            var sql = FreesqlDbInstance.GetInstance();
+            var sql = DbInstanceFactory.GetInstance();
             var model = sql.Select<cms_template>().Where(s => s.id == template).First();
             if (model != null)
             {

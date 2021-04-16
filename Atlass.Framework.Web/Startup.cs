@@ -46,7 +46,8 @@ namespace Atlass.Framework.Web
         {
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("configs/appsettings.json", optional: true, reloadOnChange: true);
+            .AddYamlFile("configs/appsettings.yml", optional: true, reloadOnChange: true);
+            //.AddJsonFile("configs/appsettings.json", optional: true, reloadOnChange: true);
             Configuration = builder.Build();
         }
 

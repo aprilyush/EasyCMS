@@ -21,10 +21,10 @@
   <!--Condition="'$(Configuration)' == 'Debug'"-->
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="CSRedisCore" Version="3.6.6" />
     <PackageReference Include="Ding.Hangfire.SQLite" Version="1.1.8" />
     <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
     <PackageReference Include="EasyCaching.ResponseCaching" Version="1.2.0" />
+    <PackageReference Include="FreeRedis" Version="0.3.5" />
     <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
@@ -33,6 +33,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
     <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.1.14" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
     <PackageReference Include="Senparc.Weixin.TenPay" Version="1.6.400" />
@@ -559,6 +560,12 @@
     <None Include="wwwroot\ui\plugins\slimscroll\jquery.slimscroll.min.js" />
     <None Include="wwwroot\ui\js\resize-tabs.js" />
     <None Include="wwwroot\ui\js\three.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="configs\appsettings.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

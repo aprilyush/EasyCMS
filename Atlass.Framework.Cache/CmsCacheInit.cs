@@ -10,7 +10,7 @@ namespace Atlass.Framework.Cache
     {
         public static void Init()
         {
-            var sqlDb = FreesqlDbInstance.GetInstance();
+            var sqlDb = DbInstanceFactory.GetInstance();
             var templates = sqlDb.Select<cms_template>().ToList();
             var channels = sqlDb.Select<cms_channel>().ToList();
 

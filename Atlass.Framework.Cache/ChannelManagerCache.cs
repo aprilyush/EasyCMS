@@ -52,7 +52,7 @@ namespace Atlass.Framework.Cache
             {
                 return _channels[channelId];
             }
-            var sql = FreesqlDbInstance.GetInstance();
+            var sql = DbInstanceFactory.GetInstance();
             var model = sql.Select<cms_channel>().Where(s => s.id == channelId).First();
             if (model != null)
             {

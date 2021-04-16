@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSRedisCore" Version="3.6.6" />
     <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
+    <PackageReference Include="FreeRedis" Version="0.3.5" />
   </ItemGroup>
 
   <ItemGroup>

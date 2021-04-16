@@ -1,15 +1,16 @@
 ﻿using Atlass.Framework.ViewModels;
+using Atlass.Framework.ViewModels.YmlConfigs;
 using FreeSql;
 using System;
 
 namespace Atlass.Framework.DbContext
 {
-    public class FreesqlDbInstance
+    public class DbInstanceFactory
     {
         private static IFreeSql _freeSql;
         private static readonly object locker = new object();
-        public static FreeSqlConfig FreeSqlConfig = new FreeSqlConfig();
-        static FreesqlDbInstance()
+        public static DbConfigsDto dbConfig = new DbConfigsDto();
+        static DbInstanceFactory()
         {
 
         }
@@ -45,7 +46,7 @@ namespace Atlass.Framework.DbContext
                     if (_freeSql == null)
                     {
                         _freeSql =new FreeSqlBuilder()
-                        .UseConnectionString(FreeSqlConfig.DataType, FreeSqlConfig.MasterConnetion)
+                        .UseConnectionString(dbConfig.DataType, dbConfig.MasterConnection)
                          .UseLazyLoading(true).Build();
                     }
                 }

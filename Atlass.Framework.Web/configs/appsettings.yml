@@ -11,10 +11,8 @@ configProperties:
 
 # 站点host http://*:80;
 HostUrl: "http://cmsl.atlass:80"
-
 #跨域
 AllowedHosts: "*"
-
 #数据库配置
 DbConfigs: 
   -
@@ -54,4 +52,29 @@ RedisConfig:
   ConnectTimeout: 5000
   ConnectionName: "easycms"
   PreKey: "{easycms}:"
-  
+ #CO2NET 设置
+SenparcSetting: 
+  IsDebug: true
+  DefaultCacheNamespace: "EasyCMSCache"
+  Cache_Redis_Configuration: "#{Cache_Redis_Configuration}#" #Redis配置
+  # Cache_Redis_Configuration: "localhost:6379" #不包含密码
+  # Cache_Redis_Configuration": "localhost:6379,password=senparc,connectTimeout=1000,connectRetry=2,syncTimeout=10000,defaultDatabase=3",//密码及其他配置
+  Cache_Memcached_Configuration: "#{Cache_Memcached_Configuration}#" #Memcached配置
+  SenparcUnionAgentKey: "#{SenparcUnionAgentKey}#" #SenparcUnionAgentKey
+#Senparc.Weixin SDK 设置
+SenparcWeixinSetting:
+  IsDebug: true
+  Token: "easycms"
+  EncodingAESKey: "IV6OT1ZdgVmW0ApgEhtg6KMgM1N9co7NFT2yJ9QtROL"
+  WeixinAppId: "wxb41a3968afc0e96b"
+  WeixinAppSecret: "5382de09bdf77a259aa2036bac417b90"
+  #微信支付
+  #微信支付V3（新版）
+  TenPayV3_MchId: "1487074472"
+  TenPayV3_SubMchId: "" #子商户，没有可留空
+  TenPayV3_Key: "B99MGW5XK4YC22G5X3S8G2TR6P8RW31Q"
+  TenPayV3_AppId: "wxb41a3968afc0e96b"
+  TenPayV3_AppSecret: "5382de09bdf77a259aa2036bac417b90"
+  TenPayV3_TenpayNotify: "http://www.yushuo.natapp1.cc/wxpay/Index"
+  #如果不设置TenPayV3_WxOpenTenpayNotify，默认在 TenPayV3_TenpayNotify 的值最后加上 "WxOpen"
+  TenPayV3_WxOpenTenpayNotify: "http://www.yushuo.natapp1.cc/wxpay/Index" #http://YourDomainName/TenpayV3/PayNotifyUrlWxOpen

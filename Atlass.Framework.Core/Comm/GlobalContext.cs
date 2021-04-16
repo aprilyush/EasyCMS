@@ -1,4 +1,5 @@
 ﻿using Atlass.Framework.Common.NLog;
+using Atlass.Framework.ViewModels.YmlConfigs;
 using Autofac;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -17,24 +18,20 @@ namespace Atlass.Framework.Core
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             return version.Major + "." + version.Minor;
         }
+        
+        /// <summary>
+        /// 数据库配置
+        /// </summary>
+        public static List<DbConfigsDto> DbConfigs { get; set; }
 
-        public static string GetWanIp()
-        {
-            string ip = string.Empty;
-            try
-            {
-                //string url = "http://www.net.cn/static/customercare/yourip.asp";
-                //string html = HttpHelper.HttpGet(url);
-                //if (!string.IsNullOrEmpty(html))
-                //{
-                //    ip = HtmlHelper.Resove(html, "<h2>", "</h2>");
-                //}
-            }
-            catch (Exception ex)
-            {
-                LogNHelper.Exception(ex);
-            }
-            return ip;
-        }
+        /// <summary>
+        /// 默认数据库配置
+        /// </summary>
+        public static DbConfigsDto DefaultDbConfig { get; set; }
+        /// <summary>
+        /// redis配置
+        /// </summary>
+        public static RedisConfigDto RedisConfig { get; set; }
+
     }
 }
