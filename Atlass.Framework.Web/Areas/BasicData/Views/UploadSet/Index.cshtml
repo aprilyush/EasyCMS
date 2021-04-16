@@ -3,8 +3,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
-<link href="~/plugins/colorpick/colpick.css" rel="stylesheet" />
+<link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<link href="~/ui/plugins/colorpick/colpick.css" rel="stylesheet" />
 <style>
     #font_color {
         margin: 0;
@@ -16,6 +16,7 @@
 </style>
     <div class="ibox">
         <div class="ibox-content">
+            <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="">
                     <a href="/BasicData/Site/Index">网站设置</a>
@@ -225,13 +226,14 @@
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
 
 @section scripts{
-    <script src="~/plugins/colorpick/colpick.js"></script>
-    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script src="~/ui/plugins/colorpick/colpick.js"></script>
+    <script src="~/ui/plugins/verUpload/verUpload.js"></script>
     <script>
         var editor;
         $(function () {

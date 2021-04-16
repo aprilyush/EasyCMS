@@ -26,15 +26,15 @@ namespace Atlass.Framework.Models
         /// </summary>
         public string site_url { get; set; }
         /// <summary>
-        /// 首页标题
+        /// SEO标题
         /// </summary>
         public string site_title { get; set; }
         /// <summary>
-        /// 首页关键词
+        /// SEO关键词
         /// </summary>
         public string site_keyword { get; set; }
         /// <summary>
-        /// 首页描述
+        /// SEO描述
         /// </summary>
         public string site_description { get; set; }
         /// <summary>

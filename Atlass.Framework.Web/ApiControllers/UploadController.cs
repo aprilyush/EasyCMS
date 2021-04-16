@@ -25,6 +25,8 @@ namespace Atlass.Framework.Web.ApiControllers
         {
             RequestHelper = requestHelper;
         }
+
+        [RequirePermission("#")]
         [HttpGet("GetUploadSet")]
         public IActionResult GetUploadSet()
         {
@@ -38,6 +40,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("Uploadimg")]
+        [RequirePermission("#")]
         public ActionResult Uploadimg()
         {
             var result = new ResultAdaptDto();
@@ -138,6 +141,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("UploadLogo")]
+        [RequirePermission("#")]
         public ActionResult UploadLogo(int imageType)
         {
             var result = new ResultAdaptDto();
@@ -194,6 +198,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="chunks">分块总数</param>
         /// <returns></returns>
         [HttpPost("SaveChunkFile")]
+        [RequirePermission("#")]
         public IActionResult SaveChunkFile()
         {
             //uploadfile,uploadvideo
@@ -229,6 +234,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="chunks">分块总数</param>
         /// <returns></returns>
         [HttpGet("Merge")]
+        [RequirePermission("#")]
         public IActionResult Merge()
         {
             var result = new ResultAdaptDto();
@@ -288,6 +294,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="chunks">分块数</param>
         /// <returns></returns>
         [HttpPost("MergeFile")]
+        [RequirePermission("#")]
         public IActionResult MergeFile(string md5, string fileName, int chunks)
         {
             var tempDir = "UploadTemp";
@@ -320,6 +327,7 @@ namespace Atlass.Framework.Web.ApiControllers
         /// <param name="chunk">分块号</param>
         /// <returns></returns>
         [HttpPost("CheckFile")]
+        [RequirePermission("#")]
         public IActionResult CheckFile(string md5, string fileName, int? chunk)
         {
             var tempDir = "UploadTemp";

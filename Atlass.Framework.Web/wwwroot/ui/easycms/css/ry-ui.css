@@ -1139,6 +1139,84 @@ table.rc-table-resizing thead > th > a {
 :-ms-input-placeholder {
 	color: #b3b3b3!important;
 }
+
+.cupload-upload-box {
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	background-color: rgb(251, 253, 255);
+	border: 1px dashed rgb(192, 204, 218);
+	border-radius: 6px;
+	box-sizing: border-box;
+	width: 148px;
+	height: 148px;
+	line-height: 146px;
+}
+
+.cupload-upload-btn {
+	font-size: 28px;
+	color: rgb(140, 147, 157);
+}
+
+.cupload-image-boxs {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+	vertical-align: top;
+}
+
+.cupload-image-box {
+	position: relative;
+	display: inline-block;
+	margin: 0px 8px 8px 0px;
+	background-color: rgb(251, 253, 255);
+	border: 1px solid rgb(192, 204, 218);
+	border-radius: 6px;
+	box-sizing: border-box;
+	width: 148px;
+	height: 148px;
+}
+
+.cupload-image-preview {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 146px;
+	height: 146px;
+}
+
+.cupload-image-delete {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 5px;
+	right: 5px;
+	z-index: 2;
+	line-height: 20px;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 18px;
+	text-align: center;
+	background: #f00;
+	cursor: pointer;
+	color: #ccc;
+	transition: all 0.3s ease 0s;
+}
+
+	.cupload-image-delete:hover {
+	}
+
+.cupload-delete-btn {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+}
+
+
 /*自定义样式*/
 .div_find {
     /*padding-top: 10px;*/

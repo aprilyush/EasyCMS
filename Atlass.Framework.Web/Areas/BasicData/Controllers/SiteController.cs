@@ -22,6 +22,9 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         {
             _siteApp = service.GetRequiredService<SiteAppService>();
         }
+
+        [RequirePermission("site:set:view")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -31,6 +34,8 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         /// 获取站点设置数据
         /// </summary>
         /// <returns></returns>
+        [RequirePermission("site:set:view")]
+        [HttpGet]
         public IActionResult GetSiteModel()
         {
             var result = new ResultAdaptDto();
@@ -45,6 +50,7 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [RequirePermission("site:set:view")]
         public IActionResult SaveSite(cms_site dto)
         {
             var site=_siteApp.SaveSite(dto);

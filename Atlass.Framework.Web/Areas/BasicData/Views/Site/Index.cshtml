@@ -1,93 +1,94 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "站点设置";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
 <div class="ibox">
     <div class="ibox-content">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#tab-1" aria-expanded="true">网站设置</a>
-            </li>
-            <li class="">
-                <a href="/BasicData/UploadSet/Index" aria-expanded="false">上传设置</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div id="tab-1" class="tab-pane active">
-                <br />
-                <form class="form form-horizontal" id="myForm">
-                    <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label required">站点名称：</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="site_name" id="site_name" value="" class="form-control" data-rule="required;">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">网站LOGO：</label>
-                        <div class="col-sm-5">
-                            <div class="cupload-upload-box" id="logo_uploader">
-                                <span class="cupload-upload-btn">+</span>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">网站设置</a>
+                </li>
+                <li class="">
+                    <a href="/BasicData/UploadSet/Index" aria-expanded="false">上传设置</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <br />
+                    <form class="form form-horizontal" id="myForm">
+                        <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label required">站点名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="site_name" id="site_name" value="" class="form-control" data-rule="required;">
                             </div>
-                            <ul class="cupload-image-boxs" id="logo">
-                            </ul>
-                            <input type="hidden" name="site_log" id="site_log" value="" class="form-control">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">网站网址：</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="site_url" id="site_url" value="" class="form-control">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网站LOGO：</label>
+                            <div class="col-sm-5">
+                                <div class="cupload-upload-box" id="logo_uploader">
+                                    <span class="cupload-upload-btn">+</span>
+                                </div>
+                                <ul class="cupload-image-boxs" id="logo">
+                                </ul>
+                                <input type="hidden" name="site_log" id="site_log" value="" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">首页标题：</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="site_title" id="site_title" value="" class="form-control">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网站网址：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="site_url" id="site_url" value="" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">首页关键词：</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="site_keyword" id="site_keyword" value="" class="form-control">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页标题：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="site_title" id="site_title" value="" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">首页描述：</label>
-                        <div class="col-sm-5">
-                            <textarea rows="5" cols="60" id="site_description" name="site_description" style="height:60px;">EasyCms演示站点
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页关键词：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="site_keyword" id="site_keyword" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页描述：</label>
+                            <div class="col-sm-5">
+                                <textarea rows="5" cols="60" id="site_description" name="site_description" style="height:60px;">EasyCms演示站点
                                 </textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">版权信息：</label>
-                        <div class="col-sm-5">
-                            <textarea rows="5" cols="60" id="site_copyright" name="site_copyright" style="height:80px;">Copyright © 2012-2018 EasyCms，易思CMS 版权所有
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">版权信息：</label>
+                            <div class="col-sm-5">
+                                <textarea rows="5" cols="60" id="site_copyright" name="site_copyright" style="height:80px;">Copyright © 2012-2018 EasyCms，易思CMS 版权所有
                                 </textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">备案号：</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="site_icp" id="site_icp" value="苏ICP备xxxxxxxx号" class="form-control">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备案号：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="site_icp" id="site_icp" value="苏ICP备xxxxxxxx号" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="footerbar">
-                        <div class="col-sm-12 col-sm-offset-3">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
-                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                        <div class="footerbar">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 @section scripts{
-    <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
-    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script src="~/ui/plugins/verUpload/verUpload.js"></script>
     <script>
         var editor;
         $(function () {
