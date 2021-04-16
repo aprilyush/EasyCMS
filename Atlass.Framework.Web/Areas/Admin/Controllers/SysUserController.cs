@@ -190,12 +190,44 @@ namespace Altas.Framework.Admin
             RequestHelper.SetCookie(claimstr);
             return Success("修改成功");
         }
+
+        /// <summary>
+        /// 重置自己密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("#")]
+        public IActionResult SelfResetPassword()
+        {
+            LoginUserDto userDto = RequestHelper.AdminInfo();
+
+            ViewBag.Id = userDto.Id.ToString();
+            ViewBag.loginName = userDto.LoginName;
+            return View();
+        }
+
+        /// <summary>
+        /// 更新自己密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [RequirePermission("#")]
+        public IActionResult UpdateSelfPassword()
+        {
+            long id = RequestHelper.GetPostInt64("id", 0);
+            String oldPassword = RequestHelper.GetPostString("oldPassword", "");
+            String newPassword = RequestHelper.GetPostString("newPassword", "");
+            String accountName = RequestHelper.GetPostString("loginName", "");
+            ResultAdaptDto resultAdaptDto = _userApp.UpdatePassword(id, accountName, oldPassword, newPassword);
+            return Json(resultAdaptDto);
+        }
+
         /// <summary>
         /// 重置密码
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [RequirePermission("#")]
+        [RequirePermission("system:user:password")]
         public IActionResult ResetPassword()
         {
             string id = RequestHelper.GetQueryString("id", "0");
@@ -216,7 +248,7 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [RequirePermission("#")]
+        [RequirePermission("system:user:password")]
         public IActionResult UpdatePassword()
         {
             long id = RequestHelper.GetPostInt64("id",0);
@@ -226,6 +258,7 @@ namespace Altas.Framework.Admin
             ResultAdaptDto resultAdaptDto = _userApp.UpdatePassword(id, accountName, oldPassword, newPassword);
             return Json(resultAdaptDto);
         }
+
         /// <summary>
         /// 用户选择
         /// </summary>
