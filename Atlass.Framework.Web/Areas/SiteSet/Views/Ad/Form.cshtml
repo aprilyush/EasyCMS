@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
-<div class="ibox">
+<div class="container-div white-bg">
     <div class="ibox-content">
         <form class="form form-horizontal" id="form" autocomplete="off">
             <input type="hidden" name="id" id="id" value="">
@@ -83,7 +83,7 @@
                         jutils.error("请设置广告图片");
                         return;
                     }
-                    jutils.ajaxPost('/BasicData/Ad/Save', $(form).serialize(), function (res) {
+                    jutils.ajaxPost('/SiteSet/Ad/Save', $(form).serialize(), function (res) {
                         if (res.status) {
                             jutils.success("保存成功");
                             cancel();
@@ -100,7 +100,7 @@
         function loadData() {
             var id = $("#id").val();
             if (id !== '0') {
-            jutils.ajaxGet('/BasicData/Ad/getmodel', { id: id }, function (res) {
+                jutils.ajaxGet('/SiteSet/Ad/getmodel', { id: id }, function (res) {
                     var model = res.data.model;
                     $('#form').initFormData(model);
                     initImage(model.ad_image);

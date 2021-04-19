@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Atlass.Framework.Web.Areas.BasicData.Controllers
 {
-    [Area("BasicData")]
+    [Area("SiteSet")]
     public class SiteController : BaseController
     {
 

@@ -84,7 +84,7 @@
                 theme: "yellow_right",
                 valid: function (form) {
                     // 表单验证通过，提交表单
-                    jutils.ajaxPost('/BasicData/Site/SaveSite', $(form).serialize(),
+                    jutils.ajaxPost('/SiteSet/Site/SaveSite', $(form).serialize(),
                         function (res) {
 
                         });
@@ -96,7 +96,7 @@
         });
         function loadData() {
             var id = jutils.getQueryParam("id");
-            jutils.ajaxGet('/BasicData/Site/getSitemodel', null, function (res) {
+            jutils.ajaxGet('/SiteSet/Site/getSitemodel', null, function (res) {
                 if (res.status) {
                     var model = res.data.model
                     $('#myForm').initFormData(model);

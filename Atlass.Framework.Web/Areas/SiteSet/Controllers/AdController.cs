@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Atlass.Framework.AppService.BasicData;
+using Atlass.Framework.AppService.CmsSet;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Atlass.Framework.Web.Areas.BasicData.Controllers
 {
-    [Area("BasicData")]
+    [Area("SiteSet")]
     public class AdController : BaseController
     {
 

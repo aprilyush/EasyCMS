@@ -298,14 +298,14 @@
             var imageModel = $('#imageForm').getFormData();
             var attachModel = $('#attachForm').getFormData();
             var data = Object.assign(imageModel, attachModel);
-            jutils.ajaxPost('/BasicData/UploadSet/Save', data,
+            jutils.ajaxPost('/SiteSet/UploadSet/Save', data,
                         function (res) {
 
                        });
         }
         function loadData() {
             var id = jutils.getQueryParam("id");
-            jutils.ajaxGet('/BasicData/UploadSet/getmodel', null, function (res) {
+            jutils.ajaxGet('/SiteSet/UploadSet/getmodel', null, function (res) {
                 if (res.status) {
                     var model = res.data.model
                     $('#imageForm').initFormData(model);

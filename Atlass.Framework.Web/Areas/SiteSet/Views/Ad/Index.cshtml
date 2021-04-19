@@ -34,7 +34,7 @@
 
         function loadGrid() {
             let options ={
-                url: '/BasicData/Ad/GetData',
+                url: '/SiteSet/Ad/GetData',
                 pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
                 pageSize: 10,                       // 每页的记录行数（*）
                 pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
@@ -82,7 +82,7 @@
 
         function add() {
 
-            jutils.dialogTop('添加广告', '/BasicData/Ad/form', { id: 0 }, null, function () {
+            jutils.dialogTop('添加广告', '/SiteSet/Ad/form', { id: 0 }, null, function () {
                 $table.easyTable("search");
             })
         
@@ -95,7 +95,7 @@
                 jutils.warn("请选择数据行");
                 return;
             }
-            jutils.dialogTop('添加广告', '/BasicData/Ad/form', { id: rows[0].id }, null, function () {
+            jutils.dialogTop('添加广告', '/SiteSet/Ad/form', { id: rows[0].id }, null, function () {
                 $table.easyTable("search");
             })
         }
@@ -103,7 +103,7 @@
         function banAd(obj) {
             var id = $(obj).data('id');
             jutils.confirm("确定禁用广告吗？", function () {
-                jutils.ajaxGet('/BasicData/Ad/ban',
+                jutils.ajaxGet('/SiteSet/Ad/ban',
                     { id: id },
                     function () {
                         $table.easyTable("search");
@@ -125,7 +125,7 @@
             }
             jutils.confirm('确认删除吗',
                 function () {
-                    jutils.ajaxGet('/BasicData/Ad/DeleteById',
+                    jutils.ajaxGet('/SiteSet/Ad/DeleteById',
                         { ids: ids.join() },
                         function () {
                             $table.easyTable("search");

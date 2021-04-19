@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Atlass.Framework.AppService.BasicData
+namespace Atlass.Framework.AppService.CmsSet
 {
     public class AdAppService
     {

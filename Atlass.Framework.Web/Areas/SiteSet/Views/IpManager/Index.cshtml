@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewData["Title"] = "访问IP限制";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="container-div">
+    <div class="row">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="site:ip:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="site:ip:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="site:ip:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger single disabled" onclick="banIp(this);" data-id="0" data-role="site:ip:ban">
+                <i class="fa fa-ban"></i> 停用
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        let $table;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            let options = {
+                url: '/siteset/ipmanager/GetData',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    { field: 'start_ip', title: '起始IP', align: 'center' },
+                    { field: 'end_ip', title: '结束IP', align: 'center' },
+                    {
+                        field: 'limit_enable', title: '启用状态', align: 'center', formatter: function (v, d, i) {
+                            if (v==1) {
+                                return '<span class="label label-primary">启用</span>';
+                            }
+
+                            return '<span class="label label-danger">停用</span>';
+                        }
+                    },
+                    { field: 'remark', title: '备注', align: 'center' }
+                ]
+
+            };
+
+            $table = $('#dataTable').easyTable(options);
+        }
+
+        function renderOperation(v, r, i) {
+            var html = jutils.initToolBarRow(v);
+            return html;
+        }
+
+        function add() {
+
+
+            var pageSize = jutils.documentSize();
+            var height = (pageSize.height * 0.9) + 'px';
+            //console.log(width, document.body.clientHeight);
+            //console.log(window.screen.availHeight, window.screen.availWidth); ['800px', height]
+            jutils.dialog('添加IP限制', '/siteset/ipmanager/form', { id: 0 },null, function () {
+                $table.easyTable('search');
+            });
+        }
+
+        function edit(obj) {
+            var pageSize = jutils.documentSize();
+            var height = (pageSize.height * 0.9) + 'px';
+            var rows = $table.easyTable('selected');
+            if (rows.length === 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.dialog('修改IP限制', '/siteset/ipmanager/form', { id: rows[0].id }, null, function () {
+                $table.easyTable('search');
+            });
+
+        }
+
+        function del(obj) {
+            var rows = $table.easyTable('selected');
+            if (rows.length === 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm('确认删除吗',
+                function () {
+                    jutils.ajaxGet('/siteset/ipmanager/DeleteByIds', { ids: id.join() },function () {
+                            $table.easyTable('search');
+                        });
+                });
+        }
+
+        function banIp() {
+            var rows = $table.easyTable('selected');
+            if (rows.length === 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+            var ids = [];
+            for (var i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm('确认停用IP访问限制吗',
+                function () {
+                    jutils.ajaxGet('/siteset/ipmanager/banIp',
+                        { ids: ids.join() },
+                        function () {
+                            $table.easyTable('search');
+                        });
+                });
+        }
+
+
+    </script>
+}
+
