@@ -1,5 +1,6 @@
 ﻿using Atlass.Framework.Models;
 using Atlass.Framework.Models.BaseData;
+using Atlass.Framework.Models.CmsSet;
 using EasyCaching.Core;
 using System;
 using System.Collections.Concurrent;

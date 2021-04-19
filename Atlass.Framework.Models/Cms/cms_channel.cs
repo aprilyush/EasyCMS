@@ -50,11 +50,13 @@ namespace Atlass.Framework.Models
 		[JsonProperty, Column(IsIdentity = true)]
 		public int id { get; set; }
 
-		[JsonProperty]
-		public long insert_id { get; set; }
+		[Column(CanUpdate = false)]
+		public DateTime create_time { get; set; }
+		[Column(CanUpdate = false)]
+		public string create_by { get; set; }
 
-		[JsonProperty, Column(DbType = "datetime")]
-		public DateTime insert_time { get; set; }
+		public DateTime update_time { get; set; }
+		public string update_by { get; set; }
 
 		[JsonProperty]
 		public int parent_id { get; set; }
@@ -73,10 +75,10 @@ namespace Atlass.Framework.Models
 		public int content_template { get; set; }
 
 		/// <summary>
-		/// 顶部导航渲染标识 0-渲染，1-不渲染 作用是为1时，在渲染顶部导航时可以根据标识不显示
+		/// 顶部导航渲染标识 1-渲染，0-不渲染 作用是为1时，在渲染顶部导航时可以根据标识不显示
 		/// </summary>
 		[JsonProperty]
-		public int dis_drawing { get; set; }
+		public int drawing_enable { get; set; }
 
 
 		/// <summary>

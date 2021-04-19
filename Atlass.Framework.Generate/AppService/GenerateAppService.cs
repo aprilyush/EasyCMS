@@ -276,7 +276,7 @@ namespace Atlass.Framework.Generate
             model.channel_image = channel.channel_image;
             model.channel_href = channel.channel_href;
             model.channel_template = channel.channel_template;
-            model.dis_drawing = channel.dis_drawing;
+            model.dis_drawing = channel.drawing_enable;
             model.current = 1;
             if (string.IsNullOrEmpty(model.channel_href))
             {
@@ -354,7 +354,7 @@ namespace Atlass.Framework.Generate
                   channel_image = s.channel_image,
                   channel_href = s.channel_href,
                   channel_template = s.channel_template,
-                  dis_drawing=s.dis_drawing
+                  dis_drawing=s.drawing_enable
               }).ToList();
 
             //设置连接和导航

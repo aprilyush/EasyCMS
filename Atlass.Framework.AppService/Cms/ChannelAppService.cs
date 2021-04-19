@@ -71,7 +71,7 @@ namespace Atlass.Framework.AppService.Cms
 
         public void Update(cms_channel dto)
         {
-            Sqldb.Update<cms_channel>().SetSource(dto).IgnoreColumns(s=>new { s.insert_time,s.insert_id}).ExecuteAffrows();
+            Sqldb.Update<cms_channel>().SetSource(dto).ExecuteAffrows();
         }
 
         /// <summary>

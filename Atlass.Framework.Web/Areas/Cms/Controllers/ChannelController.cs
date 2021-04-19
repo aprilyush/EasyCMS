@@ -26,17 +26,37 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             _channelApp=service.GetRequiredService<ChannelAppService>();
 
         }
+
+
+        /// <summary>
+        /// 栏目列表
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:view")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 栏目列表
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:view")]
+        [HttpGet]
         public IActionResult GetData()
         {
             var data = _channelApp.GetData();
             return Content(data.ToJson());
         }
 
+        /// <summary>
+        /// 栏目列表
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:add,cms:channel:edit")]
+        [HttpGet]
         public ActionResult Form(int id)
         {
             ViewBag.Id = id;
@@ -46,6 +66,14 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="sub_channel"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:add,cms:channel:edit")]
         [HttpPost]
         public IActionResult Save(cms_channel dto,int sub_channel)
         {
@@ -59,21 +87,30 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                     dto.channel_href = $"/channel/{sub_channel}";
                 }
             }
+            dto.update_by = RequestHelper.AdminInfo().LoginName;
+            dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
-                dto.insert_id = RequestHelper.AdminInfo().Id;
-                dto.insert_time = DateTime.Now;
+                dto.create_by = dto.update_by;
+                dto.create_time = DateTime.Now;
                 dto= _channelApp.Insert(dto);
             }
             else
             {
+
                 _channelApp.Update(dto);
             }
             ChannelManagerCache.AddChannel(dto);
             return Success("保存成功");
         }
 
-
+        /// <summary>
+        /// 获取栏目信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:add,cms:channel:edit")]
+        [HttpGet]
         public IActionResult GetModel(int id)
         {
            
@@ -90,9 +127,12 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         }
 
         /// <summary>
-        /// 栏目数
+        /// 获取栏目信息
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
+        [RequirePermission("#")]
+        [HttpGet]
         public IActionResult GetChannelTree()
         {
 
@@ -101,6 +141,14 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             result.data.Add("channels", channels);
             return Json(result);
         }
+
+        /// <summary>
+        /// 获取栏目信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:channel:delete")]
+        [HttpGet]
         public IActionResult DeleteById(int id)
         {
             _channelApp.DelByIds(id);

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atlass.Framework.Models.BaseData
+namespace Atlass.Framework.Models.CmsSet
 {
     public class cms_ad
     {

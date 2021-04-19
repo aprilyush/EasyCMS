@@ -104,6 +104,34 @@
             });
 
         },
+        dialogAuto: function (title, url, data, callFunc) {
+            //在最上层弹出
+            if (data) {
+                var queryStr = jutils.toQueryString(data);
+                url += "?" + queryStr;
+            }
+            let area2 = [$(window).width()-100 + 'px', $(window).height()-50 + 'px'];
+           
+            let index1 =layer.open({
+                title: title,
+                type: 2,
+                content: url,
+                area: area2,
+                maxmin: false,
+                yes: function (index, layero) {
+                    layer.close(index);
+                },
+                cancel: function (index, layero) {
+                    return true;
+                },
+                end: function () {
+                    if ($.isFunction(callFunc)) {
+                        callFunc();
+                    }
+                }
+            });
+
+        },
         dialogTop : function (title, url, data, area, callFunc) {
             //在最上层弹出
             if (data) {
