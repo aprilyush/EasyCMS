@@ -1,38 +1,50 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "广告管理";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<div class="ibox">
-    <div class="ibox-content">
-        <div id="toolbar" class="btn-group">
-
+<div class="container-div">
+    <div class="row">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add();" data-role="site:add:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="site:add:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="site:add:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger single disabled" onclick="banAd(this);" data-id="0" data-role="site:add:ban">
+                <i class="fa fa-ban"></i> 停用
+            </a>
         </div>
-        <table id="table"></table>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
     </div>
 </div>
 @section scripts{
     <script>
+        let $table;
         $(function () {
             loadGrid();
         });
 
         function loadGrid() {
-            $table = $("#table").bootstrapTable({
+            let options ={
                 url: '/BasicData/Ad/GetData',
-                toolbar: '#toolbar',
-                pagination: true,
-                method: 'get',
-                height: $(window).height() - 50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "server",
-                locale: "zh-CN",
-                striped: true,
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize
+                    }
+                    return p;
+                },
                 columns: [
                     { field: 'ck', checkbox: true },
                     { field: 'ad_title', title: '广告标题', align: 'center' },
@@ -47,7 +59,7 @@
                         }
                     },
                     {
-                        field: 'ad_status', title: '启用状态', align: 'center', formatter: function (v, d, i) {
+                        field: 'enable_status', title: '启用状态', align: 'center', formatter: function (v, d, i) {
                             if (v === 1) {
                                 return '<span class="label label-primary">启用</span>';
                             }
@@ -55,15 +67,12 @@
                             return '<span class="label label-danger">未启用</span>';
                         }
                     },
-                    {
-                        field: 'id', title: '操作', align: 'center',
-                        formatter: renderOperation
-                    }
+                    { field: 'create_time', title: '添加时间', align: 'center' }
                 ]
 
-            });
+            };
 
-            jutils.initToolBarRole('#toolbar');
+            $table = $('#dataTable').easyTable(options);
         }
 
         function renderOperation(v, r, i) {
@@ -73,35 +82,53 @@
 
         function add() {
 
-            location.href = '/BasicData/Ad/form?id=0' + 0;
-
+            jutils.dialogTop('添加广告', '/BasicData/Ad/form', { id: 0 }, null, function () {
+                $table.easyTable("search");
+            })
+        
         }
 
         function edit(obj) {
-            var id = $(obj).data('id');
-            location.href = '/BasicData/Ad/form?id=' + id;
+
+            var rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+            jutils.dialogTop('添加广告', '/BasicData/Ad/form', { id: rows[0].id }, null, function () {
+                $table.easyTable("search");
+            })
         }
-        function ban(obj) {
+
+        function banAd(obj) {
             var id = $(obj).data('id');
             jutils.confirm("确定禁用广告吗？", function () {
                 jutils.ajaxGet('/BasicData/Ad/ban',
                     { id: id },
                     function () {
-                        $table.bootstrapTable('refresh');
+                        $table.easyTable("search");
                     });
             });
 
 
         }
 
-        function del(obj) {
-            var id = $(obj).data('id');
+        function removeAll(obj) {
+            var rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn("请选择数据行");
+                return;
+            }
+            var ids = [];
+            for (let i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
             jutils.confirm('确认删除吗',
                 function () {
                     jutils.ajaxGet('/BasicData/Ad/DeleteById',
-                        { ids: id },
+                        { ids: ids.join() },
                         function () {
-                            $table.bootstrapTable('refresh');
+                            $table.easyTable("search");
                         });
                 });
         }

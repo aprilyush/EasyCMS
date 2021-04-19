@@ -134,12 +134,14 @@ namespace Atlass.Framework.Web.Controllers
                     result.message = "系统异常，请稍后再试";
                     break;
             }
+
+            Response.StatusCode = statusCode;
             if (RequestHelper.IsAjax())
             {
                 return Json(result);
             }
 
-            Response.StatusCode = statusCode;
+           
             return View(viewName);
         }
 

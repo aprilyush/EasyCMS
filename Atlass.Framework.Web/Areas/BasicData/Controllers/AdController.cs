@@ -24,23 +24,44 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _adApp = service.GetRequiredService<AdAppService>();
         }
+
+
+        [RequirePermission("site:ad:view")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 数据列表
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [RequirePermission("site:ad:view")]
+        [HttpPost]
+        public IActionResult GetData(DataTableDto dto)
+        {
+            var data = _adApp.GetData(dto);
+            return Json(data);
+        }
 
+        /// <summary>
+        /// 表单页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("site:ad:add,site:ad:edit")]
+        [HttpGet]
         public IActionResult Form(int id)
         {
             ViewBag.Id = id;
 
             return View();
         }
-        public IActionResult GetData(DataTableDto dto)
-        {
-            var data = _adApp.GetData(dto);
-            return Json(data);
-        }
+
+        [RequirePermission("site:ad:add,site:ad:edit")]
+        [HttpGet]
         public IActionResult GetModel(int id)
         {
             var result = new ResultAdaptDto();
@@ -49,20 +70,53 @@ namespace Atlass.Framework.Web.Areas.BasicData.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [RequirePermission("site:ad:add,site:ad:edit")]
+        [HttpPost]
         public IActionResult Save(cms_ad dto)
         {
-            dto.insert_id = RequestHelper.AdminInfo().Id;
-            dto=_adApp.Save(dto);
+          
+            dto=_adApp.Save(dto,RequestHelper.AdminInfo());
             SiteManagerCache.AddAdvertising(dto);
             return Success("数据保存成功");
         }
-        public IActionResult DeleteById(int id)
+
+        /// <summary>
+        /// 删除广告
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("site:ad:delete")]
+        [HttpGet]
+        public IActionResult DeleteById(string ids)
         {
-            _adApp.DeleteById(id);
-            SiteManagerCache.RemoveAdvertising(id);
+            if (ids.IsEmpty())
+            {
+                return Error("删除失败");
+            }
+           var idsArray= _adApp.DeleteById(ids);
+
+            foreach(int adId in idsArray)
+            {
+                SiteManagerCache.RemoveAdvertising(adId);
+            }
+           
             return Success("删除成功");
         }
 
+
+        /// <summary>
+        /// 暂时禁用广告
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("site:ad:ban")]
+        [HttpGet]
         public IActionResult Ban(int id)
         {
             _adApp.Ban(id);

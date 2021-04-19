@@ -1,11 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Form";
+    ViewData["Title"] = "广告信息";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-
-<link href="~/plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
-<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+<link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
 <div class="ibox">
     <div class="ibox-content">
         <form class="form form-horizontal" id="form" autocomplete="off">
@@ -19,15 +17,15 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">广告链接：</label>
                 <div class="col-sm-6">
-                    <input type="text" name="ad_href" id="ad_href" value="" class="form-control" >
+                    <input type="text" name="ad_href" id="ad_href" value="#" class="form-control" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">启用状态</label>
                 <div class="col-sm-6">
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="ad_status" name="ad_status" value="1" checked>
-                        <label for="ad_status">启用</label>
+                        <input type="checkbox" id="enable_status" name="ad_status" value="1" checked>
+                        <label for="enable_status">启用</label>
                     </div>
                 </div>
             </div>
@@ -54,15 +52,20 @@
             <div class="hr-line-dashed"></div>
             <div class="footerbar">
                 <div class="col-sm-12 col-sm-offset-3">
-                    <button class="btn btn-primary" type="submit">保存内容</button>
-                    <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-check"></i>
+                        保存
+                    </button>
+                    <button class="btn btn-danger" type="button" onclick="cancel()">
+                        <i class="fa fa-reply-all"></i>关闭
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<script src="/plugins/verUpload/verUpload.js"></script>
+<script src="~/ui/plugins/verUpload/verUpload.js"></script>
 @section scripts{
     <script>
 
@@ -154,7 +157,7 @@
         }
 
         function cancel() {
-            jutils.back();
+            jutils.closeDialog();
         }
     </script>
 }
