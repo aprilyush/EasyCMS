@@ -102,6 +102,16 @@
                 };
                 $('#scroll-up').toTop(opt);
             }
+
+
+            jutils.handleMessage(function (res) {
+                //console.log(res);
+                if (res.title === 'cms_content_form') {
+                    $table.easyTable('search');
+                }
+
+            });
+
             loadChannelTree();
             loadGrid();
         });
@@ -209,40 +219,33 @@
 
         function add() {
             if (channelId == '0') {
-                layer.alert("请先选择栏目");
+                jutils.warn("请先选择栏目");
                 return;
             }
-            var url = '/cms/Content/Form?id=0&channelId=' + channelId;
-            parent.$.altasTab.open(
-                {
-                    id: 'edit_content',
-                    title: '发布文章',
-                    url: url,
-                    close: function () {
-                        $table.easyTable('search');
-                    }
-                });
+            var url = '/cms/Content/Form';
+            jutils.openTab('cms_content_form', '发布文章', url, { id: 0, channelId: channelId });
+            //jutils.dialogTop("发布文章", url, { id: 0, channelId: channelId }, null, function () {
+            //    $table.easyTable('search');
+            //});
 
         }
-        function edit(obj) {
-            //if (channelId == '0') {
-            //    layer.alert("请先选择栏目");
-            //    return;
-            //}
-            var id = $(obj).data('id');
-            var row = $table.bootstrapTable('getRowByUniqueId', id);
-            var channel = row.channel_id;
+        function edit() {
 
-            var url = '/cms/Content/Form?id=' + id + '&channelId=' + channel;
-            parent.$.altasTab.open(
-                {
-                    id: 'edit_content',
-                    title: '修改文章',
-                    url: url,
-                    close: function () {
-                        $table.easyTable('search');
-                    }
-                });
+            var rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+            var id = rows[0].id;
+            //var row = $table.bootstrapTable('getRowByUniqueId', id);
+            var channel = rows[0].channel_id;
+
+            var url = '/cms/Content/Form';
+            jutils.openTab('cms_content_form', '修改文章', url, { id: id, channelId: channel });
+
+            //jutils.dialogTop("修改文章", url, { id: 0, channelId: channelId }, null, function () {
+            //    $table.easyTable('search');
+            //});
         }
 
         function del(obj) {

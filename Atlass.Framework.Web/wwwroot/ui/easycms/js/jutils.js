@@ -117,7 +117,7 @@
                 type: 2,
                 content: url,
                 area: area2,
-                maxmin: false,
+                maxmin: true,
                 yes: function (index, layero) {
                     layer.close(index);
                 },
@@ -147,7 +147,7 @@
                 type: 2,
                 content: url,
                 area: area2,
-                maxmin: false,
+                maxmin: true,
                 yes: function (index, layero) {
                     layer.close(index);
                 },
@@ -549,16 +549,24 @@
             a.href = href;
             a.click();
         },
-      openTab: function (tabId,title, url, isRefresh) {
+      openTab: function (tabId,title, url,data, isRefresh) {
           // 选卡页方式打开
+          if (data) {
+              var queryStr = jutils.toQueryString(data);
+              url += "?" + queryStr;
+          }
         createMenuItem(tabId,url, title, isRefresh);
       },
       refreshTab: function () {
           refreshItem();
        },
-     parentTab: function (title, url) {
+     parentTab: function (title, url,data) {
             //选卡页同一页签打开
-        var dataId = window.frameElement.getAttribute('data-id');
+         var dataId = window.frameElement.getAttribute('data-id');
+         if (data) {
+             var queryStr = jutils.toQueryString(data);
+             url += "?" + queryStr;
+         }
          createMenuItem(dataId,url, title);
         closeItem(dataId);
     },

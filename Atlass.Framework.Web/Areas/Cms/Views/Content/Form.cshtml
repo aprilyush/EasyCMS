@@ -3,26 +3,24 @@
     ViewData["Title"] = "文章信息";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/verUpload/asset/upload.css" rel="stylesheet" />
-    <div class="ibox">
-        @*<div class="ibox-title">
-            <h5 id="titleHead">添加文章</h5>
-        </div>*@
+<link href="~/ui/plugins/verUpload/asset/upload.css" rel="stylesheet" />
+    <div class="container-div white-bg">
         <div class="ibox-content">
             <div class="tabs-container">
-                <form class="form form-horizontal" id="myForm">
+                <form class="form form-horizontal" id="contentForm">
                     <input type="hidden" name="id" id="id" value="@(ViewBag.Id)">
                     <input type="hidden" name="channel_id" id="channel_id" />
+                    <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#tab-1" aria-expanded="true">文章内容</a>
+                                <a data-toggle="tab" href="#tab-content" aria-expanded="true">文章内容</a>
                             </li>
                             <li class="">
-                                <a data-toggle="tab" href="#tab-2" aria-expanded="false">文章设置</a>
+                                <a data-toggle="tab" href="#tab-set" aria-expanded="false">文章设置</a>
                             </li>
                         </ul>
                         <div class="tab-content ">
-                            <div id="tab-1" class="tab-pane active">
+                            <div id="tab-content" class="tab-pane active">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label required">归属栏目：</label>
@@ -32,7 +30,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label required">文章标题：</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="text" name="title" id="title" value="" class="form-control" data-rule="required;">
                                         </div>
                                     </div>
@@ -63,10 +61,10 @@
                                             <textarea cols="80" rows="6" id="summary" name="summary"></textarea>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
-                            <div id="tab-2" class="tab-pane">
+                            <div id="tab-set" class="tab-pane">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">文章属性：</label>
@@ -80,7 +78,7 @@
                                                 <label for="is_recommend">推荐</label>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">作者：</label>
@@ -104,15 +102,15 @@
                                         <label class="col-sm-2 control-label">审核状态：</label>
                                         <div class="col-sm-4">
                                             <div class="radio radio-success radio-inline">
-                                                <input type="radio" id="status" value="2" name="status">
+                                                <input type="radio" id="content_status" value="2" name="content_status">
                                                 <label for="status">草稿</label>
                                             </div>
                                             <div class="radio radio-success radio-inline">
-                                                <input type="radio" id="status2" value="0" name="status">
+                                                <input type="radio" id="content_status2" value="0" name="content_status">
                                                 <label for="status2">待审核</label>
                                             </div>
                                             <div class="radio radio-success radio-inline">
-                                                <input type="radio" id="status3" value="1" name="status" checked="">
+                                                <input type="radio" id="content_status3" value="1" name="content_status" checked="">
                                                 <label for="status3">审核通过</label>
                                             </div>
                                         </div>
@@ -126,40 +124,45 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">添加时间：</label>
                                         <div class="col-sm-4">
-                                            <input type="text" name="insert_time" id="insert_time" value="@(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:200px;" readonly="readonly">
+                                            <input type="text" name="publish_time" id="publish_time" value="@(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:200px;" readonly="readonly">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <div class="footerbar">
-                        <div class="col-sm-12 col-sm-offset-3">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
-                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
-                        </div>
                     </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="footerbar">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-check"></i>
+                                    发布文章
+                                </button>
+                                <button class="btn btn-danger" type="button" onclick="cancel()">
+                                    <i class="fa fa-reply-all"></i>关闭
+                                </button>
+                            </div>
+                        </div>
                 </form>
             </div>
 
         </div>
     </div>
 @section scripts{
-    <script src="~/plugins/My97DatePicker/WdatePicker.js"></script>
-    <script src="~/plugins/ueditor/ueditor.config.js"></script>
-    <script src="~/plugins/ueditor/ueditor.all.js"></script>
-    <script src="/plugins/verUpload/verUpload.js"></script>
+    <script src="~/ui/plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/ui/plugins/ueditor/ueditor.config.js"></script>
+    <script src="~/ui/plugins/ueditor/ueditor.all.js"></script>
+    <script src="~/ui/plugins/verUpload/verUpload.js"></script>
     <script>
-        var editor;
+        let editor;
         $(function () {
-            var id = jutils.getQueryParam('id');
-            var channelid = jutils.getQueryParam('channelId');
-            if (!id || id != '0') {
-                $('#titleHead').text("修改文章");
-            }
+            let id = jutils.getQueryParam('id');
+            let channelid = jutils.getQueryParam('channelId');
+
             $('#channel_id').val(channelid);
 
 
-            $('#myForm').validator({
+            $('#contentForm').validator({
                 stopOnError: false,
                 timely: 2,
                 theme: "yellow_right",
@@ -167,6 +170,7 @@
                     // 表单验证通过，提交表单
                     jutils.ajaxPost('/Cms/Content/Save', $(form).serialize(),
                         function (res) {
+                            jutils.postMessage('cms_content_form', "save content");
                             cancel();
                         });
                 }
@@ -182,7 +186,7 @@
                 if (id != '0') {
                     var model = res.data.model
 
-                    $('#myForm').initFormData(model);
+                    $('#contentForm').initFormData(model);
                     if (model.cover_image) {
                         initImage(model.cover_image);
                     }
@@ -292,7 +296,8 @@
             });
         }
         function cancel() {
-            parent.$.altasTab.close('edit_content');
+
+            jutils.closeTab();
         }
 
 
