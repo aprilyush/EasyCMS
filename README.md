@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-20 17:30:36
+ * @LastEditTime: 2021-04-20 17:36:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -29,8 +29,8 @@
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 ## 演示地址：
  windows2016服务器：http://cms.atlass.cn/admin   
- debian10服务器：http://cmsl.atlass.cn/  暂时关了
- 用户名和密码 admin  admin@123
+ debian10服务器：http://cmsl.atlass.cn/  暂时关了   
+用户名和密码 admin  admin@123    
  🛑admin没做权限限制，请别删除数据
 
 ## 依赖环境
