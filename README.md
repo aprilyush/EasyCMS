@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-20 08:59:33
+ * @LastEditTime: 2021-04-20 09:10:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -14,7 +14,7 @@
 &emsp;&emsp;同时我也写了个springboot版本的后台管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
 地址：https://gitee.com/xiaotuzi/easycmsboot
 ## 发展目标
-             现实与理想的差异皆源之于自身能力的不足，所以目标很简单
+             现实与理想的巨大差异皆源自于自身能力的不足，所以目标很简单
 &emsp;&emsp;希望EasyCms成为一个简单易用的后台管理系统的基础开发框架和建站CMS系统。
 
  ## 目标客户为：
