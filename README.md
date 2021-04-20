@@ -1,16 +1,18 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-20 08:48:43
+ * @LastEditTime: 2021-04-20 08:59:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
 -->
 
 # EasyCms
-🛑![#f03c15]禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构 
+##  🛑禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构 
 &emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
-&emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
+&emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。    
+&emsp;&emsp;同时我也写了个springboot版本的后台管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
+地址：https://gitee.com/xiaotuzi/easycmsboot
 ## 发展目标
              现实与理想的差异皆源之于自身能力的不足，所以目标很简单
 &emsp;&emsp;希望EasyCms成为一个简单易用的后台管理系统的基础开发框架和建站CMS系统。
@@ -18,14 +20,13 @@
  ## 目标客户为：
  **满足大部分企业建站需求使用的CMS管理系统**
 ## 技术介绍
-+ 基于Aspnet core3.1  
++ 基于.net5
 + ORM使用[FreeSql](https://github.com/dotnetcore/FreeSql),默认使用mysql数据库
-+ [Redis](https://github.com/tporadowski/redis)操作使用[csredis](https://github.com/2881099/csredis)
++ [Redis](https://github.com/tporadowski/redis)操作使用[freeredis](https://github.com/2881099/freeredis)
 + 缓存使用[EasyCaching](https://github.com/dotnetcore/EasyCaching)
-+ 后台模板使用H+，如果有赞助的话，后期买个admui替换掉。
++ 后台模板使用H+，扒的若依的UI
 + 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)强大的模板引擎能够实现任何你想要的页面静态化
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
-+ 其他就不列举了。。
 ## 演示地址：
  windows2016服务器：http://cms.atlass.cn:9090  
  debian10服务器：http://cmsl.atlass.cn/  
@@ -56,21 +57,6 @@
 + [ ] 前台用户中心(这个功能感觉不是很必要，除非需要实现普通用户投稿)
 ## [样图]  
 ![Image](资料/home.png)
-## [更新日志(详细)](Update.md) 
-## 2020-05-19
-1. 首页模板渲染静态页面
-2. 栏目模板路由渲染
-3. VTemplate.Engine适配
-## 2020-05-16
-1. 内容管理
-2. 栏目管理
-3. 模板管理
-## 2020-05-11
- 1. 升级到asp.net core 3.1  
- 2. 重写定时任务   
- 3. 架构拆分，部分重构  
- 4. orm框架更新为Freesql  
- 5. 页面按钮全部更改为权限控制  
- 6. 日志框架更新为serilog,增加异常写数据库  
- 7. 重构RequestHelper类库  
- 8. 开启日常更新，增加CMS功能  
+![Image](资料/user.png)
+![Image](资料/site.png)
+![Image](资料/task.png)
