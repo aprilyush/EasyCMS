@@ -48,7 +48,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         public IActionResult GetData()
         {
             var data = _channelApp.GetData();
-            return Content(data.ToJson());
+            return Json(data);
         }
 
         /// <summary>

@@ -49,11 +49,11 @@
                 var queryStr = jutils.toQueryString(data);
                 url += "?" + queryStr;
             }
-            var index1 = layer.open({
+            let index1 = layer.open({
                 title: title,
                 type: 2,
                 content: url,
-                //skin: 'layui-layer-lan',
+                skin: 'layui-layer-molv',
                 area: ['800px', '600px'],
                 maxmin: true,
                 yes: function (index, layero) {
@@ -83,11 +83,11 @@
             if (area) {
                 area2 = [area[0] + 'px', area[1] +'px'];
             }
-            var index1 = layer.open({
+            let index1 = layer.open({
                 title: title,
                 type: 2,
                 content: url,
-                //skin: 'layui-layer-lan',
+                skin: 'layui-layer-molv',
                 area: area2,
                 maxmin: true,
                 yes: function (index, layero) {
@@ -115,6 +115,7 @@
             let index1 =layer.open({
                 title: title,
                 type: 2,
+                skin: 'layui-layer-molv',
                 content: url,
                 area: area2,
                 maxmin: true,
@@ -145,6 +146,7 @@
             let index1 = parent.layer.open({
                 title: title,
                 type: 2,
+                skin: 'layui-layer-molv',
                 content: url,
                 area: area2,
                 maxmin: true,

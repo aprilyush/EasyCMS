@@ -18,6 +18,14 @@ namespace Atlass.Framework.AppService.Cms
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
+
+        /// <summary>
+        /// 模板数据列表
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="pid"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public DataTableDto GetData(DataTableDto dto, int pid,string name)
         {
             var query = Sqldb.Select<cms_template>()
@@ -42,6 +50,11 @@ namespace Atlass.Framework.AppService.Cms
             return dto;
         }
 
+        /// <summary>
+        /// 添加模板
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public cms_template InsertTemplate(cms_template dto)
         {
             if (dto.template_mode < 4)
@@ -57,6 +70,11 @@ namespace Atlass.Framework.AppService.Cms
             return dto;
         }
 
+        /// <summary>
+        /// 更新模板
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public cms_template UpdateTemplate(cms_template dto)
         {
             var oldTemp = Sqldb.Select<cms_template>()
@@ -76,6 +94,12 @@ namespace Atlass.Framework.AppService.Cms
             return dto;
 
         }
+
+       /// <summary>
+       /// 模板信息
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns></returns>
         public cms_template GetModel(int id)
         {
             if (id == 0)
@@ -151,11 +175,21 @@ namespace Atlass.Framework.AppService.Cms
 
 
         #region 模板匹配
+
+        /// <summary>
+        /// 获取所有模板
+        /// </summary>
+        /// <returns></returns>
+        public List<cms_template> GetAllTemplates()
+        {
+            var templates = Sqldb.Select<cms_template>().ToList();
+            return templates;
+        }
         /// <summary>
         /// 模板匹配列表
         /// </summary>
         /// <returns></returns>
-        public (List<TemplateMatchListDto> matchs, List<ZtreeSelIntDto> templates) MatchList()
+        public List<TemplateMatchListDto> MatchList()
         {
             var channels = Sqldb.Select<cms_channel>().ToList();
             var templates = Sqldb.Select<cms_template>().ToList();
@@ -230,28 +264,44 @@ namespace Atlass.Framework.AppService.Cms
               
                 list.Add(model);
             }
-            var templateTrees = templates.Select(s => new ZtreeSelIntDto { id = s.id, name = s.template_name, pId = s.pid }).ToList();
-            return (list, templateTrees);
+           
+            return list;
+        }
+
+
+        /// <summary>
+        /// 获取匹配
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        public cms_channel TemplateMatch(int channelId)
+        {
+            var channel= Sqldb.Select<cms_channel>()
+                .Where(s => s.id == channelId).First(s=>new cms_channel { 
+                    channel_name=s.channel_name,
+                    channel_template=s.channel_template,
+                    content_template=s.content_template
+                });
+            if (channel == null)
+            {
+                channel = new cms_channel();
+            }
+
+            return channel;
         }
 
         /// <summary>
         /// 匹配
         /// </summary>
         /// <param name="channelId"></param>
-        /// <param name="templateId"></param>
-        /// <param name="channelType">2-栏目模板,3-内容模板</param>
-        public void SetMatch(int channelId, int templateId, int channelType)
+        /// <param name="templateChannelId">栏目模板</param>
+        /// <param name="templateContentId">内容模板</param>
+        public void SetMatch(int channelId, int templateChannelId, int templateContentId)
         {
-            if (channelType == 2)
-            {
-                Sqldb.Update<cms_channel>().Set(s => s.channel_template, templateId)
-                         .Where(s => s.id == channelId).ExecuteAffrows();
-            }
-            else
-            {
-                Sqldb.Update<cms_channel>().Set(s => s.content_template, templateId)
-                        .Where(s => s.id == channelId).ExecuteAffrows();
-            }
+            Sqldb.Update<cms_channel>()
+                .Set(s => s.channel_template, templateChannelId)
+                .Set(s => s.content_template, templateContentId)
+                          .Where(s => s.id == channelId).ExecuteAffrows();
 
         }
         #endregion

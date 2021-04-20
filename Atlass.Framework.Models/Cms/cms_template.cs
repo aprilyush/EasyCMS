@@ -43,7 +43,7 @@ namespace Atlass.Framework.Models
 		public DateTime insert_time { get; set; }
 
 		/// <summary>
-		/// 1-首页，2-栏目模板，3-内容模板，4-单页模板
+		/// 1-首页，2-栏目模板，3-内容模板，4-单页模板,5-包含文件
 		/// </summary>
 		[JsonProperty]
 		public int pid { get; set; }
