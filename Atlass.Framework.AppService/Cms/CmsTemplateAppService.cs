@@ -18,14 +18,15 @@ namespace Atlass.Framework.AppService.Cms
             Sqldb = service.GetRequiredService<IFreeSql>();
         }
 
-        public DataTableDto GetData(DataTableDto dto, int pid)
+        public DataTableDto GetData(DataTableDto dto, int pid,string name)
         {
             var query = Sqldb.Select<cms_template>()
                       .WhereIf(pid > 0, s => s.pid == pid)
+                      .WhereIf(!name.IsEmpty(),s=>s.template_name.Contains(name))
                       .OrderBy(s=>s.pid)
                       .OrderByDescending(s => s.id)
                       .Count(out long total)
-                      .Page(dto.page, dto.limit)
+                      .Page(dto.pageNumber, dto.pageSize)
                       .ToList(s => new cms_template
                       {
                           id = s.id,

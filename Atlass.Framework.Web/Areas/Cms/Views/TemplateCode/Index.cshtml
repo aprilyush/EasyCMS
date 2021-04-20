@@ -4,33 +4,83 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="ibox">
-                    <div class="ibox-title">栏目列表</div>
-                    <div class="ibox-content">
-                        <ul id="tplTree" class="ztree"></ul>
-                    </div>
-                </div>
-                
+<link href="~/ui/plugins/jquery-layout/jquery.layout-latest.css" rel="stylesheet" />
+<link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
+<div class="ui-layout-west">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa icon-grid"></i>栏目列表
             </div>
-            <div class="col-md-9">
-                <div id="toolbar" class="btn-group">
+        </div>
+        <div class="ui-layout-content">
+            <div id="tplTree" class="ztree"></div>
+        </div>
+    </div>
+</div>
+<div class="ui-layout-center">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="searchForm">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                模板名称：<input type="text" name="templateName" id="templateName" />
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
 
-                </div>
-                <table id="table"></table>
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add();" data-id="0" data-role="cms:template:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+                <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="cms:template:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger single disabled" onclick="removeAll(this);" data-id="0" data-role="cms:template:delete">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-info single disabled" onclick="copyTemplate(this)" data-id="0" data-role="cms:template:copy">
+                    <i class="fa fa-clone"></i>模板复制
+                </a>
+                <a class="btn btn-warning single disabled" onclick="syncLocalFile(this)" data-id="0" data-role="cms:template:sync">
+                    <i class="fa fa-refresh"></i> 同步本地文件
+                </a>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="dataTable"></table>
             </div>
         </div>
     </div>
 </div>
 @section scripts{
-    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+    <script src="~/ui/plugins/jquery-layout/jquery.layout-latest.js"></script>
+    <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
     <script>
-        var $table, pid, lastChannelNode ;
+        var $table, pid, lastChannelNode;
         $(function () {
+            let panehHidden = false;
+            if ($(this).width() < 769) {
+                panehHidden = true;
+            }
+            $('body').layout({ initClosed: panehHidden, west__size: 200 });
+            // 回到顶部绑定
+            if ($.fn.toTop !== undefined) {
+                var opt = {
+                    win: $('.ui-layout-center'),
+                    doc: $('.ui-layout-center')
+                };
+                $('#scroll-up').toTop(opt);
+            }
+
             loadChannelTree();
             loadGrid();
         });
@@ -55,7 +105,7 @@
             jutils.ajaxGet('/Cms/TemplateCode/TemplateCategory', null, function (res) {
 
                 var templates = res.data.templates;
-                var defaultModel = { id: 0, name: "全部", pId: 0,open: true, title: '' };
+                var defaultModel = { id: 0, name: "全部", pId: 0, open: true, title: '' };
                 templates.splice(0, 0, defaultModel);
                 tplTree = $.fn.zTree.init($("#tplTree"), opts, res.data.templates);
                 tplTree.expandAll(true);
@@ -75,29 +125,24 @@
 
 
         function loadGrid() {
-            $table = $("#table").bootstrapTable({
+            let options={
                 url: '/cms/templatecode/GetData',
-                toolbar: '#toolbar',
-                pagination: true,
-                height: $(window).height() - 50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "server",//
-                locale: "zh-CN",
-                striped: true,
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                uniqueId: 'id',
                 queryParams: function (params) {
-                    var dto = {
-                        limit: params.limit, //每页多少条
-                        offset: params.offset, //从第几条开始读(默认就好)
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        templateName: $('#templateName').val(),
                         pid: pid
-                    };
-                    return dto;
+                    }
+                    return p;
                 },
                 columns: [
-                    { field: 'template_name', title: '模板名称', align: 'left'},
+                    { field: 'selectItem', radio: true },
+                    { field: 'template_name', title: '模板名称', align: 'left' },
                     { field: 'template_file', title: '模板文件', align: 'center' },
                     { field: 'file_name', title: '生成文件名', align: 'center' },
                     {
@@ -130,19 +175,18 @@
                     }
                 ]
 
-            });
-            //jutils.initToolBar('#toolbar', true);
-            jutils.initToolBarRole('#toolbar');
+            };
+
+            $table = $('#dataTable').easyTable(options);
         }
 
         function render(v, r, i) {
-            var html = jutils.initToolBarRow(v);
             if (r.template_mode === 1) {
-                var genHtml = '<a class="btn btn-white btn-bitbucket" title="生成首页" href="javascript:void(0);" onclick="genHome()" data-id="' + v + '"><i class="fa fa-rocket"></i></a>';
-                html = genHtml + html;
+                var genHtml = '<a class="btn btn-info btn-xs" title="生成首页" href="javascript:void(0);" onclick="genHome()" data-id="' + v + '"><i class="fa fa-rocket"></i>生成首页</a>';
+                return genHtml;
             }
-          
-            return html;
+
+            return '';
         }
 
         function genHome(obj) {
@@ -157,55 +201,66 @@
             return '<a href="/cms/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
         }
         function add() {
-            var url = '/cms/templatecode/Form?id=0';
 
-            parent.$.altasTab.open(
-                {
-                    id: 'vtemplate',
-                    title: '模板设置',
-                    url: url,
-                    close: function () {
-                        $table.bootstrapTable('refresh');
-                    }
-                });
+            var url = '/cms/templatecode/Form';
+            jutils.openTab('cms_template_form', '添加模板', url, { id:0 });
         }
+
+
+
         function edit(obj) {
-            var id = $(obj).data('id');
-            var url = '/cms/templatecode/Form?id=' + id;
-            //location.href = url;
-            parent.$.altasTab.open(
-                {
-                    id: 'vtemplate',
-                    title: '模板设置',
-                    url: url,
-                    close: function () {
-                        $table.bootstrapTable('refresh');
-                    }
-                });
+
+            let rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+
+
+            var url = '/cms/templatecode/Form';
+            jutils.openTab('cms_template_form', '修改模板', url, { id: rows[0].id });
+           
         }
 
         function del(obj) {
-            var id = $(obj).data('id');
+            let rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
             jutils.confirm("确认删除当前模板吗", function () {
-                jutils.ajaxGet('/cms/templatecode/DeleteById', { id: id }, function (res) {
+                jutils.ajaxGet('/cms/templatecode/DeleteById', { id: rows[0].id }, function (res) {
                     $table.bootstrapTable('refresh');
                 })
             })
         }
 
+
+
         function copyFile(obj) {
-            var id = $(obj).data('id');
+
+            let rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+         
             jutils.confirm("确认复制一份新的模板副本吗", function () {
-                jutils.ajaxGet('/cms/templatecode/copyFile', { id: id }, function (res) {
+                jutils.ajaxGet('/cms/templatecode/copyFile', { id: rows[0].id }, function (res) {
                     $table.bootstrapTable('refresh');
                 })
             })
         }
 
         function syncTemplate(obj) {
-            var id = $(obj).data('id');
+            let rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+
             jutils.confirm("确认本地模板同步到数据库吗", function () {
-                jutils.ajaxGet('/cms/templatecode/syncTemplate', { id: id }, function (res) {
+                jutils.ajaxGet('/cms/templatecode/syncTemplate', { id: rows[0].id }, function (res) {
                     $table.bootstrapTable('refresh');
                 })
             })

@@ -4,83 +4,82 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 @model Atlass.Framework.Models.cms_template;
-<link href="~/plugins/codemirror/doc/docs.css" rel="stylesheet" />
-<link href="~/plugins/codemirror/codemirror.css" rel="stylesheet" />
-<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="ibox">
+<link href="~/ui/plugins/codemirror/doc/docs.css" rel="stylesheet" />
+<link href="~/ui/plugins/codemirror/codemirror.css" rel="stylesheet" />
+<div class="container-div white-bg">
     <div class="ibox-content">
-        <form>
+        <form class="form form-horizontal" id="templateForm">
             <input type="hidden" id="id" name="id" value="@(Model.id)" />
             <div class="row">
-                <div class="col-sm-10 col-sm-offset-2">
-                    <div class="m-b-md">
-                        <h2 id="TitleHeader">添加模板</h2>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">模板类型：</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownList("pid", ViewBag.TempCategory as SelectList, new { @class = "form-control", @style = "width:250px;" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">模板名称：</label>
+                        <div class="col-sm-6">
+                            <input type="text" style="width:350px;" name="template_name" id="template_name" value="@(Model.template_name)" class="form-control" data-rule="required">
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-10 col-sm-offset-1">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <dl class="dl-horizontal">
-                                <dt style="margin-top: 8px;">模板类型：</dt>
-                                <dd>
-                                    @Html.DropDownList("pid", ViewBag.TempCategory as SelectList, new { @class = "form-control", @style = "width:250px;" })
-                                </dd>
-                            </dl>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label is-required">模板文件：</label>
+                        <div class="col-sm-6">
+                            <input type="text" style="width:350px;" name="template_file" id="template_file" value="@(Model.template_file)" class="form-control" data-rule="required">
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 路径以/分隔，文件名以T_开头例：(T_新闻详情.html)</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <dl class="dl-horizontal">
-                                <dt style="margin-top: 8px;">模板名称：</dt>
-                                <dd>
-                                    <input type="text" style="width:350px;" name="template_name" id="template_name" value="@(Model.template_name)" class="form-control" data-rule="required">
-                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>
-                                </dd>
-                                <dt style="margin-top: 8px;">
-                                    模板文件：
-                                </dt>
-                                <dd>
-                                    <input type="text" style="width:350px;" name="template_file" id="template_file" value="@(Model.template_file)" class="form-control" data-rule="required">
-                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 路径以/分隔，文件名以T_开头例：(T_新闻详情.html)</span>
-                                </dd>
-                            </dl>
-                        </div>
-                        <div class="col-sm-7" id="fileName" style="display:none;">
-                            <dl class="dl-horizontal">
-                                <dt style="margin-top: 8px;">生成文件名：</dt>
-                                <dd>
-                                    <input type="text" style="width:350px;" name="file_name" id="file_name" value="@(Model.file_name)" class="form-control">
-                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 路径以/分隔，例：(search/search.html)</span>
-                                </dd>
-                            </dl>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">生成文件名：</label>
+                        <div class="col-sm-6">
+                            <input type="text" style="width:350px;" name="file_name" id="file_name" value="@(Model.file_name)" class="form-control">
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 路径以/分隔，例：(search/search.html)</span>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <textarea id="template_code">@(Model.template_content)</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label" style=" width: 12.5%;">模板内容：</label>
+                        <div class="col-xs-6">
+                            <textarea id="template_code" name="template_code">@(Model.template_content)</textarea>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
-                    <div class="footerbar">
-                        <div class="col-sm-12 col-sm-offset-3">
-                            <button class="btn btn-primary" type="button" onclick="save();">保存内容</button>
-                            <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="footerbar">
+                <div class="col-sm-12 col-sm-offset-3">
+                    <button class="btn btn-primary" type="button" onclick="save()">
+                        <i class="fa fa-check"></i>
+                        保存模板
+                    </button>
+                    <button class="btn btn-danger" type="button" onclick="cancel()">
+                        <i class="fa fa-reply-all"></i>关闭
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 @section scripts{
-    <script src="~/plugins/codemirror/codemirror.js"></script>
-    <script src="~/plugins/codemirror/addon/scroll/simplescrollbars.js"></script>
-    <script src="~/plugins/codemirror/mode/xml/xml.js"></script>
-    <script src="~/plugins/codemirror/mode/css/css.js"></script>
-    <script src="~/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="~/ui/plugins/codemirror/codemirror.js"></script>
+    <script src="~/ui/plugins/codemirror/addon/scroll/simplescrollbars.js"></script>
+    <script src="~/ui/plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="~/ui/plugins/codemirror/mode/css/css.js"></script>
+    <script src="~/ui/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     <script>
         var editor;
         $(function () {
@@ -146,7 +145,8 @@
         }
 
         function cancel() {
-            parent.$.altasTab.close('vtemplate');
+
+            jutils.closeTab();
         }
     </script>
 

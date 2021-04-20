@@ -29,29 +29,57 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             RequestHelper = service.GetRequiredService<IAtlassRequest>();
             _templateApp = service.GetRequiredService<CmsTemplateAppService>();
         }
+
+        /// <summary>
+        /// 模板管理
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:template:view")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 列表数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:template:view")]
+        [HttpPost]
+        public IActionResult GetData(DataTableDto dto)
+        {
+            int pid = RequestHelper.GetPostInt("pid");
+            string name = RequestHelper.GetPostString("templateName", "");
+            var data = _templateApp.GetData(dto, pid, name);
+            return Json(data);
+        }
+
+
+        /// <summary>
+        /// 模板管理
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:template:add,cms:template:edit")]
+        [HttpGet]
         public IActionResult Form(int id)
         {
             var category =_templateApp.TemplateCategory();
-            category.Add(new ZtreeSelIntDto { id =0, name = "请选择模板" });
+           // category.Add(new ZtreeSelIntDto { id =0, name = "请选择模板" });
             var model = _templateApp.GetModel(id);
             ViewBag.TempCategory = new SelectList(category, "id", "name", model.pid);
             ViewData.Model = model;
             return View();
         }
 
-        public IActionResult GetData(DataTableDto dto)
-        {
-            int pid = RequestHelper.GetQueryInt("pid");
-            var data = _templateApp.GetData(dto, pid);
-            return Json(data);
-        }
 
-
+        /// <summary>
+        /// 模板管理数据提交
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:template:add,cms:template:edit")]
+        [HttpPost]
         public IActionResult Save(cms_template dto)
         {
             if (dto.pid == 0)
@@ -85,6 +113,13 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return Success("模板保存成功");
         }
 
+
+        /// <summary>
+        /// 模板分类
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("#")]
+        [HttpGet]
         public IActionResult TemplateCategory()
         {
             var result = new ResultAdaptDto();
@@ -101,6 +136,11 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// 删除模板
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:template:delete")]
         [HttpGet]
         public IActionResult DeleteById(int id)
         {
@@ -114,12 +154,15 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
             return Success("删除成功");
         }
+
+
         /// <summary>
         /// 复制模板
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("cms:template:copy")]
         public IActionResult CopyFile(int id)
         {
             var template = _templateApp.GetModel(id);
@@ -169,11 +212,12 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
         }
 
         /// <summary>
-        /// 复制模板
+        /// 同步本地模板
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [RequirePermission("cms:template:sync")]
         public IActionResult SyncTemplate(int id)
         {
             var template = _templateApp.GetModel(id);
