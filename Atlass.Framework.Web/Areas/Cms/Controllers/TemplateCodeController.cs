@@ -90,18 +90,17 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             dto.file_name = dto.file_name ?? "";
 
             var user = RequestHelper.AdminInfo();
+            dto.update_by = user.LoginName;
+            dto.update_time = DateTime.Now;
             if (dto.id == 0)
             {
-                dto.insert_id = user.Id;
-                dto.insert_time = DateTime.Now;
-                dto.edit_id= user.Id;
-                dto.edit_time = dto.insert_time;
+                dto.create_by = user.LoginName;
+                dto.create_time = DateTime.Now;
+          
                 dto=_templateApp.InsertTemplate(dto);
             }
             else
             {
-                dto.edit_id = user.Id;
-                dto.edit_time = DateTime.Now;
                 dto = _templateApp.UpdateTemplate(dto);
             }
             if (dto != null)

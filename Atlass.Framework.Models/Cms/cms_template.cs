@@ -24,11 +24,7 @@ namespace Atlass.Framework.Models
 	{
 		[JsonProperty,Column(IsPrimary =true,IsIdentity =true)]
 		public int id { get; set; }
-		[JsonProperty]
-		public long edit_id { get; set; }
-
-		[JsonProperty, Column(DbType = "datetime")]
-		public DateTime edit_time { get; set; }
+		
 
 		/// <summary>
 		/// 生成的文件名，单页模板使用
@@ -36,12 +32,7 @@ namespace Atlass.Framework.Models
 		[JsonProperty]
 		public string file_name { get; set; } = string.Empty;
 
-		[JsonProperty]
-		public long insert_id { get; set; }
-
-		[JsonProperty, Column(DbType = "datetime")]
-		public DateTime insert_time { get; set; }
-
+		
 		/// <summary>
 		/// 1-首页，2-栏目模板，3-内容模板，4-单页模板,5-包含文件
 		/// </summary>
@@ -75,6 +66,20 @@ namespace Atlass.Framework.Models
 		/// </summary>
 		[JsonProperty]
 		public int is_default { get; set; }
+
+
+		[JsonProperty]
+		[Column(CanUpdate =false)]
+		public string create_by { get; set; }
+
+		[JsonProperty, Column(DbType = "datetime",CanUpdate =false)]
+		public DateTime create_time { get; set; }
+
+		[JsonProperty]
+		public string update_by { get; set; }
+
+		[JsonProperty, Column(DbType = "datetime")]
+		public DateTime update_time { get; set; }
 
 	}
 

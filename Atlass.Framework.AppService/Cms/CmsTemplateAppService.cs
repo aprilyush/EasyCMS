@@ -90,7 +90,7 @@ namespace Atlass.Framework.AppService.Cms
                 return null;
             }
             dto.is_default = oldTemp.is_default;
-            Sqldb.Update<cms_template>().SetSource(dto).IgnoreColumns(s => new { s.insert_id, s.insert_time }).ExecuteAffrows();
+            Sqldb.Update<cms_template>().SetSource(dto).ExecuteAffrows();
             return dto;
 
         }

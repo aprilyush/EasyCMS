@@ -81,6 +81,13 @@
                 $('#scroll-up').toTop(opt);
             }
 
+            jutils.handleMessage(function (res) {
+                //console.log(res);
+                if (res.title === 'cms_template_form') {
+                    $table.easyTable('search');
+                }
+
+            });
             loadChannelTree();
             loadGrid();
         });
@@ -120,7 +127,7 @@
             tplTree.checkNode(treeNode, true, true);
             lastChannelNode = treeNode;
             pid = treeNode.id;
-            $table.bootstrapTable('refresh');
+            $table.easyTable('search');
         }
 
 
@@ -230,7 +237,7 @@
             }
             jutils.confirm("确认删除当前模板吗", function () {
                 jutils.ajaxGet('/cms/templatecode/DeleteById', { id: rows[0].id }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('search');
                 })
             })
         }
@@ -247,7 +254,7 @@
          
             jutils.confirm("确认复制一份新的模板副本吗", function () {
                 jutils.ajaxGet('/cms/templatecode/copyFile', { id: rows[0].id }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('refresh');
                 })
             })
         }
@@ -261,7 +268,7 @@
 
             jutils.confirm("确认本地模板同步到数据库吗", function () {
                 jutils.ajaxGet('/cms/templatecode/syncTemplate', { id: rows[0].id }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('search');
                 })
             })
         }

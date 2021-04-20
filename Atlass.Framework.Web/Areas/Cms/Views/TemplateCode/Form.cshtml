@@ -139,6 +139,8 @@
 
             jutils.ajaxPost('/cms/TemplateCode/Save', model, function (res) {
                 if (res.status) {
+
+                    jutils.postMessage("cms_template_form", "close");
                     cancel();
                 }
             });
