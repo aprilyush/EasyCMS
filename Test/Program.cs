@@ -21,7 +21,9 @@ namespace Test
                 //RedisTest.Test();
                 //RedisTest.Proformance();
                 // RedisTestEx.Test();
-                HtmlHelper.Replace();
+                //HtmlHelper.Replace();
+
+                DotliquidRenderTest.Render();
             }
             catch(Exception ex)
             {

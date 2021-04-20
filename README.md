@@ -1,22 +1,22 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-03-10 16:54:33
+ * @LastEditTime: 2021-04-20 08:48:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
 -->
 
 # EasyCms
-<font face="黑体" color="#FF0000">禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构</font>  
+🛑![#f03c15]禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构 
+&emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
 &emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。
 ## 发展目标
-&emsp;&emsp;EasyCms是基于Atlass Framework实现一个产品化的项目，Atlass Framework原来是实现一个适合自己公司项目的基础开发框架。  
- &emsp;&emsp;由于本人近两年一直和本地一家公司长期合为政府部门做CMS系统以及其他后台管理系统，自认为还是比较了解这些部门需要什么样的cms管理系统，需要哪些功能，
- 所以目标是实现一个适合这些部门的功能相对完善的cms系统。  
+             现实与理想的差异皆源之于自身能力的不足，所以目标很简单
+&emsp;&emsp;希望EasyCms成为一个简单易用的后台管理系统的基础开发框架和建站CMS系统。
 
  ## 目标客户为：
- **满足大部分企业建站需求，政府部门，事业单位使用的CMS管理系统**
+ **满足大部分企业建站需求使用的CMS管理系统**
 ## 技术介绍
 + 基于Aspnet core3.1  
 + ORM使用[FreeSql](https://github.com/dotnetcore/FreeSql),默认使用mysql数据库

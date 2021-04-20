@@ -39,6 +39,9 @@
     <Reference Include="CSRedisCore, Version=3.6.6.0, Culture=neutral, PublicKeyToken=9aa6a3079358d437, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\CSRedisCore.3.6.6\lib\net45\CSRedisCore.dll</HintPath>
     </Reference>
+    <Reference Include="DotLiquid, Version=2.1.436.0, Culture=neutral, PublicKeyToken=82e46016ecf9f07c, processorArchitecture=MSIL">
+      <HintPath>..\Atlass.Framework.Web\packages\DotLiquid.2.1.436\lib\net45\DotLiquid.dll</HintPath>
+    </Reference>
     <Reference Include="Fizzler, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>..\Atlass.Framework.Web\packages\Fizzler.1.3.0\lib\netstandard2.0\Fizzler.dll</HintPath>
     </Reference>
@@ -78,11 +81,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CronHelper.cs" />
+    <Compile Include="DotliquidRenderTest.cs" />
     <Compile Include="HtmlHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisTest.cs" />
     <Compile Include="RedisTestEx.cs" />
+    <Compile Include="model\cms_channel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,6 +98,11 @@
       <Project>{f57beba5-b4bc-40f0-9488-7b3b56a25ed9}</Project>
       <Name>TestJob</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="home.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
