@@ -72,18 +72,18 @@ namespace Atlass.Framework.Models
 		/// 部门
 		/// </summary>
 		[JsonProperty]
-		public int dept_id { get; set; }
+		public long dept_id { get; set; }
 		/// <summary>
 		/// 是否限制ip访问
 		/// </summary>
-		[JsonProperty, Column(DbType = "tinyint(1)")]
+		[JsonProperty, Column(DbType = "tinyint(2)")]
 		public int ip_limit { get; set; }
 
 		/// <summary>
 		/// 审核状态 0-待审，1-通过，2-草稿，100-审核不通过
 		/// </summary>
 		[JsonProperty, Column(DbType = "tinyint(2)")]
-		public int status { get; set; }
+		public int content_status { get; set; }
         /// <summary>
 		/// 置顶
 		/// </summary>
@@ -106,17 +106,23 @@ namespace Atlass.Framework.Models
 		[JsonProperty]
 		public int hit_count { get; set; }
 		/// <summary>
-		/// 设置推荐
+		/// 设置推荐 0-不推荐，1-推荐
 		/// </summary>
 		[JsonProperty]
 		public int is_recommend { get; set; }
-		[JsonProperty]
-		public long insert_id { get; set; }
 
-		[JsonProperty, Column(DbType = "datetime")]
-		public DateTime insert_time { get; set; }
+		/// <summary>
+		/// 自定义发布时间
+		/// </summary>
+		public DateTime publish_time { get; set; }
+
+		[JsonProperty, Column(CanUpdate =false)]
+		public string create_by { get; set; }
+
+		[JsonProperty, Column(CanUpdate = false,DbType = "datetime")]
+		public DateTime create_time { get; set; }
 		[JsonProperty]
-		public long update_id { get; set; }
+		public string update_by { get; set; }
 
 		[JsonProperty, Column(DbType = "datetime")]
 		public DateTime update_time { get; set; }

@@ -138,6 +138,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
 
             var result = new ResultAdaptDto();
             var channels = _channelApp.ChannelZtree();
+            channels.Insert(0, new ZtreeSelIntDto { id = 0, name = "首页" });
             result.data.Add("channels", channels);
             return Json(result);
         }

@@ -47,7 +47,7 @@ namespace Atlass.Framework.Generate
                     recommend=s.is_recommend,
                     content_href = s.content_href,
                     hit_count = s.hit_count,
-                    publish_time = s.insert_time,
+                    publish_time = s.publish_time,
                     last_edit_time = s.update_time
                 });
             if (model != null)
@@ -84,7 +84,7 @@ namespace Atlass.Framework.Generate
                    tags = s.tags,
                    content_href = s.content_href,
                    hit_count = s.hit_count,
-                   publish_time = s.insert_time,
+                   publish_time = s.publish_time,
                    last_edit_time = s.update_time
                });
             if (list.Count == 0)
@@ -136,7 +136,7 @@ namespace Atlass.Framework.Generate
                    content_href = s.content_href,
                    hit_count = s.hit_count,
                    recommend = s.is_recommend,
-                   publish_time = s.insert_time,
+                   publish_time = s.publish_time,
                    last_edit_time = s.update_time
                });
             if (list.Count == 0)
@@ -181,7 +181,7 @@ namespace Atlass.Framework.Generate
                    tags = s.tags,
                    content_href = s.content_href,
                    hit_count = s.hit_count,
-                   publish_time = s.insert_time,
+                   publish_time = s.publish_time,
                    last_edit_time = s.update_time
                });
             if (list.Count == 0)
@@ -231,7 +231,7 @@ namespace Atlass.Framework.Generate
                   tags = s.tags,
                   content_href = s.content_href,
                   hit_count = s.hit_count,
-                  publish_time = s.insert_time,
+                  publish_time = s.publish_time,
                   last_edit_time = s.update_time
               });
             if (list.Count>0)

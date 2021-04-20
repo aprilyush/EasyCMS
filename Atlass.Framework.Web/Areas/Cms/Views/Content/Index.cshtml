@@ -3,38 +3,111 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-<link href="~/plugins/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="ibox">
-                    <div class="ibox-title">栏目列表</div>
-                    <div class="ibox-content">
-                        <ul id="channelTree" class="ztree"></ul>
-                    </div>
-                </div>
-                
+<link href="~/ui/plugins/jquery-layout/jquery.layout-latest.css" rel="stylesheet" />
+<link href="~/ui/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet" />
+<div class="ui-layout-west">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa icon-grid"></i>栏目列表
             </div>
-            <div class="col-md-10">
-                <div id="toolbar" class="btn-group">
-
-                </div>
-                <table id="table"></table>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新栏目" onclick="loadChannelTree();"><i class="fa fa-refresh"></i></button>
             </div>
         </div>
-
+        <div class="ui-layout-content">
+            <div id="channelTree" class="ztree"></div>
+        </div>
     </div>
 </div>
+<div class="ui-layout-center">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="searchForm">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                标题：<input type="text" name="contentTitle" id="contentTitle"/>
+                            </li>
+
+                            <li>
+                                审核状态：
+                                <select name="contentStatus" id="contentStatus">
+                                    <option value="-1">所有</option>
+                                    <option value="0">待审</option>
+                                    <option value="1">通过</option>
+                                    <option value="100">审核不通过</option>
+                                </select>
+                            </li>
+                            <li>
+                                属性：
+                                <select name="contentProperty" id="contentProperty">
+                                    <option value="0">所有</option>
+                                    <option value="1">置顶</option>
+                                    <option value="2">推荐</option>
+                                </select>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add();" data-id="0" data-role="cms:content:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+                <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="cms:content:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="cms:content:delete">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-info multiple disabled" onclick="setTop(this)" data-id="0" data-role="cms:content:top">
+                    <i class="fa fa-arrow-up"></i> 置顶
+                </a>
+                <a class="btn btn-warning multiple disabled" onclick="setRecomend()" data-id="0" data-role="cms:content:recomend">
+                    <i class="fa fa-thumbs-up"></i> 推荐
+                </a>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="dataTable"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
-    <script src="~/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+
+<script src="~/ui/plugins/jquery-layout/jquery.layout-latest.js"></script>
+    <script src="~/ui/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
     <script>
-        var $table, channelTree, $dicTable, channelId = 0,lastChannelNode;
+        let $table, channelTree, channelId = 0, lastChannelNode;
         $(function () {
+            let panehHidden = false;
+            if ($(this).width() < 769) {
+                panehHidden = true;
+            }
+            $('body').layout({ initClosed: panehHidden, west__size: 200 });
+            // 回到顶部绑定
+            if ($.fn.toTop !== undefined) {
+                var opt = {
+                    win: $('.ui-layout-center'),
+                    doc: $('.ui-layout-center')
+                };
+                $('#scroll-up').toTop(opt);
+            }
             loadChannelTree();
             loadGrid();
         });
+
         function loadChannelTree() {
+            channelId = 0;
             var opts = {
 
                 data: {
@@ -45,7 +118,7 @@
                 }, callback: {
                     onClick: DicZtreeClick
 
-                },check: {
+                }, check: {
                     enable: true,
                     chkStyle: "radio"
                 }
@@ -65,55 +138,51 @@
             lastChannelNode = treeNode;
             //console.log(treeNode);
             channelId = treeNode.id;
-            $table.bootstrapTable('refresh');
+            $table.easyTable('search');
 
         }
         function loadGrid() {
-            $table = $("#table").bootstrapTable({
+            let options = {
                 url: '/cms/content/GetData',
-                toolbar: '#toolbar',
-                pagination: true,
-                height: $(window).height() - 50,
-                pageSize: 15,
-                pageList: [5, 10, 15, 20],
-                showColumns: true,
-                showRefresh: true,
-                clickToSelect: true,
-                sidePagination: "server",//
-                locale: "zh-CN",
-                striped: true,
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
                 uniqueId: 'id',
                 queryParams: function (params) {
-                    var dto = {
-                        limit: params.limit, //每页多少条
-                        offset: params.offset, //从第几条开始读(默认就好)
-                        channelId: channelId
-                    };
-                    return dto;
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        channelId: channelId,
+                        contentProperty: $('#contentProperty').val(),
+                        title: $('#contentTitle').val(),
+                        status: $('#contentStatus').val()
+                    }
+                    return p;
                 },
                 columns: [
-                    { field: 'ck', checkbox: true },
-                    { field: 'id', title: '文章ID', align: 'left'  },
-                    { field: 'title', title: '文章标题', align: 'left',formatter:renderTitle },
-                    { field: 'insert_time', title: '发布时间', align: 'center' },
+                    { field: 'selectItem', checkbox: true },
+                    { field: 'id', title: '文章ID', align: 'left' },
+                    { field: 'title', title: '文章标题', align: 'left', formatter: renderTitle },
+                    { field: 'publish_time', title: '发布时间', align: 'center' },
+                    { field: 'author', title: '作者', align: 'center' },
                     {
-                        field: 'status', title: '状态', align: 'center', formatter: function (v) {
+                        field: 'content_status', title: '状态', align: 'center', formatter: function (v) {
                             if (v === 1) {
                                 return '<span class="label label-primary">已审核</span>';
                             }
 
                             return '<span class="label">待审核</span>';
                         }
-                    },
-                    {
-                        field: 'id', title: '操作', align: 'center',
-                        formatter: render
                     }
+                    
+                    //{
+                    //    field: 'id', title: '操作', align: 'center',
+                    //    formatter: render
+                    //}
                 ]
 
-            });
-            //jutils.initToolBar('#toolbar', true);
-            jutils.initToolBarRole('#toolbar');
+            };
+            $table = $('#dataTable').easyTable(options);
         }
 
         function render(v, r, i) {
@@ -122,13 +191,13 @@
         }
 
         function renderTitle(v, d) {
-            var thtml = '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v +'&nbsp;&nbsp;';
-            if (d.is_top==1) {
+            var thtml = '<a href="/news/' + d.channel_id + '/' + d.id + '" target="_blank">' + v + '&nbsp;&nbsp;';
+            if (d.is_top == 1) {
                 thtml += '<img src="/static/images/top.gif"/>&nbsp;&nbsp;';
             }
-            if (d.hit_count > 100) {
-                thtml += '<img src="/static/images/hot.gif"/>&nbsp;&nbsp;';
-            }
+            //if (d.hit_count > 100) {
+            //    thtml += '<img src="/static/images/hot.gif"/>&nbsp;&nbsp;';
+            //}
             if (d.is_recommend) {
                 thtml += '<img src="/static/images/tuijian.png"/>&nbsp;&nbsp;';
             }
@@ -137,6 +206,7 @@
 
             //return '<a href="/static/content/' + d.channel_id + '/' + d.id + '.html" target="_blank">' + v + '</a>';
         }
+
         function add() {
             if (channelId == '0') {
                 layer.alert("请先选择栏目");
@@ -149,7 +219,7 @@
                     title: '发布文章',
                     url: url,
                     close: function () {
-                        $table.bootstrapTable('refresh');
+                        $table.easyTable('search');
                     }
                 });
 
@@ -162,7 +232,7 @@
             var id = $(obj).data('id');
             var row = $table.bootstrapTable('getRowByUniqueId', id);
             var channel = row.channel_id;
-          
+
             var url = '/cms/Content/Form?id=' + id + '&channelId=' + channel;
             parent.$.altasTab.open(
                 {
@@ -170,7 +240,7 @@
                     title: '修改文章',
                     url: url,
                     close: function () {
-                        $table.bootstrapTable('refresh');
+                        $table.easyTable('search');
                     }
                 });
         }
@@ -179,7 +249,7 @@
             var id = $(obj).data('id');
             jutils.confirm("确认删除当前文章吗", function () {
                 jutils.ajaxGet('/cms/Content/DeleteById', { id: id }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('search');
                 })
             })
         }
@@ -198,7 +268,7 @@
             }
             jutils.confirm("确认置顶选择的文章吗？", function () {
                 jutils.ajaxGet('/cms/content/SetTop', { ids: ids }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('search');
                 });
             });
         }
@@ -215,11 +285,12 @@
             }
             jutils.confirm("确认置顶选择的文章吗？", function () {
                 jutils.ajaxGet('/cms/content/SetRecomend', { ids: ids }, function (res) {
-                    $table.bootstrapTable('refresh');
+                    $table.easyTable('search');
                 });
             });
 
         }
+
     </script>
 }
 

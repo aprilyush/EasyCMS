@@ -25,18 +25,42 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             _contentApp = service.GetRequiredService<ContentAppService>();
 
         }
+
+
+        /// <summary>
+        /// 文章页面
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:content:view")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 文章数据
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:content:view")]
+        [HttpPost]
         public IActionResult GetData(DataTableDto dto)
         {
-            int channelId = RequestHelper.GetQueryInt("channelId");
-            var data = _contentApp.GetData(dto, channelId);
+            int channelId = RequestHelper.GetPostInt("channelId");
+            int status = RequestHelper.GetPostInt("status",-1);
+            int contentProperty = RequestHelper.GetPostInt("contentProperty",0); //0-全部，1-置顶，2-推荐
+            string title = RequestHelper.GetPostString("title");
+            var data = _contentApp.GetData(dto, channelId, title,status,contentProperty);
             return Json(data);
         }
 
+
+        /// <summary>
+        /// 文章表单
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("cms:content:add,cms:content:edit")]
+        [HttpGet]
         public ActionResult Form(int id)
         {
             int channelId = RequestHelper.GetQueryInt("channelId");
@@ -54,49 +78,31 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 提交数据
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:content:add,cms:content:edit")]
         [HttpPost]
         public IActionResult Save(cms_content dto)
         {
-            dto.sub_title = dto.sub_title ?? "";
-            dto.summary = dto.summary ?? "";
-            dto.content = dto.content ?? "";
-            dto.author = dto.author ?? "";
-            dto.source = dto.source??"";
-            dto.content_href = dto.content_href ?? "";
-            dto.cover_image = dto.cover_image??"";
-            var user = RequestHelper.AdminInfo();
-           
-            if (dto.id == 0)
-            {
-                dto.dept_id = user.DeptId;
-                dto.insert_id = user.Id;
-                if (dto.insert_time == DateTime.MinValue)
-                {
-                    dto.insert_time = DateTime.Now;
-
-                }
-                
-                long contentId=_contentApp.Insert(dto);
-                ChannelManagerCache.SetChannelLink(dto.channel_id, (int)contentId);
-                //生成文章
-                //GenerateContent generate = new GenerateContent();
-                //generate.CreateHtml((int)contentId);
-            }
-            else
-            {
-                dto.update_id = dto.insert_id;
-                dto.update_time = dto.insert_time;
-                _contentApp.Update(dto);
-                
-                //生成文章
-                // GenerateContent generate = new GenerateContent();
-                //generate.CreateHtml(dto.id);
-            }
-
+            _contentApp.SaveContent(dto, RequestHelper.AdminInfo());
+            //生成文章
+            //GenerateContent generate = new GenerateContent();
+            //generate.CreateHtml((int)contentId);
             return Success("保存成功");
         }
 
 
+        /// <summary>
+        /// 获取文章信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:content:add,cms:content:edit")]
+        [HttpGet]
         public IActionResult GetModel(int id)
         {
 
@@ -112,19 +118,39 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             return Json(result);
         }
 
-
-        public IActionResult DeleteById(int id)
+        /// <summary>
+        /// 删除文章
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:content:delete")]
+        [HttpGet]
+        public IActionResult DeleteById(string ids)
         {
-            _contentApp.DelByIds(id);
+            _contentApp.DelByIds(ids);
             return Success("删除成功");
         }
 
+        /// <summary>
+        /// 置顶
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:content:top")]
+        [HttpGet]
         public IActionResult SetTop(string ids)
         {
             _contentApp.SetTop(ids);
             return Success("删除成功");
         }
 
+        /// <summary>
+        /// 推荐
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [RequirePermission("cms:content:recomend")]
+        [HttpGet]
         public IActionResult SetRecomend(string ids)
         {
             _contentApp.SetRecomend(ids);

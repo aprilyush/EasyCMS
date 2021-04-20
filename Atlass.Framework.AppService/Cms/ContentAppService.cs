@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
@@ -32,47 +33,78 @@ namespace Atlass.Framework.Models
 
 
         /// <summary>
-        ///获取数据列表
+        /// 获取数据列表
         /// </summary>
         /// <param name="param"></param>
-
-        public DataTableDto GetData(DataTableDto param,int channelId)
+        /// <param name="channelId">栏目</param>
+        /// <param name="title">文章标题</param>
+        /// <param name="status">审核状态</param>
+        /// <param name="contentProperty">0-全部，1-置顶，2-推荐</param>
+        /// <returns></returns>
+        public DataTableDto GetData(DataTableDto param, int channelId, string title, int status, int contentProperty)
         {
             long total = 0;
             var query = Sqldb.Select<cms_content>()
-                .WhereIf(channelId>0,s=>s.channel_id==channelId)
-                .OrderByDescending(s => s.is_top)
-                .OrderByDescending(s=>s.id)
-                .Page(param.page, param.limit)
-                .Count(out total)
-                .ToList();
+                .WhereIf(channelId > 0, s => s.channel_id == channelId)
+                .WhereIf(status >= 0, s => s.content_status == status)
+                .WhereIf(!title.IsEmpty(),s=>s.title.Contains(title));
+            if (contentProperty == 1)
+            {
+                query = query.Where(s => s.is_top == 1);
+            }
+            else if (contentProperty == 2)
+            {
+                query = query.Where(s => s.is_recommend == 1);
+            }
+            var data = query.OrderByDescending(s => s.is_top)
+             .OrderByDescending(s => s.id)
+             .Page(param.pageNumber, param.pageSize)
+             .Count(out total)
+             .ToList();
 
             param.total = total;
-            param.rows = query;
+            param.rows = data;
             return param;
         }
 
-        /// <summary>
-        ///新增数据
-        /// </summary>
-        /// <param name="dto"></param>
-
-        public long Insert(cms_content dto)
-        {
-            long id =Sqldb.Insert(dto).ExecuteIdentity();
-            return id;
-        }
 
         /// <summary>
-        ///更新数据
+        /// 保存数据
         /// </summary>
         /// <param name="dto"></param>
-
-        public void Update(cms_content dto)
+        public void SaveContent(cms_content dto, LoginUserDto loginUser)
         {
-            Sqldb.Update<cms_content>().SetSource(dto)
-                .IgnoreColumns(s=>new { s.dept_id,s.insert_id,s.channel_id}).ExecuteAffrows();
+            dto.sub_title = dto.sub_title ?? "";
+            dto.summary = dto.summary ?? "";
+            dto.content = dto.content ?? "";
+            dto.author = dto.author ?? "";
+            dto.source = dto.source ?? "";
+            dto.content_href = dto.content_href ?? "";
+            dto.cover_image = dto.cover_image ?? "";
+            dto.update_by = loginUser.LoginName;
+            dto.update_time = DateTime.Now;
+            if (dto.id == 0)
+            {
+                dto.dept_id = loginUser.DeptId;
+                dto.create_by = loginUser.LoginName;
+                dto.create_time = dto.update_time;
+
+                long contentId = Sqldb.Insert(dto).ExecuteIdentity();
+                ChannelManagerCache.SetChannelLink(dto.channel_id, (int)contentId);
+                //生成文章
+                //GenerateContent generate = new GenerateContent();
+                //generate.CreateHtml((int)contentId);
+            }
+            else
+            {
+
+                Sqldb.Update<cms_content>().SetSource(dto).ExecuteAffrows();
+                //生成文章
+                // GenerateContent generate = new GenerateContent();
+                //generate.CreateHtml(dto.id);
+            }
         }
+
 
         /// <summary>
         ///获取单条数据
@@ -89,10 +121,10 @@ namespace Atlass.Framework.Models
         /// </summary>
         /// <param name="ids"></param>
 
-        public void DelByIds(int id)
+        public void DelByIds(string ids)
         {
-
-            Sqldb.Delete<cms_content>().Where(s => s.id == id).ExecuteAffrows();
+            var idsArray = ids.SplitToArrayInt();
+            Sqldb.Delete<cms_content>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
 
         /// <summary>
@@ -102,7 +134,7 @@ namespace Atlass.Framework.Models
         public void SetTop(string ids)
         {
             var idsArray = ids.SplitToArrayInt();
-            Sqldb.Update<cms_content>().Set(s=>s.is_top,1).Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
+            Sqldb.Update<cms_content>().Set(s => s.is_top, 1).Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
         /// <summary>
         /// 推荐
@@ -113,7 +145,7 @@ namespace Atlass.Framework.Models
             var idsArray = ids.SplitToArrayInt();
             Sqldb.Update<cms_content>().Set(s => s.is_recommend, 1).Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
         }
-        
+
     }
 
 }
