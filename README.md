@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-20 09:10:47
+ * @LastEditTime: 2021-04-20 17:30:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -28,11 +28,11 @@
 + 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)强大的模板引擎能够实现任何你想要的页面静态化
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 ## 演示地址：
- windows2016服务器：http://cms.atlass.cn:9090  
- debian10服务器：http://cmsl.atlass.cn/  
- 因项目在开发中，不再提供后台演示用户，只演示前台，用于展示模板的渲染能力，如果感兴趣，请下载源码  
- 本地超级管理员 admin 123123  
- 包含Mysql,SqlServer,PostgreSql三个数据库的脚本
+ windows2016服务器：http://cms.atlass.cn/admin   
+ debian10服务器：http://cmsl.atlass.cn/  暂时关了
+ 用户名和密码 admin  admin@123
+ 🛑admin没做权限限制，请别删除数据
+
 ## 依赖环境
   [模板使用文档](https://www.yuque.com/jasonyush/easycms/dorh3a)
 ## 依赖环境
