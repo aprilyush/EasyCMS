@@ -100,7 +100,7 @@
 
         }
 
-        function del(obj) {
+        function removeAll(obj) {
             var rows = $table.easyTable('selected');
             if (rows.length === 0) {
                 jutils.warn("请选择数据行");
@@ -112,7 +112,7 @@
             }
             jutils.confirm('确认删除吗',
                 function () {
-                    jutils.ajaxGet('/siteset/ipmanager/DeleteByIds', { ids: id.join() },function () {
+                    jutils.ajaxGet('/siteset/ipmanager/DeleteByIds', { ids: ids.join() },function () {
                             $table.easyTable('search');
                         });
                 });

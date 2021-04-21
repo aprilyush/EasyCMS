@@ -18,7 +18,10 @@ namespace Atlass.Framework.Core
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             return version.Major + "." + version.Minor;
         }
-        
+        /// <summary>
+        /// 运行环境 0-开发，1-发布
+        /// </summary>
+        public static int RuntimeEnvironment { get; set; } = 1;
         /// <summary>
         /// 数据库配置
         /// </summary>

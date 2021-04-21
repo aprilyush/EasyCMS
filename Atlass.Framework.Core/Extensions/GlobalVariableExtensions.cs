@@ -23,6 +23,7 @@ namespace Atlass.Framework.Core.Extensions
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 
+            
             ReadDbConfig(configuration);
 
             //freesql
@@ -53,6 +54,7 @@ namespace Atlass.Framework.Core.Extensions
         /// <param name="configuration"></param>
         private static void ReadDbConfig(IConfiguration configuration)
         {
+            GlobalContext.RuntimeEnvironment = configuration.GetValue<int>("RuntimeEnvironment");
             //获取数据库连接
             var dbConfigs = configuration.GetSection("DbConfigs").Get<List<DbConfigsDto>>();
             var defaultDbConfig = dbConfigs.Where(s => s.Enable == true).FirstOrDefault();
