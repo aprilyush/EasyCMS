@@ -1,0 +1,6 @@
+﻿使用https://github.com/stulzq/IPTools来解析国内地址
+
+https://github.com/stulzq/IPTools/raw/master/db/ip2region.db
+将数据库文件下载完成以后，放到你的项目根目录(与*.csprj文件同级)，并设置复制到输出目录
+
+不支持自定义路径

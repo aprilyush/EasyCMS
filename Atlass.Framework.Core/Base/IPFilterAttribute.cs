@@ -29,8 +29,8 @@ namespace Atlass.Framework.Core.Base
             }
 
             //访问记录 
-            var visit = RequestHelper.Visit();
-            VisitQueueInstance.Add(visit);
+           // var visit = RequestHelper.Visit();
+            //VisitQueueInstance.Add(visit);
 
             var inWriteList = IPHelper.InWriteList(RequestHelper.GetClientIp());
             if (!inWriteList)

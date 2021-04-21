@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UAParser;
 
 namespace Atlass.Framework.Core.Web
 {
@@ -366,6 +367,39 @@ namespace Atlass.Framework.Core.Web
         }
 
         /// <summary>
+        /// 获取浏览器用户信息
+        /// </summary>
+        /// <returns></returns>
+         public UserAgentDto UserAgent()
+        {
+            string agent= this.HttpRequest.Headers["User-Agent"];
+            if (string.IsNullOrEmpty(agent))
+            {
+                return null;
+            }
+            try
+            {
+                var uaParser = UAParser.Parser.GetDefault();
+                ClientInfo c = uaParser.Parse(agent);
+                if (c == null)
+                {
+                    return null;
+                }
+                var model = new UserAgentDto();
+                model.Browser = $"{c.UA.Family} {c.UA.Major}";
+                model.Device = c.Device.Family;
+                model.OS= $"{c.OS.Family} {c.OS.Major}";
+                model.Ip = GetClientIp();
+                return model;
+            }
+            catch
+            {
+                return null;
+            }
+            
+
+        }
+        /// <summary>
         /// 是否是ajax请求
         /// </summary>
         /// <returns></returns>
@@ -393,19 +427,6 @@ namespace Atlass.Framework.Core.Web
                 return true;
             }
             return false;
-        }
-
-        /// <summary>
-        /// 获取访问信息
-        /// </summary>
-        /// <returns></returns>
-        public cms_visit Visit()
-        {
-            var model =new cms_visit();
-            model.ip = GetClientIp();
-            model.visit_time = DateTime.Now;
-            model.browser= this.HttpRequest.Headers["User-Agent"];
-            return model;
         }
 
         #region cookie

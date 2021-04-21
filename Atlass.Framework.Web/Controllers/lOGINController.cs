@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService;
+using Atlass.Framework.AppService.SystemApp;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.NLog;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
+using Atlass.Framework.Models.Admin;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Atlass.Framework.Web.Models;
+using IP2Region.Ex;
+using IPTools.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Atlass.Framework.Web.Controllers
 {
@@ -21,11 +26,13 @@ namespace Atlass.Framework.Web.Controllers
         private readonly SysUserAppService _userApp;
         private readonly SysRoleAppService _roleApp;
         private readonly IAtlassRequest RequestHelper;
-        public LoginController(SysUserAppService userApp, SysRoleAppService roleApp, IAtlassRequest AtlassRequestHelper)
+        private readonly LoginInfoAppService loginInfoApp;
+        public LoginController(IServiceProvider service)
         {
-            _userApp = userApp;
-            _roleApp = roleApp;
-            RequestHelper = AtlassRequestHelper;
+            _userApp = service.GetRequiredService<SysUserAppService>();
+            _roleApp = service.GetRequiredService<SysRoleAppService>();
+            RequestHelper = service.GetRequiredService<IAtlassRequest>();
+            loginInfoApp=service.GetRequiredService<LoginInfoAppService>();
         }
         public IActionResult Index()
         {
@@ -50,6 +57,34 @@ namespace Atlass.Framework.Web.Controllers
             }
             try
             {
+                login_info loginInfo = new login_info();
+                var userAgent = RequestHelper.UserAgent();
+                if (userAgent != null)
+                {
+                    loginInfo.login_name = loginModel.uname.Trim();
+                    loginInfo.browser = userAgent.Browser;
+                    loginInfo.device_info = userAgent.Device;
+                    loginInfo.osinfo = userAgent.OS;
+                    loginInfo.request_ip = userAgent.Ip;
+                    loginInfo.request_time = DateTime.Now;
+                    if (NetHelper.IsIntranetIP(loginInfo.request_ip))
+                    {
+                        loginInfo.real_address = "本地局域网";
+                    }
+                    else
+                    {
+                        var ipInfo=IpTool.Search(loginInfo.request_ip);
+                        if (ipInfo != null)
+                        {
+                            loginInfo.real_address =$"{ipInfo.Province}-{ipInfo.City}";
+                        }
+                        //string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\ip2region.db";
+                        //DbSearcher dbSearcher = new DbSearcher(filePath);
+                        //var dataBlock = dbSearcher.BtreeSearch("120.195.209.125");
+                        //loginInfo.real_address = dataBlock.ToString();
+                    }
+                 
+                }
                 var user = _userApp.LoginValidate(loginModel.uname.Trim(), loginModel.pwd.Trim());
                 var loginUserDto = new LoginUserDto();
                 if (user != null)
@@ -74,14 +109,24 @@ namespace Atlass.Framework.Web.Controllers
                             loginUserDto.RoleName = role.role_name;
                         }
                     }
-                   
+
+                    //插入登录信息
+                    loginInfo.login_status = 1;
+                    loginInfo.login_message = "登录成功";
+                    loginInfoApp.InsertLoginInfo(loginInfo);
+
                     //设置cookie
                     // FormsAuthentication.SetAuthCookie(loginUserDto.AccountName, false);
                     string claimstr = loginUserDto.ToJson();
                     RequestHelper.SetCookie(claimstr);
 
+
                     return Redirect("/admin/Home/Index");
                 }
+
+                //插入登录信息
+                loginInfo.login_message = "用户名或密码错误";
+                loginInfoApp.InsertLoginInfo(loginInfo);
                 ModelState.AddModelError("err", "用户名或密码错误");
             }
             catch (Exception e)

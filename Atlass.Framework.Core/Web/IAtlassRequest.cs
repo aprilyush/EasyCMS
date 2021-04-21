@@ -132,13 +132,16 @@ namespace Atlass.Framework.Core.Web
         /// <returns></returns>
         public string GetClientIp();
 
-
+        /// <summary>
+        /// 获取浏览器用户信息
+        /// </summary>
+        /// <returns></returns>
+        public UserAgentDto UserAgent();
         /// <summary>
         /// 是否是ajax请求
         /// </summary>
         /// <returns></returns>
         public bool IsAjax();
-        public cms_visit Visit();
 
         /// <summary>
         /// 微信相关
