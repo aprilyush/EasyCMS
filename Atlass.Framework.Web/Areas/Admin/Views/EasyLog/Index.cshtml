@@ -4,50 +4,48 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="searchForm">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                日志类型：
-                                <select id="logType">
-                                    <option value="0">全部</option>
-                                    <option value="1">信息</option>
-                                    <option value="2">调试</option>
-                                    <option value="3">警告</option>
-                                    <option value="4">异常</option>
-                                </select>
-                            </li>
-                            <li>
-                                日志简述：<input type="text" id="log_summary" name="log_summary">
-                            </li>
-                            <li>
-                                日期：<input type="text" id="logDate" name="logDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-            <div class="btn-group-sm" role="group" id="toolbar">
-                <a class="btn btn-danger multiple disabled" onclick="del(this);" data-id="0" data-role="system:log:delete">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:log:clear">
-                    <i class="fa fa-remove"></i> 清空日志
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="dataTable"></table>
-            </div>
-            
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            日志类型：
+                            <select id="logType">
+                                <option value="0">全部</option>
+                                <option value="1">信息</option>
+                                <option value="2">调试</option>
+                                <option value="3">警告</option>
+                                <option value="4">异常</option>
+                            </select>
+                        </li>
+                        <li>
+                            日志简述：<input type="text" id="log_summary" name="log_summary">
+                        </li>
+                        <li>
+                            日期：<input type="text" id="logDate" name="logDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
+        <div class="btn-group-sm" role="group" id="toolbar">
+            <a class="btn btn-danger multiple disabled" onclick="del(this);" data-id="0" data-role="system:log:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:log:clear">
+                <i class="fa fa-trash"></i> 清空日志
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+
     </div>
 </div>
 @section scripts
@@ -69,15 +67,15 @@
                         pageNumber: params.pageNumber,
                         pageSize: params.pageSize,
                         logType: $('logType').val(),
-                        logDate:$('#logDate').val(),
+                        logDate: $('#logDate').val(),
                         log_summary: $('#log_summary').val()
                     }
                     return p;
                 },
                 columns: [
                     { field: 'ck', checkbox: true },
-                      {
-                        field: 'log_type', title: '日志类型', align: 'center',width:100, formatter:renderResult
+                    {
+                        field: 'log_type', title: '日志类型', align: 'center', width: 100, formatter: renderResult
                     },
                     {
                         field: 'log_summary', title: '日志简述', align: 'left'
@@ -106,19 +104,19 @@
                     logTitle = 'warn';
                     logClass = 'badge-warning';
                     break;
-                  case 4:
+                case 4:
                     logTitle = 'error';
                     logClass = 'badge-danger';
                     break;
 
             }
-            var html ='<span class="badge ' + logClass + '">'+logTitle+'</span>';
+            var html = '<span class="badge ' + logClass + '">' + logTitle + '</span>';
 
             return html;
         }
 
         function renderOpts(v) {
-            var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="'+v+'"><i class="fa fa-eye"></i></a>';
+            var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
             return html;
         }
 
@@ -159,7 +157,7 @@
         function clearAll() {
             jutils.confirm('确认清空日志吗',
                 function () {
-                    jutils.ajaxGet('/admin/easylog/ClearTable',null,
+                    jutils.ajaxGet('/admin/easylog/ClearTable', null,
                         function () {
                             $table.easyTable('search');
                         });

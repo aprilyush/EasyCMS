@@ -228,6 +228,7 @@ namespace Atlass.Framework.AppService
                 menus = Sqldb.Select<sys_menu, sys_role_authorize>()
                 .InnerJoin((m, r) => m.id == r.menu_id)
                 .Where((m, r) => r.role_id == user.RoleId)
+                .OrderBy((m, r) => m.menu_sort)
                 .ToList((m, r) => m);
             }
 
@@ -244,7 +245,7 @@ namespace Atlass.Framework.AppService
                         son.tab_id = CommHelper.GetMenuTabId(son.menu_url.ToLower());
                         var sons2 = menus.Where(s => s.parent_id == son.id).ToList();
                         sons2.ForEach(s => {
-                            s.tab_id = CommHelper.GetMenuTabId(son.menu_url.ToLower());
+                            s.tab_id = CommHelper.GetMenuTabId(s.menu_url.ToLower());
                         });
                         son.children = sons2;
                     });

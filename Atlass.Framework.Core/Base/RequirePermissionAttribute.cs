@@ -88,7 +88,7 @@ namespace Atlass.Framework.Core.Base
             {
                 if(requestHelper.IsAjax()&& GlobalContext.RuntimeEnvironment == 0)
                 {
-                    if (PermissionTag.Contains("delete"))
+                    if (PermissionTag.Contains("delete")|| PermissionTag.Contains("clear"))
                     {
                         var result = new ResultAdaptDto();
                         result.message = "演示模式，禁止删除";

@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "登录日志";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+
+                        <li>
+                            登录用户：<input type="text" id="loginName" name="loginName">
+                        </li>
+                        <li>
+                            登录IP：<input type="text" id="loginIP" name="loginIP">
+                        </li>
+                        <li>
+                            登录状态：
+                            <select id="loginStatus">
+                                <option value="-1">全部</option>
+                                <option value="1">成功</option>
+                                <option value="0">失败</option>
+                            </select>
+                        </li>
+                        <li>
+                            日期：<input type="text" id="loginDate" name="loginDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:loginlog:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:log:clear">
+                <i class="fa fa-trash"></i> 清空日志
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        let $table;
+        $(function () {
+            loadData();
+
+        });
+
+        function loadData() {
+            let options = {
+                url: '/admin/LoginLog/GetData',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        loginName: $('#loginName').val(),
+                        loginIP: $('#loginIP').val(),
+                        loginStatus: $('#loginStatus').val(),
+                        loginDate: $('#loginDate').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'selectItem', checkbox: true },
+                    {
+                        field: 'login_name', title: '登录用户', align: "center"
+                    },
+                    { field: 'request_ip', title: '登录IP', align: "center" },
+                    { field: 'real_address', title: '地址', align: "center" },
+                    { field: 'osinfo', title: '操作系统', align: "center" },
+                    { field: 'browser', title: '浏览器', align: "center" },
+                    { field: 'request_time', title: '登录时间', align: "center" },
+                    {
+                        field: 'login_status', title: '信息', align: "center", formatter: function (v, r) {
+
+                            if (v === 1) {
+                                return '<span class="badge badge-primary">登录成功</span>';
+                            }
+                            return '<span class="badge badge-danger">'+r.login_message+'</span>';
+                        }
+                    }
+                ]
+            };
+
+            $table = $('#dataTable').easyTable(options);
+
+        }
+
+
+        function removeAll(obj) {
+            const id = $(obj).data('id');
+            let ids = [];
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    ids.push(rows[i].id);
+                }
+            } else {
+                ids.push(id);
+            }
+
+
+            jutils.confirm("确认删除日志数据吗？", function () {
+                jutils.ajaxGet("/admin/LoginLog/removeAll", { ids: ids.join() }, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
+                });
+            });
+        }
+
+        function clearAll() {
+            jutils.confirm("确认清空登录日志吗？", function () {
+                jutils.ajaxGet("/admin/LoginLog/Clear",null, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
+                });
+            });
+        }
+
+    </script>
+
+}
+
