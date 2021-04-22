@@ -27,17 +27,17 @@ namespace VTemplate.Engine
         /// <summary>
         /// 值
         /// </summary>
-        public decimal Value { get; internal set; }
+        public decimal Value { get;  set; }
 
         /// <summary>
         /// 是否是第一个索引值
         /// </summary>
-        public bool IsFirst { get; internal set; }
+        public bool IsFirst { get; set; }
 
         /// <summary>
         /// 是否是最后一个索引值
         /// </summary>
-        public bool IsLast { get; internal set; }
+        public bool IsLast { get; set; }
 
         /// <summary>
         /// 是否是偶数索引值

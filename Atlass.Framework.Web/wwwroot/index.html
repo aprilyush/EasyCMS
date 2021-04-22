@@ -2,90 +2,31 @@
 <html id="doc">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
     <meta name="applicable-device" content="pc,mobile">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>EasyCMS站点 -  Powered by cms.atlass.com</title>
     <meta name="Keywords" content="CMS,内容管理系统，企业建站，新闻发布，EasyCMS" />
     <meta name="Description" content="EasyCMS内容管理系统，企业建站首选，基于.net core开源免费高性能，新闻发布系统" />
-    <link rel='stylesheet' href='/static/css/bootstrap.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/style.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/styles.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/jquery.fancybox.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/swiper.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/slicknav.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/static/css/font-awesome.min.css' type='text/css' media='all' />
-    <script type='text/javascript' src='/static/js/jquery.js'></script>
-    <script type='text/javascript' src='/static/js/jquery-migrate.min.js'></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="/static/css/index.css">
 </head>
-<body class="home blog">
-    <div class="wrapper">
-        <header id="header">
-    <div class="container">
-        <div class="header-logo pull-left">
-            <a title="EasyCms内容管理系统" class="logo-url" href="/index.html">
-                <img src="/static/images/logo.png" />
+<body>
+    <!-- nav部分 -->
+      <!-- nav部分 -->
+<div class="nav index">
+    <div class="layui-container">
+        <!-- 公司logo -->
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="/static/images/logo.png" alt="EasyCMS内容管理系统" width="200" height="40">
             </a>
         </div>
-        <div class="header-menu pull-right">
-            <ul id="menu-nav" class="header-menu-con">
-                <!--<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                    <a href="/index.html">首页</a>
-                </li>-->
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home on">
-                                <a href="/index.html">首页</a>
-                            </li>
-                            
-					  
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                                <a href="/channel/5">公司介绍</a>
-                            </li>
-                        
-					  
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                                <a href="/channel/1">企业文化</a>
-                            </li>
-                        
-					  
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                                <a href="/channel/6">新闻动态</a>
-                            </li>
-                        
-					  
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                                <a href="/channel/7">通知公告</a>
-                            </li>
-                        
-					  
-                
-                    
-                    
-                        
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
-                                <a href="/news/8/17">联系我们</a>
-                            </li>
-                        
-					  
+        <div class="nav-list">
+            <button>
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="layui-nav" lay-filter="">
                 
                     
                     
@@ -93,255 +34,203 @@
                 
                     
                     
+                        <li class="layui-nav-item"><a href="/channel/1">产品</a></li>
+                        
+                
                     
+                    
+                        <li class="layui-nav-item"><a href="/channel/6">新闻动态</a></li>
+                        
+                
+                    
+                    
+                        <li class="layui-nav-item"><a href="/channel/13">成功案例</a></li>
+                        
+                
+                    
+                    
+                    
+                
+                    
+                    
+                        <li class="layui-nav-item"><a href="/channel/14">关于我们</a></li>
+                        
+                
+                    
+                    
+                        <li class="layui-nav-item"><a href="/channel/8">联系我们</a></li>
+                        
                 
             </ul>
         </div>
     </div>
-</header>
-        <div class="container-fluid mini"></div>
-        <section id="slider" class="container-full">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
+</div>
+    <!-- banner部分 -->
+    <div>
+        <div class="layui-carousel" id="banner">
+            <div carousel-item>
+                
                     
-                        
-                            <div class="swiper-slide">
-                                <a href="javascript:;" title="企业建站首选">
-                                    <img src="/upfiles/images/20200604/ba9ca1a1945d464d814a3a13008fd552.jpg" alt="企业建站首选" style="width:1900px;height:495px">
-                                </a>
-                            </div>
-                        
-                            <div class="swiper-slide">
-                                <a href="javascript:;" title="完美的移动端兼容性">
-                                    <img src="/upfiles/images/20200604/51970f7d662f46dda0878921a1dae029.jpg" alt="完美的移动端兼容性" style="width:1900px;height:495px">
-                                </a>
-                            </div>
-                        
+                        <div>
+                            <img src="/upfiles/images/20210422/819aa785f8e9411193015c37d75160be.jpg">
+                            <!--<div class="panel">
+                                <p class="title">做您的建站专家</p>
+                                <p>做您的建站专家</p>
+                            </div>-->
+                        </div>
                     
-                </div>
-                <div class="swiper-pagination big-p1"></div>
-                <div class="icon-arrows-left icon"></div>
-                <div class="icon-arrows-right icon"></div>
-            </div>
-        </section>
-        <Section id="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12 col-sm-6">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" aria-controls="idx-about" role="tab" data-toggle="tab">公司介绍</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idx-about">
-                                <div class="media">
-                                    
-                                        
-                                            <p><img class="alignleft size-full wp-image-28" src="/upfiles/images/20200604/37fa44c712934b1ebca9919fd10bd056.png" alt="EasyCMS" width="117" height="117" /></p>
-                                            <p>EasyCMS是采用2020年最新主流技术开发的开源.NET Core CMS系统。架构科学，轻松支持上千万数据、千万PV；支持全站静态化，SSI，动态页面局部静态化等为您快速建站，建设大规模站点提供强大驱动，也是企业级项目产品原型的良好选择。</p>
-                                        
-                                    
-                                </div>
-                            </div>
+                        <div>
+                            <img src="/upfiles/images/20210422/4d365835e4eb48d5a0517bdbf097ae4c.jpg">
+                            <!--<div class="panel">
+                                <p class="title">完美适配PC和移动端</p>
+                                <p>完美适配PC和移动端</p>
+                            </div>-->
                         </div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#idxcontact" aria-controls="idxcontact" role="tab" data-toggle="tab" aria-expanded="false">联系我们</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active text-muted" id="idxcontact">
-                                <h3>Easy CMS</h3>
-                                <ul>
-                                    <li>地址：江苏省无锡市新吴区新洲生态园</li>
-                                    <li>总机：15961820351</li>
-                                    <li>电邮：461733078@qq.com</li>
-                                </ul>
-                            </div>
+                    
+                        <div>
+                            <img src="/upfiles/images/20210422/6080e16a569ee42550277267.jpg">
+                            <!--<div class="panel">
+                                <p class="title">专业快速</p>
+                                <p>专业快速</p>
+                            </div>-->
                         </div>
-                    </div>
-                    <div class="col-md-5 col-xs-12 col-sm-6" style="height:346px;">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#idxnews" aria-controls="idxNews" role="tab" data-toggle="tab" aria-expanded="true">新闻动态</a></li>
-                            <li role="presentation" class=""><a href="#idxnotice" aria-controls="idxNotice" role="tab" data-toggle="tab" aria-expanded="false">通知公告</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idxnews">
-                                <ul>
-                                    
-                                        
-                                            <li>
-                                                <a href="/news/6/25" target="_blank">
-                                                    <em></em>
-                                                    我的第一篇博客
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/24" target="_blank">
-                                                    <em></em>
-                                                    联系我们
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/23" target="_blank">
-                                                    <em></em>
-                                                    jasonyu
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/22" target="_blank">
-                                                    <em></em>
-                                                    推出定制跑鞋和机器人工厂，阿迪达斯找到未
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/21" target="_blank">
-                                                    <em></em>
-                                                    真源新闻内容哦
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/20" target="_blank">
-                                                    <em></em>
-                                                    我的第一篇博客
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/19" target="_blank">
-                                                    <em></em>
-                                                    我的第一篇博客
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/18" target="_blank">
-                                                    <em></em>
-                                                    真源新闻内容哦
-                                                    <span>2020-06-03</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/7" target="_blank">
-                                                    <em></em>
-                                                    做汽车维修技师的在线学习和技术支持平台，
-                                                    <span>2020-05-19</span>
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="/news/6/6" target="_blank">
-                                                    <em></em>
-                                                    推出定制跑鞋和机器人工厂，阿迪达斯找到未
-                                                    <span>2020-05-19</span>
-                                                </a>
-                                            </li>
-                                        
-                                    
-                                </ul>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="idxnotice">
-                                <ul>
-                                    
-                                        
-                                            <li>
-                                                <a href="/news/7/8" target="_blank">
-                                                    <em></em>
-                                                    人工智能进化史：从麦卡锡到“索菲亚”
-                                                    <span>2020-05-19</span>
-                                                </a>
-                                            </li>
-                                        
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 hidden-xs hidden-sm" style="height:346px;">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#home" aria-controls="idx-about" role="tab" data-toggle="tab">公司相册</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idx-images">
-                                <div class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        
-                                            
-                                                <div class="swiper-slide">
-                                                    <a href="/news/9/12" target="_blank">
-                                                        <img src="/upfiles/images/20200519/6c72868ed51640148c9b4cda3358efcc.png" alt="相册13" />
-                                                    </a>
-                                                    <div class="shadow"></div>
-                                                    <p>
-                                                        <a href="/news/9/12" class="banner-title">
-                                                            相册13
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            
-                                                <div class="swiper-slide">
-                                                    <a href="/news/9/11" target="_blank">
-                                                        <img src="/upfiles/images/20200519/898d82dbb6ff47c09e78e1ca1addbb72.png" alt="相册12" />
-                                                    </a>
-                                                    <div class="shadow"></div>
-                                                    <p>
-                                                        <a href="/news/9/11" class="banner-title">
-                                                            相册12
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            
-                                                <div class="swiper-slide">
-                                                    <a href="/news/9/10" target="_blank">
-                                                        <img src="/upfiles/images/20200519/554d33e0880746caa71649a56f913b54.png" alt="相册1" />
-                                                    </a>
-                                                    <div class="shadow"></div>
-                                                    <p>
-                                                        <a href="/news/9/10" class="banner-title">
-                                                            相册1
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            
-                                        
-                                    </div>
-                                    <div class="swiper-pagination big-p1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Section>
-    </div>
-
-    <section id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-xs-12 col-sm-6" style="width:100%">
-                <p style="text-align: center;">Copyright © 2012-2020 EasyCMS. 易思CMS 版权所有 &nbsp;&nbsp;&nbsp;备案号：苏ICP备17017410号-2&nbsp;&nbsp;<a href="javascript:void(0);">当前静态首页由EasyCms生成</a></p>
+                    
+                
             </div>
         </div>
     </div>
-</section>
-    <script type='text/javascript' src='/static/js/bootstrap.min.js'></script>
-    <script type='text/javascript' src='/static/js/scripts.js'></script>
-    <script type='text/javascript' src='/static/js/swiper.jquery.min.js'></script>
-    <script type='text/javascript' src='/static/js/jquery.slicknav.min.js'></script>
-    <script type='text/javascript' src='/static/js/wp-embed.min.js'></script>
-    <script type='text/javascript' src='/static/js/xs.js'></script>
+    <!-- main部分 -->
+    <div class="main-product">
+        <div class="layui-container">
+            <p class="title">专为前端而研制的<span>核心产品</span></p>
+            <div class="layui-row layui-col-space25">
+                
+                    
+                        <div class="layui-col-sm6 layui-col-md3">
+                            <div class="content">
+                                <div><img src="/upfiles/images/20210422/a5d17b315a314ef7a1962c5138963083.png"></div>
+                                <div>
+                                    <p class="label">响应式</p>
+                                    <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+                                </div>
+                                <a href="/news/1/34">查看产品 ></a>
+                            </div>
+                        </div>
+
+                    
+                        <div class="layui-col-sm6 layui-col-md3">
+                            <div class="content">
+                                <div><img src="/upfiles/images/20210422/86c84803902640ab83311427cc56c3ab.png"></div>
+                                <div>
+                                    <p class="label">兼容性</p>
+                                    <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+                                </div>
+                                <a href="/news/1/33">查看产品 ></a>
+                            </div>
+                        </div>
+
+                    
+                        <div class="layui-col-sm6 layui-col-md3">
+                            <div class="content">
+                                <div><img src="/upfiles/images/20210422/e1944cd801364c20b3fa71b75894642f.png"></div>
+                                <div>
+                                    <p class="label">CSS处理</p>
+                                    <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+                                </div>
+                                <a href="/news/1/32">查看产品 ></a>
+                            </div>
+                        </div>
+
+                    
+                        <div class="layui-col-sm6 layui-col-md3">
+                            <div class="content">
+                                <div><img src="/upfiles/images/20210422/4aa8fc8fe07d48c3bb531cc946e03bdc.png"></div>
+                                <div>
+                                    <p class="label">JS基础库</p>
+                                    <p>从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p>
+                                </div>
+                                <a href="/news/1/31">查看产品 ></a>
+                            </div>
+                        </div>
+
+                    
+                
+            </div>
+        </div>
+    </div>
+    <div class="main-service">
+        <div class="layui-container">
+            <p class="title">为客户打造完美的<span>专业服务</span></p>
+            <div class="layui-row layui-col-space25 layui-col-space80">
+                
+                    
+                        <div class="layui-col-sm6">
+                            <div class="content">
+                                <div class="content-left"><img src="/upfiles/images/20210422/c614ef7f2a3c4f7eb55cfbf341d3f8ce.jpg"></div>
+                                <div class="content-right">
+                                    <p class="label">1 对 1 前端指导</p>
+                                    <span></span>
+                                    <p>更有多个包含不同主题的Web组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="layui-col-sm6">
+                            <div class="content">
+                                <div class="content-left"><img src="/upfiles/images/20210422/48f624eaea7c41b1874c94364e912425.jpg"></div>
+                                <div class="content-right">
+                                    <p class="label">1 对 1 前端指导</p>
+                                    <span></span>
+                                    <p>更有多个包含不同主题的Web组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率。</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+            </div>
+            <div class="service-more"><a href="">查看更多</a></div>
+        </div>
+    </div>
+    <!-- footer部分 -->
+    <div class="footer">
+    <div class="layui-container">
+        <p class="footer-web">
+            <a href="javascript:;">合作伙伴</a>
+            <a href="javascript:;">企业画报</a>
+            <a href="javascript:;">JS网</a>
+            <a href="javascript:;">千图网</a>
+            <a href="javascript:;">昵图网</a>
+            <a href="javascript:;">素材网</a>
+            <a href="javascript:;">花瓣网</a>
+        </p>
+        <div class="layui-row footer-contact">
+            <div class="layui-col-sm2 layui-col-lg1"><img src="/static/img/erweima.jpg"></div>
+            <div class="layui-col-sm10 layui-col-lg11">
+                <div class="layui-row">
+                    <div class="layui-col-sm6 layui-col-md8 layui-col-lg9 textCenter">
+                        <p class="contact-top"><span class="right">该模板版权归 <a href="#" target="_blank">cms.atlass.com</a> 所有</span></p>
+                        <p class="contact-bottom"><span class="right">苏ICP备17017410号-2</span></p>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md4 layui-col-lg3">
+                        <p class="contact-top"><i class="layui-icon layui-icon-cellphone"></i>&nbsp;15961820351&nbsp;&nbsp;&nbsp;(9:00-18:00)</p>
+                        <p class="contact-bottom"><i class="layui-icon layui-icon-home"></i>&nbsp;461733078@qq.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+  layui.config({
+    base: '/static/js/'
+  }).use('firm');
+</script>
+
     <script type='text/javascript' src='/content/visit'></script>
 </body>
 </html>

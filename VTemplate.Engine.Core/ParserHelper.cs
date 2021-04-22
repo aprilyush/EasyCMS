@@ -16,7 +16,7 @@ namespace VTemplate.Engine
     /// <summary>
     /// 解析器的帮助类
     /// </summary>
-    internal static class ParserHelper
+    public static class ParserHelper
     {
         #region 解析判断函数块
         /// <summary>
@@ -38,7 +38,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static char ReadChar(string text, int offset)
+        public static char ReadChar(string text, int offset)
         {
             if (offset < text.Length) return text[offset];
             return (char)0;
@@ -60,7 +60,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static bool IsVariableTagStart(string text, int offset)
+        public static bool IsVariableTagStart(string text, int offset)
         {
             return (ReadChar(text, offset) == '{' && ReadChar(text, offset + 1) == '$');
         }
@@ -70,7 +70,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static bool IsTagStart(string text, int offset)
+        public static bool IsTagStart(string text, int offset)
         {
             return (ReadChar(text, offset) == '<' &&
                 IsChars(ReadChar(text, offset + 1), 'v', 'V') &&
@@ -83,7 +83,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static bool IsCloseTagStart(string text, int offset)
+        public static bool IsCloseTagStart(string text, int offset)
         {
             return (ReadChar(text, offset) == '<' && 
                 ReadChar(text, offset + 1) == '/' &&
@@ -98,7 +98,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static bool IsVTExpressionStart(string text, int offset)
+        public static bool IsVTExpressionStart(string text, int offset)
         {
             return (IsChars(ReadChar(text, offset), 'v', 'V') &&
                     IsChars(ReadChar(text, offset + 1), 't', 'T') &&
@@ -113,7 +113,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static bool IsCommentTagStart(string text, int offset)
+        public static bool IsCommentTagStart(string text, int offset)
         {
             return (ReadChar(text, offset) == '<' && 
                 ReadChar(text, offset + 1) == '!' && 
@@ -130,7 +130,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="element"></param>
         /// <param name="match"></param>
-        internal static void ParseElementAttributes(IAttributesElement element, Match match)
+        public static void ParseElementAttributes(IAttributesElement element, Match match)
         {
             //处理属性
             CaptureCollection attrNames = match.Groups["attrname"].Captures;
@@ -155,7 +155,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <param name="length"></param>
-        internal static void CreateTextNode(Template ownerTemplate, Tag container, string text, int offset, int length)
+        public static void CreateTextNode(Template ownerTemplate, Tag container, string text, int offset, int length)
         {
             if (length > 0)
             {
@@ -182,7 +182,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="prefix"></param>
         /// <returns></returns>
-        internal static Variable CreateVariable(Template ownerTemplate, Match match, out string prefix)
+        public static Variable CreateVariable(Template ownerTemplate, Match match, out string prefix)
         {
             prefix = match.Groups["prefix"].Success ? match.Groups["prefix"].Value : null;
             string name = match.Groups["name"].Value;
@@ -199,7 +199,7 @@ namespace VTemplate.Engine
         /// <param name="ownerTemplate"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        internal static VariableIdentity CreateVariableIdentity(Template ownerTemplate, string text)
+        public static VariableIdentity CreateVariableIdentity(Template ownerTemplate, string text)
         {
             if (string.IsNullOrEmpty(text)) return null;
 
@@ -224,7 +224,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="needCacheData"></param>
         /// <returns></returns>
-        internal static VariableExpression CreateVariableExpression(VariableIdentity variableId, Match match, bool needCacheData)
+        public static VariableExpression CreateVariableExpression(VariableIdentity variableId, Match match, bool needCacheData)
         {
             //解析变量字段列表
             VariableExpression field = new VariableExpression(variableId, needCacheData);
@@ -248,7 +248,7 @@ namespace VTemplate.Engine
         /// <param name="expressionText"></param>
         /// <param name="needCacheData"></param>
         /// <returns></returns>
-        internal static VariableExpression CreateVariableExpression(Template ownerTemplate, string expressionText, bool needCacheData)
+        public static VariableExpression CreateVariableExpression(Template ownerTemplate, string expressionText, bool needCacheData)
         {
             if (string.IsNullOrEmpty(expressionText)) return null;
 
@@ -273,7 +273,7 @@ namespace VTemplate.Engine
         /// <param name="ownerTemplate"></param>
         /// <param name="expressionText"></param>
         /// <returns></returns>
-        internal static IExpression CreateExpression(Template ownerTemplate, string expressionText)
+        public static IExpression CreateExpression(Template ownerTemplate, string expressionText)
         {
             if (string.IsNullOrEmpty(expressionText)) return new ConstantExpression(expressionText);
 
@@ -306,7 +306,7 @@ namespace VTemplate.Engine
         /// <param name="ownerTemplate">宿主模板</param>
         /// <param name="container">标签的容器</param>
         /// <param name="match"></param>
-        internal static VariableTag CreateVariableTag(Template ownerTemplate, Tag container, Match match)
+        public static VariableTag CreateVariableTag(Template ownerTemplate, Tag container, Match match)
         {
             string prefix;
             Variable variable = CreateVariable(ownerTemplate, match, out prefix);
@@ -330,7 +330,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否是自闭合标签</param>
         /// <returns></returns>
-        internal static Tag CreateTag(Template ownerTemplate, Match match,out bool isClosedTag)
+        public static Tag CreateTag(Template ownerTemplate, Match match,out bool isClosedTag)
         {
             string tagName = match.Groups["tagname"].Value;
             isClosedTag = match.Groups["closed"].Success;

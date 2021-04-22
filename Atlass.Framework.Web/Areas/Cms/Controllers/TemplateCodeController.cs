@@ -86,6 +86,10 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             {
                 dto.pid = 1;
             }
+            if (dto.template_content.IsEmpty())
+            {
+                return Error("模板内容不能为空");
+            }
             dto.template_mode = dto.pid;
             dto.file_name = dto.file_name ?? "";
 

@@ -50,7 +50,7 @@ namespace VTemplate.Engine.Evaluator
             {
                 return _Type;
             }
-            internal set
+            set
             {
                 _Type = value;
             }
@@ -96,7 +96,7 @@ namespace VTemplate.Engine.Evaluator
                 }
                 return _Numeric;
             }
-            internal set
+            set
             {
                 _Numeric = value;
                 _Value = _Numeric.ToString();

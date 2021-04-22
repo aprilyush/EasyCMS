@@ -38,9 +38,9 @@ namespace Atlass.Framework.Generate
 		/// </summary>
 		public int channel_template { get; set; }
 		/// <summary>
-		/// 控制渲染 顶部导航渲染标识 0-渲染，1-不渲染 作用是为1时，在渲染顶部导航时可以根据标识不显示
+		/// 控制渲染 顶部导航渲染标识 1-渲染，0-不渲染 作用是为1时，在渲染顶部导航时可以根据标识不显示
 		/// </summary>
-		public int dis_drawing { get; set; }
+		public int drawing_enable { get; set; }
 
 		//扩展
 		/// <summary>

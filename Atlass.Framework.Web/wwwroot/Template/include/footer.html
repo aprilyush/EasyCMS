@@ -1,9 +1,39 @@
-﻿<section id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-xs-12 col-sm-6" style="width:100%">
-                <p style="text-align: center;">{$site.site_copyright} &nbsp;&nbsp;&nbsp;备案号：{$site.site_icp}&nbsp;&nbsp;<a href="javascript:void(0);">当前静态首页由EasyCms生成</a></p>
+﻿<!-- footer部分 -->
+<div class="footer">
+    <div class="layui-container">
+        <p class="footer-web">
+            <a href="javascript:;">合作伙伴</a>
+            <a href="javascript:;">企业画报</a>
+            <a href="javascript:;">JS网</a>
+            <a href="javascript:;">千图网</a>
+            <a href="javascript:;">昵图网</a>
+            <a href="javascript:;">素材网</a>
+            <a href="javascript:;">花瓣网</a>
+        </p>
+        <div class="layui-row footer-contact">
+            <div class="layui-col-sm2 layui-col-lg1"><img src="/static/img/erweima.jpg"></div>
+            <div class="layui-col-sm10 layui-col-lg11">
+                <div class="layui-row">
+                    <div class="layui-col-sm6 layui-col-md8 layui-col-lg9 textCenter">
+                        <p class="contact-top"><span class="right">该模板版权归 <a href="#" target="_blank">cms.atlass.com</a> 所有</span></p>
+                        <p class="contact-bottom"><span class="right">{$site.site_icp}</span></p>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md4 layui-col-lg3">
+                        <p class="contact-top"><i class="layui-icon layui-icon-cellphone"></i>&nbsp;15961820351&nbsp;&nbsp;&nbsp;(9:00-18:00)</p>
+                        <p class="contact-bottom"><i class="layui-icon layui-icon-home"></i>&nbsp;461733078@qq.com</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+<script src="/static/layui/layui.js"></script>
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+    layui.config({
+        base: '/static/js/'
+    }).use('firm');
+</script>

@@ -23,7 +23,7 @@ namespace VTemplate.Engine
         /// 
         /// </summary>
         /// <param name="ownerTemplate"></param>
-        internal OutputTag(Template ownerTemplate)
+        public OutputTag(Template ownerTemplate)
             : base(ownerTemplate)
         {  }
 
@@ -38,7 +38,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签.即是不需要配对的结束标签
         /// </summary>
-        internal override bool IsSingleTag
+        public override bool IsSingleTag
         {
             get { return false; }
         }
@@ -48,11 +48,11 @@ namespace VTemplate.Engine
         /// <summary>
         /// 
         /// </summary>
-        protected Tag outputTarget;
+        public Tag outputTarget;
         /// <summary>
         /// 需要输出数据的标签id
         /// </summary>
-        protected Tag OutputTarget
+        public Tag OutputTarget
         {
             get
             {
@@ -102,7 +102,7 @@ namespace VTemplate.Engine
         /// 呈现本元素的数据
         /// </summary>
         /// <param name="writer"></param>
-        protected override void RenderTagData(System.IO.TextWriter writer)
+        public override void RenderTagData(System.IO.TextWriter writer)
         {
             CancelEventArgs args = new CancelEventArgs();
             this.OnBeforeRender(args);
@@ -146,7 +146,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             if (this.TagId == null && this.File == null) throw new ParserException(string.Format("{0}标签中必须定义tagid或file属性", this.TagName));
 
@@ -162,7 +162,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             OutputTag tag = new OutputTag(ownerTemplate);
             this.CopyTo(tag);

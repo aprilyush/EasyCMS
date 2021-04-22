@@ -10,9 +10,11 @@ namespace Atlass.Framework.Cache
     public static class ChannelManagerCache
     {
         private static ConcurrentDictionary<int, cms_channel> _channels;
+        private static ConcurrentDictionary<string, cms_channel> _indexChannels;
         static ChannelManagerCache()
         {
             _channels = new ConcurrentDictionary<int, cms_channel>();
+            _indexChannels = new ConcurrentDictionary<string, cms_channel>();
         }
 
         /// <summary>
@@ -21,13 +23,8 @@ namespace Atlass.Framework.Cache
         /// <param name="channel"></param>
         public static void AddChannel(cms_channel channel)
         {
-            if (_channels.ContainsKey(channel.id))
-            {
-                _channels[channel.id]= channel;
-                return;
-            }
-           
-            _channels.TryAdd(channel.id, channel);
+            _channels[channel.id] = channel;
+            _indexChannels[channel.channel_index] = channel;
         }
 
         /// <summary>
@@ -39,6 +36,10 @@ namespace Atlass.Framework.Cache
             if (_channels.ContainsKey(channelId))
             {
                 _channels.TryRemove(channelId,out cms_channel channel);
+                if (channel != null)
+                {
+                    _indexChannels.TryRemove(channel.channel_index, out cms_channel channel2);
+                }
             }
         }
         /// <summary>
@@ -54,6 +55,26 @@ namespace Atlass.Framework.Cache
             }
             var sql = DbInstanceFactory.GetInstance();
             var model = sql.Select<cms_channel>().Where(s => s.id == channelId).First();
+            if (model != null)
+            {
+                AddChannel(model);
+            }
+            return model;
+        }
+        /// <summary>
+        /// 获取栏目
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <returns></returns>
+        public static cms_channel GetChannelByIndex(string channelIndex)
+        {
+            if (_indexChannels.ContainsKey(channelIndex))
+            {
+                return _indexChannels[channelIndex];
+            }
+            var sql = DbInstanceFactory.GetInstance();
+            var model = sql.Select<cms_channel>().Where(s => s.channel_index == channelIndex)
+                .OrderBy(s => s.id).First();
             if (model != null)
             {
                 AddChannel(model);
@@ -129,7 +150,7 @@ namespace Atlass.Framework.Cache
             {
                 return null;
             }
-
+            
             return TemplateManagerCache.GetContentTemplate(channel.content_template);
         }
 

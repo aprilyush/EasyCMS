@@ -20,7 +20,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <param name="name"></param>
-        internal Variable(Template ownerTemplate, string name)
+        public Variable(Template ownerTemplate, string name)
         {
             this.OwnerTemplate = ownerTemplate;
             this.Name = name;
@@ -67,7 +67,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 获取缓存的个数
         /// </summary>
-        internal int GetCacheCount()
+        public int GetCacheCount()
         {
             return cacheExpItems.Count;
         }
@@ -76,7 +76,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="exp">变量表达式.以"."号开始.如".age"则表示此变量下的age属性/字段值</param>
         /// <param name="value"></param>
-        internal void AddExpValue(string exp, object value)
+        public void AddExpValue(string exp, object value)
         {
             lock (this.cacheExpItems)
             {
@@ -96,7 +96,7 @@ namespace VTemplate.Engine
         /// <param name="exp"></param>
         /// <param name="exist"></param>
         /// <returns></returns>
-        internal object GetExpValue(string exp, out bool exist)
+        public object GetExpValue(string exp, out bool exist)
         {
             exist = false;
             object value;

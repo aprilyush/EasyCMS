@@ -19,12 +19,12 @@ namespace VTemplate.Engine
         /// <summary>
         /// 
         /// </summary>
-        internal Template() : this(null) { }
+        public Template() : this(null) { }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="ownerTemplate"></param>
-        internal Template(Template ownerTemplate)
+        public Template(Template ownerTemplate)
             : base(ownerTemplate)
         {
             this.Visible = true;
@@ -49,7 +49,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签.即是不需要配对的结束标签
         /// </summary>
-        internal override bool IsSingleTag
+        public override bool IsSingleTag
         {
             get { return false; }
         }
@@ -63,12 +63,12 @@ namespace VTemplate.Engine
         /// <summary>
         /// 模板的关联文件
         /// </summary>
-        public string File { get; internal set; }
+        public string File { get; set; }
 
         /// <summary>
         /// 模板数据采用的编码
         /// </summary>
-        public Encoding Charset { get; internal set; }
+        public Encoding Charset { get; set; }
 
         /// <summary>
         /// 设置或返回此模板是否可见
@@ -98,7 +98,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 标签容器
         /// </summary>
-        protected Template TagContainer { get; set; }
+        public Template TagContainer { get; set; }
 
         /// <summary>
         /// 返回处理模板数据的实例
@@ -127,7 +127,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 模板的依赖文件列表
         /// </summary>
-        protected List<string> fileDependencies;
+        public List<string> fileDependencies;
         /// <summary>
         /// 返回模板的依赖文件
         /// </summary>
@@ -142,7 +142,7 @@ namespace VTemplate.Engine
         /// 添加模板的依赖文件
         /// </summary>
         /// <param name="fileName"></param>
-        internal void AddFileDependency(string fileName)
+        public void AddFileDependency(string fileName)
         {
             foreach (string item in this.fileDependencies)
             {
@@ -159,7 +159,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="name"></param>
         /// <param name="item"></param>
-        protected override void OnAddingAttribute(string name, Attribute item)
+        public override void OnAddingAttribute(string name, Attribute item)
         {
             switch (name)
             {
@@ -282,7 +282,7 @@ namespace VTemplate.Engine
         /// 呈现本元素的数据
         /// </summary>
         /// <param name="writer"></param>
-        protected override void RenderTagData(System.IO.TextWriter writer)
+        public override void RenderTagData(System.IO.TextWriter writer)
         {
             string renderInstance = this.RenderInstance == null ? null : this.RenderInstance.GetTextValue();
             string renderMethod = this.RenderMethod == null ? null : this.RenderMethod.GetTextValue();
@@ -319,7 +319,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             //将自身加入到宿主的子模板列表中
             ownerTemplate.ChildTemplates.Add(this);
@@ -357,7 +357,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             Template tag = new Template(ownerTemplate);
             //加入到宿主模板的子模板列表

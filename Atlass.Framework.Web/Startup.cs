@@ -138,8 +138,9 @@ namespace Atlass.Framework.Web
             //cookie策略
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
-            
+
             //添加新的媒体文件类型，静态文件路由
+  
             app.UseAtlassDefaultFiles(options);
 
             app.UseRouting();

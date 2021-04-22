@@ -1,142 +1,76 @@
 ﻿<!DOCTYPE html>
 <html id="doc">
+<!-- head部分 -->
 <vt:include id="navi" file="Template/include/header.html" charset="utf-8" />
-<body class="home blog">
-    <div class="wrapper">
-        <vt:include id="navi" file="Template/include/navi.html" charset="utf-8" />
-        <div class="container-fluid mini"></div>
-        <section id="slider" class="container-full">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <vt:template name="channels" type="Banner" total="2">
-                        <vt:foreach from="$#.contents" item="#.news" index="#.i">
-                            <div class="swiper-slide">
-                                <a href="javascript:;" title="{$#.news.title}">
-                                    <img src="{$#.news.cover_image}" alt="{$#.news.title}" style="width:1900px;height:495px">
-                                </a>
-                            </div>
-                        </vt:foreach>
-                    </vt:template>
-                </div>
-                <div class="swiper-pagination big-p1"></div>
-                <div class="icon-arrows-left icon"></div>
-                <div class="icon-arrows-right icon"></div>
+<body>
+    <!-- nav部分 -->
+    <vt:include id="navi" file="Template/include/navi.html" charset="utf-8" />
+    <!-- banner部分 -->
+    <div>
+        <div class="layui-carousel" id="banner">
+            <div carousel-item>
+                <vt:template name="channels" type="Banner" total="3">
+                    <vt:foreach from="$#.contents" item="#.content" index="#.i">
+                        <div>
+                            <img src="{$#.content.cover_image}">
+                            <!--<div class="panel">
+                                <p class="title">{$#.content.title}</p>
+                                <p>{$#.content.title}</p>
+                            </div>-->
+                        </div>
+                    </vt:foreach>
+                </vt:template>
             </div>
-        </section>
-        <Section id="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12 col-sm-6">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" aria-controls="idx-about" role="tab" data-toggle="tab">公司介绍</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idx-about">
-                                <div class="media">
-                                    <vt:template name="channels" type="公司介绍" total="1">
-                                        <vt:foreach from="$#.contents" item="#.news" index="#.i">
-                                            <p><img class="alignleft size-full wp-image-28" src="{$#.news.cover_image}" alt="{$#.news.title}" width="117" height="117" /></p>
-                                            <p>{$#.news.summary}</p>
-                                        </vt:foreach>
-                                    </vt:template>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#idxcontact" aria-controls="idxcontact" role="tab" data-toggle="tab" aria-expanded="false">联系我们</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active text-muted" id="idxcontact">
-                                <h3>Easy CMS</h3>
-                                <ul>
-                                    <li>地址：江苏省无锡市新吴区新洲生态园</li>
-                                    <li>总机：15961820351</li>
-                                    <li>电邮：461733078@qq.com</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-xs-12 col-sm-6" style="height:346px;">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#idxnews" aria-controls="idxNews" role="tab" data-toggle="tab" aria-expanded="true">新闻动态</a></li>
-                            <li role="presentation" class=""><a href="#idxnotice" aria-controls="idxNotice" role="tab" data-toggle="tab" aria-expanded="false">通知公告</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idxnews">
-                                <ul>
-                                    <vt:template name="channels" type="新闻动态" total="10">
-                                        <vt:foreach from="$#.contents" item="#.news" index="#.i">
-                                            <li>
-                                                <a href="{$#.news.content_href}" target="_blank">
-                                                    <em></em>
-                                                    {$#.news.title htmlencode='true' length='20'}
-                                                    <span>{$#.news.publish_time format="yyyy-MM-dd"}</span>
-                                                </a>
-                                            </li>
-                                        </vt:foreach>
-                                    </vt:template>
-                                </ul>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="idxnotice">
-                                <ul>
-                                    <vt:template name="channels" type="通知公告" total="10">
-                                        <vt:foreach from="$#.contents" item="#.news" index="#.i">
-                                            <li>
-                                                <a href="{$#.news.content_href}" target="_blank">
-                                                    <em></em>
-                                                    {$#.news.title htmlencode='true' length='20'}
-                                                    <span>{$#.news.publish_time format="yyyy-MM-dd"}</span>
-                                                </a>
-                                            </li>
-                                        </vt:foreach>
-                                    </vt:template>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 hidden-xs hidden-sm" style="height:346px;">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#home" aria-controls="idx-about" role="tab" data-toggle="tab">公司相册</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="idx-images">
-                                <div class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        <vt:template name="channels" type="公司相册" total="3">
-                                            <vt:foreach from="$#.contents" item="#.news" index="#.i">
-                                                <div class="swiper-slide">
-                                                    <a href="{$#.news.content_href}" target="_blank">
-                                                        <img src="{$#.news.cover_image}" alt="{$#.news.title}" />
-                                                    </a>
-                                                    <div class="shadow"></div>
-                                                    <p>
-                                                        <a href="{$#.news.content_href}" class="banner-title">
-                                                            {$#.news.title}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </vt:foreach>
-                                        </vt:template>
-                                    </div>
-                                    <div class="swiper-pagination big-p1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Section>
+        </div>
     </div>
+    <!-- main部分 -->
+    <div class="main-product">
+        <div class="layui-container">
+            <p class="title">专为前端而研制的<span>核心产品</span></p>
+            <div class="layui-row layui-col-space25">
+                <vt:template name="channels" type="产品" total="4">
+                    <vt:foreach from="$#.contents" item="#.content" index="#.i">
+                        <div class="layui-col-sm6 layui-col-md3">
+                            <div class="content">
+                                <div><img src="{$#.content.cover_image}"></div>
+                                <div>
+                                    <p class="label">{$#.content.title}</p>
+                                    <p>{$#.content.summary}</p>
+                                </div>
+                                <a href="{$#.content.content_href }">查看产品 ></a>
+                            </div>
+                        </div>
 
-    <vt:include id="footer" file="Template/include/footer.html" charset="utf-8" />
-    <script type='text/javascript' src='/static/js/bootstrap.min.js'></script>
-    <script type='text/javascript' src='/static/js/scripts.js'></script>
-    <script type='text/javascript' src='/static/js/swiper.jquery.min.js'></script>
-    <script type='text/javascript' src='/static/js/jquery.slicknav.min.js'></script>
-    <script type='text/javascript' src='/static/js/wp-embed.min.js'></script>
-    <script type='text/javascript' src='/static/js/xs.js'></script>
+                    </vt:foreach>
+                </vt:template>
+            </div>
+        </div>
+    </div>
+    <div class="main-service">
+        <div class="layui-container">
+            <p class="title">为客户打造完美的<span>专业服务</span></p>
+            <div class="layui-row layui-col-space25 layui-col-space80">
+                <vt:template name="channels" type="专业服务" total="2">
+                    <vt:foreach from="$#.contents" item="#.content" index="#.i">
+                        <div class="layui-col-sm6">
+                            <div class="content">
+                                <div class="content-left"><img src="{$#.content.cover_image}"></div>
+                                <div class="content-right">
+                                    <p class="label">{$#.content.title}</p>
+                                    <span></span>
+                                    <p>{$#.content.summary}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </vt:foreach>
+                </vt:template>
+            </div>
+            <div class="service-more"><a href="">查看更多</a></div>
+        </div>
+    </div>
+    <!-- footer部分 -->
+    <vt:include file="Template/include/footer.html" charset="utf-8" />
+
     <script type='text/javascript' src='/content/visit'></script>
 </body>
 </html>

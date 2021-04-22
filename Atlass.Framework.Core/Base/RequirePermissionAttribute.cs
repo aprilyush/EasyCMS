@@ -86,18 +86,18 @@ namespace Atlass.Framework.Core.Base
             }
             else
             {
-                if(requestHelper.IsAjax()&& GlobalContext.RuntimeEnvironment == 0)
-                {
-                    if (PermissionTag.Contains("delete")|| PermissionTag.Contains("clear"))
-                    {
-                        var result = new ResultAdaptDto();
-                        result.message = "演示模式，禁止删除";
-                        result.status = false;
-                        result.statusCode = 401;
-                        filterContext.Result = new JsonResult(result);
-                        return;
-                    }
-                }
+                //if(requestHelper.IsAjax()&& GlobalContext.RuntimeEnvironment == 0)
+                //{
+                //    if (PermissionTag.Contains("delete")|| PermissionTag.Contains("clear"))
+                //    {
+                //        var result = new ResultAdaptDto();
+                //        result.message = "演示模式，禁止删除";
+                //        result.status = false;
+                //        result.statusCode = 401;
+                //        filterContext.Result = new JsonResult(result);
+                //        return;
+                //    }
+                //}
                 //#只判断是否登录，不判断具体权限
                 if (PermissionTag == "#")
                 {

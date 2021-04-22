@@ -20,7 +20,7 @@ namespace VTemplate.Engine
         /// 
         /// </summary>
         /// <param name="ownerTemplate">宿主模板</param>
-        protected Element(Template ownerTemplate)
+        public Element(Template ownerTemplate)
         {
             this.OwnerTemplate = ownerTemplate;
         }
@@ -28,7 +28,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 此元素的宿主模板
         /// </summary>
-        public Template OwnerTemplate { get; protected set; }
+        public Template OwnerTemplate { get; set; }
 
         /// <summary>
         /// 此元素的宿主模板文档
@@ -43,7 +43,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 此元素的父级标签
         /// </summary>
-        public Tag Parent { get; internal set; }
+        public Tag Parent { get; set; }
 
         /// <summary>
         /// 呈现本元素的数据
@@ -55,6 +55,6 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal abstract Element Clone(Template ownerTemplate);
+        public abstract Element Clone(Template ownerTemplate);
     }
 }

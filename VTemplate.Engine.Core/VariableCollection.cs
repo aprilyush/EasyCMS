@@ -21,7 +21,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 构造默认集合
         /// </summary>
-        internal VariableCollection()
+        public VariableCollection()
         {
             _Dictionary = new Dictionary<string, Variable>(StringComparer.InvariantCultureIgnoreCase);
         }
@@ -90,7 +90,7 @@ namespace VTemplate.Engine
         /// 添加某个变量
         /// </summary>
         /// <param name="item">量元素</param>
-        internal void Add(Variable item)
+        public void Add(Variable item)
         {
             if (item == null) return;
 
@@ -108,7 +108,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 清空所有属性值
         /// </summary>
-        internal void Clear()
+        public void Clear()
         {
             _Dictionary.Clear();
         }

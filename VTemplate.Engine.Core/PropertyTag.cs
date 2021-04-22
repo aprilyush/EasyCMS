@@ -21,7 +21,7 @@ namespace VTemplate.Engine
         /// 
         /// </summary>
         /// <param name="ownerTemplate"></param>
-        internal PropertyTag(Template ownerTemplate)
+        public PropertyTag(Template ownerTemplate)
             : base(ownerTemplate)
         {
         }
@@ -37,7 +37,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签.即是不需要配对的结束标签
         /// </summary>
-        internal override bool IsSingleTag
+        public override bool IsSingleTag
         {
             get { return false; }
         }
@@ -69,12 +69,12 @@ namespace VTemplate.Engine
         /// <summary>
         /// 存储表达式结果的变量
         /// </summary>
-        public VariableIdentity Variable { get; protected set; }
+        public VariableIdentity Variable { get; set; }
 
         /// <summary>
         /// 是否输出此标签的结果值
         /// </summary>
-        public bool Output { get; protected set; }
+        public bool Output { get; set; }
         #endregion
 
         #region 添加标签属性时的触发函数.用于设置自身的某些属性值
@@ -83,7 +83,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="name"></param>
         /// <param name="item"></param>
-        protected override void OnAddingAttribute(string name, Attribute item)
+        public override void OnAddingAttribute(string name, Attribute item)
         {
             switch (name)
             {
@@ -102,7 +102,7 @@ namespace VTemplate.Engine
         /// 呈现本元素的数据
         /// </summary>
         /// <param name="writer"></param>
-        protected override void RenderTagData(System.IO.TextWriter writer)
+        public override void RenderTagData(System.IO.TextWriter writer)
         {
             //如果类型定义的是变量表达式则获取表达式的值,否则建立类型
             object container = this.Type.Value is VariableExpression ? this.Type.Value.GetValue() : Utility.CreateType(this.Type.Value.GetValue().ToString());
@@ -126,7 +126,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             if (this.Variable == null && !this.Output) throw new ParserException(string.Format("{0}标签中如果未定义Output属性为true则必须定义var属性", this.TagName));
             if (this.Field == null || string.IsNullOrEmpty(this.Field.Text)) throw new ParserException(string.Format("{0}标签中缺少field属性", this.TagName));
@@ -142,7 +142,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             PropertyTag tag = new PropertyTag(ownerTemplate);
             this.CopyTo(tag);

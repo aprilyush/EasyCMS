@@ -23,7 +23,7 @@ namespace VTemplate.Engine
         /// 标签元素
         /// </summary>
         /// <param name="ownerTemplate">宿主模板</param>
-        protected Tag(Template ownerTemplate) : base(ownerTemplate)
+        public Tag(Template ownerTemplate) : base(ownerTemplate)
         {            
             this.InnerElements = new ElementCollection<Element>();
             this.Attributes = new AttributeCollection(this);
@@ -54,18 +54,18 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签元素.即是不需要配对的结束标签
         /// </summary>
-        internal abstract bool IsSingleTag
+        public abstract bool IsSingleTag
         {
             get;
         }
         /// <summary>
         /// 标签的Id
         /// </summary>
-        public string Id { get; protected set; }
+        public string Id { get; set; }
         /// <summary>
         /// 标签的名称
         /// </summary>
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 此标签包含的子元素集合
@@ -75,7 +75,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 此标签的属性集合
         /// </summary>
-        public AttributeCollection Attributes { get; protected set; }
+        public AttributeCollection Attributes { get; set; }
         #endregion
 
         #region 添加标签属性时的触发事件函数.用于设置自身的某些属性值
@@ -105,7 +105,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="name"></param>
         /// <param name="item"></param>
-        protected virtual void OnAddingAttribute(string name, Attribute item)
+        public virtual void OnAddingAttribute(string name, Attribute item)
         {
         }
         #endregion
@@ -115,7 +115,7 @@ namespace VTemplate.Engine
         /// 添加子元素
         /// </summary>
         /// <param name="element"></param>
-        internal virtual void AppendChild(Element element)
+        public virtual void AppendChild(Element element)
         {
             element.Parent = this;
             this.InnerElements.Add(element);
@@ -216,7 +216,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal virtual bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public virtual bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             container.AppendChild(this);
             return !isClosedTag;
@@ -232,7 +232,7 @@ namespace VTemplate.Engine
         /// <param name="tagStack">标签堆栈</param>
         /// <param name="text"></param>
         /// <param name="match"></param>
-        internal virtual void ProcessEndTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match)
+        public virtual void ProcessEndTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match)
         {
             int charOffset = 0, offset = 0;
             bool isClosedTag;
@@ -377,7 +377,7 @@ namespace VTemplate.Engine
         /// 触发呈现元素标签数据之前的事件
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnBeforeRender(CancelEventArgs args)
+        public virtual void OnBeforeRender(CancelEventArgs args)
         {
             CancelEventHandler e = this.BeforeRender;
             if (e != null) e(this, args);
@@ -386,7 +386,7 @@ namespace VTemplate.Engine
         /// 触发呈现元素标签数据之前的事件
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void OnAfterRender(EventArgs args)
+        public virtual void OnAfterRender(EventArgs args)
         {
             EventHandler e = this.AfterRender;
             if (e != null) e(this, args);
@@ -410,7 +410,7 @@ namespace VTemplate.Engine
         /// 呈现本标签元素的数据
         /// </summary>
         /// <param name="writer"></param>
-        protected virtual void RenderTagData(System.IO.TextWriter writer)
+        public virtual void RenderTagData(System.IO.TextWriter writer)
         {
             CancelEventArgs args = new CancelEventArgs();
             this.OnBeforeRender(args);
@@ -471,7 +471,7 @@ namespace VTemplate.Engine
         /// 拷贝自身数据对某个新对象上
         /// </summary>
         /// <param name="tag"></param>
-        protected virtual void CopyTo(Tag tag)
+        public virtual void CopyTo(Tag tag)
         {
             tag.Id = this.Id;
             tag.Name = this.Name;

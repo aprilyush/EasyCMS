@@ -248,10 +248,18 @@
             //});
         }
 
-        function del(obj) {
-            var id = $(obj).data('id');
-            jutils.confirm("确认删除当前文章吗", function () {
-                jutils.ajaxGet('/cms/Content/DeleteById', { id: id }, function (res) {
+        function removeAll(obj) {
+            var rows = $table.easyTable("selected");
+            if (rows.length == 0) {
+                jutils.warn('请选择数据行');
+                return;
+            }
+            var ids = [];
+            for (let i = 0; i < rows.length; i++) {
+                ids.push(rows[i].id);
+            }
+            jutils.confirm("确认删除选中的文章吗", function () {
+                jutils.ajaxGet('/cms/Content/DeleteById', { ids: ids.join() }, function (res) {
                     $table.easyTable('search');
                 })
             })
@@ -266,7 +274,7 @@
                 return;
             }
             var ids = [];
-            for (var i = 0; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 ids.push(rows[i].id);
             }
             jutils.confirm("确认置顶选择的文章吗？", function () {
@@ -283,7 +291,7 @@
                 return;
             }
             var ids = [];
-            for (var i = 0; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 ids.push(rows[i].id);
             }
             jutils.confirm("确认置顶选择的文章吗？", function () {

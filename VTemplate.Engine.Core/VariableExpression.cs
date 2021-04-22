@@ -20,7 +20,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="variableId"></param>
         /// <param name="needCacheData"></param>
-        internal VariableExpression(VariableIdentity variableId, bool needCacheData) 
+        public VariableExpression(VariableIdentity variableId, bool needCacheData) 
             : this(variableId, null, false, needCacheData)
         { }
         /// <summary>
@@ -30,7 +30,7 @@ namespace VTemplate.Engine
         /// <param name="fieldName"></param>
         /// <param name="isMethod"></param>
         /// <param name="needCacheData"></param>
-        internal VariableExpression(VariableIdentity variableId, string fieldName, bool isMethod, bool needCacheData)
+        public VariableExpression(VariableIdentity variableId, string fieldName, bool isMethod, bool needCacheData)
         {
             this.VariableId = variableId;
             this.FieldName = fieldName;
@@ -43,7 +43,7 @@ namespace VTemplate.Engine
         /// <param name="parentExp"></param>
         /// <param name="fieldName"></param>
         /// <param name="isMethod"></param>
-        internal VariableExpression(VariableExpression parentExp, string fieldName, bool isMethod)
+        public VariableExpression(VariableExpression parentExp, string fieldName, bool isMethod)
         {
             parentExp.NextExpression = this;
             this.ParentExpression = parentExp;

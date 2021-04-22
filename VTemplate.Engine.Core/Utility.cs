@@ -24,7 +24,7 @@ namespace VTemplate.Engine
     /// <summary>
     /// 实用类
     /// </summary>
-    internal static class Utility
+    public static class Utility
     {
         /// <summary>
         /// 
@@ -42,7 +42,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static bool IsNothing(object value)
+        public static bool IsNothing(object value)
         {
             return value == null || value == DBNull.Value;
         }
@@ -51,7 +51,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static bool IsInteger(string value)
+        public static bool IsInteger(string value)
         {
             if (string.IsNullOrEmpty(value)) return false;
             if (value.StartsWith("00")) return false;  //00开头不认为是整数
@@ -66,7 +66,7 @@ namespace VTemplate.Engine
         /// <param name="value"></param>
         /// <param name="conversionType"></param>
         /// <returns></returns>
-        internal static object ChangeType(object value, Type conversionType)
+        public static object ChangeType(object value, Type conversionType)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace VTemplate.Engine
         /// <param name="value2"></param>
         /// <param name="success"></param>
         /// <returns></returns>
-        internal static int CompareTo(object value1, object value2, out bool success)
+        public static int CompareTo(object value1, object value2, out bool success)
         {
             Type type1 = value1.GetType();
             Type type2 = value2.GetType();
@@ -160,7 +160,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string XmlEncode(string value)
+        public static string XmlEncode(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -182,7 +182,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string TextEncode(string value)
+        public static string TextEncode(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -199,7 +199,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string JsEncode(string value)
+        public static string JsEncode(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -217,7 +217,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string CompressText(string value)
+        public static string CompressText(string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -230,7 +230,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string RemoveHtmlCode(string value)
+        public static string RemoveHtmlCode(string value)
         {
             if (string.IsNullOrEmpty(value)) return string.Empty;
 
@@ -248,7 +248,7 @@ namespace VTemplate.Engine
         /// <param name="list"></param>
         /// <param name="groupSize"></param>
         /// <returns></returns>
-        internal static IEnumerator SplitToGroup(IEnumerator list, int groupSize)
+        public static IEnumerator SplitToGroup(IEnumerator list, int groupSize)
         {
             List<ArrayList> groupList = new List<ArrayList>();
             while (true)
@@ -288,7 +288,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static bool ConverToBoolean(string value)
+        public static bool ConverToBoolean(string value)
         {
             if (value == "1" || string.Equals(value, Boolean.TrueString, StringComparison.OrdinalIgnoreCase))
             {
@@ -305,7 +305,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static int ConverToInt32(string value)
+        public static int ConverToInt32(string value)
         {
             int v;
             if (!int.TryParse(value, out v))
@@ -320,7 +320,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static decimal ConverToDecimal(object value)
+        public static decimal ConverToDecimal(object value)
         {
             if (value == null || value == DBNull.Value) return 0M;
             decimal v;
@@ -343,7 +343,7 @@ namespace VTemplate.Engine
         /// <param name="charset">采用的编码</param>
         /// <param name="appendText">附加字符</param>
         /// <returns></returns>
-        internal static string CutString(string value, int maxLength, Encoding charset, string appendText)
+        public static string CutString(string value, int maxLength, Encoding charset, string appendText)
         {
 
             if (maxLength == 0||value.Length <=maxLength)
@@ -378,7 +378,7 @@ namespace VTemplate.Engine
         /// <param name="charset"></param>
         /// <param name="defaultCharset"></param>
         /// <returns></returns>
-        internal static Encoding GetEncodingFromCharset(string charset, Encoding defaultCharset)
+        public static Encoding GetEncodingFromCharset(string charset, Encoding defaultCharset)
         {
             Encoding e = defaultCharset;
             try
@@ -398,7 +398,7 @@ namespace VTemplate.Engine
         /// <param name="value">要转换的字符串</param>
         /// <param name="type">最终的数据类型</param>
         /// <returns>如果转换失败返回null</returns>
-        internal static object ConvertTo(string value, Type type)
+        public static object ConvertTo(string value, Type type)
         {
             object result = value;
             if (value != null)
@@ -434,7 +434,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="compareType"></param>
         /// <returns></returns>
-        internal static IfConditionCompareType GetIfConditionCompareType(string compareType)
+        public static IfConditionCompareType GetIfConditionCompareType(string compareType)
         {
             IfConditionCompareType icct = IfConditionCompareType.Equal;
             if (!string.IsNullOrEmpty(compareType))
@@ -481,7 +481,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static DbType GetObjectDbType(object value)
+        public static DbType GetObjectDbType(object value)
         {
             if (value == null) return DbType.Object;
             switch (Type.GetTypeCode(value is Type ? (Type)value : value.GetType()))
@@ -526,7 +526,7 @@ namespace VTemplate.Engine
         /// <param name="propName">属性名</param>
         /// <param name="exist">是否存在此属性</param>
         /// <returns>属性值</returns>
-        internal static object GetPropertyValue(object container, string propName, out bool exist)
+        public static object GetPropertyValue(object container, string propName, out bool exist)
         {
             exist = false;
             object value = null;
@@ -670,7 +670,7 @@ namespace VTemplate.Engine
         /// <param name="methodName"></param>
         /// <param name="exist"></param>
         /// <returns></returns>
-        internal static object GetMethodResult(object container, string methodName, out bool exist)
+        public static object GetMethodResult(object container, string methodName, out bool exist)
         {
             exist = false;
             Type type = (container is Type ? (Type)container : container.GetType());
@@ -691,7 +691,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="dataSource">要处理的数据源</param>
         /// <returns>如果非IListSource与IEnumerable实例则返回null</returns>
-        internal static IEnumerable GetResolvedDataSource(object dataSource)
+        public static IEnumerable GetResolvedDataSource(object dataSource)
         {
             if (dataSource != null)
             {
@@ -739,7 +739,7 @@ namespace VTemplate.Engine
         /// <param name="tag"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        internal static string ResolveFilePath(Tag tag, string fileName)
+        public static string ResolveFilePath(Tag tag, string fileName)
         {
             if (!string.IsNullOrEmpty(fileName) && fileName.IndexOf(":") == -1 && !fileName.StartsWith("\\\\"))
             {
@@ -773,7 +773,7 @@ namespace VTemplate.Engine
         /// <param name="text"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static Point GetLineAndColumnNumber(string text, int offset)
+        public static Point GetLineAndColumnNumber(string text, int offset)
         {
             int line, column, p;
             line = column = 1;
@@ -805,7 +805,7 @@ namespace VTemplate.Engine
         /// <param name="ownerTemplate"></param>
         /// <param name="varName"></param>
         /// <returns></returns>
-        internal static Variable GetVariableOrAddNew(Template ownerTemplate, string varName)
+        public static Variable GetVariableOrAddNew(Template ownerTemplate, string varName)
         {
             Variable var = ownerTemplate.Variables[varName];
             if (var == null)
@@ -822,7 +822,7 @@ namespace VTemplate.Engine
         /// <param name="template"></param>
         /// <param name="prefix"></param>
         /// <returns>如果prefix值为null则返回template的根模板.如果为空值.则为template.如果为#则返回template的父模板.否则返回对应Id的模板</returns>
-        internal static Template GetOwnerTemplateByPrefix(Template template, string prefix)
+        public static Template GetOwnerTemplateByPrefix(Template template, string prefix)
         {
             if (prefix == string.Empty) return template;               //前缀为空.则返回当前模板
             if (prefix == "#") return template.OwnerTemplate ?? template;   //前缀为#.则返回父模板(如果父模板不存在则返回当前模板)
@@ -845,7 +845,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        internal static Type CreateType(string typeName)
+        public static Type CreateType(string typeName)
         {
             return CreateType(typeName, null);
         }
@@ -855,7 +855,7 @@ namespace VTemplate.Engine
         /// <param name="typeName">类型名称</param>
         /// <param name="assembly">程序集.如果为空.则表示当前程序域里的所有程序集</param>
         /// <returns></returns>
-        internal static Type CreateType(string typeName, string assembly)
+        public static Type CreateType(string typeName, string assembly)
         {
             if (string.IsNullOrEmpty(typeName)) return null;
 
@@ -981,7 +981,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="renderInstance">模板解析器实例的配置</param>
         /// <param name="template">要解析处理的模板</param>
-        internal static void PreRenderTemplate(string renderInstance, Template template)
+        public static void PreRenderTemplate(string renderInstance, Template template)
         {
             ITemplateRender render = GetRenderInstance(renderInstance) as ITemplateRender;
             if (render != null) render.PreRender(template);
@@ -992,7 +992,7 @@ namespace VTemplate.Engine
         /// <param name="renderInstance"></param>
         /// <param name="renderMethod"></param>
         /// <param name="template"></param>
-        internal static void PreRenderTemplateByAttributeMethod(string renderInstance, string renderMethod, Template template)
+        public static void PreRenderTemplateByAttributeMethod(string renderInstance, string renderMethod, Template template)
         {
             object render = GetRenderInstance(renderInstance);
             if (render != null)
@@ -1035,7 +1035,7 @@ namespace VTemplate.Engine
         /// 建立数据驱动工厂
         /// </summary>
         /// <param name="providerName"></param>
-        internal static DbProviderFactory CreateDbProviderFactory(string providerName)
+        public static DbProviderFactory CreateDbProviderFactory(string providerName)
         {
             if(string.IsNullOrEmpty(providerName)) return null;
 

@@ -14,7 +14,7 @@ namespace VTemplate.Engine
     /// <summary>
     /// 标签工厂
     /// </summary>
-    internal class TagFactory
+    public class TagFactory
     {
         /// <summary>
         /// 根据标签名建立标签实例
@@ -22,7 +22,7 @@ namespace VTemplate.Engine
         /// <param name="ownerTemplate"></param>
         /// <param name="tagName"></param>
         /// <returns></returns>
-        internal static Tag FromTagName(Template ownerTemplate, string tagName)
+        public static Tag FromTagName(Template ownerTemplate, string tagName)
         {
             if (!string.IsNullOrEmpty(tagName))
             {

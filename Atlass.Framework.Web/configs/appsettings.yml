@@ -79,3 +79,12 @@ SenparcWeixinSetting:
   TenPayV3_TenpayNotify: "http://www.yushuo.natapp1.cc/wxpay/Index"
   #如果不设置TenPayV3_WxOpenTenpayNotify，默认在 TenPayV3_TenpayNotify 的值最后加上 "WxOpen"
   TenPayV3_WxOpenTenpayNotify: "http://www.yushuo.natapp1.cc/wxpay/Index" #http://YourDomainName/TenpayV3/PayNotifyUrlWxOpen
+#媒体类型
+Mime: 
+  ".properties": "application/x-javascript"
+  ".bak": "application/octet-stream"
+#Extension: ".apk"
+#MimeType: "application/vnd.android.package-archive"
+#  -
+#   Extension: ".bak"
+#   MimeType: "application/octet-stream"

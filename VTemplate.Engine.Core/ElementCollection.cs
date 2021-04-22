@@ -25,7 +25,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 构造默认的集合
         /// </summary>
-        internal ElementCollection()
+        public ElementCollection()
         {
             _List = new List<T>();
         }
@@ -33,7 +33,7 @@ namespace VTemplate.Engine
         /// 构造初始含有一定数量的集合
         /// </summary>
         /// <param name="capacity">初始容量</param>
-        internal ElementCollection(int capacity)
+        public ElementCollection(int capacity)
         {
             _List = new List<T>(capacity);
         }
@@ -41,7 +41,7 @@ namespace VTemplate.Engine
         /// 构造集合
         /// </summary>
         /// <param name="collection">要复制的集合列表</param>
-        internal ElementCollection(IEnumerable<T> collection)
+        public ElementCollection(IEnumerable<T> collection)
         {
             _List = new List<T>(collection);
         }
@@ -91,7 +91,7 @@ namespace VTemplate.Engine
         /// 添加元素
         /// </summary>
         /// <param name="element">模板元素</param>
-        internal virtual void Add(T element)
+        public virtual void Add(T element)
         {
             _List.Add(element);
         }
@@ -100,7 +100,7 @@ namespace VTemplate.Engine
         /// 批量添加元素
         /// </summary>
         /// <param name="collection">集合数据,不可以为null</param>
-        internal virtual void AddRange(IEnumerable<T> collection)
+        public virtual void AddRange(IEnumerable<T> collection)
         {
             _List.AddRange(collection);
         }
@@ -123,7 +123,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 清空数据
         /// </summary>
-        internal void Clear()
+        public void Clear()
         {
             _List.Clear();
         }

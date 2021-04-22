@@ -90,7 +90,7 @@ namespace VTemplate.Engine
         /// <param name="documentElement"></param>
         /// <param name="text"></param>
         /// <param name="documentConfig"></param>
-        internal TemplateDocument(Template documentElement, string text, TemplateDocumentConfig documentConfig) : this(documentElement, documentElement, text, documentConfig) { }
+        public TemplateDocument(Template documentElement, string text, TemplateDocumentConfig documentConfig) : this(documentElement, documentElement, text, documentConfig) { }
         /// <summary>
         /// 
         /// </summary>
@@ -98,7 +98,7 @@ namespace VTemplate.Engine
         /// <param name="container"></param>
         /// <param name="text"></param>
         /// <param name="documentConfig"></param>
-        internal TemplateDocument(Template documentElement, Tag container, string text, TemplateDocumentConfig documentConfig)
+        public TemplateDocument(Template documentElement, Tag container, string text, TemplateDocumentConfig documentConfig)
         {
             this.DocumentConfig = documentConfig;
             this.AppendChild(documentElement);
@@ -202,7 +202,7 @@ namespace VTemplate.Engine
         /// 注册当前呈现的标签
         /// </summary>
         /// <param name="tag"></param>
-        internal void RegisterCurrentRenderingTag(Tag tag)
+        public void RegisterCurrentRenderingTag(Tag tag)
         {            
             TemplateDocument.CurrentRenderingDocument = tag == null ? null : tag.OwnerDocument;
             this.CurrentRenderingTag = tag;
@@ -441,7 +441,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             TemplateDocument tag = new TemplateDocument(this.DocumentConfig);
 
@@ -484,7 +484,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="panelId"></param>
         /// <param name="childPanel"></param>
-        internal void AddPanelChild(string panelId, PanelTag childPanel)
+        public void AddPanelChild(string panelId, PanelTag childPanel)
         {
             if (!_panelChilds.ContainsKey(panelId))
             {
@@ -497,7 +497,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="panelId"></param>
         /// <returns></returns>
-        internal List<PanelTag> GetPanelChilds(string panelId)
+        public List<PanelTag> GetPanelChilds(string panelId)
         {
             if (_panelChilds.ContainsKey(panelId))
             {

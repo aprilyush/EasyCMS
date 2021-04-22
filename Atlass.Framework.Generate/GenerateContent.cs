@@ -62,7 +62,15 @@ namespace Atlass.Framework.Generate
                 }
 
                 this.Document.Variables.SetValue("this", this);
-                this.Document.Variables.SetValue("news", content);
+                //站点基本信息
+                var site = SiteManagerCache.GetSiteInfo();
+                this.Document.Variables.SetValue("site", site);
+                //设置顶部导航条数据
+                var navigations = _contentApp.GetChannelTree();
+                this.Document.Variables.SetValue("navigations", navigations);
+
+                //获取当前文章信息
+                this.Document.Variables.SetValue("content", content);
                 string renderHtml = this.Document.GetRenderText();
                 renderHtml = HtmlPlayerHandler.CreateVideo(renderHtml);
                 watcher.Stop();

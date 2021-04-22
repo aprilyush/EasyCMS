@@ -229,7 +229,7 @@
            
         }
 
-        function del(obj) {
+        function removeAll(obj) {
             let rows = $table.easyTable("selected");
             if (rows.length == 0) {
                 jutils.warn('请选择数据行');
@@ -259,7 +259,7 @@
             })
         }
 
-        function syncTemplate(obj) {
+        function syncLocalFile(obj) {
             let rows = $table.easyTable("selected");
             if (rows.length == 0) {
                 jutils.warn('请选择数据行');

@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <Compile Remove="packages\**" />
+    <Compile Remove="wwwroot\static\content\**" />
     <Compile Remove="wwwroot\upfiles\**" />
     <Content Remove="packages\**" />
+    <Content Remove="wwwroot\static\content\**" />
     <Content Remove="wwwroot\upfiles\**" />
     <EmbeddedResource Remove="packages\**" />
+    <EmbeddedResource Remove="wwwroot\static\content\**" />
     <EmbeddedResource Remove="wwwroot\upfiles\**" />
     <None Remove="packages\**" />
+    <None Remove="wwwroot\static\content\**" />
     <None Remove="wwwroot\upfiles\**" />
   </ItemGroup>
   <!--Condition="'$(Configuration)' == 'Debug'"-->
@@ -56,6 +60,28 @@
 
   <ItemGroup>
     <None Include="easy_cms.sln" />
+    <None Include="wwwroot\static\layui\font\iconfont.svg" />
+    <None Include="wwwroot\static\layui\layui.all.js" />
+    <None Include="wwwroot\static\layui\layui.js" />
+    <None Include="wwwroot\static\layui\lay\modules\carousel.js" />
+    <None Include="wwwroot\static\layui\lay\modules\code.js" />
+    <None Include="wwwroot\static\layui\lay\modules\colorpicker.js" />
+    <None Include="wwwroot\static\layui\lay\modules\element.js" />
+    <None Include="wwwroot\static\layui\lay\modules\flow.js" />
+    <None Include="wwwroot\static\layui\lay\modules\form.js" />
+    <None Include="wwwroot\static\layui\lay\modules\jquery.js" />
+    <None Include="wwwroot\static\layui\lay\modules\laydate.js" />
+    <None Include="wwwroot\static\layui\lay\modules\layedit.js" />
+    <None Include="wwwroot\static\layui\lay\modules\layer.js" />
+    <None Include="wwwroot\static\layui\lay\modules\laypage.js" />
+    <None Include="wwwroot\static\layui\lay\modules\laytpl.js" />
+    <None Include="wwwroot\static\layui\lay\modules\mobile.js" />
+    <None Include="wwwroot\static\layui\lay\modules\rate.js" />
+    <None Include="wwwroot\static\layui\lay\modules\slider.js" />
+    <None Include="wwwroot\static\layui\lay\modules\table.js" />
+    <None Include="wwwroot\static\layui\lay\modules\tree.js" />
+    <None Include="wwwroot\static\layui\lay\modules\upload.js" />
+    <None Include="wwwroot\static\layui\lay\modules\util.js" />
     <None Include="wwwroot\ui\plugins\ckplayer\ckplayer.js" />
     <None Include="wwwroot\ui\plugins\ckplayer\ckplayer.min.js" />
     <None Include="wwwroot\ui\plugins\ckplayer\ckplayer.swf" />
@@ -377,14 +403,7 @@
     <None Include="wwwroot\ui\plugins\ueditor\ueditor.parse.min.js" />
     <None Include="wwwroot\static\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\static\js\bootstrap.min.js" />
-    <None Include="wwwroot\static\js\hm.js" />
-    <None Include="wwwroot\static\js\jquery-migrate.min.js" />
     <None Include="wwwroot\static\js\jquery.js" />
-    <None Include="wwwroot\static\js\jquery.slicknav.min.js" />
-    <None Include="wwwroot\static\js\scripts.js" />
-    <None Include="wwwroot\static\js\swiper.jquery.min.js" />
-    <None Include="wwwroot\static\js\wp-embed.min.js" />
-    <None Include="wwwroot\static\js\xs.js" />
     <None Include="wwwroot\ui\plugins\beautifyhtml\beautifyhtml.js" />
     <None Include="wwwroot\ui\plugins\blockUI\jquery.blockUI.js" />
     <None Include="wwwroot\ui\plugins\bootstrap-fileinput\fileinput.js" />
@@ -562,6 +581,24 @@
     <None Include="wwwroot\ui\plugins\slimscroll\jquery.slimscroll.min.js" />
     <None Include="wwwroot\ui\js\resize-tabs.js" />
     <None Include="wwwroot\ui\js\three.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\.DS_Store" />
+    <None Include="wwwroot\ui\plugins\webuploader\README.md" />
+    <None Include="wwwroot\ui\plugins\webuploader\Uploader.swf" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.custom.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.custom.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.fis.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.flashonly.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.flashonly.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.html5only.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.html5only.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.noimage.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.noimage.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.nolog.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.nolog.min.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.withoutimage.js" />
+    <None Include="wwwroot\ui\plugins\webuploader\webuploader.withoutimage.min.js" />
   </ItemGroup>
 
   <ItemGroup>

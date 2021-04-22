@@ -276,7 +276,7 @@ namespace Atlass.Framework.Generate
             model.channel_image = channel.channel_image;
             model.channel_href = channel.channel_href;
             model.channel_template = channel.channel_template;
-            model.dis_drawing = channel.drawing_enable;
+            model.drawing_enable = channel.drawing_enable;
             model.current = 1;
             if (string.IsNullOrEmpty(model.channel_href))
             {
@@ -293,11 +293,11 @@ namespace Atlass.Framework.Generate
         public List<ChannelModel> GetChannelTree(int channleId=0)
         {
             var channels = ChannelManagerCache.GetChannelList();
-            var homeId = channels.Where(s => s.channel_index == "首页").Select(s=>s.id).FirstOrDefault();
-            if (homeId == 0)
-            {
-                return new List<ChannelModel>();
-            }
+            //var homeId = channels.Where(s => s.channel_index == "首页").Select(s=>s.id).FirstOrDefault();
+            //if (homeId == 0)
+            //{
+            //    return new List<ChannelModel>();
+            //}
             //获取首页栏目下的第一层栏目
             //var topChannels = channels.Where(s => s.parent_id == homeId)
             //    .OrderBy(s => s.sort_num)
@@ -323,13 +323,13 @@ namespace Atlass.Framework.Generate
             //        s.navigation = GetNaviLocation(s.id);
             //    }
             //});
-            var list = InitChild(homeId, channels, channleId);
-            var home = new ChannelModel { id = 0, channel_href = "/index.html", channel_name = "首页" };
-            if (channleId == 0)
-            {
-                home.current = 1;
-            }
-            list.Insert(0, home);
+            var list = InitChild(0, channels, channleId);
+            //var home = new ChannelModel { id = 0, channel_href = "/index.html", channel_name = "首页" };
+            //if (channleId == 0)
+            //{
+            //    home.current = 1;
+            //}
+            //list.Insert(0, home);
             return list;
         }
 
@@ -354,7 +354,7 @@ namespace Atlass.Framework.Generate
                   channel_image = s.channel_image,
                   channel_href = s.channel_href,
                   channel_template = s.channel_template,
-                  dis_drawing=s.drawing_enable
+                  drawing_enable = s.drawing_enable
               }).ToList();
 
             //设置连接和导航

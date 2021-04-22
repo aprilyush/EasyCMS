@@ -31,7 +31,7 @@ namespace VTemplate.Engine
         /// <param name="ownerElement"></param>
         /// <param name="name"></param>
         /// <param name="text"></param>
-        internal Attribute(Element ownerElement, string name, string text)
+        public Attribute(Element ownerElement, string name, string text)
         {
             this.OwnerElement = ownerElement;
             this.Name = name;
@@ -42,7 +42,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 宿主标签
         /// </summary>
-        public Element OwnerElement { get; internal set; }
+        public Element OwnerElement { get; set; }
 
         /// <summary>
         /// 属性名称
@@ -62,7 +62,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 获取文本值
         /// </summary>
-        internal string GetTextValue()
+        public string GetTextValue()
         {
             if (this.Value == null) return this.Text;
             object v = this.Value.GetValue();

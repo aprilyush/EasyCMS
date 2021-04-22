@@ -21,7 +21,7 @@ namespace VTemplate.Engine
         /// 
         /// </summary>
         /// <param name="ownerTemplate"></param>
-        internal IfTag(Template ownerTemplate)
+        public IfTag(Template ownerTemplate)
             : base(ownerTemplate)
         {
             this.ElseIfs = new ElementCollection<IfConditionTag>();
@@ -31,7 +31,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// ElseIf节点列表
         /// </summary>
-        public ElementCollection<IfConditionTag> ElseIfs { get; protected set; }
+        public ElementCollection<IfConditionTag> ElseIfs { get; set; }
 
         /// <summary>
         /// Else节点
@@ -43,7 +43,7 @@ namespace VTemplate.Engine
         public ElseTag Else
         {
             get { return _Else; }
-            internal set
+            set
             {
                 if (value != null) value.Parent = this;
                 _Else = value;
@@ -56,7 +56,7 @@ namespace VTemplate.Engine
         /// 添加条件
         /// </summary>
         /// <param name="conditionTag"></param>
-        internal virtual void AddElseCondition(IfConditionTag conditionTag)
+        public virtual void AddElseCondition(IfConditionTag conditionTag)
         {
             conditionTag.Parent = this;
             this.ElseIfs.Add(conditionTag);
@@ -75,7 +75,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签.即是不需要配对的结束标签
         /// </summary>
-        internal override bool IsSingleTag
+        public override bool IsSingleTag
         {
             get { return false; }
         }
@@ -173,7 +173,7 @@ namespace VTemplate.Engine
         /// 呈现本元素的数据
         /// </summary>
         /// <param name="writer"></param>
-        protected override void RenderTagData(System.IO.TextWriter writer)
+        public override void RenderTagData(System.IO.TextWriter writer)
         {
             if (this.IsTestSuccess())
             {
@@ -211,7 +211,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             if (this.VarExpression == null) throw new ParserException(string.Format("{0}标签中缺少var属性", this.TagName));
             if (this.Values.Count == 0) throw new ParserException(string.Format("{0}标签中缺少value属性", this.TagName));
@@ -231,7 +231,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             IfTag tag = new IfTag(ownerTemplate);
             this.CopyTo((IfConditionTag)tag);

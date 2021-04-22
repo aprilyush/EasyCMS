@@ -24,7 +24,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <param name="varExp"></param>
-        internal VariableTag(Template ownerTemplate, VariableExpression varExp)
+        public VariableTag(Template ownerTemplate, VariableExpression varExp)
             : base(ownerTemplate)
         {
             //注册添加属性时触发事件.用于设置自身的某些属性值
@@ -38,7 +38,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 此标签的属性集合
         /// </summary>
-        public AttributeCollection Attributes { get; protected set; }
+        public AttributeCollection Attributes { get; set; }
 
         /// <summary>
         /// 变量元素中的变量表达式
@@ -169,7 +169,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 要调用的函数列表
         /// </summary>
-        public List<IExpression> CallFunctions { get; protected set; }
+        public List<IExpression> CallFunctions { get; set; }
         #endregion
 
         #region 添加标签属性时的触发事件函数.用于设置自身的某些属性值
@@ -335,7 +335,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             VariableTag tag = new VariableTag(ownerTemplate, (VariableExpression)this.VarExpression.Clone(ownerTemplate));
             foreach (var att in this.Attributes)

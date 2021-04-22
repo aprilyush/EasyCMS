@@ -14,17 +14,17 @@ namespace VTemplate.Engine
     /// <summary>
     /// 解析器的正则表达式库
     /// </summary>
-    internal static class ParserRegex
+    public static class ParserRegex
     {
         /// <summary>
         /// 标签的正则表达.如标签: &lt;vt:for from="1" to="100" index="i"&gt;
         /// </summary>
-        internal static readonly Regex TagRegex;
+        public static readonly Regex TagRegex;
 
         /// <summary>
         /// 结束标签的正则表达式.如标签: &lt;/vt:for&gt;
         /// </summary>
-        internal static readonly Regex EndTagRegex;
+        public static readonly Regex EndTagRegex;
 
         /// <summary>
         /// 变量标签的正则表达式.如: {$:member.name} 或带前缀与属性的变量标签: {$:#.member.name htmlencode='true'}
@@ -35,18 +35,18 @@ namespace VTemplate.Engine
         /// 如果变量是前缀"#"加其它字符.(如(#t1.member.name).则表示此变量是属于Id为"t1"的模板.如果不存在Id为"t1"的模板.则将产生解析错误.
         /// 注: 3.7版本以上，可以不写“:”号，如“{$member.name}”与“{$:member.name}”表示相同
         /// </summary>
-        internal static readonly Regex VarTagRegex;
+        public static readonly Regex VarTagRegex;
 
         /// <summary>
         /// 变量表达的正则表达式.如变量表达式: member.name 或带前缀的变量表达式: #.member.name
         /// </summary>
-        internal static readonly Regex VarExpRegex;
+        public static readonly Regex VarExpRegex;
 
         /// <summary>
         /// 变量标识的正则表达式.如变量:member 或带前缀 #.member。
         /// 注：3.7版本以上支持前缀“$”，如“$member”与“member”表示相同的变量标识
         /// </summary>
-        internal static readonly Regex VarIdRegex;
+        public static readonly Regex VarIdRegex;
         /// <summary>
         /// 
         /// </summary>

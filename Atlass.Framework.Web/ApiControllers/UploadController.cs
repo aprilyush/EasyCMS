@@ -21,6 +21,10 @@ namespace Atlass.Framework.Web.ApiControllers
     public class UploadController : ControllerBase
     {
         private readonly IAtlassRequest RequestHelper;
+        /// <summary>
+        /// 分片上传的每片大小
+        /// </summary>
+        private long THUNK_SIZE = 5 * 1021 * 1024;
         public UploadController(IAtlassRequest requestHelper)
         {
             RequestHelper = requestHelper;
@@ -201,6 +205,7 @@ namespace Atlass.Framework.Web.ApiControllers
         [RequirePermission("#")]
         public IActionResult SaveChunkFile()
         {
+            var result = new ResultAdaptDto();
             //uploadfile,uploadvideo
             string action = RequestHelper.GetPostString("action");
             string guid = RequestHelper.GetPostString("guid");
@@ -208,10 +213,48 @@ namespace Atlass.Framework.Web.ApiControllers
             string chunk= RequestHelper.GetPostString("chunk");
             var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/"+ guid; // 缓存文件夹
             var targetDir = GlobalParamsDto.WebRoot+"/upfiles/videos/"+DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+            if (action == "uploadfile")
+            {
+                targetDir = GlobalParamsDto.WebRoot + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+
+            }
+            if (!System.IO.Directory.Exists(targetDir))
+            {
+                System.IO.Directory.CreateDirectory(targetDir);
+            }
+
 
             var file = Request.Form.Files[0];
+            
             int index = fileName.LastIndexOf('.');
             string extName = fileName.Substring(index);
+
+            //小于分片大小的直接保存下来
+            if (file.Length < THUNK_SIZE)
+            {
+                string guidFileName = $"{IdHelper.ObjectId()}{extName}";
+                //这个hostingEnv.WebRootPath就是要存的地址可以改下
+                string newfilename = Path.Combine(targetDir, guidFileName);
+
+                using (FileStream fs = System.IO.File.Create(newfilename))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
+                if (action == "uploadfile")
+                {
+                    returnPath = "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
+                }
+                result.status = true;
+                result.statusCode = 200;
+                result.data.Add("url", returnPath);
+                result.data.Add("fileName", fileName);
+                return Content(result.ToJson());
+            }
+
+
+            //大于分片大小的直接保存下来
             if (!System.IO.Directory.Exists(tempDir))
             {
                 System.IO.Directory.CreateDirectory(tempDir);
@@ -223,7 +266,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 file.CopyTo(fs);
                 fs.Flush();
             }
-            var result = new ResultAdaptDto();
+           
             return Content(result.ToJson());
         }
         /// <summary>
@@ -274,7 +317,11 @@ namespace Atlass.Framework.Web.ApiControllers
                     fs.Flush();
                 }
                 string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
-                result.data.Add("url", returnPath);
+                if (action == "uploadfile")
+                {
+                    returnPath= "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd") + "/"+ guidFileName;
+                }
+                    result.data.Add("url", returnPath);
                 result.data.Add("fileName", fileName);
             }
             catch(Exception ex)

@@ -20,7 +20,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <param name="text"></param>
-        internal TextNode(Template ownerTemplate, string text)
+        public TextNode(Template ownerTemplate, string text)
             : base(ownerTemplate)
         {
             this.Text = text;
@@ -52,7 +52,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             return new TextNode(ownerTemplate, this.Text);
         }

@@ -21,7 +21,7 @@ namespace VTemplate.Engine
         /// 构造默认模板属性
         /// </summary>
         /// <param name="ownerElement"></param>
-        internal AttributeCollection(Element ownerElement)
+        public AttributeCollection(Element ownerElement)
         {
             this.OwnerElement = ownerElement;
             _Dictionary = new Dictionary<string, Attribute>(StringComparer.OrdinalIgnoreCase);
@@ -32,7 +32,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerElement"></param>
         /// <param name="capacity"></param>
-        internal AttributeCollection(Element ownerElement, int capacity)
+        public AttributeCollection(Element ownerElement, int capacity)
         {
             this.OwnerElement = ownerElement;
             _Dictionary = new Dictionary<string, Attribute>(capacity, StringComparer.OrdinalIgnoreCase);
@@ -41,7 +41,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 宿主标签
         /// </summary>
-        internal Element OwnerElement { get; private set; }
+        public Element OwnerElement { get; private set; }
 
         /// <summary>
         /// 存放容器
@@ -130,7 +130,7 @@ namespace VTemplate.Engine
         /// 添加某个属性值
         /// </summary>
         /// <param name="item">属性元素</param>
-        internal void Add(Attribute item)
+        public void Add(Attribute item)
         {
             if (item == null) return;
 
@@ -152,7 +152,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="name"></param>
         /// <param name="text"></param>
-        internal void Add(string name, string text)
+        public void Add(string name, string text)
         {
             Attribute attribute = new Attribute(this.OwnerElement, name, text);
             this.Add(attribute);
@@ -162,7 +162,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 清空所有属性值
         /// </summary>
-        internal void Clear()
+        public void Clear()
         {
             _Dictionary.Clear();
         }
@@ -192,7 +192,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 添加新属性时的触发事件参数
         /// </summary>
-        internal class AttributeAddingEventArgs : EventArgs
+        public class AttributeAddingEventArgs : EventArgs
         {
             /// <summary>
             /// 
@@ -210,12 +210,12 @@ namespace VTemplate.Engine
         /// <summary>
         /// 添加新属性时的触发事件
         /// </summary>
-        internal event EventHandler<AttributeAddingEventArgs> Adding;
+        public event EventHandler<AttributeAddingEventArgs> Adding;
         /// <summary>
         /// 添加新属性时触发事件
         /// </summary>
         /// <param name="item"></param>
-        protected void OnAdding(Attribute item)
+        public void OnAdding(Attribute item)
         {
             EventHandler<AttributeAddingEventArgs> e = this.Adding;
             if (e != null) e(this, new AttributeAddingEventArgs(item));

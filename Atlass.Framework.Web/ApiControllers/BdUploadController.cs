@@ -29,7 +29,7 @@ namespace Atlass.Framework.Web.ApiControllers
             string action = RequestHelper.GetQueryString("action");
             if (action == "config")
             {
-                string configPath = $@"plugins\ueditor\config.json";
+                string configPath = $@"ui\plugins\ueditor\config.json";
                 string serverPath = Path.Combine(GlobalParamsDto.WebRoot, configPath);
                 if (System.IO.File.Exists(serverPath))
                 {
@@ -49,7 +49,7 @@ namespace Atlass.Framework.Web.ApiControllers
             {
                 if (action == "config")
                 {
-                    string configPath = $@"plugins\ueditor\config.json";
+                    string configPath = $@"ui\plugins\ueditor\config.json";
                     string serverPath = Path.Combine(GlobalParamsDto.WebRoot, configPath);
                     if (System.IO.File.Exists(serverPath))
                     {
@@ -71,7 +71,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 int index = filename.LastIndexOf('.');
                 string extName = filename.Substring(index+1);
                 //uploadimage
-                string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
+                string url = $@"upfiles\images\{DateTime.Now.ToString("yyyyMMdd")}";
                 var uploadSet = SiteManagerCache.GetUploadInfo();
                 if (action == "uploadimage") {
                     var imageExt = uploadSet.image_extname.Split(',');
@@ -98,7 +98,7 @@ namespace Atlass.Framework.Web.ApiControllers
                         result.error = $"上传附件超过{uploadSet.max_file_size}MB限制,禁止上传";
                         return Content(result.ToJson());
                     }
-                    url = $"/upfiles/attachments/{DateTime.Now.ToString("yyyyMMdd")}";
+                    url = $@"upfiles\attachments\{DateTime.Now.ToString("yyyyMMdd")}";
                 }
                 else if(action=="uploadvideo"){
 
@@ -115,20 +115,18 @@ namespace Atlass.Framework.Web.ApiControllers
                         result.error = $"上传视频超过{uploadSet.max_file_size}MB限制,禁止上传";
                         return Content(result.ToJson());
                     }
-                    url = $"/upfiles/videos/{DateTime.Now.ToString("yyyyMMdd")}";
+                    url = $@"upfiles\videos\{DateTime.Now.ToString("yyyyMMdd")}";
                 }
-                var folder = GlobalParamsDto.WebRoot + url;
+                var folder = Path.Combine(GlobalParamsDto.WebRoot, url); 
 
                 if (!Directory.Exists(folder))
                 {
                     Directory.CreateDirectory(folder);
                 }
                 
-
-                string guidstr = IdHelper.ObjectId();
-                string guidFileName = guidstr + extName;
+                string guidFileName = $"{IdHelper.ObjectId()}.{extName}";
                 //这个hostingEnv.WebRootPath就是要存的地址可以改下
-                string newfilename = $"{folder}/{guidFileName}";
+                string newfilename = Path.Combine(folder, guidFileName); 
 
                 using (FileStream fs = System.IO.File.Create(newfilename))
                 {
@@ -140,15 +138,15 @@ namespace Atlass.Framework.Web.ApiControllers
                     var firstFileInfo = new FileInfo(newfilename);
                     if (firstFileInfo.Length > 200 * 1024)
                     {
-                        string compressFileName = IdHelper.ObjectId() + extName;
-                        string compressFile = $"{folder}/{compressFileName}";
+                        string compressFileName =$"{IdHelper.ObjectId()}.{extName}";
+                        string compressFile = $@"{folder}\{compressFileName}";
                         ImageUtilities.CompressImage(newfilename, compressFile, 90, 200);
                         guidFileName = compressFileName;
                     }
                 }
                 result.original = filename;
                 result.title = filename;
-                result.url = $"{url}/{guidFileName}";
+                result.url = $@"\{url}\{guidFileName}";
             }
             catch (Exception e)
             {

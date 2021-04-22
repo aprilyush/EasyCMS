@@ -21,7 +21,7 @@ namespace VTemplate.Engine
         /// 
         /// </summary>
         /// <param name="ownerTemplate"></param>
-        internal IncludeTag(Template ownerTemplate)
+        public IncludeTag(Template ownerTemplate)
             : base(ownerTemplate)
         {
             this.Charset = ownerTemplate.Charset;
@@ -38,7 +38,7 @@ namespace VTemplate.Engine
         /// <summary>
         /// 返回此标签是否是单一标签.即是不需要配对的结束标签
         /// </summary>
-        internal override bool IsSingleTag
+        public override bool IsSingleTag
         {
             get { return false; }
         }
@@ -61,7 +61,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="name"></param>
         /// <param name="item"></param>
-        protected override void OnAddingAttribute(string name, Attribute item)
+        public override void OnAddingAttribute(string name, Attribute item)
         {
             switch (name)
             {
@@ -86,7 +86,7 @@ namespace VTemplate.Engine
         /// <param name="match"></param>
         /// <param name="isClosedTag">是否闭合标签</param>
         /// <returns>如果需要继续处理EndTag则返回true.否则请返回false</returns>
-        internal override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
+        public override bool ProcessBeginTag(Template ownerTemplate, Tag container, Stack<Tag> tagStack, string text, ref Match match, bool isClosedTag)
         {
             container.AppendChild(this);
 
@@ -118,7 +118,7 @@ namespace VTemplate.Engine
         /// </summary>
         /// <param name="ownerTemplate"></param>
         /// <returns></returns>
-        internal override Element Clone(Template ownerTemplate)
+        public override Element Clone(Template ownerTemplate)
         {
             IncludeTag tag = new IncludeTag(ownerTemplate);
             this.CopyTo(tag);
