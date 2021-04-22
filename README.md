@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-22 17:03:09
+ * @LastEditTime: 2021-04-22 17:10:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -56,7 +56,7 @@
 + [ ] 意见反馈
 + [ ] 前台用户中心(这个功能感觉不是很必要，除非需要实现普通用户投稿)
 ## [样图]  
-<img src="https://github.com/yushuo1990/EasyCMS/tree/master/%E8%B5%84%E6%96%99/index.png" width="200"  alt="支付宝小程序"/>
+![Image](资料/index.png)
 ![Image](资料/home.png)
 ![Image](资料/user.png)
 ![Image](资料/site.png)
