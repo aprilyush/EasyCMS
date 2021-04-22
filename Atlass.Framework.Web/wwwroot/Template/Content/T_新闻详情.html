@@ -6,8 +6,8 @@
     <meta name="applicable-device" content="pc,mobile">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{$content.title}</title>
-    <meta name="keywords" content="{$news.title}">
-    <meta name="description" content="{$news.title}">
+    <meta name="keywords" content="{$content.title}">
+    <meta name="description" content="{$content.title}">
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="/static/css/index.css">
 </head>
@@ -15,10 +15,13 @@
 <body>
     <!-- nav部分 -->
     <vt:include file="Template/include/navi.html" charset="utf-8" />
+   <div class="banner news">
+        <img class="banImage" src="/static/images/news.jpg" alt="">
+    </div>
     <!-- main部分 -->
-    <div class="main-newsdate">
+    <div class="main-newsdate" style="margin-top:10px;">
         <div class="layui-container">
-            <p class="news">{$content.location}</p>
+            <p class="news" style="line-height:50px;">{$content.location}</p>
             <h1>{$content.title length=30}</h1>
             <p class="pushtime">
                 来源：<span>{$content.source}</span>&nbsp;&nbsp;&nbsp;&nbsp;作者：<span>{$content.author}</span>&nbsp;&nbsp;&nbsp;&nbsp;阅读：<span>{$news.hit_count}</span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<span>{$content.publish_time formatter='yyyy-MM-dd'}</span>
