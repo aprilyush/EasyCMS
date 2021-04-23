@@ -195,8 +195,6 @@ namespace Atlass.Framework.Web
                 {
 
                     GlobalParamsDto.WebRoot = env.WebRootPath;
-                    //SugarDbConn.DbConnectStr = this.Configuration.GetSection("DbConn:mysqlConn").Value;   //为数据库连接字符串赋值
-                    GlobalParamsDto.Host = this.Configuration.GetSection("WebHost:Host").Value;
 
                     //初始化栏目相关的缓存
                     CmsCacheInit.Init();

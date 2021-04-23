@@ -12,15 +12,19 @@
     <Compile Remove="packages\**" />
     <Compile Remove="wwwroot\static\content\**" />
     <Compile Remove="wwwroot\upfiles\**" />
+    <Compile Remove="wwwroot\UploadTemp\**" />
     <Content Remove="packages\**" />
     <Content Remove="wwwroot\static\content\**" />
     <Content Remove="wwwroot\upfiles\**" />
+    <Content Remove="wwwroot\UploadTemp\**" />
     <EmbeddedResource Remove="packages\**" />
     <EmbeddedResource Remove="wwwroot\static\content\**" />
     <EmbeddedResource Remove="wwwroot\upfiles\**" />
+    <EmbeddedResource Remove="wwwroot\UploadTemp\**" />
     <None Remove="packages\**" />
     <None Remove="wwwroot\static\content\**" />
     <None Remove="wwwroot\upfiles\**" />
+    <None Remove="wwwroot\UploadTemp\**" />
   </ItemGroup>
   <!--Condition="'$(Configuration)' == 'Debug'"-->
   <ItemGroup>

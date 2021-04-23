@@ -17,6 +17,10 @@ namespace Atlass.Framework.Generate
                 htmlDoc.LoadHtml(html);
                 var bodyNode = htmlDoc.DocumentNode.SelectSingleNode("//body");
                 var videoNodes = bodyNode.SelectNodes("//img[@class='easycms-player']");
+                if (videoNodes == null || videoNodes.Count == 0)
+                {
+                    return html;
+                }
                 Dictionary<string, string> playList = new Dictionary<string, string>();
                 byte needPlayer = 0;
                 foreach (var node in videoNodes)

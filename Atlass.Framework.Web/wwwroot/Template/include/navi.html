@@ -12,9 +12,9 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="layui-nav" lay-filter="">
-                <vt:foreach from="$navigations" item="#.navi" index="#.i">
+                <vt:foreach from="$#.channels" item="navi" index="i">
                     <!--vt[]-->
-                    <vt:if var="#.navi.drawing_enable" value="1">
+                    <vt:if var="navi.drawing_enable" value="1">
                         <li class="layui-nav-item"><a href="{$navi.channel_href}">{$navi.channel_name}</a></li>
                         <vt:else />
                     </vt:if>

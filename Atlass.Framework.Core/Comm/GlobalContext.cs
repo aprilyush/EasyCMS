@@ -18,6 +18,17 @@ namespace Atlass.Framework.Core
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             return version.Major + "." + version.Minor;
         }
+
+        /// <summary>
+        /// 网站根目录
+        /// </summary>
+        public static string ContentRootPath { get { return HostingEnvironment.ContentRootPath; } }
+
+        /// <summary>
+        /// 网站资源目录 wwwroot
+        /// </summary>
+        public static string  WebRootPath{ get { return HostingEnvironment.WebRootPath; } }
+
         /// <summary>
         /// 运行环境 0-开发，1-发布
         /// </summary>

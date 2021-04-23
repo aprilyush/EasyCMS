@@ -105,67 +105,41 @@ namespace Atlass.Framework.Generate
         /// <summary>
         /// 根据栏目索引获取数据详情
         /// </summary>
-        /// <param name="contentIds"></param>
+        /// <param name="channelIndex">栏目索引</param>
+        /// <param name="startNum">从第几条数据开始</param>
+        /// <param name="total">一共多少条</param>
         /// <returns></returns>
-        public List<ContentModel> GetContentSummary(string channelIndex,int page=1, int psize = 10)
+        public List<ContentModel> GetContentSummary(string channelIndex,int startNum=1, int total = 10)
         {
+            if (startNum < 1)
+            {
+                startNum = 1;
+            }
             int channelId = Sqldb.Select<cms_channel>().Where(s => s.channel_index == channelIndex)
                 .OrderBy(s=>s.id).First(s => s.id);
             if (channelId == 0)
             {
                 return new List<ContentModel>();
             }
-            var list = Sqldb.Select<cms_content>()
-               .Where(s => s.channel_id == channelId)
-               .OrderByDescending(s => s.is_top)
-               .OrderByDescending(s => s.id)
-               .Page(page, psize)
-               .ToList(s => new ContentModel
-               {
-                   id = s.id,
-                   title = s.title,
-                   sub_title = s.sub_title,
-                   summary = s.summary,
-                   cover_image = s.cover_image,
-                   author = s.author,
-                   source = s.source,
-                   channel_id = s.channel_id,
-                   ip_limit = s.ip_limit,
-                   is_top = s.is_top,
-                   tags = s.tags,
-                   content_href = s.content_href,
-                   hit_count = s.hit_count,
-                   recommend = s.is_recommend,
-                   publish_time = s.publish_time,
-                   last_edit_time = s.update_time
-               });
-            if (list.Count == 0)
-            {
-                return list;
-            }
-            list.ForEach(s =>
-            {
-                s.location = GetNaviLocation(s.channel_id);
-                if (string.IsNullOrEmpty(s.content_href))
-                {
-                    s.content_href = $"/news/{s.channel_id}/{s.id}";
-                }
-            });
+            var list = GetContentSummaryByChannelId(channelId, startNum, total);
             return list;
         }
 
         /// <summary>
         /// 根据栏目id获取数据详情
         /// </summary>
-        /// <param name="contentIds"></param>
+        /// <param name="channelId">栏目Id</param>
+        /// <param name="startNum">从第几条数据开始</param>
+        /// <param name="total">一共多少条</param>
         /// <returns></returns>
-        public List<ContentModel> GetContentSummary(int channelId, int page = 1, int psize = 10)
+        public List<ContentModel> GetContentSummaryByChannelId(int channelId, int startNum = 1, int total = 10)
         {
             var list = Sqldb.Select<cms_content>()
                .Where(s => s.channel_id == channelId)
                .OrderByDescending(s => s.is_top)
                .OrderByDescending(s => s.id)
-               .Page(page, psize)
+               .Skip(startNum - 1)
+               .Take(total)
                .ToList(s => new ContentModel
                {
                    id = s.id,

@@ -9,7 +9,7 @@
     <div>
         <div class="layui-carousel" id="banner">
             <div carousel-item>
-                <vt:template name="channels" type="Banner" total="3">
+                <vt:template name="contents" channelIndex="Banner" startNum="1" total="3">
                     <vt:foreach from="$#.contents" item="#.content" index="#.i">
                         <div>
                             <img src="{$#.content.cover_image}">
@@ -28,7 +28,7 @@
         <div class="layui-container">
             <p class="title">专为前端而研制的<span>核心产品</span></p>
             <div class="layui-row layui-col-space25">
-                <vt:template name="channels" type="产品" total="4">
+                <vt:template name="contents" channelIndex="产品" startNum="1" total="4">
                     <vt:foreach from="$#.contents" item="#.content" index="#.i">
                         <div class="layui-col-sm6 layui-col-md3">
                             <div class="content">
@@ -50,7 +50,7 @@
         <div class="layui-container">
             <p class="title">为客户打造完美的<span>专业服务</span></p>
             <div class="layui-row layui-col-space25 layui-col-space80">
-                <vt:template name="channels" type="专业服务" total="2">
+                <vt:template name="contents" channelIndex="专业服务" startNum="1" total="2">
                     <vt:foreach from="$#.contents" item="#.content" index="#.i">
                         <div class="layui-col-sm6">
                             <div class="content">
@@ -65,7 +65,11 @@
                     </vt:foreach>
                 </vt:template>
             </div>
-            <div class="service-more"><a href="">查看更多</a></div>
+            <div class="service-more">
+                <vt:template name="channel" channelIndex="专业服务">
+                    <a href="{$#.channel.channel_href}">查看更多</a>
+                </vt:template>
+            </div>
         </div>
     </div>
     <!-- footer部分 -->
