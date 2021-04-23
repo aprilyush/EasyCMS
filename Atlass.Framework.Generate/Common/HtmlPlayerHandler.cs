@@ -74,7 +74,7 @@ namespace Atlass.Framework.Generate
         /// <returns></returns>
         private static string FlashPlayer(string videoUrl)
         {
-            string videoPlayer = $"<embed src=\"/plugins/ckplayer/ckplayer.swf\" flashvars =\"video={videoUrl}\"";
+            string videoPlayer = $"<embed src=\"/ui/plugins/ckplayer/ckplayer.swf\" flashvars =\"video={videoUrl}\"";
             videoPlayer += " quality=\"high\" width = \"400\" height =\"400\" align =\"middle\" allowScriptAccess =\"always\"";
             videoPlayer += " allowFullscreen = \"true\" type = \"application/x-shockwave-flash\"></embed>";
             return videoPlayer;
@@ -87,7 +87,7 @@ namespace Atlass.Framework.Generate
         /// <returns></returns>
         private static string H5Player(string videoId)
         {
-            string videoPlayer = $"<div id=\"{videoId}\" style=\"width: 600px; height: 400px;\" style=\"position: absolute;margin-left: 30%;\"></div>";
+            string videoPlayer = $"<div id=\"{videoId}\" class=\"video_player\" style=\"width: 600px; height: 400px;position: absolute;left: 25%;\" ></div>";
 
             return videoPlayer;
         }
@@ -98,7 +98,7 @@ namespace Atlass.Framework.Generate
         /// <returns></returns>
         private static string CkPlayerJs()
         {
-            string html = "<script id=\"ckplayer\" src=\"/plugins/ckplayer/ckplayer.min.js\"></script>\n";
+            string html = "<script id=\"ckplayer\" src=\"/ui/plugins/ckplayer/ckplayer.min.js\"></script>\n";
             return html;
         }
         /// <summary>

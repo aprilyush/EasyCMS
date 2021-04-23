@@ -469,14 +469,14 @@
         localTimeString:function () {
         var jsDate = new Date();
         var year = jsDate.getFullYear();
-        var mon = formatFunc(jsDate.getMonth() + 1);
-        var day = formatFunc(jsDate.getDate());
+        var mon = jutils.formatFunc(jsDate.getMonth() + 1);
+        var day = jutils.formatFunc(jsDate.getDate());
         var hour = jsDate.getHours();
         //var noon = hour >= 12 ? 'PM' : 'AM';
         //hour = hour >= 12 ? hour - 12 : hour;
-        hour = formatFunc(hour);
-        var min = formatFunc(jsDate.getMinutes());
-        var seconds = formatFunc(jsDate.getSeconds());
+            hour = jutils.formatFunc(hour);
+            var min = jutils.formatFunc(jsDate.getMinutes());
+            var seconds = jutils.formatFunc(jsDate.getSeconds());
         var dateStr = year + mon + day + hour + min + seconds;
         return dateStr;
         },

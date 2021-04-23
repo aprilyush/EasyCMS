@@ -96,12 +96,14 @@ namespace Atlass.Framework.AppService.Cms
 
         public List<ZtreeSelIntDto> ChannelZtree()
         {
-            var list = Sqldb.Select<cms_channel>().ToList(s => new ZtreeSelIntDto
-            {
+            var list = Sqldb.Select<cms_channel>()
+                .OrderBy(s=>s.sort_num)
+                .ToList(s => new ZtreeSelIntDto
+                 {
                 id = s.id,
                 name = s.channel_name,
-                pId = s.parent_id
-            });
+                 pId = s.parent_id
+               });
             if (list.Count == 0)
             {
                 list.Insert(0, new ZtreeSelIntDto { id = 0, name = "请选择" });

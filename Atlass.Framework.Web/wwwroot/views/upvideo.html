@@ -6,12 +6,13 @@
     <title>视频上传</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="/ui/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/ui/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/ui/css/font-awesome.min.css?v=4.7.0" rel="stylesheet">
     <link href="/ui/css/animate.css" rel="stylesheet">
     <link href="/ui/css/style.css?v=4.1.0" rel="stylesheet">
-    <link href="/ui/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet" />
-    <link href="/ui/plugins/webuploader/webuploader.css" rel="stylesheet" />
+    <link href="/ui/easycms/css/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+    <link href="../ui/plugins/webuploader/webuploader.css" rel="stylesheet" />
 </head>
+
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
@@ -34,8 +35,8 @@
                                 <label for="player_type">H5播放器</label>
                             </div>
                             <div class="radio radio-success radio-inline">
-                                <input type="radio" id="player_type2" value="flash" name="player_type" >
-                                <label for="player_type2">Flash</label>
+                                <input type="radio" id="player_type2" value="flash" name="player_type">
+                                <label for="player_type2">Flash播放器</label>
                             </div>
                         </td>
                     </tr>
@@ -67,7 +68,7 @@
     <script src="/ui/plugins/layer/layer.min.js"></script>
     <script src="/ui/plugins/webuploader/webuploader.js"></script>
     <script>
-        var uploader,fileMd5='';
+        var uploader, fileMd5 = '';
         $(function () {
             localStorage.removeItem('video');
             $.ajax({
@@ -108,7 +109,7 @@
                 formData: {
                     guid: GUID,
                     action: 'uploadvideo', //自定义参数，待会儿解释
-                    md5:''
+                    md5: ''
                 },
                 accept: {
                     title: '视频文件',
@@ -138,7 +139,7 @@
             //        .progress(function (percentage) {
             //            var perText = percentage.toFixed(2) * 100;
             //            $('#msg').text('计算文件MD5,进度：' + perText);
-                        
+
             //        })
             //        // 完成
             //        .then(function (val) {
@@ -150,11 +151,11 @@
             //uploader.on('uploadBeforeSend',
             //    function (file, data, headers) {
             //        data.md5 = fileMd5;
-            //    }); 
+            //    });
             uploader.on('uploadProgress',
                 function (file, percentage) {
                     var perText = percentage.toFixed(2) * 100;
-                    $('#msg').text('上传中，进度：' + perText+"%");
+                    $('#msg').text('上传中，进度：' + perText + "%");
                 });
             uploader.on('uploadSuccess',
                 function (file, res) {
@@ -171,7 +172,7 @@
                             return;
                         }
                         $.getJSON('/api/upload/Merge', { guid: GUID, fileName: file.name }, function (res) {
-                          
+
                             if (res.status) {
                                 $('#msg').text('文件已上传100%，上传成功。。。');
                                 $('#video_url').val(res.data.url);
