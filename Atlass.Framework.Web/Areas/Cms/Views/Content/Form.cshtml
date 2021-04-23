@@ -268,12 +268,15 @@
                             // console.log(videoHtml);
                             editor.execCommand('insertHtml', videoHtml);
                         }
+
+                        localStorage.removeItem("video");
                     }
                    // console.log('没有视频文件');
                 }
             });
         }
         function upFile() {
+            localStorage.removeItem("attachmentFile");
             layer.open({
                 title: '附件上传',
                 type: 2,
@@ -290,8 +293,8 @@
                         var attachmentFile = JSON.parse(fileJson);
                         var fileHtml = '<a href="' + attachmentFile.url + '">' + attachmentFile.name + '</a>';
                         editor.execCommand('insertHtml', fileHtml);
-                        return;
                     }
+                    localStorage.removeItem("attachmentFile");
                 }
             });
         }

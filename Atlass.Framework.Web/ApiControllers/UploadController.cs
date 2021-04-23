@@ -229,31 +229,37 @@ namespace Atlass.Framework.Web.ApiControllers
             int index = fileName.LastIndexOf('.');
             string extName = fileName.Substring(index);
 
-            //小于分片大小的直接保存下来
+            //单文件小于分片大小的直接保存下来
             if (file.Length < THUNK_SIZE)
             {
-                string guidFileName = $"{IdHelper.ObjectId()}{extName}";
-                //这个hostingEnv.WebRootPath就是要存的地址可以改下
-                string newfilename = Path.Combine(targetDir, guidFileName);
+                //判断是否是单文件
+                if (!FileChunkCache.ExistChunk(guid))
+                {
+                    string guidFileName = $"{IdHelper.ObjectId()}{extName}";
+                    //这个hostingEnv.WebRootPath就是要存的地址可以改下
+                    string newfilename = Path.Combine(targetDir, guidFileName);
 
-                using (FileStream fs = System.IO.File.Create(newfilename))
-                {
-                    file.CopyTo(fs);
-                    fs.Flush();
+                    using (FileStream fs = System.IO.File.Create(newfilename))
+                    {
+                        file.CopyTo(fs);
+                        fs.Flush();
+                    }
+                    string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
+                    if (action == "uploadfile")
+                    {
+                        returnPath = "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
+                    }
+                    result.status = true;
+                    result.statusCode = 200;
+                    result.data.Add("url", returnPath);
+                    result.data.Add("fileName", fileName);
+                    return Content(result.ToJson());
                 }
-                string returnPath = "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
-                if (action == "uploadfile")
-                {
-                    returnPath = "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd") + "/" + guidFileName;
-                }
-                result.status = true;
-                result.statusCode = 200;
-                result.data.Add("url", returnPath);
-                result.data.Add("fileName", fileName);
-                return Content(result.ToJson());
+               
             }
 
-
+            //添加分片id缓存
+            FileChunkCache.AddChunkId(guid);
             //大于分片大小的直接保存下来
             if (!System.IO.Directory.Exists(tempDir))
             {
@@ -322,6 +328,9 @@ namespace Atlass.Framework.Web.ApiControllers
                     returnPath= "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd") + "/"+ guidFileName;
                 }
                     result.data.Add("url", returnPath);
+
+                //文件合并完成后移除缓存
+                FileChunkCache.RemoveChunkId(guid);
                 result.data.Add("fileName", fileName);
             }
             catch(Exception ex)
