@@ -1,14 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-22 17:21:54
+ * @LastEditTime: 2021-04-23 08:23:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
 -->
 
 # EasyCms
-##  🛑禁止使用，禁止使用，禁止使用，正在升级net5.0,升级若依的UI和权限重构 
 &emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
 &emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。    
 &emsp;&emsp;同时我也写了个springboot版本的后台管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
