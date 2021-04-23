@@ -43,6 +43,10 @@ namespace Atlass.Framework.Core.Visit
         /// <returns></returns>
         public static bool InWriteList(string ip)
         {
+            if(ip== "::1")
+            {
+                ip = "127.0.0.1";
+            }
 
             if (!IsIP(ip))
             {
