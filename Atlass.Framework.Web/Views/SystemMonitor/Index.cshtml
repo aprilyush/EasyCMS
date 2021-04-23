@@ -5,184 +5,161 @@
 }
 @using Atlass.Framework.ViewModels.OS
 @model SystemMonitor
-<div class="ibox">
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>CPU</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link"><i class="fa fa-times"></i></a>
+<div class="container-div">
+    <div class="ibox">
+        <div class="ibox-title">服务器监控信息</div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            CPU
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th>属性</th>
+                                        <th>值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>处理器</td>
+                                        <td>@ViewData["CPU"]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>核心数</td>
+                                        <td>@(Model.ProcessorCount)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPU使用率</td>
+                                        <td><span id="CPURate"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="ibox-content">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                                <tr>
-                                    <th>属性</th>
-                                    <th>值</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>处理器</td>
-                                    <td>@ViewData["CPU"]</td>
-                                </tr>
-                                <tr>
-                                    <td>核心数</td>
-                                    <td>@(Model.ProcessorCount)</td>
-                                </tr>
-                                <tr>
-                                    <td>CPU使用率</td>
-                                    <td><span id="CPURate"></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            内存
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th>属性</th>
+                                        <th>内存</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>总内存</td>
+                                        <td id="RAMTotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>内存使用率</td>
+                                        <td id="RAMRate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>硬盘</td>
+                                        <td>@ViewData["Disk"]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>内存</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            <a class="close-link"><i class="fa fa-times"></i></a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h5>服务器信息</h5>
                         </div>
-                    </div>
-                    <div class="ibox-content">
-                        <table class="table table-hover no-margins">
-                            <thead>
-                                <tr>
-                                    <th>属性</th>
-                                    <th>内存</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>总内存</td>
-                                    <td id="RAMTotal"></td>
-                                </tr>
-                                <tr>
-                                    <td>内存使用率</td>
-                                    <td id="RAMRate"></td>
-                                </tr>
-                                <tr>
-                                    <td>硬盘</td>
-                                    <td>@ViewData["Disk"]</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>服务器信息</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover margin bottom">
-                                    <tbody>
-                                        <tr>
-                                            <td>服务器名称</td>
-                                            <td>@Model.MachineName</td>
-                                            <td>操作系统</td>
-                                            <td>@Model.OSDescription</td>
-                                        </tr>
-                                        <tr>
-                                            <td>外网Ip</td>
-                                            <td>
-                                                <span id="wanIp"></span>
-                                            </td>
-                                            <td>局域网Ip</td>
-                                            <td>@Model.LanIp</td>
-                                        </tr>
-                                        <tr>
-                                            <td>系统运行时长</td>
-                                            <td><span id="RunTime">@(Model.OsRuntime)</span></td>
-                                            <td>系统架构</td>
-                                            <td>@Model.OSArchitecture</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-hover margin bottom">
+                                        <tbody>
+                                            <tr>
+                                                <td>服务器名称</td>
+                                                <td>@Model.MachineName</td>
+                                                <td>操作系统</td>
+                                                <td>@Model.OSDescription</td>
+                                            </tr>
+                                            <tr>
+                                                <td>外网Ip</td>
+                                                <td>
+                                                    <span id="wanIp"></span>
+                                                </td>
+                                                <td>局域网Ip</td>
+                                                <td>@Model.LanIp</td>
+                                            </tr>
+                                            <tr>
+                                                <td>系统运行时长</td>
+                                                <td><span id="RunTime">@(Model.OsRuntime)</span></td>
+                                                <td>系统架构</td>
+                                                <td>@Model.OSArchitecture</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>站点信息</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h5>站点信息</h5>
                         </div>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover margin bottom">
-                                    <tbody>
-                                        @*<tr>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-hover margin bottom">
+                                        <tbody>
+                                            @*<tr>
                                             <td>环境变量</td>
                                             <td>@Html.Raw(env.EnvironmentName)</td>
                                         </tr>*@
-                                        <tr>
-                                            <td>网站根目录</td>
-                                            <td>@(Model.ContentRootPath)</td>
-                                            <td>网站资源目录</td>
-                                            <td>@(Model.WebRootPath)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>.NET Core版本</td>
-                                            <td>@(Model.NetCoreVersion)</td>
-                                            <td>内存占用</td>
-                                            <td id="ProcessMemory">@(Model.ProcessMemory)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>启动时间</td>
-                                            <td>@(Model.ProcessStartTime)</td>
-                                            <td>GC模式</td>
-                                            <td>@(Model.WorkGC)</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td>网站根目录</td>
+                                                <td>@(Model.ContentRootPath)</td>
+                                                <td>网站资源目录</td>
+                                                <td>@(Model.WebRootPath)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>.NET Core版本</td>
+                                                <td>@(Model.NetCoreVersion)</td>
+                                                <td>内存占用</td>
+                                                <td id="ProcessMemory">@(Model.ProcessMemory)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>启动时间</td>
+                                                <td>@(Model.ProcessStartTime)</td>
+                                                <td>GC模式</td>
+                                                <td>@(Model.WorkGC)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+
+
 </div>
 @section scripts{
 
