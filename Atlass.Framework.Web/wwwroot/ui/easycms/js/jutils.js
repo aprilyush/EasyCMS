@@ -597,7 +597,7 @@
     //移除工具条上的按钮权限
     toolbarPermission:function()
     {
-        console.log('自动执行了:toolbarPermission');
+        //console.log('自动执行了:toolbarPermission');
         if($('#toolbar') && top.buttonPermissionModel){
             let isAdmin=top.buttonPermissionModel.isAdmin;
             currentPage.isAdmin=isAdmin;
@@ -616,15 +616,16 @@
                     $('#toolbar').empty();
                     return;
                 }
-                const buttons=menu[0].buttons;
-                if(buttons.length===0){
-                    $('#toolbar').empty();
-                    return;
-                }
+                const buttons = menu[0].buttons;
+                const buttonLength = buttons.length;
+                //if(buttons.length===0){
+                //    $('#toolbar').empty();
+                //    return;
+                //}
                 $('#toolbar').find('a').each(function(){
                          let roleTag=$(this).data('role');
                          if(roleTag!='0'){
-                             if(buttons.indexOf(roleTag)<0){
+                             if (buttonLength==0 || buttons.indexOf(roleTag)<0){
                                  $(this).remove();
                              }
                          }
@@ -638,9 +639,9 @@
         }
     },
     //data:[{roleTag:'sys:user:add',button:'<a href='#'>添加</>'}]
-    buttonPermissions:function(data){
-            //表格内的按钮权限去除
-        console.log('执行了:buttonPermissions');
+    buttonPermission:function(data){
+        //表格内的按钮权限去除
+        //console.log('执行了:buttonPermissions');
         let buttonPermissionHtml=[];
         if(top.buttonPermissionModel){
             let isAdmin=currentPage.isAdmin;
@@ -660,12 +661,13 @@
                 if(menu.length===0){
                     return '';
                 }
-                const buttons=menu[0].buttons;
-                if(buttons.length===0){
-                    return '';
-                }
-                data.forEach(function(item, index){
-                    if(buttons.indexOf(item.roleTag)>=0){
+                const buttons = menu[0].buttons;
+                const buttonLength = buttons.length;
+                //if(buttons.length===0){
+                //    return '';
+                //}
+                data.forEach(function (item, index) {
+                    if (item.roleTag == "0" || (buttonLength>0 && buttons.indexOf(item.roleTag) >= 0)) {
                         buttonPermissionHtml.push(item.button);
                     }
                 });

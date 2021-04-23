@@ -154,7 +154,6 @@ namespace Altas.Framework.Admin
         public ActionResult SavePermissions(string roleId, string ids)
         {
             var result = new ResultAdaptDto();
-            ////result.statusCodeCode = JuiJsonEnum.Ok;
             _roleApp.SavePermissions(roleId.ToInt64(),ids,RequestHelper.AdminInfo());
 
             return Json(result);

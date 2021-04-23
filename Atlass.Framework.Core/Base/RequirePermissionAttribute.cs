@@ -99,11 +99,7 @@ namespace Atlass.Framework.Core.Base
                     }
                 }
                 //#只判断是否登录，不判断具体权限
-                if (PermissionTag == "#")
-                {
-                    user.IsSuper = true;
-                }
-                if (!user.IsSuper)
+                if (PermissionTag != "#"&& !user.IsSuper)
                 {
                     var roleApp = GetRoleAppService();
                     bool hasPermission =roleApp.HasPermission(user.RoleId, PermissionTag);
