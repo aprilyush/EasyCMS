@@ -169,7 +169,7 @@ namespace Atlass.Framework.Web
                 Queues = new[] { "default"}
             });
           //  app.UseHangfireDashboard();
-            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
+            app.UseHangfireDashboard("/easytask", new DashboardOptions()
             {
                 Authorization = new[] { new HangfireAuthorizeFilter() }
             });
