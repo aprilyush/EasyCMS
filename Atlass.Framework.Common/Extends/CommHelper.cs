@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -517,6 +518,37 @@ namespace Atlass.Framework.Common
                 tabId = tabId.Substring(1);
             }
             return tabId;
+        }
+
+
+        /// <summary>
+        /// 提供连接字符串中的数据库名称
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static string GetDataBaseName(string connection)
+        {
+            try
+            {
+                string[] cons = connection.Split(';');
+                string dbName = "";
+                foreach (var con in cons)
+                {
+                    string[] kvs = con.Split('=');
+                    if (kvs[0].TrimAll().ToLower() == "initialcatalog" || kvs[0].Trim().TrimAll() == "database")
+                    {
+                        dbName = kvs[1];
+                        break;
+                    }
+                }
+
+                return dbName;
+            }
+            catch
+            {
+
+            }
+            return null;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Atlass.Framework.AppService.SystemApp
         /// <returns></returns>
         public string Save(hangfire_task dto)
         {
-            if (dto.id.EmptyId())
+            if (dto.id.IsEmptyId())
             {
 
                 var exiteJob = Sqldb.Select<hangfire_task>()

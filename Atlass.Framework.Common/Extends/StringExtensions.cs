@@ -329,7 +329,7 @@ namespace System
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static bool EmptyId(this string data)
+        public static bool IsEmptyId(this string data)
         {
             if (string.IsNullOrEmpty(data))
             {

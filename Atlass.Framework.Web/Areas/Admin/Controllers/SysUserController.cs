@@ -112,7 +112,7 @@ namespace Altas.Framework.Admin
         {
             var result=new ResultAdaptDto();
 
-            if (!id.EmptyId())
+            if (!id.IsEmptyId())
             {
                 var user = _userApp.GetUserById(id.ToInt64());
                 result.data.Add("model", user);

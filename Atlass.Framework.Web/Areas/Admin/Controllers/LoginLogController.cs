@@ -60,7 +60,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult RemoveAll(string ids)
         {
-            if (ids.EmptyId())
+            if (ids.IsEmptyId())
             {
                 return Error("删除失败");
             }
