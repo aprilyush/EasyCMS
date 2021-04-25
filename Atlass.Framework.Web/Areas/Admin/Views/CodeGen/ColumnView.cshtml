@@ -1,10 +1,11 @@
 ﻿
 @{
-    ViewData["Title"] = "数据表管理";
+    ViewData["Title"] = "数据表字段信息";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
 <div class="container-div">
+    <input type="hidden" id="tableName" name="tableName" value="@(ViewBag.TableName)">
     <div class="row">
         <div class="col-sm-12 search-collapse">
             <form id="searchForm">
@@ -12,7 +13,7 @@
                     <ul>
 
                         <li>
-                            表名称：<input type="text" id="tableName" name="tableName">
+                            字段名称：<input type="text" id="columnName" name="columnName">
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -29,7 +30,7 @@
             <a class="btn btn-danger multiple disabled" onclick="del(this);" data-id="0" data-role="system:codegen:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
-
+            <span class="badge badge-primary">数据表名称：@(ViewBag.TableName)</span>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="dataTable"></table>
@@ -47,39 +48,51 @@
 
         function loadGrid() {
             let options = {
-                url: '/admin/CodeGen/getdata',
-                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
-                pageSize: 10,                       // 每页的记录行数（*）
-                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                url: '/admin/CodeGen/getColumndata',
+                pagination: false,
                 queryParams: function (params) {
                     let p = {
-                        pageNumber: params.pageNumber,
-                        pageSize: params.pageSize,
-                        tableName: $('#tableName').val()
+                        tableName: $('#tableName').val(),
+                        columnName: $('#columnName').val()
                     }
                     return p;
                 },
                 columns: [
                     { field: 'ck', checkbox: true },
                     {
-                        field: 'table_name', title: '表名称', align: 'left'
+                        field: 'column_name', title: '字段名称', align: 'left'
                     },
                     {
-                        field: 'entity_name', title: '实体类名称', align: 'left'
+                        field: 'type_text_full', title: '数据库类型', align: 'left'
                     },
                     {
-                        field: 'table_type', title: '类型', align: 'left', formatter: function (v) {
-                            if (v === 0) {
-                                return '表';
+                        field: 'cstype', title: 'C#类型', align: 'left'
+                    },
+                    {
+                        field: 'is_identity', title: '主键', align: 'left', formatter: function (v,r) {
+
+                            if (v === 1 && r.is_identity == 1) {
+                                return '<span class="badge badge-primary">主键自增</span>';
                             }
+
                             if (v === 1) {
-                                return '视图';
+                                return '<span class="badge badge-primary">主键</span>';
                             }
-                            return '存储过程';
+                           
+                            return "";
+                        }
+                    },
+
+                    {
+                        field: 'can_null', title: '可空', align: 'left', formatter: function (v) {
+                            if (v === 1) {
+                                return '<span class="badge badge-primary">是</span>';
+                            }
+                            return '';
                         }
                     },
                     {
-                        field: 'remark', title: '表描述', align: 'left'
+                        field: 'comment', title: '字段描述', align: 'left'
                     },
                     {
                         field: 'sync_time', title: '首次同步', align: 'left'
@@ -88,7 +101,7 @@
                         field: 'update_time', title: '最近同步', align: 'left'
                     },
                     {
-                        field: 'id', title: '操作', align: 'left', formatter: renderOpts
+                        field: 'id', title: '操作', align: 'left'
                     }
                 ]
 
@@ -96,25 +109,44 @@
             $table = $('#dataTable').easyTable(options);
         }
 
-        function renderOpts(v, r) {
-           
-            var buttons = [
-                {
-                    roleTag: 'system:codegen:column',
-                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" data-id='+r.table_name+' onclick="preview(this);"><i class="fa fa-search"></i>预览</a>'
-                }
-            ]
-            return jutils.buttonPermission(buttons);
+        function renderResult(v, d) {
+            var logTitle = 'info';
+            var logClass = 'badge-info';
+            switch (v) {
+                case 2:
+                    logTitle = 'debug';
+                    logClass = 'badge-success';
+                    break;
+                case 3:
+                    logTitle = 'warn';
+                    logClass = 'badge-warning';
+                    break;
+                case 4:
+                    logTitle = 'error';
+                    logClass = 'badge-danger';
+                    break;
+
+            }
+            var html = '<span class="badge ' + logClass + '">' + logTitle + '</span>';
+
+            return html;
+        }
+
+        function renderOpts(v) {
+            var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
+            return html;
         }
 
 
 
+        function detail(obj) {
 
-        function preview(obj) {
+            var id = $(obj).data('id');
+            var url = '/admin/easylog/detail';
 
-            var tname = $(obj).data('id');
+            jutils.dialog('日志详情', url, { id: id }, null, function () {
 
-            jutils.openTab('admin_codegen_columnview',"表字段信息", '/admin/codegen/ColumnView', { tableName: tname });
+            });
         }
 
         function del() {
@@ -154,6 +186,8 @@
         }
     </script>
 }
+
+
 
 
 

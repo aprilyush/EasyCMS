@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Models.BaseData;
+﻿
 using Atlass.Framework.Models.CmsSet;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.Extensions.DependencyInjection;

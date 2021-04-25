@@ -41,6 +41,7 @@ namespace Atlass.Framework.AppService.SystemApp
         }
 
 
+        
         /// <summary>
         /// 保存数据
         /// </summary>
@@ -61,6 +62,7 @@ namespace Atlass.Framework.AppService.SystemApp
             }
             List<code_table> newTables = new List<code_table>();
             List<code_table> updateTables = new List<code_table>();
+            List<code_column> newColumns = new List<code_column>();
             foreach (var table in tables)
             {
                 var exist = Sqldb.Select<code_table>().Where(s => s.table_name == table.Name).First();
@@ -71,17 +73,45 @@ namespace Atlass.Framework.AppService.SystemApp
                     exist.update_time = DateTime.Now;
                     exist.remark = table.Comment;
                     updateTables.Add(exist);
-                    continue;
+                    Sqldb.Delete<code_column>().Where(s => s.table_name == table.Name).ExecuteAffrows();
                 }
-                exist = new code_table();
-                exist.table_name = table.Name;
-                exist.entity_name = table.Name;
-                exist.db_name= table.Schema;
-                exist.table_type = (int)table.Type;
-                exist.sync_time = DateTime.Now;
-                exist.remark = table.Comment;
-                exist.update_time = exist.sync_time;
-                newTables.Add(exist);
+                else
+                {
+                    exist = new code_table();
+                    exist.table_name = table.Name;
+                    exist.entity_name = table.Name;
+                    exist.db_name = table.Schema;
+                    exist.table_type = (int)table.Type;
+                    exist.sync_time = DateTime.Now;
+                    exist.remark = table.Comment;
+                    exist.update_time = exist.sync_time;
+                    newTables.Add(exist);
+                }
+
+
+                //列信息
+                var columns = table.Columns;
+                if (columns.Count > 0)
+                {
+                    foreach (var col in columns)
+                    {
+                        code_column colModel = new code_column();
+                        colModel.table_name = table.Name;
+                        colModel.column_name = col.Name;
+                        colModel.comment = col.Coment;
+                        colModel.can_null = col.IsNullable == true ? 1 : 0;
+                        colModel.type_text = col.DbTypeText;
+                        colModel.type_text_full = col.DbTypeTextFull;
+                        colModel.dbtype = col.DbType;
+                        colModel.cstype = col.CsType.Name;
+                        colModel.is_identity = col.IsIdentity == true ? 1 : 0;
+                        colModel.is_primary = col.IsPrimary == true ? 1 : 0;
+                        colModel.sync_time = DateTime.Now;
+                        colModel.update_time = colModel.sync_time;
+                        colModel.max_length = col.MaxLength;
+                        newColumns.Add(colModel);
+                    }
+                }
             }
 
             if (newTables.Count > 0)
@@ -91,6 +121,10 @@ namespace Atlass.Framework.AppService.SystemApp
             if (updateTables.Count > 0)
             {
                 Sqldb.Update<code_table>().SetSource(updateTables).ExecuteAffrows();
+            }
+            if (newColumns.Count > 0)
+            {
+                Sqldb.Insert(newColumns).ExecuteAffrows();
             }
         }
 
@@ -103,6 +137,30 @@ namespace Atlass.Framework.AppService.SystemApp
         {
             var idsArray = ids.SplitToArrayInt();
             Sqldb.Delete<code_table>().Where(s => idsArray.Contains(s.id)).ExecuteAffrows();
+        }
+
+
+
+        /// <summary>
+        /// 获取表的字段信息表格
+        /// </summary>
+        /// <param name="param"></param>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public DataTableDto GetColumndata(string tableName, string columnName)
+        {
+            DataTableDto dto = new DataTableDto();
+            if (tableName.IsEmpty())
+            {
+                return dto;
+            }
+            var query = Sqldb.Select<code_column>()
+                .Where(s => s.table_name == tableName)
+                .WhereIf(!columnName.IsEmpty(),s=>s.column_name== columnName)
+                .OrderBy(s => s.sort_num).ToList();
+
+            dto.rows = query;
+            return dto;
         }
     }
 }

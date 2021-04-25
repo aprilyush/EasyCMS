@@ -80,5 +80,34 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             codeGenApp.RemoveAll(ids);
             return Success("删除成功");
         }
+
+
+        /// <summary>
+        /// 表的字段信息
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        [RequirePermission("system:codegen:column")]
+        [HttpGet]
+        public IActionResult ColumnView(string tableName)
+        {
+            ViewBag.TableName = tableName;
+            return View();
+        }
+
+        /// <summary>
+        /// 表的字段信息
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        [RequirePermission("system:codegen:column")]
+        [HttpPost]
+        public IActionResult GetColumndata()
+        {
+            string tableName = RequestHelper.GetPostString("tableName");
+            string columnName= RequestHelper.GetPostString("columnName");
+            var data = codeGenApp.GetColumndata(tableName, columnName);
+            return Json(data);
+        }
     }
 }

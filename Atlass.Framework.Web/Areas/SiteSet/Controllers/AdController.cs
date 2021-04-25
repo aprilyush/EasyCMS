@@ -6,7 +6,6 @@ using Atlass.Framework.AppService.CmsSet;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
-using Atlass.Framework.Models.BaseData;
 using Atlass.Framework.Models.CmsSet;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
