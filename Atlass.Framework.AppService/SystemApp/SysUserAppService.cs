@@ -116,7 +116,7 @@ namespace Atlass.Framework.AppService
             }
             if (dto.user_avatar.IsEmpty())
             {
-                dto.user_avatar = "/ui/img/profile.jpg";
+                dto.user_avatar = "";
             }
 
             dto.update_by = userDto.LoginName;
@@ -183,6 +183,10 @@ namespace Atlass.Framework.AppService
             var data = Sqldb.Queryable<sys_user>().Where(s => s.id == id).First();
             if (data != null)
             {
+                if (data.user_avatar.IsEmpty())
+                {
+                    data.user_avatar = "/ui/images/profile.jpg";
+                }
                 data.positionList = Sqldb.Select<sys_user_position>().Where(s => s.user_id == id).ToList(s => s.position_id);
             }
            // data.pass_word = Encrypt.DesDecrypt(data.pass_word.Trim());

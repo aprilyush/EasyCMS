@@ -89,6 +89,10 @@ namespace Atlass.Framework.Web.Controllers
                 var loginUserDto = new LoginUserDto();
                 if (user != null)
                 {
+                    if (user.user_avatar.IsEmpty())
+                    {
+                        user.user_avatar = "/ui/images/profile.jpg";
+                    }
                     loginUserDto.Id = user.id;
                     loginUserDto.LoginName = user.login_name;
                     loginUserDto.UserName = user.user_name;
@@ -219,6 +223,52 @@ namespace Atlass.Framework.Web.Controllers
             return View();
         }
        
+
+        /// <summary>
+        /// 锁屏幕
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("#")]
+        public IActionResult Lock()
+        {
+            var user = RequestHelper.AdminInfo();
+            ViewData.Model = user;
+            return View();
+        }
+
+        /// <summary>
+        /// 解锁
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("#")]
+        public IActionResult UnLock(string password)
+        {
+            var result = new ResultAdaptDto();
+            result.status = false;
+            if (password.IsEmpty())
+            {
+                result.message = "密码不能为空";
+                return Json(result);
+            }
+            var loginUser = RequestHelper.AdminInfo();
+            var user = _userApp.GetUserById(loginUser.Id);
+            if (user == null)
+            {
+                result.statusCode = 403;
+                return Json(result);
+            }
+            if (user.pass_word != password.Trim())
+            {
+                result.message = "密码错误";
+                return Json(result);
+            }
+            result.status = true;
+            return Json(result);
+        }
+
         /// <summary>
         /// 退出登录
         /// </summary>

@@ -516,7 +516,7 @@ $(function() {
     // 锁定屏幕
     $('#lockScreen').on('click', function () {
         localStorage.setItem("lockScreen", "1");
-    	location.href  = ctx + "home/lock";
+    	location.href  = "/login/lock";
     });
 
     // 页签刷新按钮
