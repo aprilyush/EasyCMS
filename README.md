@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-23 08:23:08
+ * @LastEditTime: 2021-04-26 17:10:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -9,22 +9,20 @@
 
 # EasyCms
 &emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
-&emsp;&emsp;EasyCms后台管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发企业后台管理系统，企业站，微信公众号和小程序后台。    
-&emsp;&emsp;同时我也写了个springboot版本的后台管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
-地址：https://gitee.com/xiaotuzi/easycmsboot
+&emsp;&emsp;EasyCms后台权限管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发 企业后台管理系统，WebApi接口，微信公众号和小程序后台，企业站，。    
+&emsp;&emsp;同时我也写了个springboot版本的后台权限管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
+地址：https://gitee.com/xiaotuzi/easycmsboot    
+:fire: 给我个star，鼓励一下我吧
 ## 发展目标
-             现实与理想的巨大差异皆源自于自身能力的不足，所以目标很简单
-&emsp;&emsp;希望EasyCms成为一个简单易用的后台管理系统的基础开发框架和建站CMS系统。
+&emsp;&emsp;希望EasyCms成为一个简单易用，功能完善的后台权限管理系统的基础开发框架和建站CMS系统。
 
- ## 目标客户为：
- **满足大部分企业建站需求使用的CMS管理系统**
 ## 技术介绍
 + 基于.net5
 + ORM使用[FreeSql](https://github.com/dotnetcore/FreeSql),默认使用mysql数据库
 + [Redis](https://github.com/tporadowski/redis)操作使用[freeredis](https://github.com/2881099/freeredis)
 + 缓存使用[EasyCaching](https://github.com/dotnetcore/EasyCaching)
 + 后台模板使用H+，扒的若依的UI
-+ 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)强大的模板引擎能够实现任何你想要的页面静态化
++ 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
 ## 演示地址：
  windows2016服务器：http://cms.atlass.cn/admin   
@@ -36,7 +34,18 @@
   [模板使用文档](https://www.yuque.com/jasonyush/easycms/dorh3a)
 ## 依赖环境
  .net5.0, redis,mysql,SqlServer,PostgreSql
-## 功能列表（只列出CMS模块的）
+## 权限管理
++ [x] 用户管理
++ [x] 角色管理
++ [x] 菜单管理
++ [x] 通用字典
++ [x] 通用字典
++ [x] 登录日志
++ [x] 异常日志
++ [x] Hangfire定时任务
++ [x] 单位组织
++ [x] 职位信息
+## CMS内容管理
 + [x] 栏目管理
 + [x] 文章管理
 + [x] 模板管理
@@ -50,10 +59,7 @@
 + [x] 广告管理
 + [x] 通讯录
 + [x] 会议管理
-+ [ ] 站点总访问量，在线人数统计
-+ [ ] 栏目权限，文章数据权限
-+ [ ] 意见反馈
-+ [ ] 前台用户中心(这个功能感觉不是很必要，除非需要实现普通用户投稿)
+
 ## [样图]  
 ![Image](资料/Index.png)
 ![Image](资料/home.png)

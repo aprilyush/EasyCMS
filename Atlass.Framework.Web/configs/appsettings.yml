@@ -9,7 +9,7 @@ configProperties:
    System.GC.Server: true
    System.GC.Concurrent: true
 #运行环境 0-开发，1-发布
-RuntimeEnvironment: 0
+RuntimeEnvironment: 1
 # 站点host http://*:80;
 HostUrl: "http://cmsl.atlass:80"
 #跨域
