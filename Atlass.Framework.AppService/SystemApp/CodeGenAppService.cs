@@ -129,7 +129,74 @@ namespace Atlass.Framework.AppService.SystemApp
             }
         }
 
+        /// <summary>
+        /// 同步单表结构
+        /// </summary>
+        /// <param name="tableName"></param>
+        public void SyncTable(string tableName)
+        {
+            var table = Sqldb.DbFirst.GetTableByName(tableName);
+            if (table==null)
+            {
+                return;
+            }
 
+            var exist = Sqldb.Select<code_table>().Where(s => s.table_name == table.Name).First();
+            if (exist != null)
+            {
+                exist.db_name = table.Schema;
+                exist.table_type = (int)table.Type;
+                exist.update_time = DateTime.Now;
+                exist.remark = table.Comment;
+                Sqldb.Update<code_table>().SetSource(exist).ExecuteAffrows();
+                Sqldb.Delete<code_column>().Where(s => s.table_name == table.Name).ExecuteAffrows();
+            }
+            else
+            {
+                exist = new code_table();
+                exist.table_name = table.Name;
+                exist.entity_name = table.Name;
+                exist.db_name = table.Schema;
+                exist.table_type = (int)table.Type;
+                exist.sync_time = DateTime.Now;
+                exist.remark = table.Comment;
+                exist.update_time = exist.sync_time;
+                Sqldb.Insert(exist).ExecuteAffrows();
+            }
+
+
+            //列信息
+            var newColumns = new List<code_column>();
+            var columns = table.Columns;
+            if (columns.Count > 0)
+            {
+                foreach (var col in columns)
+                {
+                    code_column colModel = new code_column();
+                    colModel.table_name = table.Name;
+                    colModel.sort_num = col.Position;
+                    colModel.column_name = col.Name;
+                    colModel.comment = col.Coment;
+                    colModel.can_null = col.IsNullable == true ? 1 : 0;
+                    colModel.type_text = col.DbTypeText;
+                    colModel.type_text_full = col.DbTypeTextFull;
+                    colModel.dbtype = col.DbType;
+                    colModel.cstype = col.CsType.Name;
+                    colModel.is_identity = col.IsIdentity == true ? 1 : 0;
+                    colModel.is_primary = col.IsPrimary == true ? 1 : 0;
+                    colModel.sync_time = DateTime.Now;
+                    colModel.update_time = colModel.sync_time;
+                    colModel.max_length = col.MaxLength;
+                    newColumns.Add(colModel);
+                }
+            }
+
+
+            if (newColumns.Count > 0)
+            {
+                Sqldb.Insert(newColumns).ExecuteAffrows();
+            }
+        }
         /// <summary>
         /// 删除数据
         /// </summary>
@@ -165,6 +232,11 @@ namespace Atlass.Framework.AppService.SystemApp
         }
 
 
+        /// <summary>
+        /// 获取表信息
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         public code_table GetTable(string tableName)
         {
             code_table model = Sqldb.Select<code_table>().Where(s => s.table_name == tableName).First();

@@ -100,12 +100,16 @@
            
             var buttons = [
                 {
+                    roleTag: 'system:codegen:gentable',
+                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" data-id=' + r.table_name + ' onclick="genTable(this);"><i class="fa fa-search"></i>预览</a>'
+                },
+                {
                     roleTag: 'system:codegen:column',
                     button: '<a class="btn btn-success btn-xs " href="javascript:void(0)" data-id=' + r.table_name +' onclick="preview(this);"><i class="fa fa-list-ul"></i>字段</a>'
                 },
                 {
-                    roleTag: 'system:codegen:gentable',
-                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" data-id=' + r.table_name + ' onclick="genTable(this);"><i class="fa fa-search"></i>预览</a>'
+                    roleTag: 'system:codegen:synctable',
+                    button: '<a class="btn btn-warning btn-xs " href="javascript:void(0)" data-id=' + r.table_name + ' onclick="syncTable(this);"><i class="fa fa-refresh"></i>同步</a>'
                 }
             ]
             return jutils.buttonPermission(buttons);
@@ -128,7 +132,20 @@
             jutils.dialogTop('代码预览【生成代码仅为辅助开发，请根据实际调整代码】', '/admin/codegen/gencode', { tableName: tname });
 
         }
-        
+
+        function syncTable(obj) {
+            var tname = $(obj).data('id');
+            let msg = '确认同步表【' + tname + '】的表结构吗？';
+            jutils.confirm(msg, function () {
+                jutils.ajaxGet('/admin/CodeGen/syncTable',
+                    { tableName: tname},
+                    function () {
+                        $table.easyTable('search');
+                    });
+            })
+        }
+
+
         function del() {
             var rows = $table.easyTable('selected');
             if (rows.length === 0) {
@@ -141,7 +158,7 @@
                 ids.push(rows[i].id);
 
             }
-            jutils.confirm('确认删除数据表信息吗',
+            jutils.confirm('确认删除数据表信息吗？',
                 function () {
                     jutils.ajaxGet('/admin/CodeGen/RemoveAll',
                         { ids: ids.join() },

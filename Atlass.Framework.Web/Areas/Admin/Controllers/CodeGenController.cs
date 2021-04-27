@@ -112,6 +112,19 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
+        /// <summary>
+        /// 表的字段信息
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        [RequirePermission("system:codegen:synctable")]
+        [HttpGet]
+        public IActionResult SyncTable()
+        {
+            string tableName = RequestHelper.GetPostString("tableName");
+            codeGenApp.SyncTable(tableName.Trim());
+            return Success("表结构同步成功");
+        }
 
         /// <summary>
         /// 代码生成
@@ -122,7 +135,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GenCode(string tableName)
         {
-            code_table table = codeGenApp.GetTable(tableName);
+            code_table table = codeGenApp.GetTable(tableName.Trim());
             GenerateCodeDto codeDto = new GenerateCodeDto();
             if (table != null)
             {
