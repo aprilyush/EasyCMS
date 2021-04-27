@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-26 17:10:57
+ * @LastEditTime: 2021-04-27 15:35:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -39,12 +39,12 @@
 + [x] 角色管理
 + [x] 菜单管理
 + [x] 通用字典
-+ [x] 通用字典
 + [x] 登录日志
 + [x] 异常日志
 + [x] Hangfire定时任务
 + [x] 单位组织
 + [x] 职位信息
++ [x] 代码生成辅助
 ## CMS内容管理
 + [x] 栏目管理
 + [x] 文章管理
