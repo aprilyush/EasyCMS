@@ -21,13 +21,13 @@ namespace Atlass.Framework.Models.Admin
 		/// <summary>
 		/// 创建者
 		/// </summary>
-		[JsonProperty, Column(StringLength = 64)]
+		[JsonProperty, Column(StringLength = 64,CanUpdate =false)]
 		public string create_by { get; set; } = string.Empty;
 
 		/// <summary>
 		/// 创建时间
 		/// </summary>
-		[JsonProperty, Column(DbType = "datetime")]
+		[JsonProperty, Column(DbType = "datetime", CanUpdate = false)]
 		public DateTime create_time { get; set; }
 
 		/// <summary>

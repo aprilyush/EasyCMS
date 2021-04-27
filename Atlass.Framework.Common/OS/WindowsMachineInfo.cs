@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -89,7 +89,7 @@ namespace Atlass.Framework.Common
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             return "";
            
@@ -113,7 +113,7 @@ namespace Atlass.Framework.Common
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             return runTime;
         }

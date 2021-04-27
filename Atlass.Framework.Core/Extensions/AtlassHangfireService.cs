@@ -1,5 +1,5 @@
 ﻿using Atlass.Framework.Cache;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.HangfireExtend;
 using Atlass.Framework.ViewModels.YmlConfigs;
 using Hangfire;
@@ -26,7 +26,7 @@ namespace Atlass.Framework.Core.Extensions
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             //hangfire
             try
@@ -34,7 +34,7 @@ namespace Atlass.Framework.Core.Extensions
                 //Version=3;Pooling=true;FailIfMissing=false;
                 string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\hangfire.db";
                 string connection = $"Data Source ={filePath};Mode=ReadWriteCreate;Cache=Shared";
-                //LogNHelper.Info(connection);
+                //LoggerHelper.Info(connection);
 
                 GlobalStateHandlers.Handlers.Add(new SucceededStateExpireHandler(30));
                 services.AddHangfire(x => x.UseLogProvider(new CustomLogProvider())
@@ -43,7 +43,7 @@ namespace Atlass.Framework.Core.Extensions
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
 
            

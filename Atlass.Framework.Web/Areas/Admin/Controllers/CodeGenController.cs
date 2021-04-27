@@ -2,6 +2,8 @@
 using Atlass.Framework.Common;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
+using Atlass.Framework.Generate;
+using Atlass.Framework.Models.Admin;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -108,6 +110,56 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             string columnName= RequestHelper.GetPostString("columnName");
             var data = codeGenApp.GetColumndata(tableName, columnName);
             return Json(data);
+        }
+
+
+        /// <summary>
+        /// 代码生成
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        [RequirePermission("system:codegen:gentable")]
+        [HttpGet]
+        public IActionResult GenCode(string tableName)
+        {
+            code_table table = codeGenApp.GetTable(tableName);
+            GenerateCodeDto codeDto = new GenerateCodeDto();
+            if (table != null)
+            {
+                GenerateCodeTemplate generateCode = new GenerateCodeTemplate(table);
+                //实体类
+                var ret = generateCode.GenEntity();
+                if (ret.Status)
+                {
+                    codeDto.Entity = ret.Html;
+                }
+                //服务
+                var ret2 = generateCode.GenAppService();
+                if (ret2.Status)
+                {
+                    codeDto.Service = ret2.Html;
+                }
+                //控制器
+                var ret3 = generateCode.GenController();
+                if (ret3.Status)
+                {
+                    codeDto.Controller = ret3.Html;
+                }
+                //列表页
+                var ret4 = generateCode.GenList();
+                if (ret4.Status)
+                {
+                    codeDto.List = ret4.Html;
+                }
+                //服务
+                var ret5 = generateCode.GenForm();
+                if (ret5.Status)
+                {
+                    codeDto.Form = ret5.Html;
+                }
+            }
+            ViewData.Model = codeDto;
+            return View();
         }
     }
 }

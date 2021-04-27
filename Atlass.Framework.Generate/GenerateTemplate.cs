@@ -1,5 +1,5 @@
 ﻿using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,9 @@ using System.Text;
 
 namespace Atlass.Framework.Generate
 {
+    /// <summary>
+    /// 模板保存
+    /// </summary>
     public static class GenerateTemplate
     {
         private static string HomeDirectory = "Template";//首页模板
@@ -48,7 +51,7 @@ namespace Atlass.Framework.Generate
                 }
             }catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
         } 
 

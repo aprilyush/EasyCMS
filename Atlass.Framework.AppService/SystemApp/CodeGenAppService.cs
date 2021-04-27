@@ -97,6 +97,7 @@ namespace Atlass.Framework.AppService.SystemApp
                     {
                         code_column colModel = new code_column();
                         colModel.table_name = table.Name;
+                        colModel.sort_num = col.Position;
                         colModel.column_name = col.Name;
                         colModel.comment = col.Coment;
                         colModel.can_null = col.IsNullable == true ? 1 : 0;
@@ -161,6 +162,20 @@ namespace Atlass.Framework.AppService.SystemApp
 
             dto.rows = query;
             return dto;
+        }
+
+
+        public code_table GetTable(string tableName)
+        {
+            code_table model = Sqldb.Select<code_table>().Where(s => s.table_name == tableName).First();
+            if (model != null)
+            {
+                model.columns= Sqldb.Select<code_column>()
+                .Where(s => s.table_name == tableName)
+                .OrderBy(s => s.sort_num).ToList();
+            }
+
+            return model;
         }
     }
 }

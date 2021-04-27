@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "代码预览";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+@model Atlass.Framework.ViewModels.Common.GenerateCodeDto
+<div class="container-div white-bg">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">实体类</a></li>
+            <li><a href="#tab2" data-toggle="tab" aria-expanded="false">服务类</a></li>
+            <li><a href="#tab3" data-toggle="tab" aria-expanded="false">控制器</a></li>
+            <li><a href="#tab4" data-toggle="tab" aria-expanded="false">列表页</a></li>
+            <li><a href="#tab5" data-toggle="tab" aria-expanded="false">表单页</a></li>
+        </ul>
+        <div class="tab-content">
+            <!--实体类-->
+            <div class="tab-pane active" id="tab1">
+                <pre>
+                  @(Model.Entity)
+               </pre>
+            </div>
+            <!--服务类-->
+            <div class="tab-pane" id="tab2">
+                <pre>
+                  @(Model.Service)
+               </pre>
+            </div>
+            <!--控制器-->
+            <div class="tab-pane" id="tab3">
+                <pre>
+                  @(Model.Controller)
+               </pre>
+            </div>
+            <!--列表页-->
+            <div class="tab-pane" id="tab4">
+                <pre>
+                  @(Model.List)
+               </pre>
+            </div>
+            <!--表单页-->
+            <div class="tab-pane" id="tab5">
+                <pre>
+                  @(Model.Form)
+               </pre>
+            </div>
+        </div>
+    </div>
+
+</div>
+

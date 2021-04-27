@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,7 +70,7 @@ namespace Atlass.Framework.Core.Middleware
             {
                 return;
             }
-            LogNHelper.Exception(exception);
+            LoggerHelper.Exception(exception);
             await WriteExceptionAsync(context, exception).ConfigureAwait(false);
         }
 

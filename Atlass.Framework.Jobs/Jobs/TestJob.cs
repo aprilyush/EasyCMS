@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Models.Admin;
 using System;
@@ -25,7 +25,7 @@ namespace Atlass.Framework.Jobs
             }
             catch (Exception e)
             {
-                LogNHelper.Exception(e);
+                LoggerHelper.Exception(e);
             }
 
         }

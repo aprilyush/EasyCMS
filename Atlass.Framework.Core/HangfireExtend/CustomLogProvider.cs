@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using Hangfire.Logging;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace Atlass.Framework.Core.HangfireExtend
             // Writing a message somewhere, make sure you also include the exception parameter,
             // because it usually contain valuable information, but it can be `null` for regular
             // messages.
-            LogNHelper.Exception(String.Format("{0}: {1} {2} {3}", logLevel, Name, messageFunc(), exception));
+            LoggerHelper.Exception(String.Format("{0}: {1} {2} {3}", logLevel, Name, messageFunc(), exception));
             // Console.WriteLine();
 
             // Telling LibLog the message was successfully logged.

@@ -56,7 +56,7 @@ namespace Atlass.Framework.AppService.SystemApp
             }
             else
             {
-                Sqldb.Update<sys_position>().SetSource(dto).IgnoreColumns(s=>new { s.create_by,s.create_time }).ExecuteAffrows();
+                Sqldb.Update<sys_position>().SetSource(dto).ExecuteAffrows();
             }
            
         }

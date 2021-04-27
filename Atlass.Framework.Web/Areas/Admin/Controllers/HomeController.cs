@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.AppService;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
@@ -57,7 +57,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-                LogNHelper.Exception(e);
+                LoggerHelper.Exception(e);
                 result.status =false;
             }
 

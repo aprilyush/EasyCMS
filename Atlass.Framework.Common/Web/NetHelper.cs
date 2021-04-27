@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +39,7 @@ namespace Atlass.Framework.Common
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             return string.Empty;
         }

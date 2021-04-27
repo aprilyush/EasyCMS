@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Atlass.Framework.Web.Models;
 using Senparc.Weixin.MP.Entities.Request;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.CO2NET.AspNet.HttpUtility;
@@ -50,7 +50,7 @@ namespace Atlass.Framework.Web.Controllers
             string state1 = IdHelper.ObjectId();//随机数，用于识别请求可靠性
             HttpContext.Session.SetString("State", state1);//储存随机数到Session
             string signUrl =Request.AbsoluteUri();
-            // LogNHelper.Info(signUrl);
+            // LoggerHelper.Info(signUrl);
             // MemoryCacheHelper.Set("test", "nihao", TimeSpan.FromMinutes(1));
             // var keys= MemoryCacheHelper.GetCacheKeys();
             if (!string.IsNullOrEmpty(code))
@@ -61,11 +61,11 @@ namespace Atlass.Framework.Web.Controllers
                 {
                     return Content("错误：" + result.errmsg);
                 }
-                //LogNHelper.Info(result.openid);
+                //LoggerHelper.Info(result.openid);
                 //尝试获取用户信息
                 //OAuthUserInfo userInfo = OAuthApi.GetUserInfo(result.access_token, result.openid);
                 //string json = userInfo.ToJson();
-                //LogNHelper.Info(json);
+                //LoggerHelper.Info(json);
                 //Task.Factory.StartNew(() => GetUserInfo(result.access_token, result.openid));
                 string key = "{access_token}:wxtoken";
                 var redisClient = RedisFactory.GetRedisClient();
@@ -166,7 +166,7 @@ namespace Atlass.Framework.Web.Controllers
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
                 return Content("");
             }
         }
@@ -182,12 +182,12 @@ namespace Atlass.Framework.Web.Controllers
                 if (userInfo != null)
                 {
                     string json = userInfo.ToJson();
-                    LogNHelper.Info(json);
+                    LoggerHelper.Info(json);
                 }
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using Atlass.Framework.ViewModels.YmlConfigs;
 using Autofac;
 using Microsoft.AspNetCore.Hosting;

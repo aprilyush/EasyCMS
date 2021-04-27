@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.AppService;
 using Atlass.Framework.AppService.SystemApp;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
@@ -135,7 +135,7 @@ namespace Atlass.Framework.Web.Controllers
             }
             catch (Exception e)
             {
-                LogNHelper.Exception(e);
+                LoggerHelper.Exception(e);
                 ModelState.AddModelError("err", "登录异常");
             }
 

@@ -1,5 +1,5 @@
 ﻿using Atlass.Framework.AppService;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.DI;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.ViewModels;
@@ -60,7 +60,7 @@ namespace Atlass.Framework.Core.Base
             //记录路由日志
             //IDictionary<string, string> RouteValues = filterContext.ActionDescriptor.RouteValues;
             //string route = GetRouteInfo(RouteValues);
-            //LogNHelper.Info(route,"路由记录");
+            //LoggerHelper.Info(route,"路由记录");
 
 
             IAtlassRequest requestHelper = GetAtlassRequest();

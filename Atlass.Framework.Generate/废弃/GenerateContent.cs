@@ -1,6 +1,6 @@
 ﻿using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
@@ -76,12 +76,12 @@ namespace Atlass.Framework.Generate
                 watcher.Stop();
                 string msg = $"渲染内容页耗时：{watcher.ElapsedMilliseconds} ms";
 
-                LogNHelper.Info(msg);
+                LoggerHelper.Info(msg);
                 return (true, renderHtml);
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
                
             }
             return (false, "");
@@ -109,7 +109,7 @@ namespace Atlass.Framework.Generate
                 string templatePath = Path.Combine(GlobalParamsDto.WebRoot, "Template/article.html");
                 if (!File.Exists(templatePath))
                 {
-                    LogNHelper.Exception("模板数据不存在");
+                    LoggerHelper.Exception("模板数据不存在");
                     return;
                 }
                 if (!Directory.Exists(contentFolderPath))
@@ -139,7 +139,7 @@ namespace Atlass.Framework.Generate
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.DI;
 using Atlass.Framework.Core.Web;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +20,7 @@ namespace Atlass.Framework.Core.Middleware
             {
 
                
-                LogNHelper.Exception(context.Exception);
+                LoggerHelper.Exception(context.Exception);
 
                 //context.Result = new ContentResult
                 //{

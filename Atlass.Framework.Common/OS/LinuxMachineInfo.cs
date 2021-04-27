@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -72,7 +72,7 @@ namespace Atlass.Framework.Common
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             return runTime;
         }
@@ -114,7 +114,7 @@ namespace Atlass.Framework.Common
                 computer.UsedRate = (100 - Math.Ceiling((decimal)free * 100 / total)).ToString() + "%";
             }catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
 
             return computer;

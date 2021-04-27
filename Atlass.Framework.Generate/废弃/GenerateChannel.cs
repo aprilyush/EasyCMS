@@ -1,6 +1,6 @@
 ﻿using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -84,13 +84,13 @@ namespace Atlass.Framework.Generate
                 //watcher.Stop();
                 //string msg = $"渲染栏目耗时：{watcher.ElapsedMilliseconds} ms";
 
-                //LogNHelper.Info(msg);
+                //LoggerHelper.Info(msg);
 
                 return (true, renderHtml);
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
 
             }
             return (false, null);

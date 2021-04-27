@@ -1,5 +1,5 @@
 ﻿using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
@@ -42,7 +42,7 @@ namespace Atlass.Framework.Core.Web
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
 
             
@@ -228,7 +228,7 @@ namespace Atlass.Framework.Core.Web
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
           
 

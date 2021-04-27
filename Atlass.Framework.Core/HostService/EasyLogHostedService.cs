@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
 using Atlass.Framework.Models.Admin;

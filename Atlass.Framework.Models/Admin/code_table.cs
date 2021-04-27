@@ -53,6 +53,13 @@ namespace Atlass.Framework.Models.Admin
 		/// 最新同步时间
 		/// </summary>
 		[JsonProperty, Column(DbType = "datetime")]
-		public DateTime? update_time { get; set; }
+		public DateTime update_time { get; set; }
+
+
+		/// <summary>
+		///表字段
+		/// </summary>
+		[JsonProperty, Column(IsIgnore =true)]
+		public List<code_column> columns { get; set; }
 	}
 }

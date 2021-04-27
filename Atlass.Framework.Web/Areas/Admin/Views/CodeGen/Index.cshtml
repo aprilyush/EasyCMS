@@ -101,7 +101,11 @@
             var buttons = [
                 {
                     roleTag: 'system:codegen:column',
-                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" data-id='+r.table_name+' onclick="preview(this);"><i class="fa fa-search"></i>预览</a>'
+                    button: '<a class="btn btn-success btn-xs " href="javascript:void(0)" data-id=' + r.table_name +' onclick="preview(this);"><i class="fa fa-list-ul"></i>字段</a>'
+                },
+                {
+                    roleTag: 'system:codegen:gentable',
+                    button: '<a class="btn btn-info btn-xs " href="javascript:void(0)" data-id=' + r.table_name + ' onclick="genTable(this);"><i class="fa fa-search"></i>预览</a>'
                 }
             ]
             return jutils.buttonPermission(buttons);
@@ -117,6 +121,14 @@
             jutils.openTab('admin_codegen_columnview',"表字段信息", '/admin/codegen/ColumnView', { tableName: tname });
         }
 
+        function genTable(obj) {
+
+            var tname = $(obj).data('id');
+
+            jutils.dialogTop('代码预览【生成代码仅为辅助开发，请根据实际调整代码】', '/admin/codegen/gencode', { tableName: tname });
+
+        }
+        
         function del() {
             var rows = $table.easyTable('selected');
             if (rows.length === 0) {

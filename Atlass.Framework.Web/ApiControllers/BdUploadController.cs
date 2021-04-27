@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
@@ -150,7 +150,7 @@ namespace Atlass.Framework.Web.ApiControllers
             }
             catch (Exception e)
             {
-                LogNHelper.Exception(e);
+                LoggerHelper.Exception(e);
                 result.state = "FAIL";
                 result.error = "内部异常，请联系管理员";
             }

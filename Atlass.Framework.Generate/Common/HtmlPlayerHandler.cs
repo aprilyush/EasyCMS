@@ -1,4 +1,4 @@
-﻿using Atlass.Framework.Common.NLog;
+﻿using Atlass.Framework.Common.Log;
 using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using System;
@@ -66,7 +66,7 @@ namespace Atlass.Framework.Generate
             }
             catch(Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
             return html;
         }

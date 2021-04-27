@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Atlass.Framework.Cache;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core;
 using Atlass.Framework.Core.DI;
 using Atlass.Framework.Core.Extensions;
@@ -118,7 +118,7 @@ namespace Atlass.Framework.Web
             }
             catch (Exception e)
             {
-                LogNHelper.Exception(e);
+                LoggerHelper.Exception(e);
             }
 
         }
@@ -201,7 +201,7 @@ namespace Atlass.Framework.Web
                 }
                 catch (Exception e)
                 {
-                    LogNHelper.Exception(e);
+                    LoggerHelper.Exception(e);
                 }
             });
 

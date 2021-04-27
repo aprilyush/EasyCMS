@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.BigFile;
 using Atlass.Framework.Core.Web;
@@ -130,7 +130,7 @@ namespace Atlass.Framework.Web.ApiControllers
                     }
                     catch(Exception ex)
                     {
-                        LogNHelper.Exception(ex);
+                        LoggerHelper.Exception(ex);
                     }
                     
                 }

@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 23/04/2021 16:00:03
+ Date: 27/04/2021 14:04:56
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `cms_ad`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `update_by` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '广告信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_ad
@@ -63,7 +63,7 @@ CREATE TABLE `cms_channel`  (
   `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `update_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '栏目信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_channel
@@ -108,7 +108,7 @@ CREATE TABLE `cms_content`  (
   INDEX `idx_title`(`title`, `publish_time`) USING BTREE,
   INDEX `idx_channel`(`channel_id`, `publish_time`) USING BTREE,
   INDEX `idx_creator`(`create_by`, `publish_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '内容表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_content
@@ -177,7 +177,7 @@ CREATE TABLE `cms_ip_manager`  (
   `update_by` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `update_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ip访问限制信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_ip_manager
@@ -201,7 +201,7 @@ CREATE TABLE `cms_site`  (
   `site_copyright` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '版权信息',
   `site_icp` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '备案号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '站点设置信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_site
@@ -226,7 +226,7 @@ CREATE TABLE `cms_template`  (
   `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `update_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '模板信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_template
@@ -240,22 +240,6 @@ INSERT INTO `cms_template` VALUES (10, '右边热门新闻', 'right.html', '', 5
 INSERT INTO `cms_template` VALUES (11, 'header脚本', 'header.html', '', 5, 5, ' <!-- head部分 -->\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0\">\r\n    <meta name=\"applicable-device\" content=\"pc,mobile\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <title>{$site.site_title}</title>\r\n    <meta name=\"Keywords\" content=\"{$site.site_keyword}\" />\r\n    <meta name=\"Description\" content=\"{$site.site_description}\" />\r\n    <link rel=\"stylesheet\" href=\"/static/layui/css/layui.css\">\r\n    <link rel=\"stylesheet\" href=\"/static/css/index.css\">\r\n</head>', 0, '11297175912976384', '2020-05-28 10:36:08', '11297175912976384', '2020-05-28 10:36:08');
 INSERT INTO `cms_template` VALUES (13, '产品展示模板', 'T_产品展示模板.html', '', 2, 2, '<!DOCTYPE html>\n<html id=\"doc\">\n<!-- head部分 -->\n<vt:include id=\"navi\" file=\"Template/include/header.html\" charset=\"utf-8\" />\n<body>\n    <!-- nav部分 -->\n    <vt:include file=\"Template/include/navi.html\" charset=\"utf-8\" />\n    <!-- banner部分 -->\n    <div class=\"banner news\">\n        <img class=\"banImage\" src=\"{$channel.channel_image}\" alt=\"\">\n        <div class=\"title\">\n            <p>{$channel.channel_name}</p>\n        </div>\n    </div>\n    <!-- main -->\n    <div class=\"main-news\">\n        <div class=\"layui-container\">\n            <div class=\"layui-row layui-col-space20\">\n                <vt:foreach id=\"contents\" from=\"$contents\" item=\"content\" index=\"i\" total=\"10\" paging=\"1\">\n                    <div class=\"layui-col-lg6 content\">\n                        <div>\n                            <div class=\"news-img\">\n                                <a href=\"{$content.content_href}\">\n                                    <img src=\"{$content.cover_image}\" onerror=\"javascript:this.src=\'/static/images/biglogo.png\';\" style=\"width:184px;height:142px;\">\n                                </a>\n                            </div><div class=\"news-panel\">\n                                <strong><a href=\"{$content.content_href}\">{$content.title length=\'17\'}</a></strong>\n                                <p class=\"detail\">\n                                    <span>{$content.summary length=\'60\'}</span>\n                                    <a href=\"{$content.content_href}\">[详细]</a>\n                                </p>\n                                <p class=\"read-push\">阅读 <span>{$content.hit_count}</span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<span>{$content.publish_time formatter=\'yyyy-MM-dd\'}</span></p>\n                            </div>\n                        </div>\n                    </div>\n\n                    <vt:foreachelse />\n                    <article class=\"post-27 post type-post status-publish format-standard hentry category-news\">\n                        <div class=\"layui-col-lg6 content\">\n                            <p class=\"detail\">暂时没有数据。。。</p>\n                        </div>\n                    </article>\n                </vt:foreach>\n            </div>\n            <div id=\"newsPage\"></div>\n        </div>\n    </div>\n    <!-- footer部分 -->\n    <vt:include id=\"navi\" file=\"Template/include/footer.html\" charset=\"utf-8\" />\n</body>\n</html>\n\n', 0, 'admin', '2021-04-22 14:03:52', 'admin', '2021-04-22 14:03:52');
 INSERT INTO `cms_template` VALUES (14, '成功案例模板', 'T_成功案例模板.html', '', 2, 2, '<!DOCTYPE html>\n<html id=\"doc\">\n<!-- head部分 -->\n<vt:include id=\"navi\" file=\"Template/include/header.html\" charset=\"utf-8\" />\n<body>\n    <!-- nav部分 -->\n    <vt:include file=\"Template/include/navi.html\" charset=\"utf-8\" />\n    <!-- banner部分 -->\n    <div class=\"banner news\">\n        <img class=\"banImage\" src=\"{$channel.channel_image}\" alt=\"\">\n        <div class=\"title\">\n            <p>{$channel.channel_name}</p>\n        </div>\n    </div>\n    <!-- main -->\n    <div class=\"main-news\">\n        <div class=\"layui-container\">\n            <div class=\"layui-row layui-col-space20\">\n                <vt:foreach id=\"contents\" from=\"$contents\" item=\"content\" index=\"i\" total=\"10\" paging=\"1\">\n                    <div class=\"layui-col-lg6 content\">\n                        <div>\n                            <div class=\"news-img\">\n                                <a href=\"{$content.content_href}\">\n                                    <img src=\"{$content.cover_image}\" onerror=\"javascript:this.src=\'/static/images/biglogo.png\';\" style=\"width:184px;height:142px;\">\n                                </a>\n                            </div><div class=\"news-panel\">\n                                <strong><a href=\"{$content.content_href}\">{$content.title length=\'17\'}</a></strong>\n                                <p class=\"detail\">\n                                    <span>{$content.summary length=\'60\'}</span>\n                                    <a href=\"{$content.content_href}\">[详细]</a>\n                                </p>\n                                <p class=\"read-push\">阅读 <span>{$content.hit_count}</span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<span>{$content.publish_time formatter=\'yyyy-MM-dd\'}</span></p>\n                            </div>\n                        </div>\n                    </div>\n\n                    <vt:foreachelse />\n                    <article class=\"post-27 post type-post status-publish format-standard hentry category-news\">\n                        <div class=\"layui-col-lg6 content\">\n                            <p class=\"detail\">暂时没有数据。。。</p>\n                        </div>\n                    </article>\n                </vt:foreach>\n            </div>\n            <div id=\"newsPage\"></div>\n        </div>\n    </div>\n    <!-- footer部分 -->\n    <vt:include file=\"Template/include/footer.html\" charset=\"utf-8\" />\n</body>\n</html>\n\n', 0, 'admin', '2021-04-22 14:05:10', 'admin', '2021-04-22 14:05:23');
-
--- ----------------------------
--- Table structure for cms_template_match
--- ----------------------------
-DROP TABLE IF EXISTS `cms_template_match`;
-CREATE TABLE `cms_template_match`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `channel_id` int(11) NOT NULL,
-  `channel_template_id` int(11) NOT NULL,
-  `content_template_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of cms_template_match
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for cms_upload_set
@@ -280,7 +264,7 @@ CREATE TABLE `cms_upload_set`  (
   `max_file_size` bigint(11) NOT NULL,
   `max_media_size` bigint(20) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'cms上传设置信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_upload_set
@@ -381,6 +365,425 @@ INSERT INTO `cms_visit` VALUES (76, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10
 INSERT INTO `cms_visit` VALUES (77, '192.168.1.210', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36', '2021-04-20 10:32:25');
 
 -- ----------------------------
+-- Table structure for code_column
+-- ----------------------------
+DROP TABLE IF EXISTS `code_column`;
+CREATE TABLE `code_column`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表名',
+  `column_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '字段名称',
+  `sort_num` int(11) NOT NULL COMMENT '字段位置',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '字段描述',
+  `can_null` int(3) NOT NULL COMMENT '是否可空，0-不可空，1-可空',
+  `type_text` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '数据库类型，字符串，varchar',
+  `type_text_full` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '数据库类型，字符串，varchar(255)',
+  `max_length` int(11) NOT NULL COMMENT '字段最大长度',
+  `dbtype` int(10) NOT NULL COMMENT '数据库枚举类型int值',
+  `cstype` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'C# 类型',
+  `is_identity` int(10) NOT NULL COMMENT '自增 0-不是，1-是',
+  `is_primary` int(10) NULL DEFAULT NULL COMMENT '主键 0-不是，1-是',
+  `sync_time` datetime(0) NOT NULL COMMENT '同步时间',
+  `update_time` datetime(0) NOT NULL COMMENT '最新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_tname`(`table_name`, `sort_num`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 673 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '代码生成，表的字段信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of code_column
+-- ----------------------------
+INSERT INTO `code_column` VALUES (337, 'cms_ad', 'id', 1, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (338, 'cms_ad', 'ad_href', 3, '链接', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (339, 'cms_ad', 'ad_image', 4, '广告图', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (340, 'cms_ad', 'ad_title', 2, '广告标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (341, 'cms_ad', 'create_by', 9, '创建人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (342, 'cms_ad', 'create_time', 8, '创建时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (343, 'cms_ad', 'enable_status', 5, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (344, 'cms_ad', 'image_height', 7, '显示高度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (345, 'cms_ad', 'image_width', 6, '显示宽度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (346, 'cms_ad', 'update_by', 11, '更新人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (347, 'cms_ad', 'update_time', 10, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (348, 'cms_channel', 'id', 12, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (349, 'cms_channel', 'channel_href', 17, '外链', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (350, 'cms_channel', 'channel_image', 16, '栏目图片', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (351, 'cms_channel', 'channel_index', 14, '栏目索引', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (352, 'cms_channel', 'channel_name', 13, '栏目名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (353, 'cms_channel', 'channel_template', 19, '栏目模板', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (354, 'cms_channel', 'content_template', 20, '内容模板', 0, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (355, 'cms_channel', 'create_by', 23, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (356, 'cms_channel', 'create_time', 24, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (357, 'cms_channel', 'drawing_enable', 21, '渲染标识：1-渲染，0-不渲染 根据需要判断', 0, 'tinyint', 'tinyint(255)', 255, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (358, 'cms_channel', 'link_type', 22, '链接类型：0-默认，1-链接到第一篇文章,2-链接到子栏目', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (359, 'cms_channel', 'parent_id', 15, '上级栏目', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (360, 'cms_channel', 'sort_num', 18, '排序', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (361, 'cms_channel', 'update_by', 25, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (362, 'cms_channel', 'update_time', 26, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (363, 'cms_content', 'id', 27, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (364, 'cms_content', 'author', 38, '作者', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (365, 'cms_content', 'channel_id', 34, '栏目id', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (366, 'cms_content', 'content', 30, '文章内容', 0, 'longtext', 'longtext', -1, 751, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (367, 'cms_content', 'content_href', 40, '外链', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (368, 'cms_content', 'content_status', 37, '文章状态 0-待审，1-通过，2-草稿，100-审核不通过', 0, 'tinyint', 'tinyint(3)', 3, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (369, 'cms_content', 'cover_image', 32, '封面图片', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (370, 'cms_content', 'create_by', 45, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (371, 'cms_content', 'create_time', 46, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (372, 'cms_content', 'dept_id', 33, '作者归属部门', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (373, 'cms_content', 'hit_count', 41, '点击量', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (374, 'cms_content', 'ip_limit', 35, '是否开启ip访问限制', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (375, 'cms_content', 'is_recommend', 43, '是否推荐 0-不推荐，1-推荐', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (376, 'cms_content', 'is_top', 42, '是否置顶 0-不置顶，1-置顶', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (377, 'cms_content', 'publish_time', 44, '自定义发布时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (378, 'cms_content', 'source', 39, '来源', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (379, 'cms_content', 'sub_title', 29, '副标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (380, 'cms_content', 'summary', 31, '简介', 0, 'text', 'text', -1, 752, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (381, 'cms_content', 'tags', 36, '标签', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (382, 'cms_content', 'title', 28, '文章标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (383, 'cms_content', 'update_by', 47, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (384, 'cms_content', 'update_time', 48, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (385, 'cms_content_image', 'int', 49, '', 0, 'int', 'int(255)', 255, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (386, 'cms_content_image', 'image_sort', 51, '', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (387, 'cms_content_image', 'image_title', 52, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (388, 'cms_content_image', 'image_url', 50, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (389, 'cms_content_image', 'insert_time', 53, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (390, 'cms_ip_manager', 'id', 54, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (391, 'cms_ip_manager', 'create_by', 61, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (392, 'cms_ip_manager', 'create_time', 62, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (393, 'cms_ip_manager', 'end_ip', 56, '结束ip', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (394, 'cms_ip_manager', 'end_ip_val', 58, '结束ip值', 0, 'bigint', 'bigint(255)', 255, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (395, 'cms_ip_manager', 'limit_enable', 59, '0-不限制，1-限制', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (396, 'cms_ip_manager', 'remark', 60, '', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (397, 'cms_ip_manager', 'start_ip', 55, '起始ip', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (398, 'cms_ip_manager', 'start_ip_val', 57, '起始ip值', 0, 'bigint', 'bigint(255)', 255, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (399, 'cms_ip_manager', 'update_by', 63, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (400, 'cms_ip_manager', 'update_time', 64, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (401, 'cms_site', 'id', 65, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (402, 'cms_site', 'site_copyright', 73, '版权信息', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (403, 'cms_site', 'site_description', 72, 'SEO描述', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (404, 'cms_site', 'site_favicon', 68, '地址栏图标', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (405, 'cms_site', 'site_icp', 74, '备案号', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (406, 'cms_site', 'site_keyword', 71, 'SEO关键词', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (407, 'cms_site', 'site_logo', 67, '网站LOGO', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (408, 'cms_site', 'site_name', 66, '站点名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (409, 'cms_site', 'site_title', 70, 'SEO标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (410, 'cms_site', 'site_url', 69, '网站网址', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (411, 'cms_template', 'id', 75, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (412, 'cms_template', 'create_by', 83, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (413, 'cms_template', 'create_time', 84, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (414, 'cms_template', 'file_name', 78, '生成的文件名，单页模板使用', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (415, 'cms_template', 'is_default', 82, '是否为默认模板 0-否，1-是', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (416, 'cms_template', 'pid', 80, '1-首页，2-栏目模板，3-内容模板，4-单页模板,5-包含文件', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (417, 'cms_template', 'template_content', 81, '模板内容', 0, 'longtext', 'longtext', -1, 751, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (418, 'cms_template', 'template_file', 77, '模板文件', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (419, 'cms_template', 'template_mode', 79, '模板类型，1-首页，2-栏目模板，3-内容模板，4-单页模板,5-包含文件', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (420, 'cms_template', 'template_name', 76, '模板名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (421, 'cms_template', 'update_by', 85, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (422, 'cms_template', 'update_time', 86, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (423, 'cms_upload_set', 'id', 87, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (424, 'cms_upload_set', 'attache_extname', 101, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (425, 'cms_upload_set', 'font_color', 98, '', 0, 'varchar', 'varchar(10)', 10, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (426, 'cms_upload_set', 'font_size', 97, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (427, 'cms_upload_set', 'image_extname', 99, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (428, 'cms_upload_set', 'image_height', 91, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (429, 'cms_upload_set', 'image_opacity', 93, '', 0, 'tinyint', 'tinyint(4)', 4, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (430, 'cms_upload_set', 'image_quality', 94, '', 0, 'tinyint', 'tinyint(4)', 4, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (431, 'cms_upload_set', 'image_width', 90, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (432, 'cms_upload_set', 'max_file_size', 102, '', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (433, 'cms_upload_set', 'max_media_size', 103, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (434, 'cms_upload_set', 'media_extname', 100, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (435, 'cms_upload_set', 'open_watermark', 88, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (436, 'cms_upload_set', 'water_postion', 95, '', 0, 'tinyint', 'tinyint(255)', 255, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (437, 'cms_upload_set', 'watermark_image', 92, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (438, 'cms_upload_set', 'watermark_type', 89, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (439, 'cms_upload_set', 'watermark_word', 96, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (440, 'cms_visit', 'id', 104, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (441, 'cms_visit', 'browser', 106, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (442, 'cms_visit', 'ip', 105, '', 0, 'varchar', 'varchar(20)', 20, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (443, 'cms_visit', 'visit_time', 107, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (444, 'code_column', 'id', 108, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (445, 'code_column', 'can_null', 113, '是否可空，0-不可空，1-可空', 0, 'int', 'int(3)', 3, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (446, 'code_column', 'column_name', 110, '字段名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (447, 'code_column', 'comment', 112, '字段描述', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (448, 'code_column', 'cstype', 118, 'C# 类型', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (449, 'code_column', 'dbtype', 117, '数据库枚举类型int值', 0, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (450, 'code_column', 'is_identity', 119, '自增 0-不是，1-是', 0, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (451, 'code_column', 'is_primary', 120, '主键 0-不是，1-是', 1, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (452, 'code_column', 'max_length', 116, '字段最大长度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (453, 'code_column', 'sort_num', 111, '字段位置', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (454, 'code_column', 'sync_time', 121, '同步时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (455, 'code_column', 'table_name', 109, '表名', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (456, 'code_column', 'type_text', 114, '数据库类型，字符串，varchar', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (457, 'code_column', 'type_text_full', 115, '数据库类型，字符串，varchar(255)', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (458, 'code_column', 'update_time', 122, '最新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (459, 'code_table', 'id', 123, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (460, 'code_table', 'db_name', 124, '数据库', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (461, 'code_table', 'entity_name', 126, '代码生成 实体类名称', 1, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (462, 'code_table', 'remark', 128, '表描述', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (463, 'code_table', 'sync_time', 129, '首次同步时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (464, 'code_table', 'table_name', 125, '表名', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (465, 'code_table', 'table_type', 127, '表类型 0-表，1-视图，2-存储过程', 0, 'int', 'int(2)', 2, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (466, 'code_table', 'update_time', 130, '最新同步时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (467, 'easy_log', 'id', 131, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (468, 'easy_log', 'log_message', 133, '', 0, 'mediumtext', 'mediumtext', -1, 750, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (469, 'easy_log', 'log_summary', 132, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (470, 'easy_log', 'log_time', 135, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (471, 'easy_log', 'log_type', 134, '', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (472, 'exam_record', 'id', 136, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (473, 'exam_record', 'course_code', 137, '课程代码', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (474, 'exam_record', 'course_flag', 142, '专业课1：是 0：你收', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (475, 'exam_record', 'course_name', 138, '课程名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (476, 'exam_record', 'course_score', 139, '得分', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (477, 'exam_record', 'exam_time', 140, '考试时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (478, 'exam_record', 'remark', 141, '备注', 1, 'tinytext', 'tinytext', -1, 749, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (479, 'fh_product', 'id', 143, '', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (480, 'fh_product', 'create_by', 147, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (481, 'fh_product', 'create_time', 146, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (482, 'fh_product', 'product_name', 144, '产品名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (483, 'fh_product', 'product_type', 148, '0-产品，1-调配工时', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (484, 'fh_product', 'remark', 149, '', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (485, 'fh_product', 'sort_num', 145, '排序', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (486, 'fh_product_process', 'id', 150, '', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (487, 'fh_product_process', 'deploy_hour', 156, '调配的工时', 0, 'decimal', 'decimal(5,1)', 5, 0, 'Decimal', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (488, 'fh_product_process', 'fix_num', 154, '产品的定额数量', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (489, 'fh_product_process', 'process_name', 152, '工序名称', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (490, 'fh_product_process', 'process_type', 155, '0-产品，1-调配工时', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (491, 'fh_product_process', 'product_id', 151, '', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (492, 'fh_product_process', 'sort_num', 153, '', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (493, 'fh_staff', 'id', 157, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (494, 'fh_staff', 'create_by', 161, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (495, 'fh_staff', 'create_time', 160, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (496, 'fh_staff', 'hiredate', 159, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (497, 'fh_staff', 'staff_disable', 162, '0-正常，1-禁用', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (498, 'fh_staff', 'staff_name', 158, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (499, 'fh_time_bill', 'id', 163, '', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (500, 'fh_time_bill', 'create_by', 170, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (501, 'fh_time_bill', 'create_time', 171, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (502, 'fh_time_bill', 'deploy_hour', 167, '调配工时', 0, 'decimal', 'decimal(5,1)', 5, 0, 'Decimal', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (503, 'fh_time_bill', 'is_holiday', 169, '0-不是，1-是', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (504, 'fh_time_bill', 'remark', 174, '', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (505, 'fh_time_bill', 'staff_id', 164, '员工id', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (506, 'fh_time_bill', 'staff_name', 165, '员工名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (507, 'fh_time_bill', 'update_by', 172, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (508, 'fh_time_bill', 'update_time', 173, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (509, 'fh_time_bill', 'work_date', 168, '工作日期', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (510, 'fh_time_bill', 'work_num', 166, '实际配额数量', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (511, 'fh_time_process', 'id', 175, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (512, 'fh_time_process', 'bill_id', 176, '工时表Id', 0, 'bigint', 'bigint(11)', 11, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (513, 'fh_time_process', 'deploy_hour', 181, '调配工时', 0, 'decimal', 'decimal(5,1)', 5, 0, 'Decimal', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (514, 'fh_time_process', 'is_holiday', 184, '法定假日', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (515, 'fh_time_process', 'process_id', 178, '工序id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (516, 'fh_time_process', 'process_type', 179, '0-产品，1-调配工时', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (517, 'fh_time_process', 'product_id', 177, '产品id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (518, 'fh_time_process', 'staff_id', 182, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (519, 'fh_time_process', 'work_date', 183, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (520, 'fh_time_process', 'work_num', 180, '实际配额数量', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (521, 'hangfire_task', 'id', 185, '', 0, 'char', 'char(24)', 24, 254, 'String', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (522, 'hangfire_task', 'assembly_namespace', 189, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (523, 'hangfire_task', 'class_name', 190, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (524, 'hangfire_task', 'cron_express', 191, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (525, 'hangfire_task', 'excute_status', 192, '', 0, 'tinyint', 'tinyint(2)', 2, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (526, 'hangfire_task', 'excute_time', 188, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (527, 'hangfire_task', 'remark', 187, '', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (528, 'hangfire_task', 'task_name', 186, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (529, 'login_info', 'id', 193, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (530, 'login_info', 'browser', 196, '浏览器信息', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (531, 'login_info', 'device_info', 195, '设备信息', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (532, 'login_info', 'login_message', 202, '日志内容', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (533, 'login_info', 'login_name', 194, '登录名', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (534, 'login_info', 'login_status', 201, '0-失败，1-成功', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (535, 'login_info', 'osinfo', 197, '操作系统', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (536, 'login_info', 'real_address', 199, '真实地址', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (537, 'login_info', 'request_ip', 198, 'ip', 0, 'varchar', 'varchar(20)', 20, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (538, 'login_info', 'request_time', 200, '访问时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (539, 'sys_citys', 'id', 203, '', 0, 'bigint', 'bigint(255)', 255, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (540, 'sys_citys', 'city_code', 207, '', 0, 'int', 'int(12)', 12, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (541, 'sys_citys', 'city_level', 208, '', 0, 'int', 'int(2)', 2, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (542, 'sys_citys', 'name', 205, '', 0, 'varchar', 'varchar(100)', 100, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (543, 'sys_citys', 'province_code', 206, '', 0, 'int', 'int(12)', 12, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (544, 'sys_citys', 'zipcode', 204, '', 0, 'int', 'int(12)', 12, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (545, 'sys_dept', 'id', 209, '部门id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (546, 'sys_dept', 'ancestors', 212, '祖级列表', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (547, 'sys_dept', 'create_by', 221, '创建者', 0, 'varchar', 'varchar(64)', 64, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (548, 'sys_dept', 'create_time', 222, '创建时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (549, 'sys_dept', 'del_flag', 220, '删除标志（0代表存在 2代表删除）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (550, 'sys_dept', 'dept_name', 213, '部门名称', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (551, 'sys_dept', 'dept_status', 219, '部门状态（0正常 1停用）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (552, 'sys_dept', 'dept_type', 211, '部门类型（0公司，1部门）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (553, 'sys_dept', 'email', 218, '邮箱', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (554, 'sys_dept', 'leader', 216, '负责人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (555, 'sys_dept', 'leader_id', 215, '负责人ID', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (556, 'sys_dept', 'order_num', 214, '显示顺序', 0, 'int', 'int(4)', 4, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (557, 'sys_dept', 'parent_id', 210, '父部门id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (558, 'sys_dept', 'phone', 217, '联系电话', 0, 'varchar', 'varchar(11)', 11, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (559, 'sys_dept', 'remark', 225, '备注', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (560, 'sys_dept', 'update_by', 223, '更新者', 0, 'varchar', 'varchar(64)', 64, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (561, 'sys_dept', 'update_time', 224, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (562, 'sys_dictionary', 'id', 226, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (563, 'sys_dictionary', 'create_person', 233, '创建人', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (564, 'sys_dictionary', 'create_time', 234, '创建时间', 0, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (565, 'sys_dictionary', 'dic_code', 230, '字典编码', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (566, 'sys_dictionary', 'dic_name', 227, '字典名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (567, 'sys_dictionary', 'dic_value', 228, '字典值', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (568, 'sys_dictionary', 'parent_id', 229, '字典项', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (569, 'sys_dictionary', 'remark', 232, '备注', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (570, 'sys_dictionary', 'sort_num', 231, '排序', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (571, 'sys_menu', 'id', 235, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (572, 'sys_menu', 'create_person', 242, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (573, 'sys_menu', 'create_time', 243, '', 0, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (574, 'sys_menu', 'iframe', 244, '是否在iframe打开现在都是', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (575, 'sys_menu', 'menu_icon', 247, '菜单icon', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (576, 'sys_menu', 'menu_level', 245, '菜单层级', 0, 'tinyint', 'tinyint(4)', 4, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (577, 'sys_menu', 'menu_name', 236, '菜单名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (578, 'sys_menu', 'menu_sort', 239, '排序', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (579, 'sys_menu', 'menu_type', 246, '类型：0-目录，1-菜单', 0, 'tinyint', 'tinyint(4)', 4, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (580, 'sys_menu', 'menu_url', 237, '菜单链接', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (581, 'sys_menu', 'parent_id', 240, '上级菜单', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (582, 'sys_menu', 'remark', 241, '备注', 1, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (583, 'sys_menu', 'role_tag', 238, '权限标识', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (584, 'sys_operate', 'id', 248, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (585, 'sys_operate', 'func_sort', 251, '排序', 0, 'int', 'int(5)', 5, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (586, 'sys_operate', 'func_title', 249, '按钮名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (587, 'sys_operate', 'menu_id', 252, '菜单Id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (588, 'sys_operate', 'role_tag', 250, '权限标识', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (589, 'sys_position', 'id', 253, '岗位ID', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (590, 'sys_position', 'create_by', 258, '创建者', 0, 'varchar', 'varchar(64)', 64, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (591, 'sys_position', 'create_time', 259, '创建时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (592, 'sys_position', 'post_code', 254, '岗位编码', 0, 'varchar', 'varchar(64)', 64, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (593, 'sys_position', 'post_name', 255, '岗位名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (594, 'sys_position', 'post_sort', 256, '显示顺序', 0, 'int', 'int(4)', 4, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (595, 'sys_position', 'post_status', 257, '状态（0正常 1停用）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (596, 'sys_position', 'remark', 262, '备注', 1, 'varchar', 'varchar(500)', 500, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (597, 'sys_position', 'update_by', 260, '更新者', 0, 'varchar', 'varchar(64)', 64, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (598, 'sys_position', 'update_time', 261, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (599, 'sys_role', 'id', 263, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (600, 'sys_role', 'create_person', 269, '创建人', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (601, 'sys_role', 'create_time', 270, '创建时间', 0, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (602, 'sys_role', 'remark', 271, '备注', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (603, 'sys_role', 'role_code', 265, '角色编码', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (604, 'sys_role', 'role_name', 264, '角色名称', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (605, 'sys_role', 'role_sort', 266, '排序', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (606, 'sys_role', 'role_status', 268, '角色状态(0:正常，1:禁用)', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (607, 'sys_role', 'role_super', 267, '超管(1:是，0:不是)', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (608, 'sys_role_authorize', 'id', 272, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (609, 'sys_role_authorize', 'create_person', 276, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (610, 'sys_role_authorize', 'create_time', 277, '', 0, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (611, 'sys_role_authorize', 'menu_id', 274, '菜单或者操作id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (612, 'sys_role_authorize', 'menu_pid', 275, '上级id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (613, 'sys_role_authorize', 'role_id', 273, '角色id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (614, 'sys_user', 'id', 278, '用户id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (615, 'sys_user', 'create_by', 293, '创建人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (616, 'sys_user', 'create_time', 294, '创建时间', 0, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (617, 'sys_user', 'del_flag', 292, '删除标志（0代表存在 1代表删除）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (618, 'sys_user', 'dept_id', 287, '部门', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (619, 'sys_user', 'dept_name', 288, '部门', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (620, 'sys_user', 'email', 283, '邮箱', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (621, 'sys_user', 'gender', 284, '用户性别（1男 0女 2未知）', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (622, 'sys_user', 'is_super', 285, '是否是超管(0-不是，1-是)', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (623, 'sys_user', 'login_name', 279, '登录账号', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (624, 'sys_user', 'mobile_phone', 282, '手机号码', 0, 'varchar', 'varchar(20)', 20, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (625, 'sys_user', 'pass_word', 280, '密码', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (626, 'sys_user', 'remark', 290, '备注', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (627, 'sys_user', 'role_id', 286, '角色id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (628, 'sys_user', 'update_by', 295, '更新人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (629, 'sys_user', 'update_time', 296, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (630, 'sys_user', 'user_avatar', 289, '用户头像', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (631, 'sys_user', 'user_name', 281, '用户名', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (632, 'sys_user', 'user_status', 291, '账号状态(0-正常，1-禁用)', 0, 'int', 'int(1)', 1, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (633, 'sys_user_position', 'id', 297, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (634, 'sys_user_position', 'create_by', 301, '', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (635, 'sys_user_position', 'create_time', 300, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (636, 'sys_user_position', 'position_id', 299, '职位id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (637, 'sys_user_position', 'user_id', 298, '用户id', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (638, 'sys_validate_code', 'id', 302, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (639, 'sys_validate_code', 'create_time', 306, '', 1, 'datetime', 'datetime(3)', 3, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (640, 'sys_validate_code', 'note_code', 304, '', 1, 'varchar', 'varchar(10)', 10, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (641, 'sys_validate_code', 'tel', 303, '', 1, 'varchar', 'varchar(15)', 15, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (642, 'sys_validate_code', 'validate_type', 305, '', 1, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (643, 'work_address_book', 'id', 307, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (644, 'work_address_book', 'address', 315, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (645, 'work_address_book', 'department_name', 310, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (646, 'work_address_book', 'dept_id', 309, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (647, 'work_address_book', 'inner_tel', 313, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (648, 'work_address_book', 'insert_time', 318, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (649, 'work_address_book', 'mobile', 314, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (650, 'work_address_book', 'profile', 316, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (651, 'work_address_book', 'real_name', 308, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (652, 'work_address_book', 'sort_num', 317, '', 0, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (653, 'work_address_book', 'work_job', 312, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (654, 'work_address_book', 'work_number', 311, '', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (655, 'work_notice', 'id', 319, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (656, 'work_notice', 'dept_ids', 328, '', 0, 'varchar', 'varchar(500)', 500, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (657, 'work_notice', 'insert_id', 324, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (658, 'work_notice', 'insert_time', 323, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (659, 'work_notice', 'n_content', 322, '', 0, 'text', 'text', -1, 752, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (660, 'work_notice', 'n_time', 321, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (661, 'work_notice', 'n_title', 320, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (662, 'work_notice', 'nick_name', 325, '', 1, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (663, 'work_notice', 'received_count', 327, '', 0, 'int', 'int(255)', 255, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (664, 'work_notice', 'total_depts', 326, '', 0, 'int', 'int(10)', 10, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (665, 'work_notice_reply', 'id', 329, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (666, 'work_notice_reply', 'dept_id', 334, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (667, 'work_notice_reply', 'dept_name', 335, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (668, 'work_notice_reply', 'nick_name', 332, '', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (669, 'work_notice_reply', 'notice_id', 330, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (670, 'work_notice_reply', 'reply_status', 336, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (671, 'work_notice_reply', 'reply_time', 333, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (672, 'work_notice_reply', 'user_id', 331, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+
+-- ----------------------------
+-- Table structure for code_table
+-- ----------------------------
+DROP TABLE IF EXISTS `code_table`;
+CREATE TABLE `code_table`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `db_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '数据库',
+  `table_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表名',
+  `entity_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '代码生成 实体类名称',
+  `table_type` int(2) NOT NULL COMMENT '表类型 0-表，1-视图，2-存储过程',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '表描述',
+  `sync_time` datetime(0) NOT NULL COMMENT '首次同步时间',
+  `update_time` datetime(0) NOT NULL COMMENT '最新同步时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_tname`(`table_name`, `update_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 110 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '表数据信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of code_table
+-- ----------------------------
+INSERT INTO `code_table` VALUES (76, '', 'cms_ad', 'cms_ad', 0, '广告信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (77, '', 'cms_channel', 'cms_channel', 0, '栏目信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (78, '', 'cms_content', 'cms_content', 0, '内容表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (79, '', 'cms_content_image', 'cms_content_image', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (80, '', 'cms_ip_manager', 'cms_ip_manager', 0, 'ip访问限制信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (81, '', 'cms_site', 'cms_site', 0, '站点设置信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (82, '', 'cms_template', 'cms_template', 0, '模板信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (83, '', 'cms_upload_set', 'cms_upload_set', 0, 'cms上传设置信息', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (84, '', 'cms_visit', 'cms_visit', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (85, '', 'code_column', 'code_column', 0, '代码生成，表的字段信息', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (86, '', 'code_table', 'code_table', 0, '表数据信息', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (87, '', 'easy_log', 'easy_log', 0, '系统日志', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (88, '', 'exam_record', 'exam_record', 0, '自考成绩表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (89, '', 'fh_product', 'fh_product', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (90, '', 'fh_product_process', 'fh_product_process', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (91, '', 'fh_staff', 'fh_staff', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (92, '', 'fh_time_bill', 'fh_time_bill', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (93, '', 'fh_time_process', 'fh_time_process', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (94, '', 'hangfire_task', 'hangfire_task', 0, 'hangfire任务管理表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (95, '', 'login_info', 'login_info', 0, '登录日志表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (96, '', 'sys_citys', 'sys_citys', 0, '行政区域表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (97, '', 'sys_dept', 'sys_dept', 0, '部门表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (98, '', 'sys_dictionary', 'sys_dictionary', 0, '字典表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (99, '', 'sys_menu', 'sys_menu', 0, '菜单表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (100, '', 'sys_operate', 'sys_operate', 0, '按钮操作表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (101, '', 'sys_position', 'sys_position', 0, '岗位信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (102, '', 'sys_role', 'sys_role', 0, '用户角色表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (103, '', 'sys_role_authorize', 'sys_role_authorize', 0, '角色权限表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (104, '', 'sys_user', 'sys_user', 0, '系统用户表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (105, '', 'sys_user_position', 'sys_user_position', 0, '用户职位表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (106, '', 'sys_validate_code', 'sys_validate_code', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (107, '', 'work_address_book', 'work_address_book', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (108, '', 'work_notice', 'work_notice', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (109, '', 'work_notice_reply', 'work_notice_reply', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+
+-- ----------------------------
 -- Table structure for easy_log
 -- ----------------------------
 DROP TABLE IF EXISTS `easy_log`;
@@ -392,73 +795,26 @@ CREATE TABLE `easy_log`  (
   `log_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_time`(`log_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of easy_log
 -- ----------------------------
-INSERT INTO `easy_log` VALUES (1, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 15:18:20');
-INSERT INTO `easy_log` VALUES (2, '日志信息', '渲染内容页耗时：152 ms', 1, '2021-04-22 15:18:20');
-INSERT INTO `easy_log` VALUES (3, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Web.ApiControllers.UploadController.SaveChunkFile() in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Web\\ApiControllers\\UploadController.cs:line 219\r\n   at lambda_method782(Closure , Object , Object[] )\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2021-04-22 15:33:04');
-INSERT INTO `easy_log` VALUES (4, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 15:41:27');
-INSERT INTO `easy_log` VALUES (5, '日志信息', '渲染内容页耗时：223 ms', 1, '2021-04-22 15:41:27');
-INSERT INTO `easy_log` VALUES (6, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 15:52:49');
-INSERT INTO `easy_log` VALUES (7, '日志信息', '渲染内容页耗时：165 ms', 1, '2021-04-22 15:52:49');
-INSERT INTO `easy_log` VALUES (8, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 15:56:21');
-INSERT INTO `easy_log` VALUES (9, '日志信息', '渲染内容页耗时：143 ms', 1, '2021-04-22 15:56:21');
-INSERT INTO `easy_log` VALUES (10, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 16:09:47');
-INSERT INTO `easy_log` VALUES (11, '日志信息', '渲染内容页耗时：138 ms', 1, '2021-04-22 16:09:47');
-INSERT INTO `easy_log` VALUES (12, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-22 16:22:40');
-INSERT INTO `easy_log` VALUES (13, '日志信息', '渲染内容页耗时：12 ms', 1, '2021-04-22 16:22:40');
-INSERT INTO `easy_log` VALUES (14, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:00:15');
-INSERT INTO `easy_log` VALUES (15, '日志信息', '渲染内容页耗时：148 ms', 1, '2021-04-23 09:00:15');
-INSERT INTO `easy_log` VALUES (16, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:00:37');
-INSERT INTO `easy_log` VALUES (17, '日志信息', '渲染内容页耗时：2 ms', 1, '2021-04-23 09:00:37');
-INSERT INTO `easy_log` VALUES (18, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:00:40');
-INSERT INTO `easy_log` VALUES (19, '日志信息', '渲染内容页耗时：1 ms', 1, '2021-04-23 09:00:40');
-INSERT INTO `easy_log` VALUES (20, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:00:46');
-INSERT INTO `easy_log` VALUES (21, '日志信息', '渲染内容页耗时：1 ms', 1, '2021-04-23 09:00:46');
-INSERT INTO `easy_log` VALUES (22, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:00:52');
-INSERT INTO `easy_log` VALUES (23, '日志信息', '渲染内容页耗时：1 ms', 1, '2021-04-23 09:00:52');
-INSERT INTO `easy_log` VALUES (24, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:10:50');
-INSERT INTO `easy_log` VALUES (25, '日志信息', '渲染内容页耗时：5 ms', 1, '2021-04-23 09:10:50');
-INSERT INTO `easy_log` VALUES (26, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:12:53');
-INSERT INTO `easy_log` VALUES (27, '日志信息', '渲染内容页耗时：6 ms', 1, '2021-04-23 09:12:53');
-INSERT INTO `easy_log` VALUES (28, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 09:23:36');
-INSERT INTO `easy_log` VALUES (29, '日志信息', '渲染内容页耗时：5 ms', 1, '2021-04-23 09:23:36');
-INSERT INTO `easy_log` VALUES (30, '日志信息', '渲染内容页耗时：9 ms', 1, '2021-04-23 09:28:31');
-INSERT INTO `easy_log` VALUES (31, '日志信息', '渲染内容页耗时：128 ms', 1, '2021-04-23 09:30:37');
-INSERT INTO `easy_log` VALUES (32, '日志信息', '渲染内容页耗时：2 ms', 1, '2021-04-23 09:30:57');
-INSERT INTO `easy_log` VALUES (33, '日志信息', '渲染内容页耗时：127 ms', 1, '2021-04-23 09:34:34');
-INSERT INTO `easy_log` VALUES (34, '日志信息', '渲染内容页耗时：128 ms', 1, '2021-04-23 09:37:15');
-INSERT INTO `easy_log` VALUES (35, '日志信息', '渲染内容页耗时：133 ms', 1, '2021-04-23 09:38:14');
-INSERT INTO `easy_log` VALUES (36, '日志信息', '渲染内容页耗时：5 ms', 1, '2021-04-23 09:47:35');
-INSERT INTO `easy_log` VALUES (37, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 10:17:58');
-INSERT INTO `easy_log` VALUES (38, '日志信息', '渲染内容页耗时：41 ms', 1, '2021-04-23 10:17:58');
-INSERT INTO `easy_log` VALUES (39, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 10:17:59');
-INSERT INTO `easy_log` VALUES (40, '日志信息', '渲染内容页耗时：1 ms', 1, '2021-04-23 10:17:59');
-INSERT INTO `easy_log` VALUES (41, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 10:18:48');
-INSERT INTO `easy_log` VALUES (42, '日志信息', '渲染内容页耗时：1 ms', 1, '2021-04-23 10:18:48');
-INSERT INTO `easy_log` VALUES (43, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 10:18:49');
-INSERT INTO `easy_log` VALUES (44, '日志信息', '渲染内容页耗时：3 ms', 1, '2021-04-23 10:18:49');
-INSERT INTO `easy_log` VALUES (45, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.GenerateService.GenerateHtml(Int32 contentId, Int32 channelId, Int32 channelPage) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\GenerateService.cs:line 72', 4, '2021-04-23 14:50:39');
-INSERT INTO `easy_log` VALUES (46, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 14:53:12');
-INSERT INTO `easy_log` VALUES (47, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 14:57:02');
-INSERT INTO `easy_log` VALUES (48, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 14:57:03');
-INSERT INTO `easy_log` VALUES (49, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:05:16');
-INSERT INTO `easy_log` VALUES (50, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:05:17');
-INSERT INTO `easy_log` VALUES (51, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:15:26');
-INSERT INTO `easy_log` VALUES (52, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:15:30');
-INSERT INTO `easy_log` VALUES (53, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:15:31');
-INSERT INTO `easy_log` VALUES (54, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:17:39');
-INSERT INTO `easy_log` VALUES (55, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:21:20');
-INSERT INTO `easy_log` VALUES (56, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:42:02');
-INSERT INTO `easy_log` VALUES (57, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:42:56');
-INSERT INTO `easy_log` VALUES (58, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:43:05');
-INSERT INTO `easy_log` VALUES (59, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 22', 4, '2021-04-23 15:43:10');
-INSERT INTO `easy_log` VALUES (60, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:47:02');
-INSERT INTO `easy_log` VALUES (61, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:47:41');
-INSERT INTO `easy_log` VALUES (62, 'Object reference not set to an instance of an object.', 'System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Atlass.Framework.Generate.HtmlPlayerHandler.CreateVideo(String html) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Generate\\Common\\HtmlPlayerHandler.cs:line 19', 4, '2021-04-23 15:51:45');
+INSERT INTO `easy_log` VALUES (1, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (2, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (3, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (4, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (5, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (6, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (7, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (8, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (9, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (10, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (11, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (12, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (13, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (14, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (15, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
 
 -- ----------------------------
 -- Table structure for exam_record
@@ -473,7 +829,7 @@ CREATE TABLE `exam_record`  (
   `remark` tinytext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '备注',
   `course_flag` int(255) NOT NULL COMMENT '专业课1：是 0：你收',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '自考成绩表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of exam_record
@@ -620,25 +976,6 @@ INSERT INTO `fh_time_process` VALUES (143324256456774, 143324256452677, 1, 14298
 INSERT INTO `fh_time_process` VALUES (143341757567045, 143341757521989, 1, 142989528420421, 0, 10000, 0.0, 3, '2021-03-30 00:00:00', 0);
 
 -- ----------------------------
--- Table structure for gateway_info
--- ----------------------------
-DROP TABLE IF EXISTS `gateway_info`;
-CREATE TABLE `gateway_info`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `collector_mac` char(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `display_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `insert_time` datetime(0) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gateway_info
--- ----------------------------
-INSERT INTO `gateway_info` VALUES (1, '95DE5F0B', '哈尔滨商业大学', NULL, '2020-12-04 10:13:29');
-INSERT INTO `gateway_info` VALUES (2, 'AE29F600', '哈尔滨商业大学', NULL, '2020-12-04 10:13:53');
-
--- ----------------------------
 -- Table structure for hangfire_task
 -- ----------------------------
 DROP TABLE IF EXISTS `hangfire_task`;
@@ -652,7 +989,7 @@ CREATE TABLE `hangfire_task`  (
   `cron_express` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `excute_status` tinyint(2) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'hangfire任务管理表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of hangfire_task
@@ -675,7 +1012,7 @@ CREATE TABLE `login_info`  (
   `login_status` int(255) NOT NULL COMMENT '0-失败，1-成功',
   `login_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '登录日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of login_info
@@ -688,267 +1025,16 @@ INSERT INTO `login_info` VALUES (9, 'yushuo', 'Other', 'Chrome 86', 'Windows 10'
 INSERT INTO `login_info` VALUES (10, 'yushuo', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-23 10:27:18', 1, '登录成功');
 INSERT INTO `login_info` VALUES (11, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-23 10:40:40', 1, '登录成功');
 INSERT INTO `login_info` VALUES (12, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-23 15:59:50', 1, '登录成功');
-
--- ----------------------------
--- Table structure for pay_history
--- ----------------------------
-DROP TABLE IF EXISTS `pay_history`;
-CREATE TABLE `pay_history`  (
-  `out_trade_no` char(24) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `device_info` char(24) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `openid` char(28) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `transaction_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `time_end` bigint(20) NOT NULL,
-  `total_fee` int(11) NOT NULL,
-  `expert_id` char(28) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `expert_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pay_time` datetime(0) NOT NULL,
-  `expert_did` char(24) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '000000000000000000000000',
-  PRIMARY KEY (`out_trade_no`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of pay_history
--- ----------------------------
-INSERT INTO `pay_history` VALUES ('5ccadcca3ad0d010704a307d', '5cc94f863ad0d00738983f07', 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '4200000305201905022381610388', 20190502200433, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', 'HPV（尖锐湿疣）检测及疫苗咨询', '2019-05-02 20:04:33', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ccb95f93ad0d011b4e53068', '5ccb8e083ad0d011b4e53067', 'oAVzdjgMrRCRbfTxOAX0nS-UlvqY', '4200000299201905036945911191', 20190503091442, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-03 09:14:42', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ccd48293ad0d00e3079ea7b', '5ccd47c03ad0d00f44c4d873', 'oAVzdjgMrRCRbfTxOAX0nS-UlvqY', '4200000305201905041423193060', 20190504160712, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-04 16:07:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ccfec1f3ad0d00c08d88677', '5ccfea613ad0d00c6cde5838', 'oAVzdjsgt5V88pl48Yqni1DNwgFk', '4200000299201905063592891437', 20190506161118, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-05-06 16:11:18', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cd674163ad0d010c8415306', '5ccef76f3ad0d013503e1559', 'oAVzdjtHj--5n3EWniWr-vNFcjkA', '4200000292201905115241851442', 20190511150459, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-05-11 15:04:59', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cd8ee323ad0d00fec23b09b', '5cd8eb903ad0d0043cb7ab20', 'oAVzdjvl9ikVkkr8Zo1u23Cvxaoc', '4200000292201905134561514130', 20190513121031, 200, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-05-13 12:10:31', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cd954b03ad0d0071c8c28eb', '5cd948eb3ad0d0043cb7ab3f', 'oAVzdjhp7Idm0amnTH53xwVLV4Sw', '4200000293201905138108996174', 20190513192749, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-13 19:27:49', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cda71853ad0d00714324a21', '5cda6f973ad0d00714324a1e', 'oAVzdjg57R8OE1iIhFfCfeNE1l-w', '4200000290201905147248957940', 20190514154312, 200, 'oAVzdjpmVyCHg6ZnDnWE5u5MXfbA', '张嘉', '2019-05-14 15:43:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cdaf0703ad0d00e3cc2a357', '5cdaef193ad0d004fc548692', 'oAVzdjvXxU9JTnl5UugHeBV3y0G8', '4200000305201905152276568861', 20190515004436, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', 'HPV（尖锐湿疣）检测及疫苗咨询', '2019-05-15 00:44:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cdc1e0b3ad0d01454970e7a', '5cdb5df23ad0d0055c8f8e72', 'oAVzdjvXxU9JTnl5UugHeBV3y0G8', '4200000299201905155696320158', 20190515221127, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-15 22:11:27', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cdc263c3ad0d01454970e7c', '5cdc25173ad0d012f09c669d', 'oAVzdjqQ2zY6o9obSlgIwQ9aewgY', '4200000306201905159020860016', 20190515224624, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-15 22:46:24', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cde83d13ad0d000ecb0edd2', '5cde76633ad0d000ecb0edcb', 'oAVzdjn3JCZj_MQVZEB4Ju47RqFY', '4200000299201905179668243088', 20190517175015, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-05-17 17:50:15', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cdf7b033ad0d00970a1011a', '5cdf77743ad0d017841e0ec7', 'oAVzdjlaQHrb8Q8cr692llZ5_7Rs', '4200000305201905182765274542', 20190518112455, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-18 11:24:55', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cdfe27f3ad0d015a090ee45', '5cdfde4a3ad0d015a090ee42', 'oAVzdjhp7Idm0amnTH53xwVLV4Sw', '4200000298201905189544298421', 20190518184628, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-18 18:46:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce3f2133ad0d00f1011632a', '5ce3f01f3ad0d00f10116324', 'oAVzdjrDMKiuomIeEqDtYY6G2qWY', '4200000295201905219097270123', 20190521204159, 200, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-05-21 20:41:59', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce49b973ad0d00e1087d74e', '5ce416fb3ad0d00e1087d70c', 'oAVzdjjByK6TnuE5cuTAB-ienpCY', '4200000305201905220520636133', 20190522084519, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-22 08:45:19', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce4d65e3ad0d00e1087d767', '5ce4c6583ad0d0174492e372', 'oAVzdjmAVIvC4XV6XBY3Q_Hqe_AI', '4200000298201905221083701535', 20190522125606, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-22 12:56:06', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce529043ad0d00e1087d7a5', '5ce524d93ad0d00e1087d7a0', 'oAVzdjnmuutRADStH1tEkDruhdAI', '4200000302201905224284770629', 20190522184841, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-22 18:48:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce738203ad0d009b0704da4', '5ce736763ad0d00d1c73c3db', 'oAVzdjnmuutRADStH1tEkDruhdAI', '4200000300201905247536571503', 20190524081743, 200, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-05-24 08:17:43', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce7a8ef3ad0d009b0704de1', '5ce798af3ad0d00d1c73c401', 'oAVzdjp6AwaO-4n39ikJ7-0pkfSU', '4200000303201905245581813191', 20190524161902, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-05-24 16:19:02', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce8d3e13ad0d00b646458dd', '5ce8d2ed3ad0d012f876b026', 'oAVzdjuyRTMicEsSCBTiInLzRGnU', '4200000297201905259708856660', 20190525133431, 1000, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-05-25 13:34:31', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce949ec3ad0d0134cbfbce0', '5ce93cce3ad0d00280336c80', 'oAVzdjifRvCQJm3wWTWcwxEGLxDc', '4200000307201905255525490844', 20190525215811, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-25 21:58:11', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ce94f243ad0d00b6464591b', '5ce94ac53ad0d00280336c85', 'oAVzdjt_Pyp7DpUob9wznUA11bkE', '4200000294201905254852758134', 20190525222025, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-25 22:20:25', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ceb79833ad0d00b5c1e80e6', '5ceb66d83ad0d00b5c1e80df', 'oAVzdjoekxCb2hfn4LXb6pFWDhYY', '4200000293201905279818458660', 20190527134544, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-27 13:45:44', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cebe7b63ad0d00b5c1e8103', '5cebd38e3ad0d014f4ebbf3c', 'oAVzdjit3iOc_j00ylRNWGcQPzu4', '4200000303201905277424019924', 20190527213556, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-27 21:35:56', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ced12c83ad0d017a8b6e4be', '5ced09183ad0d017a8b6e4b8', 'oAVzdjrDMKiuomIeEqDtYY6G2qWY', '4200000304201905288257921643', 20190528185156, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-28 18:51:56', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cedea3b3ad0d00db86662ac', '5cede8953ad0d00db86662a8', 'oAVzdjjuiaKY9XQKCw4FfHS04iGQ', '4200000293201905295625671915', 20190529101113, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-29 10:11:13', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cef35883ad0d015802a7756', '5cef32c73ad0d0161ca808c8', 'oAVzdjoiPhveHoA1cvhoe6HmYN0k', '4200000306201905301784725490', 20190530094446, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', 'HPV（尖锐湿疣）检测及疫苗咨询', '2019-05-30 09:44:46', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cef506d3ad0d00dd8a2952c', '5cef4f363ad0d015802a776b', 'oAVzdjjuiaKY9XQKCw4FfHS04iGQ', '4200000295201905302183350119', 20190530113930, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-05-30 11:39:30', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf1c8c73ad0d01708237944', '5cf1c6f73ad0d0125cc07d7e', 'oAVzdjgqD0FvWkNAToXWczzSnSWU', '4200000303201906010887399946', 20190601083732, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-01 08:37:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf25fef3ad0d00094614f27', '5cf25d143ad0d00094614f23', 'oAVzdjrDMKiuomIeEqDtYY6G2qWY', '4200000306201906013193216056', 20190601192228, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-06-01 19:22:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf261ef3ad0d00094614f29', '5cf260b43ad0d01708237962', 'oAVzdjrDMKiuomIeEqDtYY6G2qWY', '4200000294201906010153162647', 20190601193059, 200, 'oAVzdjl5I583iNjaDnsbr2qCwV1g', '小宗', '2019-06-01 19:30:59', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf3026e3ad0d016fc8f5628', '5cf2fbec3ad0d016fc8f5627', 'oAVzdjjk1VXVQ7iLfFixmvtTvOSE', '4200000297201906029691265185', 20190602065550, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-02 06:55:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf3bcac3ad0d015fc0f40e0', '5cf3bb563ad0d009b0952132', 'oAVzdjoiPhveHoA1cvhoe6HmYN0k', '4200000290201906024508424243', 20190602201027, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-06-02 20:10:27', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf5e0053ad0d00efc3806fb', '5cf5df0f3ad0d01098ee782a', 'oAVzdjt_Pyp7DpUob9wznUA11bkE', '4200000289201906040091660872', 20190604110546, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-06-04 11:05:46', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf89dac3ad0d0005059beed', '5cf89cb13ad0d0005059beec', 'oAVzdjtjI_iaBs-eew_o6Ipa5Tsc', '4200000289201906064729059038', 20190606125929, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-06 12:59:29', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cf9f42b3ad0d00b600edee5', '5cf9ec0f3ad0d00b600edee4', 'oAVzdjuznB7qjuqdnGjF9UrUBSYw', '4200000294201906072214384240', 20190607132052, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-07 13:20:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cfa4c7f3ad0d00b600edf11', '5cfa4c013ad0d011806d430f', 'oAVzdjq5rb-JVOs14RR_BcmfvYi8', '4200000306201906075995802619', 20190607193740, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', 'HPV（尖锐湿疣）检测及疫苗咨询', '2019-06-07 19:37:40', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cfb31743ad0d00b600edf6f', '5cf5fd833ad0d010e07ad8e0', 'oAVzdjrDMKiuomIeEqDtYY6G2qWY', '4200000295201906082645597003', 20190608115432, 200, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-06-08 11:54:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cfbd20c3ad0d004d8a7e734', '5cfbd1d33ad0d016280c3f00', 'oAVzdjthriJpEjGEeOXE_6FfcbYk', '4200000302201906082743747715', 20190608231945, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-08 23:19:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5cfc93493ad0d010c4c20f6e', '5cfc92ef3ad0d010c4c20f6d', 'oAVzdjvZ08MTUFyH6qVmwQc9yrjg', '4200000296201906091990362792', 20190609130415, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-09 13:04:15', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d01c4ca3ad0d01588d6d7c0', '5d01c4b03ad0d01588d6d7bf', 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '4200000300201906132409979719', 20190613113647, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '广东零元版自检活动（2019）', '2019-06-13 11:36:47', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d05d4493ad0d01284493756', '5d01e0bd3ad0d01588d6d7e5', 'oAVzdjnwwSS_x6cdUxY0jFXQkmvI', '4200000291201906163273786728', 20190616133200, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-16 13:32:00', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d08744f3ad0d00d1cc314ab', '5d08400c3ad0d00438c6ab8a', 'oAVzdjseyAEcEnPe5dNAyAZ1dLVc', '4200000291201906184012583502', 20190618131916, 5000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-06-18 13:19:16', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d09db413ad0d0104c93a2aa', '5d09d90d3ad0d0104c93a2a7', 'oAVzdjv2BlGSrbi5qcJhV6iZptXk', '4200000299201906192359261739', 20190619145046, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', 'HPV（尖锐湿疣）检测及疫苗咨询', '2019-06-19 14:50:46', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d0cc4ca3ad0d0176c31fc79', '5d0cbf803ad0d002ac0f7769', 'oAVzdjpcVVADae_whp6siOJZgDps', '4200000298201906213052530312', 20190621195144, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-21 19:51:44', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d0f61773ad0d017782ca927', '5d0f586e3ad0d006dc685a6a', 'oAVzdjkA-EGin6wH7WMYLzoDlAPg', '4200000293201906232159437057', 20190623192445, 1000, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-06-23 19:24:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d0f6cbf3ad0d017782ca92a', '5d0f69063ad0d00c6cf67518', 'oAVzdjkA-EGin6wH7WMYLzoDlAPg', '4200000298201906235345184308', 20190623201252, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-23 20:12:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d157d8c3ad0d015fc4c941c', '5d156c573ad0d015fc4c9417', 'oAVzdjte7em98cNAepAPaPpVFgDc', '4200000296201906283671745646', 20190628103810, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-06-28 10:38:10', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d158b463ad0d015fc4c9424', '5d15676d3ad0d0172085f074', 'oAVzdjte7em98cNAepAPaPpVFgDc', '4200000297201906286293831361', 20190628113648, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-28 11:36:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d1638673ad0d00c08c93893', '5d16362a3ad0d00c08c93892', 'oAVzdjjuiHfXXM6Avoc_HMm2f4lY', '4200000289201906286780906784', 20190628235524, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-28 23:55:24', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d1751293ad0d00b00d1c5e8', '5d174fc53ad0d00be819a4e0', 'oAVzdjseyAEcEnPe5dNAyAZ1dLVc', '4200000294201906298300565861', 20190629195320, 5000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-06-29 19:53:20', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d18abd33ad0d00eb086bf5b', '5d18a6473ad0d013fc522818', 'oAVzdjkA-EGin6wH7WMYLzoDlAPg', '4200000308201906302921872347', 20190630203225, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-06-30 20:32:25', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d18c3373ad0d00a408673c5', '5d18c0513ad0d00eb086bf6b', 'oAVzdjqxWI2eKVLl6ee5a0OdeAOg', '4200000293201906309016351823', 20190630221212, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-06-30 22:12:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d1d45d73ad0d011ac8c05bd', '5d1cc8f53ad0d0170c5a1abb', 'oAVzdjlyXFBPOFucRxQJaxQARpOs', '4200000304201907042177737177', 20190704081839, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-07-04 08:18:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d1ea82f3ad0d004a8dd35f3', '5d1e9d173ad0d00bbcd01a62', 'oAVzdjlvVyYRbXZ6s8hbwtS8_Y2Q', '4200000290201907055853311743', 20190705093028, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-05 09:30:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d1ef1e53ad0d00bbcd01a7c', '5d1ebdb33ad0d00c18c3311e', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000301201907057747841708', 20190705144457, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-05 14:44:57', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d22f9d03ad0d014f8dd831f', '5d22f8933ad0d0162c4dc106', 'oAVzdjrDa7KVY84xoB52QYrNV7VQ', '4200000349201907080416364252', 20190708160750, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-08 16:07:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d27367d3ad0d01704be543f', '5d2736123ad0d001287161c0', 'oAVzdjij8ace9yvYvcX3NLFKl9Lg', '4200000343201907110230767961', 20190711211547, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-07-11 21:15:47', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d31d82c3ad0d010fc5f4687', '5d31caf73ad0d015ec32f10e', 'oAVzdjij8ace9yvYvcX3NLFKl9Lg', '4200000355201907197249247502', 20190719224819, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-07-19 22:48:19', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3284343ad0d01328a463f8', '5d3282b13ad0d010fc5f46a8', 'oAVzdjkRXjf8yNJWbY8BPYHtmcOs', '4200000350201907209555723341', 20190720110221, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-20 11:02:21', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d345b8c3ad0d00f48817885', '5d345a633ad0d00f48817883', 'oAVzdjhGh0-y1T3d_IdlR8QOqJIo', '4200000355201907219062809237', 20190721203321, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-21 20:33:21', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d35b2cc3ad0d0121ce5b6a5', '5d35a9ee3ad0d0121ce5b6a0', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000348201907224636415779', 20190722205752, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-07-22 20:57:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3834623ad0d0019c3cbb43', '5d3831c43ad0d010ecfe1aad', 'oAVzdjoiPhveHoA1cvhoe6HmYN0k', '4200000356201907245241096650', 20190724183519, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-24 18:35:19', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d39f5573ad0d00dcc19e68f', '5d39c2c53ad0d007a474d84b', 'oAVzdjifz6C4jdOPB8P8YSzuN1aI', '4200000341201907261247866675', 20190726023101, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-26 02:31:01', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3bd75f3ad0d004ccea1340', '5d3bd6fb3ad0d004ccea133f', 'oAVzdjnzZIlB_Et1XjKWs6dSn6EU', '4200000352201907278656564735', 20190727124733, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-27 12:47:33', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3bff0b3ad0d004ccea135b', '5d3bfba93ad0d017908867a8', 'oAVzdjgwsNWBuu0uAE8ylZ2pEM8M', '4200000346201907277870826985', 20190727153650, 2000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2019-07-27 15:36:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d0fa53ad0d00c2cf88831', '5d3d0d3f3ad0d01044008170', 'oAVzdjgEtxSVmJ7ODWi35eIcm_ZM', '4200000350201907283383956546', 20190728105956, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 10:59:56', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d122a3ad0d01044008173', '5d3d10893ad0d00854327749', 'oAVzdjvALIEMCyapDCblRTANswNs', '4200000347201907287922772094', 20190728111040, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 11:10:40', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d684a3ad0d00c2cf88849', '5d3d50ca3ad0d0085432775e', 'oAVzdjqRMcLifKfk7ZfHC_MYAHE8', '4200000353201907280974645535', 20190728171813, 100, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-07-28 17:18:13', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d6a383ad0d010b451c363', '5d3d4e133ad0d0104400818b', 'oAVzdjqRMcLifKfk7ZfHC_MYAHE8', '4200000351201907284035376516', 20190728172627, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 17:26:27', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d6b373ad0d0085432776c', '5d3d6aa13ad0d010b451c364', 'oAVzdjqRMcLifKfk7ZfHC_MYAHE8', '4200000346201907281344620214', 20190728173039, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 17:30:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3d76053ad0d00c2cf88851', '5d3d73543ad0d0085432776f', 'oAVzdjqRMcLifKfk7ZfHC_MYAHE8', '4200000340201907281709767634', 20190728181658, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 18:16:58', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d3da1e83ad0d0085432777f', '5d3d96193ad0d010b451c376', 'oAVzdjjBB6I9a9OSvYxbm8TpBjoU', '4200000352201907281530892420', 20190728212357, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-07-28 21:23:57', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d4382d23ad0d01348edcd62', '5d4382933ad0d00accc92a5a', 'oAVzdjgc21ECSZma5ZI-BUweVCik', '4200000341201908024710699785', 20190802082456, 1000, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-02 08:24:56', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d43bca53ad0d01348edcd82', '5d43bc6b3ad0d01470832f19', 'oAVzdjjDB6ZCHwULUysXsx4MhD0c', '4200000349201908023021228809', 20190802123139, 500, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-02 12:31:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d43fd623ad0d01470832f3a', '5d43fce53ad0d01470832f39', 'oAVzdjpNyf5pDl5aIautoMRhhS34', '4200000351201908026431570332', 20190802170754, 5000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-02 17:07:54', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d4419353ad0d00accc92a95', '5d4414743ad0d00620aa57f2', 'oAVzdjkoo227O3oM3p0IQtihpcEg', '4200000351201908023713531853', 20190802190634, 100, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-02 19:06:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d4478833ad0d00620aa581c', '5d4476153ad0d01470832f6d', 'oAVzdjpNyf5pDl5aIautoMRhhS34', '4200000356201908033493454656', 20190803015315, 5000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-08-03 01:53:15', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d4d03d33ad0d010447786a5', '5d4d03863ad0d011ace33780', 'oAVzdjv2BlGSrbi5qcJhV6iZptXk', '4200000357201908097506544200', 20190809132545, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-09 13:25:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d4d22643ad0d011ace3378c', '5d4d0bd93ad0d010447786af', 'oAVzdjkY-VgcejF1nG97LS-lIT70', '4200000353201908098344597277', 20190809153609, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-09 15:36:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d52a3cb3ad0d014f4a4ef02', '5d52a2c73ad0d0050cc75426', 'oAVzdjtPZ1J1rGyXwbc9hE4DpB9Q', '4200000351201908130527553007', 20190813194937, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-13 19:49:37', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d536ce73ad0d009087c1625', '5d536cc43ad0d00accb98f00', 'oAVzdjlkewVtlF0FWspEiw--Lpis', '4200000358201908142126520456', 20190814100741, 500, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-14 10:07:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d536ed03ad0d00accb98f02', '5d536d5c3ad0d00ee43d05ee', 'oAVzdjlkewVtlF0FWspEiw--Lpis', '4200000348201908144773195787', 20190814101550, 100, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-14 10:15:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d5370663ad0d00accb98f07', '5d5370273ad0d00accb98f06', 'oAVzdjlkewVtlF0FWspEiw--Lpis', '4200000350201908140124526723', 20190814102236, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-14 10:22:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d53e71b3ad0d011c4b2ad50', '5d53e3f13ad0d0168874f1a0', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000343201908147194131384', 20190814184903, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-14 18:49:03', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d56035a3ad0d00324c254ea', '5d55e93b3ad0d00324c254e7', 'oAVzdjkY-VgcejF1nG97LS-lIT70', '4200000357201908162557703689', 20190816091409, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-08-16 09:14:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d56042e3ad0d016a4bcf84a', '5d5601e63ad0d011c4d1812f', 'oAVzdjkY-VgcejF1nG97LS-lIT70', '4200000358201908165620108883', 20190816091740, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-08-16 09:17:40', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d57af8c3ad0d00e40d21757', '5d57af163ad0d014cca12d00', 'oAVzdjgrPDsbw2aIxSXB1Tq7bR0w', '4200000343201908173199327483', 20190817154107, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-17 15:41:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d57b24a3ad0d00e40d2175c', '5d57b1a43ad0d00e3016b646', 'oAVzdjgrPDsbw2aIxSXB1Tq7bR0w', '4200000356201908170345676141', 20190817155248, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-08-17 15:52:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d57d8173ad0d00e3016b65c', '5d57d1523ad0d00e3016b65a', 'oAVzdjn4nkWEys8WMLk8ms5-_YW4', '4200000352201908171412577323', 20190817183404, 5000, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2019-08-17 18:34:04', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d58b6ec3ad0d0148c21d946', '5d58b00c3ad0d0148c21d942', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000349201908188125287321', 20190818102448, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-18 10:24:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d58fd693ad0d0148c21d95a', '5d58fcb63ad0d0148c21d959', 'oAVzdjo1BsTaRpkWab7HZ5IySmkw', '4200000343201908183422738181', 20190818152533, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-18 15:25:33', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d59ff3c3ad0d013a02253ec', '5d594f733ad0d00d5c0bc67a', 'oAVzdjlg1572L5SJt4nBfepf7jyY', '4200000352201908196737342901', 20190819094538, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-19 09:45:38', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d5a3ef33ad0d00cb0e2a633', '5d5a3cd13ad0d00de492c44c', 'oAVzdjqUz5OqqyQC6tDYhCgCC6Ns', '4200000345201908193020893094', 20190819141728, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-19 14:17:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d5b6bb63ad0d01578ce1eff', '5d5b68693ad0d017a479deb3', 'oAVzdjjDxUuCykLK1y3NGl9DtXBk', '4200000345201908203456767813', 20190820114107, 100, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-20 11:41:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d5eb3e53ad0d01784eceae2', '5d5eb3723ad0d0024843c916', 'oAVzdjlMgd1Oj4aizdamGiuiL5e4', '4200000351201908221440801097', 20190822232532, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-22 23:25:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d5f525e3ad0d0020434dc93', '5d5f4fa33ad0d010e84ced30', 'oAVzdjg4lLzXXZ723g6bBDXT0v2k', '4200000346201908235923862998', 20190823104139, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-23 10:41:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d612a903ad0d0128084c393', '5d611e253ad0d01194191f12', 'oAVzdjkWZDcWtnxFAgD8fPYAM8PQ', '4200000355201908240393956667', 20190824201628, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-24 20:16:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6146293ad0d0128084c39b', '5d6143f33ad0d0128084c398', 'oAVzdjjL_gdiA8RswRFKiRcdy9oU', '4200000354201908241239967481', 20190824221409, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-08-24 22:14:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d61584c3ad0d01194191f28', '5d6156d83ad0d0128084c3a4', 'oAVzdjjDxUuCykLK1y3NGl9DtXBk', '4200000344201908245303482354', 20190824233137, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-24 23:31:37', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d62a33b3ad0d002304bac82', '5d613cb63ad0d001f4459214', 'oAVzdjlg1572L5SJt4nBfepf7jyY', '4200000346201908251407931211', 20190825230332, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-08-25 23:03:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d62a50f3ad0d01558c20d98', '5d6142f53ad0d001f445921b', 'oAVzdjjL_gdiA8RswRFKiRcdy9oU', '4200000348201908259468245785', 20190825231120, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-08-25 23:11:20', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6341dd3ad0d00cc09fdcf3', '5d633ffc3ad0d00cc09fdcf2', 'oAVzdjkWZDcWtnxFAgD8fPYAM8PQ', '4200000354201908268786692987', 20190826102024, 1000, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2019-08-26 10:20:24', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d64d1d63ad0d00d3cc09467', '5d64b9d23ad0d000a4b7cc23', 'oAVzdji21ZB_JnvPtHXSvNQ-9xNQ', '4200000354201908276137931937', 20190827144652, 500, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-08-27 14:46:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d64f3c03ad0d00c883bb371', '5d64947f3ad0d00cc09fdd74', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000342201908274259306981', 20190827171134, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-27 17:11:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6644243ad0d003b890c4bd', '5d6643d93ad0d003b890c4bc', 'oAVzdjpvU-T4ekrKuMCs1E7mjfoQ', '4200000346201908285791276995', 20190828170649, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-08-28 17:06:49', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6680bb3ad0d0114cdee9f7', '5d66808d3ad0d003b890c4d0', 'oAVzdjg4lLzXXZ723g6bBDXT0v2k', '4200000339201908285637949031', 20190828212521, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-28 21:25:21', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d67339c3ad0d01340c0a75a', '5d6731f33ad0d016d8643311', 'oAVzdjlvLelaXdGQmJex4Sua3Wt0', '4200000344201908294313862691', 20190829100843, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-29 10:08:43', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d67a5c93ad0d016d8643334', '5d678c243ad0d006e00e2618', 'oAVzdjiC09t2O0TEwLv2dXQY8tj0', '4200000347201908291778878449', 20190829181542, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-08-29 18:15:42', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6b6a213ad0d0168082f90a', '5d6b68bc3ad0d014109c3fb6', 'oAVzdju24VCqzocMFujIY22o8Xwo', '4200000344201909012878575063', 20190901145016, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-01 14:50:16', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6ccff23ad0d017346c620d', '5d6ccf2f3ad0d009601b13b7', 'oAVzdjqaBfDHR7UvTE25tXVHTvPo', '4200000355201909028108669070', 20190902161656, 100, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-09-02 16:16:56', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d6fafc83ad0d012a8701973', '5d6faefe3ad0d012a8701972', 'oAVzdjgEtxSVmJ7ODWi35eIcm_ZM', '4200000403201909047052074986', 20190904203631, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-04 20:36:31', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d722d8f3ad0d017e06fb40d', '5d720c443ad0d017e06fb3f7', 'oAVzdjnd86LzaY-vH0IQAGc3BTu8', '4200000415201909064239154459', 20190906175740, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-06 17:57:40', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d722ff23ad0d010741c8c00', '5d722dee3ad0d01558a449ff', 'oAVzdjnd86LzaY-vH0IQAGc3BTu8', '4200000403201909061616692728', 20190906180750, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-06 18:07:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d75092e3ad0d0149c3738ff', '5d7507b43ad0d0149c3738fc', 'oAVzdjitTl1eSVQ3lEihXhI3Oin0', '4200000407201909082726630705', 20190908215916, 500, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '广东零元版自检活动（2019）', '2019-09-08 21:59:16', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d750b313ad0d00f3c921151', '5d7509233ad0d0149c3738fd', 'oAVzdjitTl1eSVQ3lEihXhI3Oin0', '4200000402201909084116304738', 20190908220750, 1000, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '广东零元版自检活动（2019）', '2019-09-08 22:07:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7529c63ad0d0149c373915', '5d7528ff3ad0d0149c373913', 'oAVzdjitTl1eSVQ3lEihXhI3Oin0', '4200000402201909097075583609', 20190909001820, 1000, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-09-09 00:18:20', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7888803ad0d015f04e0786', '5d78885d3ad0d003b4da7ae9', 'oAVzdjqyViP9_u6cNF2tx023Cxdw', '4200000404201909117441355285', 20190911133918, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-11 13:39:18', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d78e8213ad0d015f04e079c', '5d78e73c3ad0d011748d8e12', 'oAVzdjqeXZ57kjvjvKN3AwOy47gM', '4200000415201909118202449335', 20190911202721, 1000, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2019-09-11 20:27:21', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d79b5d13ad0d00c10de0f62', '5d79b4123ad0d00c10de0f61', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000413201909127178276962', 20190912110453, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-12 11:04:53', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7a3f8f3ad0d004cc05ec7b', '5d7a3bc03ad0d0095cb3f1b2', 'oAVzdjlSH07kPQ2CysZiYMy66EyM', '4200000402201909123348487357', 20190912205240, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-12 20:52:40', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7b2e5d3ad0d011e8cec639', '5d7b21cd3ad0d0166035f5fa', 'oAVzdjpk3p3h_dW8H9W8OADdBOIM', '4200000404201909139150166854', 20190913135131, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-13 13:51:31', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7b5d143ad0d010ec4c9b10', '5d7b59ab3ad0d011e8cec640', 'oAVzdjlmw9R-cdzAM5hYqL1LKv64', '4200000407201909134890595917', 20190913171050, 500, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-09-13 17:10:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7c902c3ad0d003d46ff3ed', '5d7c8ec63ad0d003d46ff3ec', 'oAVzdjpk3p3h_dW8H9W8OADdBOIM', '4200000404201909149626001307', 20190914150109, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-14 15:01:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7dc6683ad0d013f80c734d', '5d7dc4e33ad0d013f80c734b', 'oAVzdjvhwNTFnxL5Qou38uIxBxLM', '4200000405201909156147851400', 20190915130448, 2000, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-09-15 13:04:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7f15e13ad0d01290e312c3', '5d7e57db3ad0d00f28d75a18', 'oAVzdjvXxU9JTnl5UugHeBV3y0G8', '4200000411201909163812168642', 20190916125607, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-16 12:56:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d7fbe803ad0d01290e312e9', '5d7fbdc43ad0d00b50ddc314', 'oAVzdjtqC7MsHfDokkgEdZePMAtA', '4200000409201909178506577508', 20190917005532, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-09-17 00:55:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d855be83ad0d0126cae2754', '5d85581a3ad0d01448d81d76', 'oAVzdjjrs64uOdek2mv73O6www8o', '4200000409201909216157431705', 20190921070842, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-09-21 07:08:42', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d85cfb03ad0d011042125f2', '5d85cd203ad0d01448d81d8b', 'oAVzdjjH0p_qGP7F9hzXpiwlSeJA', '4200000415201909211735586504', 20190921152228, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-21 15:22:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d8643a23ad0d0161880c2f7', '5d8635a03ad0d0161880c2f6', 'oAVzdjqeXZ57kjvjvKN3AwOy47gM', '4200000408201909212620342041', 20190921233711, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-09-21 23:37:11', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d8846a83ad0d0015c964ff5', '5d8832843ad0d016608b3194', 'oAVzdjlfkcAKkjFYS-xvEN0Q-d5s', '4200000421201909234469476335', 20190923121439, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-23 12:14:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d8cebc43ad0d00f102fb517', '5d8ceab13ad0d006bcc0b226', 'oAVzdjlyfhM02CeU4RYlcdf-r6Zg', '4200000405201909270346077698', 20190927004811, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2019-09-27 00:48:11', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d8f24c53ad0d00dac38a603', '5d8f229e3ad0d00df4ed1a6d', 'oAVzdjkZntc89flxnnmYl5t7QiG8', '4200000404201909286039505014', 20190928171554, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-28 17:15:54', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d8f5dba3ad0d01148ea5794', '5d8f592c3ad0d00dac38a60b', 'oAVzdjgSHOqBs77BB9u7u8ZqSFlA', '4200000421201909283166871360', 20190928211855, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-28 21:18:55', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9090d43ad0d00aa0b97517', '5d9090653ad0d00e2ce90dc1', 'oAVzdjgSHOqBs77BB9u7u8ZqSFlA', '4200000412201909296491538335', 20190929190912, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-09-29 19:09:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9204713ad0d0105c9ba7e3', '5d9204083ad0d0105c9ba7e2', 'oAVzdjuQfhGGbTfYHwpbzKweWKFU', '4200000418201909300135204844', 20190930213452, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-09-30 21:34:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d920be53ad0d00a9c925d0d', '5d920b573ad0d00e384611f0', 'oAVzdjuQfhGGbTfYHwpbzKweWKFU', '4200000409201909300100286747', 20190930220636, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-09-30 22:06:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9321ea3ad0d00f38812180', '5d8effc33ad0d01148ea5784', 'oAVzdjk1t59N2t0bYxOs0Egyzzq4', '4200000411201910019003160376', 20191001175248, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2019-10-01 17:52:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9332be3ad0d011109fa1db', '5d93329e3ad0d011109fa1da', 'oAVzdjuIien6wniuwtwi9PHUVxHE', '4200000407201910019654546296', 20191001190436, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-01 19:04:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9814cc3ad0d008b48a4176', '5d9813093ad0d010d463c49a', 'oAVzdjgofulTwUL3_VE-F18CFxt4', '4200000405201910054960738722', 20191005115812, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-05 11:58:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9942e83ad0d016e460d691', '5d9942823ad0d0073492510f', 'oAVzdjpnjpA0m42Z4WTeOgcyJQm4', '4200000411201910062412574018', 20191006092710, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-06 09:27:10', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9a00fb3ad0d00ea863dbad', '5d99fc383ad0d00ea863dbac', 'oAVzdjiC1CuuqerF8i8z9RUI5P4I', '4200000418201910060891105206', 20191006225807, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-06 22:58:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9abb103ad0d00da40c9d2b', '5d9aba533ad0d00c28bd3c3a', 'oAVzdjr-8Z61B6CPuKIrBjMVRG8A', '4200000410201910070616970225', 20191007121204, 200, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2019-10-07 12:12:04', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5d9d8e033ad0d00940e1934b', '5d9d8a6b3ad0d00940e1934a', 'oAVzdjsIdHWSQavhFyoSTSE2xq4I', '4200000417201910096145951821', 20191009153641, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-10-09 15:36:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5da9b04f3ad0d013a0c4ee8a', '5da9a8493ad0d017f8a9c2ee', 'oAVzdjqPMojmUfGIH5gj0sXX9ZIg', '4200000417201910180333331171', 20191018203013, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-18 20:30:13', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5daadbe53ad0d00ee86275d8', '5daad9f23ad0d0020016bd93', 'oAVzdjg-BfZAE-G-9MAORCliQMxg', '4200000413201910199468993426', 20191019174828, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-10-19 17:48:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5daadd0f3ad0d008f06eada6', '5daadc443ad0d0020016bd94', 'oAVzdjg-BfZAE-G-9MAORCliQMxg', '4200000405201910191007847472', 20191019175325, 500, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-10-19 17:53:25', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dac73fa3ad0d0179828fd2d', '5dac66b13ad0d0179828fd24', 'oAVzdjo4U1KQ2lWYTlkcgoNIpQfs', '4200000416201910209880899371', 20191020224936, 2000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-20 22:49:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dad229b3ad0d00f9c342c75', '5dac2baa3ad0d00bb096a4c9', 'oAVzdjlg1572L5SJt4nBfepf7jyY', '4200000420201910210762431496', 20191021111442, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-21 11:14:42', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dae3f283ad0d00f34dee8fd', '5dae143d3ad0d013dc82b7b1', 'oAVzdjiQgdaL_tSF_8HatMu7x_RE', '4200000417201910225981822864', 20191022072847, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-22 07:28:47', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5daeff653ad0d011505dee2c', '5daeff1b3ad0d011505dee2b', 'oAVzdjoOLZam8up5_ENirGQQdkn8', '4200000406201910223446879608', 20191022210858, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-22 21:08:58', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db2dc5b3ad0d0114ca4353e', '5db2d3353ad0d00d58f55d32', 'oAVzdjqPMojmUfGIH5gj0sXX9ZIg', '4200000405201910254724774575', 20191025192832, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-25 19:28:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db2efcf3ad0d00d58f55d40', '5db2c32e3ad0d0114ca43538', 'oAVzdjqPMojmUfGIH5gj0sXX9ZIg', '4200000406201910251182538256', 20191025205134, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-25 20:51:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db2f7743ad0d0114ca4354c', '5db2f3b33ad0d010ac731cb0', 'oAVzdjoQi9BRkH92Oqjb5iUrp6Jo', '4200000420201910255969948813', 20191025212411, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-10-25 21:24:11', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db318f33ad0d0114ca4355f', '5db314943ad0d0114ca4355c', 'oAVzdjqUz5OqqyQC6tDYhCgCC6Ns', '4200000407201910254600688731', 20191025234703, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-25 23:47:03', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db3c7103ad0d008245bb719', '5db3bba13ad0d00a44767d4f', 'oAVzdjqPMojmUfGIH5gj0sXX9ZIg', '4200000419201910263183236212', 20191026120958, 500, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-10-26 12:09:58', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5db856f63ad0d01268700b37', '5db853fd3ad0d00d4879a474', 'oAVzdjobw6hDqv_9gt5wZJXYb8PI', '4200000413201910293598658860', 20191029231300, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-10-29 23:13:00', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbb80d23ad0d0027c5f1c20', '5dbb7cfc3ad0d0027c5f1c1e', 'oAVzdjoj5QAc4IK-W-8ywerWqX3Q', '4200000404201911013547370881', 20191101084823, 1000, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-11-01 08:48:23', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbceb8d3ad0d010b833a509', '5dbce03c3ad0d006c00e095b', 'oAVzdjlmw9R-cdzAM5hYqL1LKv64', '4200000410201911028899449213', 20191102103603, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-11-02 10:36:03', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbcf9403ad0d00ec0b29320', '5dbceccf3ad0d00ec0b2931e', 'oAVzdjlmw9R-cdzAM5hYqL1LKv64', '4200000416201911029424607515', 20191102113430, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-02 11:34:30', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbd74e03ad0d010b833a522', '5dbd6adc3ad0d00ec0b29344', 'oAVzdjlVlfhVrFSGFlmm26LzTEKg', '4200000415201911023640941675', 20191102202211, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-02 20:22:11', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbe6e283ad0d00aac719f52', '5dbcfe963ad0d006c00e0961', 'oAVzdjlg1572L5SJt4nBfepf7jyY', '4200000419201911035543636154', 20191103140533, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-03 14:05:33', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbe932b3ad0d00ea0816cff', '5dbe92a43ad0d00aac719f5e', 'oAVzdjgMrRCRbfTxOAX0nS-UlvqY', '4200000408201911038685810416', 20191103164335, 1000, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-11-03 16:43:35', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dbe94333ad0d00aac719f60', '5dbe8c8e3ad0d004887f740c', 'oAVzdjvprlEHIhAPrbm7yxPKq7dU', '4200000412201911030416510128', 20191103164753, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-03 16:47:53', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dc038133ad0d00ba03432a9', '5dc030a43ad0d010f8b81ef4', 'oAVzdjpmcA027347f-e33wN_hBTw', '4200000461201911049448533176', 20191104223919, 1000, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2019-11-04 22:39:19', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dc039993ad0d00ec4820df3', '5dc033513ad0d00ec4820df2', 'oAVzdjvE9jyClpIWbgKrw5VSEkCY', '4200000456201911048828334478', 20191104224554, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-11-04 22:45:54', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dc0e69f3ad0d017a8141a10', '5dc0e3b13ad0d001d4cc93bc', 'oAVzdjsDMIT8fJcwghd7LdmZ8DOg', '4200000469201911056300951960', 20191105110402, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '广东零元版自检活动（2019）', '2019-11-05 11:04:02', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dcd39a23ad0d00fc4a44581', '5dcd37d53ad0d009b47026f3', 'oAVzdjg7aYq2qjtmxcdwDKgjoN5k', '4200000466201911148808478785', 20191114192534, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-14 19:25:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dceb24d3ad0d00dec5cb529', '5dceb1b73ad0d00f94ec43ad', 'oAVzdjiSRplMsNGFWHh5aAAXPkDs', '4200000466201911154487305385', 20191115221234, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-15 22:12:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd0a2de3ad0d01390e685d2', '5dd09dc93ad0d01390e685d1', 'oAVzdjvgZOzXseE-hJyO67e2PQn8', '4200000452201911175851570966', 20191117093117, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-17 09:31:17', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd148c73ad0d016c474a48e', '5dd141463ad0d01390e6860e', 'oAVzdjmKilTJCvs2Aj4jZWNrGkKo', '4200000471201911177746791658', 20191117211909, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-17 21:19:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd15c523ad0d016c474a495', '5dd15c0a3ad0d01390e68619', 'oAVzdjqJ0x9bWV3AvtgA9dGAfEBg', '4200000466201911176354614904', 20191117224234, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-11-17 22:42:34', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd3b0183ad0d01750aa168c', '5dd24ce13ad0d014105b2caa', 'oAVzdjmZE3lStnPefdFrFxKgRsZQ', '4200000452201911196343398348', 20191119170429, 100, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '广东零元版自检活动（2019）', '2019-11-19 17:04:29', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd62d5c3ad0d017ecb35f4d', '5dd61bd03ad0d017ecb35f4b', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000452201911215076855168', 20191121142329, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-21 14:23:29', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dd944393ad0d00d143eb3fb', '5dd9429f3ad0d00438aff8c6', 'oAVzdjlyXFBPOFucRxQJaxQARpOs', '4200000452201911239186822019', 20191123223750, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-11-23 22:37:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dda7c1a3ad0d0027cae26dd', '5dda7b9e3ad0d00e94b617a7', 'oAVzdjm6Xh1Np_LI0Snd-2602fsE', '4200000466201911242952758980', 20191124204831, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-24 20:48:31', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5ddd0bee3ad0d00bf0fe487a', '5ddd07c23ad0d0102ce3088a', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000469201911269368635804', 20191126192644, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-26 19:26:44', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de125bd3ad0d00adc352aba', '5de125223ad0d00adc352ab8', 'oAVzdjiOKt9SVDjSKmRs3jj43h1s', '4200000458201911290153198267', 20191129220553, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-29 22:05:53', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de1e1a23ad0d003b8a33a07', '5de1cd963ad0d01704710ab9', 'oAVzdjhOfspHMprXv8I3t-dG35fg', '4200000465201911307636990960', 20191130112736, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-30 11:27:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de1fcbc3ad0d003b8a33a12', '5de1fb493ad0d01704710ac5', 'oAVzdjuxizXoIR5tqUh2lpAko4Ko', '4200000464201911304424482583', 20191130132313, 500, 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '周折', '2019-11-30 13:23:13', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de1fd383ad0d01704710ac7', '5de1fa743ad0d003b8a33a11', 'oAVzdjuxizXoIR5tqUh2lpAko4Ko', '4200000465201911300814303559', 20191130132517, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-11-30 13:25:17', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de5bd693ad0d00ec40ebf85', '5de5bbd73ad0d00ec40ebf84', 'oAVzdjtqfgzLAzHSiX7HNspgEdcs', '4200000467201912034905264946', 20191203094206, 200, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-12-03 09:42:06', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de5e1173ad0d00c5c379b59', '5de541553ad0d00808aa5cab', 'oAVzdjiH4vaGcmSi0c1cdJFtCH7Y', '4200000460201912030156922898', 20191203121420, 100, 'oAVzdjml_WibiFybO9YhHi9yA6Wg', '杨阳', '2019-12-03 12:14:20', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de642aa3ad0d00ec40ebfc0', '5de641d83ad0d00d0859a4d7', 'oAVzdjgzCeLzpenXNTfhB6HFuErk', '4200000469201912039154015058', 20191203191039, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-03 19:10:39', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de6690e3ad0d00c5c379b88', '5de64c683ad0d00d0859a4dc', 'oAVzdjn-qwreh6voxXbVTnzpkx9s', '4200000463201912039435868359', 20191203215435, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-12-03 21:54:35', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de67f723ad0d00ec40ebfe3', '5de67f333ad0d00c5c379b99', 'oAVzdji5VsHx-QpdC_UeEUX0dqSI', '4200000461201912038238791971', 20191203232959, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-03 23:29:59', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5de887523ad0d00e1808c240', '5de8630d3ad0d00e1808c23b', 'oAVzdji5VsHx-QpdC_UeEUX0dqSI', '4200000465201912053092913987', 20191205122807, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-05 12:28:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dee55b43ad0d015000cde9e', '5dee54e33ad0d015000cde9d', 'oAVzdjnVOOPh7iAGhbKs8mZdQIE0', '4200000452201912098313631924', 20191209221001, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-09 22:10:01', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dee763d3ad0d015000cdeb3', '5dee6d5d3ad0d015000cdeb1', 'oAVzdjkCQ0L0DRcPOSpYoL5aFfUY', '4200000457201912108341129711', 20191210002855, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-10 00:28:55', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5def49393ad0d00d70f321bf', '5def48e53ad0d015885d8f0a', 'oAVzdjnVOOPh7iAGhbKs8mZdQIE0', '4200000468201912103133494300', 20191210152901, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2019-12-10 15:29:01', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5def6a5e3ad0d004a8c9bac1', '5def696a3ad0d015885d8f15', 'oAVzdjnVOOPh7iAGhbKs8mZdQIE0', '4200000459201912101740550447', 20191210175027, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-10 17:50:27', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5df08e013ad0d0043c955adb', '5df0842a3ad0d0043c955ada', 'oAVzdjgHZgWY1a_dL73uMUraGeGE', '4200000462201912110148277002', 20191211143445, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-11 14:34:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5df0f9633ad0d00438ca044d', '5df0eeb13ad0d00710a240d8', 'oAVzdjkqkttVZWnrlzRQcgHMgzWw', '4200000460201912112548067505', 20191211221257, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-11 22:12:57', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5df1b6143ad0d016c4595b28', '5df1303d3ad0d01084b182ca', 'oAVzdjvqmZQdq35mN512i_2bmW7U', '4200000459201912121004349588', 20191212113803, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-12 11:38:03', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5df70e153ad0d016748ff789', '5df6f7833ad0d00e48321c61', 'oAVzdjlg1572L5SJt4nBfepf7jyY', '4200000468201912161470035324', 20191216125450, 1000, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2019-12-16 12:54:50', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5dff27d73ad0d0167c1e6a36', '5dff26dd3ad0d0167c1e6a35', 'oAVzdjpFlZK0nwPdRvlHTWWYIspo', '4200000459201912221809639007', 20191222162253, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2019-12-22 16:22:53', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0039bf3ad0d0043c0f9d19', '5e00389e3ad0d000ecc9e2b1', 'oAVzdjgMrRCRbfTxOAX0nS-UlvqY', '4200000453201912232485571869', 20191223115136, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-23 11:51:36', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0470a03ad0d0178c1cba8f', '5e046d7f3ad0d01018bb30b4', 'oAVzdjjDsHDFf5zFua6zziewCx7U', '4200000461201912267910255928', 20191226163445, 200, 'oAVzdjv01R7TULKhkFa6a2JcWa_Y', '黄子锋', '2019-12-26 16:34:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0482163ad0d013705a59cf', '5e0372ee3ad0d00fdc50d699', 'oAVzdjnrrLXtDHFVBeZdPRo0ZLKg', '4200000455201912267816851359', 20191226174915, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-26 17:49:15', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e07441e3ad0d0024caaafde', '5e05d6de3ad0d0129c291498', 'oAVzdjpgAMNPHBqbxgHiQ5jh37ug', '4200000453201912281481393355', 20191228200141, 500, 'oAVzdjgpoZEau_9hxdiDtIWctK54', '余涛', '2019-12-28 20:01:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e09c8e63ad0d01568cf128b', '5e09c65e3ad0d00e184b808c', 'oAVzdjvhXnupo4rWiJYJZ2PjarcE', '4200000470201912309426749331', 20191230175243, 2000, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2019-12-30 17:52:43', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0ae0823ad0d00c14634f94', '5e0ad94e3ad0d014043278d1', 'oAVzdjgMrRCRbfTxOAX0nS-UlvqY', '4200000471201912312372049628', 20191231134546, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2019-12-31 13:45:46', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0c98fe3ad0d01608f82900', '5e0c92bb3ad0d00a0cb92f01', 'oAVzdjpm2n4Di03dgEq0762HExuE', '4200000455202001011799321700', 20200101210507, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-01 21:05:07', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e0d685f3ad0d016804e6d6a', '5e0d64d63ad0d017c8e17f4a', 'oAVzdjklIv8sFwLlMaH8FSDROAwo', '4200000452202001021050618731', 20200102114957, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-01-02 11:49:57', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e11fcef3ad0d00e84ca5ac7', '5e11e2233ad0d0175825a910', 'oAVzdjucSEs0LGnPmA4NNeD8tocE', '4200000458202001053849683235', 20200105231251, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-05 23:12:51', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e131b1c3ad0d00ba493ae9a', '5e12c43c3ad0d00ba493ae83', 'oAVzdjuNjB7pigzVKy3bwScDLVKI', '4200000470202001063046011349', 20200106193352, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-06 19:33:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e134eeb3ad0d00ba493aea7', '5e134ebb3ad0d00d3c354248', 'oAVzdjjdBwRGsLpWHDJLKia1cIgA', '4200000503202001062221664703', 20200106231458, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-06 23:14:58', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e1ff2213ad0d00700ddbbab', '5e1ff12c3ad0d013c881ec04', 'oAVzdjvgZOzXseE-hJyO67e2PQn8', '4200000514202001164743691902', 20200116131832, 500, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2020-01-16 13:18:32', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e2695df3ad0d016308c2777', '5e2691133ad0d0167c6f0a20', 'oAVzdjt82cI9dAtnAFYbt1Dg8B9M', '4200000514202001216107291895', 20200121141048, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-21 14:10:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e2697fa3ad0d016308c277a', '5e2691133ad0d0167c6f0a20', 'oAVzdjt82cI9dAtnAFYbt1Dg8B9M', '4200000515202001213520301470', 20200121141945, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-21 14:19:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e26e3513ad0d016308c278d', '5e2696553ad0d016308c2778', 'oAVzdjt82cI9dAtnAFYbt1Dg8B9M', '4200000515202001212692168493', 20200121194112, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-21 19:41:12', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e27321e3ad0d014f8d86742', '5e26804e3ad0d0167c6f0a1b', 'oAVzdjmSUTYstSoX8-s_1Qs8S6JU', '4200000504202001224552432086', 20200122011728, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-01-22 01:17:28', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e35279e3ad0d01198dc3efa', '5e351e483ad0d013b0a4b67c', 'oAVzdjirgM5foaFShfQaNIurD4dg', '4200000521202002011943216696', 20200201152419, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-02-01 15:24:19', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e3f81423ad0d00bec4d3c7f', '5e3f807d3ad0d00bec4d3c7d', 'oAVzdjvhXnupo4rWiJYJZ2PjarcE', '4200000504202002094069243228', 20200209114926, 500, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2020-02-09 11:49:26', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e4b811a3ad0d007c08772a7', '5e4b7bc53ad0d007c08772a6', 'oAVzdjucSEs0LGnPmA4NNeD8tocE', '4200000513202002189613590924', 20200218141601, 2000, 'oAVzdjqiMwTqEJOPiFv1sziPF3v0', '阿勇', '2020-02-18 14:16:01', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e4bf8703ad0d007c08772c3', '5e4bd56f3ad0d007c08772bf', 'oAVzdjucSEs0LGnPmA4NNeD8tocE', '4200000505202002188851103181', 20200218224508, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-02-18 22:45:08', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e4e1f1d3ad0d00fe0fe284b', '5e4e16153ad0d013545ac9d6', 'oAVzdjgFXvikdvAbiGoG3rPGorDE', '4200000505202002202844258793', 20200220135446, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-02-20 13:54:46', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e4ead4b3ad0d001ec3ba5cd', '5e4e8cf73ad0d001ec3ba5b8', 'oAVzdjlVIxb4nHz52So6q4jUSBSo', '4200000506202002219830988663', 20200221000122, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-02-21 00:01:22', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e53d0153ad0d002c4375740', '5e53cf913ad0d002c437573f', 'oAVzdjrFJpALwWm2r--vS8bo9KWY', '4200000518202002245511510635', 20200224213106, 500, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-02-24 21:31:06', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e53e8703ad0d009ecd843a3', '5e53e4f33ad0d009247b187a', 'oAVzdjpNTq8zbnLkuy0nSgKVn750', '4200000510202002241056724802', 20200224231509, 200, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-02-24 23:15:09', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e5914543ad0d00e0c36129c', '5e5913e13ad0d00e0c36129b', 'oAVzdjuNSthBjeiZHPE5H2QHG5Xw', '4200000514202002286124529202', 20200228212351, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-02-28 21:23:51', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e5ba3e03ad0d00c688ecab2', '5e5a29563ad0d00d6443feb3', 'oAVzdjuPpAIEy4NfDYwEeNIAvsx4', '4200000517202003017131507509', 20200301200041, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-01 20:00:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e5f9c873ad0d00c286534e6', '5e5f9c1c3ad0d006a4370f86', 'oAVzdjqF8L971lNtZxLAQVNjHq4g', '4200000502202003047428321135', 20200304201821, 500, 'oAVzdju5E_NaSOLWfjlUYoTzSdzE', '阿嘉', '2020-03-04 20:18:21', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e5fb8293ad0d00c30a9a2d9', '5e5de1253ad0d01138635ee4', 'oAVzdjvdHYEQhP4cSbpK20EfR2eU', '4200000515202003047714822273', 20200304221618, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-04 22:16:18', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e6f74383ad0d01020d6ca44', '5e6f6a903ad0d00ca0b4d25c', 'oAVzdjlFl5ObaoQo5fi75nm-rbKg', '4200000504202003169904834527', 20200316204241, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-16 20:42:41', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e6f77833ad0d013e07fca91', '5e6f745e3ad0d01020d6ca45', 'oAVzdjlFl5ObaoQo5fi75nm-rbKg', '4200000507202003165738368541', 20200316205645, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-16 20:56:45', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e72f9893ad0d0109c0f2f14', '5e72f6c93ad0d0109c0f2f13', 'oAVzdjnI4MUVzq3dXAbFF0HVl7_Y', '4200000513202003196396940816', 20200319124816, 200, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-19 12:48:16', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e745dec3ad0d0108c057d1f', '5e72b6293ad0d008c44523cc', 'oAVzdjv01eVSrjbW0b3_fYJHna9w', '4200000502202003202671859287', 20200320140852, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-20 14:08:52', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e783da23ad0d000949be10e', '5e7816963ad0d006bcedadd3', 'oAVzdjmBZQUiS0ACaMR7FzWAgIYs', '4200000513202003230513707590', 20200323124006, 2000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-23 12:40:06', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e7a25f93ad0d00d14fd7772', '5e7a06503ad0d00d14fd776b', 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '4200000519202003241433209796', 20200324232344, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-03-24 23:23:44', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e7aee183ad0d006c0ed78c7', '5e7aede93ad0d00988c38c02', 'oAVzdjgpb16bDnrLp43yZgcDF2hs', '4200000520202003250548640619', 20200325133733, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-03-25 13:37:33', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e7d7c6a3ad0d0099c35200e', '5e7d79023ad0d0099c35200d', 'oAVzdjkzewwx1_rPKMy41Kw-zroI', '4200000569202003273616740427', 20200327120920, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '阿捷', '2020-03-27 12:09:20', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e7f49203ad0d0088469885f', '5e7df0903ad0d00638855aa0', 'oAVzdjvdHYEQhP4cSbpK20EfR2eU', '4200000567202003286866364682', 20200328205502, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-28 20:55:02', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e80ab363ad0d008a04fdf4b', '5e80a5773ad0d00d545c4a90', 'oAVzdjmSUTYstSoX8-s_1Qs8S6JU', '4200000556202003294077913097', 20200329220548, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-29 22:05:48', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e81737b3ad0d013b80fcffc', '5e81695e3ad0d012cca55eb1', 'oAVzdjmZE3lStnPefdFrFxKgRsZQ', '4200000563202003301902230420', 20200330122017, 100, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-30 12:20:17', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e83409c3ad0d00788a9d54d', '5e833fc23ad0d01250b084b8', 'oAVzdjpdETSE6OCwQU8qTUSSCqPc', '4200000552202003312153304074', 20200331210747, 500, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-03-31 21:07:47', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e8c2a553ad0d00ef0948ef7', '5e8c28ab3ad0d012c84afed1', 'oAVzdjhjA7h2bJZp8N1w_coIE6_s', '4200000571202004077051636821', 20200407152306, 100, 'oAVzdjiLnwLNsR_sGiNagvJqih_s', '性病检测服务', '2020-04-07 15:23:06', '000000000000000000000000');
-INSERT INTO `pay_history` VALUES ('5e8d6f3a3ad0d010943ccbd8', '5e8c8a883ad0d006c01734a8', 'oAVzdjl8gwJfnf-6_6c2-ryE3A6c', '4200000557202004082368287659', 20200408142917, 1000, 'oAVzdjs9LH9fp6QZfWIXwT5pRzZs', '古羽舟', '2020-04-08 14:29:17', '000000000000000000000000');
+INSERT INTO `login_info` VALUES (13, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-25 13:21:24', 1, '登录成功');
+INSERT INTO `login_info` VALUES (14, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 08:36:30', 1, '登录成功');
+INSERT INTO `login_info` VALUES (15, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 08:52:51', 1, '登录成功');
+INSERT INTO `login_info` VALUES (16, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 08:54:23', 0, '用户名或密码错误');
+INSERT INTO `login_info` VALUES (17, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 08:54:26', 0, '用户名或密码错误');
+INSERT INTO `login_info` VALUES (18, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 08:54:30', 1, '登录成功');
+INSERT INTO `login_info` VALUES (19, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 09:23:59', 1, '登录成功');
+INSERT INTO `login_info` VALUES (20, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 09:27:21', 1, '登录成功');
+INSERT INTO `login_info` VALUES (21, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 10:11:49', 1, '登录成功');
+INSERT INTO `login_info` VALUES (22, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-27 11:24:33', 1, '登录成功');
 
 -- ----------------------------
 -- Table structure for sys_citys
@@ -962,7 +1048,7 @@ CREATE TABLE `sys_citys`  (
   `city_code` int(12) NOT NULL,
   `city_level` int(2) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '行政区域表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_citys
@@ -4236,26 +4322,6 @@ INSERT INTO `sys_dept` VALUES (110, 0, 0, '', '无锡富华科技有限公司', 
 INSERT INTO `sys_dept` VALUES (111, 110, 0, '', '江苏真源网络', 1, 1365223127751200768, '潘总', '', '', 0, 0, 'admin', '2021-03-15 17:37:45', 'admin', '2021-03-15 17:37:45', '');
 
 -- ----------------------------
--- Table structure for sys_diagnosis
--- ----------------------------
-DROP TABLE IF EXISTS `sys_diagnosis`;
-CREATE TABLE `sys_diagnosis`  (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pid` bigint(20) NOT NULL,
-  `code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sort_num` smallint(255) NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_diagnosis
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_dictionary
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dictionary`;
@@ -4270,7 +4336,7 @@ CREATE TABLE `sys_dictionary`  (
   `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创建人',
   `create_time` datetime(3) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dictionary
@@ -4301,7 +4367,7 @@ CREATE TABLE `sys_menu`  (
   `menu_type` tinyint(4) NOT NULL COMMENT '类型：0-目录，1-菜单',
   `menu_icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单icon',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4314,14 +4380,14 @@ INSERT INTO `sys_menu` VALUES (138030650765085, '职位信息', '/admin/position
 INSERT INTO `sys_menu` VALUES (138030650765086, '部门管理', '/admin/SysDepartment/index', 'system:dept:view', 1, 138030650765089, NULL, 'admin', '2020-05-12 09:10:29.816', 0, 2, 1, 'fa fa-sitemap');
 INSERT INTO `sys_menu` VALUES (138030650765088, '系统管理', '#', '#', 100, 0, '1', 'admin', '2017-08-30 10:36:57.803', 0, 1, 0, 'fa fa-cogs');
 INSERT INTO `sys_menu` VALUES (138030650765089, '单位组织', '#', '#', 99, 0, '', 'admin', '2018-08-13 14:02:39.201', 0, 1, 0, 'fa fa-sitemap');
-INSERT INTO `sys_menu` VALUES (138030650765092, '定时任务', '/admin/hangfirejob/index', 'system:hangfirejob:view', 10, 138030650765088, NULL, 'admin', '2019-04-18 17:23:59.429', 0, 2, 1, 'fa fa-tag');
+INSERT INTO `sys_menu` VALUES (138030650765092, '定时任务', '/admin/hangfirejob/index', 'system:hangfirejob:view', 9, 138030650765088, NULL, 'admin', '2019-04-18 17:23:59.429', 0, 2, 1, 'fa fa-tag');
 INSERT INTO `sys_menu` VALUES (138030650765093, '异常日志', '/admin/easylog/index', 'system:log:view', 2, 150768673534021, NULL, 'admin', '2020-04-11 12:22:46.047', 0, 3, 1, 'fa fa-tag');
 INSERT INTO `sys_menu` VALUES (142971618836549, '生产管理', '#', '#', 1, 0, NULL, 'admin', '2021-03-30 10:13:02.400', 0, 1, 0, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (142971913965637, '员工管理', '/fuhua/staff/index', 'fh:staff:view', 5, 142971618836549, NULL, 'admin', '2021-03-30 10:14:14.454', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (142984211783749, '产品工序', '/fuhua/product/index', 'fh:product:view', 4, 142971618836549, NULL, 'admin', '2021-03-30 11:04:16.851', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (143026935611461, '工时管理', '/fuhua/timebill/index', 'fh:timebill:view', 3, 142971618836549, NULL, 'admin', '2021-03-30 13:58:07.473', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (143326710992965, '工时统计', '/fuhua/WorkTimeReport/index', 'fh:worktimereport:view', 1, 142971618836549, NULL, 'admin', '2021-03-31 10:17:54.822', 0, 2, 1, 'fa fa-bookmark');
-INSERT INTO `sys_menu` VALUES (148970094415941, 'Hangfire监控', '/hangfire', '#', 10, 138030650765088, NULL, 'admin', '2021-04-16 09:00:53.978', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (148970094415941, 'Hangfire监控', '/easytask', '#', 10, 138030650765088, NULL, 'admin', '2021-04-16 09:00:53.978', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (149035334889541, '内容管理', '#', '#', 1, 0, NULL, 'admin', '2021-04-16 13:26:21.828', 0, 1, 0, 'fa fa-book');
 INSERT INTO `sys_menu` VALUES (149035570483269, '站点管理', '#', '#', 2, 0, NULL, 'admin', '2021-04-16 13:27:19.346', 0, 1, 0, 'fa fa-internet-explorer');
 INSERT INTO `sys_menu` VALUES (149035865407557, '站点设置', '/SiteSet/site/index', 'site:set:view', 1, 149035570483269, NULL, 'admin', '2021-04-16 13:28:31.349', 0, 2, 1, 'fa fa-bookmark');
@@ -4334,6 +4400,7 @@ INSERT INTO `sys_menu` VALUES (150463360806981, '模板管理', '/Cms/TemplateCo
 INSERT INTO `sys_menu` VALUES (150485981093957, '模板匹配', '/cms/TemplateMatch/Index', 'cms:templatematch:view', 4, 149035334889541, NULL, 'admin', '2021-04-20 15:49:03.499', 0, 2, 1, 'fa fa-exchange');
 INSERT INTO `sys_menu` VALUES (150768673534021, '日志管理', '#', '#', 8, 138030650765088, NULL, 'admin', '2021-04-21 10:59:20.208', 0, 2, 0, 'fa fa-pencil-square-o');
 INSERT INTO `sys_menu` VALUES (150769392050245, '登录日志', '/admin/loginlog/index', 'system:loginlog:view', 1, 150768673534021, NULL, 'admin', '2021-04-21 11:02:15.627', 0, 3, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (152219595145285, '代码生成', '/admin/codegen/index', 'system:codegen:view', 11, 138030650765088, NULL, 'admin', '2021-04-25 13:23:09.116', 0, 2, 1, 'fa fa-bookmark');
 
 -- ----------------------------
 -- Table structure for sys_operate
@@ -4346,7 +4413,7 @@ CREATE TABLE `sys_operate`  (
   `func_sort` int(5) NOT NULL COMMENT '排序',
   `menu_id` bigint(20) NOT NULL COMMENT '菜单Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '按钮操作表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_operate
@@ -4414,6 +4481,7 @@ INSERT INTO `sys_operate` VALUES (150485981282373, '匹配模板', 'cms:template
 INSERT INTO `sys_operate` VALUES (150769039695941, '删除', 'system:log:delete', 1, 138030650765093);
 INSERT INTO `sys_operate` VALUES (150769039695942, '清空', 'system:log:clear', 2, 138030650765093);
 INSERT INTO `sys_operate` VALUES (150769392238661, '删除', 'system:loginlog:delete', 1, 150769392050245);
+INSERT INTO `sys_operate` VALUES (152219595280453, '全量同步', 'system:codegen:syncall', 1, 152219595145285);
 
 -- ----------------------------
 -- Table structure for sys_position
@@ -4457,7 +4525,7 @@ CREATE TABLE `sys_role`  (
   `create_time` datetime(3) NOT NULL COMMENT '创建时间',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -4471,14 +4539,14 @@ INSERT INTO `sys_role` VALUES (138027723972677, '组长', 'group_leader', 1, 0, 
 DROP TABLE IF EXISTS `sys_role_authorize`;
 CREATE TABLE `sys_role_authorize`  (
   `id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
-  `menu_id` bigint(20) NOT NULL,
-  `menu_pid` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL COMMENT '角色id',
+  `menu_id` bigint(20) NOT NULL COMMENT '菜单或者操作id',
+  `menu_pid` bigint(20) NOT NULL COMMENT '上级id',
   `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_time` datetime(3) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_roleid`(`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_authorize
@@ -4526,24 +4594,6 @@ INSERT INTO `sys_role_authorize` VALUES (151466757640284, 138027723972674, 15009
 INSERT INTO `sys_role_authorize` VALUES (151466757640285, 138027723972674, 150094471213126, 150094470795333, 'admin', '2021-04-23 10:19:50.391');
 
 -- ----------------------------
--- Table structure for sys_tables
--- ----------------------------
-DROP TABLE IF EXISTS `sys_tables`;
-CREATE TABLE `sys_tables`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `table_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表名',
-  `table_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表描述',
-  `entity_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '实体类名称，用于生成控制器和Service',
-  `create_time` datetime(0) NOT NULL,
-  `update_time` datetime(0) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_tables
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -4568,20 +4618,20 @@ CREATE TABLE `sys_user`  (
   `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '更新人',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (138030650765371, 'admin', 'admin@123', '管理员122', '15961820351', 'admin2@fofia.com', 0, 1, 0, 0, '无锡市富华科技', '/ui/img/profile.jpg', '', 1, 0, 'admin', '2017-08-30 10:36:57.803', 'admin', '2021-02-27 16:40:44');
-INSERT INTO `sys_user` VALUES (138030650765372, 'pxw', '123123', '浦总', '18012388691', 'pxw@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/img/profile.jpg', '', 1, 0, 'admin', '2020-01-06 16:28:59.650', 'admin', '2021-02-27 15:22:05');
-INSERT INTO `sys_user` VALUES (138030650765373, 'cxq', '123123', '陈总', '', 'cxq@fofia.com', 1, 0, 1000985679938850816, 104, '无锡源致科技', '/ui/img/profile.jpg', '备注', 1, 0, 'admin', '2020-05-10 17:33:53.332', 'admin', '2021-02-27 15:21:58');
-INSERT INTO `sys_user` VALUES (138030650765374, 'lyy', '123456', '罗总', '15961820351', 'lyy@fofia.com', 1, 0, 1000985679938850816, 100, '无锡市富华科技', '/ui/img/profile.jpg', '备注事实上111', 1, 0, 'yushuo', '2021-02-01 11:28:17.561', 'admin', '2021-03-12 13:50:27');
-INSERT INTO `sys_user` VALUES (138030650765375, 'phh', '123123', '潘总', '13861451731', 'pdd@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/img/profile.jpg', '备注', 1, 0, 'admin', '2021-02-26 16:52:12.934', 'admin', '2021-02-27 15:21:28');
-INSERT INTO `sys_user` VALUES (138030650765376, 'yushuo', '123123', '于硕', '15961820351', '461733078@qq.com', 1, 0, 138027723972674, 107, '技术部', '/ui/img/profile.jpg', '于硕', 1, 0, 'admin', '2021-02-26 17:04:29.137', 'admin', '2021-04-23 10:19:11');
-INSERT INTO `sys_user` VALUES (138030650765377, 'qqw', '123456', '曲奇伟', '', 'qqw@fofia.com', 1, 0, 1000985679938850816, 3, '硬件研发部', '/ui/img/profile.jpg', '曲奇伟', 1, 0, 'admin', '2021-02-26 17:06:00.296', 'admin', '2021-02-27 15:21:36');
-INSERT INTO `sys_user` VALUES (138030650765378, 'mdf', '123123', '毛总', '', 'mdf@fofia.com', 1, 0, 1000985679938850816, 105, '江苏真源科技', '/ui/img/profile.jpg', '毛东方', 1, 0, 'admin', '2021-02-26 17:06:28.377', 'admin', '2021-03-02 13:57:34');
-INSERT INTO `sys_user` VALUES (138030650765381, 'ceshi', '123456', '于硕', '15961820351', '', 1, 0, 138027723972677, 0, '', '/ui/img/profile.jpg', NULL, 1, 0, 'admin', '2021-03-16 11:08:11.368', 'admin', '2021-04-02 09:27:40');
+INSERT INTO `sys_user` VALUES (138030650765371, 'admin', 'admin@123', '管理员122', '15961820351', 'admin2@fofia.com', 0, 1, 0, 0, '无锡市富华科技', '/ui/images/profile.jpg', '', 1, 0, 'admin', '2017-08-30 10:36:57.803', 'admin', '2021-02-27 16:40:44');
+INSERT INTO `sys_user` VALUES (138030650765372, 'pxw', '123123', '浦总', '18012388691', 'pxw@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/images/profile.jpg', '', 1, 0, 'admin', '2020-01-06 16:28:59.650', 'admin', '2021-02-27 15:22:05');
+INSERT INTO `sys_user` VALUES (138030650765373, 'cxq', '123123', '陈总', '', 'cxq@fofia.com', 1, 0, 1000985679938850816, 104, '无锡源致科技', '/ui/images/profile.jpg', '备注', 1, 0, 'admin', '2020-05-10 17:33:53.332', 'admin', '2021-02-27 15:21:58');
+INSERT INTO `sys_user` VALUES (138030650765374, 'lyy', '123456', '罗总', '15961820351', 'lyy@fofia.com', 1, 0, 1000985679938850816, 100, '无锡市富华科技', '/ui/images/profile.jpg', '备注事实上111', 1, 0, 'yushuo', '2021-02-01 11:28:17.561', 'admin', '2021-03-12 13:50:27');
+INSERT INTO `sys_user` VALUES (138030650765375, 'phh', '123123', '潘总', '13861451731', 'pdd@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/images/profile.jpg', '备注', 1, 0, 'admin', '2021-02-26 16:52:12.934', 'admin', '2021-02-27 15:21:28');
+INSERT INTO `sys_user` VALUES (138030650765376, 'yushuo', '123123', '于硕', '15961820351', '461733078@qq.com', 1, 0, 138027723972674, 107, '技术部', '/ui/images/profile.jpg', '于硕', 1, 0, 'admin', '2021-02-26 17:04:29.137', 'admin', '2021-04-23 10:19:11');
+INSERT INTO `sys_user` VALUES (138030650765377, 'qqw', '123456', '曲奇伟', '', 'qqw@fofia.com', 1, 0, 1000985679938850816, 3, '硬件研发部', '/ui/images/profile.jpg', '曲奇伟', 1, 0, 'admin', '2021-02-26 17:06:00.296', 'admin', '2021-02-27 15:21:36');
+INSERT INTO `sys_user` VALUES (138030650765378, 'mdf', '123123', '毛总', '', 'mdf@fofia.com', 1, 0, 1000985679938850816, 105, '江苏真源科技', '/ui/images/profile.jpg', '毛东方', 1, 0, 'admin', '2021-02-26 17:06:28.377', 'admin', '2021-03-02 13:57:34');
+INSERT INTO `sys_user` VALUES (138030650765381, 'ceshi', '123456', '于硕', '15961820351', '', 1, 0, 138027723972677, 0, '', '/ui/images/profile.jpg', NULL, 1, 0, 'admin', '2021-03-16 11:08:11.368', 'admin', '2021-04-02 09:27:40');
 
 -- ----------------------------
 -- Table structure for sys_user_position
@@ -4595,7 +4645,7 @@ CREATE TABLE `sys_user_position`  (
   `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_uid`(`user_id`, `position_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '用户职位表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_position
@@ -4617,390 +4667,6 @@ CREATE TABLE `sys_validate_code`  (
 -- ----------------------------
 -- Records of sys_validate_code
 -- ----------------------------
-
--- ----------------------------
--- Table structure for water_number
--- ----------------------------
-DROP TABLE IF EXISTS `water_number`;
-CREATE TABLE `water_number`  (
-  `id` int(11) NOT NULL,
-  `serial_num` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of water_number
--- ----------------------------
-INSERT INTO `water_number` VALUES (20190408, 21);
-INSERT INTO `water_number` VALUES (20190409, 1);
-INSERT INTO `water_number` VALUES (20190418, 1);
-INSERT INTO `water_number` VALUES (20190419, 4);
-INSERT INTO `water_number` VALUES (20190420, 4);
-INSERT INTO `water_number` VALUES (20190422, 20);
-INSERT INTO `water_number` VALUES (20190424, 4);
-INSERT INTO `water_number` VALUES (20190429, 7);
-INSERT INTO `water_number` VALUES (20190430, 11);
-INSERT INTO `water_number` VALUES (20190501, 29);
-INSERT INTO `water_number` VALUES (20190502, 13);
-INSERT INTO `water_number` VALUES (20190503, 29);
-INSERT INTO `water_number` VALUES (20190504, 15);
-INSERT INTO `water_number` VALUES (20190505, 14);
-INSERT INTO `water_number` VALUES (20190506, 11);
-INSERT INTO `water_number` VALUES (20190507, 23);
-INSERT INTO `water_number` VALUES (20190508, 13);
-INSERT INTO `water_number` VALUES (20190509, 14);
-INSERT INTO `water_number` VALUES (20190510, 19);
-INSERT INTO `water_number` VALUES (20190511, 10);
-INSERT INTO `water_number` VALUES (20190512, 9);
-INSERT INTO `water_number` VALUES (20190513, 20);
-INSERT INTO `water_number` VALUES (20190514, 8);
-INSERT INTO `water_number` VALUES (20190515, 17);
-INSERT INTO `water_number` VALUES (20190516, 9);
-INSERT INTO `water_number` VALUES (20190517, 7);
-INSERT INTO `water_number` VALUES (20190518, 13);
-INSERT INTO `water_number` VALUES (20190519, 21);
-INSERT INTO `water_number` VALUES (20190520, 19);
-INSERT INTO `water_number` VALUES (20190521, 30);
-INSERT INTO `water_number` VALUES (20190522, 44);
-INSERT INTO `water_number` VALUES (20190523, 27);
-INSERT INTO `water_number` VALUES (20190524, 21);
-INSERT INTO `water_number` VALUES (20190525, 24);
-INSERT INTO `water_number` VALUES (20190526, 21);
-INSERT INTO `water_number` VALUES (20190527, 10);
-INSERT INTO `water_number` VALUES (20190528, 12);
-INSERT INTO `water_number` VALUES (20190529, 18);
-INSERT INTO `water_number` VALUES (20190530, 24);
-INSERT INTO `water_number` VALUES (20190531, 9);
-INSERT INTO `water_number` VALUES (20190601, 11);
-INSERT INTO `water_number` VALUES (20190602, 24);
-INSERT INTO `water_number` VALUES (20190603, 18);
-INSERT INTO `water_number` VALUES (20190604, 24);
-INSERT INTO `water_number` VALUES (20190605, 7);
-INSERT INTO `water_number` VALUES (20190606, 16);
-INSERT INTO `water_number` VALUES (20190607, 47);
-INSERT INTO `water_number` VALUES (20190608, 32);
-INSERT INTO `water_number` VALUES (20190609, 19);
-INSERT INTO `water_number` VALUES (20190610, 14);
-INSERT INTO `water_number` VALUES (20190611, 38);
-INSERT INTO `water_number` VALUES (20190612, 26);
-INSERT INTO `water_number` VALUES (20190613, 35);
-INSERT INTO `water_number` VALUES (20190614, 9);
-INSERT INTO `water_number` VALUES (20190615, 14);
-INSERT INTO `water_number` VALUES (20190616, 10);
-INSERT INTO `water_number` VALUES (20190617, 9);
-INSERT INTO `water_number` VALUES (20190618, 14);
-INSERT INTO `water_number` VALUES (20190619, 8);
-INSERT INTO `water_number` VALUES (20190620, 3);
-INSERT INTO `water_number` VALUES (20190621, 12);
-INSERT INTO `water_number` VALUES (20190622, 14);
-INSERT INTO `water_number` VALUES (20190623, 22);
-INSERT INTO `water_number` VALUES (20190624, 17);
-INSERT INTO `water_number` VALUES (20190625, 15);
-INSERT INTO `water_number` VALUES (20190626, 13);
-INSERT INTO `water_number` VALUES (20190627, 10);
-INSERT INTO `water_number` VALUES (20190628, 16);
-INSERT INTO `water_number` VALUES (20190629, 11);
-INSERT INTO `water_number` VALUES (20190630, 21);
-INSERT INTO `water_number` VALUES (20190701, 21);
-INSERT INTO `water_number` VALUES (20190702, 14);
-INSERT INTO `water_number` VALUES (20190703, 22);
-INSERT INTO `water_number` VALUES (20190704, 12);
-INSERT INTO `water_number` VALUES (20190705, 10);
-INSERT INTO `water_number` VALUES (20190706, 10);
-INSERT INTO `water_number` VALUES (20190707, 11);
-INSERT INTO `water_number` VALUES (20190708, 12);
-INSERT INTO `water_number` VALUES (20190709, 6);
-INSERT INTO `water_number` VALUES (20190710, 12);
-INSERT INTO `water_number` VALUES (20190711, 19);
-INSERT INTO `water_number` VALUES (20190712, 19);
-INSERT INTO `water_number` VALUES (20190713, 19);
-INSERT INTO `water_number` VALUES (20190714, 20);
-INSERT INTO `water_number` VALUES (20190715, 10);
-INSERT INTO `water_number` VALUES (20190716, 12);
-INSERT INTO `water_number` VALUES (20190717, 23);
-INSERT INTO `water_number` VALUES (20190718, 34);
-INSERT INTO `water_number` VALUES (20190719, 19);
-INSERT INTO `water_number` VALUES (20190720, 9);
-INSERT INTO `water_number` VALUES (20190721, 9);
-INSERT INTO `water_number` VALUES (20190722, 22);
-INSERT INTO `water_number` VALUES (20190723, 21);
-INSERT INTO `water_number` VALUES (20190724, 4);
-INSERT INTO `water_number` VALUES (20190725, 10);
-INSERT INTO `water_number` VALUES (20190726, 19);
-INSERT INTO `water_number` VALUES (20190727, 20);
-INSERT INTO `water_number` VALUES (20190728, 14);
-INSERT INTO `water_number` VALUES (20190729, 26);
-INSERT INTO `water_number` VALUES (20190730, 17);
-INSERT INTO `water_number` VALUES (20190731, 14);
-INSERT INTO `water_number` VALUES (20190801, 13);
-INSERT INTO `water_number` VALUES (20190802, 21);
-INSERT INTO `water_number` VALUES (20190803, 21);
-INSERT INTO `water_number` VALUES (20190804, 15);
-INSERT INTO `water_number` VALUES (20190805, 23);
-INSERT INTO `water_number` VALUES (20190806, 12);
-INSERT INTO `water_number` VALUES (20190807, 19);
-INSERT INTO `water_number` VALUES (20190808, 19);
-INSERT INTO `water_number` VALUES (20190809, 16);
-INSERT INTO `water_number` VALUES (20190810, 13);
-INSERT INTO `water_number` VALUES (20190811, 11);
-INSERT INTO `water_number` VALUES (20190812, 10);
-INSERT INTO `water_number` VALUES (20190813, 8);
-INSERT INTO `water_number` VALUES (20190814, 7);
-INSERT INTO `water_number` VALUES (20190815, 12);
-INSERT INTO `water_number` VALUES (20190816, 12);
-INSERT INTO `water_number` VALUES (20190817, 16);
-INSERT INTO `water_number` VALUES (20190818, 13);
-INSERT INTO `water_number` VALUES (20190819, 8);
-INSERT INTO `water_number` VALUES (20190820, 14);
-INSERT INTO `water_number` VALUES (20190821, 4);
-INSERT INTO `water_number` VALUES (20190822, 14);
-INSERT INTO `water_number` VALUES (20190823, 5);
-INSERT INTO `water_number` VALUES (20190824, 13);
-INSERT INTO `water_number` VALUES (20190825, 9);
-INSERT INTO `water_number` VALUES (20190826, 11);
-INSERT INTO `water_number` VALUES (20190827, 12);
-INSERT INTO `water_number` VALUES (20190828, 15);
-INSERT INTO `water_number` VALUES (20190829, 29);
-INSERT INTO `water_number` VALUES (20190830, 15);
-INSERT INTO `water_number` VALUES (20190831, 4);
-INSERT INTO `water_number` VALUES (20190901, 12);
-INSERT INTO `water_number` VALUES (20190902, 17);
-INSERT INTO `water_number` VALUES (20190903, 5);
-INSERT INTO `water_number` VALUES (20190904, 10);
-INSERT INTO `water_number` VALUES (20190905, 13);
-INSERT INTO `water_number` VALUES (20190906, 12);
-INSERT INTO `water_number` VALUES (20190907, 19);
-INSERT INTO `water_number` VALUES (20190908, 8);
-INSERT INTO `water_number` VALUES (20190909, 17);
-INSERT INTO `water_number` VALUES (20190910, 12);
-INSERT INTO `water_number` VALUES (20190911, 7);
-INSERT INTO `water_number` VALUES (20190912, 7);
-INSERT INTO `water_number` VALUES (20190913, 6);
-INSERT INTO `water_number` VALUES (20190914, 13);
-INSERT INTO `water_number` VALUES (20190915, 13);
-INSERT INTO `water_number` VALUES (20190916, 11);
-INSERT INTO `water_number` VALUES (20190917, 7);
-INSERT INTO `water_number` VALUES (20190918, 8);
-INSERT INTO `water_number` VALUES (20190919, 6);
-INSERT INTO `water_number` VALUES (20190920, 14);
-INSERT INTO `water_number` VALUES (20190921, 17);
-INSERT INTO `water_number` VALUES (20190922, 7);
-INSERT INTO `water_number` VALUES (20190923, 7);
-INSERT INTO `water_number` VALUES (20190924, 13);
-INSERT INTO `water_number` VALUES (20190925, 18);
-INSERT INTO `water_number` VALUES (20190926, 13);
-INSERT INTO `water_number` VALUES (20190927, 35);
-INSERT INTO `water_number` VALUES (20190928, 14);
-INSERT INTO `water_number` VALUES (20190929, 13);
-INSERT INTO `water_number` VALUES (20190930, 8);
-INSERT INTO `water_number` VALUES (20191001, 18);
-INSERT INTO `water_number` VALUES (20191002, 10);
-INSERT INTO `water_number` VALUES (20191003, 10);
-INSERT INTO `water_number` VALUES (20191004, 11);
-INSERT INTO `water_number` VALUES (20191005, 14);
-INSERT INTO `water_number` VALUES (20191006, 17);
-INSERT INTO `water_number` VALUES (20191007, 18);
-INSERT INTO `water_number` VALUES (20191008, 14);
-INSERT INTO `water_number` VALUES (20191009, 13);
-INSERT INTO `water_number` VALUES (20191010, 26);
-INSERT INTO `water_number` VALUES (20191011, 14);
-INSERT INTO `water_number` VALUES (20191012, 10);
-INSERT INTO `water_number` VALUES (20191013, 11);
-INSERT INTO `water_number` VALUES (20191014, 6);
-INSERT INTO `water_number` VALUES (20191015, 8);
-INSERT INTO `water_number` VALUES (20191016, 10);
-INSERT INTO `water_number` VALUES (20191017, 10);
-INSERT INTO `water_number` VALUES (20191018, 2);
-INSERT INTO `water_number` VALUES (20191019, 11);
-INSERT INTO `water_number` VALUES (20191020, 15);
-INSERT INTO `water_number` VALUES (20191021, 13);
-INSERT INTO `water_number` VALUES (20191022, 9);
-INSERT INTO `water_number` VALUES (20191023, 7);
-INSERT INTO `water_number` VALUES (20191024, 14);
-INSERT INTO `water_number` VALUES (20191025, 18);
-INSERT INTO `water_number` VALUES (20191026, 15);
-INSERT INTO `water_number` VALUES (20191027, 7);
-INSERT INTO `water_number` VALUES (20191028, 20);
-INSERT INTO `water_number` VALUES (20191029, 10);
-INSERT INTO `water_number` VALUES (20191030, 12);
-INSERT INTO `water_number` VALUES (20191031, 5);
-INSERT INTO `water_number` VALUES (20191101, 11);
-INSERT INTO `water_number` VALUES (20191102, 16);
-INSERT INTO `water_number` VALUES (20191103, 12);
-INSERT INTO `water_number` VALUES (20191104, 17);
-INSERT INTO `water_number` VALUES (20191105, 13);
-INSERT INTO `water_number` VALUES (20191106, 9);
-INSERT INTO `water_number` VALUES (20191107, 5);
-INSERT INTO `water_number` VALUES (20191108, 9);
-INSERT INTO `water_number` VALUES (20191109, 11);
-INSERT INTO `water_number` VALUES (20191110, 6);
-INSERT INTO `water_number` VALUES (20191111, 9);
-INSERT INTO `water_number` VALUES (20191112, 7);
-INSERT INTO `water_number` VALUES (20191113, 2);
-INSERT INTO `water_number` VALUES (20191114, 7);
-INSERT INTO `water_number` VALUES (20191115, 17);
-INSERT INTO `water_number` VALUES (20191116, 19);
-INSERT INTO `water_number` VALUES (20191117, 17);
-INSERT INTO `water_number` VALUES (20191118, 17);
-INSERT INTO `water_number` VALUES (20191119, 8);
-INSERT INTO `water_number` VALUES (20191120, 11);
-INSERT INTO `water_number` VALUES (20191121, 11);
-INSERT INTO `water_number` VALUES (20191122, 7);
-INSERT INTO `water_number` VALUES (20191123, 19);
-INSERT INTO `water_number` VALUES (20191124, 9);
-INSERT INTO `water_number` VALUES (20191125, 7);
-INSERT INTO `water_number` VALUES (20191126, 4);
-INSERT INTO `water_number` VALUES (20191127, 7);
-INSERT INTO `water_number` VALUES (20191128, 11);
-INSERT INTO `water_number` VALUES (20191129, 26);
-INSERT INTO `water_number` VALUES (20191130, 27);
-INSERT INTO `water_number` VALUES (20191201, 47);
-INSERT INTO `water_number` VALUES (20191202, 26);
-INSERT INTO `water_number` VALUES (20191203, 14);
-INSERT INTO `water_number` VALUES (20191204, 25);
-INSERT INTO `water_number` VALUES (20191205, 7);
-INSERT INTO `water_number` VALUES (20191206, 9);
-INSERT INTO `water_number` VALUES (20191207, 11);
-INSERT INTO `water_number` VALUES (20191208, 13);
-INSERT INTO `water_number` VALUES (20191209, 19);
-INSERT INTO `water_number` VALUES (20191210, 15);
-INSERT INTO `water_number` VALUES (20191211, 10);
-INSERT INTO `water_number` VALUES (20191212, 5);
-INSERT INTO `water_number` VALUES (20191213, 5);
-INSERT INTO `water_number` VALUES (20191214, 11);
-INSERT INTO `water_number` VALUES (20191215, 5);
-INSERT INTO `water_number` VALUES (20191216, 14);
-INSERT INTO `water_number` VALUES (20191217, 11);
-INSERT INTO `water_number` VALUES (20191218, 18);
-INSERT INTO `water_number` VALUES (20191219, 13);
-INSERT INTO `water_number` VALUES (20191220, 12);
-INSERT INTO `water_number` VALUES (20191221, 6);
-INSERT INTO `water_number` VALUES (20191222, 8);
-INSERT INTO `water_number` VALUES (20191223, 16);
-INSERT INTO `water_number` VALUES (20191224, 4);
-INSERT INTO `water_number` VALUES (20191225, 22);
-INSERT INTO `water_number` VALUES (20191226, 21);
-INSERT INTO `water_number` VALUES (20191227, 8);
-INSERT INTO `water_number` VALUES (20191228, 24);
-INSERT INTO `water_number` VALUES (20191229, 19);
-INSERT INTO `water_number` VALUES (20191230, 17);
-INSERT INTO `water_number` VALUES (20191231, 8);
-INSERT INTO `water_number` VALUES (20200101, 8);
-INSERT INTO `water_number` VALUES (20200102, 18);
-INSERT INTO `water_number` VALUES (20200103, 11);
-INSERT INTO `water_number` VALUES (20200104, 14);
-INSERT INTO `water_number` VALUES (20200105, 10);
-INSERT INTO `water_number` VALUES (20200106, 9);
-INSERT INTO `water_number` VALUES (20200107, 9);
-INSERT INTO `water_number` VALUES (20200108, 4);
-INSERT INTO `water_number` VALUES (20200109, 10);
-INSERT INTO `water_number` VALUES (20200110, 18);
-INSERT INTO `water_number` VALUES (20200111, 6);
-INSERT INTO `water_number` VALUES (20200112, 4);
-INSERT INTO `water_number` VALUES (20200113, 14);
-INSERT INTO `water_number` VALUES (20200114, 14);
-INSERT INTO `water_number` VALUES (20200115, 9);
-INSERT INTO `water_number` VALUES (20200116, 13);
-INSERT INTO `water_number` VALUES (20200117, 25);
-INSERT INTO `water_number` VALUES (20200118, 8);
-INSERT INTO `water_number` VALUES (20200119, 4);
-INSERT INTO `water_number` VALUES (20200120, 1);
-INSERT INTO `water_number` VALUES (20200121, 14);
-INSERT INTO `water_number` VALUES (20200123, 7);
-INSERT INTO `water_number` VALUES (20200124, 3);
-INSERT INTO `water_number` VALUES (20200125, 1);
-INSERT INTO `water_number` VALUES (20200127, 3);
-INSERT INTO `water_number` VALUES (20200128, 4);
-INSERT INTO `water_number` VALUES (20200129, 6);
-INSERT INTO `water_number` VALUES (20200131, 7);
-INSERT INTO `water_number` VALUES (20200201, 4);
-INSERT INTO `water_number` VALUES (20200202, 4);
-INSERT INTO `water_number` VALUES (20200203, 3);
-INSERT INTO `water_number` VALUES (20200204, 2);
-INSERT INTO `water_number` VALUES (20200205, 1);
-INSERT INTO `water_number` VALUES (20200206, 4);
-INSERT INTO `water_number` VALUES (20200207, 5);
-INSERT INTO `water_number` VALUES (20200208, 4);
-INSERT INTO `water_number` VALUES (20200209, 7);
-INSERT INTO `water_number` VALUES (20200211, 4);
-INSERT INTO `water_number` VALUES (20200212, 7);
-INSERT INTO `water_number` VALUES (20200213, 6);
-INSERT INTO `water_number` VALUES (20200214, 5);
-INSERT INTO `water_number` VALUES (20200215, 1);
-INSERT INTO `water_number` VALUES (20200216, 13);
-INSERT INTO `water_number` VALUES (20200217, 8);
-INSERT INTO `water_number` VALUES (20200218, 8);
-INSERT INTO `water_number` VALUES (20200219, 2);
-INSERT INTO `water_number` VALUES (20200220, 3);
-INSERT INTO `water_number` VALUES (20200221, 4);
-INSERT INTO `water_number` VALUES (20200222, 2);
-INSERT INTO `water_number` VALUES (20200224, 7);
-INSERT INTO `water_number` VALUES (20200225, 9);
-INSERT INTO `water_number` VALUES (20200226, 1);
-INSERT INTO `water_number` VALUES (20200227, 10);
-INSERT INTO `water_number` VALUES (20200228, 5);
-INSERT INTO `water_number` VALUES (20200229, 8);
-INSERT INTO `water_number` VALUES (20200301, 3);
-INSERT INTO `water_number` VALUES (20200302, 2);
-INSERT INTO `water_number` VALUES (20200303, 5);
-INSERT INTO `water_number` VALUES (20200304, 3);
-INSERT INTO `water_number` VALUES (20200305, 2);
-INSERT INTO `water_number` VALUES (20200306, 12);
-INSERT INTO `water_number` VALUES (20200307, 7);
-INSERT INTO `water_number` VALUES (20200308, 9);
-INSERT INTO `water_number` VALUES (20200309, 4);
-INSERT INTO `water_number` VALUES (20200310, 8);
-INSERT INTO `water_number` VALUES (20200311, 6);
-INSERT INTO `water_number` VALUES (20200312, 5);
-INSERT INTO `water_number` VALUES (20200313, 3);
-INSERT INTO `water_number` VALUES (20200314, 8);
-INSERT INTO `water_number` VALUES (20200315, 4);
-INSERT INTO `water_number` VALUES (20200316, 7);
-INSERT INTO `water_number` VALUES (20200317, 3);
-INSERT INTO `water_number` VALUES (20200318, 6);
-INSERT INTO `water_number` VALUES (20200319, 6);
-INSERT INTO `water_number` VALUES (20200320, 11);
-INSERT INTO `water_number` VALUES (20200321, 6);
-INSERT INTO `water_number` VALUES (20200322, 6);
-INSERT INTO `water_number` VALUES (20200323, 8);
-INSERT INTO `water_number` VALUES (20200324, 13);
-INSERT INTO `water_number` VALUES (20200325, 6);
-INSERT INTO `water_number` VALUES (20200326, 4);
-INSERT INTO `water_number` VALUES (20200327, 7);
-INSERT INTO `water_number` VALUES (20200328, 4);
-INSERT INTO `water_number` VALUES (20200329, 7);
-INSERT INTO `water_number` VALUES (20200330, 12);
-INSERT INTO `water_number` VALUES (20200331, 14);
-INSERT INTO `water_number` VALUES (20200401, 12);
-INSERT INTO `water_number` VALUES (20200402, 6);
-INSERT INTO `water_number` VALUES (20200403, 4);
-INSERT INTO `water_number` VALUES (20200404, 8);
-INSERT INTO `water_number` VALUES (20200405, 7);
-INSERT INTO `water_number` VALUES (20200406, 5);
-INSERT INTO `water_number` VALUES (20200407, 9);
-INSERT INTO `water_number` VALUES (20200408, 2);
-INSERT INTO `water_number` VALUES (20200409, 1);
-
--- ----------------------------
--- Table structure for weixin_set
--- ----------------------------
-DROP TABLE IF EXISTS `weixin_set`;
-CREATE TABLE `weixin_set`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `site_host` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `consulting_success` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `new_question` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `feed_back` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `question_end` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `pay_notice` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of weixin_set
--- ----------------------------
-INSERT INTO `weixin_set` VALUES (4, 'http://182.43.178.216:9006', 'KN_168ZYI3in5bmbDPJyaS-1uSPoeMB4y9RcQ4A-PgA', 'WsHUzIsqiS_mj8T_zVM0AyeYeUvwGRmZPiOslDroffo', 'kjBH3e5ILVXG1JF6yHKal2mBDpg04M0xNT0cHL9N6qI', 'kjBH3e5ILVXG1JF6yHKal2mBDpg04M0xNT0cHL9N6qI', 'w3sXNn3f_XQs2SxLMsxrlsIsZv-GUIyqJcavMFxkO9M');
-INSERT INTO `weixin_set` VALUES (5, 'http://182.43.178.216:9006', 'KN_168ZYI3in5bmbDPJyaS-1uSPoeMB4y9RcQ4A-PgA', 'WsHUzIsqiS_mj8T_zVM0AyeYeUvwGRmZPiOslDroffo', 'kjBH3e5ILVXG1JF6yHKal2mBDpg04M0xNT0cHL9N6qI', 'kjBH3e5ILVXG1JF6yHKal2mBDpg04M0xNT0cHL9N6qI', 'w3sXNn3f_XQs2SxLMsxrlsIsZv-GUIyqJcavMFxkO9M');
 
 -- ----------------------------
 -- Table structure for work_address_book
@@ -5072,36 +4738,5 @@ CREATE TABLE `work_notice_reply`  (
 INSERT INTO `work_notice_reply` VALUES (7, 2, 0, '', '1753-01-01 00:00:00', 1, '锡山区公安分局', 0);
 INSERT INTO `work_notice_reply` VALUES (8, 2, 0, '', '1753-01-01 00:00:00', 2, '后桥派出所', 0);
 INSERT INTO `work_notice_reply` VALUES (9, 2, 0, '', '1753-01-01 00:00:00', 3, '云林派出所', 0);
-
--- ----------------------------
--- Table structure for wx_user
--- ----------------------------
-DROP TABLE IF EXISTS `wx_user`;
-CREATE TABLE `wx_user`  (
-  `id` char(24) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `open_id` char(28) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `job_name` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `national` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `marriage_status` tinyint(2) NOT NULL,
-  `educational_level` tinyint(2) NOT NULL,
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `gender` tinyint(2) NOT NULL,
-  `birth_year` int(11) NOT NULL,
-  `avatar_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `province` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of wx_user
--- ----------------------------
-INSERT INTO `wx_user` VALUES ('5ea6910dc1a5090d38c55bd9', 'oSwFD1MDHXUb-FwNvyQMl84fJbTg', '泉哥', '自由', '汉', 2, 5, '2020-04-27 16:00:13', 1, 2019, '', '北京', '北京市');
-INSERT INTO `wx_user` VALUES ('5eaba1cfc1a5091ad8b192a1', 'oSwFD1CiLggugMME0w0ATuwABPdg', '让人', '', '', 0, 0, '2020-05-01 12:13:04', 1, 2004, '', '山西省', '太原市');
-INSERT INTO `wx_user` VALUES ('5eabd23ac1a5091ad8b192a5', 'o3m4Rs7DVszSC4xUdvRefZb5zHRE', '于硕', '', '', 0, 0, '2020-05-01 15:39:38', 1, 2006, '', '江苏省', '无锡市');
-INSERT INTO `wx_user` VALUES ('5eb36bc7c1a50916309d6dd5', 'o3m4Rs9xns-njcbbPSPNY5BAFLLU', '匿名', '', '', 0, 0, '2020-05-07 10:00:40', 1, 2020, '', '北京', '北京市');
-INSERT INTO `wx_user` VALUES ('5eb79d01c1a5090d64702a5d', 'o3m4Rs-yG-QV8Tw2hcKRcU0vCRwo', '暴君爱草丛', '', '', 0, 0, '2020-05-10 14:19:46', 1, 2016, '', '广东省', '广州市');
-INSERT INTO `wx_user` VALUES ('5eb79d55c1a5090d64702a60', 'o3m4RszBOBnyZL8-2gqLSTCJ8qhA', 't', '', '', 0, 0, '2020-05-10 14:21:09', 1, 2020, '', '山西省', '太原市');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -25,7 +25,7 @@ namespace Atlass.Framework.AppService.SystemApp
                 .Where(s => s.log_time >= logDate)
                 .WhereIf(logType > 0, s => s.log_type == logType)
                 .WhereIf(!string.IsNullOrEmpty(log_summary), s => s.log_summary == log_summary)
-                .OrderByDescending(s => s.id).Count(out long total).Page(param.page, param.limit).ToList();
+                .OrderByDescending(s => s.id).Count(out long total).Page(param.pageNumber, param.pageSize).ToList();
             param.total = total;
             param.rows = query;
             return param;

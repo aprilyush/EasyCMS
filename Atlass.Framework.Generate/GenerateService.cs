@@ -1,5 +1,5 @@
 ﻿using Atlass.Framework.Cache;
-using Atlass.Framework.Common.NLog;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core;
 using Atlass.Framework.Generate.Dto;
 using Atlass.Framework.Models;
@@ -192,7 +192,7 @@ namespace Atlass.Framework.Generate
             }
             catch (Exception ex)
             {
-                LogNHelper.Exception(ex);
+                LoggerHelper.Exception(ex);
             }
 
             return ret;

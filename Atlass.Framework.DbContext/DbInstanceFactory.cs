@@ -25,7 +25,7 @@ namespace Atlass.Framework.DbContext
                            {
                                //执行中打印日志
 
-                               //LogDbHelper.Sql(executing.CommandText);
+                               //LoggerHelper.Sql(executing.CommandText);
                                // log.LogInformation(executing.CommandText);
                            });
             //if (freeSql.SlaveConnections?.Count > 0)//判断是否存在从库
