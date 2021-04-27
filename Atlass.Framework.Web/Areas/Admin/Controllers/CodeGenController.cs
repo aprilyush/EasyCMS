@@ -121,7 +121,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult SyncTable()
         {
-            string tableName = RequestHelper.GetPostString("tableName");
+            string tableName = RequestHelper.GetQueryString("tableName");
             codeGenApp.SyncTable(tableName.Trim());
             return Success("表结构同步成功");
         }
