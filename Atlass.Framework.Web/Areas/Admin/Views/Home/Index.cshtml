@@ -19,7 +19,7 @@
     <link href="~/ui/css/animate.css" rel="stylesheet" />
     <link href="~/ui/css/style.css" rel="stylesheet" />
     <link href="~/ui/css/skins.css" rel="stylesheet" />
-    <link href="~/ui/easycms/css/ry-ui.css?v=4.6.0" rel="stylesheet" />
+    <link href="~/ui/css/ry-ui.css?v=4.6.0" rel="stylesheet" />
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
     <div id="wrapper">
@@ -41,7 +41,7 @@
                             <a class="menuItem noactive" title="个人中心" href="/admin/sysuser/profile" data-id="admin_user_profile">
                                 <div class="hide" text="个人中心">个人中心</div>
                                 <div class="pull-left image">
-                                    <img src="~/ui/images/profile.jpg" onerror="this.src='/ui/images/profile.jpg'" class="img-circle" alt="User Image">
+                                    <img src="@(ViewBag.Avatar)" onerror="this.onerror=null;this.src='/ui/images/profile.jpg'" class="img-circle" alt="User Image">
                                 </div>
                             </a>
                             <div class="pull-left info">
@@ -133,7 +133,7 @@
                         <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
                         <li class="dropdown user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-                                <img src="~/ui/images/profile.jpg" onerror="this.src='/ui/images/profile.jpg'" class="user-image">
+                                <img src="@(ViewBag.Avatar)" onerror="this.onerror=null;this.src='/ui/images/profile.jpg'" class="user-image">
                                 <span class="hidden-xs">@(ViewBag.UserName)</span>
                             </a>
                             <ul class="dropdown-menu">

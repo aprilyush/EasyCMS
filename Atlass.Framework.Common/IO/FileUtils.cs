@@ -497,6 +497,42 @@ namespace Atlass.Framework.Common
             return CommHelper.ToEnum(CommHelper.UpperFirst(typeStr), FileType.Unknown);
         }
 
+
+        /// <summary>
+        /// 根据上传图片文件的contenttype获取图片文件后缀名
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public static string GetExtensionByContentType(string contentType)
+        {
+            string extenName = ".png";
+            switch (contentType)
+            {
+                case "image/bmp":
+                    extenName = ".bmp";
+                    break;
+                case "image/gif":
+                    extenName = ".gif";
+                    break;
+                case "image/jpeg":
+                    extenName = ".jpeg";
+                    break;
+                case "image/jpg":
+                    extenName = ".jpg";
+                    break;
+                case "image/png":
+                    extenName = ".png";
+                    break;
+                case "image/pneg":
+                    extenName = ".pneg";
+                    break;
+                case "image/webp":
+                    extenName = ".webp";
+                    break;
+            }
+            return extenName;
+        }
+
         //public static bool IsType(FileType type, string typeStr)
         //{
         //    if (string.IsNullOrEmpty(typeStr)) return false;

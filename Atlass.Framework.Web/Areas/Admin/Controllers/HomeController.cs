@@ -32,7 +32,7 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
                 return Redirect("/login/index");
             }
             var userDto = RequestHelper.AdminInfo();
-
+            ViewBag.Avatar = userDto.Avatar;
             ViewBag.Id = userDto.Id.ToString();
             ViewBag.AccountName = userDto.LoginName;
             ViewBag.UserName = userDto.UserName;

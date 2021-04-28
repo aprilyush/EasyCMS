@@ -39,8 +39,10 @@
                     </div>
                     <div class="ibox-content">
                         <div class="text-center">
-                            <p class="user-info-head" onclick="avatar()"><img class="img-circle img-lg" src="@(Model.Avatar)" onerror="this.src='/ui/img/profile.jpg'"></p>
-                            <p><a href="javascript:avatar()">修改头像</a></p>
+                            <p class="user-info-head" onclick="avatar();">
+                            <img class="img-circle img-lg" src="@(Model.Avatar)" onerror="this.src='/ui/images/profile.jpg'">
+                            </p>
+                            <p><a href="javascript:avatar();">修改头像</a></p>
                         </div>
                         <ul class="list-group list-group-striped">
                             <li class="list-group-item">
@@ -212,28 +214,10 @@
         });
         /*用户管理-头像*/
         function avatar() {
-            jutils.warn('暂不支持');
-            return;
-            var url ='/system/user/profile/avatar';
-            top.layer.open({
-                type: 2,
-                area: [$(window).width() + 'px', $(window).height() + 'px'],
-                fix: false,
-                //不固定
-                maxmin: true,
-                shade: 0.3,
-                title: "修改头像",
-                content: url,
-                btn: ['确定', '关闭'],
-                // 弹层外区域关闭
-                shadeClose: true,
-                yes: function (index, layero) {
-                    var iframeWin = layero.find('iframe')[0];
-                    iframeWin.contentWindow.submitHandler(index, layero);
-                },
-                cancel: function (index) {
-                    return true;
-                }
+
+            var url = '/admin/sysuser/avatar';
+            jutils.dialogTop("修改头像", url, null,null, function(){
+                jutils.refreshTab();
             });
         }
 

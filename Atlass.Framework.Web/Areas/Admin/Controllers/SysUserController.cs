@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using Atlass.Framework.AppService;
 using Atlass.Framework.AppService.SystemApp;
 using Atlass.Framework.Common;
+using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
@@ -264,9 +267,79 @@ namespace Altas.Framework.Admin
         /// </summary>
         /// <returns></returns>
         [RequirePermission("#")]
+        [HttpGet]
         public IActionResult UserSelect()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("#")]
+        [HttpGet]
+        public IActionResult Avatar()
+        {
+            var user = RequestHelper.AdminInfo();
+            ViewBag.Avatar = user.Avatar;
+            return View();
+        }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        /// <returns></returns>
+        [RequirePermission("#")]
+        [HttpPost]
+        public IActionResult UpdateAvatar()
+        {
+            var user = RequestHelper.AdminInfo();
+            var files = RequestHelper.Request().Form.Files;
+            if (files.Count == 0)
+            {
+
+                return Error("上传失败");
+            }
+            string url = $"/upfiles/heads";
+            var folder = GlobalParamsDto.WebRoot + url;
+
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            var file = files[0];
+            var extName = FileUtils.GetExtensionByContentType(file.ContentType.ToLower());
+            string guidFileName = IdHelper.ObjectId() + extName;
+            //这个hostingEnv.WebRootPath就是要存的地址可以改下
+            string filename = $"{folder}/{guidFileName}";
+            using (FileStream fs = System.IO.File.Create(filename))
+            {
+                file.CopyTo(fs);
+                fs.Flush();
+            }
+            string imgurl = $"{url}/{guidFileName}";
+            if (user.Avatar!= "/ui/images/profile.jpg")
+            {
+                string oldAvatar = GlobalParamsDto.WebRoot + user.Avatar;
+                try
+                {
+                    if (System.IO.File.Exists(oldAvatar))
+                    {
+                        System.IO.File.Delete(oldAvatar);
+                    }
+                }catch(Exception ex)
+                {
+                    LoggerHelper.Exception(ex);
+                }
+            }
+            _userApp.UpdateAvatar(user.LoginName, imgurl);
+            user.Avatar = imgurl;
+            string claimstr = user.ToJson();
+            RequestHelper.SetCookie(claimstr);
+
+            return Success("头像已更新");
         }
     }
 }

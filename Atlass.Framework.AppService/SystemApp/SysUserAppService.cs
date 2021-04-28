@@ -239,5 +239,17 @@ namespace Atlass.Framework.AppService
             ret.message = "密码更新成功";
             return ret;
         }
+
+        /// <summary>
+        /// 更新头像
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="imageUrl"></param>
+        public void UpdateAvatar(string loginName,string imageUrl)
+        {
+            Sqldb.Update<sys_user>()
+                .Set(s => s.user_avatar, imageUrl)
+                .Where(s => s.login_name == loginName).ExecuteAffrows();
+        }
     }
 }
