@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-27 15:35:20
+ * @LastEditTime: 2021-04-29 15:31:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -59,7 +59,9 @@
 + [x] 广告管理
 + [x] 通讯录
 + [x] 会议管理
-
+## 注意事项
++ hangfire使用的sqlite来存储数据，请给与data/hangfire.db 数据文件相应的读写权限,否则站点无法启动
++ 登录使用了ip2region来解析登录ip地址，请将data/ip2region.db 数据库文件放置到站点根目录下，否则无法登录
 ## [样图]  
 ![Image](资料/Index.png)
 ![Image](资料/home.png)
