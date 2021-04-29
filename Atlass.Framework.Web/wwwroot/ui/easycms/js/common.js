@@ -281,7 +281,7 @@ function createMenuItem(tabId,dataUrl, menuName, isRefresh) {
     var topWindow = $(window.parent.document);
     // 选项卡菜单已存在
     $('.menuTab', topWindow).each(function() {
-        if ($(this).data('id') == dataUrl) {
+        if ($(this).data('id') == tabId) {
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active').siblings('.menuTab').removeClass('active');
                 scrollToTab(this);
