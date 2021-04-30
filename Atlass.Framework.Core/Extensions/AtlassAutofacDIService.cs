@@ -1,4 +1,5 @@
-﻿using Atlass.Framework.Core.DI;
+﻿using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core.DI;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.ViewModels;
 using FreeSql;
@@ -16,10 +17,22 @@ namespace Atlass.Framework.Core.Extensions
     {
         public static void AddFreeSql(this IServiceCollection service)
         {
-            var freeSql = GlobalContext.DefaultDbConfig;
+            var freeSqlConfig = GlobalContext.DefaultDbConfig;
             service.AddSingleton<IFreeSql>(f =>
             {
-                return DbInstanceFactory.GetInstance(freeSql.DataType, freeSql.MasterConnection);
+                IFreeSql freeSql = DbInstanceFactory.GetInstance(freeSqlConfig.DataType, freeSqlConfig.MasterConnection);
+                if (GlobalContext.FreeSqlConfig != null && GlobalContext.FreeSqlConfig.LogSql)
+                {
+                    freeSql.Aop.CurdAfter += (s, e) => {
+                        if (e.Table.DbName != "easy_log" && e.Table.DbName != "sys_sql_log")
+                        {
+                            LoggerHelper.Debug(e.Sql, $"sql执行耗时：{e.ElapsedMilliseconds}ms");
+                        }
+
+                    };
+                }
+
+                return freeSql;
             });
 
 

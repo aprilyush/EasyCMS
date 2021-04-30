@@ -56,6 +56,9 @@ namespace Atlass.Framework.Core.Extensions
         {
             GlobalContext.RuntimeEnvironment = configuration.GetValue<int>("RuntimeEnvironment");
             //获取数据库连接
+            GlobalContext.FreeSqlConfig = configuration.GetSection("FreeSqlConfig").Get<FreeSqlConfig>();
+
+            //获取数据库连接
             var dbConfigs = configuration.GetSection("DbConfigs").Get<List<DbConfigsDto>>();
             var defaultDbConfig = dbConfigs.Where(s => s.Enable == true).FirstOrDefault();
             if (defaultDbConfig == null)

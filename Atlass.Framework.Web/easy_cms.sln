@@ -41,8 +41,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTemplate.Engine", "..\VTem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlass.Framework.Enum", "..\Atlass.Framework.Enum\Atlass.Framework.Enum.csproj", "{2A86CFAF-99B2-426F-BA3A-B1D20F6D942B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlass.TemplateExt", "..\Atlass.Template\Atlass.TemplateExt.csproj", "{A4EC037C-F872-4B7E-83E1-2D85467C3327}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,10 +103,6 @@ Global
 		{2A86CFAF-99B2-426F-BA3A-B1D20F6D942B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A86CFAF-99B2-426F-BA3A-B1D20F6D942B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A86CFAF-99B2-426F-BA3A-B1D20F6D942B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4EC037C-F872-4B7E-83E1-2D85467C3327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4EC037C-F872-4B7E-83E1-2D85467C3327}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4EC037C-F872-4B7E-83E1-2D85467C3327}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4EC037C-F872-4B7E-83E1-2D85467C3327}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,7 +122,6 @@ Global
 		{7D38996A-480F-4369-A4A4-CA99F0D58173} = {906AC258-D21A-4CA7-894F-48025453B92E}
 		{FE2B0A8E-7518-4437-8785-3BE923D4CA5E} = {3E3EB6E5-810E-4B60-8A18-2D7C546B2DDD}
 		{2A86CFAF-99B2-426F-BA3A-B1D20F6D942B} = {333F7FBC-8B3C-4A15-8619-0032A5D1FA72}
-		{A4EC037C-F872-4B7E-83E1-2D85467C3327} = {906AC258-D21A-4CA7-894F-48025453B92E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD4ABA64-4EA0-4FB6-852B-E43F0C93DBA4}

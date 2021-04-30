@@ -14,6 +14,9 @@ RuntimeEnvironment: 1
 HostUrl: "http://cmsl.atlass:80"
 #跨域
 AllowedHosts: "*"
+#freesql的配置
+FreeSqlConfig:  
+  LogSql: false  #是否记录sql,true记录，false不记录
 #数据库配置
 DbConfigs: 
   -

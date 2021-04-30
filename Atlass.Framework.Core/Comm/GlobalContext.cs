@@ -34,6 +34,10 @@ namespace Atlass.Framework.Core
         /// </summary>
         public static int RuntimeEnvironment { get; set; } = 1;
         /// <summary>
+        /// freesql的配置
+        /// </summary>
+        public static FreeSqlConfig FreeSqlConfig { get; set; } = new FreeSqlConfig();
+        /// <summary>
         /// 数据库配置
         /// </summary>
         public static List<DbConfigsDto> DbConfigs { get; set; }

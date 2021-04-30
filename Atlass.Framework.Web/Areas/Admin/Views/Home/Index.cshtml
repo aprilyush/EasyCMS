@@ -243,7 +243,7 @@
         var isLinkage = true;
 
         // 本地主题优先，未设置取系统配置
-        if ($.common.isNotEmpty(skin)) {
+        if (!$.common.isNotEmpty(skin)) {
             skin = 'skin-green|theme-blue';
         }
         $("body").addClass(skin.split('|')[0]);
@@ -274,6 +274,8 @@
 
         /* 切换菜单 */
         function toggleMenu() {
+            $.modal.alertError('暂不支持');
+            return;
             $.modal.confirm("确认要切换成横向菜单吗？", function () {
                 $.get('/system/menuStyle/topnav', function (result) {
                     window.location.reload();
