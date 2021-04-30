@@ -24,13 +24,13 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="add();" data-role="system:{$table.table_name}:add">
+            <a class="btn btn-success" onclick="add();" data-role="system:{$roletag}:add">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:{$table.table_name}:edit">
+            <a class="btn btn-primary single disabled" onclick="edit(this);" data-id="0" data-role="system:{$roletag}:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
-            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:{$table.table_name}:delete">
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:{$roletag}:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
         </div>
@@ -49,7 +49,7 @@
 
         function loadData() {
             let options = {
-                url: '/admin/{$upperTableName}/getList',
+                url: '/admin/{$upperTableName}/GetPageList',
                 pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
                 pageSize: 10,                       // 每页的记录行数（*）
                 pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）

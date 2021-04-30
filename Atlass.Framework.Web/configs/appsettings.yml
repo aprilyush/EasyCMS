@@ -16,7 +16,7 @@ HostUrl: "http://cmsl.atlass:80"
 AllowedHosts: "*"
 #freesql的配置
 FreeSqlConfig:  
-  LogSql: false  #是否记录sql,true记录，false不记录
+  LogSql: true  #是否记录sql,true记录，false不记录
 #数据库配置
 DbConfigs: 
   -

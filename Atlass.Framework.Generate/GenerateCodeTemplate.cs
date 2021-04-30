@@ -163,12 +163,17 @@ namespace Atlass.Framework.Generate
                 Document = new TemplateDocument(newContent, GlobalContext.WebRootPath, filePath);
                // RenderDocumentCache.AddRenderDocument(10005, Document);
             }
+            string upperTableName = GetUpperCanelName(table.entity_name);
+            string lowTableName = upperTableName.Substring(0, 1).ToLower()+ upperTableName.Substring(1);
+            string roletag = table.entity_name.Replace("-","");
             //加入基本信息
             Document.Variables.SetValue("this", this);
             Document.Variables.SetValue("table", table);
             Document.Variables.SetValue("columns", columns);
             Document.Variables.SetValue("gentime", DateTime.Now);
-            Document.Variables.SetValue("upperTableName", GetUpperCanelName(table.entity_name));
+            Document.Variables.SetValue("upperTableName", upperTableName);
+            Document.Variables.SetValue("lowTableName", lowTableName);
+            Document.Variables.SetValue("roletag", roletag);
             Document.RegisterGlobalFunction(this.GetColumnAttr);
             Document.RegisterGlobalFunction(this.GetCsType);
 
@@ -249,7 +254,7 @@ namespace Atlass.Framework.Generate
                 var columnModel = (code_column)columnParams[0];
                // string json = columnModel.ToJson();
                // LoggerHelper.Debug(json,$"长度：{colums.l}");
-                string attr = $"[Column(DbType =\"{columnModel.type_text_full}\"";
+                string attr = $",Column(DbType =\"{columnModel.type_text_full}\"";
                 if (columnModel.is_primary == 1)
                 {
                     attr += ",IsPrimary =true";
@@ -262,7 +267,7 @@ namespace Atlass.Framework.Generate
                 {
                     attr += ",CanUpdate = false";
                 }
-                attr += ")]";
+                attr += ")";
 
                 var dval = GetDefaultVal(columnModel.type_text);
                 return new { attr = attr, defaultVal = dval };
@@ -296,6 +301,7 @@ namespace Atlass.Framework.Generate
                 case "tinytext":
                 case "text":
                 case "longtext":
+                case "mediumtext":
                     val = "string.Empty";
                     break;
                 case "decimal":

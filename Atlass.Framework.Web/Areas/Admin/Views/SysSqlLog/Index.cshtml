@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewData["Title"] = "sql执行日志";
+Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="searchForm">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            数据表名称：<input type="text" id="tableName" />
+                        </li>
+                        <li>
+                            日期：<input type="text" id="logDate" name="logDate" value="@(DateTime.Now.AddMinutes(-30).ToString("yyyy-MM-dd HH:mm:ss"))" onclick="WdatePicker({isShowClear:false,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly">
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" id="resetButton"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-danger multiple disabled" onclick="removeAll(this);" data-id="0" data-role="system:sqllog:delete">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:sqllog:clear">
+                <i class="fa fa-trash"></i> 清空日志
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        let $table;
+        $(function () {
+            loadData();
+
+        });
+
+        function loadData() {
+            let options = {
+                url: '/admin/SysSqlLog/GetPageList',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        tableName: $('#tableName').val(),
+                        logDate: $('#logDate').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'selectItem', checkbox: true },
+                     {field: 'table_name', title: '表名', align: "center" },
+
+                     {field: 'sql_string', title: '执行sql字符串', align: "center" },
+
+                     {field: 'elapsed_time', title: '耗时毫秒', align: "center" },
+
+                     {field: 'excute_time', title: '执行时间', align: "center" },
+                    {
+                        field: 'id', title: '操作', align: "center", formatter: renderOpts
+                    }
+                ]
+            };
+
+            $table = $('#dataTable').easyTable(options);
+
+        }
+
+        function renderOpts(v) {
+            var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
+            return html;
+        }
+
+
+        function removeAll(obj) {
+            const id = $(obj).data('id');
+            let ids = [];
+            if (id == 0) {
+                const rows = $table.easyTable("selected");
+                if (rows.length == 0) {
+                    jutils.warn("请选择数据行");
+                    return;
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    ids.push(rows[i].id);
+                }
+            } else {
+                ids.push(id);
+            }
+
+
+            jutils.confirm("确认删除数据吗？", function () {
+                jutils.ajaxGet("/admin/SysSqlLog/removeAll", { ids: ids.join() }, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
+                });
+            });
+        }
+
+        function clearAll() {
+            jutils.confirm("确认清空数据吗？", function () {
+                jutils.ajaxGet("/admin/SysSqlLog/ClearTable", null, function (res) {
+                    if (res.status) {
+                        $table.easyTable('search');
+                    }
+                });
+            });
+        }
+
+    </script>
+
+}
+
+

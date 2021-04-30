@@ -17,16 +17,17 @@ namespace Atlass.Framework.Core.Extensions
     {
         public static void AddFreeSql(this IServiceCollection service)
         {
-            var freeSqlConfig = GlobalContext.DefaultDbConfig;
+            var dbConfig = GlobalContext.DefaultDbConfig;
+            var freeSqlConfig = GlobalContext.FreeSqlConfig;
             service.AddSingleton<IFreeSql>(f =>
             {
-                IFreeSql freeSql = DbInstanceFactory.GetInstance(freeSqlConfig.DataType, freeSqlConfig.MasterConnection);
-                if (GlobalContext.FreeSqlConfig != null && GlobalContext.FreeSqlConfig.LogSql)
+                IFreeSql freeSql = DbInstanceFactory.GetInstance(dbConfig.DataType, dbConfig.MasterConnection);
+                if (freeSqlConfig.LogSql)
                 {
                     freeSql.Aop.CurdAfter += (s, e) => {
                         if (e.Table.DbName != "easy_log" && e.Table.DbName != "sys_sql_log")
                         {
-                            LoggerHelper.Debug(e.Sql, $"sql执行耗时：{e.ElapsedMilliseconds}ms");
+                            LoggerHelper.Sql(e.Table.DbName,e.Sql, e.ElapsedMilliseconds);
                         }
 
                     };

@@ -104,5 +104,21 @@ namespace Atlass.Framework.Common.Log
             //}
             //logger = null;
         }
+
+        /// <summary>
+        /// 调试信息
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Sql(string tableName, string sql,long elapsedTime)
+        {
+            LogDto log = new LogDto() { LogSummary = tableName, LogMessage = sql, LogTime = DateTime.Now, LogType = 5,ElapsedTime=elapsedTime };
+            LogQueueInstance.Add(log);
+            // Logger logger = LogManager.GetLogger("InfoLog");
+            //if (logger.IsDebugEnabled)
+            //{
+            //    logger.Debug(message);
+            //}
+            //logger = null;
+        }
     }
 }

@@ -37,14 +37,24 @@ namespace Atlass.Framework.Core.HostService
                 while (true)
                 {
                     List<easy_log> logs = new List<easy_log>();
-                    for (int i = 0; i < 100; i++)
+                    List<sys_sql_log> sqllogs = new List<sys_sql_log>();
+                    for (int i = 0; i < 300; i++)
                     {    //队列中取log
                         LogDto log = LogQueueInstance.GetLog();
                         if (log == null)
                         {
                             break;
                         }
-                        if (log != null)
+                        if (log.LogType==5)
+                        {
+                            sys_sql_log sqllog = new sys_sql_log();
+                            sqllog.table_name = log.LogSummary;
+                            sqllog.sql_string = log.LogMessage;
+                            sqllog.excute_time = log.LogTime;
+                            sqllog.elapsed_time = log.ElapsedTime;
+                            sqllogs.Add(sqllog);
+                        }
+                        else
                         {
                             easy_log logModel = new easy_log();
                             logModel.log_summary = log.LogSummary;
@@ -55,34 +65,39 @@ namespace Atlass.Framework.Core.HostService
                         }
 
                     }
-                    List<cms_visit> visits = new List<cms_visit>();
+                    //List<cms_visit> visits = new List<cms_visit>();
 
-                    for (int i = 0; i < 100; i++)
-                    {    //队列中取log
-                        cms_visit visit = VisitQueueInstance.GetVisit();
-                        if (visit == null)
-                        {
-                            break;
-                        }
-                        visits.Add(visit);
+                    //for (int i = 0; i < 100; i++)
+                    //{    //队列中取log
+                    //    cms_visit visit = VisitQueueInstance.GetVisit();
+                    //    if (visit == null)
+                    //    {
+                    //        break;
+                    //    }
+                    //    visits.Add(visit);
 
-                    }
+                    //}
                     try
                     {
                         if (logs.Count > 0)
                         {
                             _freeSql.Insert(logs).ExecuteAffrows();
                         }
-                        if (visits.Count > 0)
+                        //if (visits.Count > 0)
+                        //{
+                        //    _freeSql.Insert(visits).ExecuteAffrows();
+                        //}
+                        if (sqllogs.Count > 0)
                         {
-                            _freeSql.Insert(visits).ExecuteAffrows();
+                            _freeSql.Insert(sqllogs).ExecuteAffrows();
                         }
+                        
                     }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex.ToString());
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(5000);
                 }
             }
             catch(Exception ex)
