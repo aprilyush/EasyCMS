@@ -164,15 +164,18 @@ namespace Atlass.Framework.Web
             });
 
             //启动hangfire服务和面板
-            app.UseHangfireServer(new BackgroundJobServerOptions
-            {
-                Queues = new[] { "default"}
-            });
-          //  app.UseHangfireDashboard();
-            app.UseHangfireDashboard("/easytask", new DashboardOptions()
-            {
-                Authorization = new[] { new HangfireAuthorizeFilter() }
-            });
+            if (GlobalContext.CrontabConfigDto.Enable) {
+                app.UseHangfireServer(new BackgroundJobServerOptions
+                {
+                    Queues = new[] { "default" }
+                });
+                //  app.UseHangfireDashboard();
+                app.UseHangfireDashboard("/easytask", new DashboardOptions()
+                {
+                    Authorization = new[] { new HangfireAuthorizeFilter() }
+                });
+            }
+           
 
 
             //关于 UseSenparcGlobal() 的更多用法见 CO2NET Demo：

@@ -19,7 +19,9 @@ namespace Atlass.Framework.Core.Extensions
         {
             var redis = configuration.GetSection("RedisConfig").Get<RedisConfigDto>();
 
+            var crontab = configuration.GetSection("Crontab").Get<CrontabConfigDto>();
             GlobalContext.RedisConfig = redis;
+            GlobalContext.CrontabConfigDto = crontab;
             try
             {
                 RedisFactory.Init(redis);
@@ -31,15 +33,16 @@ namespace Atlass.Framework.Core.Extensions
             //hangfire
             try
             {
-                //Version=3;Pooling=true;FailIfMissing=false;
-                string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\hangfire.db";
-                string connection = $"Data Source ={filePath};Mode=ReadWriteCreate;Cache=Shared";
-                //LoggerHelper.Info(connection);
+                if (crontab.Enable)
+                {
+                    string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\hangfire.db";
+                    string connection = $"Data Source ={filePath};Mode=ReadWriteCreate;Cache=Shared";
+                    //LoggerHelper.Info(connection);
 
-                GlobalStateHandlers.Handlers.Add(new SucceededStateExpireHandler(30));
-                services.AddHangfire(x => x.UseLogProvider(new CustomLogProvider())
-                .UseSQLiteStorage(connection));
-
+                    GlobalStateHandlers.Handlers.Add(new SucceededStateExpireHandler(30));
+                    services.AddHangfire(x => x.UseLogProvider(new CustomLogProvider())
+                    .UseSQLiteStorage(connection));
+                }
             }
             catch(Exception ex)
             {

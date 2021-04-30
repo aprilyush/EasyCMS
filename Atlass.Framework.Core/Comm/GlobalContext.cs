@@ -51,5 +51,10 @@ namespace Atlass.Framework.Core
         /// </summary>
         public static RedisConfigDto RedisConfig { get; set; }
 
+        /// <summary>
+        /// 定时任务配置
+        /// </summary>
+        public static CrontabConfigDto CrontabConfigDto { get; set; }
+
     }
 }

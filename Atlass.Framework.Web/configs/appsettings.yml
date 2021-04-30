@@ -56,6 +56,9 @@ RedisConfig:
   ConnectTimeout: 5000
   ConnectionName: "easycms"
   PreKey: "{easycms}:"
+#定时任务配置
+Crontab: 
+  Enable: false #是否开启hanfire
  #CO2NET 设置
 SenparcSetting: 
   IsDebug: true
