@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 27/04/2021 14:04:56
+ Date: 30/04/2021 10:21:38
 */
 
 SET NAMES utf8mb4;
@@ -386,22 +386,11 @@ CREATE TABLE `code_column`  (
   `update_time` datetime(0) NOT NULL COMMENT '最新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_tname`(`table_name`, `sort_num`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 673 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '代码生成，表的字段信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 705 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '代码生成，表的字段信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of code_column
 -- ----------------------------
-INSERT INTO `code_column` VALUES (337, 'cms_ad', 'id', 1, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (338, 'cms_ad', 'ad_href', 3, '链接', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (339, 'cms_ad', 'ad_image', 4, '广告图', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (340, 'cms_ad', 'ad_title', 2, '广告标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (341, 'cms_ad', 'create_by', 9, '创建人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (342, 'cms_ad', 'create_time', 8, '创建时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (343, 'cms_ad', 'enable_status', 5, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (344, 'cms_ad', 'image_height', 7, '显示高度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (345, 'cms_ad', 'image_width', 6, '显示宽度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (346, 'cms_ad', 'update_by', 11, '更新人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
-INSERT INTO `code_column` VALUES (347, 'cms_ad', 'update_time', 10, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_column` VALUES (348, 'cms_channel', 'id', 12, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_column` VALUES (349, 'cms_channel', 'channel_href', 17, '外链', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_column` VALUES (350, 'cms_channel', 'channel_image', 16, '栏目图片', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
@@ -727,6 +716,22 @@ INSERT INTO `code_column` VALUES (669, 'work_notice_reply', 'notice_id', 330, ''
 INSERT INTO `code_column` VALUES (670, 'work_notice_reply', 'reply_status', 336, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_column` VALUES (671, 'work_notice_reply', 'reply_time', 333, '', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_column` VALUES (672, 'work_notice_reply', 'user_id', 331, '', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_column` VALUES (684, 'cms_ad', 'id', 1, '', 0, 'int', 'int(11)', 11, 3, 'Int32', 1, 1, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (685, 'cms_ad', 'ad_href', 3, '链接', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (686, 'cms_ad', 'ad_image', 4, '广告图', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (687, 'cms_ad', 'ad_title', 2, '广告标题', 0, 'varchar', 'varchar(255)', 255, 253, 'String', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (688, 'cms_ad', 'create_by', 9, '创建人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (689, 'cms_ad', 'create_time', 8, '创建时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (690, 'cms_ad', 'enable_status', 5, '', 0, 'tinyint', 'tinyint(1)', 1, 1, 'SByte', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (691, 'cms_ad', 'image_height', 7, '显示高度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (692, 'cms_ad', 'image_width', 6, '显示宽度', 0, 'int', 'int(11)', 11, 3, 'Int32', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (693, 'cms_ad', 'update_by', 11, '更新人', 0, 'varchar', 'varchar(30)', 30, 253, 'String', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (694, 'cms_ad', 'update_time', 10, '更新时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-27 14:29:10', '2021-04-27 14:29:10');
+INSERT INTO `code_column` VALUES (700, 'sys_sql_log', 'id', 1, '数据Id', 0, 'int', 'int(255)', 255, 3, 'Int32', 1, 1, '2021-04-29 11:49:50', '2021-04-29 11:49:50');
+INSERT INTO `code_column` VALUES (701, 'sys_sql_log', 'elapsed_time', 4, '耗时毫秒', 0, 'bigint', 'bigint(20)', 20, 8, 'Int64', 0, 0, '2021-04-29 11:49:50', '2021-04-29 11:49:50');
+INSERT INTO `code_column` VALUES (702, 'sys_sql_log', 'excute_time', 5, '执行时间', 0, 'datetime', 'datetime', -1, 12, 'DateTime', 0, 0, '2021-04-29 11:49:50', '2021-04-29 11:49:50');
+INSERT INTO `code_column` VALUES (703, 'sys_sql_log', 'sql_string', 3, '执行sql字符串', 0, 'mediumtext', 'mediumtext', -1, 750, 'String', 0, 0, '2021-04-29 11:49:50', '2021-04-29 11:49:50');
+INSERT INTO `code_column` VALUES (704, 'sys_sql_log', 'table_name', 2, '表名', 0, 'varchar', 'varchar(50)', 50, 253, 'String', 0, 0, '2021-04-29 11:49:50', '2021-04-29 11:49:50');
 
 -- ----------------------------
 -- Table structure for code_table
@@ -743,12 +748,12 @@ CREATE TABLE `code_table`  (
   `update_time` datetime(0) NOT NULL COMMENT '最新同步时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_tname`(`table_name`, `update_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 110 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '表数据信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 111 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '表数据信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of code_table
 -- ----------------------------
-INSERT INTO `code_table` VALUES (76, '', 'cms_ad', 'cms_ad', 0, '广告信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (76, '', 'cms_ad', 'cms_ad', 0, '广告信息表', '2021-04-27 13:59:24', '2021-04-27 14:29:10');
 INSERT INTO `code_table` VALUES (77, '', 'cms_channel', 'cms_channel', 0, '栏目信息表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_table` VALUES (78, '', 'cms_content', 'cms_content', 0, '内容表', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_table` VALUES (79, '', 'cms_content_image', 'cms_content_image', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
@@ -782,6 +787,7 @@ INSERT INTO `code_table` VALUES (106, '', 'sys_validate_code', 'sys_validate_cod
 INSERT INTO `code_table` VALUES (107, '', 'work_address_book', 'work_address_book', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_table` VALUES (108, '', 'work_notice', 'work_notice', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
 INSERT INTO `code_table` VALUES (109, '', 'work_notice_reply', 'work_notice_reply', 0, '', '2021-04-27 13:59:24', '2021-04-27 13:59:24');
+INSERT INTO `code_table` VALUES (110, '', 'sys_sql_log', 'sys_sql_log', 0, 'sql执行日志\r\n', '2021-04-29 11:49:28', '2021-04-29 11:49:50');
 
 -- ----------------------------
 -- Table structure for easy_log
@@ -795,26 +801,51 @@ CREATE TABLE `easy_log`  (
   `log_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_time`(`log_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of easy_log
 -- ----------------------------
-INSERT INTO `easy_log` VALUES (1, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (2, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (3, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (4, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (5, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (6, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (7, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (8, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (9, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (10, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (11, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (12, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (13, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (14, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
-INSERT INTO `easy_log` VALUES (15, '调试', '{\"id\":12,\"can_null\":0,\"column_name\":\"id\",\"comment\":\"\",\"cstype\":\"Int32\",\"dbtype\":3,\"max_length\":11,\"is_identity\":1,\"is_primary\":1,\"sort_num\":0,\"sync_time\":\"2021-04-25 15:59:56\",\"table_name\":\"cms_channel\",\"type_text\":\"int\",\"type_text_full\":\"int(11)\",\"update_time\":\"2021-04-25 15:59:56\"}', 2, '2021-04-27 12:08:54');
+INSERT INTO `easy_log` VALUES (1, 'sql执行耗时：8ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 13:14:38');
+INSERT INTO `easy_log` VALUES (2, 'sql执行耗时：4ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:14:01');
+INSERT INTO `easy_log` VALUES (3, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:14:01');
+INSERT INTO `easy_log` VALUES (4, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:14:01');
+INSERT INTO `easy_log` VALUES (5, 'sql执行耗时：3ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:14:22');
+INSERT INTO `easy_log` VALUES (6, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:14:22');
+INSERT INTO `easy_log` VALUES (7, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:14:22');
+INSERT INTO `easy_log` VALUES (8, 'sql执行耗时：3ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:15:01');
+INSERT INTO `easy_log` VALUES (9, 'sql执行耗时：0ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:15:01');
+INSERT INTO `easy_log` VALUES (10, 'sql执行耗时：0ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:15:01');
+INSERT INTO `easy_log` VALUES (11, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`staff_name`, a.`hiredate`, a.`create_time`, a.`create_by`, a.`staff_disable` \r\nFROM `fh_staff` a \r\nWHERE (a.`staff_disable` = 0)', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (12, 'sql执行耗时：1ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 1 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (13, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (14, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142993017999429) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (15, 'sql执行耗时：1ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 2 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (16, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (17, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528424517) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (18, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 3 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (19, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (20, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528424517) \r\nlimit 0,1', 2, '2021-04-29 14:15:08');
+INSERT INTO `easy_log` VALUES (21, 'sql执行耗时：4ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:15:35');
+INSERT INTO `easy_log` VALUES (22, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:15:35');
+INSERT INTO `easy_log` VALUES (23, 'sql执行耗时：0ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:15:35');
+INSERT INTO `easy_log` VALUES (24, 'sql执行耗时：4ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:16:35');
+INSERT INTO `easy_log` VALUES (25, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:16:35');
+INSERT INTO `easy_log` VALUES (26, 'sql执行耗时：0ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:16:35');
+INSERT INTO `easy_log` VALUES (27, 'sql执行耗时：2ms', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-29 14:18:54');
+INSERT INTO `easy_log` VALUES (28, 'sql执行耗时：0ms', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 2, '2021-04-29 14:18:55');
+INSERT INTO `easy_log` VALUES (29, 'sql执行耗时：1ms', 'SELECT a.`id` as1, a.`staff_name` as2 \r\nFROM `fh_staff` a \r\nORDER BY a.`id` DESC', 2, '2021-04-29 14:18:55');
+INSERT INTO `easy_log` VALUES (30, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`staff_name`, a.`hiredate`, a.`create_time`, a.`create_by`, a.`staff_disable` \r\nFROM `fh_staff` a \r\nWHERE (a.`staff_disable` = 0)', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (31, 'sql执行耗时：1ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 1 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (32, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (33, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142993017999429) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (34, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 2 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (35, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (36, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528424517) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (37, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`bill_id`, a.`staff_id`, a.`work_date`, a.`deploy_hour`, a.`day_hour`, a.`work_num`, a.`is_holiday`, a.`process_id`, a.`process_type`, a.`product_id` \r\nFROM `fh_time_process` a \r\nWHERE (a.`staff_id` = 3 AND a.`work_date` >= \'2021-04-01 00:00:00.000\' AND a.`work_date` < \'2021-05-01 00:00:00.000\')', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (38, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528420421) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (39, 'sql执行耗时：0ms', 'SELECT a.`id`, a.`product_id`, a.`process_name`, a.`sort_num`, a.`process_type`, a.`fix_num`, a.`deploy_hour` \r\nFROM `fh_product_process` a \r\nWHERE (a.`id` = 142989528424517) \r\nlimit 0,1', 2, '2021-04-29 14:18:58');
+INSERT INTO `easy_log` VALUES (40, 'Data too long for column \'remark\' at row 1', 'System.Exception: Data too long for column \'remark\' at row 1\r\n ---> MySqlConnector.MySqlException (0x80004005): Data too long for column \'remark\' at row 1\r\n ---> MySqlConnector.MySqlException (0x80004005): Data too long for column \'remark\' at row 1\r\n   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 49\r\n   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 131\r\n   at MySqlConnector.MySqlDataReader.CreateAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 436\r\n   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(IReadOnlyList`1 commands, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 60\r\n   at MySqlConnector.MySqlCommand.ExecuteNonQueryAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 264\r\n   at MySqlConnector.MySqlCommand.ExecuteNonQuery() in /_/src/MySqlConnector/MySqlCommand.cs:line 100\r\n   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)\r\n   --- End of inner exception stack trace ---\r\n   at FreeSql.Internal.CommonProvider.AdoProvider.LoggerException(IObjectPool`1 pool, PrepareCommandResult pc, Exception ex, DateTime dt, StringBuilder logtxt, Boolean isThrowException)\r\n   at FreeSql.Internal.CommonProvider.AdoProvider.ExecuteNonQuery(DbConnection connection, DbTransaction transaction, CommandType cmdType, String cmdText, Int32 cmdTimeout, DbParameter[] cmdParms)\r\n   at FreeSql.Internal.CommonProvider.InsertProvider`1.RawExecuteAffrows()\r\n   at FreeSql.Internal.CommonProvider.InsertProvider`1.SplitExecuteAffrows(Int32 valuesLimit, Int32 parameterLimit)\r\n   at FreeSql.MySql.Curd.MySqlInsert`1.ExecuteAffrows()\r\n   at Atlass.Framework.AppService.SysMenuAppService.AddMenu(sys_menu dto, String funcs) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.AppService\\SystemApp\\SysMenuAppService.cs:line 62\r\n   at Altas.Framework.Controllers.Admin.SysMenuController.SaveData(sys_menu dto, String funcs) in E:\\开源\\Atlass开发框架\\EasyCMS\\Atlass.Framework.Web\\Areas\\Admin\\Controllers\\SysMenuController.cs:line 99\r\n   at lambda_method691(Closure , Object , Object[] )\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)', 4, '2021-04-30 09:33:12');
 
 -- ----------------------------
 -- Table structure for exam_record
@@ -867,7 +898,7 @@ CREATE TABLE `fh_product`  (
 -- Records of fh_product
 -- ----------------------------
 INSERT INTO `fh_product` VALUES (1, 'PT289', 1, '2021-03-30 11:25:54', 'admin', 0, '备注');
-INSERT INTO `fh_product` VALUES (2, '调配工时', 2, '2021-03-30 11:40:06', 'admin', 1, '独立计算');
+INSERT INTO `fh_product` VALUES (2, '派工工时', 2, '2021-03-30 11:40:06', 'admin', 1, '独立计算，小时为单位');
 
 -- ----------------------------
 -- Table structure for fh_product_process
@@ -889,7 +920,7 @@ CREATE TABLE `fh_product_process`  (
 -- ----------------------------
 INSERT INTO `fh_product_process` VALUES (142989528420421, 1, '镭刻', 1, 3000, 0, 0.0);
 INSERT INTO `fh_product_process` VALUES (142989528424517, 1, '打胶', 2, 5000, 0, 0.0);
-INSERT INTO `fh_product_process` VALUES (142993017999429, 2, '调配工时', 1, 0, 1, 1.5);
+INSERT INTO `fh_product_process` VALUES (142993017999429, 2, '派工工时', 1, 0, 1, 1.5);
 
 -- ----------------------------
 -- Table structure for fh_staff
@@ -924,6 +955,7 @@ CREATE TABLE `fh_time_bill`  (
   `deploy_hour` decimal(5, 1) NOT NULL COMMENT '调配工时',
   `work_date` datetime(0) NOT NULL COMMENT '工作日期',
   `is_holiday` int(11) NOT NULL COMMENT '0-不是，1-是',
+  `day_hour` decimal(5, 1) NOT NULL COMMENT '当日完成工时',
   `create_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `create_time` datetime(0) NOT NULL,
   `update_by` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -936,10 +968,13 @@ CREATE TABLE `fh_time_bill`  (
 -- ----------------------------
 -- Records of fh_time_bill
 -- ----------------------------
-INSERT INTO `fh_time_bill` VALUES (143323429118021, 3, '于硕', 1, 100.0, '2021-03-31 00:00:00', 1, 'admin', '2021-03-31 10:04:34', 'admin', '2021-03-31 10:04:34', '嘿嘿');
-INSERT INTO `fh_time_bill` VALUES (143323952558149, 2, '蒲华磊', 1553, 0.0, '2021-03-31 00:00:00', 0, 'admin', '2021-03-31 10:06:41', 'admin', '2021-03-31 10:06:41', NULL);
-INSERT INTO `fh_time_bill` VALUES (143324256452677, 1, '蒲晓渝', 2765, 0.0, '2021-03-31 00:00:00', 0, 'admin', '2021-03-31 10:07:56', 'admin', '2021-03-31 10:07:56', '哈哈');
-INSERT INTO `fh_time_bill` VALUES (143341757521989, 3, '于硕', 10000, 0.0, '2021-03-30 00:00:00', 0, 'admin', '2021-03-31 11:19:08', 'admin', '2021-03-31 11:19:08', '哈哈');
+INSERT INTO `fh_time_bill` VALUES (143323429118021, 3, '于硕', 1, 100.0, '2021-03-31 00:00:00', 1, 0.0, 'admin', '2021-03-31 10:04:34', 'admin', '2021-03-31 10:04:34', '嘿嘿');
+INSERT INTO `fh_time_bill` VALUES (143323952558149, 2, '蒲华磊', 1553, 0.0, '2021-03-31 00:00:00', 0, 0.0, 'admin', '2021-03-31 10:06:41', 'admin', '2021-03-31 10:06:41', NULL);
+INSERT INTO `fh_time_bill` VALUES (143324256452677, 1, '蒲晓渝', 2765, 0.0, '2021-03-31 00:00:00', 0, 0.0, 'admin', '2021-03-31 10:07:56', 'admin', '2021-03-31 10:07:56', '哈哈');
+INSERT INTO `fh_time_bill` VALUES (143341757521989, 3, '于硕', 10000, 0.0, '2021-03-30 00:00:00', 0, 0.0, 'admin', '2021-03-31 11:19:08', 'admin', '2021-03-31 11:19:08', '哈哈');
+INSERT INTO `fh_time_bill` VALUES (153307330478149, 3, '于硕', 2455, 0.0, '2021-04-28 00:00:00', 0, 4.7, 'admin', '2021-04-28 15:09:10', 'admin', '2021-04-28 15:09:10', NULL);
+INSERT INTO `fh_time_bill` VALUES (153334668718149, 1, '蒲晓渝', 1333, 13.0, '2021-04-27 00:00:00', 0, 19.7, 'admin', '2021-04-28 17:00:24', '', '0001-01-01 00:00:00', '备注份饭');
+INSERT INTO `fh_time_bill` VALUES (153343358767173, 2, '蒲华磊', 1344, 0.0, '2021-04-28 00:00:00', 1, 6.3, 'admin', '2021-04-28 17:35:45', 'admin', '2021-04-28 17:35:45', '范德萨发生的');
 
 -- ----------------------------
 -- Table structure for fh_time_process
@@ -953,6 +988,7 @@ CREATE TABLE `fh_time_process`  (
   `process_type` int(255) NOT NULL COMMENT '0-产品，1-调配工时',
   `work_num` int(11) NOT NULL COMMENT '实际配额数量',
   `deploy_hour` decimal(5, 1) NOT NULL COMMENT '调配工时',
+  `day_hour` decimal(5, 1) NOT NULL COMMENT '当日总工时',
   `staff_id` int(11) NOT NULL,
   `work_date` datetime(0) NOT NULL,
   `is_holiday` int(11) NOT NULL COMMENT '法定假日',
@@ -965,15 +1001,21 @@ CREATE TABLE `fh_time_process`  (
 -- ----------------------------
 -- Records of fh_time_process
 -- ----------------------------
-INSERT INTO `fh_time_process` VALUES (143316198641733, 143316198576197, 1, 142989528420421, 0, 3000, 0.0, 1, '2021-03-31 00:00:00', 1);
-INSERT INTO `fh_time_process` VALUES (143316198654021, 143316198576197, 2, 142993017999429, 1, 0, 1.5, 1, '2021-03-31 00:00:00', 1);
-INSERT INTO `fh_time_process` VALUES (143316198654022, 143316198576197, 1, 142989528424517, 0, 2000, 0.0, 1, '2021-03-31 00:00:00', 1);
-INSERT INTO `fh_time_process` VALUES (143323429179461, 143323429118021, 2, 142993017999429, 1, 0, 100.0, 3, '2021-03-31 00:00:00', 1);
-INSERT INTO `fh_time_process` VALUES (143323429191749, 143323429118021, 1, 142989528420421, 0, 1, 0.0, 3, '2021-03-31 00:00:00', 1);
-INSERT INTO `fh_time_process` VALUES (143323952562245, 143323952558149, 1, 142989528420421, 0, 1553, 0.0, 2, '2021-03-31 00:00:00', 0);
-INSERT INTO `fh_time_process` VALUES (143324256456773, 143324256452677, 1, 142989528420421, 0, 1333, 0.0, 1, '2021-03-31 00:00:00', 0);
-INSERT INTO `fh_time_process` VALUES (143324256456774, 143324256452677, 1, 142989528424517, 0, 1432, 0.0, 1, '2021-03-31 00:00:00', 0);
-INSERT INTO `fh_time_process` VALUES (143341757567045, 143341757521989, 1, 142989528420421, 0, 10000, 0.0, 3, '2021-03-30 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143316198641733, 143316198576197, 1, 142989528420421, 0, 3000, 0.0, 0.0, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143316198654021, 143316198576197, 2, 142993017999429, 1, 0, 1.5, 0.0, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143316198654022, 143316198576197, 1, 142989528424517, 0, 2000, 0.0, 0.0, 1, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323429179461, 143323429118021, 2, 142993017999429, 1, 0, 100.0, 0.0, 3, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323429191749, 143323429118021, 1, 142989528420421, 0, 1, 0.0, 0.0, 3, '2021-03-31 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (143323952562245, 143323952558149, 1, 142989528420421, 0, 1553, 0.0, 0.0, 2, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143324256456773, 143324256452677, 1, 142989528420421, 0, 1333, 0.0, 0.0, 1, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143324256456774, 143324256452677, 1, 142989528424517, 0, 1432, 0.0, 0.0, 1, '2021-03-31 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (143341757567045, 143341757521989, 1, 142989528420421, 0, 10000, 0.0, 0.0, 3, '2021-03-30 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (153307330551877, 153307330478149, 1, 142989528420421, 0, 1000, 0.0, 0.0, 3, '2021-04-28 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (153307330555973, 153307330478149, 1, 142989528424517, 0, 1455, 0.0, 0.0, 3, '2021-04-28 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (153342809129029, 153334668718149, 1, 142989528420421, 0, 1333, 0.0, 3.3, 1, '2021-04-27 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (153342809129030, 153334668718149, 2, 142993017999429, 1, 0, 13.0, 16.3, 1, '2021-04-27 00:00:00', 0);
+INSERT INTO `fh_time_process` VALUES (153343358775365, 153343358767173, 1, 142989528420421, 0, 1222, 0.0, 3.1, 2, '2021-04-28 00:00:00', 1);
+INSERT INTO `fh_time_process` VALUES (153343358775366, 153343358767173, 1, 142989528424517, 0, 122, 0.0, 3.2, 2, '2021-04-28 00:00:00', 1);
 
 -- ----------------------------
 -- Table structure for hangfire_task
@@ -1012,7 +1054,7 @@ CREATE TABLE `login_info`  (
   `login_status` int(255) NOT NULL COMMENT '0-失败，1-成功',
   `login_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '登录日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '登录日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of login_info
@@ -1035,6 +1077,15 @@ INSERT INTO `login_info` VALUES (19, 'admin', 'Other', 'Chrome 86', 'Windows 10'
 INSERT INTO `login_info` VALUES (20, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 09:27:21', 1, '登录成功');
 INSERT INTO `login_info` VALUES (21, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-26 10:11:49', 1, '登录成功');
 INSERT INTO `login_info` VALUES (22, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-27 11:24:33', 1, '登录成功');
+INSERT INTO `login_info` VALUES (23, 'admin', 'Other', 'Chrome 86', 'Windows 10', '127.0.0.1', '本地局域网', '2021-04-27 15:32:36', 0, '用户名或密码错误');
+INSERT INTO `login_info` VALUES (24, 'admin', 'Other', 'Chrome 86', 'Windows 10', '127.0.0.1', '本地局域网', '2021-04-27 15:32:48', 1, '登录成功');
+INSERT INTO `login_info` VALUES (25, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-28 09:03:53', 1, '登录成功');
+INSERT INTO `login_info` VALUES (26, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-28 14:12:20', 1, '登录成功');
+INSERT INTO `login_info` VALUES (27, 'ceshi', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-29 09:44:26', 0, '用户名或密码错误');
+INSERT INTO `login_info` VALUES (28, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-29 09:44:33', 1, '登录成功');
+INSERT INTO `login_info` VALUES (29, 'ceshi', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-29 15:40:31', 0, '用户名或密码错误');
+INSERT INTO `login_info` VALUES (30, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-29 15:40:38', 1, '登录成功');
+INSERT INTO `login_info` VALUES (31, 'admin', 'Other', 'Chrome 86', 'Windows 10', '192.168.1.210', '本地局域网', '2021-04-30 08:27:28', 1, '登录成功');
 
 -- ----------------------------
 -- Table structure for sys_citys
@@ -4359,7 +4410,7 @@ CREATE TABLE `sys_menu`  (
   `role_tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '#' COMMENT '权限标识',
   `menu_sort` int(11) NOT NULL COMMENT '排序',
   `parent_id` bigint(20) NOT NULL COMMENT '上级菜单',
-  `remark` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_person` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_time` datetime(3) NOT NULL,
   `iframe` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否在iframe打开现在都是',
@@ -4386,7 +4437,7 @@ INSERT INTO `sys_menu` VALUES (142971618836549, '生产管理', '#', '#', 1, 0, 
 INSERT INTO `sys_menu` VALUES (142971913965637, '员工管理', '/fuhua/staff/index', 'fh:staff:view', 5, 142971618836549, NULL, 'admin', '2021-03-30 10:14:14.454', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (142984211783749, '产品工序', '/fuhua/product/index', 'fh:product:view', 4, 142971618836549, NULL, 'admin', '2021-03-30 11:04:16.851', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (143026935611461, '工时管理', '/fuhua/timebill/index', 'fh:timebill:view', 3, 142971618836549, NULL, 'admin', '2021-03-30 13:58:07.473', 0, 2, 1, 'fa fa-bookmark');
-INSERT INTO `sys_menu` VALUES (143326710992965, '工时统计', '/fuhua/WorkTimeReport/index', 'fh:worktimereport:view', 1, 142971618836549, NULL, 'admin', '2021-03-31 10:17:54.822', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (143326710992965, '每月工时统计', '/fuhua/WorkTimeReport/index', 'fh:worktimereport:view', 1, 142971618836549, NULL, 'admin', '2021-03-31 10:17:54.822', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (148970094415941, 'Hangfire监控', '/easytask', '#', 10, 138030650765088, NULL, 'admin', '2021-04-16 09:00:53.978', 0, 2, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (149035334889541, '内容管理', '#', '#', 1, 0, NULL, 'admin', '2021-04-16 13:26:21.828', 0, 1, 0, 'fa fa-book');
 INSERT INTO `sys_menu` VALUES (149035570483269, '站点管理', '#', '#', 2, 0, NULL, 'admin', '2021-04-16 13:27:19.346', 0, 1, 0, 'fa fa-internet-explorer');
@@ -4401,6 +4452,8 @@ INSERT INTO `sys_menu` VALUES (150485981093957, '模板匹配', '/cms/TemplateMa
 INSERT INTO `sys_menu` VALUES (150768673534021, '日志管理', '#', '#', 8, 138030650765088, NULL, 'admin', '2021-04-21 10:59:20.208', 0, 2, 0, 'fa fa-pencil-square-o');
 INSERT INTO `sys_menu` VALUES (150769392050245, '登录日志', '/admin/loginlog/index', 'system:loginlog:view', 1, 150768673534021, NULL, 'admin', '2021-04-21 11:02:15.627', 0, 3, 1, 'fa fa-bookmark');
 INSERT INTO `sys_menu` VALUES (152219595145285, '代码生成', '/admin/codegen/index', 'system:codegen:view', 11, 138030650765088, NULL, 'admin', '2021-04-25 13:23:09.116', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (153320562102341, '每日工序统计', '/fuhua/ProcessReport/index', 'fh:processreport:view', 2, 142971618836549, NULL, 'admin', '2021-04-28 16:02:59.878', 0, 2, 1, 'fa fa-bookmark');
+INSERT INTO `sys_menu` VALUES (153933377921093, 'Sql执行日志', '/admin/syssqllog/index', 'admin:sqllog:view', 3, 150768673534021, '请开启配置项\r\n#freesql的配置\r\nFreeSqlConfig:  \r\n  LogSql: false  #是否记录sql,true记录，false不记录\r\n', 'admin', '2021-04-30 09:36:33.115', 0, 3, 1, 'fa fa-bookmark');
 
 -- ----------------------------
 -- Table structure for sys_operate
@@ -4482,6 +4535,10 @@ INSERT INTO `sys_operate` VALUES (150769039695941, '删除', 'system:log:delete'
 INSERT INTO `sys_operate` VALUES (150769039695942, '清空', 'system:log:clear', 2, 138030650765093);
 INSERT INTO `sys_operate` VALUES (150769392238661, '删除', 'system:loginlog:delete', 1, 150769392050245);
 INSERT INTO `sys_operate` VALUES (152219595280453, '全量同步', 'system:codegen:syncall', 1, 152219595145285);
+INSERT INTO `sys_operate` VALUES (152939127238725, '字段', 'system:codegen:column', 2, 152219595145285);
+INSERT INTO `sys_operate` VALUES (152939127242821, '预览', 'system:codegen:gentable', 3, 152219595145285);
+INSERT INTO `sys_operate` VALUES (153933378093125, '删除', 'admin:sqllog:delete', 1, 153933377921093);
+INSERT INTO `sys_operate` VALUES (153933378093126, '移除', 'admin:sqllog:clear', 2, 153933377921093);
 
 -- ----------------------------
 -- Table structure for sys_position
@@ -4594,6 +4651,27 @@ INSERT INTO `sys_role_authorize` VALUES (151466757640284, 138027723972674, 15009
 INSERT INTO `sys_role_authorize` VALUES (151466757640285, 138027723972674, 150094471213126, 150094470795333, 'admin', '2021-04-23 10:19:50.391');
 
 -- ----------------------------
+-- Table structure for sys_sql_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_sql_log`;
+CREATE TABLE `sys_sql_log`  (
+  `id` int(255) NOT NULL AUTO_INCREMENT COMMENT '数据Id',
+  `table_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表名',
+  `sql_string` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '执行sql字符串',
+  `elapsed_time` bigint(20) NOT NULL COMMENT '耗时毫秒',
+  `excute_time` datetime(0) NOT NULL COMMENT '执行时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = 'sql执行日志\r\n' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_sql_log
+-- ----------------------------
+INSERT INTO `sys_sql_log` VALUES (1, 'sys_menu', 'SELECT a.`id`, a.`create_person`, a.`create_time`, a.`iframe`, a.`menu_icon`, a.`menu_level`, a.`menu_name`, a.`menu_sort`, a.`menu_type`, a.`menu_url`, a.`parent_id`, a.`remark`, a.`role_tag` \r\nFROM `sys_menu` a \r\nORDER BY a.`menu_sort`', 2, '2021-04-30 09:55:32');
+INSERT INTO `sys_sql_log` VALUES (2, 'sys_menu', 'SELECT a.`id` as1, a.`create_person` as2, a.`create_time` as3, a.`iframe` as4, a.`menu_icon` as5, a.`menu_level` as6, a.`menu_name` as7, a.`menu_sort` as8, a.`menu_type` as9, a.`menu_url` as10, a.`parent_id` as11, a.`remark` as12, a.`role_tag` as13 \r\nFROM `sys_menu` a \r\nINNER JOIN `sys_role_authorize` b ON a.`id` = b.`menu_id` \r\nWHERE (b.`role_id` = 0 AND a.`role_tag` <> \'#\')', 1, '2021-04-30 09:55:33');
+INSERT INTO `sys_sql_log` VALUES (3, 'hangfire_task', 'SELECT count(1) as1 \r\nFROM `hangfire_task` a', 26, '2021-04-30 09:55:36');
+INSERT INTO `sys_sql_log` VALUES (4, 'hangfire_task', 'SELECT a.`id`, a.`task_name`, a.`assembly_namespace`, a.`class_name`, a.`cron_express`, a.`excute_time`, a.`remark`, a.`excute_status` \r\nFROM `hangfire_task` a \r\nORDER BY a.`excute_status` DESC, a.`excute_time` DESC \r\nlimit 0,10', 1, '2021-04-30 09:55:36');
+
+-- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -4623,7 +4701,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (138030650765371, 'admin', 'admin@123', '管理员122', '15961820351', 'admin2@fofia.com', 0, 1, 0, 0, '无锡市富华科技', '/ui/images/profile.jpg', '', 1, 0, 'admin', '2017-08-30 10:36:57.803', 'admin', '2021-02-27 16:40:44');
+INSERT INTO `sys_user` VALUES (138030650765371, 'admin', 'admin@123', '管理员122', '15961820351', 'admin2@fofia.com', 0, 1, 0, 0, '无锡市富华科技', '/upfiles/heads/608b4fed569ee40a8c5049dd.png', '', 1, 0, 'admin', '2017-08-30 10:36:57.803', 'admin', '2021-02-27 16:40:44');
 INSERT INTO `sys_user` VALUES (138030650765372, 'pxw', '123123', '浦总', '18012388691', 'pxw@fofia.com', 1, 0, 1000985679938850816, 101, '江苏真源网络服务有限公司', '/ui/images/profile.jpg', '', 1, 0, 'admin', '2020-01-06 16:28:59.650', 'admin', '2021-02-27 15:22:05');
 INSERT INTO `sys_user` VALUES (138030650765373, 'cxq', '123123', '陈总', '', 'cxq@fofia.com', 1, 0, 1000985679938850816, 104, '无锡源致科技', '/ui/images/profile.jpg', '备注', 1, 0, 'admin', '2020-05-10 17:33:53.332', 'admin', '2021-02-27 15:21:58');
 INSERT INTO `sys_user` VALUES (138030650765374, 'lyy', '123456', '罗总', '15961820351', 'lyy@fofia.com', 1, 0, 1000985679938850816, 100, '无锡市富华科技', '/ui/images/profile.jpg', '备注事实上111', 1, 0, 'yushuo', '2021-02-01 11:28:17.561', 'admin', '2021-03-12 13:50:27');
