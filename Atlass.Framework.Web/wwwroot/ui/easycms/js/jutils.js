@@ -613,7 +613,12 @@
                            return currentValue.menuId==menuId;
                 })
                 if(menu.length===0){
-                    $('#toolbar').empty();
+                    $('#toolbar').find('a').each(function(){
+                        let roleTag=$(this).data('role');
+                        if(roleTag!='0'){
+                            $(this).remove();
+                        }
+                    });
                     return;
                 }
                 const buttons = menu[0].buttons;

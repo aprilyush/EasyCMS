@@ -288,7 +288,7 @@ function createMenuItem(tabId,dataUrl, menuName, isRefresh) {
                 $('.page-tabs-content').animate({ marginLeft: ""}, "fast");
                 // 显示tab对应的内容区
                 $('.mainContent .RuoYi_iframe', topWindow).each(function() {
-                    if ($(this).data('id') == dataUrl) {
+                    if ($(this).data('id') == tabId) {
                         $(this).show().siblings('.RuoYi_iframe').hide();
                         return false;
                     }
