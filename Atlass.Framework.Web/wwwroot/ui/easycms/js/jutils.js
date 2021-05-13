@@ -420,7 +420,7 @@
         toLocalTime:function (localTime) {
             if (!localTime || localTime == '0001-01-01 00:00:00' ||
                 localTime == '1900-01-01 00:00:00' || localTime == '1753-01-01 00:00:00') {
-                return '-';
+                return '';
             }
             return localTime;
 
@@ -482,7 +482,9 @@
         },
         // 格式为 yyyy-MM-dd HH:mm:ss
         formatDate: function (v, format) {
-            if (!v) return "";
+            if (!v || v == '0001-01-01 00:00:00' || v == '1900-01-01 00:00:00' || v == '1753-01-01 00:00:00') {
+                return "";
+            }
             var d = v;
             if (typeof v === 'string') {
                 if (v.indexOf("/Date(") > -1)
@@ -611,14 +613,15 @@
             if (menuId) {
                 const menu=buttonPermissionList.filter(function(currentValue,index,arr){
                            return currentValue.menuId==menuId;
-                })
+                });
                 if(menu.length===0){
-                    $('#toolbar').find('a').each(function(){
-                        let roleTag=$(this).data('role');
-                        if(roleTag!='0'){
+                /* $('#toolbar').empty();*/
+                    $('#toolbar').find('a').each(function () {
+                        let roleTag = $(this).data('role');
+                        if (roleTag != '0') {
                             $(this).remove();
                         }
-                    });
+                    })
                     return;
                 }
                 const buttons = menu[0].buttons;
@@ -634,8 +637,17 @@
                                  $(this).remove();
                              }
                          }
-                })
+                });
 
+            }else{
+                $('#toolbar').find('a').each(function(){
+                    let roleTag=$(this).data('role');
+                    if(roleTag!='0'){
+                        if (buttonLength==0 || buttons.indexOf(roleTag)<0){
+                            $(this).remove();
+                        }
+                    }
+                });
             }
         }else{
             if($('#toolbar')){
@@ -660,11 +672,16 @@
             let buttonPermissionList=currentPage.buttonPermissions;
             let menuId = self.frameElement.getAttribute('data-id');
             if (menuId) {
-                const menu=buttonPermissionList.filter(function(currentValue,index,arr){
-                    return currentValue.menuId==menuId;
+                const menu = buttonPermissionList.filter(function (currentValue, index, arr) {
+                    return currentValue.menuId == menuId;
                 })
-                if(menu.length===0){
-                    return '';
+                if (menu.length === 0) {
+                    data.forEach(function (item, index) {
+                        if (item.roleTag == "0") {
+                            buttonPermissionHtml.push(item.button);
+                        }
+                    });
+                    return buttonPermissionHtml.join('');
                 }
                 const buttons = menu[0].buttons;
                 const buttonLength = buttons.length;
@@ -672,15 +689,21 @@
                 //    return '';
                 //}
                 data.forEach(function (item, index) {
-                    if (item.roleTag == "0" || (buttonLength>0 && buttons.indexOf(item.roleTag) >= 0)) {
+                    if (item.roleTag == "0" || (buttonLength > 0 && buttons.indexOf(item.roleTag) >= 0)) {
                         buttonPermissionHtml.push(item.button);
                     }
                 });
 
+            } else {
+                data.forEach(function (item, index) {
+                    if (item.roleTag == "0") {
+                        buttonPermissionHtml.push(item.button);
+                    }
+                });
             }
         }
 
-        return buttonPermissionHtml.join('');;
+        return buttonPermissionHtml.join('');
      },
 
     });
@@ -711,19 +734,10 @@ $.fn.initFormData = function (formdata) {
                      $('input:radio[name="'+key+'"]').each(function () {
                         let nowVal = $(this).val();
                          if (nowVal == value) {
-                             if($(this).hasClass('icheck')){
-                                 $(this).iCheck('check');
-                             }else{
-                                 $(this).attr("checked", true);
-                             }
+                             $(this).attr("checked", true);
 
                         } else {
-                             if($(this).hasClass('icheck')){
-                                 $(this).iCheck('uncheck');
-                             }else{
-                                 $(this).removeAttr("checked");
-                             }
-
+                             $(this).removeAttr("checked");
                         }
                     });
                     break;
@@ -771,4 +785,7 @@ $.fn.getFormData =function(){
 }
 $.fn.selectText=function(){
     return $(this).find("option:selected").text();
+}
+$.fn.isChecked = function () {
+    return $(this).is(":checked");
 }
