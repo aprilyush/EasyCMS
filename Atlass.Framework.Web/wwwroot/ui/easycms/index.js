@@ -122,7 +122,7 @@ function fixedSidebar() {
 // 设置锚点
 function setIframeUrl(href) {
 	if($.common.equals("history", mode)) {
-	    storage.set('publicPath', href);
+        localStorage.setItem('publicPath', href);
 	} else {
 	    var nowUrl = window.location.href;
 	    var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));

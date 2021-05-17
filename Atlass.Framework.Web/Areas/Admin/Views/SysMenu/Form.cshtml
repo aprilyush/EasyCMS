@@ -50,7 +50,9 @@
                                     <label class="col-sm-3 control-label is-required">图标：</label>
                                     <div class="col-sm-5">
                                         <div class="input-group">
-                                            <input type="text" name="menu_icon" id="menu_icon" class="form-control" value="fa fa-bookmark" data-rule="required"> <span class="input-group-btn">
+                                            <input type="text" name="menu_icon" id="menu_icon" class="form-control" value="fa fa-bookmark" data-rule="required">
+                                            <span class="input-group-addon"><i id="pickIcon" class="fa fa-bookmark"></i></span>
+                                            <span class="input-group-btn">
                                                 <button type="button" class="btn btn-primary" onclick="showicon();">
                                                     搜索图标
                                                 </button>
@@ -162,8 +164,10 @@
                 }
             });
             jutils.handleMessage(function (res) {
-                if (res.title == 'fontPick') {
-                    $('#menu_icon').val(res.icon);
+                //console.log(res);
+                if (res.title == 'font_pick') {
+                    $('#menu_icon').val(res.data);
+                    $('#pickIcon').attr('class', res.data);
                 }
 
             });
@@ -182,6 +186,7 @@
                 function (res) {
                     const model = res.data.model;
                     $('#menuForm').initFormData(model);
+                    $('#pickIcon').attr('class', model.menu_icon);
                     $("#parent_id").select2("val", [model.parent_id]);
                     const funcs = res.data.funcs;
                     const flen = funcs.length;
@@ -311,16 +316,9 @@
         }
 
         function showicon(rowIndex) {
-            rowIndex = rowIndex || 0;
-            var findex = layer.open({
-                'title': '设置图标',
-                type: 2,
-                area: ['700px', '450px'],
-                fixed: false, //不固定
-                maxmin: true,
-                content: '/ui/fontawesome.html?id=' + rowIndex
-            });
-            layer.full(findex);
+
+            jutils.dialogTop('设置图标', '/ui/icon.html');
+
         }
     </script>
 

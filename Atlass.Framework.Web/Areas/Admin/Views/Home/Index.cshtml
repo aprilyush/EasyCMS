@@ -212,7 +212,7 @@
                 $('#lockScreen').click();
             }
             if ($.common.equals("history", mode) && window.performance.navigation.type == 1) {
-                var url = storage.get('publicPath');
+                var url = localStorage.getItem('publicPath');
                 if ($.common.isNotEmpty(url)) {
                     applyPath(url);
                 }
@@ -223,7 +223,7 @@
                     applyPath(url);
                 } else {
                     if ($.common.equals("history", mode)) {
-                        storage.set('publicPath', "");
+                        localStorage.setItem('publicPath', "");
                     }
                 }
             }
@@ -234,11 +234,11 @@
 
         window.history.forward(1);
         // 皮肤缓存
-        var skin = storage.get("skin");
+        var skin = localStorage.getItem("skin");
         // history（表示去掉地址的#）否则地址以"#"形式展示
         var mode = "history";
         // 历史访问路径缓存
-        var historyPath = storage.get("historyPath");
+        var historyPath = localStorage.getItem("historyPath");
         // 是否页签与菜单联动
         var isLinkage = true;
 
