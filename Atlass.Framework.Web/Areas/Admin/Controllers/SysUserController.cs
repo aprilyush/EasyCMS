@@ -12,9 +12,11 @@ using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
 using Atlass.Framework.ViewModels.Common;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
+using NPOI.OpenXmlFormats.Dml;
 
 namespace Altas.Framework.Admin
 {
@@ -340,6 +342,22 @@ namespace Altas.Framework.Admin
             RequestHelper.SetCookie(claimstr);
 
             return Success("头像已更新");
+        }
+
+
+
+        /// <summary>
+        /// 停止web，用于重启应用
+        /// </summary>
+        /// <param name="applicationLifetime"></param>
+        /// <returns></returns>
+        [RequirePermission("system:user:stop")]
+        [HttpGet]
+        public IActionResult StopWeb([FromServices]IApplicationLifetime applicationLifetime)
+        {
+            applicationLifetime.StopApplication();
+
+            return Success("应用已停止");
         }
     }
 }
