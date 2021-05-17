@@ -26,6 +26,9 @@
             <a class="btn btn-info" onclick="syncAll(this);" data-id="0" data-role="system:codegen:syncall">
                 <i class="fa fa-refresh"></i> 全量同步
             </a>
+            <a class="btn btn-primary" onclick="importTable(this);" data-id="0" data-role="system:codegen:import">
+                <i class="fa fa-refresh"></i> 导入单表
+            </a>
             <a class="btn btn-danger multiple disabled" onclick="del(this);" data-id="0" data-role="system:codegen:delete">
                 <i class="fa fa-remove"></i> 删除
             </a>
@@ -176,6 +179,25 @@
                             $table.easyTable('search');
                         });
                 });
+        }
+
+        //导入单表
+        function importTable(obj) {
+            //prompt层
+
+            layer.prompt({ title: '填写需要导入的数据表名称', formType: 2 }, function (txt, index) {
+                if (jutils.empty(txt)) {
+                    jutils.warn("请填写数据表名称");
+                    return;
+                }
+
+                jutils.ajaxGet('/admin/CodeGen/syncTable',
+                    { tableName: txt },
+                    function () {
+                        layer.close(index);
+                        $table.easyTable('search');
+                    });
+            });
         }
 
         function query() {

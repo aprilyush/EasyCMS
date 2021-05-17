@@ -31,12 +31,11 @@ namespace Atlass.Framework.AppService
          /// <summary>
          /// 数据列表
          ///</summary>
-        public DataTableDto GetList(DataTableDto param)
+        public DataTableDto GetPageList(DataTableDto param)
         {
             
             var query = Sqldb.Select<{$table.table_name}>()
-                .Where(s => s.log_time >= logDate)
-                .OrderByDescending(s => s.id)
+                .OrderByDescending(s => s.create_time)
                 .Count(out long total)
                 .Page(param.pageNumber, param.pageSize)
                 .ToList();

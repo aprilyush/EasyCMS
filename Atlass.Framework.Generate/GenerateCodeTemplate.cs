@@ -254,7 +254,7 @@ namespace Atlass.Framework.Generate
                 var columnModel = (code_column)columnParams[0];
                // string json = columnModel.ToJson();
                // LoggerHelper.Debug(json,$"长度：{colums.l}");
-                string attr = $",Column(DbType =\"{columnModel.type_text_full}\"";
+                string attr = $"Column(DbType =\"{columnModel.type_text_full}\"";
                 if (columnModel.is_primary == 1)
                 {
                     attr += ",IsPrimary =true";
