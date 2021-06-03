@@ -1,0 +1,248 @@
+/**
+ 
+ @Name: layuiNetCompany - 大气风格的网络公司企业模版
+ @Author: xuxingyu
+ @Copyright: layui.com
+ 
+ */
+
+
+body{background: #fff;}
+.textCenter{text-align: center;}
+
+/** 首页 */
+
+/*导航部分*/
+.nav{width: 100%; height: 80px; box-shadow: 0 3px 3px 0 #CCC; background: #FFF; position: fixed; left: 0; top: 0; z-index: 999; overflow: hidden; transition: 0.3s}
+.nav.index{background: rgba(255, 255, 255 ,0.8); box-shadow: 0 0 0 0 rgba(0,0,0,0.05);}
+.nav.scroll{ background: #FFF; box-shadow: 0 3px 3px 0 rgba(0,0,0,0.05); transition: 0.3s}
+.nav .layui-container{position: relative; transition: all 400ms ease-out;}
+.nav .nav-logo{height: 100%; position: absolute; top: 0; left: 15px; line-height: 80px;}
+.nav .nav-list{display: inline-block; height: 80px;}
+.nav .nav-list button{width: 25px; height: 30px; position: absolute; top: 30px; right: 15px; background-color: transparent; border: none; outline: none; cursor: pointer;}
+.nav .nav-list button span{display: block; width: 25px; height: 2px; background: #2db5a3; margin-bottom: 6px; transition: 0.5s;}
+.nav .nav-list button span.spa1{transform: rotate(45deg);}
+.nav .nav-list button span.spa3{transform: rotate(-45deg) translate(5px,-5px);}
+.nav .layui-nav{width: 100%; position: absolute; top: 80px; right: 0; color: #000; background: transparent;}
+.nav .layui-nav .layui-nav-item{display: block; line-height: 60px;}
+.nav .layui-nav *{font-size: 18px;}
+.nav .layui-nav .layui-nav-item a{padding: 0 0; color: #000;}
+.nav .layui-nav-bar,
+.nav .layui-nav .layui-this:after{height: 2px; background-color: #2db5a3;}
+.nav .layui-nav .layui-this a
+,.nav .layui-nav .layui-nav-item a:hover{color: #2db5a3;}
+
+/*轮播*/
+#banner {height: 500px;top: 80px;margin: 0 auto;}
+#banner img{min-width: 100%; height: 500px;}
+#banner .panel{width: 400px; position: absolute; top: 25%; left: 50%; margin-left: -200px; text-align: center;}
+#banner .panel p{color: #8c8c8c; font-size: 44px; line-height: 80px; letter-spacing: 15px;}
+#banner .panel p.title{color: #4a4a4a; font-size: 54px; letter-spacing: 10px;}
+
+/*主体—产品*/
+.main-product{padding-top:20px; padding-bottom: 130px;}
+.main-product p{font-size: 16px; color: #ababab; line-height: 28px;}
+.main-product p.title
+,.main-service p.title{color: #484848; font-size: 24px; text-align: center; line-height: 160px;}
+.main-product p.title span
+,.main-service p.title span{color: #2db5a3;}
+.main-product .content{border: 1px solid #DEDEDE; padding: 30px 36px 0 36px; text-align: center; transition: 0.3s;}
+.main-product .content p.label{font-size: 18px; color: #939393; line-height: 46px; padding-top: 6px;}
+.main-product .content a{font-size: 18px; color: #a1d8cb; line-height: 68px;}
+.main-product .content:hover{box-shadow: 0 0 3px 3px #EEE; transition: 0.3s;}
+.main-product .content img{transition: 2s;}
+.main-product .content img:hover{transform: rotateY(180deg);}
+
+/*主体-服务*/
+.main-service{background: #f8f8f8;}
+.main-service .content{position: relative;}
+.main-service .content .content-left{width: 50%;}
+.main-service .content .content-left img{width: 100%;}
+.main-service .content .content-right{box-sizing: border-box; background: #FFF; padding: 58px 40px 0 48px; width: 50%; height: 100%; position: absolute; top: 0; right: 0; transition: 0.3s; overflow: hidden;}
+.main-service .content .content-right p{color: #adadad; line-height: 32px; overflow: hidden; text-overflow: ellipsis;}
+.main-service .content .content-right p.label{font-size: 16px; color: #4a4a4a;}
+.main-service .content .content-right span{display: block; width: 50px; height: 2px; background: #2cb6a1; margin-bottom: 23px;} 
+.main-service .content .content-right:hover{box-shadow: 2px 2px 2px #EEE; transition: 0.3s;}
+.main-service .service-more{padding-top: 80px; padding-bottom: 80px; text-align: center;}
+.main-service .service-more a{padding: 10px 62px; font-size: 23px; line-height: 46px;color: #FFF; background: #7fd3c6; border-radius: 3px;}
+
+/*底部*/
+.footer{padding-bottom: 70px; background: #5e6664;}
+.footer .footer-web{padding-top: 50px; padding-bottom: 63px;}
+.footer .footer-web a{color: #a5aaa9; line-height: 22px; margin-right: 20px; transition: 0.3s;}
+.footer .footer-web a:hover{color: #dce1e0; transition: 0.3s;}
+.footer .footer-contact{color: #fff;}
+.footer .footer-contact a{color: #a5aaa9;}
+.footer .footer-contact .contact-top{padding-top: 20px; line-height: 30px;}
+.footer .footer-contact .contact-bottom{line-height: 35px;}
+
+
+/** 产品 */
+.banner{height: 320px; margin: 80px auto 0;position: relative;width: 90%;}
+.banner .banImage{width: 100%;height: 100%;position: absolute;left: 0;top: 0;}
+/* .banner.product{background: url(../img/nav_img1.jpg) no-repeat center top; background-size: cover;} */
+.main.product{padding: 30px 0 75px 0;}
+.main.product .content{padding: 50px 0; border-bottom: 1px solid #e8e8e8;}
+.main.product .content .content-img{text-align: center;}
+.main.product .content .content-img img{max-width: 100%;}
+.main.product .content .label{color: #565656; font-size: 30px; line-height: 78px; margin-top: 32px;}
+.main.product .content .detail{font-size: 16px; line-height: 28px; color: #d7d7d7; padding-bottom: 30px;}
+.main.product .content a{color: #a0d2cc; font-size: 16px; line-height: 38px; padding:10px 11px 10px 23px; border: 1px solid #a0d2cc; border-radius: 3px;}
+
+
+/** 动态 */
+/* .banner.news{background: url(../img/nav_img3.jpg) no-repeat center top; background-size: cover;} */
+.banner .title{padding-top: 170px;position: relative;z-index: 10;}
+.banner .title.active{padding-top: 120px; transition: 1.5s;}
+.banner .title p{color: #606060; font-size: 36px; text-align: center; line-height: 50px; letter-spacing: 5px;}
+.banner .title p.en{font-size: 20px; letter-spacing: 3px;}
+.main-news{padding: 70px 0 80px 0;}
+.main-news .content > div{padding-bottom: 40px; border-bottom: 1px dashed #eaeaea; position: relative;}
+.main-news .content .news-img{display: inline-block; width: 30%; vertical-align: top;}
+.main-news .content .news-img img{max-width: 90%;}
+.main-news .content .news-panel{display: inline-block; width: 70%; vertical-align: top; padding-left: 5px; box-sizing: border-box;}
+.main-news .content .news-panel strong a{display: block; color: #555; font-size: 18px; line-height: 26px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+.main-news .content .news-panel p.detail{color: #777; line-height: 24px;}
+.main-news .content .news-panel p.read-push{color: #AAA; padding-top: 5px;}
+.main-news #newsPage .layui-laypage{display: block; text-align: center; margin-top: 70px;}
+.main-news #newsPage .layui-laypage a,.main-news #newsPage .layui-laypage span{font-size: 18px; line-height: 40px; height: 40px; margin-right: 20px; border-radius: 3px; color: #e3e3e3;}
+/*动态详情页*/
+.main-newsdate{margin-top: 80px; text-align: center;}
+.main-newsdate .news{text-align: left; line-height: 104px;}
+.main-newsdate h1{padding-top: 6px;}
+.main-newsdate .pushtime{color: #686868; font-size: 18px; line-height: 82px;}
+.main-newsdate .introTop{padding-bottom: 28px; font-size: 18px; line-height: 20px; text-align: left;}
+.main-newsdate .introBott{font-size: 18px; line-height: 42px; text-align: justify; padding: 40px 0 102px 0;}
+.main-newsdate img{max-width: 100%;}
+
+
+/** 案例 */
+/* .banner.case{background: url(../img/nav_img2.jpg) no-repeat center top; background-size: cover;} */
+.main-case{padding: 30px 0 75px;}
+.main-case .content{width: 48%; text-align: center; padding-top: 120px; padding-bottom: 20px; border-bottom: 2px solid #c9c9c9;}
+.main-case .content.even{margin-left: 2%;}
+.main-case .content .case-img{border: 1px solid #e2e2e2; overflow: hidden;}
+.main-case .content .case-img img{width: 100%; transition: 2s;}
+.main-case .content .case-img img:hover{transform: scale(1.2,1.2); transition: 2s;}
+.main-case .content p.lable{padding-top: 13px; font-size: 30px; line-height: 76px;}
+.main-case .content p{font-size: 18px; line-height: 32px; color: #505050;}
+.main-case #casePage .layui-laypage{display: block; text-align: center; margin-top: 100px;}
+.main-case #casePage .layui-laypage a,.main-case #casePage .layui-laypage span{font-size: 18px; line-height: 40px; height: 40px; margin-right: 20px; border-radius: 3px; color: #e3e3e3;}
+
+
+/** 关于 */
+/* .banner.about{background: url(../img/nav_img4.jpg) no-repeat center top; background-size: cover;} */
+.main-about{padding-bottom: 130px;}
+.main-about ul.aboutab{padding: 100px 0; text-align: center;}
+.main-about ul.aboutab li{display: inline-block; padding: 0 22px; margin-left: 15px; font-size: 20px; line-height: 46px; color: #b5b5b5; border: 1px solid #e2e2e2; border-radius: 3px; cursor: pointer;}
+.main-about ul.aboutab li:first-child{margin-left: 0;}
+.main-about ul.aboutab li.layui-this
+,.main-about ul.aboutab li:hover{color: #2ab5a3; border-color: #afddd7; transition: 0.3s;}
+.main-about .tabJob, .main-about .tabCour{display: none;}
+/*公司简介*/
+.main-about .tabIntro{padding-bottom: 15px;}
+.main-about .tabIntro .content{vertical-align: middle;}
+.main-about .tabIntro .content .img{width: 50%;}
+.main-about .tabIntro .content .img img{width: 100%;}
+.main-about .tabIntro .content .panel{width: 50%;}
+.main-about .tabIntro .content p{padding: 0 20px; line-height: 24px; text-align: justify;}
+.main-about .tabIntro .p_hidden{padding: 0 20px; display: none;}
+/*招贤纳士*/
+.main-about .tabJob .content{padding: 0 0 40px 20px; border: 1px solid #e2e2e2; border-top: 4px solid #65d0c5; margin-top: 90px;}
+.main-about .tabJob .content:first-child{margin-top: 10px;}
+.main-about .tabJob .content p{font-size: 18px; line-height: 40px;}
+.main-about .tabJob .content p.title{font-size: 24px; color: #545454; line-height: 60px;}
+.main-about .tabJob .content ol{padding-left: 20px; list-style-type: none; counter-reset: sectioncounter;}
+.main-about .tabJob .content ol li{color: #8d8d8d; font-size: 16px; line-height: 30px;}
+.main-about .tabJob .content ol li:before {content: counter(sectioncounter) "、"; counter-increment: sectioncounter;}
+/*发展历程*/
+.main-about .tabCour p.title{font-size: 28px; line-height: 28px; text-align: center;}
+.main-about .tabCour .timeline{position: relative; margin-top: 75px;}
+.main-about .tabCour .timeline:before{position: absolute; top: 0; bottom: 0; content: ""; width: 2px; background-color: #e2e2e2; left: 50px;}
+.main-about .tabCour .timeline li{position: relative; padding-top: 70px;}
+.main-about .tabCour .timeline li:first-child{padding-top: 0;}
+.main-about .tabCour .timeline li .cour-img{position: absolute; left: 0; width: 100px; border-radius: 50%;}
+.main-about .tabCour .timeline li .cour-img img{width: 100%;}
+.main-about .tabCour .timeline li .cour-panel{padding-top: 20px; padding-left: 120px; text-align: left;}
+.main-about .tabCour .timeline li .cour-panel p.label{font-size: 18px; color: #000;}
+.main-about .tabCour .timeline li .cour-panel p{color: #949494; line-height: 30px;}
+
+
+@media screen and (max-width: 480px){
+  .main-service .content .content-right{padding: 10px 10px 0 10px;}
+  .main-service .content .content-right p{line-height: 24px;}
+  .main-news .content .news-panel p.read-push{font-size: 12px;}
+  .main-case .content{padding-top: 60px;}
+  .main-case .content p.lable{padding-top: 10px; font-size: 18px; line-height: 48px;}
+  .main-case .content p{font-size: 12px; line-height: 20px; color: #505050;}
+  .main-about ul.aboutab{padding: 70px 0;}
+  .main-about ul.aboutab li{padding: 0 15px; font-size: 16px; box-sizing: border-box;}
+  .main-about .tabIntro .content .img{width: 100%;}
+  .main-about .tabIntro .content .panel{width: 100%;}
+  .main-about .tabIntro .content .panel.p_block{display: none;}
+  .main-about .tabIntro .p_hidden{display: block;}
+  .main-news #newsPage .layui-laypage a,.main-news #newsPage .layui-laypage span
+  ,.main-case #casePage .layui-laypage a,.main-case #casePage .layui-laypage span{padding: 0 12px; font-size: 14px; line-height: 30px; height: 30px; margin-right: 4px;}
+}
+/*小屏幕*/
+@media screen and (min-width: 768px){
+  .nav{max-height: 80px;}
+  .nav.index{background: rgba(255, 255, 255 ,0.3);}
+  .nav .nav-list button{display: none;}
+  .nav .layui-nav{width: auto; position: absolute; top: 0; padding: 0 5px; border-radius: 0; margin: 0;}
+  .nav .layui-nav .layui-nav-item{display: inline-block; margin:0 53px; line-height: 80px;}
+  .main-product p.title
+  ,.main-service p.title{font-size: 36px; line-height: 216px;}
+  .main.product .content .content-img{text-align: left;}
+  .main-news .content .news-panel strong a{font-size: 20px; line-height: 30px;}
+  .main-news .content .news-panel p.read-push{padding-top: 0; position: absolute; bottom: 40px;}
+  .main-newsdate .pushtime{line-height: 142px;}
+  .main-case .content{width: 45%;}
+  .main-case .content.even{margin-left: 9%;}
+  .main-about ul.aboutab li{padding: 0 32px; font-size: 24px; margin-left: 30px; line-height: 50px;}
+  .main-about .tabIntro .content p{padding: 0 30px; font-size: 18px; line-height: 30px;}
+  .main-about .tabJob .content p{font-size: 24px; line-height: 50px;}
+  .main-about .tabJob .content p.title{font-size: 30px; line-height: 90px;}
+  .main-about .tabJob .content ol li{font-size: 20px; line-height: 60px;}
+  .main-about .tabCour .timeline:before{left: 50%;}
+  .main-about .tabCour .timeline li{min-height: 195px; padding-top: 95px;}
+  .main-about .tabCour .timeline li .cour-img{left: 50%; margin-left: -97.5px; width: 195px;}
+  .main-about .tabCour .timeline li .cour-panel{padding-top: 55px; padding-left: 0;}
+  .main-about .tabCour .timeline li.odd .cour-panel{text-align: right;}
+}
+@media screen and (min-width: 768px) and (max-width: 992px){
+  .main.product .content div.right{padding-left: 20px;}
+  .nav .layui-nav .layui-nav-item{margin:0 33px;}
+  .main-service .content .content-right{padding: 10px 10px 0 15px;}
+  .main-service .content .content-right span{margin-bottom: 20px;}
+  .main-service .content .content-right p{line-height: 28px;}
+  .main.product .content .label{line-height: 40px; margin-top: 0;}
+  .main.product .content .detail{padding-bottom: 10px;}
+}
+/*大屏幕*/
+@media screen and (min-width: 992px){
+  .main.product .content{padding: 100px 0;}
+  .main.product .content div.right{padding-left: 0;}
+  .main-news .content .news-img{width: 20%;}
+  .main-news .content .news-panel{width: 80%;}
+  .main-case .content{width: 31%;}
+  .main-case .content.even{margin-left: 0;}
+  .main-case .content.center{margin-right: 3%; margin-left: 3%;}
+  .main-about .tabIntro .content p{padding: 0 50px; font-size: 20px; line-height: 40px;}
+}
+/*超大屏幕*/
+@media screen and (min-width: 1200px) {
+  .main-news .content .news-img{width: 35%;}
+  .main-news .content .news-panel{width: 65%;}
+  .main-news .content:nth-child(odd){padding-right: 20px;}
+  .main-news .content:nth-child(even){padding-left: 20px;}
+  .main-about .tabCour .timeline li .cour-panel{padding-left: 50px;}
+  .main-about .tabCour .timeline li.odd .cour-panel{padding-left: 0; padding-right: 50px;}
+}
+@media screen and (min-width: 1300px) {
+  .layui-container{width: 1200px; padding: 0;}
+  .main-about .tabJob .content:last-child{margin-bottom: 180px;}
+  .nav .nav-logo{position: absolute; top: 0; left: 0;}
+  .layui-col-space80{margin: -40px;}
+  .layui-col-space80>*{padding: 40px;}
+}
