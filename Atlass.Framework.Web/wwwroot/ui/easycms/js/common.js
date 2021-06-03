@@ -36,7 +36,7 @@ $(function() {
     // 按下ESC按钮关闭弹层
     $('body', document).on('keyup', function(e) {
         if (e.which === 27) {
-            $.modal.closeAll();
+            jutils.closeAll();
         }
     });
 });
@@ -161,10 +161,10 @@ function createMenuItem(tabId,dataUrl, menuName, isRefresh) {
         // 添加选项卡对应的iframe
         var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + tabId + '" data-panel="' + panelUrl + '" seamless></iframe>';
         $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
-        
-        window.parent.$.modal.loading("数据加载中，请稍后...");
+
+        window.parent.jutils.loading("数据加载中，请稍后...");
         $('.mainContent iframe:visible', topWindow).load(function () {
-            window.parent.$.modal.closeLoading();
+            window.parent.jutils.closeLoading();
         });
 
         // 添加选项卡
@@ -223,22 +223,22 @@ function calSumWidth(elements) {
 /** 密码规则范围验证 */
 function checkpwd(chrtype, password) {
     if (chrtype == 1) {
-        if(!$.common.numValid(password)){
+        if (!jutils.numValid(password)){
             $.modal.alertWarning("密码只能为0-9数字");
             return false;
         }
     } else if (chrtype == 2) {
-        if(!$.common.enValid(password)){
+        if (!jutilsenValid(password)){
             $.modal.alertWarning("密码只能为a-z和A-Z字母");
             return false;
         }
     } else if (chrtype == 3) {
-        if(!$.common.enNumValid(password)){
+        if (!jutils.enNumValid(password)){
             $.modal.alertWarning("密码必须包含字母以及数字");
             return false;
         }
     } else if (chrtype == 4) {
-        if(!$.common.charValid(password)){
+        if (!jutils.charValid(password)){
             $.modal.alertWarning("密码必须包含字母、数字、以及特殊符号<font color='red'>~!@#$%^&*()-=_+</font>");
             return false;
         }

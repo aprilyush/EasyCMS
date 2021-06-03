@@ -201,8 +201,10 @@
     <script src="~/ui/plugins/blockUI/jquery.blockUI.js"></script>
     <script src="~/ui/plugins/layer/layer.min.js"></script>
     <script src="~/ui/plugins/fullscreen/jquery.fullscreen.js"></script>
-    <script src="~/ui/easycms/js/ry-ui.js?v=4.6.0"></script>
+    @*<script src="~/ui/easycms/js/ry-ui.js?v=4.6.0"></script>*@
+    <script src="~/ui/easycms/js/jutils.js"></script>
     <script src="~/ui/easycms/js/common.js?v=4.6.0"></script>
+
     <script src="~/ui/easycms/index.js?v=20201208"></script>
 
     <script inline="javascript">
@@ -211,18 +213,18 @@
             if (lockScreen) {
                 $('#lockScreen').click();
             }
-            if ($.common.equals("history", mode) && window.performance.navigation.type == 1) {
+            if (mode == 'history' && window.performance.navigation.type == 1) {
                 var url = localStorage.getItem('publicPath');
-                if ($.common.isNotEmpty(url)) {
+                if (!jutils.empty(url)) {
                     applyPath(url);
                 }
             } else {
                 var hash = location.hash;
-                if ($.common.isNotEmpty(hash)) {
+                if (!jutils.empty(hash)) {
                     var url = hash.substring(1, hash.length);
                     applyPath(url);
                 } else {
-                    if ($.common.equals("history", mode)) {
+                    if (mode == 'history') {
                         localStorage.setItem('publicPath', "");
                     }
                 }
@@ -243,7 +245,7 @@
         var isLinkage = true;
 
         // 本地主题优先，未设置取系统配置
-        if (!$.common.isNotEmpty(skin)) {
+        if (jutils.empty(skin)) {
             skin = 'skin-green|theme-blue';
         }
         $("body").addClass(skin.split('|')[0]);
@@ -274,9 +276,9 @@
 
         /* 切换菜单 */
         function toggleMenu() {
-            $.modal.alertError('暂不支持');
+            jutils.warn('暂不支持');
             return;
-            $.modal.confirm("确认要切换成横向菜单吗？", function () {
+            jutils.confirm("确认要切换成横向菜单吗？", function () {
                 $.get('/system/menuStyle/topnav', function (result) {
                     window.location.reload();
                 });

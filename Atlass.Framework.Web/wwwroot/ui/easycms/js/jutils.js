@@ -35,6 +35,30 @@
             }
             return ret.join('&');
         },
+        // 判断移动端
+        isMobile: function () {
+            return navigator.userAgent.match(/(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i);
+        },
+        // 数字正则表达式，只能为0-9数字
+        numValid: function (text) {
+            var patten = new RegExp(/^[0-9]+$/);
+            return patten.test(text);
+        },
+        // 英文正则表达式，只能为a-z和A-Z字母
+        enValid: function (text) {
+            var patten = new RegExp(/^[a-zA-Z]+$/);
+            return patten.test(text);
+        },
+        // 英文、数字正则表达式，必须包含（字母，数字）
+        enNumValid: function (text) {
+            var patten = new RegExp(/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/);
+            return patten.test(text);
+        },
+        // 英文、数字、特殊字符正则表达式，必须包含（字母，数字，特殊字符!@#$%^&*()-=_+）
+        charValid: function (text) {
+            var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#\$%\^&\*\(\)\-=_\+])[A-Za-z\d~!@#\$%\^&\*\(\)\-=_\+]{6,}$/);
+            return patten.test(text);
+        },
         getChecked:function(name){
             //获取checkbox选中的值,返回数组[]
             var checkeds =[];
@@ -42,6 +66,129 @@
                 checkeds.push($(this).val());
             });
             return checkeds;
+        },
+        ajax: function (type, asysc, url, data, okfunc) {
+            var isasync = asysc || true;
+            $.ajax({
+                async: isasync,//默认为true异步，如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。 
+                url: url,
+                type: type,
+                dataType: 'json',
+                cache: false,
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.status) {
+                        if (res.message) {
+                            jutils.success(res.message);
+                        }
+                    } else {
+                        if (res.message) {
+                            jutils.error(res.message);
+                        }
+                    }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
+                    }
+                    if ($.isFunction(okfunc)) {
+                        okfunc(res);
+                    }
+                }, beforeSend: function (data, textStatus, jqXHr) {
+                    jutils.loading("请求中。。");
+                },
+                error: function (jqXHr, textStatus, errorMsg) {
+                    jutils.error('请求异常');
+                },
+                complete: function (jqXHr, textStatus) {
+                    jutils.closeLoading();
+                }
+            });
+        },
+        ajaxGet: function (url, data, okfunc) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.status) {
+                        if (res.message) {
+                            jutils.success(res.message);
+                        }
+                    } else {
+                        if (res.message) {
+                            jutils.error(res.message);
+                        }
+                    }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
+                    }
+                    if ($.isFunction(okfunc)) {
+                        okfunc(res);
+                    }
+                }, beforeSend: function (data, textStatus, jqXHr) {
+                    jutils.loading("请求中。。");
+                },
+                error: function (jqXHr, textStatus, errorMsg) {
+                    jutils.error('请求异常');
+                },
+                complete: function (jqXHr, textStatus) {
+                    jutils.closeLoading();
+                }
+            });
+        },
+        ajaxPost: function (url, data, okfunc) {
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.status) {
+                        if (res.message) {
+                            jutils.success(res.message);
+                        }
+                    } else {
+                        if (res.message) {
+                            jutils.error(res.message);
+                        }
+                    }
+                    // 401-未授权，403-未登录
+                    if (res.statusCode === 403) {
+                        jutils.toLogin();
+                        return;
+                    }
+                    if (res.statusCode === 401) {
+                        return;
+                    }
+                    if ($.isFunction(okfunc)) {
+                        okfunc(res);
+                    }
+                }, beforeSend: function (data, textStatus, jqXHr) {
+                    jutils.loading("请求中。。");
+                },
+                error: function (jqXHr, textStatus, errorMsg) {
+                    jutils.error('请求异常');
+                },
+                complete: function (jqXHr, textStatus) {
+                    //layer.msg('请求异常', { time: 2000, icon: 5 });
+                    jutils.closeLoading();
+                }
+            });
         },
         dialogFull:function (title, url, data, callFunc) {
             //弹出即全屏
@@ -105,7 +252,7 @@
 
         },
         dialogAuto: function (title, url, data, callFunc) {
-            //在最上层弹出
+            //在iframe中自适应弹出
             if (data) {
                 var queryStr = jutils.toQueryString(data);
                 url += "?" + queryStr;
@@ -170,131 +317,12 @@
                 parent.layer.close(index);
             }
         },
+        // 关闭全部窗体
+        closeAll: function () {
+            layer.closeAll();
+        },
         toLogin:function() {
             if (window.top !== window.self) { window.top.location ="/login/index"; }
-        },
-        ajax : function (type, asysc, url, data, okfunc) {
-            var isasync = asysc || true;
-            $.ajax({
-                async: isasync,//默认为true异步，如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。 
-                url: url,
-                type: type,
-                dataType: 'json',
-                cache: false,
-                data: data,
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                success: function (res) {
-                    if (res.status) {
-                        if (res.message) {
-                            jutils.success(res.message);
-                        }
-                    } else {
-                        if (res.message) {
-                            jutils.error(res.message);
-                        }
-                    }
-                    // 401-未授权，403-未登录
-                    if (res.statusCode === 403) {
-                        jutils.toLogin();
-                        return;
-                    }
-                    if (res.statusCode === 401) {
-                        return;
-                    }
-                    if ($.isFunction(okfunc)) {
-                        okfunc(res);
-                    }
-                }, beforeSend: function (data, textStatus, jqXHr) {
-                    jutils.loading("请求中。。");
-                },
-                error: function (jqXHr, textStatus, errorMsg) {
-                    jutils.error('请求异常');
-                },
-                complete: function (jqXHr, textStatus) {
-                    jutils.closeLoading();
-                }
-            });
-        },
-        ajaxGet : function (url, data, okfunc) {
-            $.ajax({
-                url: url,
-                type: 'get',
-                dataType: 'json',
-                cache: false,
-                data: data,
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                success: function (res) {
-                    if (res.status) {
-                        if (res.message) {
-                            jutils.success(res.message);
-                        }
-                    } else {
-                        if (res.message) {
-                            jutils.error(res.message);
-                        }
-                    }
-                    // 401-未授权，403-未登录
-                    if (res.statusCode === 403) {
-                        jutils.toLogin();
-                        return;
-                    }
-                    if (res.statusCode === 401) {
-                        return;
-                    }
-                    if ($.isFunction(okfunc)) {
-                        okfunc(res);
-                    }
-                }, beforeSend: function (data, textStatus, jqXHr) {
-                    jutils.loading("请求中。。");
-                },
-                error: function (jqXHr, textStatus, errorMsg) {
-                    jutils.error('请求异常');
-                },
-                complete: function (jqXHr, textStatus) {
-                    jutils.closeLoading();
-                }
-            });
-        },
-        ajaxPost : function (url, data, okfunc) {
-            $.ajax({
-                url: url,
-                type: 'post',
-                dataType: 'json',
-                cache: false,
-                data: data,
-                contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-                success: function (res) {
-                    if (res.status) {
-                        if (res.message) {
-                            jutils.success(res.message);
-                        }
-                    } else {
-                        if (res.message) {
-                            jutils.error(res.message);
-                        }
-                    }
-                    // 401-未授权，403-未登录
-                    if (res.statusCode === 403) {
-                        jutils.toLogin();
-                        return;
-                    }
-                    if (res.statusCode === 401) {
-                        return;
-                    }
-                    if ($.isFunction(okfunc)) {
-                        okfunc(res);
-                    }
-                }, beforeSend: function (data, textStatus, jqXHr) {
-                         jutils.loading("请求中。。");
-                },
-                error: function (jqXHr, textStatus, errorMsg) {
-                    jutils.error('请求异常');
-                },
-                complete: function (jqXHr, textStatus) {
-                   //layer.msg('请求异常', { time: 2000, icon: 5 });
-                    jutils.closeLoading();
-                }
-            });
         },
         /** 消息提示 弹窗状态码
         // modal_status = {

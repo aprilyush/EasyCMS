@@ -96,10 +96,10 @@ namespace Altas.Framework.Admin
         [RequirePermission("system:user:add,system:user:edit")]
         public ActionResult SaveData(sys_user dto,List<long> position)
         {
-            var exist = _userApp.CheckUserName(dto.login_name, dto.id);
-            if (exist)
+            var ret = _userApp.CheckUserName(dto.login_name, dto.id,RequestHelper.AdminInfo());
+            if (!ret.status)
             {
-                return Error("用户名已存在");
+                return Error(ret.message);
             }
             _userApp.SaveData(dto, position, RequestHelper.AdminInfo());
 

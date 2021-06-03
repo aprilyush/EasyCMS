@@ -77,20 +77,32 @@ namespace Atlass.Framework.AppService
         /// <param name="uname"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool CheckUserName(string uname, long id)
+        public ResultAdaptDto CheckUserName(string uname, long id,LoginUserDto loginUser)
         {
+            var result = new ResultAdaptDto();
             var user = Sqldb.Select<sys_user>().Where(s => s.login_name == uname.Trim()).First();
             if (user == null)
             {
-                return false;
+                result.status = true;
+                return result;
             }
             
-            if (user.id==id)
+            if (user.id!=id)
             {
-                return false;
+                result.status = false;
+                result.message = $"用户名【{uname}】已存在";
+                return result;
             }
 
-            return true;
+            if (user.login_name.ToLower() == "admin")
+            {
+                if (loginUser.LoginName.ToLower() != "admin")
+                {
+                    result.status = false;
+                    result.message = $"无权限修改【{uname}】信息";
+                }
+            }
+            return result;
         }
 
 

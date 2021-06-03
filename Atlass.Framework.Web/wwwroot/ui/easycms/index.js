@@ -65,7 +65,7 @@ $(function() {
 });
 
 $(window).bind("load resize", function() {
-    isMobile = $.common.isMobile() || $(window).width() < 769;
+    isMobile = jutils.isMobile() || $(window).width() < 769;
     if (isMobile) {
         $('body').addClass('canvas-menu');
         $("body").removeClass("mini-navbar");
@@ -98,7 +98,7 @@ function syncMenuTab(dataId) {
             
             // 顶部菜单同步处理
             var tabStr = $dataObj.parents(".tab-pane").attr("id");
-            if ($.common.isNotEmpty(tabStr)) {
+            if (!jutils.empty(tabStr)) {
                 var sepIndex = tabStr.lastIndexOf('_');
                 var menuId = tabStr.substring(sepIndex + 1, tabStr.length);
                 $("#tab_" + menuId + " a").click();
@@ -121,7 +121,7 @@ function fixedSidebar() {
 
 // 设置锚点
 function setIframeUrl(href) {
-	if($.common.equals("history", mode)) {
+    if (mode =='history') {
         localStorage.setItem('publicPath', href);
 	} else {
 	    var nowUrl = window.location.href;
@@ -322,10 +322,10 @@ $(function() {
             var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataId + '" data-href="'+dataUrl+'" seamless></iframe>';
             $('.mainContent').find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
 
-            $.modal.loading("数据加载中，请稍后...");
+            jutils.loading("数据加载中，请稍后...");
 
             $('.mainContent iframe:visible').load(function () {
-            	$.modal.closeLoading();
+                jutils.closeLoading();
             });
 
             // 添加选项卡
@@ -406,7 +406,7 @@ $(function() {
                     }
                 });
 
-                if($.common.isNotEmpty(panelUrl)){
+                if (!jutils.empty(panelUrl)) {
             		$('.menuTab[data-id="' + panelUrl + '"]').addClass('active').siblings('.menuTab').removeClass('active');
             		$('.mainContent .RuoYi_iframe').each(function() {
                         if ($(this).data('id') == panelUrl) {
@@ -644,9 +644,9 @@ $(function() {
                     setActiveTab(this);
                     var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
                     var url = target.attr('src');
-                    $.modal.loading("数据加载中，请稍后...");
+                    jutils.loading("数据加载中，请稍后...");
                     target.attr('src', url).load(function () {
-                    	$.modal.closeLoading();
+                        jutils.closeLoading();
                     });
                 }
             },
