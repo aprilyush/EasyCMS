@@ -11,8 +11,7 @@ namespace Atlass.Framework.Models
 
     /// <summary>
     /// {$table.remark}
-    ///
-</summary>
+    ///</summary>
     [JsonObject(MemberSerialization.OptIn), Table(Name = "{$table.table_name}",DisableSyncStructure = true)]
     public class {$table.entity_name}
     {
@@ -20,9 +19,8 @@ namespace Atlass.Framework.Models
     <vt:function var="colAttr" method="GetColumnAttr" args="$#.column" />
     <vt:function var="cstype" method="GetCsType" args="$#.column.cstype" />
     /// <summary>
-        ///{$#.column.comment}
-        ///
-    </summary>
+    ///{$#.column.comment}
+    ///</summary>
     [JsonProperty,{$:#.colAttr.attr}]
     public {$:#.cstype} {$:#.column.column_name} { get; set; }={$:#.colAttr.defaultVal};
 </vt:foreach>
