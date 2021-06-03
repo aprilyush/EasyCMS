@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-28 17:31:14
- * @LastEditTime: 2021-04-29 15:31:33
+ * @LastEditTime: 2021-06-03 11:28:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\开源\Atlass开发框架\EasyCMS\README.md
@@ -10,9 +10,10 @@
 # EasyCms
 &emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
 &emsp;&emsp;EasyCms后台权限管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发 企业后台管理系统，WebApi接口，微信公众号和小程序后台，企业站，。    
-&emsp;&emsp;同时我也写了个springboot版本的后台权限管理系统，暂时没有cms的功能，主要是为了学习springboot,功能基本一致
-地址：https://gitee.com/xiaotuzi/easycmsboot    
 :fire: 给我个star，鼓励一下我吧
+## spring boot版本
+&emsp;&emsp;同时我也写了个springboot版本的后台权限管理系统，主要是为了学习springboot,功能基本一致。   
+地址：https://gitee.com/yushuo1990/easycmsboot    
 ## 发展目标
 &emsp;&emsp;希望EasyCms成为一个简单易用，功能完善的后台权限管理系统的基础开发框架和建站CMS系统。
 
