@@ -31,7 +31,8 @@
             }
 
             target.bootstrapTable("refresh",{
-                silent: true
+                silent: true,
+                pageNumber:1
             });
 
         },
@@ -62,13 +63,14 @@
             });
             if($('#searchForm')){
                 $('#searchButton').on('click',function(){
-                    target.bootstrapTable("refresh",{silent: true});
+                    target.bootstrapTable("refresh", { silent: true, pageNumber: 1});
                 });
                 $('#resetButton').on('click',function(){
                     $('#searchForm')[0].reset();
                     document.getElementById("searchForm").reset();
                     target.bootstrapTable("refresh",{
-                        silent: true
+                        silent: true,
+                        pageNumber: 1
                     });
                 })
             }
