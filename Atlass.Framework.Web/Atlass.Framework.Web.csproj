@@ -604,6 +604,7 @@
     <None Include="wwwroot\ui\plugins\webuploader\webuploader.nolog.min.js" />
     <None Include="wwwroot\ui\plugins\webuploader\webuploader.withoutimage.js" />
     <None Include="wwwroot\ui\plugins\webuploader\webuploader.withoutimage.min.js" />
+    <None Include="wwwroot\ui\plugins\xmselect\xm-select.js" />
   </ItemGroup>
 
   <ItemGroup>
