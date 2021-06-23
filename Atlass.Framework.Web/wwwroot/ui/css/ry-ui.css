@@ -690,6 +690,23 @@ label {
 	height: 30px;
     width: 200px;
 }
+.select-list li .xmselect {
+		border-radius: 4px;
+		background: transparent;
+		float: right;
+		height: 30px;
+		width: 350px;
+		padding-left: 5px;
+}
+
+.select-list li .xm-input {
+		width: 350px !important;
+}
+
+.select-list li .xmspan {
+		margin-top: 8px;
+		float: left;
+}
 
 .bootstrap-select.form-control .btn-default {
     color: inherit;

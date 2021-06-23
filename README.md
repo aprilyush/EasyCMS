@@ -61,8 +61,10 @@
 + [x] 通讯录
 + [x] 会议管理
 ## 注意事项
-+ hangfire使用的sqlite来存储数据，请给与data/hangfire.db 数据文件相应的读写权限,否则站点无法启动
++ hangfire使用的litedb来存储数据，请给与data/hangfire_litedb.db 数据文件相应的读写权限,否则站点无法启动
 + 登录使用了ip2region来解析登录ip地址，请将data/ip2region.db 数据库文件放置到站点根目录下，否则无法登录
++ 如果启用hangfire任务并且部署到IIS的化请注意应用程序池的设置，避免回收造成资源占用导致站点启动失败,其他的站点设置如启用预加载，AlwaysRunning等都需要设置
+![Image](资料/IIS应用程序池配置.png)
 ## [样图]  
 ![Image](资料/Index.png)
 ![Image](资料/home.png)
