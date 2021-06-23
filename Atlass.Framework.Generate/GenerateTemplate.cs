@@ -1,5 +1,6 @@
 ﻿using Atlass.Framework.Common;
 using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core;
 using Atlass.Framework.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace Atlass.Framework.Generate
         /// <param name="templateContent"></param>
         private static void CreateHome(string templateName,string templateContent)
         {
-            string filePath = Path.Combine(GlobalParamsDto.WebRoot, HomeDirectory, templateName);
+            string filePath = Path.Combine(GlobalContext.WebRootPath, HomeDirectory, templateName);
             FileUtils.WriteText(filePath, templateContent);
         }
 
@@ -73,7 +74,7 @@ namespace Atlass.Framework.Generate
         /// <param name="templateContent"></param>
         private static void CreateChannel(string templateName, string templateContent)
         {
-            string filePath = Path.Combine(GlobalParamsDto.WebRoot, ChannelDirectory, templateName);
+            string filePath = Path.Combine(GlobalContext.WebRootPath, ChannelDirectory, templateName);
             FileUtils.WriteText(filePath, templateContent);
         }
 
@@ -84,7 +85,7 @@ namespace Atlass.Framework.Generate
         /// <param name="templateContent"></param>
         private static void CreateContent(string templateName, string templateContent)
         {
-            string filePath = Path.Combine(GlobalParamsDto.WebRoot, ContentDirectory, templateName);
+            string filePath = Path.Combine(GlobalContext.WebRootPath, ContentDirectory, templateName);
             FileUtils.WriteText(filePath, templateContent);
         }
 
@@ -95,7 +96,7 @@ namespace Atlass.Framework.Generate
         /// <param name="templateContent"></param>
         private static void CreateInclude(string templateName, string templateContent)
         {
-            string filePath = Path.Combine(GlobalParamsDto.WebRoot, IncludeDirectory, templateName);
+            string filePath = Path.Combine(GlobalContext.WebRootPath, IncludeDirectory, templateName);
             FileUtils.WriteText(filePath, templateContent);
         }
     }

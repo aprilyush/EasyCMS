@@ -49,7 +49,7 @@ namespace Atlass.Framework.Common.Log
         /// <param name="ex"></param>
         public static void Exception(Exception ex)
         {
-            LogDto log = new LogDto() { LogSummary = ex.Message, LogMessage = ex.ToString(), LogTime = DateTime.Now, LogType = 4 };
+            LogDto log = new LogDto() { LogSummary = ex.Message, LogMessage = ex.StackTrace, LogTime = DateTime.Now, LogType = 4 };
             LogQueueInstance.Add(log);
             // Logger logger = LogManager.GetLogger("Exception");
             //if (logger.IsErrorEnabled)

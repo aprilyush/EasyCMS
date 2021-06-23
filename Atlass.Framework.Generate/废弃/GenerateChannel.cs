@@ -1,6 +1,7 @@
 ﻿using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core;
 using Atlass.Framework.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,8 +56,8 @@ namespace Atlass.Framework.Generate
                 this.Document = RenderDocumentCache.GetRenderDocument(templateModel.id);
                 if (this.Document == null)
                 {
-                    string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
-                    this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                    string templateFile = Path.Combine(GlobalContext.WebRootPath, templateModel.template_file);
+                    this.Document = new TemplateDocument(templateModel.template_content, GlobalContext.WebRootPath, templateFile);
                     RenderDocumentCache.AddRenderDocument(templateModel.id, this.Document);
                 }
                 

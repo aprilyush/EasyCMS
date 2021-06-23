@@ -3,7 +3,8 @@ using Atlass.Framework.Common.Log;
 using Atlass.Framework.Core.HangfireExtend;
 using Atlass.Framework.ViewModels.YmlConfigs;
 using Hangfire;
-using Hangfire.SQLite;
+using Hangfire.Heartbeat;
+using Hangfire.LiteDB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace Atlass.Framework.Core.Extensions
 {
-    public static class AtlassHangfireService
+    public static class EasyHangfireService
     {
         public static IServiceCollection AddAtlassHangfire(this IServiceCollection services, IConfiguration configuration)
         {
@@ -35,13 +36,14 @@ namespace Atlass.Framework.Core.Extensions
             {
                 if (crontab.Enable)
                 {
-                    string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\hangfire.db";
-                    string connection = $"Data Source ={filePath};Mode=ReadWriteCreate;Cache=Shared";
+                    string filePath = AppDomain.CurrentDomain.BaseDirectory + @"data\hangfire_lite.db";
+                    //string connection = $"Data Source ={filePath};Mode=ReadWriteCreate;Cache=Shared";
                     //LoggerHelper.Info(connection);
-
+                    string liteConnection = $"Filename={filePath};Connection=direct";
                     GlobalStateHandlers.Handlers.Add(new SucceededStateExpireHandler(30));
                     services.AddHangfire(x => x.UseLogProvider(new CustomLogProvider())
-                    .UseSQLiteStorage(connection));
+                     .UseLiteDbStorage(liteConnection, null)
+                     .UseHeartbeatPage(checkInterval: TimeSpan.FromSeconds(crontab.CheckInterval)));
                 }
             }
             catch(Exception ex)

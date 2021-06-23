@@ -7,6 +7,7 @@ using Atlass.Framework.AppService;
 using Atlass.Framework.AppService.SystemApp;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Models;
@@ -304,7 +305,7 @@ namespace Altas.Framework.Admin
                 return Error("上传失败");
             }
             string url = $"/upfiles/heads";
-            var folder = GlobalParamsDto.WebRoot + url;
+            var folder = GlobalContext.WebRootPath + url;
 
             if (!Directory.Exists(folder))
             {
@@ -324,7 +325,7 @@ namespace Altas.Framework.Admin
             string imgurl = $"{url}/{guidFileName}";
             if (user.Avatar!= "/ui/images/profile.jpg")
             {
-                string oldAvatar = GlobalParamsDto.WebRoot + user.Avatar;
+                string oldAvatar = GlobalContext.WebRootPath + user.Avatar;
                 try
                 {
                     if (System.IO.File.Exists(oldAvatar))

@@ -6,13 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="Ding.Hangfire.SQLite" Version="1.1.8" />
     <PackageReference Include="FreeRedis" Version="0.3.5" />
     <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
     <PackageReference Include="Hangfire.Core" Version="1.7.22" />
+    <PackageReference Include="Hangfire.Heartbeat" Version="0.5.1" />
+    <PackageReference Include="Hangfire.LiteDB" Version="0.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />

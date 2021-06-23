@@ -1,6 +1,7 @@
 ﻿using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core;
 using Atlass.Framework.DbContext;
 using Atlass.Framework.Models;
 using Atlass.Framework.ViewModels;
@@ -56,8 +57,8 @@ namespace Atlass.Framework.Generate
                 this.Document = RenderDocumentCache.GetRenderDocument(templateModel.id);
                 if (this.Document == null)
                 {
-                    string templateFile = Path.Combine(GlobalParamsDto.WebRoot, templateModel.template_file);
-                    this.Document = new TemplateDocument(templateModel.template_content, GlobalParamsDto.WebRoot, templateFile);
+                    string templateFile = Path.Combine(GlobalContext.WebRootPath, templateModel.template_file);
+                    this.Document = new TemplateDocument(templateModel.template_content, GlobalContext.WebRootPath, templateFile);
                     RenderDocumentCache.AddRenderDocument(templateModel.id, this.Document);
                 }
 
@@ -104,9 +105,9 @@ namespace Atlass.Framework.Generate
                 string contentFolder = $@"static/content/{content.channel_id}";
                 string contentFile= $@"static/content/{content.channel_id}/{ content.id}.html";
                 
-                string contentFolderPath = Path.Combine(GlobalParamsDto.WebRoot, contentFolder);
-                string contentFilePath = Path.Combine(GlobalParamsDto.WebRoot, contentFile);
-                string templatePath = Path.Combine(GlobalParamsDto.WebRoot, "Template/article.html");
+                string contentFolderPath = Path.Combine(GlobalContext.WebRootPath, contentFolder);
+                string contentFilePath = Path.Combine(GlobalContext.WebRootPath, contentFile);
+                string templatePath = Path.Combine(GlobalContext.WebRootPath, "Template/article.html");
                 if (!File.Exists(templatePath))
                 {
                     LoggerHelper.Exception("模板数据不存在");
@@ -166,7 +167,7 @@ namespace Atlass.Framework.Generate
 
         protected virtual void LoadTemplate(string templateContent,string fileName)
         {
-            this.Document = new TemplateDocument(templateContent, GlobalParamsDto.WebRoot,fileName);
+            this.Document = new TemplateDocument(templateContent, GlobalContext.WebRootPath,fileName);
         }
         protected virtual void InitPageTemplate(ContentModel content)
         {

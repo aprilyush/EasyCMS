@@ -29,7 +29,6 @@
   <!--Condition="'$(Configuration)' == 'Debug'"-->
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="Ding.Hangfire.SQLite" Version="1.1.8" />
     <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
     <PackageReference Include="EasyCaching.ResponseCaching" Version="1.2.0" />
     <PackageReference Include="FreeRedis" Version="0.3.5" />
@@ -37,6 +36,8 @@
     <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
     <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
+    <PackageReference Include="Hangfire.Heartbeat" Version="0.5.1" />
+    <PackageReference Include="Hangfire.LiteDB" Version="0.4.0" />
     <PackageReference Include="IP2Region.Ex" Version="1.2.0" />
     <PackageReference Include="IPTools.China" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />

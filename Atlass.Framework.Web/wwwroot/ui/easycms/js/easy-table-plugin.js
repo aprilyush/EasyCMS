@@ -36,6 +36,18 @@
             });
 
         },
+        load: function (target, data) {
+            if ($('#toolbar .multiple')) {
+                $('#toolbar .multiple').addClass('disabled');
+            }
+
+            // 非单个禁用
+            if ($('#toolbar .single')) {
+                $('#toolbar .single').addClass('disabled');
+            }
+
+            target.bootstrapTable("load",data);
+        },
         getPagination: function (target, params) {
             var pagination = {
                 pageSize: params.limit,                         //页面大小

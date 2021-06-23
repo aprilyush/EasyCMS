@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
 using Atlass.Framework.Common.Log;
+using Atlass.Framework.Core;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.BigFile;
 using Atlass.Framework.Core.Web;
@@ -59,7 +60,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 return Content(result.ToJson());
             }
             string url = $"/upfiles/images/{DateTime.Now.ToString("yyyyMMdd")}";
-            var folder = GlobalParamsDto.WebRoot + url;
+            var folder = GlobalContext.WebRootPath + url;
 
             if (!Directory.Exists(folder))
             {
@@ -114,7 +115,7 @@ namespace Atlass.Framework.Web.ApiControllers
                                 //图片水印
                                 if (imageSet.watermark_type == 1)
                                 {
-                                    string waterMarkIamge = GlobalParamsDto.WebRoot + imageSet.watermark_image;
+                                    string waterMarkIamge = GlobalContext.WebRootPath + imageSet.watermark_image;
                                     if (System.IO.File.Exists(waterMarkIamge))
                                     {
                                         marker.AddImageSignPic(image, sourcePath, waterMarkIamge, imageSet.water_postion, imageSet.image_quality, imageSet.image_opacity);
@@ -162,7 +163,7 @@ namespace Atlass.Framework.Web.ApiControllers
             {
                 url = "";
             }
-            var folder = GlobalParamsDto.WebRoot + url;
+            var folder = GlobalContext.WebRootPath + url;
 
             if (!Directory.Exists(folder))
             {
@@ -211,11 +212,11 @@ namespace Atlass.Framework.Web.ApiControllers
             string guid = RequestHelper.GetPostString("guid");
             string fileName = RequestHelper.GetPostString("name");
             string chunk= RequestHelper.GetPostString("chunk");
-            var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/"+ guid; // 缓存文件夹
-            var targetDir = GlobalParamsDto.WebRoot+"/upfiles/videos/"+DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+            var tempDir = GlobalContext.WebRootPath + "/UploadTemp/"+ guid; // 缓存文件夹
+            var targetDir = GlobalContext.WebRootPath+"/upfiles/videos/"+DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
             if (action == "uploadfile")
             {
-                targetDir = GlobalParamsDto.WebRoot + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+                targetDir = GlobalContext.WebRootPath + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
 
             }
             if (!System.IO.Directory.Exists(targetDir))
@@ -291,13 +292,13 @@ namespace Atlass.Framework.Web.ApiControllers
             {
                 string guid = RequestHelper.GetQueryString("guid");
                 string fileName = RequestHelper.GetQueryString("fileName");
-                var tempDir = GlobalParamsDto.WebRoot + "/UploadTemp/" + guid; // 缓存文件夹
-                var targetDir = GlobalParamsDto.WebRoot + "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+                var tempDir = GlobalContext.WebRootPath + "/UploadTemp/" + guid; // 缓存文件夹
+                var targetDir = GlobalContext.WebRootPath + "/upfiles/videos/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
                  //uploadfile,uploadvideo
                 string action = RequestHelper.GetPostString("action");
                 if(action== "uploadfile")
                 {
-                    targetDir = GlobalParamsDto.WebRoot + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
+                    targetDir = GlobalContext.WebRootPath + "/upfiles/attachments/" + DateTime.Now.ToString("yyyyMMdd"); // 目标文件夹
 
                 }
                 if (!System.IO.Directory.Exists(targetDir))

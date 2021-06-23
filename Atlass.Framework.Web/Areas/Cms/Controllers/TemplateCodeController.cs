@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Atlass.Framework.AppService.Cms;
 using Atlass.Framework.Cache;
 using Atlass.Framework.Common;
+using Atlass.Framework.Core;
 using Atlass.Framework.Core.Base;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Generate;
@@ -150,7 +151,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
             string templateFile = _templateApp.DeleteById(id);
             if (templateFile != null)
             {
-                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                string filePath = Path.Combine(GlobalContext.WebRootPath, templateFile);
                 FileUtils.DeleteFileIfExists(filePath);
                 RenderDocumentCache.Clear();
             }
@@ -192,7 +193,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                     templateFile = $"Template/include/{templateFile}";
                 }
 
-                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                string filePath = Path.Combine(GlobalContext.WebRootPath, templateFile);
                 FileInfo file = new FileInfo(filePath);
 
                 string copyFile = filePath.Replace(file.Name, "副本" + file.Name);
@@ -247,7 +248,7 @@ namespace Atlass.Framework.Web.Areas.Cms.Controllers
                     templateFile = $"Template/include/{templateFile}";
                 }
 
-                string filePath = Path.Combine(GlobalParamsDto.WebRoot, templateFile);
+                string filePath = Path.Combine(GlobalContext.WebRootPath, templateFile);
                 string newContent=FileUtils.ReadText(filePath);
                 if (newContent.IsEmpty())
                 {

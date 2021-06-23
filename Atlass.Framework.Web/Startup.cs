@@ -17,6 +17,7 @@ using Autofac.Extensions.DependencyInjection;
 using EasyCaching.Core;
 using EasyCaching.ResponseCaching;
 using Hangfire;
+using Hangfire.Heartbeat.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Senparc.CO2NET;
 using Senparc.CO2NET.RegisterServices;
@@ -125,7 +127,7 @@ namespace Atlass.Framework.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
             IHostApplicationLifetime appLifetime, IOptions<Dictionary<string, string>> options,
-            IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
+            IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting, ILogger<Startup> logger)
         {
             GlobalContext.HostingEnvironment = env;
             //GlobalContext.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
@@ -164,11 +166,12 @@ namespace Atlass.Framework.Web
             });
 
             //启动hangfire服务和面板
-            if (GlobalContext.CrontabConfigDto.Enable) {
+            var cronConfig = GlobalContext.CrontabConfigDto;
+            if (cronConfig.Enable) {
                 app.UseHangfireServer(new BackgroundJobServerOptions
                 {
                     Queues = new[] { "default" }
-                });
+                }, new[] { new ProcessMonitor(checkInterval: TimeSpan.FromSeconds(cronConfig.CheckInterval)) });
                 //  app.UseHangfireDashboard();
                 app.UseHangfireDashboard("/easytask", new DashboardOptions()
                 {
@@ -197,8 +200,7 @@ namespace Atlass.Framework.Web
                 try
                 {
 
-                    GlobalParamsDto.WebRoot = env.WebRootPath;
-
+                    logger.LogWarning($"application start at {DateTime.Now}");
                     //初始化栏目相关的缓存
                     CmsCacheInit.Init();
                 }
@@ -208,7 +210,10 @@ namespace Atlass.Framework.Web
                 }
             });
 
-
+            appLifetime.ApplicationStopped.Register(() =>
+            {
+                logger.LogWarning($"application stop at {DateTime.Now}");
+            });
         }
     }
 }

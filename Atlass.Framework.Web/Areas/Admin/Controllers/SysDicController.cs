@@ -92,7 +92,10 @@ namespace Altas.Framework.Admin
         {
             dto.dic_code = dto.dic_code ?? "";
             dto.dic_name = dto.dic_name.Trim();
-            dto.dic_value = dto.dic_name;
+            if (dto.dic_value.IsEmpty())
+            {
+                dto.dic_value = dto.dic_name;
+            }
             if (dto.id == 0)
             {
                 _dicApp.InsertDicData(dto, RequestHelper.AdminInfo());

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Atlass.Framework.Core.Web;
 using Atlass.Framework.Cache;
+using Atlass.Framework.Core;
 
 namespace Atlass.Framework.Web.ApiControllers
 {
@@ -30,7 +31,7 @@ namespace Atlass.Framework.Web.ApiControllers
             if (action == "config")
             {
                 string configPath = $@"ui\plugins\ueditor\config.json";
-                string serverPath = Path.Combine(GlobalParamsDto.WebRoot, configPath);
+                string serverPath = Path.Combine(GlobalContext.WebRootPath, configPath);
                 if (System.IO.File.Exists(serverPath))
                 {
                     string json = System.IO.File.ReadAllText(serverPath);
@@ -50,7 +51,7 @@ namespace Atlass.Framework.Web.ApiControllers
                 if (action == "config")
                 {
                     string configPath = $@"ui\plugins\ueditor\config.json";
-                    string serverPath = Path.Combine(GlobalParamsDto.WebRoot, configPath);
+                    string serverPath = Path.Combine(GlobalContext.WebRootPath, configPath);
                     if (System.IO.File.Exists(serverPath))
                     {
                         string json = System.IO.File.ReadAllText(serverPath);
@@ -117,7 +118,7 @@ namespace Atlass.Framework.Web.ApiControllers
                     }
                     url = $@"upfiles\videos\{DateTime.Now.ToString("yyyyMMdd")}";
                 }
-                var folder = Path.Combine(GlobalParamsDto.WebRoot, url); 
+                var folder = Path.Combine(GlobalContext.WebRootPath, url); 
 
                 if (!Directory.Exists(folder))
                 {

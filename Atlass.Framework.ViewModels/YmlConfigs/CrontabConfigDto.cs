@@ -15,5 +15,9 @@ namespace Atlass.Framework.ViewModels.YmlConfigs
         /// 是否开启
         /// </summary>
         public bool Enable { get; set; } = false;
+        /// <summary>
+        /// 健康检查的时间间隔
+        /// </summary>
+        public int CheckInterval { get; set; } = 10;
     }
 }
