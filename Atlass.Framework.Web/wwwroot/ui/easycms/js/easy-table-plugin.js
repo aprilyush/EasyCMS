@@ -60,6 +60,9 @@
         selected: function (target){
             return target.bootstrapTable('getSelections');
         },
+        getRowById: function (target, rowId) {
+            return target.bootstrapTable("getRowByUniqueId", rowId);
+        },
         selectedEvent:function (target){
             //点击事件
             target.on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {

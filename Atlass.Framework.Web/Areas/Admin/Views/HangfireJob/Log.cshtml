@@ -26,9 +26,6 @@
 </div>
 
 <div id="logDiv" class="ibox" style="display:none;">
-    <div class="ibox-title">
-        <h5>日志信息</h5>
-    </div>
     <div class="ibox-content">
         <div class="well">
             <h4 id="logTime"></h4>
@@ -88,7 +85,7 @@
 
         function renderOpts(v,r,index) {
             if (r.excute_result == 1) {
-                var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
+                var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="异常信息" href="javascript:void(0);" onclick="detail(this);" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
                 return html;
             }
             return '';
@@ -103,9 +100,10 @@
             if (row) {
                 $('#log').text(row.error_message);
                 layer.open({
+                    title:'任务异常信息',
                     type: 1,
                     skin: 'layui-layer-rim', //加上边框
-                    area: ['600px', '400px'], //宽高
+                    area: ['800px', '600px'], //宽高
                     content: $('#logDiv')
                 });
             }
