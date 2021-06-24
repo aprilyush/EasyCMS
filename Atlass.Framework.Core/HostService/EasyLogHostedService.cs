@@ -36,14 +36,35 @@ namespace Atlass.Framework.Core.HostService
                 //Console.WriteLine("服务开始了吗");
                 while (true)
                 {
-                    List<easy_log> logs = new List<easy_log>();
-                    List<sys_sql_log> sqllogs = new List<sys_sql_log>();
+                    List<easy_log> logs = new List<easy_log>(300);
+                    List<sys_sql_log> sqllogs = new List<sys_sql_log>(300);
+                    List<crontab_history> jobLogs = new List<crontab_history>(300);
                     for (int i = 0; i < 300; i++)
                     {    //队列中取log
                         LogDto log = LogQueueInstance.GetLog();
                         if (log == null)
                         {
                             break;
+                        }
+                        if (log.LogType == 6)
+                        {
+                            crontab_history crontabModel = new crontab_history();
+                            crontabModel.job_id = log.LogSummary;
+                            crontabModel.error_message = log.LogMessage;
+                            crontabModel.excute_time = log.LogTime;
+                            crontabModel.excute_result = log.ExcuteResult;
+                            if (log.ElapsedTime < 1000)
+                            {
+                                crontabModel.elapsed_time = $"{log.ElapsedTime}毫秒";
+                            }
+                            else
+                            {
+                                decimal elaspedSeconds = Math.Round((decimal)log.ElapsedTime / 1000, 1);
+                                crontabModel.elapsed_time = $"{elaspedSeconds}秒";
+                            }
+
+                            jobLogs.Add(crontabModel);
+                            continue;
                         }
                         if (log.LogType==5)
                         {
@@ -91,7 +112,11 @@ namespace Atlass.Framework.Core.HostService
                         {
                             _freeSql.Insert(sqllogs).ExecuteAffrows();
                         }
-                        
+
+                        if (jobLogs.Count > 0)
+                        {
+                            _freeSql.Insert(jobLogs).ExecuteAffrows();
+                        }
                     }
                     catch (Exception ex)
                     {

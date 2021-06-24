@@ -71,8 +71,9 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         {
             string id=_logApp.Save(dto);
             IJob job = ReflectionHelper.Instance<IJob>(dto.assembly_namespace.Trim(),dto.class_name.Trim());
-            RecurringJob.AddOrUpdate(id,
-                   () => job.Excute(_wxSetting.WeixinAppId,id),dto.cron_express, TimeZoneInfo.Local);
+            Dictionary<string, string> jobParams = new Dictionary<string, string>();
+            jobParams.Add("jobId", dto.id);
+            RecurringJob.AddOrUpdate(id,() => job.Excute(jobParams),dto.cron_express, TimeZoneInfo.Local);
             return Success("任务添加完成");
 
         }
@@ -119,8 +120,9 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
                 return Error("任务启动失败");
             }
             IJob job = ReflectionHelper.Instance<IJob>(dto.assembly_namespace.Trim(), dto.class_name.Trim());
-            RecurringJob.AddOrUpdate(id,
-                   () => job.Excute(_wxSetting.WeixinAppId, dto.id), dto.cron_express,TimeZoneInfo.Local);
+            Dictionary<string, string> jobParams = new Dictionary<string, string>();
+            jobParams.Add("jobId", dto.id);
+            RecurringJob.AddOrUpdate(id,() => job.Excute(jobParams), dto.cron_express,TimeZoneInfo.Local);
             _logApp.Resume(dto.id);
             return Success("任务启动成功");
         }
@@ -131,6 +133,43 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
         {
             RecurringJob.Trigger(id);
             return Success("任务开始执行");
+        }
+
+        /// <summary>
+        /// 执行日志
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [RequirePermission("system:hangfire:log")]
+        public IActionResult Log(string jobId)
+        {
+            ViewBag.JobId = jobId;
+            return View();
+        }
+
+        /// <summary>
+        /// 执行日志
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [RequirePermission("system:hangfire:log")]
+        public IActionResult LogData(DataTableDto dto)
+        {
+            string jobId = RequestHelper.GetPostString("jobId");
+            var data = _logApp.GetLogPageList(dto, jobId);
+            return Json(data);
+        }
+
+        [HttpGet]
+        [RequirePermission("system:hangfire:log")]
+        public IActionResult ClearJobLog(string jobId)
+        {
+            if (jobId.IsEmptyId())
+            {
+                return Error("清除执行日志失败");
+            }
+            _logApp.ClearJobLog(jobId);
+            return Success();
         }
     }
 }

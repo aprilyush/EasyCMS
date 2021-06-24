@@ -120,5 +120,30 @@ namespace Atlass.Framework.Common.Log
             //}
             //logger = null;
         }
+
+        /// <summary>
+        /// job日志
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <param name="excuteTime"></param>
+        /// <param name="elapsedTime"></param>
+        /// <param name="excuteResult"></param>
+        /// <param name="ex"></param>
+        public static void JobLog(JobExcuteDto jobDto)
+        {
+            LogDto log = new LogDto();
+
+            log.LogSummary = jobDto.JobId;
+            log.LogMessage = "";
+            if (jobDto.EX != null)
+            {
+                log.LogMessage = $"{jobDto.EX.Message}：{jobDto.EX.StackTrace}";
+            }
+            log.LogTime = jobDto.ExcuteTime;
+            log.LogType = 6;
+            log.ElapsedTime = (long)jobDto.ElapsedTime;
+            log.ExcuteResult = jobDto.ExcuteResult;
+            LogQueueInstance.Add(log);
+        }
     }
 }

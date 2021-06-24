@@ -6,6 +6,6 @@ namespace Atlass.Framework.Jobs
 {
     public interface IJob
     {
-        public void Excute(string wxAppId, string taskId);
+        public void Excute(Dictionary<string, string> jobParams);
     }
 }

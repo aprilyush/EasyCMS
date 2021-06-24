@@ -1,0 +1,141 @@
+﻿
+
+@{
+    ViewData["Title"] = "执行日志";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="container-div">
+    <input type="hidden" id="jobId" value="@(ViewBag.JobId)" />
+    <div class="row">
+
+        <div class="btn-group-sm" role="group" id="toolbar">
+
+            <a class="btn btn-danger" onclick="clearAll(this);" data-id="0" data-role="system:hangfire:log">
+                <i class="fa fa-trash"></i> 清空日志
+            </a>
+            <a class="btn btn-danger" onclick="cancel(this);" data-id="0" data-role="0">
+                <i class="fa fa-reply-all"></i>关闭
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="dataTable"></table>
+        </div>
+
+    </div>
+</div>
+
+<div id="logDiv" class="ibox" style="display:none;">
+    <div class="ibox-title">
+        <h5>日志信息</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="well">
+            <h4 id="logTime"></h4>
+            <div class="original" id="log">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        var $table;
+        $(function () {
+            loadGrid();
+        });
+
+        function loadGrid() {
+            let options = {
+                url: '/admin/hangfireJob/Logdata',
+                pageNumber: 1,                      // 初始化加载第一页，默认第一页,并记录
+                pageSize: 10,                       // 每页的记录行数（*）
+                pageList: "10, 25, 50, 100",        // 可供选择的每页的行数（*）
+                queryParams: function (params) {
+                    let p = {
+                        pageNumber: params.pageNumber,
+                        pageSize: params.pageSize,
+                        jobId: $('#jobId').val()
+                    }
+                    return p;
+                },
+                columns: [
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: 'excute_time', title: '执行时间', align: 'center'
+                    },
+                    {
+                        field: 'elapsed_time', title: '执行耗时', align: 'center'
+                    },
+                    {
+                        field: 'excute_result', title: '执行结果', align: 'center', formatter: function (v) {
+                            if (v === 1) {
+                                return '<span class="label label-danger">失败</span>';
+                            }
+                            return '<span class="label label-primary">成功</span>';
+                        }
+                    },
+                    {
+                        field: 'id', title: '操作', align: 'center', formatter: renderOpts
+                    }
+                ]
+
+            };
+            $table = $('#dataTable').easyTable(options);
+        }
+
+
+        function renderOpts(v,r,index) {
+            if (r.excute_result == 1) {
+                var html = '<a data-role="0" class="btn btn-white btn-bitbucket" title="View" href="javascript:void(0);" onclick="detail(this)" data-id="' + v + '"><i class="fa fa-eye"></i></a>';
+                return html;
+            }
+            return '';
+        }
+
+
+
+        function detail(obj) {
+            $('#log').text('');
+            let rowId = $(obj).data('id');
+            let row = $table.easyTable('getRowById', rowId);
+            if (row) {
+                $('#log').text(row.error_message);
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['600px', '400px'], //宽高
+                    content: $('#logDiv')
+                });
+            }
+
+
+        }
+
+        function clearAll() {
+            jutils.confirm('确认清空日志吗',
+                function () {
+                    jutils.ajaxGet('/admin/hangfireJob/ClearJobLog', { jobId: $('#jobId').val()},
+                        function () {
+                            $table.easyTable('search');
+                        });
+                });
+        }
+
+        function query() {
+            $table.easyTable('search');
+        }
+
+        function cancel() {
+            jutils.closeDialog();
+        }
+    </script>
+}
+
+
+
+
+
+
+

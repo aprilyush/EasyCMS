@@ -25,7 +25,10 @@
                             </select>
                         </li>
                         <li>
-                            日期：<input type="text" id="loginDate" name="loginDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
+                            日期：<input type="text" id="startDate" name="startDate" value="@(DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
+                        </li>
+                        <li>
+                            至：<input type="text" id="endDate" name="endDate" value="@(DateTime.Now.ToString("yyyy-MM-dd"))" onclick="WdatePicker({isShowClear:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" id="searchButton"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -69,7 +72,9 @@
                         loginName: $('#loginName').val(),
                         loginIP: $('#loginIP').val(),
                         loginStatus: $('#loginStatus').val(),
-                        loginDate: $('#loginDate').val()
+                        startDate: $('#startDate').val(),
+                        endDate: $('#endDate').val()
+
                     }
                     return p;
                 },

@@ -18,5 +18,9 @@ namespace Atlass.Framework.Common.Log
         /// sql执行时间
         /// </summary>
         public long ElapsedTime { get; set; }
+        /// <summary>
+        /// job执行结果，0-OK，1-失败
+        /// </summary>
+        public int ExcuteResult { get; set; }
     }
 }

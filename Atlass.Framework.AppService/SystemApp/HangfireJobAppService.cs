@@ -89,5 +89,34 @@ namespace Atlass.Framework.AppService.SystemApp
         {
             return Sqldb.Update<hangfire_task>().Set(s => s.excute_status, 1).Where(s => s.id == id).ExecuteAffrows();
         }
+
+
+        /// <summary>
+        /// 任务执行日志
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
+        public DataTableDto GetLogPageList(DataTableDto dto, string jobId)
+        {
+            var query = Sqldb.Select<crontab_history>()
+                .Where(s => s.job_id == jobId)
+               .OrderByDescending(s => s.id)
+               .Count(out long total)
+               .Page(dto.pageNumber, dto.pageSize).ToList();
+            dto.total = total;
+            dto.rows = query;
+            return dto;
+        }
+
+
+        /// <summary>
+        /// 清除执行日志
+        /// </summary>
+        /// <param name="jobId"></param>
+        public void ClearJobLog(string jobId)
+        {
+            Sqldb.Delete<crontab_history>().Where(s => s.job_id == jobId).ExecuteAffrows();
+        }
     }
 }

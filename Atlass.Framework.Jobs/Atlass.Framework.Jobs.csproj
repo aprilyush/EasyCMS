@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
   </ItemGroup>
 
@@ -14,10 +20,6 @@
     <ProjectReference Include="..\Atlass.Framework.DbContext\Atlass.Framework.DbContext.csproj" />
     <ProjectReference Include="..\Atlass.Framework.Models\Atlass.Framework.Models.csproj" />
     <ProjectReference Include="..\Atlass.Framework.ViewModels\Atlass.Framework.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

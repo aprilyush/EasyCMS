@@ -24,15 +24,20 @@ namespace Atlass.Framework.AppService.SystemApp
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public DataTableDto GetData(DataTableDto dto,int loginStatus,string loginName, string loginIP, string loginDate)
+        public DataTableDto GetData(DataTableDto dto,int loginStatus,string loginName, string loginIP, string startDate,string endDate)
         {
-            var stime = DateTime.Now.AddDays(-15);
-            if (!loginDate.IsEmpty())
+            var stime = DateTime.Now.AddMonths(-1);
+            var etime = DateTime.Now;
+            if (!startDate.IsEmpty())
             {
-                stime = loginDate.ToDate();
+                stime = startDate.ToDate();
+            }
+            if (!endDate.IsEmpty())
+            {
+                etime = endDate.ToDate().AddDays(1);
             }
             var query = Sqldb.Select<login_info>()
-                      .Where(s=>s.request_time> stime)
+                      .Where(s=>s.request_time> stime&&s.request_time< etime)
                       .WhereIf(loginStatus >= 0,s=>s.login_status== loginStatus)
                       .WhereIf(!loginName.IsEmpty(), s => s.login_name == loginName)
                       .WhereIf(!loginIP.IsEmpty(), s => s.request_ip == loginIP)

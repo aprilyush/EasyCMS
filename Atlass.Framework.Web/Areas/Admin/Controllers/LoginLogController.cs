@@ -46,9 +46,9 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             int loginStatus = RequestHelper.GetPostInt("loginStatus", -1);
             string loginName = RequestHelper.GetPostString("loginName");
             string loginIP = RequestHelper.GetPostString("loginIP");
-            string loginDate = RequestHelper.GetPostString("loginDate");
-
-            var data = loginInfoApp.GetData(dto, loginStatus, loginName, loginIP,loginDate);
+            string startDate = RequestHelper.GetPostString("startDate");
+            string endDate = RequestHelper.GetPostString("endDate");
+            var data = loginInfoApp.GetData(dto, loginStatus, loginName, loginIP,startDate,endDate);
             return Json(data);
         }
 
