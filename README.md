@@ -13,7 +13,7 @@
 :fire: 给我个star，鼓励一下我吧
 ## spring boot版本
 &emsp;&emsp;同时我也写了个springboot版本的后台权限管理系统，主要是为了学习springboot,功能基本一致。   
-地址：https://gitee.com/yushuo1990/easycmsboot    
+地址：https://gitee.com/aprilyu/easyboot    
 ## 发展目标
 &emsp;&emsp;希望EasyCms成为一个简单易用，功能完善的后台权限管理系统的基础开发框架和建站CMS系统。
 
@@ -25,9 +25,9 @@
 + 后台模板使用H+，扒的若依的UI
 + 静态页面生成模板引擎：[VTemplate.Engine](https://github.com/jasonyush/VTemplate.Engine)
 + 定时任务采用[hangfire](https://github.com/HangfireIO/Hangfire)
-## 演示地址：
+## 演示地址：为了避免违法信息的发布，全部关了
  windows2016服务器：http://cms.atlass.cn/admin   
- debian10服务器：http://cmsl.atlass.cn/  暂时关了   
+ debian10服务器：http://cmsl.atlass.cn/ 
 用户名和密码 admin  admin@123    
  🛑admin没做权限限制，请别删除数据
 
