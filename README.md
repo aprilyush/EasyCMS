@@ -9,6 +9,7 @@
 
 # EasyCms
 &emsp;&emsp;<font face="黑体" color="#FF0000"></font>   
+&emsp;&emsp;88 github   
 &emsp;&emsp;EasyCms后台权限管理系统 基于Asp.net Core的后台快速开发框架，可用于快速开发 企业后台管理系统，WebApi接口，微信公众号和小程序后台，企业站，。    
 :fire: 给我个star，鼓励一下我吧
 ## spring boot版本
