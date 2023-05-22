@@ -1,4 +1,4 @@
-﻿using Ganss.XSS;
+﻿using Ganss.Xss;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;

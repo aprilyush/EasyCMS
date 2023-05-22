@@ -1,32 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="FreeRedis" Version="0.3.5" />
-    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
-    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
-    <PackageReference Include="Hangfire.Core" Version="1.7.22" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="FreeRedis" Version="1.0.11" />
+    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.SqlServer" Version="3.2.695" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.1" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.1" />
     <PackageReference Include="Hangfire.Heartbeat" Version="0.5.1" />
-    <PackageReference Include="Hangfire.LiteDB" Version="0.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
-    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
-    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.6.400" />
-    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Hangfire.LiteDB" Version="0.4.1" />
+    <PackageReference Include="Hangfire.Storage.SQLite" Version="0.3.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.18.11" />
+    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.12.5.7" />
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
     <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
-    <PackageReference Include="UAParser" Version="3.1.46" />
+    <PackageReference Include="UAParser" Version="3.1.47" />
   </ItemGroup>
 
   <ItemGroup>

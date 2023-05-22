@@ -36,7 +36,13 @@
             });
 
         },
-        load: function (target, data) {
+        clear: function (target) {
+            target.bootstrapTable("removeAll");
+        },
+        load: function (target,data) {
+            // 从第一页开始
+            // target.bootstrapTable('refresh', {pageNumber: 1});
+
             if ($('#toolbar .multiple')) {
                 $('#toolbar .multiple').addClass('disabled');
             }
@@ -46,7 +52,8 @@
                 $('#toolbar .single').addClass('disabled');
             }
 
-            target.bootstrapTable("load",data);
+            target.bootstrapTable("load", data);
+
         },
         getPagination: function (target, params) {
             var pagination = {
@@ -57,11 +64,30 @@
             };
             return pagination;
         },
+        getRowById: function (target, uniqueId) {
+            return target.bootstrapTable('getRowByUniqueId', uniqueId);
+        },
+        updateById: function (target, uniqueId, row) {
+            target.bootstrapTable('updateByUniqueId', { id: uniqueId, row: row });
+        },
+        updateRow: function (target,row, rowIndex) {
+          
+            target.bootstrapTable('updateRow', { index: rowIndex, row: row });
+        },
         selected: function (target){
             return target.bootstrapTable('getSelections');
         },
-        getRowById: function (target, rowId) {
-            return target.bootstrapTable("getRowByUniqueId", rowId);
+        hideColumn: function (target, column) {
+            target.bootstrapTable('hideColumn', column);//隐藏某列
+        },
+        showColumn: function (target, column) {
+            target.bootstrapTable('showColumn', column);//显示某列
+        },
+        getData: function (target) {
+            return target.bootstrapTable('getData', { useCurrentPage: false, includeHiddenRows: true });
+        },
+        remove: function (target, delField, delval) {
+            target.bootstrapTable('remove', { field: delField, values: delval });
         },
         selectedEvent:function (target){
             //点击事件
@@ -112,8 +138,8 @@
         strictSearch: false,
         showSearch:true,
         showSearchButton: true,                    //显示搜索按钮
-         searchSelector: false,
-         visibleSearch: false,
+        searchSelector: false,
+        visibleSearch: false,
         showButtonIcons: true,
         showButtonText: true,
         showSearchClearButton: false,
@@ -129,6 +155,7 @@
         totalField: 'total',
         dataField: 'rows',
         columns: [],
+        paginationShowPageGo:false,
         queryParamsType: '',//设置为limit时候是没有pageNumber返回的
         ajaxOptions: {
             // headers: {"Authorization":'Bearer '+localStorage.getItem('nfApiToken')}
@@ -136,9 +163,14 @@
         queryParams: function (params) {
             var p = {
                 pageNumber: params.pageNumber,
-                pageSize: params.pageSize
+                pageSize: params.pageSize,
+                sort: params.sort,      //排序列名  
+                sortOrder: params.order //排位命令（desc，asc） 
             }
             return p;
+        },
+        onSort: function (name, order) {
+            //console.log(name, order);
         },
         onLoadSuccess: function (data) {
 

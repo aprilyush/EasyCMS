@@ -16,7 +16,7 @@ $(function() {
     if ($.fn.toTop !== undefined) {
         $('#scroll-up').toTop();
     }
-	
+
     // 气泡弹出框特效（移到元素时）
     $(document).on("mouseenter", '.table [data-toggle="popover"]', function() {
         var _this = this;
@@ -33,10 +33,26 @@ $(function() {
             if (!$(".popover:hover").length) $(_this).popover("hide");
         }, 100);
     });
+
+    // tree表格树 展开/折叠
+    var expandFlag;
+    $("#expandAllBtn").click(function() {
+        // var dataExpand = $.common.isEmpty(table.options.expandAll) ? true : table.options.expandAll;
+        // expandFlag = $.common.isEmpty(expandFlag) ? dataExpand : expandFlag;
+        var dataExpand =jutils.empty(table.options.expandAll) ? true : table.options.expandAll;
+        expandFlag = jutils.empty(expandFlag) ? dataExpand : expandFlag;
+        if (!expandFlag) {
+            $.bttTable.bootstrapTreeTable('expandAll');
+        } else {
+            $.bttTable.bootstrapTreeTable('collapseAll');
+        }
+        expandFlag = expandFlag ? false: true;
+    })
+	
     // 按下ESC按钮关闭弹层
     $('body', document).on('keyup', function(e) {
         if (e.which === 27) {
-            jutils.closeAll();
+            $.modal.closeAll();
         }
     });
 });
@@ -146,6 +162,11 @@ function createMenuItem(tabId,dataUrl, menuName, isRefresh) {
                     }
                 });
             }
+
+            if (tabId == 'crm_orderlogistics_index' || tabId == 'crm_orderbill_index') {
+                 let mesageBody = { title: 'order_tab', data:'' }
+                document.getElementById(tabId).contentWindow.postMessage(mesageBody, '*');
+            }
             if (isRefresh) {
             	refreshTab();
             }
@@ -159,12 +180,12 @@ function createMenuItem(tabId,dataUrl, menuName, isRefresh) {
         $('.menuTab', topWindow).removeClass('active');
 
         // 添加选项卡对应的iframe
-        var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + tabId + '" data-panel="' + panelUrl + '" seamless></iframe>';
+        var str1 = '<iframe class="RuoYi_iframe" name="' + dataIndex + '" id="' + tabId + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + tabId + '" data-panel="' + panelUrl + '" seamless></iframe>';
         $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
-
-        window.parent.jutils.loading("数据加载中，请稍后...");
+        
+        window.parent.$.modal.loading("数据加载中，请稍后...");
         $('.mainContent iframe:visible', topWindow).load(function () {
-            window.parent.jutils.closeLoading();
+            window.parent.$.modal.closeLoading();
         });
 
         // 添加选项卡
@@ -220,31 +241,6 @@ function calSumWidth(elements) {
     return width;
 }
 
-/** 密码规则范围验证 */
-function checkpwd(chrtype, password) {
-    if (chrtype == 1) {
-        if (!jutils.numValid(password)){
-            $.modal.alertWarning("密码只能为0-9数字");
-            return false;
-        }
-    } else if (chrtype == 2) {
-        if (!jutilsenValid(password)){
-            $.modal.alertWarning("密码只能为a-z和A-Z字母");
-            return false;
-        }
-    } else if (chrtype == 3) {
-        if (!jutils.enNumValid(password)){
-            $.modal.alertWarning("密码必须包含字母以及数字");
-            return false;
-        }
-    } else if (chrtype == 4) {
-        if (!jutils.charValid(password)){
-            $.modal.alertWarning("密码必须包含字母、数字、以及特殊符号<font color='red'>~!@#$%^&*()-=_+</font>");
-            return false;
-        }
-    }
-    return true;
-}
 
 
 // 动态加载css文件

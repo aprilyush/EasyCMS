@@ -1,14 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.SqlServer" Version="3.2.695" />
   </ItemGroup>
 
   <ItemGroup>

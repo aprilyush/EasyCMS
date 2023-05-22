@@ -19,5 +19,10 @@ namespace Atlass.Framework.ViewModels.YmlConfigs
         /// 健康检查的时间间隔
         /// </summary>
         public int CheckInterval { get; set; } = 10;
+
+        /// <summary>
+        /// 0-Sqlite,1-LiteDb
+        /// </summary>
+        public int Storage { get; set; }
     }
 }

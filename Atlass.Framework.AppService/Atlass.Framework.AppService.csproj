@@ -1,16 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetCore.Collections.Paginable.FreeSql" Version="3.3.0" />
-    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="2.3.200" />
-    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.200" />
-    <PackageReference Include="Mapster" Version="7.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="DotNetCore.Collections.Paginable.FreeSql" Version="5.0.0" />
+    <PackageReference Include="FreeSql.Provider.MySqlConnector" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.PostgreSQL" Version="3.2.695" />
+    <PackageReference Include="FreeSql.Provider.SqlServer" Version="3.2.695" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
-    <PackageReference Include="FreeRedis" Version="0.3.5" />
+    <PackageReference Include="EasyCaching.InMemory" Version="1.9.0" />
+    <PackageReference Include="FreeRedis" Version="1.0.11" />
   </ItemGroup>
 
   <ItemGroup>

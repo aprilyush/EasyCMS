@@ -60,6 +60,7 @@ RedisConfig:
 Crontab: 
   Enable: true #是否开启hanfire  如果部署到IIS注意配置应用程序池的“禁用重叠回收为true”否则会造成资源占用问题
   CheckInterval: 10 #健康检查的时间间隔
+  Storage:  0   #0-Sqlite,1-LiteDb
  #CO2NET 设置
 SenparcSetting: 
   IsDebug: true

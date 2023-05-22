@@ -19,7 +19,7 @@ namespace Atlass.Framework.Common
 
         //有序guid
         private static SequentialGuidGenerator _generator = null;
-        //new snowflake
+        //new snowflake Yitter.IdGenerator
         private static IIdGenerator _IdGenInstance = null;
         private IdHelper()
         {
@@ -102,7 +102,7 @@ namespace Atlass.Framework.Common
         /// <returns></returns>
         public static string GenOId()
         {
-            return "000000000000000000000000";
+            return "0";
         }
 
         /// <summary>
