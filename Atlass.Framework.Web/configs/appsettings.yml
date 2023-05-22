@@ -22,7 +22,7 @@ DbConfigs:
   -
    Enable: true
    DataType: 0 #mysql
-   MasterConnection: "Data Source=127.0.0.1;Port=3306;Initial Catalog=easycms_net5;user id=root;password=123123;Max Pool Size=10;Connection Timeout=5;CharSet=utf8mb4;"
+   MasterConnection: "Data Source=127.0.0.1;Port=3306;Initial Catalog=easycms_net6;user id=root;password=123123;Max Pool Size=10;Connection Timeout=5;CharSet=utf8mb4;"
    SlaveConnections: []
   -
    Enable: false

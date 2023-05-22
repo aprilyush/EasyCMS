@@ -118,7 +118,7 @@
 
         function edit(obj) {
             var dataId = $(obj).data('id');
-            jutils.openTab('admin_sysmenu_form', '修改菜单', '/admin/sysmenu/form?id=' + dataId);
+            jutils.openTab('admin_sysmenu_form', '修改菜单', '/admin/sysmenu/form',{id:dataId});
             //console.log("from edit", dataId);
         }
 

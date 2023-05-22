@@ -52,7 +52,7 @@
                         </div>
                     </li>
                     <li>
-                        <a class="menuItem" href="/SystemMonitor/index" data-id="systemmonitor_index"><i class="fa fa-home"></i> <span class="nav-label">首页</span> </a>
+                        <a class="menuItem" href="@(ViewBag.HomeUrl)" data-id="0"><i class="fa fa-home"></i> <span class="nav-label">首页</span> </a>
                     </li>
                     @{
                         List<sys_menu> menus = Model;
@@ -174,7 +174,7 @@
                 </button>
                 <nav class="page-tabs menuTabs">
                     <div class="page-tabs-content">
-                        <a href="javascript:;" class="active menuTab" data-id="systemmonitor_index">首页</a>
+                        <a href="javascript:;" class="active menuTab" data-id="0">首页</a>
                     </div>
                 </nav>
                 <button class="roll-nav roll-right tabRight">
@@ -186,8 +186,7 @@
             <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
 
             <div class="row mainContent" id="content-main" style="height: calc(100% - 91px)">
-                <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="systemmonitor_index"
-                        src="/SystemMonitor/index" frameborder="0" seamless></iframe>
+                <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="0" src="@(ViewBag.HomeUrl)" frameborder="0" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->
@@ -201,8 +200,7 @@
     <script src="~/ui/plugins/blockUI/jquery.blockUI.js"></script>
     <script src="~/ui/plugins/layer/layer.min.js"></script>
     <script src="~/ui/plugins/fullscreen/jquery.fullscreen.js"></script>
-    @*<script src="~/ui/easycms/js/ry-ui.js?v=4.6.0"></script>*@
-    <script src="~/ui/easycms/js/jutils.js"></script>
+    <script src="~/ui/easycms/js/ry-ui.js?v=4.6.0"></script>
     <script src="~/ui/easycms/js/common.js?v=4.6.0"></script>
 
     <script src="~/ui/easycms/index.js?v=20201208"></script>
@@ -213,22 +211,22 @@
             if (lockScreen) {
                 $('#lockScreen').click();
             }
-            if (mode == 'history' && window.performance.navigation.type == 1) {
-                var url = localStorage.getItem('publicPath');
-                if (!jutils.empty(url)) {
-                    applyPath(url);
-                }
-            } else {
-                var hash = location.hash;
-                if (!jutils.empty(hash)) {
-                    var url = hash.substring(1, hash.length);
-                    applyPath(url);
-                } else {
-                    if (mode == 'history') {
-                        localStorage.setItem('publicPath', "");
-                    }
-                }
-            }
+            //if (mode == 'history' && window.performance.navigation.type == 1) {
+            //    var url = localStorage.getItem('publicPath');
+            //    if (!jutils.empty(url)) {
+            //        applyPath(url);
+            //    }
+            //} else {
+            //    var hash = location.hash;
+            //    if (!jutils.empty(hash)) {
+            //        var url = hash.substring(1, hash.length);
+            //        applyPath(url);
+            //    } else {
+            //        if (mode == 'history') {
+            //            localStorage.setItem('publicPath', "");
+            //        }
+            //    }
+            //}
 
 
             $("[data-toggle='tooltip']").tooltip();

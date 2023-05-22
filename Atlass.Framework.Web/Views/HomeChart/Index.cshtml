@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "首页";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<style>
+    .title {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .rank-list {
+        margin: 20px auto;
+        width:250px;
+        border-collapse: collapse;
+    }
+
+        .rank-list td,
+        .rank-list th {
+            border: 0;
+            padding: 5px 10px;
+        }
+
+        .rank-list thead th {
+            background: #333;
+            color: #fff;
+        }
+
+        .rank-list tbody tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .rank-list tbody tr:hover {
+            background: #666;
+            color: #fff;
+        }
+
+        .rank-list a {
+            text-decoration: none;
+            color: #333;
+        }
+
+            .rank-list a:hover {
+                color: #fff;
+            }
+
+</style>
+<div class="container-div">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">总计</span>
+                        <h5>栏目数量</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins" id="channel_count">0</h1>
+                                <div class="font-bold text-navy">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">总计</span>
+                        <h5>文章数量</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins" id="content_count">0</h1>
+                                <div class="font-bold text-navy">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">总计</span>
+                        <h5>咨询(次)</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins" id="totalmq">0</h1>
+                                <div class="font-bold text-navy">
+                                    人工咨询
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right">月</span>
+                        <h5>打赏(元)</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins" id="mm">￥ 0</h1>
+                        <div class="stat-percent font-bold text-info">
+                            <i class="fa fa-level-up"></i>
+                        </div>
+                        <small>总计</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @section scripts{
+        <script src="/ui/plugins/echarts/echarts.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                loadData();
+            });
+
+            function loadData() {
+                $.ajax({
+                    url: '/homeChart/GetChart',
+                    type: 'get',
+                    dataType: 'json',
+                    cache: false,
+                    data: null,
+                    //contentType: 'application/x-www-form-urlencoded',
+                    success: function (res) {
+                        if (res.status) {
+                            var model = res.data.model;
+                        $('#channel_count').text(model.channel_count);
+                        $('#content_count').text(model.content_count);
+   
+                        }
+                    }, beforeSend: function (data, textStatus, jqXHr) {
+
+                    },
+                    error: function (jqXHr, textStatus, errorMsg) {
+                        layer.msg('请求异常');
+                    }
+                });
+            }
+
+      
+        </script>
+
+    }
+

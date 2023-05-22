@@ -37,6 +37,8 @@ namespace Atlass.Framework.Web.Areas.Admin.Controllers
             ViewBag.AccountName = userDto.LoginName;
             ViewBag.UserName = userDto.UserName;
             ViewData.Model = roleApp.GetNaviMenu(userDto);
+
+            ViewBag.HomeUrl = "/homeChart/index";
             return View();
         }
     

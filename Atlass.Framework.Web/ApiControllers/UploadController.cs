@@ -84,11 +84,12 @@ namespace Atlass.Framework.Web.ApiControllers
                 fs.Flush();
             }
             var firstFileInfo = new FileInfo(filename);
-            if (firstFileInfo.Length > 200 * 1024)
+            int needCompressMinSize = 1024 * 1024;
+            if (firstFileInfo.Length > needCompressMinSize)
             {
                 string compressFileName = IdHelper.ObjectId() + extName;
                 string compressFile = $"{folder}/{compressFileName}";
-                ImageUtilities.CompressImage(filename, compressFile, 90, 200);
+                ImageUtilities.CompressImage(filename, compressFile, 60, 1024);
                 guidFileName = compressFileName;
             }
             if (nomark == 0)
